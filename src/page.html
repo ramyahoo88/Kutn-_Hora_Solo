@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <meta name="theme-color" content="#18191c">
+  <meta name="description" content="An unofficial solo playtest for Kutná Hora: The City of Silver, with a planning rival and a complete two-player board.">
+  <title>Kutná Hora Solo · The City of Silver</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%231d2220'/%3E%3Cpath d='M16 4l12 12-12 12L4 16z' fill='%23d5b988'/%3E%3Cpath d='M16 10l6 6-6 6-6-6z' fill='%231d2220'/%3E%3C/svg%3E">
+  <style>/* BUNDLE_CSS */</style>
+</head>
+<body>
+  <a class="skip-link" href="#play">Skip to game</a>
+  <header class="masthead">
+    <div class="frame topbar">
+      <div class="wordmark"><span class="mark" aria-hidden="true">◆</span><span>Kutná Hora Solo</span></div>
+      <nav aria-label="Game controls">
+        <button type="button" class="flat" data-do="undo" id="undo">Undo</button>
+        <button type="button" class="flat" data-do="dialog" data-value="help">Guide</button>
+        <button type="button" class="outline" data-do="dialog" data-value="setup">New game</button>
+      </nav>
+    </div>
+  </header>
+  <main class="frame" id="play">
+    <section class="hero" aria-label="Kutná Hora: The City of Silver">
+      <div class="hero-art" aria-hidden="true"></div>
+      <div class="hero-copy">
+        <span class="eyebrow">Unofficial solo playtest · vAPP_VERSION</span>
+        <h1>Kutná Hora</h1>
+        <p>The City of Silver</p>
+      </div>
+    </section>
+    <section class="gameline" id="dashboard" aria-label="Round and event"></section>
+    <section class="save-status" id="save-status" aria-label="Save status" hidden>
+      <p id="save-warning" role="status"></p>
+      <div class="save-actions">
+        <button type="button" class="outline" data-do="export">Export current game</button>
+        <button type="button" class="outline" id="export-unreadable" data-do="export-unreadable" hidden>Download unreadable save</button>
+      </div>
+    </section>
+    <section class="summary" id="overview" aria-label="Players and prices"></section>
+    <div id="flash" class="flash" role="status" aria-live="polite"></div>
+    <div class="layout">
+      <div class="column" id="decisions"></div>
+      <div class="column" id="boards"></div>
+      <div class="column" id="town-hall"></div>
+    </div>
+    <section class="panel journal" aria-labelledby="journal-title">
+      <div class="panel-head">
+        <h2 id="journal-title">Game journal</h2>
+        <button type="button" class="flat" data-do="journal" id="journal-toggle" aria-controls="journal-body" aria-expanded="false">Show all</button>
+      </div>
+      <div id="journal-body"></div>
+    </section>
+  </main>
+  <footer class="frame footer">
+    <span>Fan project for the game by Ondřej Bystroň, Petr Čáslava and Pavel Jarosch · Czech Games Edition</span>
+    <span><button type="button" class="link" data-do="export">Export save</button><button type="button" class="link" data-do="import">Import save</button></span>
+  </footer>
+  <input id="file" type="file" accept="application/json,.json" hidden>
+  <dialog id="player-board-dialog" aria-labelledby="player-board-title">
+    <div class="panel-head"><h2 id="player-board-title"></h2><button type="button" class="flat" data-do="close">Close</button></div>
+    <div class="dialog-body player-board-body" id="player-board-body"></div>
+  </dialog>
+  <dialog id="setup-dialog" aria-labelledby="setup-title">
+    <form id="setup-form">
+      <div class="panel-head"><h2 id="setup-title">New game</h2><button type="button" class="flat" data-do="close">Close</button></div>
+      <div class="dialog-body">
+        <p class="muted">Play a six-round game against the rival. The app handles the boards, shuffles and scoring.</p>
+        <div class="field-grid">
+          <label>Guild setup<select name="setup" id="guild-setup"></select></label>
+          <label>Starting player<select name="starter"><option value="0">You</option><option value="1">Rival</option></select></label>
+          <label class="wide">Your guilds<select name="side" id="guild-side"></select></label>
+          <label class="wide">Your house rows<select name="rows" id="guild-rows"></select></label>
+          <label>Rival<select name="difficulty"><option value="standard">Standard</option><option value="quick">Quick</option></select></label>
+          <label>Game seed<span class="input-pair"><input name="seed" type="text" maxlength="64" spellcheck="false" autocomplete="off"><button type="button" class="outline" data-do="seed">Random</button></span></label>
+        </div>
+        <p id="opening-note" class="fine"></p>
+        <button type="submit" class="primary">Start game</button>
+      </div>
+    </form>
+  </dialog>
+  <dialog id="help-dialog" aria-labelledby="help-title">
+    <div class="panel-head"><h2 id="help-title">Playing Kutná Hora Solo</h2><button type="button" class="flat" data-do="close">Close</button></div>
+    <div class="dialog-body guide">
+      <p>Play one side of the two-player game. Choose a card half, pick a target if needed, and confirm. After two cards on your first two turns and one on your last, your round is complete. Use <strong>Play rival turn</strong> when the rival has the move.</p>
+      <p><strong>Build a guild income.</strong> Take Rights to a building, claim a Plot, then use Building. A Mine can also start ore production. The Income action collects the current value of your production. The market prices affect both players.</p>
+      <p><strong>Follow the grid.</strong> Town and mine coordinates are read left to right, top to bottom. Colored dots are printed scoring matches. A striped guild offer can sell Rights while new construction of that guild is unavailable.</p>
+      <p><strong>Win on points.</strong> Patricians score in rounds 4–6. The final count adds town matches, mine row awards, final income, reputation and unused items to earned points. Coins break a points tie.</p>
+      <p><strong>Check public information.</strong> The remaining rival cards are shown below the turn controls. Open either player board to see production, guild houses and supplies.</p>
+      <p><strong>Resume or share a position.</strong> This browser keeps your current game where local storage is available. Export a JSON save to move between browsers or share a position. Version 0.1.0 saves keep their existing deck order. New games use the updated shuffle, so an old seed produces a different setup.</p>
+      <p><strong>Rival settings.</strong> Standard looks beyond its current turn and estimates the effect of both players’ positions. Quick checks fewer continuations. Both use the same rules and public game information.</p>
+      <p><a href="https://filemanager.czechgames.com/storage/files/kutna-hora-the-city-of-silver/rules/kutna-hora-rules-en.pdf" target="_blank" rel="noreferrer">CGE rulebook</a> · <a href="https://www.czechgames.com/news/available-now-the-kutna-hora-companion-app" target="_blank" rel="noreferrer">CGE market companion</a> · <a href="https://www.zatrolene-hry.cz/spolecenska-hra/kutna-hora-mesto-stribra-14736/k-stazeni/vlastni-solo-mod-capek-18184/" target="_blank" rel="noreferrer">Capek paper variant</a></p>
+      <p class="fine">Banner cropped from <a href="https://commons.wikimedia.org/wiki/File:Kutn%C3%A1_Hora_-_St._Barbara%27s_Church_-_Panoramic_Photocompilation.jpg" target="_blank" rel="noreferrer">St. Barbara’s Church by Txllxt TxllxT</a> under <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noreferrer">CC BY-SA 4.0</a>.</p>
+    </div>
+  </dialog>
+  <script>/* BUNDLE_JS */</script>
+</body>
+</html>
