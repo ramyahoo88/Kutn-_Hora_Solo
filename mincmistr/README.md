@@ -7,7 +7,7 @@ Developed and tested against this repository's engine at `v0.3.0-playtest` (`0b2
 ## Read or print
 
 - `Mincmistr_Print_and_Play.pdf`: rules on pages 1–4, card sheets on pages 5–8. Print at 100% on Letter or A4.
-- `Mincmistr_Rules.md`: the rulebook text (version 1.2.1, which adds play against two or three Mincmistrs).
+- `Mincmistr_Rules.md`: the rulebook text (version 1.2.2, which adds play against two or three Mincmistrs).
 - `Mincmistr_Sim_Report.md`: design history, test method and results.
 - `Mincmistr_Sample_Game.md`: two rounds of a simulated game, annotated rule by rule.
 - `NOTES.md`: the overnight lab notebook.

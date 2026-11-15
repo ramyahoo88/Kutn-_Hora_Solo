@@ -1,6 +1,6 @@
 # The Mincmistr: design and simulation report
 
-15 Nov 2026 · rules version 1.2.1 · engine: Kutná Hora Solo v0.3.0 (`0b28294`, `src/` unchanged)
+15 Nov 2026 · rules version 1.2.2 · engine: Kutná Hora Solo v0.3.0 (`0b28294`, `src/` unchanged)
 
 ## Summary
 
@@ -125,11 +125,11 @@ With the Quick rival in your seat against Journeyman Mincmistrs, it wins 15.6% a
 | 3 (fair share 33%), 144 games | 11.1%, −6.6 | 29.9%, −1.1 |
 | 4 (fair share 25%), 192 games | 13.5%, −3.7 | 30.2%, +0.5 |
 
-The two-player ladder carries over, with one qualification. With four players, Master sits at fair share. This run had the rival winning 24.7%; GPT's independent audit (commit `e1712d9`) found 26% with separate Plan decks and 21% with one shared deck. With three players, Master is slightly easy. The rival won 37.2% on seeds `x1–x4` and 41.3% on `y1–y4`, and the audit found 42–44% for the Standard and Planner rivals, all against a 33% fair share. Moving the double last turn to the last four rounds (N = 4) brings the three-player rival down to 37.8% (`y1–y4`, 288 games). Rule 10 recommends N = 4 for three players.
+The two-player ladder carries over, with one qualification. With four players, Master sits at fair share. This run had the rival winning 24.7%; GPT's independent audit (commit `e1712d9`) found 26% with separate Plan decks and 21% with one shared deck. With three players, Master is slightly easy. The rival won 37.2% on seeds `x1–x4` and 41.3% on `y1–y4`, and the audit found 42–44% for the Standard and Planner rivals, all against a 33% fair share. On the same `y1–y4` boards (288 games each), moving the double last turn to the last four rounds (N = 4) cut the rival's wins from 41.3% to 37.8%. Its margin over the strongest Mincmistr fell from −2.15 to −4.85, so the Mincmistrs were 2.7 points tougher. The win-rate change is less certain than the margin change. Rule 10 offers N = 4 as the tougher three-player option.
 
 Journeyman is the gentler choice at every table size. Grandmaster's lead over the rival narrows as the player count rises.
 
-## Audit corrections (v1.2.1)
+## Audit corrections (v1.2.1–1.2.2)
 
 GPT's audit of commit `e1712d9` found two print errors and two benchmark defects. All four are fixed:
 
@@ -137,6 +137,7 @@ GPT's audit of commit `e1712d9` found two print errors and two benchmark defects
 - **St. Barbara tile 9.** Rule 6.5 sent *Dig twice* to the paid Mine rule. It now says both Mine actions are free, use reserve miners first, and place for free by rule 6.4. The code was already correct.
 - **Unknown rival names.** The v0.3.0 engine silently plays Standard for an unknown rival name such as `planner`. `simfinal.mjs` and `multisim.mjs` now stop with an error instead (`policies.mjs`). No published number used an unknown name.
 - **Master workload.** `overhead.mjs` did not apply Master's double last turn, so it counted 30 card plays instead of 33. Fixed. The published workload figures are for Journeyman and are unchanged.
+- **Follow-up (v1.2.2).** `multi.mjs` and the lab harness `sim.mjs` also reject unknown rival names now. Rule 10 calls N = 4 the tougher three-player option rather than an even game, and the multiplayer caption gives the right game counts. GPT reproduced all 576 three-player games.
 
 ## Exploit tests
 

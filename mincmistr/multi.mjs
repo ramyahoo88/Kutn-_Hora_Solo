@@ -1,8 +1,9 @@
 // Mechanical robustness: 3- and 4-player games with Mincmistrs in several seats.
 import {createGame,transition} from '../src/engine.mjs';
 import {botAction} from '../src/bot.mjs';
+import {checkPolicy} from './policies.mjs';
 import {createMincmistr,mincmistrAction,mincmistrCardsThisTurn} from './mincmistr.mjs';
-const count=Number(process.argv[2]), games=Number(process.argv[3]??6), level=process.argv[4]??'journeyman', opp=process.argv[5]??'quick';
+const count=Number(process.argv[2]), games=Number(process.argv[3]??6), level=process.argv[4]??'journeyman', opp=checkPolicy(process.argv[5]??'quick');
 let tot=[], wins=0, stalls=0;
 for (let i=0;i<games;i++) {
   let s=createGame({seed:`mp${count}-${i}`,playerCount:count,setup:1+i%9,side:i%count,starter:i%count});

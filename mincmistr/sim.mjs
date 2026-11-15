@@ -2,8 +2,10 @@
 import {createGame,transition,plotCount} from '../src/engine.mjs';
 import {botAction} from '../src/bot.mjs';
 import {createMemory,automaAction,DEFAULT} from './automa.mjs';
+import {checkPolicy} from './policies.mjs';
 
 export function playGame({seed,setup,side,starter,automaSeat,opponent,config=DEFAULT,playerCount=2}) {
+  if (typeof opponent!=='function') checkPolicy(opponent);
   let s=createGame({seed,setup,side,starter,playerCount});
   const mems=new Map();
   for (let seat=0;seat<playerCount;seat++) if (seat===automaSeat || (Array.isArray(automaSeat)&&automaSeat.includes(seat))) mems.set(seat,createMemory(s,seat,config));

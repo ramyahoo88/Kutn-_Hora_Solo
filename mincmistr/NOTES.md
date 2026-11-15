@@ -139,3 +139,8 @@ and delivered at 03:30/03:55. Re-verified: deliverables present, equivalence 0 m
 - overhead.mjs applies Master's double last turn (33 card plays).
 - 3p Master: x1-x4 37.2%, y1-y4 41.3% (combined 39.2%, 576 games) vs fair 33%; audit 42-44%. N=4 at 3p: 37.8%.
   Rule 10 now recommends N=4 for three players. 4p Master at fair share (24.7% here; audit 26% separate decks / 21% shared).
+
+## 09:05 — v1.2.2 from GPT follow-up (verified 2623c2c, reproduced all 576 3p games)
+- Rule 10: N=4 is "a tougher three-player game" (rounds 3-6), not "even": N=4 cut rival wins 41.3% -> 37.8% and margin
+  over strongest Mincmistr -2.15 -> -4.85 on matched y1-y4 boards; win-rate change less certain than margin change.
+- Multiplayer caption: 288-576 games. multi.mjs and sim.mjs (lab) now reject unknown rival names too.

@@ -1,6 +1,6 @@
 # The Mincmistr
 
-**A card-driven solo opponent for Kutná Hora** · Version 1.2.1 · 15 Nov 2026
+**A card-driven solo opponent for Kutná Hora** · Version 1.2.2 · 15 Nov 2026
 
 You play a normal two-player game against the Mincmistr, the mint master. It plays by the same rules as a player. It starts like a player, pays every cost and either pays its taxes or loses reputation. It obeys every limit and scores the same way at the end. It gets no starting points and no hidden information. Instead of a player's judgement, it uses a short checklist, a deck of 15 Plan cards and a fixed row of its six action cards.
 
@@ -170,7 +170,7 @@ To face more opponents, set up a three- or four-player game. Give each Mincmistr
 - Each Mincmistr follows these rules on its own.
 - Wherever a rule compares it with "you", it compares with the best of its opponents, you and the other Mincmistrs alike.
 - All of them play at the same level.
-- With three players, Master is slightly easy: the Standard rival won about 39% against a fair share of 33%. For an even game, give the double last turn to the last four rounds instead (rule 9, N = 4).
+- With three players, Master is slightly easy: the Standard rival won about 39% against a fair share of 33%. For a tougher three-player game, double the last turn in rounds 3–6 (rule 9, N = 4).
 
 ## 11. Example
 
@@ -193,7 +193,7 @@ These results come from simulated two-player games in the Kutná Hora Solo engin
 
 If you usually beat the app's Standard rival, start at Master. Each level is worth about 5 points.
 
-Against two or three Mincmistrs, here is how often the app's Standard rival wins when it takes your seat (288–384 games each):
+Against two or three Mincmistrs, here is how often the app's Standard rival wins when it takes your seat (288–576 games each):
 
 | Opponents | Apprentice | Journeyman | Master | Grandmaster |
 |---|---|---|---|---|
