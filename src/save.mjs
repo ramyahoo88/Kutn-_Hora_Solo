@@ -1,6 +1,6 @@
 import {
-  BUILDINGS,CARDS,EVENTS,GOODS,GUILD_SETUPS_BY_COUNT,MINCMISTR_LEVELS,MINCMISTR_PLANS,MINE_GROUPS,MINE_ROWS,MINES,PATRICIANS,
-  RIVAL_SETTINGS,SAVE_SCHEMA,SETUP_VERSION,TECHNOLOGY,
+  BUILDINGS,CARDS,EVENTS,GOODS,GUILD_SETUPS_BY_COUNT,MINCMISTR_LEVELS,MINCMISTR_PLANS,MINCMISTR_RULES_VERSION,
+  MINE_GROUPS,MINE_ROWS,MINES,PATRICIANS,PLAN_EXPLANATION_LIMIT,RIVAL_SETTINGS,SAVE_SCHEMA,SETUP_VERSION,TECHNOLOGY,VERSION,
 } from './data.mjs';
 import {cardsThisTurn,finalResult,legalActions,plotCount,rulesFor,seatAtTurn,turnsPerRound,validPlanDeck} from './engine.mjs';
 
@@ -11,6 +11,10 @@ const array=(items,n)=>Array.isArray(items)&&items.length===n;
 const known=(table,id)=>typeof id==='string'&&Object.hasOwn(table,id);
 const tally=(record,keys,max)=>record&&keys.every(key=>integer(record[key],0,max));
 const regularMine=id=>known(MINES,id)&&MINES[id].tier!==undefined;
+const shortText=(text,max)=>typeof text==='string'&&text.length<=max;
+const validExplanation=value=>value===undefined||
+  Array.isArray(value)&&value.length<=PLAN_EXPLANATION_LIMIT&&value.every(step=>
+    shortText(step?.rule,4)&&/^\d{1,2}(?:\.\d)?$/.test(step.rule)&&shortText(step.text,300));
 
 function validMincmistr(s, count) {
   const m=s.mincmistr;
@@ -118,8 +122,8 @@ export function checkGame(s) {
   const availableTechnology=TECHNOLOGY.slice(0,s.technology).map(tile=>tile.id);
   ok(new Set(technologyTiles).size===technologyTiles.length&&technologyTiles.every(id=>availableTechnology.includes(id)),'technology stock');
   ok(Array.isArray(s.log)&&s.log.length<=1500&&s.log.every(row=>row&&integer(row.round,1,rounds)&&
-    (row.actor===null||integer(row.actor,0,count-1))&&typeof row.text==='string'&&row.text.length<=500&&
-    (row.rule===undefined||(typeof row.rule==='string'&&row.rule.length<=120))),'journal');
+    (row.actor===null||integer(row.actor,0,count-1))&&shortText(row.text,500)&&
+    (row.rule===undefined||shortText(row.rule,120))&&validExplanation(row.explanation)),'journal');
   ok(s.phase==='end' ? array(s.result?.scores,count)&&(s.result.winner===null||integer(s.result.winner,0,count-1))&&s.result.scores.every(score=>
     score&&['earned','town','mines','income','reputation','extras','total','coins'].every(key=>integer(score[key],-99999,99999))
   ) : s.result===null,'final result');
@@ -157,6 +161,15 @@ export function readSave(text) {
 }
 export const writeSave=state=>JSON.stringify({kind:SAVE_KIND,state});
 
+function validPlanChanges(changes,state) {
+  const spaces=(values,max)=>Array.isArray(values)&&values.length<=max&&new Set(values).size===values.length&&
+    values.every(index=>integer(index,0,max-1));
+  const {board}=rulesFor(state);
+  return spaces(changes?.town,state.city.length)&&changes.town.every(i=>board.town[i])&&
+    spaces(changes.mine,state.mine.length)&&Array.isArray(changes.summary)&&changes.summary.length<=20&&
+    changes.summary.every(text=>shortText(text,200));
+}
+
 function readSnapshot(snapshot) {
   const state=savedState(snapshot.state);
   const rivalReport=Array.isArray(snapshot.rivalReport)
@@ -165,7 +178,41 @@ function readSnapshot(snapshot) {
   const review=snapshot.review;
   const validReview=state.mincmistr && integer(review?.seat,1,state.players.length-1) &&
     (review.plan===null || integer(review.plan,1,MINCMISTR_PLANS.length));
-  return {state,rivalReport,review:validReview?{seat:review.seat,plan:review.plan}:null};
+  const currentReview=validReview?{seat:review.seat,plan:review.plan}:null;
+  if (currentReview?.plan&&validPlanChanges(review.changes,state)) {
+    const {town,mine,summary}=review.changes;
+    currentReview.changes={town,mine,summary};
+  }
+  return {state,rivalReport,review:currentReview};
+}
+
+export const readPosition=text=>readSnapshot(saveRecord(text));
+
+export function writePlaytestReport(current,previous,note='',createdAt=new Date()) {
+  const {state}=current;
+  const playerCount=state.players.length;
+  const before=previous?.state;
+  const priorMove=before&&!previous.replaced&&before.seed===state.seed&&before.setup===state.setup&&before.side===state.side&&
+    before.difficulty===state.difficulty&&before.players.length===state.players.length&&
+    before.log.length<=state.log.length&&before.log.every((row,i)=>{
+      const after=state.log[i];
+      return row.round===after.round&&row.actor===after.actor&&row.text===after.text;
+    });
+  return JSON.stringify({
+    kind:SAVE_KIND,...current,
+    playtest:{
+      appVersion:VERSION,mincmistrRulesVersion:state.mincmistr?MINCMISTR_RULES_VERSION:null,
+      createdAt:createdAt.toISOString(),seed:state.seed,
+      setup:{
+        card:state.setup,side:state.side,players:playerCount,guildRows:state.players.map(p=>p.guilds),
+        mineLayout:state.mineLayout,startingSeat:(state.starter-(state.round-1)%playerCount+playerCount)%playerCount,
+        difficulty:state.difficulty,level:state.mincmistr?.level??null,sharedDeck:state.mincmistr?.shared??null,
+        tougherMaster:state.mincmistr?.tougher??false,events:state.events.length>0,
+      },
+      note:note.trim().slice(0,1000),
+      ...(priorMove?{before:{kind:SAVE_KIND,state:before}}:{}),
+    },
+  });
 }
 
 export function readAutosave(text) {
@@ -175,7 +222,11 @@ export function readAutosave(text) {
   if (Array.isArray(saved.undo)) {
     // A damaged history entry should never hide a valid current position.
     for (const entry of saved.undo.slice(-AUTOSAVE_UNDO_LIMIT).reverse()) {
-      try { undo.unshift(readSnapshot(entry)); } catch { break; }
+      try {
+        const prior=readSnapshot(entry);
+        if (entry.replaced===true) prior.replaced=true;
+        undo.unshift(prior);
+      } catch { break; }
     }
   }
   return {current,undo};

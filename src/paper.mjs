@@ -3,6 +3,7 @@ import {describePlan,PLAN_DECK,PLAN_GOALS,PLAN_PRIORITIES} from './mincmistr.mjs
 import {downloadJson,storageSlot} from './storage.mjs';
 
 const STORAGE = 'kutna-hora-mincmistr-deck-v1';
+const DECK_FILE_KIND = 'kutna-hora-mincmistr-deck';
 const UNDO_LIMIT = 5;
 const RECENT_LIMIT = 5;
 const byId = id => document.getElementById(id);
@@ -58,13 +59,22 @@ function readSnapshot(record) {
   return validRecent ? {deck,recent} : deckSnapshot(deck);
 }
 
-function readDeck(raw) {
+function readDeck(raw, portable=false) {
   const saved = JSON.parse(raw);
+  if (portable && (saved?.kind!==DECK_FILE_KIND || saved.version!==1 ||
+      !Array.isArray(saved.history) || saved.history.length>UNDO_LIMIT)) {
+    throw Error('Choose a Mincmistr deck JSON export from Draw only.');
+  }
   const current = readSnapshot(saved);
   const history = [];
   if (Array.isArray(saved.history)) {
     for (const entry of saved.history.slice(-UNDO_LIMIT).reverse()) {
-      try { history.unshift(readSnapshot(entry)); } catch { break; }
+      try {
+        history.unshift(readSnapshot(entry));
+      } catch (error) {
+        if (portable) throw error;
+        break;
+      }
     }
   } else if (validPlanDeck(saved.previous)) {
     // v0.3.4 saved only the deck immediately before the last draw.
@@ -76,31 +86,46 @@ function readDeck(raw) {
   return {current,history};
 }
 
-function openReference() {
+function selectReference(section) {
   const dialog = byId('paper-reference');
-  dialog.showModal();
+  for (const button of dialog.querySelectorAll('[data-reference]')) {
+    const id = button.getAttribute('aria-controls');
+    button.setAttribute('aria-pressed',String(id===section));
+    byId(id).hidden = id!==section;
+  }
   dialog.querySelector('.reference-body').scrollTop = 0;
 }
 
-function connectReference() {
-  byId('paper-open-reference').addEventListener('click',openReference);
+export function openReference(rule) {
   const dialog = byId('paper-reference');
-  const buttons = [...dialog.querySelectorAll('[data-reference]')];
-  for (const button of buttons) button.addEventListener('click',() => {
-    for (const tab of buttons) {
-      const selected = tab === button;
-      tab.setAttribute('aria-pressed',String(selected));
-      byId(tab.getAttribute('aria-controls')).hidden = !selected;
-    }
-    dialog.querySelector('.reference-body').scrollTop = 0;
-  });
+  const target=rule?byId(`mincmistr-rule-${rule}`):null;
+  if (target) selectReference('paper-ref-rules');
+  if (!dialog.open) dialog.showModal();
+  const body=dialog.querySelector('.reference-body');
+  body.scrollTop=0;
+  if (target) {
+    body.scrollTop=target.getBoundingClientRect().top-body.getBoundingClientRect().top-12;
+    target.focus({preventScroll:true});
+  }
+}
+
+export function connectReference() {
+  const dialog = byId('paper-reference');
+  byId('paper-open-reference').addEventListener('click',() => openReference());
+  for (const button of dialog.querySelectorAll('[data-reference]')) {
+    button.addEventListener('click',() => selectReference(button.getAttribute('aria-controls')));
+  }
   byId('paper-reference-close').addEventListener('click',() => dialog.close());
-  dialog.addEventListener('close',() => document.body.classList.remove('print-mine-aid'));
-  byId('paper-print-mine').addEventListener('click',() => {
-    document.body.classList.add('print-mine-aid');
-    try { window.print(); } catch { document.body.classList.remove('print-mine-aid'); }
-  });
-  window.addEventListener('afterprint',() => document.body.classList.remove('print-mine-aid'));
+  const clearPrint=() => document.body.classList.remove('print-reference','print-mine-aid','print-table-reference');
+  for (const [id,mode] of [['paper-print-mine','print-mine-aid'],['paper-print-table','print-table-reference']]) {
+    byId(id).addEventListener('click',() => {
+      clearPrint();
+      document.body.classList.add('print-reference',mode);
+      try { window.print(); } catch { clearPrint(); }
+    });
+  }
+  dialog.addEventListener('close',clearPrint);
+  window.addEventListener('afterprint',clearPrint);
 }
 
 export function startPaperDrawer() {
@@ -112,12 +137,19 @@ export function startPaperDrawer() {
   const view = byId('paper-current');
   const recentList = byId('paper-recent-list');
   const recentView = byId('paper-plan-dialog');
+  const deckFile = byId('paper-deck-file');
+  const message = byId('paper-message');
   let current;
   let history = [];
   let unreadable = null;
   let unavailable = false;
   let conflict = false;
   let writing = false;
+
+  function say(text,problem=false) {
+    message.textContent=text;
+    message.classList.toggle('error',problem);
+  }
 
   function restore() {
     try {
@@ -135,7 +167,7 @@ export function startPaperDrawer() {
   function renderStatus() {
     const message = conflict ? 'The saved deck changed. Load it before drawing or undoing.' :
       unavailable ? 'Deck storage is unavailable. Draws may be lost when you close or reload this tab.' :
-      unreadable !== null ? 'The saved deck could not be opened. Start a new deck to resume autosave.' : '';
+      unreadable !== null ? 'The saved deck could not be opened. Import a deck or start a new one to resume autosave.' : '';
     if (warning.textContent !== message) warning.textContent = message;
     byId('paper-save-status').hidden = !message;
     byId('paper-load').hidden = !conflict && !unavailable;
@@ -144,6 +176,8 @@ export function startPaperDrawer() {
     draw.disabled = writing || conflict;
     undo.disabled = writing || conflict || history.length === 0;
     byId('paper-new').disabled = writing || conflict;
+    byId('paper-import-deck').disabled = writing || conflict;
+    byId('paper-export-deck').disabled = writing;
   }
 
   function render() {
@@ -166,9 +200,10 @@ export function startPaperDrawer() {
   }
 
   async function update(next, nextHistory, replace = false) {
-    if (conflict || writing) return;
+    if (conflict || writing) return false;
     const trigger = document.activeElement;
     writing = true;
+    say('');
     renderStatus();
     const contents = unreadable !== null && !replace ? null : JSON.stringify({
       ...next,history:nextHistory,previous:nextHistory.at(-1)?.deck ?? null,
@@ -179,7 +214,7 @@ export function startPaperDrawer() {
     if (conflict) {
       renderStatus();
       if (!byId('draw-only').hidden) byId('paper-load').focus();
-      return;
+      return false;
     }
     current = next;
     history = nextHistory;
@@ -189,6 +224,7 @@ export function startPaperDrawer() {
     if (!byId('draw-only').hidden && [draw,undo,byId('paper-new')].includes(trigger) && document.activeElement === document.body) {
       (trigger.disabled?draw:trigger).focus({preventScroll:true});
     }
+    return true;
   }
 
   restore();
@@ -214,6 +250,27 @@ export function startPaperDrawer() {
   byId('paper-export-unreadable').addEventListener('click',() => {
     if (unreadable !== null) downloadJson(unreadable,'Mincmistr_Unreadable_Deck.json');
   });
+  byId('paper-export-deck').addEventListener('click',() => {
+    downloadJson(JSON.stringify({kind:DECK_FILE_KIND,version:1,...current,history}),'Mincmistr_Plan_Deck.json');
+  });
+  byId('paper-import-deck').addEventListener('click',() => deckFile.click());
+  deckFile.addEventListener('change',async () => {
+    const file=deckFile.files[0];
+    deckFile.value='';
+    if (!file || writing || conflict) return;
+    const before=current;
+    try {
+      if (file.size>32_768) throw Error('That deck file is larger than 32 KB.');
+      const imported=readDeck(await file.text(),true);
+      if (writing || conflict || current!==before) throw Error('The deck changed while the file was opening. Try importing again.');
+      if (await update(imported.current,imported.history,true)) {
+        say('Plan deck imported.');
+        if (!byId('draw-only').hidden) draw.focus();
+      }
+    } catch (error) {
+      say(error instanceof SyntaxError?'This file does not contain valid deck data.':error.message,true);
+    }
+  });
   byId('paper-new').addEventListener('click',() => confirm.showModal());
   byId('paper-cancel').addEventListener('click',() => confirm.close());
   byId('paper-reset').addEventListener('click',() => {
@@ -230,6 +287,5 @@ export function startPaperDrawer() {
     recentView.showModal();
   });
   byId('paper-plan-close').addEventListener('click',() => recentView.close());
-  connectReference();
   render();
 }

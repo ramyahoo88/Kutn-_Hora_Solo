@@ -29,6 +29,36 @@
       <p><b>Free right</b>: public, most VP + 2/pelican + 2/rep. <b>House</b>: row with most removed.</p>
       <div class="rhead2">Difficulty</div>
       <p class="small"><b>Apprentice</b>: no point maths in Plot, Build, Mine.<br><b>Journeyman</b>: as written.<br><b>Master</b>: last 3 rounds, last turn plays both.<br><b>Grandmaster</b>: same, every round.</p></div></div>
+<section id="paper-ref-table" class="reference-prose" hidden>
+  <h1>Mincmistr table reference</h1>
+<p><strong>Kutná Hora: The City of Silver · Mincmistr v1.2.3</strong></p>
+<h2>Play one action card</h2>
+<p><strong>Skip any check you cannot play.</strong> Use the leftmost matching action card. Never use the Joker. Keep the Plan through all bonuses.</p>
+<ol>
+<li><strong>Flip a Plan.</strong> Reshuffle the discards when the deck runs out.</li>
+<li><strong>Cash below 20 g.</strong> Try Income.</li>
+<li><strong>Two or more pelicans.</strong> Try St. Barbara. One pelican is enough on tile 6, 7, 8, 9 or 11.</li>
+<li><strong>Plan goals.</strong> Take the first possible goal from top to bottom.</li>
+<li><strong>Fallback.</strong> Try Income, then Mine, then discard the leftmost remaining action card.</li>
+</ol>
+<p><strong>Action card row.</strong> Mine / Joker → Rights / St. Barbara → Mine / Plot → Build / Income → Rights / Income → Build / Plot.</p>
+<h2>Construct</h2>
+<p><strong>Build</strong> with a right and a plot, else <strong>Plot</strong> if rights outnumber plots and it holds fewer than three plots, else <strong>Rights</strong> if it holds fewer than two rights.</p>
+<p><strong>Buying Rights.</strong> Only affordable own-guild tiles with a house left and enough demand qualify. Maximize production × price, then cheapest, higher market row, leftmost. Skip if none qualify.</p>
+<p><strong>Plot.</strong> Most town points a held right could score, then cheapest, then arrow. <strong>Build.</strong> Highest production (public = 0), town points, arrow, earliest acquired right.</p>
+<h2>Free rights</h2>
+<p><strong>House reward.</strong> Take an eligible public right. With no eligible public right, take nothing.</p>
+<p><strong>St. Barbara tile 2.</strong> Prefer an eligible public right. Otherwise, take an eligible own-guild right with the highest production × price. With no eligible right, take nothing.</p>
+<p>Rank public rights by VP + 2 per pelican + 2 per reputation. Break free-right ties by market reading order. The three-right limit applies to both rewards.</p>
+<h2>Mine, Income and ties</h2>
+<p><strong>Mine.</strong> Use a pool miner or recruit up to two. Keep the most stars + ore + VP, then most stars, then first drawn. Place for most row VP gained, then cheapest, fewest own mines in row, arrow.</p>
+<p><strong>Income.</strong> Collect income. If it can then pay 10 g, seat an available patrician with the biggest edge of at least 1 VP. Edge is its points per token minus the best opponent’s. Ties go green, silver, yellow, red. Pay taxes when able.</p>
+<p><strong>Arrow.</strong> ◀ first space in reading order (top to bottom, left to right). ▶ last in that order.</p>
+<h2>Difficulty</h2>
+<p><strong>Apprentice</strong> skips town points for Plot and Build. For mine placement it uses fewest own mines in row, then cost, then arrow. <strong>Journeyman</strong> uses the priorities above.</p>
+<p><strong>Master</strong> plays both remaining cards on its last turn in the final three rounds. Tougher three-player Master does this in rounds 3–6. <strong>Grandmaster</strong> does this every round.</p>
+  <button type="button" class="outline" id="paper-print-table">Print table reference</button>
+</section>
 <section id="paper-ref-mine" class="reference-prose" hidden>
   <h2>Mincmistr mine choice aid</h2>
 <p><strong>Choose the tile.</strong> Take the drawn tile with the highest stars + ore + VP. Break ties by more stars, then first drawn.</p>
@@ -92,7 +122,7 @@
 <li>3 reference cards: Card play, Goals and Choices.</li>
 <li>From the game box: one set of player components per Mincmistr, including six action cards per set.</li>
 </ul>
-<h2>1. Setup</h2>
+<h2 id="mincmistr-rule-1" tabindex="-1">1. Setup</h2>
 <ol>
 <li>Set up the normal game for your table size. Choose your guild set first from the matching row of the guild setup card. Shuffle the remaining sets and deal one to each Mincmistr. Give each Mincmistr its normal player components, coins and reputation. Use the normal rules for the starting player and seat order.</li>
 <li>Shuffle the Mincmistr's three guilds to set their order, top to bottom, on its player board.</li>
@@ -100,7 +130,7 @@
 <li>Lay its six action cards face up in a row, in the order shown in rule 2.</li>
 <li>Choose a difficulty (rule 9). Journeyman is the standard game.</li>
 </ol>
-<h2>2. The row</h2>
+<h2 id="mincmistr-rule-2" tabindex="-1">2. The row</h2>
 <p>The Mincmistr's action cards always sit in this order, left to right:</p>
 <table>
 <thead>
@@ -127,7 +157,7 @@
 <p>When it takes an action, it uses <strong>the leftmost card still in its row that shows that action</strong>. Remove the card from the row as it is played. At the start of each round, all six cards return to the row in the same order.</p>
 <p>The Mincmistr <strong>never uses the Joker</strong>. It uses its Mine / Joker card only for Mine.</p>
 <p>An action is <strong>not possible</strong> if no card in the row shows it, or if it would be illegal or unaffordable right now. Skip it and go on to the next check.</p>
-<h2>3. Plan cards</h2>
+<h2 id="mincmistr-rule-3" tabindex="-1">3. Plan cards</h2>
 <p>Each Plan card shows two <strong>goals</strong> in priority order and an <strong>arrow</strong>.</p>
 <ul>
 <li><strong>Construct</strong>: Build, else Plot, else Rights (rule 5.1).</li>
@@ -136,17 +166,17 @@
 <li>The <strong>arrow</strong>, ◀ or ▶, breaks ties between spaces (rule 7).</li>
 </ul>
 <p>When the deck runs out, shuffle the discards to form a new deck.</p>
-<h2>4. When the Mincmistr plays a card</h2>
+<h2 id="mincmistr-rule-4" tabindex="-1">4. When the Mincmistr plays a card</h2>
 <p>Each time the Mincmistr must play an action card, follow these steps.</p>
-<p><strong>4.0 Flip.</strong> Flip the top Plan card face up onto the discard pile. This is the current Plan card.</p>
-<p><strong>4.1 Short of cash.</strong> If it has <strong>fewer than 20 g</strong>, it takes <strong>Income</strong> (rule 6.6). Stop here.</p>
-<p><strong>4.2 Pelicans.</strong> It contributes to <strong>St. Barbara</strong> if it has <strong>2 or more pelicans</strong>, or if it has <strong>1 pelican</strong> and the current St. Barbara tile is a <strong>prize tile</strong>. Stop here.</p>
+<p id="mincmistr-rule-4.0" tabindex="-1"><strong>4.0 Flip.</strong> Flip the top Plan card face up onto the discard pile. This is the current Plan card.</p>
+<p id="mincmistr-rule-4.1" tabindex="-1"><strong>4.1 Short of cash.</strong> If it has <strong>fewer than 20 g</strong>, it takes <strong>Income</strong> (rule 6.6). Stop here.</p>
+<p id="mincmistr-rule-4.2" tabindex="-1"><strong>4.2 Pelicans.</strong> It contributes to <strong>St. Barbara</strong> if it has <strong>2 or more pelicans</strong>, or if it has <strong>1 pelican</strong> and the current St. Barbara tile is a <strong>prize tile</strong>. Stop here.</p>
 <p>The prize tiles are <em>Seat a patrician</em> (tile 6), <em>Public neighbours</em> (7), <em>Free building</em> (8), <em>Dig twice</em> (9) and <em>Complete the cathedral</em> (11).</p>
-<p><strong>4.3 Plan.</strong> Try the goals on the current Plan card, top first. It does the first goal that is possible. Stop here.</p>
-<p><strong>4.4 Nothing worked.</strong> It takes Income. If that is not possible, it Mines. If that is not possible either, it discards its leftmost card with no effect.</p>
+<p id="mincmistr-rule-4.3" tabindex="-1"><strong>4.3 Plan.</strong> Try the goals on the current Plan card, top first. It does the first goal that is possible. Stop here.</p>
+<p id="mincmistr-rule-4.4" tabindex="-1"><strong>4.4 Nothing worked.</strong> It takes Income. If that is not possible, it Mines. If that is not possible either, it discards its leftmost card with no effect.</p>
 <p>Skip any step that is not possible. For example, if it has 12 g but has already played both Income cards this round, skip 4.1 and go to 4.2.</p>
-<h2>5. Goals</h2>
-<h3>5.1 Construct</h3>
+<h2 id="mincmistr-rule-5" tabindex="-1">5. Goals</h2>
+<h3 id="mincmistr-rule-5.1" tabindex="-1">5.1 Construct</h3>
 <p>Do the first of these that is possible:</p>
 <ol>
 <li><strong>Build</strong>: if it holds at least one building right and at least one plot.</li>
@@ -154,25 +184,25 @@
 <li><strong>Rights</strong>: if it holds fewer than 2 rights.</li>
 </ol>
 <p>Each one still needs a card in the row and enough coins. Rule 6 gives its choices.</p>
-<h3>5.2 Mine</h3>
+<h3 id="mincmistr-rule-5.2" tabindex="-1">5.2 Mine</h3>
 <p>It takes a Mine action using a miner from its pool. If its pool is empty, it recruits as many miners as it can, up to 2, paying the permit price. Then it draws mine tiles as normal and places one (rule 6.4).</p>
-<h3>5.3 St. Barbara</h3>
+<h3 id="mincmistr-rule-5.3" tabindex="-1">5.3 St. Barbara</h3>
 <p>If it has a pelican, it contributes to St. Barbara and resolves the current St. Barbara tile as normal. Rule 6.5 covers any choices on that tile.</p>
-<h2>6. Choices</h2>
-<h3>6.1 Rights</h3>
+<h2 id="mincmistr-rule-6" tabindex="-1">6. Choices</h2>
+<h3 id="mincmistr-rule-6.1" tabindex="-1">6.1 Rights</h3>
 <p>It takes only <strong>guild tiles it could build right now</strong>. The tile must belong to one of its own guilds, that guild's row must still have a house, and the population or ore track must allow that guild's next building. It <strong>never buys public building rights</strong>. Like any player, it gets public rights free from its top house row.</p>
 <p>Of those tiles, it takes the one with the highest <strong>income value</strong>: production × the current price of that commodity. Ties go to the cheaper tile, then the higher market row, then the tile further left.</p>
 <p>If no qualifying tile is available to buy, Rights is not possible. Go to the next check.</p>
-<h3>6.2 Plot</h3>
+<h3 id="mincmistr-rule-6.2" tabindex="-1">6.2 Plot</h3>
 <p>It claims the legal plot where one of its held rights would score the <strong>most town points</strong>, counting the matching dots that building would score there. Ties go to the cheaper plot, then the arrow.</p>
-<h3>6.3 Build</h3>
+<h3 id="mincmistr-rule-6.3" tabindex="-1">6.3 Build</h3>
 <p>It builds the held right with the <strong>most production</strong>. Public buildings count as 0, so it builds one only when no guild building can be built. It places the building on the plot where it scores the <strong>most town points</strong>. Ties go by the arrow, then to the right it took first.</p>
-<h3>6.4 Mine tiles</h3>
+<h3 id="mincmistr-rule-6.4" tabindex="-1">6.4 Mine tiles</h3>
 <p>Of the tiles drawn, it keeps the one with the most <strong>stars + ore + VP</strong>. Ties go to more stars, then the first tile drawn.</p>
 <p>It places that tile where it <strong>gains the most mine-row points right now</strong>: the award it would hold in that row after placing, minus the award it holds there now. Use the normal mine-row awards. With two players, a row with 0–3 stars in total pays 2 to the leader and 0 to the other player, 4–6 stars pays 4 and 1, and 7 or more pays 6 and 2. Tied players both take the higher award, and a player with no stars in a row scores nothing there. A tile with no stars gains nothing anywhere.</p>
 <p>Ties go to the cheapest space, then the row where it has the fewest mines, then the arrow. If it cannot pay for any space, it discards the draw.</p>
 <p>Free tiles from technology use the same placement rule.</p>
-<h3>6.5 Bonus steps</h3>
+<h3 id="mincmistr-rule-6.5" tabindex="-1">6.5 Bonus steps</h3>
 <ul>
 <li><strong>Free building right</strong> (from a house row or St. Barbara tile 2): among eligible rights, take the public tile with the highest <strong>VP + 2 per pelican + 2 per reputation</strong>. Ties go to the first tile offered. If no public tile is eligible, a house reward gives nothing. On St. Barbara tile 2 only, fall back to the eligible tile from one of its own guilds with the highest income value. Break ties by the first tile offered. Take nothing if no tile is eligible.</li>
 <li><strong>Remove a house</strong>: from the guild row with the most houses already removed. Ties go to the top row. It always takes optional house removals.</li>
@@ -181,7 +211,7 @@
 <li><strong>Dig twice</strong> (St. Barbara tile 9): it takes both free Mine actions, as the tile says, using miners from its reserve first. Placement is free; place each tile by rule 6.4.</li>
 <li><strong>Free plot, free building or extra Income</strong>: use rules 6.2, 6.3 and 6.6.</li>
 </ul>
-<h3>6.6 Income and patricians</h3>
+<h3 id="mincmistr-rule-6.6" tabindex="-1">6.6 Income and patricians</h3>
 <p>Whenever it takes Income, it seats a patrician if three things are true: one is available, it can pay the 10 g (counting the Income it collects), and that colour's <strong>edge is at least 1</strong>. If more than one colour qualifies, it picks the biggest edge. Ties go green, silver, yellow, red. Otherwise it takes plain Income.</p>
 <p><strong>Edge</strong> = the points one patrician of that colour gives the Mincmistr in a council scoring, minus the points it gives you. With more than two players, compare it with the best of its opponents, other Mincmistrs included.</p>
 <table>
@@ -210,21 +240,21 @@
 </tr>
 </tbody>
 </table>
-<h2>7. The arrow</h2>
+<h2 id="mincmistr-rule-7" tabindex="-1">7. The arrow</h2>
 <p>When spaces tie, the arrow on the current Plan card decides:</p>
 <ul>
 <li><strong>◀</strong>: the earliest space in reading order. Start at the top row and read left to right.</li>
 <li><strong>▶</strong>: the latest space in reading order. Start at the bottom row and read right to left.</li>
 </ul>
 <p>This applies to town plots, building placement and mine spaces.</p>
-<h2>8. Everything else</h2>
+<h2 id="mincmistr-rule-8" tabindex="-1">8. Everything else</h2>
 <ul>
 <li><strong>Taxes</strong>: it pays if it can. Otherwise it loses reputation.</li>
 <li><strong>Events</strong>: they affect it exactly as they affect a player.</li>
 <li><strong>Limits</strong>: 3 rights, 3 plots, miners, houses and every other limit apply as normal.</li>
 <li><strong>End of game</strong>: it scores exactly like a player. The higher total wins. Use the normal tie-breaker.</li>
 </ul>
-<h2>9. Difficulty</h2>
+<h2 id="mincmistr-rule-9" tabindex="-1">9. Difficulty</h2>
 <table>
 <thead>
 <tr>
@@ -253,7 +283,7 @@
 </table>
 <p>Master and Grandmaster give it extra actions only. They never add points, coins or discounts.</p>
 <p><strong>Fine-tuning.</strong> For a step between levels, give the double last turn to the last N rounds only. Each extra round is worth about 1.5 to 2.5 points (see rule 12). Master is N = 3 and Grandmaster is N = 6.</p>
-<h2>10. Two or three Mincmistrs</h2>
+<h2 id="mincmistr-rule-10" tabindex="-1">10. Two or three Mincmistrs</h2>
 <p>To face more opponents, set up a three- or four-player game using rule 1. Give each Mincmistr its own row of action cards.</p>
 <ul>
 <li>They can share one Plan deck. Flip a new card for each card play.</li>
@@ -262,11 +292,11 @@
 <li>All of them play at the same level.</li>
 <li>With three players, Master is slightly easy: the Standard rival won about 39% against a fair share of 33%. For a tougher three-player game, double the last turn in rounds 3–6 (rule 9, N = 4).</li>
 </ul>
-<h2>11. Example</h2>
+<h2 id="mincmistr-rule-11" tabindex="-1">11. Example</h2>
 <p>It is round 2. The Mincmistr has 26 g and 1 pelican. It holds one building right and no plot. Its Mine / Joker card is already played. You flip a Plan card showing <strong>Mine, then Construct</strong>, with arrow ▶.</p>
 <p>At 26 g it is not short of cash. It has only 1 pelican, and the current St. Barbara tile is <em>Free plot</em> (tile 4), which is not a prize tile. So it follows the plan. Mine is possible. It has a miner in its pool, so it plays Mine / Plot, the leftmost Mine card left in its row.</p>
 <p>It draws two tiles and keeps the one with 2 stars, because it has more stars + ore + VP. You lead the top row 2 stars to 0, with 2 stars in that row. In the second row, you have 3 stars and it has 1, out of 4 stars in total. The 2-star tile in the top row gives a total of 4 stars, tied at 2 each, so it moves from 0 to the leader's 4 points: a gain of 4. In the second row it would also tie at 3 stars, but the 6-star total keeps the award at 4 and 1, so its share rises from 1 to 4: a gain of 3. It places the tile in the top row, on the cheapest space there. If two spaces tie, it takes the latest in reading order.</p>
-<h2>12. How strong is it?</h2>
+<h2 id="mincmistr-rule-12" tabindex="-1">12. How strong is it?</h2>
 <p>These results come from simulated two-player games in the Kutná Hora Solo engine (v0.3.0) against the app's two rivals. All seeds were held out from tuning, and every game set covers both seats and both starting players. The Standard column uses 768 games per level and the Quick column 384. The figures are the Mincmistr's win rate and its average margin in points.</p>
 <table>
 <thead>
@@ -365,7 +395,7 @@
 </tr>
 </tbody>
 </table>
-<h2>13. Quick reference</h2>
+<h2 id="mincmistr-rule-13" tabindex="-1">13. Quick reference</h2>
 <ol>
 <li>Flip a Plan card.</li>
 <li>Fewer than 20 g: <strong>Income</strong>.</li>

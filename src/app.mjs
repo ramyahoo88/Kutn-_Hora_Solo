@@ -1,6 +1,6 @@
 import {
   BARBARA, BUILDINGS, CARDS, CITY_WIDTH, COMMODITY, GAME_RULES, GOODS, GUILDS,
-  GUILD_SETUPS_BY_COUNT, HOUSE_EFFECTS, LABEL, MINES, PATRICIANS, REP_SCORE,
+  GUILD_SETUPS_BY_COUNT, HOUSE_EFFECTS, LABEL, MINES, PATRICIANS, REP_SCORE, VERSION,
 } from './data.mjs';
 import {
   applyKnownAction, canBuildGuild, cityPointsAt, copyState, coordinate, createGame, currentBarbara,
@@ -9,8 +9,8 @@ import {
 } from './engine.mjs';
 import {actionRationale,botAction} from './bot.mjs';
 import {describePlan,PLAN_DECK,playMincmistr,ROW} from './mincmistr.mjs';
-import {setPlanFace,showPlan,startPaperDrawer} from './paper.mjs';
-import {readAutosave,readSave,writeAutosave,writeSave} from './save.mjs';
+import {connectReference,openReference,setPlanFace,showPlan,startPaperDrawer} from './paper.mjs';
+import {readAutosave,readPosition,writeAutosave,writePlaytestReport,writeSave} from './save.mjs';
 import {downloadJson,storageSlot} from './storage.mjs';
 
 const STORAGE='kutna-hora-solo-v1';
@@ -76,14 +76,19 @@ function startDigitalGame() {
 }
 
 async function storePosition(next, {replace=false, undoing=false}={}) {
-  const history=undoing?undo.slice(0,-1):[...undo,{state,rivalReport,review}].slice(-20);
+  const previous={state,rivalReport,review};
+  if (replace) previous.replaced=true;
+  const history=undoing?undo.slice(0,-1):[...undo,previous].slice(-20);
   const contents=unreadableSave!==null && !replace?null:writeAutosave(next,history);
   const result=await savedGame.write(contents,{replace});
   saveConflict=result==='conflict';
   if (saveConflict) return false;
   const previousGame=replace || state.seed!==next.state.seed || state.players.length!==next.state.players.length;
   ({state,rivalReport,review}=next);
-  if (previousGame) boardSeat=0;
+  if (previousGame) {
+    boardSeat=0;
+    byId('playtest-note').value='';
+  }
   undo=history;
   resetSelection();
   saveFailed=result==='unavailable';
@@ -431,6 +436,33 @@ function renderResult() {
     <tbody>${lines.map(([key,label])=>`<tr class="${key==='total'?'total':''}"><th scope="row">${label}</th>${scores.map(score=>`<td>${score[key]}</td>`).join('')}</tr>`).join('')}</tbody>
     </table><button type="button" class="primary fill" data-do="dialog" data-value="setup">New game</button>`;
 }
+function ruleLink(number,label=`Rule ${number}`) {
+  if (!byId(`mincmistr-rule-${number}`)) return safe(label);
+  return `<button type="button" class="link rule-link" data-do="rule" data-value="${safe(number)}" aria-haspopup="dialog" aria-label="Read Mincmistr rule ${safe(number)}">${safe(label)}</button>`;
+}
+function renderRule(text) {
+  const match=text.match(/^Rule (\d+(?:\.\d+)?)\b/);
+  return match?ruleLink(match[1])+safe(text.slice(match[0].length)):safe(text);
+}
+function renderExplanation(entry) {
+  if (!entry?.explanation?.length) return '';
+  return `<details class="plan-explanation"><summary>Why this move?</summary><ol>${
+    entry.explanation.map(step=>`<li>${ruleLink(step.rule)} <span>${safe(step.text)}</span></li>`).join('')
+  }</ol></details>`;
+}
+function renderPlanChanges(changes) {
+  if (!changes) return '';
+  const width=rulesFor(state).board.mineWidth;
+  const spaces=[
+    ...changes.town.map(i=>['town',i,`Town ${coordinate(i,CITY_WIDTH)}`]),
+    ...changes.mine.map(i=>['mine',i,`Mine ${coordinate(i,width)}`]),
+  ];
+  if (!spaces.length&&!changes.summary.length) return '';
+  return `<div class="plan-changes"><h4>Changed by this Plan</h4><ul>${
+    spaces.map(([area,index,label])=>`<li><button type="button" class="link changed-space" data-do="locate-plan-change" data-value="${area}-${index}">◆ ${label}</button></li>`).join('')
+  }${changes.summary.map(line=>`<li>${safe(line)}</li>`).join('')}</ul></div>`;
+}
+
 function renderDecisions() {
   selections=[];
   let title='Your turn';
@@ -457,17 +489,20 @@ function renderDecisions() {
   const last=state.log.filter(entry=>entry.actor>0).slice(-4).map(entry=>noteFor(entry.actor,entry.text));
   const reviewTitle=review?.plan?`Plan ${review.plan}`:'Taxes';
   const draw=review?.plan?state.log.findLast(entry=>entry.actor===review.seat&&plansByNote.has(entry.text)):null;
-  const rule=draw?.rule&&plansByNote.get(draw.text)===review.plan?draw.rule:'';
+  const planEntry=draw&&plansByNote.get(draw.text)===review.plan?draw:null;
   const notes=review?`<section class="panel rival-review" aria-labelledby="review-title"><div class="panel-head">
     <h3 id="review-title">${playerName(review.seat)} · ${reviewTitle}</h3></div>
     <div class="review-body">
       ${review.plan?`<button type="button" class="outline review-plan" data-do="plan-card" data-value="${review.seat}/${review.plan}" aria-haspopup="dialog">
         <span class="printed-plan-face" id="review-plan-face" aria-hidden="true"></span>View Plan card</button>`:''}
       <div class="review-actions">
-        ${rule?`<p class="review-rule">${safe(rule)}</p>`:''}
+        ${planEntry?.rule?`<p class="review-rule">${renderRule(planEntry.rule)}</p>`:''}
         ${rivalReport.length?`<ul>${rivalReport.map(row=>`<li>${safe(row)}</li>`).join('')}</ul>`:'<p class="muted">Finished resolving the Plan.</p>'}
       </div>
-    </div></section>`:
+    </div>
+    ${renderPlanChanges(review.changes)}
+    ${renderExplanation(planEntry)}
+    </section>`:
     rivalReport.length||last.length?`<details class="panel rival-report" ${state.players.length===2?'open':''}><summary>Rival notes</summary><ul>${(rivalReport.length?rivalReport:last).map(row=>`<li>${safe(row)}</li>`).join('')}</ul></details>`:'';
   byId('decisions').innerHTML=`<section class="panel decision" aria-label="Turn actions"><div class="panel-head"><h2 id="turn-title" tabindex="-1">${title}</h2>${tag?`<span class="turn-tag">${tag}</span>`:''}</div>
     <div class="panel-body">${content}</div></section>
@@ -547,20 +582,21 @@ function mapCell(value, i, columns, area, board) {
   const matching=selections.findIndex(a=>a.space===i&&(
     area==='town'?['plot','build','score-building'].includes(a.kind):['place-mine','technology'].includes(a.kind)));
   const active=matching>=0&&selectedAction?.space===i;
+  const changed=review?.changes?.[area]?.includes(i);
   const owner=value?.owner??value?.plot;
   const tokenClass=owner!==undefined?`seat-${owner}`:value?'neutral':'open';
   const entrance=area==='mine'&&board.entrances.includes(i)&&!value;
   const classes=[`cell ${tokenClass}`,matching>=0?'target':'',active?'selected':'',value?.rock?'rock':'',
-    entrance?'entrance':''].join(' ');
+    entrance?'entrance':'',changed?'plan-changed':''].join(' ');
   const name=value?.rock?'Rock':tile?.name??(value?'Reserved plot':entrance?'Entrance':'Open space');
   const positionOwner=owner!==undefined?playerName(owner):tile?.public?'Public':'';
-  const title=`${area==='town'?'Town':'Mine'} ${id} · ${name}${positionOwner?` · ${positionOwner}`:''}${value?.rock?` · ${value.stars} ★`:''}`;
+  const title=`${area==='town'?'Town':'Mine'} ${id} · ${name}${positionOwner?` · ${positionOwner}`:''}${value?.rock?` · ${value.stars} ★`:''}${changed?' · Changed by last Plan':''}`;
   const edge=area==='town'&&board.edge[i];
   const edgeMark=edge?`<span class="cell-edge" title="Board edge · ${dotLabels[edge]}"><span class="sr-only">Board edge</span>${dots({dots:edge})}</span>`:'';
   const details=area==='town'?dots(tile)+edgeMark:
     value?`<small>${value.stars} ★${tile?` · ${tile.extend}w`:''}</small>`:'';
-  const content=`<span class="cell-id">${id}</span>${value||entrance?`<b>${safe(name)}</b>`:''}${details}`;
-  const attributes=`class="${classes}" title="${safe(title)}"`;
+  const content=`<span class="cell-id">${id}${changed?'<span class="plan-change-mark" aria-hidden="true"> ◆</span><span class="sr-only"> Changed by last Plan</span>':''}</span>${value||entrance?`<b>${safe(name)}</b>`:''}${details}`;
+  const attributes=`class="${classes}" title="${safe(title)}"${changed?` id="plan-change-${area}-${i}"`:''}`;
   const reference=`${area}/${i}`;
   const inspectable=tile||value?.rock;
   if (matching>=0) {
@@ -568,7 +604,7 @@ function mapCell(value, i, columns, area, board) {
     return inspectable?`<div class="tile-with-details">${target}${detailsButton(reference,title)}</div>`:target;
   }
   if (inspectable) return `<button type="button" ${attributes} ${inspectAttributes(reference,`Inspect ${title}`)}>${content}</button>`;
-  return `<div ${attributes}>${content}</div>`;
+  return `<div ${attributes}${changed?' tabindex="-1"':''}>${content}</div>`;
 }
 function renderBoards() {
   const {board}=rulesFor(state);
@@ -633,8 +669,8 @@ function renderJournal() {
   byId('journal-body').innerHTML=`<ol class="log-list">${entries.map(item=>{
     const plan=state.mincmistr&&item.actor>0?plansByNote.get(item.text):undefined;
     const note=safe(item.text);
-    const content=plan?`<button type="button" class="link plan-card-link" data-do="plan-card" data-value="${item.actor}/${plan}" aria-haspopup="dialog">${note}</button>${item.rule?`<span class="journal-rule">${safe(item.rule)}</span>`:''}`:note;
-    return `<li><span class="log-round">R${item.round}</span><span class="log-seat seat-${item.actor}">${item.actor===null?'Town':playerName(item.actor)}</span><span>${content}</span></li>`;
+    const content=plan?`<button type="button" class="link plan-card-link" data-do="plan-card" data-value="${item.actor}/${plan}" aria-haspopup="dialog">${note}</button>${item.rule?`<div class="journal-rule">${renderRule(item.rule)}</div>`:''}${renderExplanation(item)}`:note;
+    return `<li><span class="log-round">R${item.round}</span><span class="log-seat seat-${item.actor}">${item.actor===null?'Town':playerName(item.actor)}</span><div class="journal-entry">${content}</div></li>`;
   }).join('')}</ol>`;
 }
 function render() {
@@ -674,7 +710,34 @@ async function changeGame(change, {focus=false, planning=false}={}) {
 function commit() {
   const a=selections[choice];
   if (!a || state.actor!==0) return;
-  changeGame(()=>storePosition({state:transition(state,a),rivalReport,review}),{focus:true});
+  const recentPlan=review?{seat:review.seat,plan:review.plan}:null;
+  changeGame(()=>storePosition({state:transition(state,a),rivalReport,review:recentPlan}),{focus:true});
+}
+function planChanges(before,after) {
+  const previous=before.players[before.actor],next=after.players[before.actor];
+  const summary=[];
+  const compare=(label,from,to,unit='')=>{
+    if (from!==to) summary.push(`${label} ${from} → ${to}${unit}`);
+  };
+  compare('Coins',previous.coins,next.coins,' g');
+  compare('Reputation',previous.rep,next.rep);
+  compare('Earned points',previous.vp,next.vp,' VP');
+  compare('Pelicans',previous.pelicans,next.pelicans);
+  const gained=next.held.filter(id=>!previous.held.includes(id));
+  const spent=previous.held.filter(id=>!next.held.includes(id));
+  if (gained.length) summary.push(`Rights gained · ${gained.map(id=>BUILDINGS[id].name).join(', ')}`);
+  if (spent.length) summary.push(`Rights used · ${spent.map(id=>BUILDINGS[id].name).join(', ')}`);
+  compare('Population',before.pop,after.pop);
+  compare('Ore',before.ore,after.ore);
+  compare('Tax',before.tax,after.tax,' g');
+  compare('Mine draw',before.technology+1,after.technology+1);
+  const cathedral=game=>currentBarbara(game)===12?'complete':`tile ${currentBarbara(game)}`;
+  compare('St. Barbara',cathedral(before),cathedral(after));
+  return {
+    town:before.city.flatMap((tile,i)=>tile===after.city[i]?[]:[i]),
+    mine:before.mine.flatMap((tile,i)=>tile===after.mine[i]?[]:[i]),
+    summary,
+  };
 }
 function runRival(onePlan=false) {
   if (state.actor===0 || state.phase==='end' || (onePlan && !state.mincmistr)) return;
@@ -714,8 +777,9 @@ function runRival(onePlan=false) {
       if (next.actor!==0&&next.phase!=='end') await new Promise(resolve=>setTimeout(resolve,0));
     }
     if (saveConflict) return;
-    await storePosition({state:next,rivalReport:onePlan||multiple?notes:notes.slice(0,6),
-      review:onePlan?{seat:start.actor,plan:planNumber}:null});
+    const reviewed=onePlan?{seat:start.actor,plan:planNumber}:null;
+    if (reviewed?.plan) reviewed.changes=planChanges(start,next);
+    await storePosition({state:next,rivalReport:onePlan||multiple?notes:notes.slice(0,6),review:reviewed});
   },{focus:true,planning:true});
 }
 function changeAction(card,kind) {
@@ -824,11 +888,11 @@ byId('file').addEventListener('change',async event=>{
   if (!file || busy) return;
   const previous=state;
   try {
-    if (file.size>1_000_000) throw Error('That save is larger than 1 MB.');
-    const next=readSave(await file.text());
+    if (file.size>4_000_000) throw Error('That save is larger than 4 MB.');
+    const next=readPosition(await file.text());
     if (busy || saveConflict || state!==previous) throw Error('The game changed while the file was opening. Try importing again.');
     await changeGame(async()=>{
-      const applied=await storePosition({state:next,rivalReport:[],review:null},{replace:true});
+      const applied=await storePosition(next,{replace:true});
       if (applied && !saveFailed) say('Save imported.');
     },{focus:true});
   } catch (error) {say(error instanceof SyntaxError?'This file does not contain valid save data.':error.message,true);}
@@ -844,7 +908,7 @@ byId('digital-game').addEventListener('click',event=>{
   const button=event.target.closest('button[data-do]');
   if (!button||button.disabled) return;
   const {do:action,value}=button.dataset;
-  if (busy && !['dialog','close','journal','player-board','export','export-unreadable'].includes(action)) return;
+  if (busy && !['dialog','close','journal','player-board','export','export-unreadable','report'].includes(action)) return;
   try {
     switch(action) {
       case 'dialog': openDialog(value); break;
@@ -855,6 +919,13 @@ byId('digital-game').addEventListener('click',event=>{
         break;
       case 'inspect': inspectTile(value,button); break;
       case 'plan-card': showPlanCard(value); break;
+      case 'rule': openReference(value); break;
+      case 'locate-plan-change': {
+        const cell=byId(`plan-change-${value}`);
+        cell?.scrollIntoView?.({block:'center'});
+        cell?.focus({preventScroll:true});
+        break;
+      }
       case 'close': button.closest('dialog').close(); break;
       case 'seed': byId('setup-form').elements.seed.value=randomSeed(); break;
       case 'card': changeAction(...value.split('/')); break;
@@ -882,6 +953,14 @@ byId('digital-game').addEventListener('click',event=>{
         break;
       }
       case 'journal': allJournal=!allJournal; renderJournal(); break;
+      case 'report': {
+        const time=new Date();
+        const seed=state.seed.replace(/[^a-z0-9._-]+/gi,'-');
+        const stamp=time.toISOString().replace(/[:.]/g,'-');
+        const contents=writePlaytestReport({state,rivalReport,review},undo.at(-1),byId('playtest-note').value,time);
+        downloadJson(contents,`Kutna_Hora_Playtest_v${VERSION}_${seed}_${stamp}.json`);
+        break;
+      }
       case 'export': downloadJson(writeSave(state),'Kutna_Hora_Solo_Save.json'); break;
       case 'export-unreadable':
         if (unreadableSave!==null) downloadJson(unreadableSave,'Kutna_Hora_Unreadable_Save.json');
@@ -900,6 +979,7 @@ function showMode() {
   if (changed) {
     const leaving=drawOnly?digital:drawer;
     leaving.querySelector('dialog[open]')?.close();
+    if (byId('paper-reference').open) byId('paper-reference').close();
   }
   digital.hidden=drawOnly;
   drawer.hidden=!drawOnly;
@@ -914,4 +994,5 @@ function showMode() {
   if (changed) byId(drawOnly?'paper-title':'digital-title').focus();
 }
 window.addEventListener('hashchange',showMode);
+connectReference();
 showMode();

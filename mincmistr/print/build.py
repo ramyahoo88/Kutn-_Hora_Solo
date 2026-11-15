@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Build the Mincmistr print-and-play: rules pages + Plan cards + reference cards -> one HTML -> PDF.
 Card data comes from cards.json, exported from mincmistr.mjs, so the printed deck always matches the code."""
-import json, pathlib, subprocess, sys, html
+import json, pathlib, re, subprocess, sys, html
 import markdown
 
 HERE = pathlib.Path(__file__).parent
@@ -101,14 +101,78 @@ def sheet(cards, cls='sheet', note=''):
 def app_reference(out_html):
     cards = ''.join(ref_cards())
     mine = markdown.markdown((HERE / 'mine-aid.md').read_text(encoding='utf-8'), extensions=['tables'])
+    reference = markdown.markdown((HERE / 'reference-sheet.md').read_text(encoding='utf-8'))
     rules = markdown.markdown(rules_md, extensions=['tables'])
+    # Both modes open the same full rules and can focus the numbered check.
+    rules = re.sub(
+        r'<(h[23]|p)>(<strong>)?(\d+(?:\.\d+)?)(?=\.?\s)',
+        lambda m: f'<{m[1]} id="mincmistr-rule-{m[3]}" tabindex="-1">{m[2] or ""}{m[3]}',
+        rules,
+    )
     pathlib.Path(out_html).write_text(f'''<div id="paper-ref-cards">{cards}</div>
+<section id="paper-ref-table" class="reference-prose" hidden>
+  {reference}
+  <button type="button" class="outline" id="paper-print-table">Print table reference</button>
+</section>
 <section id="paper-ref-mine" class="reference-prose" hidden>
   {mine}
   <button type="button" class="outline" id="paper-print-mine">Print mine aid</button>
 </section>
 <section id="paper-ref-rules" class="reference-prose" hidden>{rules}</section>
 ''', encoding='utf-8')
+
+def table_reference(size, out_pdf):
+    """Render the same table reference as the app, at full size on one sheet."""
+    import os
+    import xml.etree.ElementTree as ET
+    from reportlab.lib.colors import HexColor
+    from reportlab.lib.pagesizes import A4, letter
+    from reportlab.lib.styles import ParagraphStyle
+    from reportlab.pdfbase import pdfmetrics
+    from reportlab.pdfbase.ttfonts import TTFont
+    from reportlab.pdfgen.canvas import Canvas
+    from reportlab.platypus import Paragraph, SimpleDocTemplate
+
+    page_size = {'letter': letter, 'a4': A4}[size.lower()]
+    fonts = pathlib.Path(os.environ.get('DEJAVU_FONTS', '/usr/share/fonts/truetype/dejavu'))
+    for name, suffix in [('TableSans', ''), ('TableSansBold', '-Bold')]:
+        pdfmetrics.registerFont(TTFont(name, str(fonts / f'DejaVuSans{suffix}.ttf')))
+    pdfmetrics.registerFontFamily('TableSans', normal='TableSans', bold='TableSansBold')
+
+    dark = HexColor('#2c2520')
+    accent = HexColor('#5b2a1f')
+    margin = 34
+    body = ParagraphStyle('Body', fontName='TableSans', fontSize=11, leading=13.5, spaceAfter=4, textColor=dark)
+    numbered = ParagraphStyle('Step', parent=body, leftIndent=18, bulletIndent=1, spaceAfter=2)
+    title = ParagraphStyle('Title', parent=body, fontName='TableSansBold', fontSize=24, leading=28, spaceAfter=6, textColor=accent)
+    heading = ParagraphStyle('Heading', parent=body, fontName='TableSansBold', fontSize=12.2, leading=14,
+                             spaceBefore=6, spaceAfter=3, textColor=accent, keepWithNext=True)
+
+    def inline(node):
+        body_html = html.escape(node.text or '') + ''.join(ET.tostring(child, encoding='unicode') for child in node)
+        return body_html.replace('<strong>', '<b>').replace('</strong>', '</b>')
+
+    story = []
+    markup = markdown.markdown((HERE / 'reference-sheet.md').read_text(encoding='utf-8'))
+    for node in ET.fromstring(f'<article>{markup}</article>'):
+        if node.tag == 'ol':
+            story.extend(Paragraph(inline(item), numbered, bulletText=f'{i}.') for i, item in enumerate(node, 1))
+        else:
+            story.append(Paragraph(inline(node), {'h1': title, 'h2': heading, 'p': body}[node.tag]))
+
+    def footer(canvas, doc):
+        if doc.page != 1:
+            raise ValueError('The table reference must fit on one page.')
+        canvas.setStrokeColor(HexColor('#c9b79c'))
+        canvas.line(margin, 31, page_size[0] - margin, 31)
+        canvas.setFillColor(accent)
+        canvas.setFont('TableSans', 8.5)
+        canvas.drawString(margin, 18, f'Table reference · {"A4" if size.lower() == "a4" else "US Letter"} · Print at actual size')
+
+    doc = SimpleDocTemplate(out_pdf, pagesize=page_size, leftMargin=margin, rightMargin=margin,
+                            topMargin=32, bottomMargin=42, title='Mincmistr table reference', author='Kutná Hora Solo')
+    doc.build(story, onFirstPage=footer, onLaterPages=footer,
+              canvasmaker=lambda *args, **kwargs: Canvas(*args, **{**kwargs, 'invariant': 1}))
 
 def refresh_rules(source_pdf, out_pdf):
     """Replace the rules pages while retaining the existing card sheets."""
@@ -179,5 +243,7 @@ if __name__ == '__main__':
         app_reference(sys.argv[2])
     elif sys.argv[1] == '--refresh-rules':
         refresh_rules(sys.argv[2], sys.argv[3])
+    elif sys.argv[1] == '--table-reference':
+        table_reference(sys.argv[2], sys.argv[3])
     else:
         main(sys.argv[1], sys.argv[2])

@@ -1,14 +1,16 @@
-# Kutná Hora Solo v0.3.6 playtest
+# Kutná Hora Solo v0.3.7 playtest
 
 An unofficial browser playtest for Kutná Hora: The City of Silver. Play one seat against one, two or three rivals. The app handles the town, mines, market, council and game draws. The same HTML works offline. Players can mirror its placements on the table. Export and import a JSON save to move a game between copies.
 
 To play offline, open [Kutna_Hora_Solo.html](Kutna_Hora_Solo.html) on GitHub, choose **Download raw file**, and open the downloaded file in your browser.
 
-For the physical game, choose **Draw only** in the toolbar. Tap **Draw Plan** once per Mincmistr action card and resolve the printed Plan at the table. One shared 15-card deck supports one to three Mincmistrs. **Rules and reference** opens the three reference cards, full v1.2.3 rules and a printable mine choice aid offline. You can view the five most recent revealed Plans and undo up to five draws, including after a reshuffle or reload. Bookmark the page with `#draw-only` to open the deck directly.
+For the physical game, choose **Draw only** in the toolbar. Tap **Draw Plan** once per Mincmistr action card and resolve the printed Plan at the table. One shared 15-card deck supports one to three Mincmistrs. **Rules and reference** opens the reference cards, full v1.2.3 rules and two printable aids. **Export deck** and **Import deck** move the deck, recent draws and five Undo steps between devices. Bookmark the page with `#draw-only` to open the deck directly.
 
 Choose a rival count in **New game**. Pick your guild set from that player count's setup card and arrange your house rows. The seed assigns each remaining set once and determines the rivals’ house rows. At larger tables, **Play rivals** runs through the consecutive rival turns and tax decisions until you have a choice or the game ends. Earlier two-player saves import as two-player games.
 
-Choose **Mincmistr** under **Rival difficulty** to play the v1.2.3 tabletop variant directly in the app. Choose Apprentice, Journeyman, Master or Grandmaster for one to three Mincmistrs. With several Mincmistrs, the default is one shared Plan deck and you can choose individual decks. At a three-player table, Master offers the tougher rounds 3–6 option from rule 10. **Play one Plan** resolves that card and its bonus choices, then shows the card, the rule that selected its action, and the moves. The journal keeps the rule beside each new Plan. Open **View Plan card** or a journal entry to see the printed face and selectable text. Saves include the Plan decks and their current positions. Open Mincmistr saves with v0.3.2 or later. [Tabletop rules and printables](mincmistr/README.md)
+Choose **Mincmistr** under **Rival difficulty** to play the v1.2.3 tabletop variant directly in the app. Choose Apprentice, Journeyman, Master or Grandmaster for one to three Mincmistrs. With several Mincmistrs, choose a shared deck or one per rival. At a three-player table, Master offers the tougher rounds 3–6 option from rule 10. **Play one Plan** resolves the card and its bonuses, then marks the town and mine spaces it changed. Tap a coordinate in the review to jump to that space. **Why this move?** shows the checks and tie-breaks, including for Plans played as a batch. The journal preserves these details. Rule numbers open the relevant text offline. [Tabletop rules and printables](mincmistr/README.md)
+
+Use **Export playtest report** in the journal to download the game, settings, journal and previous action when available. **Add a playtest note** includes your observations in the report. Open the report itself with **Import save**, or extract its `playtest.before` save to replay the last move.
 
 The digital game keeps up to five Undo steps after reload. Each mode uses its own autosave. If another tab advances a save, load the latest position when prompted. Draw only preserves unreadable saved decks until an explicit reset. Individual Mincmistr decks use different seat inputs even with a 64-character seed. [v0.3.4 audit](https://github.com/ramyahoo88/Kutn-_Hora_Solo/blob/c6149d3350981c5507b3ca7279c579d9e767d5f6/docs/Astra_Audit_v0.3.4.md)
 
@@ -38,6 +40,7 @@ Version 0.2.0 added the rival’s visible hand and both player boards, previews 
 node build.mjs
 cmp dist/index.html Kutna_Hora_Solo.html
 node --test test/*.test.mjs
+node mincmistr/flowcheck.mjs
 node test/rival-study.mjs 12 v030-check
 ```
 
@@ -100,7 +103,7 @@ node test/skip-planner-study.mjs /path/to/skip-traces standard,planner --case=4 
 
 ## Playtest checks
 
-- **Draw only.** Draw 16 Plans. Reload and undo twice to reach draw 14 of 15. Draw twice and confirm the same two Plans appear across the reshuffle. Open **Rules and reference**, then close it and confirm the same Plan is visible. Test **Print mine aid** on your page size.
+- **Draw only.** Draw 16 Plans and export the deck. Import it in another browser or device. Undo twice to reach draw 14 of 15, then draw twice and confirm the same two Plans appear across the reshuffle. Open **Rules and reference** to print the table reference or mine choice aid.
 - **Mincmistr.** Use Card 6, seed `app-table-4`, three rivals and Grandmaster. Start a rival and choose **Play one Plan**. Check the resolved action and card, then use **Play rivals** to continue. Open an earlier Plan from the journal. Reload, Undo, and replay the batch to see the same cards. Export and reimport the save and continue to round 5. Each Mincmistr plays both remaining cards on its last turn of every round.
 
 - **One rival.** Start as the Metallurgists, Miners, and Innkeepers on Card 1 with seed `silver-1308`. The rival’s rows should be Builders, Grocers, and Scribes.

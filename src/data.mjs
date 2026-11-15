@@ -1,4 +1,6 @@
-export const VERSION = '0.3.6';
+export const VERSION = '0.3.7';
+export const MINCMISTR_RULES_VERSION = '1.2.3';
+export const PLAN_EXPLANATION_LIMIT = 32;
 export const SAVE_SCHEMA = 3;
 export const SETUP_VERSION = 2;
 export const RIVAL_SETTINGS = ['standard','quick','planner','mincmistr'];

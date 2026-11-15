@@ -39,13 +39,20 @@ async function click(page,selector) {
 async function enabled(page,selector) {
   await page.locator(`${selector}:enabled`).waitFor();
 }
-async function importGame(page,contents) {
+async function chooseFile(page,selector,contents,name) {
   const [chooser]=await Promise.all([
     page.waitForEvent('filechooser'),
-    click(page,'footer [data-do="import"]'),
+    click(page,selector),
   ]);
-  await chooser.setFiles({name:'Position.json',mimeType:'application/json',buffer:Buffer.from(contents)});
+  await chooser.setFiles({name,mimeType:'application/json',buffer:Buffer.from(contents)});
+}
+async function importGame(page,contents) {
+  await chooseFile(page,'footer [data-do="import"]',contents,'Position.json');
   await page.getByText('Save imported.',{exact:true}).waitFor();
+}
+async function downloadFile(page,selector) {
+  const [download]=await Promise.all([page.waitForEvent('download'),click(page,selector)]);
+  return {name:download.suggestedFilename(),text:await readFile(await download.path(),'utf8')};
 }
 
 try {
@@ -127,16 +134,72 @@ try {
   console.log('PASS one Plan includes its mine bonus, review, replay and fast rival batch');
 
   const digitalPosition=await raw(a,GAME);
-  const mobile=await browser.newContext({viewport:{width:390,height:844},hasTouch:true,isMobile:browserName!=='firefox'});
+  const mobile=await browser.newContext({viewport:{width:360,height:800},hasTouch:true,acceptDownloads:true,
+    isMobile:browserName!=='firefox'});
   const phone=observe(await mobile.newPage());
+  await phone.goto(origin);
+  const doubleMine=createGame({seed:'browser-playtest-report',difficulty:'mincmistr',starter:1,playerCount:4,
+    mincmistr:{level:'grandmaster',shared:false}});
+  doubleMine.barbara=9;
+  doubleMine.players[1].pelicans=1;
+  await importGame(phone,writeSave(doubleMine));
+  await click(phone,'[data-do="rival-step"]');
+  const highlights=phone.locator('.cell.plan-changed');
+  await highlights.last().waitFor();
+  assert.equal(await highlights.count(),2);
+  assert.equal(await phone.locator('.plan-changes .changed-space').count(),2);
+  assert.match(await phone.locator('.plan-changes').textContent(),/Pelicans 1 → 0/);
+  assert.match(await phone.locator('.plan-changes').textContent(),/St\. Barbara tile 9 → tile 10/);
+  await phone.locator('.plan-changes .changed-space').first().click();
+  assert.ok(await phone.evaluate(()=>document.activeElement.matches('.cell.plan-changed')));
+  await click(phone,'.rival-review .plan-explanation summary');
+  assert.match(await phone.locator('.rival-review .plan-explanation').textContent(),/Plan arrow/);
+  assert.ok(await phone.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth));
+  await click(phone,'.review-rule [data-do="rule"]');
+  await phone.locator('#paper-reference[open] #paper-ref-rules').waitFor();
+  assert.equal(await phone.evaluate(()=>document.activeElement.id),'mincmistr-rule-4.2');
+  assert.ok(await phone.locator('[id="mincmistr-rule-4.2"]').evaluate(el=>{
+    const box=el.getBoundingClientRect(),frame=el.closest('.reference-body').getBoundingClientRect();
+    return box.top>=frame.top-1&&box.bottom<=frame.bottom+1;
+  }));
+  await click(phone,'#paper-reference-close');
+  assert.ok(await phone.locator('.rival-review .plan-explanation').evaluate(el=>el.open));
+  const afterDoubleMine=await game(phone);
+  await phone.reload();
+  assert.equal(await highlights.count(),2);
+  await click(phone,'.rival-review .plan-explanation summary');
+  assert.match(await phone.locator('.rival-review .plan-explanation').textContent(),/Mine row gain|mine row gain/);
+  await click(phone,'.report-note summary');
+  await phone.locator('#playtest-note').fill('Both free mines resolved.');
+  const report=await downloadFile(phone,'[data-do="report"]');
+  assert.ok(report.name.startsWith(`Kutna_Hora_Playtest_v${VERSION}_browser-playtest-report_`));
+  const decodedReport=JSON.parse(report.text);
+  assert.equal(decodedReport.playtest.note,'Both free mines resolved.');
+  assert.equal(decodedReport.playtest.appVersion,VERSION);
+  assert.equal(decodedReport.playtest.mincmistrRulesVersion,'1.2.3');
+  assert.equal(decodedReport.playtest.setup.sharedDeck,false);
+  assert.deepEqual(decodedReport.playtest.before.state,doubleMine);
+  assert.deepEqual(decodedReport.state,afterDoubleMine);
+  await click(phone,'#undo');
+  await highlights.last().waitFor({state:'detached'});
+  assert.deepEqual(await game(phone),doubleMine);
+  await importGame(phone,report.text);
+  assert.deepEqual(await game(phone),afterDoubleMine);
+  assert.equal(await highlights.count(),2);
+  const reopenedReport=await downloadFile(phone,'[data-do="report"]');
+  assert.equal(JSON.parse(reopenedReport.text).playtest.before,undefined);
+  console.log('PASS 360 px Plan review, offline rule jump, double-mine markers, report download and import');
+
+  await phone.setViewportSize({width:390,height:844});
   await phone.goto(origin+'/#draw-only');
+  const phoneGame=await raw(phone,GAME);
   await mobile.setOffline(true);
   for (let i=1;i<=16;i++) {
     await phone.locator('#paper-draw').tap();
     const number=(i-1)%15+1;
     await phone.getByText(`Draw ${number} of 15`,{exact:true}).waitFor();
   }
-  assert.equal(await raw(phone,GAME),null);
+  assert.equal(await raw(phone,GAME),phoneGame);
   const shown=await phone.locator('#paper-status').textContent();
   const paperSave=await raw(phone,PAPER);
   assert.equal((await saved(phone,PAPER)).history.length,5);
@@ -170,6 +233,15 @@ try {
   assert.ok(!await phone.locator('.reference-nav').isVisible());
   await phone.emulateMedia({media:'screen'});
   await phone.evaluate(()=>window.dispatchEvent(new Event('afterprint')));
+  await click(phone,'[aria-controls="paper-ref-table"]');
+  await phone.getByRole('heading',{name:'Mincmistr table reference',exact:true}).waitFor();
+  await click(phone,'#paper-print-table');
+  await phone.emulateMedia({media:'print'});
+  assert.ok(await phone.locator('#paper-ref-table').isVisible());
+  assert.ok(!await phone.locator('#paper-ref-mine').isVisible());
+  assert.ok(!await phone.locator('#paper-face').isVisible());
+  await phone.emulateMedia({media:'screen'});
+  await phone.evaluate(()=>window.dispatchEvent(new Event('afterprint')));
   await click(phone,'[aria-controls="paper-ref-rules"]');
   await phone.getByRole('heading',{name:'10. Two or three Mincmistrs',exact:true}).waitFor();
   assert.ok(await phone.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth));
@@ -177,8 +249,36 @@ try {
   await click(phone,'#paper-reference-close');
   assert.equal(await phone.locator('#paper-status').textContent(),shown);
   assert.equal(await raw(phone,PAPER),paperSave);
+  const portable=await downloadFile(phone,'#paper-export-deck');
+  assert.equal(portable.name,'Mincmistr_Plan_Deck.json');
   await mobile.close();
-  console.log('PASS 390 px touch layout, offline references, recent Plans and reshuffle Undo');
+  console.log('PASS 390 px touch layout, both printable aids, offline references, recent Plans and reshuffle Undo');
+
+  const receiver=await browser.newContext();
+  const transferred=observe(await receiver.newPage());
+  await transferred.goto(origin);
+  await importGame(transferred,writeSave(doubleMine));
+  const receiverGame=await raw(transferred,GAME);
+  await transferred.goto(origin+'/#draw-only');
+  await chooseFile(transferred,'#paper-import-deck',portable.text,portable.name);
+  await transferred.getByText('Plan deck imported.',{exact:true}).waitFor();
+  assert.equal(await raw(transferred,PAPER),paperSave);
+  assert.equal(await raw(transferred,GAME),receiverGame);
+  for (const count of [15,14]) {
+    await click(transferred,'#paper-undo');
+    await transferred.getByText(`Draw ${count} of 15`,{exact:true}).waitFor();
+  }
+  for (const count of [15,1]) {
+    await click(transferred,'#paper-draw');
+    await transferred.getByText(`Draw ${count} of 15`,{exact:true}).waitFor();
+  }
+  assert.equal(await raw(transferred,PAPER),paperSave);
+  await chooseFile(transferred,'#paper-import-deck',report.text,report.name);
+  await transferred.getByText('Choose a Mincmistr deck JSON export from Draw only.',{exact:true}).waitFor();
+  assert.equal(await raw(transferred,PAPER),paperSave);
+  assert.equal(await raw(transferred,GAME),receiverGame);
+  await receiver.close();
+  console.log('PASS Draw only portability, identical reshuffle replay and wrong-file rejection');
 
   await a.goto(origin+'/#draw-only');
   await b.goto(origin+'/#draw-only');

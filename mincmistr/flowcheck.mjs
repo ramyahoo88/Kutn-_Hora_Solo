@@ -1,37 +1,72 @@
-// Independent check of rule 4 (card-play flow), written from the rulebook text, against mincmistr.mjs tallies.
-import {createGame,transition,legalActions,plotCount} from '../src/engine.mjs';
-import {CARDS} from '../src/data.mjs';
+// Check the paper priority flow independently of the automa's tallies.
+import {createGame,transition,legalActions,canBuildGuild,plotCount} from '../src/engine.mjs';
+import {BUILDINGS,CARDS} from '../src/data.mjs';
 import {botAction} from '../src/bot.mjs';
-import {createMincmistr,mincmistrAction,ROW} from './mincmistr.mjs';
-const PRIZE=[6,7,8,9,11];
-let plays=0, bad=0; const ex=[];
-const has=(s,seat,kind)=>{ // a card in the row shows the action and it is legal now (rule 2)
-  const card=ROW.find(c=>(s.players[seat].hand&(1<<c))&&CARDS[c].includes(kind));
-  return card!==undefined && legalActions(s).some(a=>a.kind===kind&&!a.as&&a.card===card);
-};
+import {createMincmistr,mincmistrAction} from './mincmistr.mjs';
+
+const PRINTED_ROW=[0,5,1,2,4,3];
+const PRIZE_TILES=[6,7,8,9,11];
+
+function qualifies(state,id) {
+  const tile=BUILDINGS[id],p=state.players[state.actor];
+  if (!tile||tile.public) return false;
+  const row=p.guilds.indexOf(tile.group);
+  return row>=0&&p.houses[row]<4&&canBuildGuild(state,tile.group);
+}
+
+function expectedPlay(state,plan) {
+  const p=state.players[state.actor];
+  const choices=legalActions(state);
+  function allowed(kind,eligible=()=>true) {
+    const card=PRINTED_ROW.find(c=>(p.hand&(1<<c))&&CARDS[c].includes(kind));
+    return choices.find(a=>a.kind===kind&&a.card===card&&!a.as&&eligible(a));
+  }
+  function construct() {
+    const plots=plotCount(state,state.actor);
+    const build=p.held.length&&plots?allowed('build'):null;
+    if (build) return build;
+    const plot=p.held.length>plots&&plots<3?allowed('plot'):null;
+    if (plot) return plot;
+    if (p.held.length>=2) return null;
+    return allowed('rights',a=>qualifies(state,a.id));
+  }
+  const income=allowed('income'),barbara=allowed('barbara'),mine=allowed('mine');
+  if (p.coins<20&&income) return {check:'cash',move:income};
+  if (barbara&&(p.pelicans>=2||p.pelicans===1&&PRIZE_TILES.includes(state.barbara))) {
+    return {check:'pelicans',move:barbara};
+  }
+  for (const goal of plan.goals) {
+    const move=goal==='C'?construct():goal==='M'?mine:barbara;
+    if (move) return {check:`goal:${goal}`,move};
+  }
+  if (income) return {check:'fallback:I',move:income};
+  if (mine) return {check:'fallback:M',move:mine};
+  return {check:'discard',move:{kind:'skip',card:PRINTED_ROW.find(c=>p.hand&(1<<c))}};
+}
+
+let plays=0,bad=0;
+const examples=[];
 for (let i=0;i<20;i++) for (const seat of [0,1]) {
-  let s=createGame({seed:`fc-${i}`,setup:1+i%9,side:i%2,starter:(i>>1)%2});
-  const m=createMincmistr(s,seat,'journeyman');
-  while (s.phase!=='end') {
-    if (s.actor===seat && s.phase==='action' && !s.pending.length) {
-      const before={...m.stats.rules}; const p=s.players[seat];
-      const a=mincmistrAction(s,m);
-      const fired=Object.keys(m.stats.rules).find(k=>m.stats.rules[k]!==(before[k]??0));
-      // expected from the text
-      let exp;
-      if (p.coins<20 && has(s,seat,'income')) exp='cash';
-      else if ((p.pelicans>=2 || (p.pelicans>=1 && PRIZE.includes(Math.min(s.barbara,12)))) && has(s,seat,'barbara')) exp='pelicans';
-      else exp=fired.startsWith('goal:')||fired.startsWith('fallback')||fired==='discard'?fired:'?';
-      // for goals: the fired goal must be on the card, and every earlier goal must have produced nothing
+  let state=createGame({seed:`fc-${i}`,setup:1+i%9,side:i%2,starter:(i>>1)%2});
+  const memory=createMincmistr(state,seat,'journeyman');
+  while (state.phase!=='end') {
+    const isPlan=state.actor===seat&&state.phase==='action'&&!state.pending.length;
+    const before=isPlan?{...memory.stats.rules}:null;
+    const action=state.actor===seat?mincmistrAction(state,memory):botAction(state,'quick');
+    if (isPlan) {
       plays++;
-      if (exp!==fired) { bad++; if (ex.length<5) ex.push({seed:s.seed,round:s.round,coins:p.coins,pel:p.pelicans,tile:s.barbara,exp,fired}); }
-      if (fired.startsWith('goal:') && !m.card.goals.includes(fired.slice(5))) { bad++; ex.push({why:'goal not on card',fired,card:m.card}); }
-      if (fired==='goal:M' && a.kind!=='mine') bad++;
-      if (fired==='cash' && a.kind!=='income') bad++;
-      if (fired==='pelicans' && a.kind!=='barbara') bad++;
-      if (a.as) { bad++; ex.push({why:'joker used'}); }
-      s=transition(s,a);
-    } else s=transition(s,s.actor===seat?mincmistrAction(s,m):botAction(s,'quick'));
+      const actual=Object.keys(memory.stats.rules).filter(key=>memory.stats.rules[key]!==(before[key]??0));
+      const {check,move}=expectedPlay(state,memory.card);
+      const badRight=action.kind==='rights'&&!qualifies(state,action.id);
+      if (actual.length!==1||actual[0]!==check||action.kind!==move.kind||action.card!==move.card||action.as||badRight) {
+        bad++;
+        if (examples.length<5) examples.push({seed:state.seed,round:state.round,turn:state.turn,
+          plan:memory.card.number,expected:{check,kind:move.kind,card:move.card},actual,action});
+      }
+    }
+    state=transition(state,action);
   }
 }
-console.log('card plays',plays,'flow mismatches',bad); for (const e of ex) console.log(JSON.stringify(e));
+console.log('card plays',plays,'flow mismatches',bad);
+for (const example of examples) console.log(JSON.stringify(example));
+if (bad) process.exitCode=1;
