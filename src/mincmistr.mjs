@@ -363,7 +363,7 @@ function describePlanRule(m,action) {
 }
 
 // Play one decision from a saved digital game. Bonus decisions use the last flipped card.
-export function playMincmistr(state) {
+export function playMincmistr(state, beforeRoundEnd) {
   const {mincmistr,actor:seat}=state;
   if (!mincmistr || seat===0 || state.phase==='end') throw Error('Choose a Mincmistr turn.');
   const slot=mincmistr.shared?0:seat-1;
@@ -376,14 +376,14 @@ export function playMincmistr(state) {
   };
   const action=mincmistrAction(state,m);
   if (!m.stats.cards) {
-    if (!m.explanation?.length || !m.card) return transition(state,action);
+    if (!m.explanation?.length || !m.card) return transition(state,action,beforeRoundEnd);
     const title=`${describePlan(m.card)}.`;
     const index=state.log.findLastIndex(entry=>entry.actor===seat&&entry.round===state.round&&entry.text===title);
-    if (index<0) return transition(state,action);
+    if (index<0) return transition(state,action,beforeRoundEnd);
     const log=[...state.log];
     const explanation=[...(log[index].explanation??[]),...m.explanation].slice(0,PLAN_EXPLANATION_LIMIT);
     log[index]={...log[index],explanation};
-    return transition({...state,log},action);
+    return transition({...state,log},action,beforeRoundEnd);
   }
 
   explain(m,action.kind==='skip'?'4.4':'2',action.kind==='skip'
@@ -398,5 +398,5 @@ export function playMincmistr(state) {
   const log=state.log?[...state.log,{
     round:state.round,actor:seat,text:`${describePlan(m.card)}.`,rule:describePlanRule(m,action),explanation:m.explanation,
   }]:null;
-  return transition({...state,mincmistr:{...mincmistr,decks,lastPlans},log},action);
+  return transition({...state,mincmistr:{...mincmistr,decks,lastPlans},log},action,beforeRoundEnd);
 }

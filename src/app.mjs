@@ -17,6 +17,7 @@ const STORAGE='kutna-hora-solo-v1';
 const savedGame=storageSlot(STORAGE);
 const FIRST_SEED='silver-1308';
 const byId=id=>document.getElementById(id);
+const noteInput=byId('playtest-note');
 const safe=value=>String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const money=n=>`${n} g`;
 const formatNumber=n=>String(n).replace('-','−');
@@ -38,9 +39,26 @@ let busy=false;
 let allJournal=false;
 let rivalReport=[];
 let review=null;
+let importedReport;
+let savingDraft=null;
 let flashTimer;
 let selectionGroup=null;
 let boardSeat=0;
+
+function currentPosition() {
+  return {state,rivalReport,review,playtestNote:noteInput.value||undefined,importedReport};
+}
+
+function restorePlaytestNote(note='') {
+  noteInput.value=note;
+  noteInput.closest('details').open=Boolean(note);
+}
+
+function reportVersions() {
+  if (!importedReport) return undefined;
+  const {appVersion,mincmistrRulesVersion}=importedReport;
+  return {appVersion,mincmistrRulesVersion};
+}
 
 function restoreAutosave() {
   try {
@@ -51,7 +69,8 @@ function restoreAutosave() {
     if (saved===null) return;
     try {
       const loaded=readAutosave(saved);
-      ({state,rivalReport,review}=loaded.current);
+      ({state,rivalReport,review,importedReport}=loaded.current);
+      restorePlaytestNote(loaded.current.playtestNote);
       undo=loaded.undo;
       boardSeat=0;
       resetSelection();
@@ -76,18 +95,23 @@ function startDigitalGame() {
 }
 
 async function storePosition(next, {replace=false, undoing=false}={}) {
-  const previous={state,rivalReport,review};
+  const previous=currentPosition();
   if (replace) previous.replaced=true;
   const history=undoing?undo.slice(0,-1):[...undo,previous].slice(-20);
-  const contents=unreadableSave!==null && !replace?null:writeAutosave(next,history);
+  const restoreDraft=replace || (undoing&&next.replaced);
+  const position={
+    state:next.state,rivalReport:next.rivalReport,review:next.review,
+    playtestNote:restoreDraft?next.playtestNote:previous.playtestNote,
+    importedReport:replace||undoing?next.importedReport:reportVersions(),
+  };
+  const contents=unreadableSave!==null && !replace?null:writeAutosave(position,history);
   const result=await savedGame.write(contents,{replace});
   saveConflict=result==='conflict';
   if (saveConflict) return false;
-  const previousGame=replace || state.seed!==next.state.seed || state.players.length!==next.state.players.length;
-  ({state,rivalReport,review}=next);
-  if (previousGame) {
+  ({state,rivalReport,review,importedReport}=position);
+  if (restoreDraft) {
     boardSeat=0;
-    byId('playtest-note').value='';
+    restorePlaytestNote(position.playtestNote);
   }
   undo=history;
   resetSelection();
@@ -95,6 +119,27 @@ async function storePosition(next, {replace=false, undoing=false}={}) {
   if (result==='saved') unreadableSave=null;
   return true;
 }
+
+async function persistPlaytestNote() {
+  let note;
+  do {
+    note=noteInput.value;
+    const result=await savedGame.write(writeAutosave(currentPosition(),undo));
+    saveConflict=result==='conflict';
+    saveFailed=result==='unavailable';
+    if (result!=='saved') return;
+  } while (note!==noteInput.value);
+}
+
+noteInput.addEventListener('input',()=>{
+  if (busy || savingDraft || saveConflict || unreadableSave!==null) return;
+  savingDraft=persistPlaytestNote().finally(()=>{
+    savingDraft=null;
+    renderSaveStatus();
+  });
+  renderSaveStatus();
+});
+
 function renderSaveStatus() {
   const protectedSave=unreadableSave!==null;
   let warning='';
@@ -104,9 +149,11 @@ function renderSaveStatus() {
   if (byId('save-warning').textContent!==warning) byId('save-warning').textContent=warning;
   byId('save-status').hidden=!warning;
   byId('load-saved-game').hidden=!saveConflict && !saveFailed;
-  byId('load-saved-game').disabled=busy;
+  byId('load-saved-game').disabled=busy||!!savingDraft;
   byId('export-unreadable').hidden=!protectedSave || saveConflict;
   byId('undo').disabled=busy || saveConflict || undo.length===0;
+  byId('report-before').disabled=busy || saveConflict;
+  noteInput.readOnly=busy;
   for (const button of byId('decisions').querySelectorAll('[data-do="commit"],[data-do="rival"],[data-do="rival-step"]')) {
     button.disabled=busy || saveConflict;
   }
@@ -450,7 +497,7 @@ function renderExplanation(entry) {
     entry.explanation.map(step=>`<li>${ruleLink(step.rule)} <span>${safe(step.text)}</span></li>`).join('')
   }</ol></details>`;
 }
-function renderPlanChanges(changes) {
+function renderPlanChanges(changes, hasRoundEndRecord) {
   if (!changes) return '';
   const width=rulesFor(state).board.mineWidth;
   const spaces=[
@@ -458,9 +505,18 @@ function renderPlanChanges(changes) {
     ...changes.mine.map(i=>['mine',i,`Mine ${coordinate(i,width)}`]),
   ];
   if (!spaces.length&&!changes.summary.length) return '';
-  return `<div class="plan-changes"><h4>Changed by this Plan</h4><ul>${
+  const title=hasRoundEndRecord?'Changed by this Plan':'Changes after this step';
+  return `<div class="plan-changes"><h4>${title}</h4><ul class="change-list">${
     spaces.map(([area,index,label])=>`<li><button type="button" class="link changed-space" data-do="locate-plan-change" data-value="${area}-${index}">◆ ${label}</button></li>`).join('')
   }${changes.summary.map(line=>`<li>${safe(line)}</li>`).join('')}</ul></div>`;
+}
+
+function renderRoundEnd(roundEnd) {
+  if (!roundEnd || (!roundEnd.notes.length&&!roundEnd.summary.length)) return '';
+  return `<div class="round-end-review"><h4>Automatic round-end effects</h4>
+    ${roundEnd.notes.length?`<ul class="round-end-notes">${roundEnd.notes.map(line=>`<li>${safe(line)}</li>`).join('')}</ul>`:''}
+    ${roundEnd.summary.length?`<ul class="change-list">${roundEnd.summary.map(line=>`<li>${safe(line)}</li>`).join('')}</ul>`:''}
+  </div>`;
 }
 
 function renderDecisions() {
@@ -500,7 +556,8 @@ function renderDecisions() {
         ${rivalReport.length?`<ul>${rivalReport.map(row=>`<li>${safe(row)}</li>`).join('')}</ul>`:'<p class="muted">Finished resolving the Plan.</p>'}
       </div>
     </div>
-    ${renderPlanChanges(review.changes)}
+    ${renderPlanChanges(review.changes,review.roundEnd!==undefined)}
+    ${renderRoundEnd(review.roundEnd)}
     ${renderExplanation(planEntry)}
     </section>`:
     rivalReport.length||last.length?`<details class="panel rival-report" ${state.players.length===2?'open':''}><summary>Rival notes</summary><ul>${(rivalReport.length?rivalReport:last).map(row=>`<li>${safe(row)}</li>`).join('')}</ul></details>`:'';
@@ -672,6 +729,14 @@ function renderJournal() {
     const content=plan?`<button type="button" class="link plan-card-link" data-do="plan-card" data-value="${item.actor}/${plan}" aria-haspopup="dialog">${note}</button>${item.rule?`<div class="journal-rule">${renderRule(item.rule)}</div>`:''}${renderExplanation(item)}`:note;
     return `<li><span class="log-round">R${item.round}</span><span class="log-seat seat-${item.actor}">${item.actor===null?'Town':playerName(item.actor)}</span><div class="journal-entry">${content}</div></li>`;
   }).join('')}</ol>`;
+  byId('report-source').hidden=!importedReport;
+  byId('report-before').hidden=!importedReport?.before;
+  if (importedReport) {
+    const versions=['Imported playtest report'];
+    if (importedReport.appVersion) versions.push(`App v${importedReport.appVersion}`);
+    if (importedReport.mincmistrRulesVersion) versions.push(`Mincmistr v${importedReport.mincmistrRulesVersion}`);
+    byId('report-source-title').textContent=versions.join(' · ');
+  }
 }
 function render() {
   if (byId('tile-dialog').open) byId('tile-dialog').close();
@@ -696,7 +761,11 @@ async function changeGame(change, {focus=false, planning=false}={}) {
   busy=true;
   if (planning) renderDecisions();
   renderSaveStatus();
-  try { await change(); }
+  try {
+    // A draft write uses the same save slot, so let it finish before moving.
+    if (savingDraft) await savingDraft;
+    if (!saveConflict) await change();
+  }
   catch (error) { say(error.message,true); }
   finally {
     busy=false;
@@ -713,32 +782,61 @@ function commit() {
   const recentPlan=review?{seat:review.seat,plan:review.plan}:null;
   changeGame(()=>storePosition({state:transition(state,a),rivalReport,review:recentPlan}),{focus:true});
 }
-function planChanges(before,after) {
-  const previous=before.players[before.actor],next=after.players[before.actor];
+function compareChange(summary,label,from,to,unit='') {
+  if (from!==to) summary.push(`${label} ${from} → ${to}${unit}`);
+}
+
+function playerChanges(previous,next) {
   const summary=[];
-  const compare=(label,from,to,unit='')=>{
-    if (from!==to) summary.push(`${label} ${from} → ${to}${unit}`);
-  };
-  compare('Coins',previous.coins,next.coins,' g');
-  compare('Reputation',previous.rep,next.rep);
-  compare('Earned points',previous.vp,next.vp,' VP');
-  compare('Pelicans',previous.pelicans,next.pelicans);
+  compareChange(summary,'Coins',previous.coins,next.coins,' g');
+  compareChange(summary,'Reputation',previous.rep,next.rep);
+  compareChange(summary,'Earned points',previous.vp,next.vp,' VP');
+  compareChange(summary,'Pelicans',previous.pelicans,next.pelicans);
+  compareChange(summary,'Miner pool',previous.pool,next.pool);
+  compareChange(summary,'Miner reserve',previous.reserve,next.reserve);
+  for (const good of GOODS) compareChange(summary,`${COMMODITY[good]} production`,previous.production[good],next.production[good]);
+  for (const [row,guild] of previous.guilds.entries()) {
+    compareChange(summary,`Houses removed · ${GUILDS[guild]}`,previous.houses[row],next.houses[row]);
+  }
   const gained=next.held.filter(id=>!previous.held.includes(id));
   const spent=previous.held.filter(id=>!next.held.includes(id));
   if (gained.length) summary.push(`Rights gained · ${gained.map(id=>BUILDINGS[id].name).join(', ')}`);
   if (spent.length) summary.push(`Rights used · ${spent.map(id=>BUILDINGS[id].name).join(', ')}`);
-  compare('Population',before.pop,after.pop);
-  compare('Ore',before.ore,after.ore);
-  compare('Tax',before.tax,after.tax,' g');
-  compare('Mine draw',before.technology+1,after.technology+1);
+  return summary;
+}
+
+function sharedChanges(before,after) {
+  const summary=[];
+  compareChange(summary,'Population',before.pop,after.pop);
+  compareChange(summary,'Ore',before.ore,after.ore);
+  compareChange(summary,'Tax',before.tax,after.tax,' g');
+  compareChange(summary,'Mine draw',before.technology+1,after.technology+1);
   const cathedral=game=>currentBarbara(game)===12?'complete':`tile ${currentBarbara(game)}`;
-  compare('St. Barbara',cathedral(before),cathedral(after));
+  compareChange(summary,'St. Barbara',cathedral(before),cathedral(after));
+  for (const color of PATRICIANS) {
+    compareChange(summary,`${cap(color)} patricians seated`,before.council[color],after.council[color]);
+    compareChange(summary,`${cap(color)} patricians in pool`,before.patrons[color],after.patrons[color]);
+  }
+  return summary;
+}
+
+function planChanges(before,after) {
+  const seat=before.actor;
   return {
     town:before.city.flatMap((tile,i)=>tile===after.city[i]?[]:[i]),
     mine:before.mine.flatMap((tile,i)=>tile===after.mine[i]?[]:[i]),
-    summary,
+    summary:[...playerChanges(before.players[seat],after.players[seat]),...sharedChanges(before,after)],
   };
 }
+
+function roundEndReview(before,after) {
+  if (!before) return null;
+  const notes=after.log.slice(before.log.length).map(({actor,text})=>actor===null?text:`${playerName(actor)} · ${text}`);
+  const players=before.players.flatMap((player,seat)=>
+    playerChanges(player,after.players[seat]).map(line=>`${playerName(seat)} · ${line}`));
+  return {notes,summary:[...sharedChanges(before,after),...players]};
+}
+
 function runRival(onePlan=false) {
   if (state.actor===0 || state.phase==='end' || (onePlan && !state.mincmistr)) return;
   changeGame(async()=>{
@@ -747,6 +845,8 @@ function runRival(onePlan=false) {
     await new Promise(resolve=>setTimeout(resolve,24));
     let next=start;
     const notes=[];
+    let afterAction;
+    const beforeRoundEnd=onePlan?position=>{afterAction=copyState(position);}:undefined;
     let planNumber=null;
     let steps=0;
     while (next.actor!==0&&next.phase!=='end') {
@@ -756,7 +856,7 @@ function runRival(onePlan=false) {
         const previousEntries=next.log.length;
         let why;
         if (next.mincmistr) {
-          next=playMincmistr(next);
+          next=playMincmistr(next,beforeRoundEnd);
           if (onePlan && start.phase==='action') planNumber=next.mincmistr.lastPlans[start.actor-1]+1;
         } else {
           const action=botAction(next);
@@ -764,7 +864,7 @@ function runRival(onePlan=false) {
           if (!multiple&&['rights','build','place-mine','technology','income'].includes(action.kind)) why=actionRationale(next,action);
           next=transition(next,action);
         }
-        const entries=next.log.slice(previousEntries).filter(entry=>entry.actor===turn.actor);
+        const entries=next.log.slice(previousEntries,afterAction?.log.length).filter(entry=>entry.actor===turn.actor);
         for (const entry of entries) {
           if (onePlan && plansByNote.has(entry.text)) continue;
           notes.push(onePlan?entry.text:noteFor(turn.actor,entry.text));
@@ -777,8 +877,8 @@ function runRival(onePlan=false) {
       if (next.actor!==0&&next.phase!=='end') await new Promise(resolve=>setTimeout(resolve,0));
     }
     if (saveConflict) return;
-    const reviewed=onePlan?{seat:start.actor,plan:planNumber}:null;
-    if (reviewed?.plan) reviewed.changes=planChanges(start,next);
+    const reviewed=onePlan?{seat:start.actor,plan:planNumber,roundEnd:roundEndReview(afterAction,next)}:null;
+    if (reviewed?.plan) reviewed.changes=planChanges(start,afterAction??next);
     await storePosition({state:next,rivalReport:onePlan||multiple?notes:notes.slice(0,6),review:reviewed});
   },{focus:true,planning:true});
 }
@@ -953,11 +1053,21 @@ byId('digital-game').addEventListener('click',event=>{
         break;
       }
       case 'journal': allJournal=!allJournal; renderJournal(); break;
+      case 'report-before': {
+        const before=importedReport?.before;
+        if (!before) break;
+        const position={state:before.state,rivalReport:[],review:null,playtestNote:noteInput.value,importedReport:reportVersions()};
+        changeGame(async()=>{
+          const applied=await storePosition(position,{replace:true});
+          if (applied && !saveFailed) say('Position before the reported step loaded.');
+        },{focus:true});
+        break;
+      }
       case 'report': {
         const time=new Date();
         const seed=state.seed.replace(/[^a-z0-9._-]+/gi,'-');
         const stamp=time.toISOString().replace(/[:.]/g,'-');
-        const contents=writePlaytestReport({state,rivalReport,review},undo.at(-1),byId('playtest-note').value,time);
+        const contents=writePlaytestReport(currentPosition(),undo.at(-1),noteInput.value,time);
         downloadJson(contents,`Kutna_Hora_Playtest_v${VERSION}_${seed}_${stamp}.json`);
         break;
       }

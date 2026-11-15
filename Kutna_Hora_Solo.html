@@ -185,10 +185,11 @@ select, input[type=text] { min-height: 40px; padding: 7px 9px; border-radius: 6p
 .plan-explanation summary { color: var(--brass); padding-block: 5px; cursor: pointer; font-weight: 650; }
 .plan-explanation ol { margin: 4px 0 7px; padding-inline-start: 19px; color: var(--muted); }
 .plan-explanation li + li { margin-top: 4px; }
-.plan-changes { margin: 0 12px 10px; padding-top: 7px; border-top: 1px solid var(--line); }
-.plan-changes h4 { margin: 0 0 5px; font-size: .82rem; font-weight: 700; }
-.plan-changes ul { display: flex; flex-wrap: wrap; gap: 4px; padding: 0; margin: 0; list-style: none; }
-.plan-changes li { border: 1px solid var(--line); border-radius: 5px; padding: 3px 6px; font-size: .78rem; color: var(--muted); }
+.plan-changes, .round-end-review { margin: 0 12px 10px; padding-top: 7px; border-top: 1px solid var(--line); }
+.plan-changes h4, .round-end-review h4 { margin: 0 0 5px; font-size: .82rem; font-weight: 700; }
+.change-list { display: flex; flex-wrap: wrap; gap: 4px; padding: 0; margin: 0; list-style: none; }
+.change-list li { border: 1px solid var(--line); border-radius: 5px; padding: 3px 6px; font-size: .78rem; color: var(--muted); }
+.round-end-notes { margin: 0 0 6px; padding-inline-start: 19px; font-size: .83rem; color: var(--muted); }
 .changed-space { padding: 0; font: inherit; line-height: 1.5; text-decoration: underline; }
 .rival-flow { margin-bottom: 8px; }
 .legend { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 3px 8px; align-items: center; font-size: .77rem; color: var(--muted); }
@@ -262,6 +263,9 @@ button.offer:hover, .offer.chosen { outline: 1px solid var(--brass); outline-off
 .journal-rule { display: block; color: var(--quiet); }
 .log-round { color: var(--quiet); }
 .log-seat { color: var(--seat,var(--muted)); }
+.report-source { margin: 0 13px 7px; padding: 8px 10px; border: 1px solid var(--line); border-radius: 7px; }
+.report-source h3 { color: var(--muted); font-size: .85rem; overflow-wrap: anywhere; }
+.report-source button { margin-top: 5px; }
 .report-note { padding: 0 13px 10px; color: var(--muted); }
 .report-note summary { cursor: pointer; padding: 5px 0; font-size: .84rem; color: var(--brass); }
 .report-note textarea { width: 100%; padding: 7px 9px; border: 1px solid #66625d; border-radius: 6px; background: #222225; resize: vertical; }
@@ -403,6 +407,7 @@ dialog::backdrop { background: #100f11b9; }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; } }
 @media print {
   @page mincmistr-reference { margin: 12mm; }
+  :root { color-scheme: light; background: #fff; }
   body.print-reference { page: mincmistr-reference; color-scheme: light; color: #222; background: #fff; min-width: 0; font: 11pt/1.32 system-ui, sans-serif; }
   .print-reference #digital-game,
   .print-reference #draw-only,
@@ -440,7 +445,7 @@ dialog::backdrop { background: #100f11b9; }
     <section class="hero" aria-label="Kutná Hora: The City of Silver">
       <div class="hero-art" aria-hidden="true"></div>
       <div class="hero-copy">
-        <span class="eyebrow">Unofficial solo playtest · v0.3.7</span>
+        <span class="eyebrow">Unofficial solo playtest · v0.3.8</span>
         <h1>Kutná Hora</h1>
         <p>The City of Silver</p>
       </div>
@@ -470,8 +475,12 @@ dialog::backdrop { background: #100f11b9; }
         </div>
       </div>
       <div id="journal-body"></div>
+      <section class="report-source" id="report-source" aria-labelledby="report-source-title" hidden>
+        <h3 id="report-source-title"></h3>
+        <button type="button" class="outline" id="report-before" data-do="report-before" hidden>Load position before this step</button>
+      </section>
       <details class="report-note">
-        <summary>Add a playtest note</summary>
+        <summary>Playtest note</summary>
         <label class="sr-only" for="playtest-note">Note to include in the playtest report</label>
         <textarea id="playtest-note" rows="3" maxlength="1000" placeholder="What happened or what did you expect?"></textarea>
       </details>
@@ -532,8 +541,8 @@ dialog::backdrop { background: #100f11b9; }
       <p><strong>Check public information.</strong> Open a tile to inspect its costs and effects. Use <strong>Details</strong> when the tile is an action target. Either player board shows the full house rewards, production and supplies. The rival’s remaining cards are below the turn controls.</p>
       <p><strong>Resume or share a position.</strong> This browser keeps your game and up to five recent Undo steps when local storage is available. If another tab advances the save, choose <strong>Load saved game</strong> to continue from that position. Export a JSON save to move between browsers or share a position. Version 0.1.0 saves keep their existing deck order.</p>
       <p><strong>Rival settings.</strong> Standard and Quick consider the next player's likely card. Planner tries the replies on a copy of the board, explores several possible draws when choices are close, and looks further ahead for builds and final scoring.</p>
-      <p><strong>Mincmistr.</strong> Choose <strong>Play one Plan</strong> to see the moves, resources and board spaces changed. Expand <strong>Why this move?</strong> for the checks and tie-breaks, or tap a rule number to read it offline. You can also open Plans and explanations from the journal.</p>
-      <p><strong>Report a playtest.</strong> Use <strong>Export playtest report</strong> in the journal to save the current position, settings, game history and an optional note. Open a report with <strong>Import save</strong>.</p>
+      <p><strong>Mincmistr.</strong> Choose <strong>Play one Plan</strong> to see the moves, resources and board spaces changed. The review also shows any automatic round-end effects. Expand <strong>Why this move?</strong> for the checks and tie-breaks, or tap a rule number to read it offline.</p>
+      <p><strong>Report a playtest.</strong> The journal saves your <strong>Playtest note</strong> with the game. Use <strong>Export playtest report</strong> to share the game and note. Open a report with <strong>Import save</strong>, then use <strong>Load position before this step</strong> in the journal if an earlier position is included. Undo returns to the imported position.</p>
       <p><strong>Playing on the table.</strong> Open <strong>Draw only</strong> for a shared Plan deck. Draw one Plan for each Mincmistr action card. <strong>Rules and reference</strong> has the full rules and two printable aids. Use <strong>Export deck</strong> and <strong>Import deck</strong> to move the current deck and five recent Undo steps between devices.</p>
       <p><strong>Mincmistr levels.</strong> Journeyman follows the printed priorities. Apprentice simplifies plot, build and mine choices. Master plays both cards on its last turn in the final three rounds, and Grandmaster does so each round. In three-player games, Master can also double its last turn in rounds 3–6. <button type="button" class="link guide-rule" data-do="rule" data-value="9" aria-haspopup="dialog">Read rule 9</button></p>
       <p><a href="https://filemanager.czechgames.com/storage/files/kutna-hora-the-city-of-silver/rules/kutna-hora-rules-en.pdf" target="_blank" rel="noreferrer">CGE rulebook</a> · <a href="https://www.czechgames.com/news/available-now-the-kutna-hora-companion-app" target="_blank" rel="noreferrer">CGE market companion</a> · <a href="https://www.zatrolene-hry.cz/spolecenska-hra/kutna-hora-mesto-stribra-14736/k-stazeni/vlastni-solo-mod-capek-18184/" target="_blank" rel="noreferrer">Capek paper variant</a></p>
@@ -1021,7 +1030,7 @@ dialog::backdrop { background: #100f11b9; }
   <script>'use strict';
 const modules={};
 modules.data=(()=>{
-const VERSION = '0.3.7';
+const VERSION = '0.3.8';
 const MINCMISTR_RULES_VERSION = '1.2.3';
 const PLAN_EXPLANATION_LIMIT = 32;
 const SAVE_SCHEMA = 3;
@@ -2075,10 +2084,11 @@ function finishRound(state) {
   state.starter=(state.starter+1)%state.players.length;
   beginRound(state);
 }
-function finishCard(state) {
+function finishCard(state, beforeRoundEnd) {
   if (state.pending.length || state.left>0) return;
   state.turn++;
   if (state.turn===turnsPerRound(state)) {
+    beforeRoundEnd?.(state);
     state.actor=state.starter;
     resolveEvent(state);
     if (state.events[state.round-1]==='rush' || state.players.every((_,seat)=>taxCost(state,seat)===0)) finishRound(state);
@@ -2091,7 +2101,7 @@ function finishCard(state) {
   state.actor=seatAtTurn(state,state.turn);
   state.left=cardsThisTurn(state);
 }
-function resolveTax(state, action) {
+function resolveTax(state, action, beforeRoundEnd) {
   const p=state.players[state.actor];
   if (action.kind==='tax') {
     pay(p,action.cost);
@@ -2103,12 +2113,15 @@ function resolveTax(state, action) {
   if (state.taxIndex<state.players.length-1) {
     state.taxIndex++;
     state.actor=seatAtTurn(state,state.taxIndex);
-  } else finishRound(state);
+  } else {
+    beforeRoundEnd?.(state);
+    finishRound(state);
+  }
 }
 
-function applyKnownAction(state, action, planning=false) {
+function applyKnownAction(state, action, planning=false, beforeRoundEnd) {
   if (state.phase==='tax') {
-    resolveTax(state,action);
+    resolveTax(state,action,beforeRoundEnd);
     return;
   }
   if (state.pending.length) resolvePending(state,action);
@@ -2121,14 +2134,15 @@ function applyKnownAction(state, action, planning=false) {
     if (action.kind==='skip') log(state,state.actor,`Spent the ${CARDS[action.card].map(kind=>LABEL[kind]).join(' / ')} card with no effect.`);
     basicEffect(state,action);
   }
-  if (!planning) finishCard(state);
+  if (!planning) finishCard(state,beforeRoundEnd);
 }
 
-function transition(state, requested) {
+// A review can record the action's effects before automatic round processing.
+function transition(state, requested, beforeRoundEnd) {
   const action=legalActions(state).find(value=>EFFECT_ID(value)===EFFECT_ID(requested));
   if (!action) throw Error('That choice is no longer available.');
   const next=copyState(state);
-  applyKnownAction(next,action);
+  applyKnownAction(next,action,false,beforeRoundEnd);
   return next;
 }
 
@@ -3114,7 +3128,7 @@ function describePlanRule(m,action) {
 }
 
 // Play one decision from a saved digital game. Bonus decisions use the last flipped card.
-function playMincmistr(state) {
+function playMincmistr(state, beforeRoundEnd) {
   const {mincmistr,actor:seat}=state;
   if (!mincmistr || seat===0 || state.phase==='end') throw Error('Choose a Mincmistr turn.');
   const slot=mincmistr.shared?0:seat-1;
@@ -3127,14 +3141,14 @@ function playMincmistr(state) {
   };
   const action=mincmistrAction(state,m);
   if (!m.stats.cards) {
-    if (!m.explanation?.length || !m.card) return transition(state,action);
+    if (!m.explanation?.length || !m.card) return transition(state,action,beforeRoundEnd);
     const title=`${describePlan(m.card)}.`;
     const index=state.log.findLastIndex(entry=>entry.actor===seat&&entry.round===state.round&&entry.text===title);
-    if (index<0) return transition(state,action);
+    if (index<0) return transition(state,action,beforeRoundEnd);
     const log=[...state.log];
     const explanation=[...(log[index].explanation??[]),...m.explanation].slice(0,PLAN_EXPLANATION_LIMIT);
     log[index]={...log[index],explanation};
-    return transition({...state,log},action);
+    return transition({...state,log},action,beforeRoundEnd);
   }
 
   explain(m,action.kind==='skip'?'4.4':'2',action.kind==='skip'
@@ -3149,7 +3163,7 @@ function playMincmistr(state) {
   const log=state.log?[...state.log,{
     round:state.round,actor:seat,text:`${describePlan(m.card)}.`,rule:describePlanRule(m,action),explanation:m.explanation,
   }]:null;
-  return transition({...state,mincmistr:{...mincmistr,decks,lastPlans},log},action);
+  return transition({...state,mincmistr:{...mincmistr,decks,lastPlans},log},action,beforeRoundEnd);
 }
 
 return {PLAN_DECK,ROW,LEVELS,PLAN_PRIORITIES,createMincmistr,mincmistrAction,mincmistrCardsThisTurn,PLAN_GOALS,describePlan,playMincmistr};
@@ -3169,6 +3183,7 @@ const known=(table,id)=>typeof id==='string'&&Object.hasOwn(table,id);
 const tally=(record,keys,max)=>record&&keys.every(key=>integer(record[key],0,max));
 const regularMine=id=>known(MINES,id)&&MINES[id].tier!==undefined;
 const shortText=(text,max)=>typeof text==='string'&&text.length<=max;
+const textList=(values,count,length)=>Array.isArray(values)&&values.length<=count&&values.every(value=>shortText(value,length));
 const validExplanation=value=>value===undefined||
   Array.isArray(value)&&value.length<=PLAN_EXPLANATION_LIMIT&&value.every(step=>
     shortText(step?.rule,4)&&/^\d{1,2}(?:\.\d)?$/.test(step.rule)&&shortText(step.text,300));
@@ -3323,8 +3338,39 @@ function validPlanChanges(changes,state) {
     values.every(index=>integer(index,0,max-1));
   const {board}=rulesFor(state);
   return spaces(changes?.town,state.city.length)&&changes.town.every(i=>board.town[i])&&
-    spaces(changes.mine,state.mine.length)&&Array.isArray(changes.summary)&&changes.summary.length<=20&&
-    changes.summary.every(text=>shortText(text,200));
+    spaces(changes.mine,state.mine.length)&&textList(changes.summary,32,200);
+}
+
+function startingSeat(state) {
+  const count=state.players.length;
+  return (state.starter-(state.round-1)%count+count)%count;
+}
+
+function isPriorPosition(before,state) {
+  if (!before || before.seed!==state.seed || before.setup!==state.setup || before.side!==state.side ||
+      before.difficulty!==state.difficulty || before.mineLayout!==state.mineLayout || before.players.length!==state.players.length ||
+      startingSeat(before)!==startingSeat(state) || before.events.join()!==state.events.join()) return false;
+  if (!before.players.every((player,i)=>player.guilds.join()===state.players[i].guilds.join())) return false;
+  const old=before.mincmistr,next=state.mincmistr;
+  if (old?.level!==next?.level || old?.shared!==next?.shared || old?.tougher!==next?.tougher) return false;
+  return before.log.length<=state.log.length&&before.log.every((row,i)=>{
+    const after=state.log[i];
+    return row.round===after.round&&row.actor===after.actor&&row.text===after.text;
+  });
+}
+
+function readReportSource(report,state) {
+  if (!report || typeof report!=='object' || Array.isArray(report)) return undefined;
+  const version=value=>shortText(value,24)?value:null;
+  const source={appVersion:version(report.appVersion),mincmistrRulesVersion:version(report.mincmistrRulesVersion)};
+  if (report.before?.kind===SAVE_KIND) {
+    // A damaged replay position should not prevent opening the report itself.
+    try {
+      const before=savedState(report.before.state);
+      if (isPriorPosition(before,state)) source.before={kind:SAVE_KIND,state:before};
+    } catch {}
+  }
+  return source;
 }
 
 function readSnapshot(snapshot) {
@@ -3340,34 +3386,39 @@ function readSnapshot(snapshot) {
     const {town,mine,summary}=review.changes;
     currentReview.changes={town,mine,summary};
   }
-  return {state,rivalReport,review:currentReview};
+  if (currentReview) {
+    const roundEnd=review.roundEnd;
+    if (roundEnd===null) currentReview.roundEnd=null;
+    else if (textList(roundEnd?.notes,24,600)&&textList(roundEnd.summary,40,200)) {
+      currentReview.roundEnd={notes:roundEnd.notes,summary:roundEnd.summary};
+    }
+  }
+  const note=snapshot.playtestNote??snapshot.playtest?.note;
+  const importedReport=readReportSource(snapshot.importedReport??snapshot.playtest,state);
+  return {state,rivalReport,review:currentReview,
+    ...(typeof note==='string'&&note?{playtestNote:note.slice(0,1000)}:{}),
+    ...(importedReport?{importedReport}:{}),
+  };
 }
 
 const readPosition=text=>readSnapshot(saveRecord(text));
 
-function writePlaytestReport(current,previous,note='',createdAt=new Date()) {
-  const {state}=current;
-  const playerCount=state.players.length;
-  const before=previous?.state;
-  const priorMove=before&&!previous.replaced&&before.seed===state.seed&&before.setup===state.setup&&before.side===state.side&&
-    before.difficulty===state.difficulty&&before.players.length===state.players.length&&
-    before.log.length<=state.log.length&&before.log.every((row,i)=>{
-      const after=state.log[i];
-      return row.round===after.round&&row.actor===after.actor&&row.text===after.text;
-    });
+function writePlaytestReport(current,previous,note=current.playtestNote??'',createdAt=new Date()) {
+  const {state,rivalReport,review,importedReport}=current;
+  const before=importedReport?.before?.state??(previous?.replaced?null:previous?.state);
   return JSON.stringify({
-    kind:SAVE_KIND,...current,
+    kind:SAVE_KIND,state,rivalReport,review,
     playtest:{
       appVersion:VERSION,mincmistrRulesVersion:state.mincmistr?MINCMISTR_RULES_VERSION:null,
       createdAt:createdAt.toISOString(),seed:state.seed,
       setup:{
-        card:state.setup,side:state.side,players:playerCount,guildRows:state.players.map(p=>p.guilds),
-        mineLayout:state.mineLayout,startingSeat:(state.starter-(state.round-1)%playerCount+playerCount)%playerCount,
+        card:state.setup,side:state.side,players:state.players.length,guildRows:state.players.map(p=>p.guilds),
+        mineLayout:state.mineLayout,startingSeat:startingSeat(state),
         difficulty:state.difficulty,level:state.mincmistr?.level??null,sharedDeck:state.mincmistr?.shared??null,
         tougherMaster:state.mincmistr?.tougher??false,events:state.events.length>0,
       },
       note:note.trim().slice(0,1000),
-      ...(priorMove?{before:{kind:SAVE_KIND,state:before}}:{}),
+      ...(isPriorPosition(before,state)?{before:{kind:SAVE_KIND,state:before}}:{}),
     },
   });
 }
@@ -3781,6 +3832,7 @@ const STORAGE='kutna-hora-solo-v1';
 const savedGame=storageSlot(STORAGE);
 const FIRST_SEED='silver-1308';
 const byId=id=>document.getElementById(id);
+const noteInput=byId('playtest-note');
 const safe=value=>String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const money=n=>`${n} g`;
 const formatNumber=n=>String(n).replace('-','−');
@@ -3802,9 +3854,26 @@ let busy=false;
 let allJournal=false;
 let rivalReport=[];
 let review=null;
+let importedReport;
+let savingDraft=null;
 let flashTimer;
 let selectionGroup=null;
 let boardSeat=0;
+
+function currentPosition() {
+  return {state,rivalReport,review,playtestNote:noteInput.value||undefined,importedReport};
+}
+
+function restorePlaytestNote(note='') {
+  noteInput.value=note;
+  noteInput.closest('details').open=Boolean(note);
+}
+
+function reportVersions() {
+  if (!importedReport) return undefined;
+  const {appVersion,mincmistrRulesVersion}=importedReport;
+  return {appVersion,mincmistrRulesVersion};
+}
 
 function restoreAutosave() {
   try {
@@ -3815,7 +3884,8 @@ function restoreAutosave() {
     if (saved===null) return;
     try {
       const loaded=readAutosave(saved);
-      ({state,rivalReport,review}=loaded.current);
+      ({state,rivalReport,review,importedReport}=loaded.current);
+      restorePlaytestNote(loaded.current.playtestNote);
       undo=loaded.undo;
       boardSeat=0;
       resetSelection();
@@ -3840,18 +3910,23 @@ function startDigitalGame() {
 }
 
 async function storePosition(next, {replace=false, undoing=false}={}) {
-  const previous={state,rivalReport,review};
+  const previous=currentPosition();
   if (replace) previous.replaced=true;
   const history=undoing?undo.slice(0,-1):[...undo,previous].slice(-20);
-  const contents=unreadableSave!==null && !replace?null:writeAutosave(next,history);
+  const restoreDraft=replace || (undoing&&next.replaced);
+  const position={
+    state:next.state,rivalReport:next.rivalReport,review:next.review,
+    playtestNote:restoreDraft?next.playtestNote:previous.playtestNote,
+    importedReport:replace||undoing?next.importedReport:reportVersions(),
+  };
+  const contents=unreadableSave!==null && !replace?null:writeAutosave(position,history);
   const result=await savedGame.write(contents,{replace});
   saveConflict=result==='conflict';
   if (saveConflict) return false;
-  const previousGame=replace || state.seed!==next.state.seed || state.players.length!==next.state.players.length;
-  ({state,rivalReport,review}=next);
-  if (previousGame) {
+  ({state,rivalReport,review,importedReport}=position);
+  if (restoreDraft) {
     boardSeat=0;
-    byId('playtest-note').value='';
+    restorePlaytestNote(position.playtestNote);
   }
   undo=history;
   resetSelection();
@@ -3859,6 +3934,27 @@ async function storePosition(next, {replace=false, undoing=false}={}) {
   if (result==='saved') unreadableSave=null;
   return true;
 }
+
+async function persistPlaytestNote() {
+  let note;
+  do {
+    note=noteInput.value;
+    const result=await savedGame.write(writeAutosave(currentPosition(),undo));
+    saveConflict=result==='conflict';
+    saveFailed=result==='unavailable';
+    if (result!=='saved') return;
+  } while (note!==noteInput.value);
+}
+
+noteInput.addEventListener('input',()=>{
+  if (busy || savingDraft || saveConflict || unreadableSave!==null) return;
+  savingDraft=persistPlaytestNote().finally(()=>{
+    savingDraft=null;
+    renderSaveStatus();
+  });
+  renderSaveStatus();
+});
+
 function renderSaveStatus() {
   const protectedSave=unreadableSave!==null;
   let warning='';
@@ -3868,9 +3964,11 @@ function renderSaveStatus() {
   if (byId('save-warning').textContent!==warning) byId('save-warning').textContent=warning;
   byId('save-status').hidden=!warning;
   byId('load-saved-game').hidden=!saveConflict && !saveFailed;
-  byId('load-saved-game').disabled=busy;
+  byId('load-saved-game').disabled=busy||!!savingDraft;
   byId('export-unreadable').hidden=!protectedSave || saveConflict;
   byId('undo').disabled=busy || saveConflict || undo.length===0;
+  byId('report-before').disabled=busy || saveConflict;
+  noteInput.readOnly=busy;
   for (const button of byId('decisions').querySelectorAll('[data-do="commit"],[data-do="rival"],[data-do="rival-step"]')) {
     button.disabled=busy || saveConflict;
   }
@@ -4214,7 +4312,7 @@ function renderExplanation(entry) {
     entry.explanation.map(step=>`<li>${ruleLink(step.rule)} <span>${safe(step.text)}</span></li>`).join('')
   }</ol></details>`;
 }
-function renderPlanChanges(changes) {
+function renderPlanChanges(changes, hasRoundEndRecord) {
   if (!changes) return '';
   const width=rulesFor(state).board.mineWidth;
   const spaces=[
@@ -4222,9 +4320,18 @@ function renderPlanChanges(changes) {
     ...changes.mine.map(i=>['mine',i,`Mine ${coordinate(i,width)}`]),
   ];
   if (!spaces.length&&!changes.summary.length) return '';
-  return `<div class="plan-changes"><h4>Changed by this Plan</h4><ul>${
+  const title=hasRoundEndRecord?'Changed by this Plan':'Changes after this step';
+  return `<div class="plan-changes"><h4>${title}</h4><ul class="change-list">${
     spaces.map(([area,index,label])=>`<li><button type="button" class="link changed-space" data-do="locate-plan-change" data-value="${area}-${index}">◆ ${label}</button></li>`).join('')
   }${changes.summary.map(line=>`<li>${safe(line)}</li>`).join('')}</ul></div>`;
+}
+
+function renderRoundEnd(roundEnd) {
+  if (!roundEnd || (!roundEnd.notes.length&&!roundEnd.summary.length)) return '';
+  return `<div class="round-end-review"><h4>Automatic round-end effects</h4>
+    ${roundEnd.notes.length?`<ul class="round-end-notes">${roundEnd.notes.map(line=>`<li>${safe(line)}</li>`).join('')}</ul>`:''}
+    ${roundEnd.summary.length?`<ul class="change-list">${roundEnd.summary.map(line=>`<li>${safe(line)}</li>`).join('')}</ul>`:''}
+  </div>`;
 }
 
 function renderDecisions() {
@@ -4264,7 +4371,8 @@ function renderDecisions() {
         ${rivalReport.length?`<ul>${rivalReport.map(row=>`<li>${safe(row)}</li>`).join('')}</ul>`:'<p class="muted">Finished resolving the Plan.</p>'}
       </div>
     </div>
-    ${renderPlanChanges(review.changes)}
+    ${renderPlanChanges(review.changes,review.roundEnd!==undefined)}
+    ${renderRoundEnd(review.roundEnd)}
     ${renderExplanation(planEntry)}
     </section>`:
     rivalReport.length||last.length?`<details class="panel rival-report" ${state.players.length===2?'open':''}><summary>Rival notes</summary><ul>${(rivalReport.length?rivalReport:last).map(row=>`<li>${safe(row)}</li>`).join('')}</ul></details>`:'';
@@ -4436,6 +4544,14 @@ function renderJournal() {
     const content=plan?`<button type="button" class="link plan-card-link" data-do="plan-card" data-value="${item.actor}/${plan}" aria-haspopup="dialog">${note}</button>${item.rule?`<div class="journal-rule">${renderRule(item.rule)}</div>`:''}${renderExplanation(item)}`:note;
     return `<li><span class="log-round">R${item.round}</span><span class="log-seat seat-${item.actor}">${item.actor===null?'Town':playerName(item.actor)}</span><div class="journal-entry">${content}</div></li>`;
   }).join('')}</ol>`;
+  byId('report-source').hidden=!importedReport;
+  byId('report-before').hidden=!importedReport?.before;
+  if (importedReport) {
+    const versions=['Imported playtest report'];
+    if (importedReport.appVersion) versions.push(`App v${importedReport.appVersion}`);
+    if (importedReport.mincmistrRulesVersion) versions.push(`Mincmistr v${importedReport.mincmistrRulesVersion}`);
+    byId('report-source-title').textContent=versions.join(' · ');
+  }
 }
 function render() {
   if (byId('tile-dialog').open) byId('tile-dialog').close();
@@ -4460,7 +4576,11 @@ async function changeGame(change, {focus=false, planning=false}={}) {
   busy=true;
   if (planning) renderDecisions();
   renderSaveStatus();
-  try { await change(); }
+  try {
+    // A draft write uses the same save slot, so let it finish before moving.
+    if (savingDraft) await savingDraft;
+    if (!saveConflict) await change();
+  }
   catch (error) { say(error.message,true); }
   finally {
     busy=false;
@@ -4477,32 +4597,61 @@ function commit() {
   const recentPlan=review?{seat:review.seat,plan:review.plan}:null;
   changeGame(()=>storePosition({state:transition(state,a),rivalReport,review:recentPlan}),{focus:true});
 }
-function planChanges(before,after) {
-  const previous=before.players[before.actor],next=after.players[before.actor];
+function compareChange(summary,label,from,to,unit='') {
+  if (from!==to) summary.push(`${label} ${from} → ${to}${unit}`);
+}
+
+function playerChanges(previous,next) {
   const summary=[];
-  const compare=(label,from,to,unit='')=>{
-    if (from!==to) summary.push(`${label} ${from} → ${to}${unit}`);
-  };
-  compare('Coins',previous.coins,next.coins,' g');
-  compare('Reputation',previous.rep,next.rep);
-  compare('Earned points',previous.vp,next.vp,' VP');
-  compare('Pelicans',previous.pelicans,next.pelicans);
+  compareChange(summary,'Coins',previous.coins,next.coins,' g');
+  compareChange(summary,'Reputation',previous.rep,next.rep);
+  compareChange(summary,'Earned points',previous.vp,next.vp,' VP');
+  compareChange(summary,'Pelicans',previous.pelicans,next.pelicans);
+  compareChange(summary,'Miner pool',previous.pool,next.pool);
+  compareChange(summary,'Miner reserve',previous.reserve,next.reserve);
+  for (const good of GOODS) compareChange(summary,`${COMMODITY[good]} production`,previous.production[good],next.production[good]);
+  for (const [row,guild] of previous.guilds.entries()) {
+    compareChange(summary,`Houses removed · ${GUILDS[guild]}`,previous.houses[row],next.houses[row]);
+  }
   const gained=next.held.filter(id=>!previous.held.includes(id));
   const spent=previous.held.filter(id=>!next.held.includes(id));
   if (gained.length) summary.push(`Rights gained · ${gained.map(id=>BUILDINGS[id].name).join(', ')}`);
   if (spent.length) summary.push(`Rights used · ${spent.map(id=>BUILDINGS[id].name).join(', ')}`);
-  compare('Population',before.pop,after.pop);
-  compare('Ore',before.ore,after.ore);
-  compare('Tax',before.tax,after.tax,' g');
-  compare('Mine draw',before.technology+1,after.technology+1);
+  return summary;
+}
+
+function sharedChanges(before,after) {
+  const summary=[];
+  compareChange(summary,'Population',before.pop,after.pop);
+  compareChange(summary,'Ore',before.ore,after.ore);
+  compareChange(summary,'Tax',before.tax,after.tax,' g');
+  compareChange(summary,'Mine draw',before.technology+1,after.technology+1);
   const cathedral=game=>currentBarbara(game)===12?'complete':`tile ${currentBarbara(game)}`;
-  compare('St. Barbara',cathedral(before),cathedral(after));
+  compareChange(summary,'St. Barbara',cathedral(before),cathedral(after));
+  for (const color of PATRICIANS) {
+    compareChange(summary,`${cap(color)} patricians seated`,before.council[color],after.council[color]);
+    compareChange(summary,`${cap(color)} patricians in pool`,before.patrons[color],after.patrons[color]);
+  }
+  return summary;
+}
+
+function planChanges(before,after) {
+  const seat=before.actor;
   return {
     town:before.city.flatMap((tile,i)=>tile===after.city[i]?[]:[i]),
     mine:before.mine.flatMap((tile,i)=>tile===after.mine[i]?[]:[i]),
-    summary,
+    summary:[...playerChanges(before.players[seat],after.players[seat]),...sharedChanges(before,after)],
   };
 }
+
+function roundEndReview(before,after) {
+  if (!before) return null;
+  const notes=after.log.slice(before.log.length).map(({actor,text})=>actor===null?text:`${playerName(actor)} · ${text}`);
+  const players=before.players.flatMap((player,seat)=>
+    playerChanges(player,after.players[seat]).map(line=>`${playerName(seat)} · ${line}`));
+  return {notes,summary:[...sharedChanges(before,after),...players]};
+}
+
 function runRival(onePlan=false) {
   if (state.actor===0 || state.phase==='end' || (onePlan && !state.mincmistr)) return;
   changeGame(async()=>{
@@ -4511,6 +4660,8 @@ function runRival(onePlan=false) {
     await new Promise(resolve=>setTimeout(resolve,24));
     let next=start;
     const notes=[];
+    let afterAction;
+    const beforeRoundEnd=onePlan?position=>{afterAction=copyState(position);}:undefined;
     let planNumber=null;
     let steps=0;
     while (next.actor!==0&&next.phase!=='end') {
@@ -4520,7 +4671,7 @@ function runRival(onePlan=false) {
         const previousEntries=next.log.length;
         let why;
         if (next.mincmistr) {
-          next=playMincmistr(next);
+          next=playMincmistr(next,beforeRoundEnd);
           if (onePlan && start.phase==='action') planNumber=next.mincmistr.lastPlans[start.actor-1]+1;
         } else {
           const action=botAction(next);
@@ -4528,7 +4679,7 @@ function runRival(onePlan=false) {
           if (!multiple&&['rights','build','place-mine','technology','income'].includes(action.kind)) why=actionRationale(next,action);
           next=transition(next,action);
         }
-        const entries=next.log.slice(previousEntries).filter(entry=>entry.actor===turn.actor);
+        const entries=next.log.slice(previousEntries,afterAction?.log.length).filter(entry=>entry.actor===turn.actor);
         for (const entry of entries) {
           if (onePlan && plansByNote.has(entry.text)) continue;
           notes.push(onePlan?entry.text:noteFor(turn.actor,entry.text));
@@ -4541,8 +4692,8 @@ function runRival(onePlan=false) {
       if (next.actor!==0&&next.phase!=='end') await new Promise(resolve=>setTimeout(resolve,0));
     }
     if (saveConflict) return;
-    const reviewed=onePlan?{seat:start.actor,plan:planNumber}:null;
-    if (reviewed?.plan) reviewed.changes=planChanges(start,next);
+    const reviewed=onePlan?{seat:start.actor,plan:planNumber,roundEnd:roundEndReview(afterAction,next)}:null;
+    if (reviewed?.plan) reviewed.changes=planChanges(start,afterAction??next);
     await storePosition({state:next,rivalReport:onePlan||multiple?notes:notes.slice(0,6),review:reviewed});
   },{focus:true,planning:true});
 }
@@ -4717,11 +4868,21 @@ byId('digital-game').addEventListener('click',event=>{
         break;
       }
       case 'journal': allJournal=!allJournal; renderJournal(); break;
+      case 'report-before': {
+        const before=importedReport?.before;
+        if (!before) break;
+        const position={state:before.state,rivalReport:[],review:null,playtestNote:noteInput.value,importedReport:reportVersions()};
+        changeGame(async()=>{
+          const applied=await storePosition(position,{replace:true});
+          if (applied && !saveFailed) say('Position before the reported step loaded.');
+        },{focus:true});
+        break;
+      }
       case 'report': {
         const time=new Date();
         const seed=state.seed.replace(/[^a-z0-9._-]+/gi,'-');
         const stamp=time.toISOString().replace(/[:.]/g,'-');
-        const contents=writePlaytestReport({state,rivalReport,review},undo.at(-1),byId('playtest-note').value,time);
+        const contents=writePlaytestReport(currentPosition(),undo.at(-1),noteInput.value,time);
         downloadJson(contents,`Kutna_Hora_Playtest_v${VERSION}_${seed}_${stamp}.json`);
         break;
       }

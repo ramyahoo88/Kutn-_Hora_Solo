@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {createGame,legalActions,transition} from '../src/engine.mjs';
-import {readAutosave,readSave,writeAutosave,writeSave} from '../src/save.mjs';
+import {readAutosave,readPosition,readSave,writeAutosave,writePlaytestReport,writeSave} from '../src/save.mjs';
 
 test('autosave keeps five validated positions and imports as an ordinary save',()=>{
   let state=createGame({seed:'autosave-history'});
@@ -21,4 +21,18 @@ test('autosave keeps five validated positions and imports as an ordinary save',(
   const recovered=readAutosave(JSON.stringify(damaged));
   assert.deepEqual(recovered.current,current);
   assert.deepEqual(recovered.undo,positions.slice(-3,-1));
+});
+
+test('a bad earlier position does not erase the current position or report note',()=>{
+  const before=createGame({seed:'report-replay'});
+  const state=transition(before,legalActions(before).find(action=>action.kind==='skip'));
+  const report=JSON.parse(writePlaytestReport({state,rivalReport:[],review:null},{state:before},'Report note'));
+  assert.deepEqual(readPosition(JSON.stringify(report)).importedReport.before.state,before);
+  for (const invalidBefore of [null,createGame({seed:'different-game'})]) {
+    report.playtest.before.state=invalidBefore;
+    const loaded=readPosition(JSON.stringify(report));
+    assert.deepEqual(loaded.state,state);
+    assert.equal(loaded.playtestNote,'Report note');
+    assert.equal(loaded.importedReport.before,undefined);
+  }
 });

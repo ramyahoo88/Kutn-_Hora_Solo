@@ -103,6 +103,28 @@ try {
   await importGame(a,exported);
   console.log('PASS digital tabs, Undo after reload, file picker and save download');
 
+  const draft='This observation belongs to the current game.';
+  await click(a,'.report-note summary');
+  await a.locator('#playtest-note').fill(draft);
+  await a.waitForFunction(({key,draft})=>JSON.parse(localStorage.getItem(key)).playtestNote===draft,{key:GAME,draft});
+  await a.reload();
+  assert.equal(await a.locator('#playtest-note').inputValue(),draft);
+  await b.locator('#load-saved-game').waitFor();
+  await click(b,'#load-saved-game');
+  assert.equal(await b.locator('#playtest-note').inputValue(),draft);
+  const otherGame=createGame({seed:drawn.seed,starter:1});
+  await importGame(b,writeSave(otherGame));
+  await a.locator('#load-saved-game').waitFor();
+  await click(a,'#load-saved-game');
+  assert.deepEqual(await game(a),otherGame);
+  assert.equal(await a.locator('#playtest-note').inputValue(),'');
+  assert.equal(JSON.parse((await downloadFile(a,'[data-do="report"]')).text).playtest.note,'');
+  await click(a,'#undo');
+  await a.getByRole('heading',{name:'Place a mine',exact:true}).waitFor();
+  assert.equal(await a.locator('#playtest-note').inputValue(),draft);
+  assert.deepEqual(await game(a),drawn);
+  console.log('PASS notes persist through reload, follow the loaded game across tabs and return with Undo');
+
   const opening=createGame({seed:'browser-mincmistr-bonus',difficulty:'mincmistr',starter:1,playerCount:4});
   const deck=opening.mincmistr.decks[0];
   deck.draw=[3,...deck.draw.filter(id=>id!==3)]; // Plan 4 starts with Mine.
@@ -132,6 +154,41 @@ try {
   await a.getByRole('heading',{name:'Your turn',exact:true}).waitFor();
   assert.ok((await game(a)).mincmistr.decks[0].discard.length>1);
   console.log('PASS one Plan includes its mine bonus, review, replay and fast rival batch');
+
+  const roundEnd=await readFile(new URL('./fixtures/Round_End_Plan.json',import.meta.url),'utf8');
+  await importGame(a,roundEnd);
+  await click(a,'[data-do="rival-step"]');
+  await a.getByRole('heading',{name:'Rival · Plan 13',exact:true}).waitFor();
+  const planDelta=await a.locator('.plan-changes').textContent();
+  assert.match(planDelta,/Ore 9 → 12/);
+  assert.match(planDelta,/Ore production 2 → 5/);
+  assert.match(planDelta,/Miner pool 0 → 1/);
+  assert.match(planDelta,/Miner reserve 6 → 4/);
+  assert.doesNotMatch(planDelta,/Pelicans|Ore 9 → 14/);
+  const endReview=a.locator('.round-end-review');
+  assert.match(await endReview.textContent(),/Cathedral Construction resolved/);
+  assert.match(await endReview.textContent(),/Hammer Works/);
+  assert.match(await endReview.textContent(),/Ore 12 → 14/);
+  assert.match(await endReview.textContent(),/Rival · Pelicans 1 → 2/);
+  await a.reload();
+  assert.match(await endReview.textContent(),/Rival · Pelicans 1 → 2/);
+  await click(a,'#undo');
+  await endReview.waitFor({state:'detached'});
+  assert.deepEqual(await game(a),JSON.parse(roundEnd).state);
+  for (const [tile,expected] of [
+    [3,['Beer production 0 → 2','Houses removed · Innkeepers 0 → 1']],
+    [6,['Green patricians seated 0 → 1']],
+  ]) {
+    const position=createGame({seed:'browser-track-delta',playerCount:4,starter:1,difficulty:'mincmistr'});
+    position.barbara=tile;
+    position.players[1].pelicans=2;
+    await importGame(a,writeSave(position));
+    await click(a,'[data-do="rival-step"]');
+    await a.locator('.plan-changes').waitFor();
+    const delta=await a.locator('.plan-changes').textContent();
+    for (const line of expected) assert.ok(delta.includes(line),line);
+  }
+  console.log('PASS Plan and round-end effects have separate deltas, including miners, production, houses and council');
 
   const digitalPosition=await raw(a,GAME);
   const mobile=await browser.newContext({viewport:{width:360,height:800},hasTouch:true,acceptDownloads:true,
@@ -171,6 +228,9 @@ try {
   assert.match(await phone.locator('.rival-review .plan-explanation').textContent(),/Mine row gain|mine row gain/);
   await click(phone,'.report-note summary');
   await phone.locator('#playtest-note').fill('Both free mines resolved.');
+  await phone.waitForFunction(key=>JSON.parse(localStorage.getItem(key)).playtestNote==='Both free mines resolved.',GAME);
+  await phone.reload();
+  assert.equal(await phone.locator('#playtest-note').inputValue(),'Both free mines resolved.');
   const report=await downloadFile(phone,'[data-do="report"]');
   assert.ok(report.name.startsWith(`Kutna_Hora_Playtest_v${VERSION}_browser-playtest-report_`));
   const decodedReport=JSON.parse(report.text);
@@ -183,12 +243,31 @@ try {
   await click(phone,'#undo');
   await highlights.last().waitFor({state:'detached'});
   assert.deepEqual(await game(phone),doubleMine);
-  await importGame(phone,report.text);
+  const earlierReport={...decodedReport,playtest:{...decodedReport.playtest,appVersion:'0.3.7'}};
+  await importGame(phone,JSON.stringify(earlierReport));
   assert.deepEqual(await game(phone),afterDoubleMine);
   assert.equal(await highlights.count(),2);
+  assert.equal(await phone.locator('#playtest-note').inputValue(),'Both free mines resolved.');
+  assert.match(await phone.locator('#report-source-title').textContent(),/App v0\.3\.7 · Mincmistr v1\.2\.3/);
+  assert.ok(await phone.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth));
   const reopenedReport=await downloadFile(phone,'[data-do="report"]');
-  assert.equal(JSON.parse(reopenedReport.text).playtest.before,undefined);
-  console.log('PASS 360 px Plan review, offline rule jump, double-mine markers, report download and import');
+  assert.deepEqual(JSON.parse(reopenedReport.text).playtest.before.state,doubleMine);
+  await phone.reload();
+  await click(phone,'#report-before');
+  await phone.getByText('Position before the reported step loaded.',{exact:true}).waitFor();
+  assert.deepEqual(await game(phone),doubleMine);
+  assert.ok(await phone.locator('#report-before').isHidden());
+  await phone.reload();
+  await click(phone,'#undo');
+  await phone.locator('#report-before').waitFor();
+  assert.deepEqual(await game(phone),afterDoubleMine);
+  assert.equal(await phone.locator('#playtest-note').inputValue(),'Both free mines resolved.');
+  await click(phone,'#report-before');
+  await phone.getByText('Position before the reported step loaded.',{exact:true}).waitFor();
+  await click(phone,'[data-do="rival-step"]');
+  await highlights.last().waitFor();
+  assert.deepEqual(await game(phone),afterDoubleMine);
+  console.log('PASS 360 px Plan review, offline rules, report notes, pre-action replay and Undo after reload');
 
   await phone.setViewportSize({width:390,height:844});
   await phone.goto(origin+'/#draw-only');
@@ -240,6 +319,11 @@ try {
   assert.ok(await phone.locator('#paper-ref-table').isVisible());
   assert.ok(!await phone.locator('#paper-ref-mine').isVisible());
   assert.ok(!await phone.locator('#paper-face').isVisible());
+  const printPage=await phone.evaluate(()=>{
+    const style=getComputedStyle(document.documentElement);
+    return {scheme:style.colorScheme,background:style.backgroundColor};
+  });
+  assert.deepEqual(printPage,{scheme:'light',background:'rgb(255, 255, 255)'});
   await phone.emulateMedia({media:'screen'});
   await phone.evaluate(()=>window.dispatchEvent(new Event('afterprint')));
   await click(phone,'[aria-controls="paper-ref-rules"]');

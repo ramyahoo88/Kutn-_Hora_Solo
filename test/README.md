@@ -20,6 +20,6 @@ node test/browser-smoke.mjs firefox
 node test/browser-smoke.mjs webkit
 ```
 
-The DOM test simulates blocked storage and shared tabs. The browser test opens the shipped HTML over loopback and from disk. It covers 360 and 390 px layouts, Plan explanations and rule links, double-mine markers, report import/export, deck transfer across a reshuffle, print views, and reload and Undo in both modes. Use `HEADED=1` to see the browser. `BROWSER_EXECUTABLE` can point to an installed browser of the chosen engine.
+The DOM test simulates blocked storage and shared tabs. The browser test opens the shipped HTML over loopback and from disk. It checks Plan explanations, resource changes and round-end events, playtest notes across tabs, report replay and Undo after reload, deck transfer across a reshuffle, and print views at 360 and 390 px. Use `HEADED=1` to see the browser. `BROWSER_EXECUTABLE` can point to an installed browser of the chosen engine.
 
 For a Safari or iPhone check, open the HTML and follow the README's playtest checks. WebKit exercises the engine in the automated suite. Safari's file-opening, storage and print behavior can differ by device.

@@ -12,6 +12,7 @@ const known=(table,id)=>typeof id==='string'&&Object.hasOwn(table,id);
 const tally=(record,keys,max)=>record&&keys.every(key=>integer(record[key],0,max));
 const regularMine=id=>known(MINES,id)&&MINES[id].tier!==undefined;
 const shortText=(text,max)=>typeof text==='string'&&text.length<=max;
+const textList=(values,count,length)=>Array.isArray(values)&&values.length<=count&&values.every(value=>shortText(value,length));
 const validExplanation=value=>value===undefined||
   Array.isArray(value)&&value.length<=PLAN_EXPLANATION_LIMIT&&value.every(step=>
     shortText(step?.rule,4)&&/^\d{1,2}(?:\.\d)?$/.test(step.rule)&&shortText(step.text,300));
@@ -166,8 +167,39 @@ function validPlanChanges(changes,state) {
     values.every(index=>integer(index,0,max-1));
   const {board}=rulesFor(state);
   return spaces(changes?.town,state.city.length)&&changes.town.every(i=>board.town[i])&&
-    spaces(changes.mine,state.mine.length)&&Array.isArray(changes.summary)&&changes.summary.length<=20&&
-    changes.summary.every(text=>shortText(text,200));
+    spaces(changes.mine,state.mine.length)&&textList(changes.summary,32,200);
+}
+
+function startingSeat(state) {
+  const count=state.players.length;
+  return (state.starter-(state.round-1)%count+count)%count;
+}
+
+function isPriorPosition(before,state) {
+  if (!before || before.seed!==state.seed || before.setup!==state.setup || before.side!==state.side ||
+      before.difficulty!==state.difficulty || before.mineLayout!==state.mineLayout || before.players.length!==state.players.length ||
+      startingSeat(before)!==startingSeat(state) || before.events.join()!==state.events.join()) return false;
+  if (!before.players.every((player,i)=>player.guilds.join()===state.players[i].guilds.join())) return false;
+  const old=before.mincmistr,next=state.mincmistr;
+  if (old?.level!==next?.level || old?.shared!==next?.shared || old?.tougher!==next?.tougher) return false;
+  return before.log.length<=state.log.length&&before.log.every((row,i)=>{
+    const after=state.log[i];
+    return row.round===after.round&&row.actor===after.actor&&row.text===after.text;
+  });
+}
+
+function readReportSource(report,state) {
+  if (!report || typeof report!=='object' || Array.isArray(report)) return undefined;
+  const version=value=>shortText(value,24)?value:null;
+  const source={appVersion:version(report.appVersion),mincmistrRulesVersion:version(report.mincmistrRulesVersion)};
+  if (report.before?.kind===SAVE_KIND) {
+    // A damaged replay position should not prevent opening the report itself.
+    try {
+      const before=savedState(report.before.state);
+      if (isPriorPosition(before,state)) source.before={kind:SAVE_KIND,state:before};
+    } catch {}
+  }
+  return source;
 }
 
 function readSnapshot(snapshot) {
@@ -183,34 +215,39 @@ function readSnapshot(snapshot) {
     const {town,mine,summary}=review.changes;
     currentReview.changes={town,mine,summary};
   }
-  return {state,rivalReport,review:currentReview};
+  if (currentReview) {
+    const roundEnd=review.roundEnd;
+    if (roundEnd===null) currentReview.roundEnd=null;
+    else if (textList(roundEnd?.notes,24,600)&&textList(roundEnd.summary,40,200)) {
+      currentReview.roundEnd={notes:roundEnd.notes,summary:roundEnd.summary};
+    }
+  }
+  const note=snapshot.playtestNote??snapshot.playtest?.note;
+  const importedReport=readReportSource(snapshot.importedReport??snapshot.playtest,state);
+  return {state,rivalReport,review:currentReview,
+    ...(typeof note==='string'&&note?{playtestNote:note.slice(0,1000)}:{}),
+    ...(importedReport?{importedReport}:{}),
+  };
 }
 
 export const readPosition=text=>readSnapshot(saveRecord(text));
 
-export function writePlaytestReport(current,previous,note='',createdAt=new Date()) {
-  const {state}=current;
-  const playerCount=state.players.length;
-  const before=previous?.state;
-  const priorMove=before&&!previous.replaced&&before.seed===state.seed&&before.setup===state.setup&&before.side===state.side&&
-    before.difficulty===state.difficulty&&before.players.length===state.players.length&&
-    before.log.length<=state.log.length&&before.log.every((row,i)=>{
-      const after=state.log[i];
-      return row.round===after.round&&row.actor===after.actor&&row.text===after.text;
-    });
+export function writePlaytestReport(current,previous,note=current.playtestNote??'',createdAt=new Date()) {
+  const {state,rivalReport,review,importedReport}=current;
+  const before=importedReport?.before?.state??(previous?.replaced?null:previous?.state);
   return JSON.stringify({
-    kind:SAVE_KIND,...current,
+    kind:SAVE_KIND,state,rivalReport,review,
     playtest:{
       appVersion:VERSION,mincmistrRulesVersion:state.mincmistr?MINCMISTR_RULES_VERSION:null,
       createdAt:createdAt.toISOString(),seed:state.seed,
       setup:{
-        card:state.setup,side:state.side,players:playerCount,guildRows:state.players.map(p=>p.guilds),
-        mineLayout:state.mineLayout,startingSeat:(state.starter-(state.round-1)%playerCount+playerCount)%playerCount,
+        card:state.setup,side:state.side,players:state.players.length,guildRows:state.players.map(p=>p.guilds),
+        mineLayout:state.mineLayout,startingSeat:startingSeat(state),
         difficulty:state.difficulty,level:state.mincmistr?.level??null,sharedDeck:state.mincmistr?.shared??null,
         tougherMaster:state.mincmistr?.tougher??false,events:state.events.length>0,
       },
       note:note.trim().slice(0,1000),
-      ...(priorMove?{before:{kind:SAVE_KIND,state:before}}:{}),
+      ...(isPriorPosition(before,state)?{before:{kind:SAVE_KIND,state:before}}:{}),
     },
   });
 }

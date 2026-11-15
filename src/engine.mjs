@@ -736,10 +736,11 @@ function finishRound(state) {
   state.starter=(state.starter+1)%state.players.length;
   beginRound(state);
 }
-export function finishCard(state) {
+export function finishCard(state, beforeRoundEnd) {
   if (state.pending.length || state.left>0) return;
   state.turn++;
   if (state.turn===turnsPerRound(state)) {
+    beforeRoundEnd?.(state);
     state.actor=state.starter;
     resolveEvent(state);
     if (state.events[state.round-1]==='rush' || state.players.every((_,seat)=>taxCost(state,seat)===0)) finishRound(state);
@@ -752,7 +753,7 @@ export function finishCard(state) {
   state.actor=seatAtTurn(state,state.turn);
   state.left=cardsThisTurn(state);
 }
-function resolveTax(state, action) {
+function resolveTax(state, action, beforeRoundEnd) {
   const p=state.players[state.actor];
   if (action.kind==='tax') {
     pay(p,action.cost);
@@ -764,12 +765,15 @@ function resolveTax(state, action) {
   if (state.taxIndex<state.players.length-1) {
     state.taxIndex++;
     state.actor=seatAtTurn(state,state.taxIndex);
-  } else finishRound(state);
+  } else {
+    beforeRoundEnd?.(state);
+    finishRound(state);
+  }
 }
 
-export function applyKnownAction(state, action, planning=false) {
+export function applyKnownAction(state, action, planning=false, beforeRoundEnd) {
   if (state.phase==='tax') {
-    resolveTax(state,action);
+    resolveTax(state,action,beforeRoundEnd);
     return;
   }
   if (state.pending.length) resolvePending(state,action);
@@ -782,13 +786,14 @@ export function applyKnownAction(state, action, planning=false) {
     if (action.kind==='skip') log(state,state.actor,`Spent the ${CARDS[action.card].map(kind=>LABEL[kind]).join(' / ')} card with no effect.`);
     basicEffect(state,action);
   }
-  if (!planning) finishCard(state);
+  if (!planning) finishCard(state,beforeRoundEnd);
 }
 
-export function transition(state, requested) {
+// A review can record the action's effects before automatic round processing.
+export function transition(state, requested, beforeRoundEnd) {
   const action=legalActions(state).find(value=>EFFECT_ID(value)===EFFECT_ID(requested));
   if (!action) throw Error('That choice is no longer available.');
   const next=copyState(state);
-  applyKnownAction(next,action);
+  applyKnownAction(next,action,false,beforeRoundEnd);
   return next;
 }

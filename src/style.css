@@ -173,10 +173,11 @@ select, input[type=text] { min-height: 40px; padding: 7px 9px; border-radius: 6p
 .plan-explanation summary { color: var(--brass); padding-block: 5px; cursor: pointer; font-weight: 650; }
 .plan-explanation ol { margin: 4px 0 7px; padding-inline-start: 19px; color: var(--muted); }
 .plan-explanation li + li { margin-top: 4px; }
-.plan-changes { margin: 0 12px 10px; padding-top: 7px; border-top: 1px solid var(--line); }
-.plan-changes h4 { margin: 0 0 5px; font-size: .82rem; font-weight: 700; }
-.plan-changes ul { display: flex; flex-wrap: wrap; gap: 4px; padding: 0; margin: 0; list-style: none; }
-.plan-changes li { border: 1px solid var(--line); border-radius: 5px; padding: 3px 6px; font-size: .78rem; color: var(--muted); }
+.plan-changes, .round-end-review { margin: 0 12px 10px; padding-top: 7px; border-top: 1px solid var(--line); }
+.plan-changes h4, .round-end-review h4 { margin: 0 0 5px; font-size: .82rem; font-weight: 700; }
+.change-list { display: flex; flex-wrap: wrap; gap: 4px; padding: 0; margin: 0; list-style: none; }
+.change-list li { border: 1px solid var(--line); border-radius: 5px; padding: 3px 6px; font-size: .78rem; color: var(--muted); }
+.round-end-notes { margin: 0 0 6px; padding-inline-start: 19px; font-size: .83rem; color: var(--muted); }
 .changed-space { padding: 0; font: inherit; line-height: 1.5; text-decoration: underline; }
 .rival-flow { margin-bottom: 8px; }
 .legend { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 3px 8px; align-items: center; font-size: .77rem; color: var(--muted); }
@@ -250,6 +251,9 @@ button.offer:hover, .offer.chosen { outline: 1px solid var(--brass); outline-off
 .journal-rule { display: block; color: var(--quiet); }
 .log-round { color: var(--quiet); }
 .log-seat { color: var(--seat,var(--muted)); }
+.report-source { margin: 0 13px 7px; padding: 8px 10px; border: 1px solid var(--line); border-radius: 7px; }
+.report-source h3 { color: var(--muted); font-size: .85rem; overflow-wrap: anywhere; }
+.report-source button { margin-top: 5px; }
 .report-note { padding: 0 13px 10px; color: var(--muted); }
 .report-note summary { cursor: pointer; padding: 5px 0; font-size: .84rem; color: var(--brass); }
 .report-note textarea { width: 100%; padding: 7px 9px; border: 1px solid #66625d; border-radius: 6px; background: #222225; resize: vertical; }
@@ -391,6 +395,7 @@ dialog::backdrop { background: #100f11b9; }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; } }
 @media print {
   @page mincmistr-reference { margin: 12mm; }
+  :root { color-scheme: light; background: #fff; }
   body.print-reference { page: mincmistr-reference; color-scheme: light; color: #222; background: #fff; min-width: 0; font: 11pt/1.32 system-ui, sans-serif; }
   .print-reference #digital-game,
   .print-reference #draw-only,
