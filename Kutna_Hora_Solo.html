@@ -290,7 +290,7 @@ dialog::backdrop { background: #100f11b9; }
     <section class="hero" aria-label="Kutná Hora: The City of Silver">
       <div class="hero-art" aria-hidden="true"></div>
       <div class="hero-copy">
-        <span class="eyebrow">Unofficial solo playtest · v0.2.1</span>
+        <span class="eyebrow">Unofficial solo playtest · v0.2.2</span>
         <h1>Kutná Hora</h1>
         <p>The City of Silver</p>
       </div>
@@ -349,6 +349,7 @@ dialog::backdrop { background: #100f11b9; }
     <div class="panel-head"><h2 id="help-title">Playing Kutná Hora Solo</h2><button type="button" class="flat" data-do="close">Close</button></div>
     <div class="dialog-body guide">
       <p>Play one side of the two-player game. Choose a card half, pick a target if needed, and confirm. After two cards on your first two turns and one on your last, your round is complete. Use <strong>Play rival turn</strong> when the rival has the move.</p>
+      <p><strong>Set up your guilds.</strong> The printed setup lets the second player pick a guild set first. In New game you can choose either set and arrange your own house rows. The seed determines the rival’s row order.</p>
       <p><strong>Build a guild income.</strong> Take Rights to a building, claim a Plot, then use Building. A Mine can also start ore production. The Income action collects the current value of your production. The market prices affect both players.</p>
       <p><strong>Follow the grid.</strong> Town and mine coordinates are read left to right, top to bottom. Colored dots are printed scoring matches. A striped guild offer can sell Rights while new construction of that guild is unavailable.</p>
       <p><strong>Win on points.</strong> Patricians score in rounds 4–6. The final count adds town matches, mine row awards, final income, reputation and unused items to earned points. Coins break a points tie.</p>
@@ -362,7 +363,7 @@ dialog::backdrop { background: #100f11b9; }
   <script>'use strict';
 const modules={};
 modules.data=(()=>{
-const VERSION = '0.2.1';
+const VERSION = '0.2.2';
 const SAVE_SCHEMA = 2;
 const SETUP_VERSION = 2;
 const GUILDS = {
@@ -507,7 +508,7 @@ const EVENTS = {
   fever:{name:'Silver Fever',set:'A',pop:2, detail:'At round end, population rises 2 and both miner pools refill for free.'},
   rush:{name:'Land Rush',set:'A',tax:4,pop:2, detail:'At round end, population rises 2. Skip all taxes this round.'},
   siege:{name:'Siege of Kutná Hora',set:'A',tax:2, detail:'At round end, discard the top tile of the three original public stacks.'},
-  code:{name:'Ius Regale Montanorum',set:'A',ore:2, detail:'At round end, ore rises 2 and five mine tiles are discarded.'},
+  code:{name:'Ius Regale Montanorum',set:'A',ore:2, detail:'At round end, ore rises 2. Discard the next five mine tiles, or the rest of the stack if fewer remain.'},
   cathedral:{name:'Cathedral Construction',set:'A',ore:2, detail:'At round end, ore rises 2 and each player gains one pelican.'},
   michal:{name:'Michal of Vrchoviště',set:'B',tax:3, detail:'At round end, discard the top tile of the leftmost stack in each row.'},
   groschen:{name:'180,000 Groschen',set:'B',ore:3, detail:'At round end, ore rises 3. Skip the current cathedral tile and add its tax before paying taxes.'},
@@ -670,15 +671,22 @@ function createGame(options = {}) {
   const setup = Object.hasOwn(GUILD_SETUPS,options.setup) ? Number(options.setup) : 1;
   const side = options.side===1 ? 1 : 0;
   const starter = options.starter===1 ? 1 : 0;
+  const rng = seedNumber(seed);
   const state = {
-    schema:SAVE_SCHEMA, setupVersion:SETUP_VERSION, seed, rng:seedNumber(seed),
+    schema:SAVE_SCHEMA, setupVersion:SETUP_VERSION, seed, rng,
     setup, side, starter, round:1, turn:0, left:TURN_CARD_COUNTS[0],
     actor:starter, phase:'action', pending:[], difficulty:options.difficulty==='quick'?'quick':'standard',
     players:GUILD_SETUPS[setup].map((_,i) => {
       const printed = GUILD_SETUPS[setup][i===0?side:1-side];
       const order = options.orders?.[i];
-      const guilds = order?.length===3 && new Set(order).size===3 && order.every(key=>printed.includes(key)) ? order : printed;
-      return player(guilds, i===starter?40:41);
+      const coins = i===starter?40:41;
+      if (Array.isArray(order) && order.length===3 && new Set(order).size===3 && order.every(key=>printed.includes(key))) {
+        return player(order,coins);
+      }
+      if (i===0) return player(printed,coins);
+      // Keep the rival's house order independent of the market and deck shuffles.
+      const houseRng = {rng:seedNumber(`rival-houses/${rng}/${setup}/${side}`)};
+      return player(shuffle(houseRng,printed),coins);
     }),
     city:empty(CITY.length), mine:empty(20), market:[], marketDiscard:[],
     mineDeck:[], mineDiscard:[], mineMixed:false, technology:0, red:[], events:[],
@@ -1189,6 +1197,7 @@ function resolveEvent(state) {
       }
       break;
     case 'code': {
+      // Discard from the current stack. A later Mine draw triggers recycling.
       const discarded=state.mineDeck.splice(0,5);
       state.mineDiscard.push(...discarded);
       break;

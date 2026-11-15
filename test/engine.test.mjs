@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {BUILDINGS,MINES,ROCK_LAYOUTS,ROCK_STARS} from '../src/data.mjs';
+import {BUILDINGS,GUILD_SETUPS,MINES,ROCK_LAYOUTS,ROCK_STARS} from '../src/data.mjs';
 import {botAction,publicPlanningState} from '../src/bot.mjs';
 import {
   actionKey,canBuildGuild,cityPointsAt,createGame,finalResult,income,legalActions,marketOffer,mineRow,mineSpaces,
@@ -14,9 +14,10 @@ function play(state, requested) {
 }
 const owned = (id,owner) => ({id,owner,stars:MINES[id].stars});
 
-test('printed first-game card, opening prices, mine draw and rights rotation',()=>{
+test('printed guild sets, opening prices, mine draw and rights rotation',()=>{
   let game=createGame({seed:'silver-1308'});
-  assert.deepEqual(game.players.map(p=>p.guilds),[['silver','ore','beer'],['wood','permit','food']]);
+  assert.deepEqual(game.players[0].guilds,['silver','ore','beer']);
+  assert.deepEqual([...game.players[1].guilds].sort(),['food','permit','wood']);
   assert.deepEqual(game.players.map(p=>p.coins),[40,41]);
   assert.deepEqual(['wood','food','beer','ore','silver','permit'].map(key=>price(game,key)),[2,3,5,3,4,4]);
   assert.deepEqual(mineSpaces(game),[{space:1,wood:2},{space:3,wood:2}]);
@@ -264,4 +265,59 @@ test('third house row pays the printed 1, 3 and 4 reputation, then 8 points',()=
     observed.push([next.players[0].rep-p.rep,next.players[0].vp-p.vp]);
   }
   assert.deepEqual(observed,[[1,0],[3,0],[4,0],[0,8]]);
+});
+
+test('the rival can use all six row orders for its guild set',()=>{
+  for (const side of [0,1]) {
+    const seen=new Set();
+    for (let i=0; i<64; i++) {
+      const g=createGame({seed:`rival-order-${i}`,side});
+      assert.deepEqual(g.players[0].guilds,GUILD_SETUPS[1][side]);
+      assert.deepEqual([...g.players[1].guilds].sort(),[...GUILD_SETUPS[1][1-side]].sort());
+      seen.add(g.players[1].guilds.join('/'));
+    }
+    assert.equal(seen.size,6);
+  }
+});
+
+test('explicit house orders are respected without changing the seeded boards or decks',()=>{
+  const options={seed:'separate-house-seed',setup:6,side:1,starter:1};
+  const seeded=createGame(options);
+  const orders=GUILD_SETUPS[6].slice().reverse().map(set=>[...set].reverse());
+  const explicit=createGame({...options,orders});
+  assert.deepEqual(explicit.players.map(p=>p.guilds),orders);
+  for (const key of ['mineLayout','mine','mineDeck','market','red','events','rng']) {
+    assert.deepEqual(explicit[key],seeded[key],key);
+  }
+  assert.deepEqual(readSave(writeSave(seeded)).players,seeded.players);
+});
+
+test('Ius Regale discards at most five tiles and only the next draw recycles an empty stack',()=>{
+  for (const remaining of [0,3,5,7]) {
+    let g=createGame({seed:'ius-regale-boundary'});
+    g.events=['code','fever','rush','michal','king'];
+    g.tax=0;
+    const deck=g.mineDeck;
+    const split=deck.length-remaining;
+    g.mineDeck=deck.slice(split);
+    g.mineDiscard=deck.slice(0,split);
+    const beforeRng=g.rng;
+
+    for (let i=0; i<10; i++) g=transition(g,legalActions(g).find(a=>a.kind==='skip'));
+    const discarded=Math.min(split+5,deck.length);
+    assert.equal(g.round,2);
+    assert.equal(g.ore,2);
+    assert.deepEqual(g.mineDiscard,deck.slice(0,discarded));
+    assert.deepEqual(g.mineDeck,deck.slice(discarded));
+    assert.equal(g.mineMixed,false);
+    assert.equal(g.rng,beforeRng);
+    checkGame(g);
+
+    const next=play(g,{kind:'mine',refill:0,card:0});
+    assert.equal(next.mineMixed,remaining<=5);
+    assert.equal(next.pending[0].drawn.length,1);
+    if (remaining>5) assert.deepEqual(next.pending[0].drawn,[g.mineDeck[0]]);
+    else assert.deepEqual(next.mineDiscard,[]);
+    checkGame(next);
+  }
 });

@@ -1,0 +1,361 @@
+{
+  "kind": "kutna-hora-solo",
+  "state": {
+    "schema": 2,
+    "setupVersion": 2,
+    "seed": "ius-short-stack-5",
+    "rng": 2332320881,
+    "setup": 1,
+    "side": 0,
+    "starter": 1,
+    "round": 1,
+    "turn": 5,
+    "left": 1,
+    "actor": 0,
+    "phase": "action",
+    "pending": [],
+    "difficulty": "standard",
+    "players": [
+      {
+        "guilds": [
+          "silver",
+          "ore",
+          "beer"
+        ],
+        "coins": 41,
+        "vp": 0,
+        "rep": 0,
+        "production": {
+          "wood": 0,
+          "food": 0,
+          "beer": 0,
+          "ore": 0,
+          "silver": 0,
+          "permit": 0
+        },
+        "houses": [
+          0,
+          0,
+          0
+        ],
+        "held": [],
+        "pool": 1,
+        "reserve": 8,
+        "pelicans": 0,
+        "usedPelicans": 0,
+        "hand": 48
+      },
+      {
+        "guilds": [
+          "wood",
+          "permit",
+          "food"
+        ],
+        "coins": 40,
+        "vp": 0,
+        "rep": 0,
+        "production": {
+          "wood": 0,
+          "food": 0,
+          "beer": 0,
+          "ore": 0,
+          "silver": 0,
+          "permit": 0
+        },
+        "houses": [
+          0,
+          0,
+          0
+        ],
+        "held": [],
+        "pool": 1,
+        "reserve": 8,
+        "pelicans": 0,
+        "usedPelicans": 0,
+        "hand": 32
+      }
+    ],
+    "city": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    "mine": [
+      null,
+      null,
+      {
+        "rock": true,
+        "stars": 0
+      },
+      null,
+      null,
+      null,
+      null,
+      null,
+      {
+        "rock": true,
+        "stars": 1
+      },
+      null,
+      null,
+      {
+        "rock": true,
+        "stars": 1
+      },
+      null,
+      null,
+      null,
+      null,
+      null,
+      {
+        "rock": true,
+        "stars": 2
+      },
+      null,
+      null
+    ],
+    "market": [
+      [
+        {
+          "group": "permit",
+          "tiles": [
+            "assay",
+            "ore-market",
+            "mining-office",
+            "courthouse"
+          ]
+        },
+        {
+          "group": "silver",
+          "tiles": [
+            "furnace",
+            "smelter",
+            "hammer",
+            "washworks"
+          ]
+        },
+        {
+          "group": "green",
+          "tiles": [
+            "st-mary",
+            "st-john",
+            "st-george"
+          ]
+        }
+      ],
+      [
+        {
+          "group": "beer",
+          "tiles": [
+            "brewery",
+            "tavern",
+            "bathhouse",
+            "warehouse"
+          ]
+        },
+        {
+          "group": "wood",
+          "tiles": [
+            "sawmill",
+            "mason",
+            "limekiln",
+            "workshop"
+          ]
+        },
+        {
+          "group": "civicSilver",
+          "tiles": [
+            "high-church",
+            "bartholomew",
+            "our-lady"
+          ]
+        }
+      ],
+      [
+        {
+          "group": "food",
+          "tiles": [
+            "bread",
+            "butcher",
+            "bakery",
+            "fish"
+          ]
+        },
+        {
+          "group": "ore",
+          "tiles": [
+            "pump",
+            "airshaft",
+            "horse-mill",
+            "smithy"
+          ]
+        },
+        {
+          "group": "yellow",
+          "tiles": [
+            "coal-market",
+            "mint",
+            "hospital"
+          ]
+        }
+      ]
+    ],
+    "marketDiscard": [],
+    "mineDeck": [
+      "m3-7",
+      "m3-6",
+      "m3-4"
+    ],
+    "mineDiscard": [
+      "m1-1",
+      "m1-2",
+      "m1-5",
+      "m1-6",
+      "m1-4",
+      "m1-3",
+      "m2-5",
+      "m2-6",
+      "m2-7",
+      "m2-3",
+      "m2-4",
+      "m2-2",
+      "m2-8",
+      "m2-1",
+      "m2-9",
+      "m3-2",
+      "m3-1",
+      "m3-3",
+      "m3-11",
+      "m3-5",
+      "m3-10",
+      "m3-9",
+      "m3-12",
+      "m3-8"
+    ],
+    "mineMixed": false,
+    "technology": 0,
+    "red": [
+      "town-hall",
+      "school",
+      "smallcastle"
+    ],
+    "events": [
+      "code",
+      "abbey",
+      "rush",
+      "abbot",
+      "groschen"
+    ],
+    "pop": 0,
+    "ore": 0,
+    "arms": {
+      "wood": 0,
+      "food": 0,
+      "beer": 0,
+      "ore": 0,
+      "silver": 0,
+      "permit": 0
+    },
+    "tax": 0,
+    "barbara": 1,
+    "bank": {
+      "green": 3,
+      "silver": 3,
+      "yellow": 3,
+      "red": 3
+    },
+    "patrons": {
+      "green": 0,
+      "silver": 0,
+      "yellow": 0,
+      "red": 0
+    },
+    "council": {
+      "green": 0,
+      "silver": 0,
+      "yellow": 0,
+      "red": 0
+    },
+    "log": [
+      {
+        "round": 1,
+        "actor": null,
+        "text": "Round 1 begins · Ius Regale Montanorum."
+      },
+      {
+        "round": 1,
+        "actor": 1,
+        "text": "Spent the Mine / Joker card with no effect."
+      },
+      {
+        "round": 1,
+        "actor": 1,
+        "text": "Spent the Mine / Plot card with no effect."
+      },
+      {
+        "round": 1,
+        "actor": 0,
+        "text": "Spent the Mine / Joker card with no effect."
+      },
+      {
+        "round": 1,
+        "actor": 0,
+        "text": "Spent the Mine / Plot card with no effect."
+      },
+      {
+        "round": 1,
+        "actor": 1,
+        "text": "Spent the Building / Income card with no effect."
+      },
+      {
+        "round": 1,
+        "actor": 1,
+        "text": "Spent the Building / Plot card with no effect."
+      },
+      {
+        "round": 1,
+        "actor": 0,
+        "text": "Spent the Building / Income card with no effect."
+      },
+      {
+        "round": 1,
+        "actor": 0,
+        "text": "Spent the Building / Plot card with no effect."
+      },
+      {
+        "round": 1,
+        "actor": 1,
+        "text": "Spent the Rights / Income card with no effect."
+      }
+    ],
+    "result": null,
+    "mineLayout": 13
+  }
+}

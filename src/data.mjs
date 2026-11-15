@@ -1,4 +1,4 @@
-export const VERSION = '0.2.1';
+export const VERSION = '0.2.2';
 export const SAVE_SCHEMA = 2;
 export const SETUP_VERSION = 2;
 export const GUILDS = {
@@ -143,7 +143,7 @@ export const EVENTS = {
   fever:{name:'Silver Fever',set:'A',pop:2, detail:'At round end, population rises 2 and both miner pools refill for free.'},
   rush:{name:'Land Rush',set:'A',tax:4,pop:2, detail:'At round end, population rises 2. Skip all taxes this round.'},
   siege:{name:'Siege of Kutná Hora',set:'A',tax:2, detail:'At round end, discard the top tile of the three original public stacks.'},
-  code:{name:'Ius Regale Montanorum',set:'A',ore:2, detail:'At round end, ore rises 2 and five mine tiles are discarded.'},
+  code:{name:'Ius Regale Montanorum',set:'A',ore:2, detail:'At round end, ore rises 2. Discard the next five mine tiles, or the rest of the stack if fewer remain.'},
   cathedral:{name:'Cathedral Construction',set:'A',ore:2, detail:'At round end, ore rises 2 and each player gains one pelican.'},
   michal:{name:'Michal of Vrchoviště',set:'B',tax:3, detail:'At round end, discard the top tile of the leftmost stack in each row.'},
   groschen:{name:'180,000 Groschen',set:'B',ore:3, detail:'At round end, ore rises 3. Skip the current cathedral tile and add its tax before paying taxes.'},

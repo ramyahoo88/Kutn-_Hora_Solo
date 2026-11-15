@@ -38,15 +38,22 @@ export function createGame(options = {}) {
   const setup = Object.hasOwn(GUILD_SETUPS,options.setup) ? Number(options.setup) : 1;
   const side = options.side===1 ? 1 : 0;
   const starter = options.starter===1 ? 1 : 0;
+  const rng = seedNumber(seed);
   const state = {
-    schema:SAVE_SCHEMA, setupVersion:SETUP_VERSION, seed, rng:seedNumber(seed),
+    schema:SAVE_SCHEMA, setupVersion:SETUP_VERSION, seed, rng,
     setup, side, starter, round:1, turn:0, left:TURN_CARD_COUNTS[0],
     actor:starter, phase:'action', pending:[], difficulty:options.difficulty==='quick'?'quick':'standard',
     players:GUILD_SETUPS[setup].map((_,i) => {
       const printed = GUILD_SETUPS[setup][i===0?side:1-side];
       const order = options.orders?.[i];
-      const guilds = order?.length===3 && new Set(order).size===3 && order.every(key=>printed.includes(key)) ? order : printed;
-      return player(guilds, i===starter?40:41);
+      const coins = i===starter?40:41;
+      if (Array.isArray(order) && order.length===3 && new Set(order).size===3 && order.every(key=>printed.includes(key))) {
+        return player(order,coins);
+      }
+      if (i===0) return player(printed,coins);
+      // Keep the rival's house order independent of the market and deck shuffles.
+      const houseRng = {rng:seedNumber(`rival-houses/${rng}/${setup}/${side}`)};
+      return player(shuffle(houseRng,printed),coins);
     }),
     city:empty(CITY.length), mine:empty(20), market:[], marketDiscard:[],
     mineDeck:[], mineDiscard:[], mineMixed:false, technology:0, red:[], events:[],
@@ -557,6 +564,7 @@ function resolveEvent(state) {
       }
       break;
     case 'code': {
+      // Discard from the current stack. A later Mine draw triggers recycling.
       const discarded=state.mineDeck.splice(0,5);
       state.mineDiscard.push(...discarded);
       break;
