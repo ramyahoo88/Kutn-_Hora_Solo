@@ -1,0 +1,305 @@
+[
+  {
+    "name": "Normal move, pending move, Undo, reload and JSON export/import round trip",
+    "passed": true,
+    "detail": {
+      "pendingReload": true,
+      "undoTwoSteps": true,
+      "exportBlobCreated": true,
+      "importValid": true,
+      "invalidImportPreservesState": true
+    }
+  },
+  {
+    "name": "Rival turn completes and Undo restores the entire rival turn",
+    "passed": true,
+    "detail": {
+      "errors": [],
+      "undoWholeTurn": true
+    }
+  },
+  {
+    "name": "New game setup controls work and Undo restores previous game",
+    "passed": true
+  },
+  {
+    "name": "Complete six-round game through shipped controls, every human apply agrees with engine",
+    "passed": true,
+    "detail": {
+      "seed": "astra-v022-controls-full",
+      "result": {
+        "scores": [
+          {
+            "earned": 14,
+            "town": 7,
+            "mines": 8,
+            "income": 6,
+            "reputation": 0,
+            "extras": 5,
+            "total": 40,
+            "coins": 193
+          },
+          {
+            "earned": 14,
+            "town": 1,
+            "mines": 13,
+            "income": 2,
+            "reputation": 1,
+            "extras": 5,
+            "total": 36,
+            "coins": 16
+          }
+        ],
+        "winner": 0,
+        "winners": [
+          0
+        ]
+      },
+      "humanDecisions": 47,
+      "rivalButtons": 24,
+      "inputOperations": 141,
+      "errors": []
+    }
+  },
+  {
+    "name": "Mine preview includes population and ore; applied result agrees",
+    "passed": true,
+    "detail": {
+      "info": "0 \u2605 \u00b7 4 wood for adjacent expansion \u00b7 Ore production +2 \u00b7 Population +1 \u00b7 Ore deck +2Price changes \u00b7 Wood 2 \u2192 3 g \u00b7 Beer 5 \u2192 6 g \u00b7 Ore 3 \u2192 2 g \u00b7 Silver 4 \u2192 5 g"
+    }
+  },
+  {
+    "name": "Tavern regression: house-row preview, reputation 1 to 4, Undo and reload",
+    "passed": true,
+    "detail": {
+      "info": " Beer production +2 \u00b7 Beer price indicator +1 \u00b7 Population +1 \u00b7 Tax rate +1 g \u00b7 Reputation +3 \u00b7 Advances St. Barbara to tile 3 \u00b7 Removes one Innkeepers housePrice changes \u00b7 Food 3 \u2192 4 g \u00b7 Beer 3 \u2192 2 g",
+      "from": 1,
+      "to": 4,
+      "undo": 1,
+      "reload": 4
+    }
+  },
+  {
+    "name": "Unreadable autosave is protected, recoverable and visibly warned",
+    "passed": true,
+    "detail": {
+      "oldBytesPreserved": true,
+      "recoveryBlobCreated": true,
+      "warning": true
+    }
+  },
+  {
+    "name": "Failed autosave warns and leaves old save intact",
+    "passed": true,
+    "detail": {
+      "visibleWarning": true,
+      "oldSavePreserved": true
+    }
+  },
+  {
+    "name": "New Game identifies seeded rival rows and Ius logs its actual discard count",
+    "passed": true,
+    "detail": {
+      "setupLabel": true,
+      "actualDiscardCount": 3,
+      "reloadPreservesJournal": true
+    }
+  },
+  {
+    "name": "Tax shows the actual VP cost at, near and above the reputation floor",
+    "passed": true,
+    "detail": [
+      {
+        "rep": -5,
+        "info": "Reputation stays at \u22125 \u00b7 Lose 6 VP for steps below \u22125",
+        "label": "Lose 6 VP"
+      },
+      {
+        "rep": -4,
+        "info": "Reputation \u22124 \u2192 \u22125 \u00b7 Lose 4 VP for steps below \u22125 \u00b7 Final reputation score \u22122 \u2192 \u22124 VP",
+        "label": "Lose 1 reputation \u00b7 Lose 4 VP"
+      },
+      {
+        "rep": 0,
+        "info": "Reputation 0 \u2192 \u22123 \u00b7 Final reputation score 0 \u2192 \u22121 VP",
+        "label": "Lose 3 reputation"
+      }
+    ]
+  },
+  {
+    "name": "Tile 7 previews reputation, capped results, zero and the Joker fee",
+    "passed": true,
+    "detail": [
+      {
+        "rep": 0,
+        "gain": 2,
+        "vp": 0,
+        "info": "Gain 1 reputation for each public building next to each of your buildings.Reputation +2 \u00b7 Pelicans \u22121 \u00b7 Advances St. Barbara to tile 8"
+      },
+      {
+        "rep": 8,
+        "gain": 1,
+        "vp": 2,
+        "info": "Gain 1 reputation for each public building next to each of your buildings.VP +2 \u00b7 Reputation +1 \u00b7 Pelicans \u22121 \u00b7 Advances St. Barbara to tile 8"
+      },
+      {
+        "rep": 9,
+        "gain": 0,
+        "vp": 4,
+        "info": "Gain 1 reputation for each public building next to each of your buildings.VP +4 \u00b7 Reputation stays at 9 \u00b7 Pelicans \u22121 \u00b7 Advances St. Barbara to tile 8"
+      },
+      {
+        "rep": 0,
+        "gain": 0,
+        "vp": 0,
+        "info": "Gain 1 reputation for each public building next to each of your buildings.Reputation stays at 0 \u00b7 Pelicans \u22121 \u00b7 Advances St. Barbara to tile 8"
+      },
+      {
+        "rep": 2,
+        "gain": 1,
+        "vp": 0,
+        "info": "Gain 1 reputation for each public building next to each of your buildings.Includes the Joker cost. Reputation +1 \u00b7 Pelicans \u22121 \u00b7 Advances St. Barbara to tile 8"
+      }
+    ]
+  },
+  {
+    "name": "Market inspection uses a button and keeps the selected Rights target",
+    "passed": true,
+    "detail": {
+      "market": {
+        "Type": "Innkeepers",
+        "Rights price": "1 g",
+        "Tiles in stack": "4",
+        "Build cost": "7 wood \u00b7 14 g at current prices",
+        "Plot value": "8 g",
+        "Matching dots": "Blue, Orange",
+        "Printed effects": "Beer production +2 \u00b7 Advance beer price indicator \u00b7 Advances St. Barbara \u00b7 Population +1"
+      },
+      "independentTarget": true,
+      "held": "st-john"
+    }
+  },
+  {
+    "name": "Placed town and mine inspection shows ownership, scoring and printed effects",
+    "passed": true,
+    "detail": {
+      "town": {
+        "Type": "Metallurgists",
+        "Location": "Town C1",
+        "Owner": "You",
+        "Town score now": "3 VP",
+        "Build cost": "7 wood",
+        "Plot value": "6 g",
+        "Matching dots": "Silver, Red",
+        "Printed effects": "Silver production +3 \u00b7 Advance silver price indicator"
+      },
+      "mine": {
+        "Location": "Mine B1",
+        "Owner": "You",
+        "Stars": "0",
+        "Expansion value": "4 wood",
+        "Printed effects": "Ore production and ore deck +2 \u00b7 Population +1"
+      }
+    }
+  },
+  {
+    "name": "Both player boards show every house reward and move the next marker after building",
+    "passed": true,
+    "detail": {
+      "you": 12,
+      "rival": 12,
+      "markerUpdated": true
+    }
+  },
+  {
+    "name": "Unavailability reasons and Undo lifetime appear in the shipped controls",
+    "passed": true,
+    "detail": {
+      "visibleReasons": true,
+      "guide": true,
+      "reload": true
+    }
+  },
+  {
+    "name": "v0.1.0 import still retains the original decks and corrects III-3",
+    "passed": true
+  },
+  {
+    "name": "Complete a 3-player quick game through the shipped controls",
+    "passed": true,
+    "detail": {
+      "count": 3,
+      "rounds": 6,
+      "actions": 46,
+      "batches": 23,
+      "scores": [
+        49,
+        38,
+        42
+      ],
+      "winners": [
+        0
+      ]
+    }
+  },
+  {
+    "name": "Complete a 4-player planner game through the shipped controls",
+    "passed": true,
+    "detail": {
+      "count": 4,
+      "rounds": 5,
+      "actions": 37,
+      "batches": 20,
+      "scores": [
+        31,
+        38,
+        39,
+        47
+      ],
+      "winners": [
+        3
+      ]
+    }
+  },
+  {
+    "name": "Complete a 3-player master game through the shipped controls",
+    "passed": true,
+    "detail": {
+      "count": 3,
+      "rounds": 6,
+      "actions": 48,
+      "batches": 23,
+      "scores": [
+        38,
+        42,
+        51
+      ],
+      "winners": [
+        2
+      ]
+    }
+  },
+  {
+    "name": "Complete a 4-player grandmaster game through the shipped controls",
+    "passed": true,
+    "detail": {
+      "count": 4,
+      "rounds": 5,
+      "actions": 36,
+      "batches": 19,
+      "scores": [
+        27,
+        33,
+        55,
+        40
+      ],
+      "winners": [
+        2
+      ]
+    }
+  },
+  {
+    "name": "A real schema 2 game with a mine draw resumes from v0.2.3",
+    "passed": true
+  }
+]

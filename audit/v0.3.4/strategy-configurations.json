@@ -1,0 +1,725 @@
+[
+  {
+    "boards": 8,
+    "prefix": "astra034-strategy-2",
+    "players": 2,
+    "level": "master",
+    "policy": "standard",
+    "deck": "shared",
+    "events": true
+  },
+  {
+    "boards": 4,
+    "prefix": "astra034-independent-discovery-2",
+    "players": 2,
+    "level": "master",
+    "policy": "industry",
+    "deck": "shared",
+    "events": true
+  },
+  {
+    "boards": 4,
+    "prefix": "astra034-independent-discovery-2",
+    "players": 2,
+    "level": "master",
+    "policy": "mining",
+    "deck": "shared",
+    "events": true
+  },
+  {
+    "boards": 4,
+    "prefix": "astra034-independent-discovery-2",
+    "players": 2,
+    "level": "master",
+    "policy": "council-focus",
+    "deck": "shared",
+    "events": true
+  },
+  {
+    "boards": 4,
+    "prefix": "astra034-independent-discovery-2",
+    "players": 2,
+    "level": "master",
+    "policy": "blockade",
+    "deck": "shared",
+    "events": true
+  },
+  {
+    "boards": 4,
+    "prefix": "astra034-independent-discovery-2",
+    "players": 2,
+    "level": "master",
+    "policy": "industry",
+    "deck": "shared",
+    "events": true,
+    "digitalOpponent": "standard"
+  },
+  {
+    "boards": 4,
+    "prefix": "astra034-independent-discovery-2",
+    "players": 2,
+    "level": "master",
+    "policy": "mining",
+    "deck": "shared",
+    "events": true,
+    "digitalOpponent": "standard"
+  },
+  {
+    "boards": 4,
+    "prefix": "astra034-independent-discovery-2",
+    "players": 2,
+    "level": "master",
+    "policy": "council-focus",
+    "deck": "shared",
+    "events": true,
+    "digitalOpponent": "standard"
+  },
+  {
+    "boards": 4,
+    "prefix": "astra034-independent-discovery-2",
+    "players": 2,
+    "level": "master",
+    "policy": "blockade",
+    "deck": "shared",
+    "events": true,
+    "digitalOpponent": "standard"
+  },
+  {
+    "boards": 4,
+    "prefix": "astra034-independent-discovery-2",
+    "players": 2,
+    "level": "master",
+    "policy": "industry",
+    "deck": "shared",
+    "events": true,
+    "digitalOpponent": "planner"
+  },
+  {
+    "boards": 4,
+    "prefix": "astra034-independent-discovery-2",
+    "players": 2,
+    "level": "master",
+    "policy": "mining",
+    "deck": "shared",
+    "events": true,
+    "digitalOpponent": "planner"
+  },
+  {
+    "boards": 4,
+    "prefix": "astra034-independent-discovery-2",
+    "players": 2,
+    "level": "master",
+    "policy": "council-focus",
+    "deck": "shared",
+    "events": true,
+    "digitalOpponent": "planner"
+  },
+  {
+    "boards": 4,
+    "prefix": "astra034-independent-discovery-2",
+    "players": 2,
+    "level": "master",
+    "policy": "blockade",
+    "deck": "shared",
+    "events": true,
+    "digitalOpponent": "planner"
+  },
+  {
+    "boards": 4,
+    "prefix": "astra034-independent-confirm-2",
+    "players": 2,
+    "level": "master",
+    "policy": "industry",
+    "deck": "shared",
+    "events": true
+  },
+  {
+    "boards": 4,
+    "prefix": "astra034-independent-confirm-2",
+    "players": 2,
+    "level": "master",
+    "policy": "mining",
+    "deck": "shared",
+    "events": true
+  },
+  {
+    "boards": 4,
+    "prefix": "astra034-independent-confirm-2",
+    "players": 2,
+    "level": "master",
+    "policy": "council-focus",
+    "deck": "shared",
+    "events": true
+  },
+  {
+    "boards": 4,
+    "prefix": "astra034-independent-confirm-2",
+    "players": 2,
+    "level": "master",
+    "policy": "blockade",
+    "deck": "shared",
+    "events": true
+  },
+  {
+    "boards": 4,
+    "prefix": "astra034-independent-confirm-2",
+    "players": 2,
+    "level": "master",
+    "policy": "industry",
+    "deck": "shared",
+    "events": true,
+    "digitalOpponent": "standard"
+  },
+  {
+    "boards": 4,
+    "prefix": "astra034-independent-confirm-2",
+    "players": 2,
+    "level": "master",
+    "policy": "mining",
+    "deck": "shared",
+    "events": true,
+    "digitalOpponent": "standard"
+  },
+  {
+    "boards": 4,
+    "prefix": "astra034-independent-confirm-2",
+    "players": 2,
+    "level": "master",
+    "policy": "council-focus",
+    "deck": "shared",
+    "events": true,
+    "digitalOpponent": "standard"
+  },
+  {
+    "boards": 4,
+    "prefix": "astra034-independent-confirm-2",
+    "players": 2,
+    "level": "master",
+    "policy": "blockade",
+    "deck": "shared",
+    "events": true,
+    "digitalOpponent": "standard"
+  },
+  {
+    "boards": 4,
+    "prefix": "astra034-independent-confirm-2",
+    "players": 2,
+    "level": "master",
+    "policy": "industry",
+    "deck": "shared",
+    "events": true,
+    "digitalOpponent": "planner"
+  },
+  {
+    "boards": 4,
+    "prefix": "astra034-independent-confirm-2",
+    "players": 2,
+    "level": "master",
+    "policy": "mining",
+    "deck": "shared",
+    "events": true,
+    "digitalOpponent": "planner"
+  },
+  {
+    "boards": 4,
+    "prefix": "astra034-independent-confirm-2",
+    "players": 2,
+    "level": "master",
+    "policy": "council-focus",
+    "deck": "shared",
+    "events": true,
+    "digitalOpponent": "planner"
+  },
+  {
+    "boards": 4,
+    "prefix": "astra034-independent-confirm-2",
+    "players": 2,
+    "level": "master",
+    "policy": "blockade",
+    "deck": "shared",
+    "events": true,
+    "digitalOpponent": "planner"
+  },
+  {
+    "boards": 8,
+    "prefix": "astra034-strategy-3",
+    "players": 3,
+    "level": "master",
+    "policy": "standard",
+    "deck": "shared",
+    "events": false
+  },
+  {
+    "boards": 4,
+    "prefix": "astra034-independent-discovery-3",
+    "players": 3,
+    "level": "master",
+    "policy": "industry",
+    "deck": "shared",
+    "events": false
+  },
+  {
+    "boards": 4,
+    "prefix": "astra034-independent-discovery-3",
+    "players": 3,
+    "level": "master",
+    "policy": "mining",
+    "deck": "shared",
+    "events": false
+  },
+  {
+    "boards": 4,
+    "prefix": "astra034-independent-discovery-3",
+    "players": 3,
+    "level": "master",
+    "policy": "council-focus",
+    "deck": "shared",
+    "events": false
+  },
+  {
+    "boards": 4,
+    "prefix": "astra034-independent-discovery-3",
+    "players": 3,
+    "level": "master",
+    "policy": "blockade",
+    "deck": "shared",
+    "events": false
+  },
+  {
+    "boards": 4,
+    "prefix": "astra034-independent-discovery-3",
+    "players": 3,
+    "level": "master",
+    "policy": "industry",
+    "deck": "shared",
+    "events": false,
+    "digitalOpponent": "standard"
+  },
+  {
+    "boards": 4,
+    "prefix": "astra034-independent-discovery-3",
+    "players": 3,
+    "level": "master",
+    "policy": "mining",
+    "deck": "shared",
+    "events": false,
+    "digitalOpponent": "standard"
+  },
+  {
+    "boards": 4,
+    "prefix": "astra034-independent-discovery-3",
+    "players": 3,
+    "level": "master",
+    "policy": "council-focus",
+    "deck": "shared",
+    "events": false,
+    "digitalOpponent": "standard"
+  },
+  {
+    "boards": 4,
+    "prefix": "astra034-independent-discovery-3",
+    "players": 3,
+    "level": "master",
+    "policy": "blockade",
+    "deck": "shared",
+    "events": false,
+    "digitalOpponent": "standard"
+  },
+  {
+    "boards": 4,
+    "prefix": "astra034-independent-discovery-3",
+    "players": 3,
+    "level": "master",
+    "policy": "industry",
+    "deck": "shared",
+    "events": false,
+    "digitalOpponent": "planner"
+  },
+  {
+    "boards": 4,
+    "prefix": "astra034-independent-discovery-3",
+    "players": 3,
+    "level": "master",
+    "policy": "mining",
+    "deck": "shared",
+    "events": false,
+    "digitalOpponent": "planner"
+  },
+  {
+    "boards": 4,
+    "prefix": "astra034-independent-discovery-3",
+    "players": 3,
+    "level": "master",
+    "policy": "council-focus",
+    "deck": "shared",
+    "events": false,
+    "digitalOpponent": "planner"
+  },
+  {
+    "boards": 4,
+    "prefix": "astra034-independent-discovery-3",
+    "players": 3,
+    "level": "master",
+    "policy": "blockade",
+    "deck": "shared",
+    "events": false,
+    "digitalOpponent": "planner"
+  },
+  {
+    "boards": 4,
+    "prefix": "astra034-independent-confirm-3",
+    "players": 3,
+    "level": "master",
+    "policy": "industry",
+    "deck": "shared",
+    "events": false
+  },
+  {
+    "boards": 4,
+    "prefix": "astra034-independent-confirm-3",
+    "players": 3,
+    "level": "master",
+    "policy": "mining",
+    "deck": "shared",
+    "events": false
+  },
+  {
+    "boards": 4,
+    "prefix": "astra034-independent-confirm-3",
+    "players": 3,
+    "level": "master",
+    "policy": "council-focus",
+    "deck": "shared",
+    "events": false
+  },
+  {
+    "boards": 4,
+    "prefix": "astra034-independent-confirm-3",
+    "players": 3,
+    "level": "master",
+    "policy": "blockade",
+    "deck": "shared",
+    "events": false
+  },
+  {
+    "boards": 4,
+    "prefix": "astra034-independent-confirm-3",
+    "players": 3,
+    "level": "master",
+    "policy": "industry",
+    "deck": "shared",
+    "events": false,
+    "digitalOpponent": "standard"
+  },
+  {
+    "boards": 4,
+    "prefix": "astra034-independent-confirm-3",
+    "players": 3,
+    "level": "master",
+    "policy": "mining",
+    "deck": "shared",
+    "events": false,
+    "digitalOpponent": "standard"
+  },
+  {
+    "boards": 4,
+    "prefix": "astra034-independent-confirm-3",
+    "players": 3,
+    "level": "master",
+    "policy": "council-focus",
+    "deck": "shared",
+    "events": false,
+    "digitalOpponent": "standard"
+  },
+  {
+    "boards": 4,
+    "prefix": "astra034-independent-confirm-3",
+    "players": 3,
+    "level": "master",
+    "policy": "blockade",
+    "deck": "shared",
+    "events": false,
+    "digitalOpponent": "standard"
+  },
+  {
+    "boards": 4,
+    "prefix": "astra034-independent-confirm-3",
+    "players": 3,
+    "level": "master",
+    "policy": "industry",
+    "deck": "shared",
+    "events": false,
+    "digitalOpponent": "planner"
+  },
+  {
+    "boards": 4,
+    "prefix": "astra034-independent-confirm-3",
+    "players": 3,
+    "level": "master",
+    "policy": "mining",
+    "deck": "shared",
+    "events": false,
+    "digitalOpponent": "planner"
+  },
+  {
+    "boards": 4,
+    "prefix": "astra034-independent-confirm-3",
+    "players": 3,
+    "level": "master",
+    "policy": "council-focus",
+    "deck": "shared",
+    "events": false,
+    "digitalOpponent": "planner"
+  },
+  {
+    "boards": 4,
+    "prefix": "astra034-independent-confirm-3",
+    "players": 3,
+    "level": "master",
+    "policy": "blockade",
+    "deck": "shared",
+    "events": false,
+    "digitalOpponent": "planner"
+  },
+  {
+    "boards": 8,
+    "prefix": "astra034-strategy-4",
+    "players": 4,
+    "level": "master",
+    "policy": "standard",
+    "deck": "shared",
+    "events": false
+  },
+  {
+    "boards": 4,
+    "prefix": "astra034-independent-discovery-4",
+    "players": 4,
+    "level": "master",
+    "policy": "industry",
+    "deck": "shared",
+    "events": false
+  },
+  {
+    "boards": 4,
+    "prefix": "astra034-independent-discovery-4",
+    "players": 4,
+    "level": "master",
+    "policy": "mining",
+    "deck": "shared",
+    "events": false
+  },
+  {
+    "boards": 4,
+    "prefix": "astra034-independent-discovery-4",
+    "players": 4,
+    "level": "master",
+    "policy": "council-focus",
+    "deck": "shared",
+    "events": false
+  },
+  {
+    "boards": 4,
+    "prefix": "astra034-independent-discovery-4",
+    "players": 4,
+    "level": "master",
+    "policy": "blockade",
+    "deck": "shared",
+    "events": false
+  },
+  {
+    "boards": 4,
+    "prefix": "astra034-independent-discovery-4",
+    "players": 4,
+    "level": "master",
+    "policy": "industry",
+    "deck": "shared",
+    "events": false,
+    "digitalOpponent": "standard"
+  },
+  {
+    "boards": 4,
+    "prefix": "astra034-independent-discovery-4",
+    "players": 4,
+    "level": "master",
+    "policy": "mining",
+    "deck": "shared",
+    "events": false,
+    "digitalOpponent": "standard"
+  },
+  {
+    "boards": 4,
+    "prefix": "astra034-independent-discovery-4",
+    "players": 4,
+    "level": "master",
+    "policy": "council-focus",
+    "deck": "shared",
+    "events": false,
+    "digitalOpponent": "standard"
+  },
+  {
+    "boards": 4,
+    "prefix": "astra034-independent-discovery-4",
+    "players": 4,
+    "level": "master",
+    "policy": "blockade",
+    "deck": "shared",
+    "events": false,
+    "digitalOpponent": "standard"
+  },
+  {
+    "boards": 4,
+    "prefix": "astra034-independent-discovery-4",
+    "players": 4,
+    "level": "master",
+    "policy": "industry",
+    "deck": "shared",
+    "events": false,
+    "digitalOpponent": "planner"
+  },
+  {
+    "boards": 4,
+    "prefix": "astra034-independent-discovery-4",
+    "players": 4,
+    "level": "master",
+    "policy": "mining",
+    "deck": "shared",
+    "events": false,
+    "digitalOpponent": "planner"
+  },
+  {
+    "boards": 4,
+    "prefix": "astra034-independent-discovery-4",
+    "players": 4,
+    "level": "master",
+    "policy": "council-focus",
+    "deck": "shared",
+    "events": false,
+    "digitalOpponent": "planner"
+  },
+  {
+    "boards": 4,
+    "prefix": "astra034-independent-discovery-4",
+    "players": 4,
+    "level": "master",
+    "policy": "blockade",
+    "deck": "shared",
+    "events": false,
+    "digitalOpponent": "planner"
+  },
+  {
+    "boards": 4,
+    "prefix": "astra034-independent-confirm-4",
+    "players": 4,
+    "level": "master",
+    "policy": "industry",
+    "deck": "shared",
+    "events": false
+  },
+  {
+    "boards": 4,
+    "prefix": "astra034-independent-confirm-4",
+    "players": 4,
+    "level": "master",
+    "policy": "mining",
+    "deck": "shared",
+    "events": false
+  },
+  {
+    "boards": 4,
+    "prefix": "astra034-independent-confirm-4",
+    "players": 4,
+    "level": "master",
+    "policy": "council-focus",
+    "deck": "shared",
+    "events": false
+  },
+  {
+    "boards": 4,
+    "prefix": "astra034-independent-confirm-4",
+    "players": 4,
+    "level": "master",
+    "policy": "blockade",
+    "deck": "shared",
+    "events": false
+  },
+  {
+    "boards": 4,
+    "prefix": "astra034-independent-confirm-4",
+    "players": 4,
+    "level": "master",
+    "policy": "industry",
+    "deck": "shared",
+    "events": false,
+    "digitalOpponent": "standard"
+  },
+  {
+    "boards": 4,
+    "prefix": "astra034-independent-confirm-4",
+    "players": 4,
+    "level": "master",
+    "policy": "mining",
+    "deck": "shared",
+    "events": false,
+    "digitalOpponent": "standard"
+  },
+  {
+    "boards": 4,
+    "prefix": "astra034-independent-confirm-4",
+    "players": 4,
+    "level": "master",
+    "policy": "council-focus",
+    "deck": "shared",
+    "events": false,
+    "digitalOpponent": "standard"
+  },
+  {
+    "boards": 4,
+    "prefix": "astra034-independent-confirm-4",
+    "players": 4,
+    "level": "master",
+    "policy": "blockade",
+    "deck": "shared",
+    "events": false,
+    "digitalOpponent": "standard"
+  },
+  {
+    "boards": 4,
+    "prefix": "astra034-independent-confirm-4",
+    "players": 4,
+    "level": "master",
+    "policy": "industry",
+    "deck": "shared",
+    "events": false,
+    "digitalOpponent": "planner"
+  },
+  {
+    "boards": 4,
+    "prefix": "astra034-independent-confirm-4",
+    "players": 4,
+    "level": "master",
+    "policy": "mining",
+    "deck": "shared",
+    "events": false,
+    "digitalOpponent": "planner"
+  },
+  {
+    "boards": 4,
+    "prefix": "astra034-independent-confirm-4",
+    "players": 4,
+    "level": "master",
+    "policy": "council-focus",
+    "deck": "shared",
+    "events": false,
+    "digitalOpponent": "planner"
+  },
+  {
+    "boards": 4,
+    "prefix": "astra034-independent-confirm-4",
+    "players": 4,
+    "level": "master",
+    "policy": "blockade",
+    "deck": "shared",
+    "events": false,
+    "digitalOpponent": "planner"
+  }
+]

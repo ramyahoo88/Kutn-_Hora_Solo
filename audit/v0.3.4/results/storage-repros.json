@@ -1,0 +1,30 @@
+[
+  {
+    "case": "two-paper-tabs",
+    "seed": "astra034-tabs",
+    "before": [
+      5,
+      3,
+      6
+    ],
+    "after": [
+      5,
+      3
+    ],
+    "warning": ""
+  },
+  {
+    "case": "two-digital-tabs",
+    "seed": "astra034-tabs",
+    "minesBefore": 1,
+    "minesAfter": 0,
+    "warning": ""
+  },
+  {
+    "case": "paper-read-recovery",
+    "seed": "astra034-recovery",
+    "drawsBefore": 8,
+    "drawsAfter": 1,
+    "warning": ""
+  }
+]

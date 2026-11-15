@@ -1,0 +1,2 @@
+Draw only: 30 draws; all 15 printed faces; reshuffle; exact Undo after reload; reset/cancel; mode switches; storage failure; digital-save isolation. PASS
+Plan viewer: all 15 faces; three latest Plan links; all 90 journal draws; exact Undo/replay; offline image. PASS

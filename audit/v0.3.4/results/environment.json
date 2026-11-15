@@ -1,0 +1,7 @@
+{
+  "node": "v24.22.1",
+  "python": "3.12.14",
+  "jsdom": "26.1.0",
+  "pdfRenderer": "pdftoppm version 26.05.0",
+  "browser": "Chromium startup blocked; no native-browser QA performed"
+}

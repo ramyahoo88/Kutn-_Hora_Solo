@@ -1,0 +1,3632 @@
+{
+  "games": 240,
+  "steps": 29344,
+  "previews": 117512,
+  "previewBoundaryExcluded": 3089,
+  "hidden": {
+    "quick": 180,
+    "standard": 180,
+    "planner": 180
+  },
+  "maxPending": 2,
+  "pendingKinds": {
+    "mine-place": 4103,
+    "right": 633,
+    "technology": 187,
+    "plot": 83,
+    "house": 159,
+    "patrician": 59,
+    "income": 159,
+    "mine": 60,
+    "build": 22,
+    "score-building": 7
+  },
+  "reshuffles": 81,
+  "maxTax": 24,
+  "maxPop": 31,
+  "maxOre": 30,
+  "maxTechnology": 4,
+  "results": [
+    {
+      "seed": "astra034-stress-2-0",
+      "players": 2,
+      "digital": false,
+      "level": "apprentice",
+      "steps": 85,
+      "scores": [
+        -4,
+        -10
+      ],
+      "winners": [
+        0
+      ]
+    },
+    {
+      "seed": "astra034-stress-2-1",
+      "players": 2,
+      "digital": false,
+      "level": "journeyman",
+      "steps": 90,
+      "scores": [
+        -14,
+        5
+      ],
+      "winners": [
+        1
+      ]
+    },
+    {
+      "seed": "astra034-stress-2-2",
+      "players": 2,
+      "digital": false,
+      "level": "master",
+      "steps": 86,
+      "scores": [
+        3,
+        12
+      ],
+      "winners": [
+        1
+      ]
+    },
+    {
+      "seed": "astra034-stress-2-3",
+      "players": 2,
+      "digital": false,
+      "level": "grandmaster",
+      "steps": 88,
+      "scores": [
+        -11,
+        -12
+      ],
+      "winners": [
+        0
+      ]
+    },
+    {
+      "seed": "astra034-stress-2-4",
+      "players": 2,
+      "digital": false,
+      "level": "apprentice",
+      "steps": 86,
+      "scores": [
+        -4,
+        -5
+      ],
+      "winners": [
+        0
+      ]
+    },
+    {
+      "seed": "astra034-stress-2-5",
+      "players": 2,
+      "digital": false,
+      "level": "journeyman",
+      "steps": 89,
+      "scores": [
+        8,
+        9
+      ],
+      "winners": [
+        1
+      ]
+    },
+    {
+      "seed": "astra034-stress-2-6",
+      "players": 2,
+      "digital": false,
+      "level": "master",
+      "steps": 93,
+      "scores": [
+        1,
+        -3
+      ],
+      "winners": [
+        0
+      ]
+    },
+    {
+      "seed": "astra034-stress-2-7",
+      "players": 2,
+      "digital": false,
+      "level": "grandmaster",
+      "steps": 86,
+      "scores": [
+        17,
+        10
+      ],
+      "winners": [
+        0
+      ]
+    },
+    {
+      "seed": "astra034-stress-2-8",
+      "players": 2,
+      "digital": false,
+      "level": "apprentice",
+      "steps": 87,
+      "scores": [
+        4,
+        -7
+      ],
+      "winners": [
+        0
+      ]
+    },
+    {
+      "seed": "astra034-stress-2-9",
+      "players": 2,
+      "digital": false,
+      "level": "journeyman",
+      "steps": 85,
+      "scores": [
+        1,
+        7
+      ],
+      "winners": [
+        1
+      ]
+    },
+    {
+      "seed": "astra034-stress-2-10",
+      "players": 2,
+      "digital": false,
+      "level": "master",
+      "steps": 88,
+      "scores": [
+        19,
+        1
+      ],
+      "winners": [
+        0
+      ]
+    },
+    {
+      "seed": "astra034-stress-2-11",
+      "players": 2,
+      "digital": false,
+      "level": "grandmaster",
+      "steps": 88,
+      "scores": [
+        4,
+        -12
+      ],
+      "winners": [
+        0
+      ]
+    },
+    {
+      "seed": "astra034-stress-2-12",
+      "players": 2,
+      "digital": false,
+      "level": "apprentice",
+      "steps": 89,
+      "scores": [
+        -10,
+        0
+      ],
+      "winners": [
+        1
+      ]
+    },
+    {
+      "seed": "astra034-stress-2-13",
+      "players": 2,
+      "digital": false,
+      "level": "journeyman",
+      "steps": 86,
+      "scores": [
+        3,
+        -8
+      ],
+      "winners": [
+        0
+      ]
+    },
+    {
+      "seed": "astra034-stress-2-14",
+      "players": 2,
+      "digital": false,
+      "level": "master",
+      "steps": 84,
+      "scores": [
+        15,
+        15
+      ],
+      "winners": [
+        1
+      ]
+    },
+    {
+      "seed": "astra034-stress-2-15",
+      "players": 2,
+      "digital": false,
+      "level": "grandmaster",
+      "steps": 86,
+      "scores": [
+        -2,
+        5
+      ],
+      "winners": [
+        1
+      ]
+    },
+    {
+      "seed": "astra034-stress-2-16",
+      "players": 2,
+      "digital": false,
+      "level": "apprentice",
+      "steps": 87,
+      "scores": [
+        -14,
+        -14
+      ],
+      "winners": [
+        1
+      ]
+    },
+    {
+      "seed": "astra034-stress-2-17",
+      "players": 2,
+      "digital": false,
+      "level": "journeyman",
+      "steps": 84,
+      "scores": [
+        6,
+        -1
+      ],
+      "winners": [
+        0
+      ]
+    },
+    {
+      "seed": "astra034-stress-2-18",
+      "players": 2,
+      "digital": false,
+      "level": "master",
+      "steps": 86,
+      "scores": [
+        9,
+        -7
+      ],
+      "winners": [
+        0
+      ]
+    },
+    {
+      "seed": "astra034-stress-2-19",
+      "players": 2,
+      "digital": false,
+      "level": "grandmaster",
+      "steps": 89,
+      "scores": [
+        4,
+        3
+      ],
+      "winners": [
+        0
+      ]
+    },
+    {
+      "seed": "astra034-stress-2-20",
+      "players": 2,
+      "digital": false,
+      "level": "apprentice",
+      "steps": 89,
+      "scores": [
+        -12,
+        -14
+      ],
+      "winners": [
+        0
+      ]
+    },
+    {
+      "seed": "astra034-stress-2-21",
+      "players": 2,
+      "digital": false,
+      "level": "journeyman",
+      "steps": 84,
+      "scores": [
+        12,
+        -2
+      ],
+      "winners": [
+        0
+      ]
+    },
+    {
+      "seed": "astra034-stress-2-22",
+      "players": 2,
+      "digital": false,
+      "level": "master",
+      "steps": 87,
+      "scores": [
+        -4,
+        -5
+      ],
+      "winners": [
+        0
+      ]
+    },
+    {
+      "seed": "astra034-stress-2-23",
+      "players": 2,
+      "digital": false,
+      "level": "grandmaster",
+      "steps": 87,
+      "scores": [
+        15,
+        10
+      ],
+      "winners": [
+        0
+      ]
+    },
+    {
+      "seed": "astra034-stress-2-24",
+      "players": 2,
+      "digital": false,
+      "level": "apprentice",
+      "steps": 87,
+      "scores": [
+        -10,
+        -5
+      ],
+      "winners": [
+        1
+      ]
+    },
+    {
+      "seed": "astra034-stress-2-25",
+      "players": 2,
+      "digital": false,
+      "level": "journeyman",
+      "steps": 85,
+      "scores": [
+        -8,
+        -7
+      ],
+      "winners": [
+        1
+      ]
+    },
+    {
+      "seed": "astra034-stress-2-26",
+      "players": 2,
+      "digital": false,
+      "level": "master",
+      "steps": 88,
+      "scores": [
+        -10,
+        -2
+      ],
+      "winners": [
+        1
+      ]
+    },
+    {
+      "seed": "astra034-stress-2-27",
+      "players": 2,
+      "digital": false,
+      "level": "grandmaster",
+      "steps": 90,
+      "scores": [
+        -8,
+        4
+      ],
+      "winners": [
+        1
+      ]
+    },
+    {
+      "seed": "astra034-stress-2-28",
+      "players": 2,
+      "digital": false,
+      "level": "apprentice",
+      "steps": 87,
+      "scores": [
+        -7,
+        17
+      ],
+      "winners": [
+        1
+      ]
+    },
+    {
+      "seed": "astra034-stress-2-29",
+      "players": 2,
+      "digital": false,
+      "level": "journeyman",
+      "steps": 87,
+      "scores": [
+        -7,
+        -1
+      ],
+      "winners": [
+        1
+      ]
+    },
+    {
+      "seed": "astra034-stress-2-30",
+      "players": 2,
+      "digital": false,
+      "level": "master",
+      "steps": 87,
+      "scores": [
+        -16,
+        -8
+      ],
+      "winners": [
+        1
+      ]
+    },
+    {
+      "seed": "astra034-stress-2-31",
+      "players": 2,
+      "digital": false,
+      "level": "grandmaster",
+      "steps": 87,
+      "scores": [
+        8,
+        8
+      ],
+      "winners": [
+        1
+      ]
+    },
+    {
+      "seed": "astra034-stress-2-32",
+      "players": 2,
+      "digital": false,
+      "level": "apprentice",
+      "steps": 85,
+      "scores": [
+        -13,
+        -9
+      ],
+      "winners": [
+        1
+      ]
+    },
+    {
+      "seed": "astra034-stress-2-33",
+      "players": 2,
+      "digital": false,
+      "level": "journeyman",
+      "steps": 84,
+      "scores": [
+        16,
+        -3
+      ],
+      "winners": [
+        0
+      ]
+    },
+    {
+      "seed": "astra034-stress-2-34",
+      "players": 2,
+      "digital": false,
+      "level": "master",
+      "steps": 86,
+      "scores": [
+        -12,
+        10
+      ],
+      "winners": [
+        1
+      ]
+    },
+    {
+      "seed": "astra034-stress-2-35",
+      "players": 2,
+      "digital": false,
+      "level": "grandmaster",
+      "steps": 85,
+      "scores": [
+        -16,
+        -16
+      ],
+      "winners": [
+        0
+      ]
+    },
+    {
+      "seed": "astra034-stress-2-36",
+      "players": 2,
+      "digital": false,
+      "level": "apprentice",
+      "steps": 87,
+      "scores": [
+        6,
+        14
+      ],
+      "winners": [
+        1
+      ]
+    },
+    {
+      "seed": "astra034-stress-2-37",
+      "players": 2,
+      "digital": false,
+      "level": "journeyman",
+      "steps": 88,
+      "scores": [
+        -13,
+        2
+      ],
+      "winners": [
+        1
+      ]
+    },
+    {
+      "seed": "astra034-stress-2-38",
+      "players": 2,
+      "digital": false,
+      "level": "master",
+      "steps": 91,
+      "scores": [
+        -6,
+        -8
+      ],
+      "winners": [
+        0
+      ]
+    },
+    {
+      "seed": "astra034-stress-2-39",
+      "players": 2,
+      "digital": false,
+      "level": "grandmaster",
+      "steps": 86,
+      "scores": [
+        -15,
+        -1
+      ],
+      "winners": [
+        1
+      ]
+    },
+    {
+      "seed": "astra034-stress-2-40",
+      "players": 2,
+      "digital": false,
+      "level": "apprentice",
+      "steps": 86,
+      "scores": [
+        0,
+        14
+      ],
+      "winners": [
+        1
+      ]
+    },
+    {
+      "seed": "astra034-stress-2-41",
+      "players": 2,
+      "digital": false,
+      "level": "journeyman",
+      "steps": 89,
+      "scores": [
+        -10,
+        -14
+      ],
+      "winners": [
+        0
+      ]
+    },
+    {
+      "seed": "astra034-stress-2-42",
+      "players": 2,
+      "digital": false,
+      "level": "master",
+      "steps": 85,
+      "scores": [
+        14,
+        25
+      ],
+      "winners": [
+        1
+      ]
+    },
+    {
+      "seed": "astra034-stress-2-43",
+      "players": 2,
+      "digital": false,
+      "level": "grandmaster",
+      "steps": 85,
+      "scores": [
+        -9,
+        6
+      ],
+      "winners": [
+        1
+      ]
+    },
+    {
+      "seed": "astra034-stress-2-44",
+      "players": 2,
+      "digital": false,
+      "level": "apprentice",
+      "steps": 85,
+      "scores": [
+        -7,
+        8
+      ],
+      "winners": [
+        1
+      ]
+    },
+    {
+      "seed": "astra034-stress-2-45",
+      "players": 2,
+      "digital": false,
+      "level": "journeyman",
+      "steps": 91,
+      "scores": [
+        5,
+        -12
+      ],
+      "winners": [
+        0
+      ]
+    },
+    {
+      "seed": "astra034-stress-2-46",
+      "players": 2,
+      "digital": false,
+      "level": "master",
+      "steps": 87,
+      "scores": [
+        -6,
+        -5
+      ],
+      "winners": [
+        1
+      ]
+    },
+    {
+      "seed": "astra034-stress-2-47",
+      "players": 2,
+      "digital": false,
+      "level": "grandmaster",
+      "steps": 90,
+      "scores": [
+        -12,
+        1
+      ],
+      "winners": [
+        1
+      ]
+    },
+    {
+      "seed": "astra034-stress-2-48",
+      "players": 2,
+      "digital": false,
+      "level": "apprentice",
+      "steps": 84,
+      "scores": [
+        7,
+        3
+      ],
+      "winners": [
+        0
+      ]
+    },
+    {
+      "seed": "astra034-stress-2-49",
+      "players": 2,
+      "digital": false,
+      "level": "journeyman",
+      "steps": 89,
+      "scores": [
+        -13,
+        7
+      ],
+      "winners": [
+        1
+      ]
+    },
+    {
+      "seed": "astra034-stress-2-50",
+      "players": 2,
+      "digital": false,
+      "level": "master",
+      "steps": 85,
+      "scores": [
+        -3,
+        3
+      ],
+      "winners": [
+        1
+      ]
+    },
+    {
+      "seed": "astra034-stress-2-51",
+      "players": 2,
+      "digital": false,
+      "level": "grandmaster",
+      "steps": 86,
+      "scores": [
+        14,
+        1
+      ],
+      "winners": [
+        0
+      ]
+    },
+    {
+      "seed": "astra034-stress-2-52",
+      "players": 2,
+      "digital": false,
+      "level": "apprentice",
+      "steps": 83,
+      "scores": [
+        -13,
+        -9
+      ],
+      "winners": [
+        1
+      ]
+    },
+    {
+      "seed": "astra034-stress-2-53",
+      "players": 2,
+      "digital": false,
+      "level": "journeyman",
+      "steps": 86,
+      "scores": [
+        11,
+        -5
+      ],
+      "winners": [
+        0
+      ]
+    },
+    {
+      "seed": "astra034-stress-2-54",
+      "players": 2,
+      "digital": false,
+      "level": "master",
+      "steps": 84,
+      "scores": [
+        7,
+        -1
+      ],
+      "winners": [
+        0
+      ]
+    },
+    {
+      "seed": "astra034-stress-2-55",
+      "players": 2,
+      "digital": false,
+      "level": "grandmaster",
+      "steps": 87,
+      "scores": [
+        -3,
+        -10
+      ],
+      "winners": [
+        0
+      ]
+    },
+    {
+      "seed": "astra034-stress-2-56",
+      "players": 2,
+      "digital": false,
+      "level": "apprentice",
+      "steps": 86,
+      "scores": [
+        -14,
+        -1
+      ],
+      "winners": [
+        1
+      ]
+    },
+    {
+      "seed": "astra034-stress-2-57",
+      "players": 2,
+      "digital": false,
+      "level": "journeyman",
+      "steps": 89,
+      "scores": [
+        -13,
+        -2
+      ],
+      "winners": [
+        1
+      ]
+    },
+    {
+      "seed": "astra034-stress-2-58",
+      "players": 2,
+      "digital": false,
+      "level": "master",
+      "steps": 85,
+      "scores": [
+        -12,
+        10
+      ],
+      "winners": [
+        1
+      ]
+    },
+    {
+      "seed": "astra034-stress-2-59",
+      "players": 2,
+      "digital": false,
+      "level": "grandmaster",
+      "steps": 88,
+      "scores": [
+        12,
+        30
+      ],
+      "winners": [
+        1
+      ]
+    },
+    {
+      "seed": "astra034-stress-2-60",
+      "players": 2,
+      "digital": true,
+      "level": "apprentice",
+      "steps": 84,
+      "scores": [
+        6,
+        45
+      ],
+      "winners": [
+        1
+      ]
+    },
+    {
+      "seed": "astra034-stress-2-61",
+      "players": 2,
+      "digital": true,
+      "level": "journeyman",
+      "steps": 87,
+      "scores": [
+        -5,
+        49
+      ],
+      "winners": [
+        1
+      ]
+    },
+    {
+      "seed": "astra034-stress-2-62",
+      "players": 2,
+      "digital": true,
+      "level": "master",
+      "steps": 90,
+      "scores": [
+        -9,
+        61
+      ],
+      "winners": [
+        1
+      ]
+    },
+    {
+      "seed": "astra034-stress-2-63",
+      "players": 2,
+      "digital": true,
+      "level": "grandmaster",
+      "steps": 92,
+      "scores": [
+        -3,
+        68
+      ],
+      "winners": [
+        1
+      ]
+    },
+    {
+      "seed": "astra034-stress-2-64",
+      "players": 2,
+      "digital": true,
+      "level": "apprentice",
+      "steps": 85,
+      "scores": [
+        -10,
+        26
+      ],
+      "winners": [
+        1
+      ]
+    },
+    {
+      "seed": "astra034-stress-2-65",
+      "players": 2,
+      "digital": true,
+      "level": "journeyman",
+      "steps": 87,
+      "scores": [
+        -11,
+        23
+      ],
+      "winners": [
+        1
+      ]
+    },
+    {
+      "seed": "astra034-stress-2-66",
+      "players": 2,
+      "digital": true,
+      "level": "master",
+      "steps": 90,
+      "scores": [
+        17,
+        43
+      ],
+      "winners": [
+        1
+      ]
+    },
+    {
+      "seed": "astra034-stress-2-67",
+      "players": 2,
+      "digital": true,
+      "level": "grandmaster",
+      "steps": 92,
+      "scores": [
+        22,
+        60
+      ],
+      "winners": [
+        1
+      ]
+    },
+    {
+      "seed": "astra034-stress-2-68",
+      "players": 2,
+      "digital": true,
+      "level": "apprentice",
+      "steps": 85,
+      "scores": [
+        16,
+        47
+      ],
+      "winners": [
+        1
+      ]
+    },
+    {
+      "seed": "astra034-stress-2-69",
+      "players": 2,
+      "digital": true,
+      "level": "journeyman",
+      "steps": 89,
+      "scores": [
+        4,
+        44
+      ],
+      "winners": [
+        1
+      ]
+    },
+    {
+      "seed": "astra034-stress-2-70",
+      "players": 2,
+      "digital": true,
+      "level": "master",
+      "steps": 90,
+      "scores": [
+        -16,
+        41
+      ],
+      "winners": [
+        1
+      ]
+    },
+    {
+      "seed": "astra034-stress-2-71",
+      "players": 2,
+      "digital": true,
+      "level": "grandmaster",
+      "steps": 99,
+      "scores": [
+        17,
+        64
+      ],
+      "winners": [
+        1
+      ]
+    },
+    {
+      "seed": "astra034-stress-2-72",
+      "players": 2,
+      "digital": true,
+      "level": "apprentice",
+      "steps": 94,
+      "scores": [
+        2,
+        38
+      ],
+      "winners": [
+        1
+      ]
+    },
+    {
+      "seed": "astra034-stress-2-73",
+      "players": 2,
+      "digital": true,
+      "level": "journeyman",
+      "steps": 90,
+      "scores": [
+        4,
+        36
+      ],
+      "winners": [
+        1
+      ]
+    },
+    {
+      "seed": "astra034-stress-2-74",
+      "players": 2,
+      "digital": true,
+      "level": "master",
+      "steps": 91,
+      "scores": [
+        -7,
+        34
+      ],
+      "winners": [
+        1
+      ]
+    },
+    {
+      "seed": "astra034-stress-2-75",
+      "players": 2,
+      "digital": true,
+      "level": "grandmaster",
+      "steps": 95,
+      "scores": [
+        14,
+        43
+      ],
+      "winners": [
+        1
+      ]
+    },
+    {
+      "seed": "astra034-stress-2-76",
+      "players": 2,
+      "digital": true,
+      "level": "apprentice",
+      "steps": 88,
+      "scores": [
+        -10,
+        44
+      ],
+      "winners": [
+        1
+      ]
+    },
+    {
+      "seed": "astra034-stress-2-77",
+      "players": 2,
+      "digital": true,
+      "level": "journeyman",
+      "steps": 85,
+      "scores": [
+        -13,
+        30
+      ],
+      "winners": [
+        1
+      ]
+    },
+    {
+      "seed": "astra034-stress-2-78",
+      "players": 2,
+      "digital": true,
+      "level": "master",
+      "steps": 87,
+      "scores": [
+        12,
+        59
+      ],
+      "winners": [
+        1
+      ]
+    },
+    {
+      "seed": "astra034-stress-2-79",
+      "players": 2,
+      "digital": true,
+      "level": "grandmaster",
+      "steps": 95,
+      "scores": [
+        -5,
+        52
+      ],
+      "winners": [
+        1
+      ]
+    },
+    {
+      "seed": "astra034-stress-3-0",
+      "players": 3,
+      "digital": false,
+      "level": "apprentice",
+      "steps": 130,
+      "scores": [
+        -12,
+        -14,
+        -7
+      ],
+      "winners": [
+        2
+      ]
+    },
+    {
+      "seed": "astra034-stress-3-1",
+      "players": 3,
+      "digital": false,
+      "level": "journeyman",
+      "steps": 124,
+      "scores": [
+        30,
+        17,
+        27
+      ],
+      "winners": [
+        0
+      ]
+    },
+    {
+      "seed": "astra034-stress-3-2",
+      "players": 3,
+      "digital": false,
+      "level": "master",
+      "steps": 129,
+      "scores": [
+        -11,
+        -12,
+        8
+      ],
+      "winners": [
+        2
+      ]
+    },
+    {
+      "seed": "astra034-stress-3-3",
+      "players": 3,
+      "digital": false,
+      "level": "grandmaster",
+      "steps": 134,
+      "scores": [
+        -6,
+        22,
+        22
+      ],
+      "winners": [
+        2
+      ]
+    },
+    {
+      "seed": "astra034-stress-3-4",
+      "players": 3,
+      "digital": false,
+      "level": "apprentice",
+      "steps": 132,
+      "scores": [
+        -7,
+        14,
+        -14
+      ],
+      "winners": [
+        1
+      ]
+    },
+    {
+      "seed": "astra034-stress-3-5",
+      "players": 3,
+      "digital": false,
+      "level": "journeyman",
+      "steps": 127,
+      "scores": [
+        -2,
+        -20,
+        4
+      ],
+      "winners": [
+        2
+      ]
+    },
+    {
+      "seed": "astra034-stress-3-6",
+      "players": 3,
+      "digital": false,
+      "level": "master",
+      "steps": 122,
+      "scores": [
+        0,
+        3,
+        -12
+      ],
+      "winners": [
+        1
+      ]
+    },
+    {
+      "seed": "astra034-stress-3-7",
+      "players": 3,
+      "digital": false,
+      "level": "grandmaster",
+      "steps": 129,
+      "scores": [
+        -5,
+        16,
+        18
+      ],
+      "winners": [
+        2
+      ]
+    },
+    {
+      "seed": "astra034-stress-3-8",
+      "players": 3,
+      "digital": false,
+      "level": "apprentice",
+      "steps": 126,
+      "scores": [
+        21,
+        1,
+        5
+      ],
+      "winners": [
+        0
+      ]
+    },
+    {
+      "seed": "astra034-stress-3-9",
+      "players": 3,
+      "digital": false,
+      "level": "journeyman",
+      "steps": 130,
+      "scores": [
+        -1,
+        -16,
+        -7
+      ],
+      "winners": [
+        0
+      ]
+    },
+    {
+      "seed": "astra034-stress-3-10",
+      "players": 3,
+      "digital": false,
+      "level": "master",
+      "steps": 129,
+      "scores": [
+        14,
+        20,
+        4
+      ],
+      "winners": [
+        1
+      ]
+    },
+    {
+      "seed": "astra034-stress-3-11",
+      "players": 3,
+      "digital": false,
+      "level": "grandmaster",
+      "steps": 130,
+      "scores": [
+        -12,
+        4,
+        15
+      ],
+      "winners": [
+        2
+      ]
+    },
+    {
+      "seed": "astra034-stress-3-12",
+      "players": 3,
+      "digital": false,
+      "level": "apprentice",
+      "steps": 128,
+      "scores": [
+        -4,
+        24,
+        23
+      ],
+      "winners": [
+        1
+      ]
+    },
+    {
+      "seed": "astra034-stress-3-13",
+      "players": 3,
+      "digital": false,
+      "level": "journeyman",
+      "steps": 132,
+      "scores": [
+        -16,
+        4,
+        1
+      ],
+      "winners": [
+        1
+      ]
+    },
+    {
+      "seed": "astra034-stress-3-14",
+      "players": 3,
+      "digital": false,
+      "level": "master",
+      "steps": 127,
+      "scores": [
+        6,
+        17,
+        5
+      ],
+      "winners": [
+        1
+      ]
+    },
+    {
+      "seed": "astra034-stress-3-15",
+      "players": 3,
+      "digital": false,
+      "level": "grandmaster",
+      "steps": 130,
+      "scores": [
+        -8,
+        -9,
+        2
+      ],
+      "winners": [
+        2
+      ]
+    },
+    {
+      "seed": "astra034-stress-3-16",
+      "players": 3,
+      "digital": false,
+      "level": "apprentice",
+      "steps": 128,
+      "scores": [
+        -11,
+        3,
+        -6
+      ],
+      "winners": [
+        1
+      ]
+    },
+    {
+      "seed": "astra034-stress-3-17",
+      "players": 3,
+      "digital": false,
+      "level": "journeyman",
+      "steps": 124,
+      "scores": [
+        16,
+        8,
+        -2
+      ],
+      "winners": [
+        0
+      ]
+    },
+    {
+      "seed": "astra034-stress-3-18",
+      "players": 3,
+      "digital": false,
+      "level": "master",
+      "steps": 131,
+      "scores": [
+        -17,
+        16,
+        -2
+      ],
+      "winners": [
+        1
+      ]
+    },
+    {
+      "seed": "astra034-stress-3-19",
+      "players": 3,
+      "digital": false,
+      "level": "grandmaster",
+      "steps": 133,
+      "scores": [
+        -12,
+        5,
+        7
+      ],
+      "winners": [
+        2
+      ]
+    },
+    {
+      "seed": "astra034-stress-3-20",
+      "players": 3,
+      "digital": false,
+      "level": "apprentice",
+      "steps": 136,
+      "scores": [
+        0,
+        2,
+        9
+      ],
+      "winners": [
+        2
+      ]
+    },
+    {
+      "seed": "astra034-stress-3-21",
+      "players": 3,
+      "digital": false,
+      "level": "journeyman",
+      "steps": 129,
+      "scores": [
+        -6,
+        -16,
+        -3
+      ],
+      "winners": [
+        2
+      ]
+    },
+    {
+      "seed": "astra034-stress-3-22",
+      "players": 3,
+      "digital": false,
+      "level": "master",
+      "steps": 131,
+      "scores": [
+        18,
+        7,
+        -8
+      ],
+      "winners": [
+        0
+      ]
+    },
+    {
+      "seed": "astra034-stress-3-23",
+      "players": 3,
+      "digital": false,
+      "level": "grandmaster",
+      "steps": 136,
+      "scores": [
+        -1,
+        -5,
+        -6
+      ],
+      "winners": [
+        0
+      ]
+    },
+    {
+      "seed": "astra034-stress-3-24",
+      "players": 3,
+      "digital": false,
+      "level": "apprentice",
+      "steps": 130,
+      "scores": [
+        -8,
+        -8,
+        -11
+      ],
+      "winners": [
+        0,
+        1
+      ]
+    },
+    {
+      "seed": "astra034-stress-3-25",
+      "players": 3,
+      "digital": false,
+      "level": "journeyman",
+      "steps": 132,
+      "scores": [
+        4,
+        -15,
+        5
+      ],
+      "winners": [
+        2
+      ]
+    },
+    {
+      "seed": "astra034-stress-3-26",
+      "players": 3,
+      "digital": false,
+      "level": "master",
+      "steps": 129,
+      "scores": [
+        -2,
+        -10,
+        -1
+      ],
+      "winners": [
+        2
+      ]
+    },
+    {
+      "seed": "astra034-stress-3-27",
+      "players": 3,
+      "digital": false,
+      "level": "grandmaster",
+      "steps": 129,
+      "scores": [
+        55,
+        25,
+        12
+      ],
+      "winners": [
+        0
+      ]
+    },
+    {
+      "seed": "astra034-stress-3-28",
+      "players": 3,
+      "digital": false,
+      "level": "apprentice",
+      "steps": 134,
+      "scores": [
+        2,
+        16,
+        15
+      ],
+      "winners": [
+        1
+      ]
+    },
+    {
+      "seed": "astra034-stress-3-29",
+      "players": 3,
+      "digital": false,
+      "level": "journeyman",
+      "steps": 129,
+      "scores": [
+        -7,
+        18,
+        16
+      ],
+      "winners": [
+        1
+      ]
+    },
+    {
+      "seed": "astra034-stress-3-30",
+      "players": 3,
+      "digital": false,
+      "level": "master",
+      "steps": 132,
+      "scores": [
+        2,
+        15,
+        -9
+      ],
+      "winners": [
+        1
+      ]
+    },
+    {
+      "seed": "astra034-stress-3-31",
+      "players": 3,
+      "digital": false,
+      "level": "grandmaster",
+      "steps": 131,
+      "scores": [
+        -4,
+        -12,
+        5
+      ],
+      "winners": [
+        2
+      ]
+    },
+    {
+      "seed": "astra034-stress-3-32",
+      "players": 3,
+      "digital": false,
+      "level": "apprentice",
+      "steps": 129,
+      "scores": [
+        10,
+        4,
+        26
+      ],
+      "winners": [
+        2
+      ]
+    },
+    {
+      "seed": "astra034-stress-3-33",
+      "players": 3,
+      "digital": false,
+      "level": "journeyman",
+      "steps": 128,
+      "scores": [
+        -10,
+        -16,
+        -18
+      ],
+      "winners": [
+        0
+      ]
+    },
+    {
+      "seed": "astra034-stress-3-34",
+      "players": 3,
+      "digital": false,
+      "level": "master",
+      "steps": 133,
+      "scores": [
+        1,
+        21,
+        -12
+      ],
+      "winners": [
+        1
+      ]
+    },
+    {
+      "seed": "astra034-stress-3-35",
+      "players": 3,
+      "digital": false,
+      "level": "grandmaster",
+      "steps": 128,
+      "scores": [
+        1,
+        -14,
+        -16
+      ],
+      "winners": [
+        0
+      ]
+    },
+    {
+      "seed": "astra034-stress-3-36",
+      "players": 3,
+      "digital": false,
+      "level": "apprentice",
+      "steps": 124,
+      "scores": [
+        30,
+        21,
+        23
+      ],
+      "winners": [
+        0
+      ]
+    },
+    {
+      "seed": "astra034-stress-3-37",
+      "players": 3,
+      "digital": false,
+      "level": "journeyman",
+      "steps": 134,
+      "scores": [
+        -16,
+        -6,
+        -9
+      ],
+      "winners": [
+        1
+      ]
+    },
+    {
+      "seed": "astra034-stress-3-38",
+      "players": 3,
+      "digital": false,
+      "level": "master",
+      "steps": 124,
+      "scores": [
+        9,
+        8,
+        -1
+      ],
+      "winners": [
+        0
+      ]
+    },
+    {
+      "seed": "astra034-stress-3-39",
+      "players": 3,
+      "digital": false,
+      "level": "grandmaster",
+      "steps": 129,
+      "scores": [
+        15,
+        -1,
+        13
+      ],
+      "winners": [
+        0
+      ]
+    },
+    {
+      "seed": "astra034-stress-3-40",
+      "players": 3,
+      "digital": false,
+      "level": "apprentice",
+      "steps": 126,
+      "scores": [
+        10,
+        10,
+        0
+      ],
+      "winners": [
+        0
+      ]
+    },
+    {
+      "seed": "astra034-stress-3-41",
+      "players": 3,
+      "digital": false,
+      "level": "journeyman",
+      "steps": 133,
+      "scores": [
+        -20,
+        -14,
+        7
+      ],
+      "winners": [
+        2
+      ]
+    },
+    {
+      "seed": "astra034-stress-3-42",
+      "players": 3,
+      "digital": false,
+      "level": "master",
+      "steps": 140,
+      "scores": [
+        8,
+        9,
+        2
+      ],
+      "winners": [
+        1
+      ]
+    },
+    {
+      "seed": "astra034-stress-3-43",
+      "players": 3,
+      "digital": false,
+      "level": "grandmaster",
+      "steps": 128,
+      "scores": [
+        32,
+        31,
+        21
+      ],
+      "winners": [
+        0
+      ]
+    },
+    {
+      "seed": "astra034-stress-3-44",
+      "players": 3,
+      "digital": false,
+      "level": "apprentice",
+      "steps": 124,
+      "scores": [
+        18,
+        13,
+        0
+      ],
+      "winners": [
+        0
+      ]
+    },
+    {
+      "seed": "astra034-stress-3-45",
+      "players": 3,
+      "digital": false,
+      "level": "journeyman",
+      "steps": 128,
+      "scores": [
+        -7,
+        -10,
+        -16
+      ],
+      "winners": [
+        0
+      ]
+    },
+    {
+      "seed": "astra034-stress-3-46",
+      "players": 3,
+      "digital": false,
+      "level": "master",
+      "steps": 125,
+      "scores": [
+        17,
+        29,
+        13
+      ],
+      "winners": [
+        1
+      ]
+    },
+    {
+      "seed": "astra034-stress-3-47",
+      "players": 3,
+      "digital": false,
+      "level": "grandmaster",
+      "steps": 134,
+      "scores": [
+        7,
+        -2,
+        -1
+      ],
+      "winners": [
+        0
+      ]
+    },
+    {
+      "seed": "astra034-stress-3-48",
+      "players": 3,
+      "digital": false,
+      "level": "apprentice",
+      "steps": 134,
+      "scores": [
+        -12,
+        5,
+        -5
+      ],
+      "winners": [
+        1
+      ]
+    },
+    {
+      "seed": "astra034-stress-3-49",
+      "players": 3,
+      "digital": false,
+      "level": "journeyman",
+      "steps": 136,
+      "scores": [
+        -11,
+        5,
+        -13
+      ],
+      "winners": [
+        1
+      ]
+    },
+    {
+      "seed": "astra034-stress-3-50",
+      "players": 3,
+      "digital": false,
+      "level": "master",
+      "steps": 136,
+      "scores": [
+        1,
+        -6,
+        4
+      ],
+      "winners": [
+        2
+      ]
+    },
+    {
+      "seed": "astra034-stress-3-51",
+      "players": 3,
+      "digital": false,
+      "level": "grandmaster",
+      "steps": 126,
+      "scores": [
+        32,
+        18,
+        50
+      ],
+      "winners": [
+        2
+      ]
+    },
+    {
+      "seed": "astra034-stress-3-52",
+      "players": 3,
+      "digital": false,
+      "level": "apprentice",
+      "steps": 127,
+      "scores": [
+        26,
+        3,
+        -11
+      ],
+      "winners": [
+        0
+      ]
+    },
+    {
+      "seed": "astra034-stress-3-53",
+      "players": 3,
+      "digital": false,
+      "level": "journeyman",
+      "steps": 135,
+      "scores": [
+        -14,
+        3,
+        5
+      ],
+      "winners": [
+        2
+      ]
+    },
+    {
+      "seed": "astra034-stress-3-54",
+      "players": 3,
+      "digital": false,
+      "level": "master",
+      "steps": 125,
+      "scores": [
+        11,
+        -4,
+        -13
+      ],
+      "winners": [
+        0
+      ]
+    },
+    {
+      "seed": "astra034-stress-3-55",
+      "players": 3,
+      "digital": false,
+      "level": "grandmaster",
+      "steps": 131,
+      "scores": [
+        -12,
+        -16,
+        -10
+      ],
+      "winners": [
+        2
+      ]
+    },
+    {
+      "seed": "astra034-stress-3-56",
+      "players": 3,
+      "digital": false,
+      "level": "apprentice",
+      "steps": 138,
+      "scores": [
+        -3,
+        1,
+        -8
+      ],
+      "winners": [
+        1
+      ]
+    },
+    {
+      "seed": "astra034-stress-3-57",
+      "players": 3,
+      "digital": false,
+      "level": "journeyman",
+      "steps": 130,
+      "scores": [
+        4,
+        -16,
+        1
+      ],
+      "winners": [
+        0
+      ]
+    },
+    {
+      "seed": "astra034-stress-3-58",
+      "players": 3,
+      "digital": false,
+      "level": "master",
+      "steps": 130,
+      "scores": [
+        34,
+        28,
+        11
+      ],
+      "winners": [
+        0
+      ]
+    },
+    {
+      "seed": "astra034-stress-3-59",
+      "players": 3,
+      "digital": false,
+      "level": "grandmaster",
+      "steps": 130,
+      "scores": [
+        -8,
+        -16,
+        2
+      ],
+      "winners": [
+        2
+      ]
+    },
+    {
+      "seed": "astra034-stress-3-60",
+      "players": 3,
+      "digital": true,
+      "level": "apprentice",
+      "steps": 135,
+      "scores": [
+        -10,
+        35,
+        43
+      ],
+      "winners": [
+        2
+      ]
+    },
+    {
+      "seed": "astra034-stress-3-61",
+      "players": 3,
+      "digital": true,
+      "level": "journeyman",
+      "steps": 137,
+      "scores": [
+        -12,
+        40,
+        46
+      ],
+      "winners": [
+        2
+      ]
+    },
+    {
+      "seed": "astra034-stress-3-62",
+      "players": 3,
+      "digital": true,
+      "level": "master",
+      "steps": 141,
+      "scores": [
+        -18,
+        47,
+        39
+      ],
+      "winners": [
+        1
+      ]
+    },
+    {
+      "seed": "astra034-stress-3-63",
+      "players": 3,
+      "digital": true,
+      "level": "grandmaster",
+      "steps": 151,
+      "scores": [
+        7,
+        74,
+        51
+      ],
+      "winners": [
+        1
+      ]
+    },
+    {
+      "seed": "astra034-stress-3-64",
+      "players": 3,
+      "digital": true,
+      "level": "apprentice",
+      "steps": 132,
+      "scores": [
+        10,
+        60,
+        48
+      ],
+      "winners": [
+        1
+      ]
+    },
+    {
+      "seed": "astra034-stress-3-65",
+      "players": 3,
+      "digital": true,
+      "level": "journeyman",
+      "steps": 133,
+      "scores": [
+        -1,
+        59,
+        35
+      ],
+      "winners": [
+        1
+      ]
+    },
+    {
+      "seed": "astra034-stress-3-66",
+      "players": 3,
+      "digital": true,
+      "level": "master",
+      "steps": 149,
+      "scores": [
+        12,
+        59,
+        55
+      ],
+      "winners": [
+        1
+      ]
+    },
+    {
+      "seed": "astra034-stress-3-67",
+      "players": 3,
+      "digital": true,
+      "level": "grandmaster",
+      "steps": 147,
+      "scores": [
+        13,
+        53,
+        62
+      ],
+      "winners": [
+        2
+      ]
+    },
+    {
+      "seed": "astra034-stress-3-68",
+      "players": 3,
+      "digital": true,
+      "level": "apprentice",
+      "steps": 132,
+      "scores": [
+        2,
+        45,
+        43
+      ],
+      "winners": [
+        1
+      ]
+    },
+    {
+      "seed": "astra034-stress-3-69",
+      "players": 3,
+      "digital": true,
+      "level": "journeyman",
+      "steps": 135,
+      "scores": [
+        -8,
+        54,
+        53
+      ],
+      "winners": [
+        1
+      ]
+    },
+    {
+      "seed": "astra034-stress-3-70",
+      "players": 3,
+      "digital": true,
+      "level": "master",
+      "steps": 134,
+      "scores": [
+        6,
+        37,
+        56
+      ],
+      "winners": [
+        2
+      ]
+    },
+    {
+      "seed": "astra034-stress-3-71",
+      "players": 3,
+      "digital": true,
+      "level": "grandmaster",
+      "steps": 152,
+      "scores": [
+        7,
+        54,
+        72
+      ],
+      "winners": [
+        2
+      ]
+    },
+    {
+      "seed": "astra034-stress-3-72",
+      "players": 3,
+      "digital": true,
+      "level": "apprentice",
+      "steps": 127,
+      "scores": [
+        -10,
+        42,
+        50
+      ],
+      "winners": [
+        2
+      ]
+    },
+    {
+      "seed": "astra034-stress-3-73",
+      "players": 3,
+      "digital": true,
+      "level": "journeyman",
+      "steps": 137,
+      "scores": [
+        -2,
+        44,
+        46
+      ],
+      "winners": [
+        2
+      ]
+    },
+    {
+      "seed": "astra034-stress-3-74",
+      "players": 3,
+      "digital": true,
+      "level": "master",
+      "steps": 146,
+      "scores": [
+        14,
+        73,
+        68
+      ],
+      "winners": [
+        1
+      ]
+    },
+    {
+      "seed": "astra034-stress-3-75",
+      "players": 3,
+      "digital": true,
+      "level": "grandmaster",
+      "steps": 146,
+      "scores": [
+        -2,
+        58,
+        55
+      ],
+      "winners": [
+        1
+      ]
+    },
+    {
+      "seed": "astra034-stress-3-76",
+      "players": 3,
+      "digital": true,
+      "level": "apprentice",
+      "steps": 139,
+      "scores": [
+        -9,
+        37,
+        40
+      ],
+      "winners": [
+        2
+      ]
+    },
+    {
+      "seed": "astra034-stress-3-77",
+      "players": 3,
+      "digital": true,
+      "level": "journeyman",
+      "steps": 134,
+      "scores": [
+        11,
+        47,
+        41
+      ],
+      "winners": [
+        1
+      ]
+    },
+    {
+      "seed": "astra034-stress-3-78",
+      "players": 3,
+      "digital": true,
+      "level": "master",
+      "steps": 140,
+      "scores": [
+        20,
+        51,
+        47
+      ],
+      "winners": [
+        1
+      ]
+    },
+    {
+      "seed": "astra034-stress-3-79",
+      "players": 3,
+      "digital": true,
+      "level": "grandmaster",
+      "steps": 145,
+      "scores": [
+        17,
+        71,
+        82
+      ],
+      "winners": [
+        2
+      ]
+    },
+    {
+      "seed": "astra034-stress-4-0",
+      "players": 4,
+      "digital": false,
+      "level": "apprentice",
+      "steps": 149,
+      "scores": [
+        -6,
+        -5,
+        4,
+        -2
+      ],
+      "winners": [
+        2
+      ]
+    },
+    {
+      "seed": "astra034-stress-4-1",
+      "players": 4,
+      "digital": false,
+      "level": "journeyman",
+      "steps": 140,
+      "scores": [
+        17,
+        15,
+        4,
+        7
+      ],
+      "winners": [
+        0
+      ]
+    },
+    {
+      "seed": "astra034-stress-4-2",
+      "players": 4,
+      "digital": false,
+      "level": "master",
+      "steps": 139,
+      "scores": [
+        6,
+        -3,
+        17,
+        0
+      ],
+      "winners": [
+        2
+      ]
+    },
+    {
+      "seed": "astra034-stress-4-3",
+      "players": 4,
+      "digital": false,
+      "level": "grandmaster",
+      "steps": 146,
+      "scores": [
+        -4,
+        -7,
+        9,
+        3
+      ],
+      "winners": [
+        2
+      ]
+    },
+    {
+      "seed": "astra034-stress-4-4",
+      "players": 4,
+      "digital": false,
+      "level": "apprentice",
+      "steps": 137,
+      "scores": [
+        -4,
+        5,
+        2,
+        8
+      ],
+      "winners": [
+        3
+      ]
+    },
+    {
+      "seed": "astra034-stress-4-5",
+      "players": 4,
+      "digital": false,
+      "level": "journeyman",
+      "steps": 145,
+      "scores": [
+        7,
+        -3,
+        2,
+        -10
+      ],
+      "winners": [
+        0
+      ]
+    },
+    {
+      "seed": "astra034-stress-4-6",
+      "players": 4,
+      "digital": false,
+      "level": "master",
+      "steps": 143,
+      "scores": [
+        10,
+        -2,
+        -8,
+        11
+      ],
+      "winners": [
+        3
+      ]
+    },
+    {
+      "seed": "astra034-stress-4-7",
+      "players": 4,
+      "digital": false,
+      "level": "grandmaster",
+      "steps": 145,
+      "scores": [
+        -10,
+        -7,
+        -10,
+        -15
+      ],
+      "winners": [
+        1
+      ]
+    },
+    {
+      "seed": "astra034-stress-4-8",
+      "players": 4,
+      "digital": false,
+      "level": "apprentice",
+      "steps": 145,
+      "scores": [
+        5,
+        -10,
+        -5,
+        -10
+      ],
+      "winners": [
+        0
+      ]
+    },
+    {
+      "seed": "astra034-stress-4-9",
+      "players": 4,
+      "digital": false,
+      "level": "journeyman",
+      "steps": 145,
+      "scores": [
+        -7,
+        -4,
+        -2,
+        -8
+      ],
+      "winners": [
+        2
+      ]
+    },
+    {
+      "seed": "astra034-stress-4-10",
+      "players": 4,
+      "digital": false,
+      "level": "master",
+      "steps": 148,
+      "scores": [
+        -10,
+        3,
+        4,
+        -5
+      ],
+      "winners": [
+        2
+      ]
+    },
+    {
+      "seed": "astra034-stress-4-11",
+      "players": 4,
+      "digital": false,
+      "level": "grandmaster",
+      "steps": 146,
+      "scores": [
+        -9,
+        10,
+        3,
+        7
+      ],
+      "winners": [
+        1
+      ]
+    },
+    {
+      "seed": "astra034-stress-4-12",
+      "players": 4,
+      "digital": false,
+      "level": "apprentice",
+      "steps": 148,
+      "scores": [
+        2,
+        -8,
+        -8,
+        -9
+      ],
+      "winners": [
+        0
+      ]
+    },
+    {
+      "seed": "astra034-stress-4-13",
+      "players": 4,
+      "digital": false,
+      "level": "journeyman",
+      "steps": 142,
+      "scores": [
+        6,
+        -2,
+        19,
+        -4
+      ],
+      "winners": [
+        2
+      ]
+    },
+    {
+      "seed": "astra034-stress-4-14",
+      "players": 4,
+      "digital": false,
+      "level": "master",
+      "steps": 143,
+      "scores": [
+        6,
+        10,
+        -16,
+        3
+      ],
+      "winners": [
+        1
+      ]
+    },
+    {
+      "seed": "astra034-stress-4-15",
+      "players": 4,
+      "digital": false,
+      "level": "grandmaster",
+      "steps": 145,
+      "scores": [
+        -9,
+        4,
+        -14,
+        2
+      ],
+      "winners": [
+        1
+      ]
+    },
+    {
+      "seed": "astra034-stress-4-16",
+      "players": 4,
+      "digital": false,
+      "level": "apprentice",
+      "steps": 145,
+      "scores": [
+        -4,
+        -12,
+        -2,
+        -5
+      ],
+      "winners": [
+        2
+      ]
+    },
+    {
+      "seed": "astra034-stress-4-17",
+      "players": 4,
+      "digital": false,
+      "level": "journeyman",
+      "steps": 145,
+      "scores": [
+        -12,
+        -10,
+        -16,
+        -4
+      ],
+      "winners": [
+        3
+      ]
+    },
+    {
+      "seed": "astra034-stress-4-18",
+      "players": 4,
+      "digital": false,
+      "level": "master",
+      "steps": 145,
+      "scores": [
+        5,
+        -9,
+        -11,
+        -4
+      ],
+      "winners": [
+        0
+      ]
+    },
+    {
+      "seed": "astra034-stress-4-19",
+      "players": 4,
+      "digital": false,
+      "level": "grandmaster",
+      "steps": 148,
+      "scores": [
+        13,
+        0,
+        7,
+        -3
+      ],
+      "winners": [
+        0
+      ]
+    },
+    {
+      "seed": "astra034-stress-4-20",
+      "players": 4,
+      "digital": false,
+      "level": "apprentice",
+      "steps": 150,
+      "scores": [
+        -5,
+        -10,
+        1,
+        -12
+      ],
+      "winners": [
+        2
+      ]
+    },
+    {
+      "seed": "astra034-stress-4-21",
+      "players": 4,
+      "digital": false,
+      "level": "journeyman",
+      "steps": 145,
+      "scores": [
+        -5,
+        -6,
+        -14,
+        -10
+      ],
+      "winners": [
+        0
+      ]
+    },
+    {
+      "seed": "astra034-stress-4-22",
+      "players": 4,
+      "digital": false,
+      "level": "master",
+      "steps": 142,
+      "scores": [
+        11,
+        7,
+        15,
+        -3
+      ],
+      "winners": [
+        2
+      ]
+    },
+    {
+      "seed": "astra034-stress-4-23",
+      "players": 4,
+      "digital": false,
+      "level": "grandmaster",
+      "steps": 149,
+      "scores": [
+        11,
+        14,
+        5,
+        -3
+      ],
+      "winners": [
+        1
+      ]
+    },
+    {
+      "seed": "astra034-stress-4-24",
+      "players": 4,
+      "digital": false,
+      "level": "apprentice",
+      "steps": 142,
+      "scores": [
+        -10,
+        8,
+        2,
+        1
+      ],
+      "winners": [
+        1
+      ]
+    },
+    {
+      "seed": "astra034-stress-4-25",
+      "players": 4,
+      "digital": false,
+      "level": "journeyman",
+      "steps": 147,
+      "scores": [
+        7,
+        -10,
+        0,
+        -7
+      ],
+      "winners": [
+        0
+      ]
+    },
+    {
+      "seed": "astra034-stress-4-26",
+      "players": 4,
+      "digital": false,
+      "level": "master",
+      "steps": 146,
+      "scores": [
+        0,
+        6,
+        -7,
+        -2
+      ],
+      "winners": [
+        1
+      ]
+    },
+    {
+      "seed": "astra034-stress-4-27",
+      "players": 4,
+      "digital": false,
+      "level": "grandmaster",
+      "steps": 142,
+      "scores": [
+        2,
+        9,
+        -10,
+        -14
+      ],
+      "winners": [
+        1
+      ]
+    },
+    {
+      "seed": "astra034-stress-4-28",
+      "players": 4,
+      "digital": false,
+      "level": "apprentice",
+      "steps": 140,
+      "scores": [
+        -2,
+        -9,
+        -10,
+        1
+      ],
+      "winners": [
+        3
+      ]
+    },
+    {
+      "seed": "astra034-stress-4-29",
+      "players": 4,
+      "digital": false,
+      "level": "journeyman",
+      "steps": 142,
+      "scores": [
+        -5,
+        -5,
+        -4,
+        11
+      ],
+      "winners": [
+        3
+      ]
+    },
+    {
+      "seed": "astra034-stress-4-30",
+      "players": 4,
+      "digital": false,
+      "level": "master",
+      "steps": 145,
+      "scores": [
+        -3,
+        -2,
+        -6,
+        12
+      ],
+      "winners": [
+        3
+      ]
+    },
+    {
+      "seed": "astra034-stress-4-31",
+      "players": 4,
+      "digital": false,
+      "level": "grandmaster",
+      "steps": 147,
+      "scores": [
+        1,
+        0,
+        -13,
+        0
+      ],
+      "winners": [
+        0
+      ]
+    },
+    {
+      "seed": "astra034-stress-4-32",
+      "players": 4,
+      "digital": false,
+      "level": "apprentice",
+      "steps": 150,
+      "scores": [
+        -3,
+        -8,
+        -6,
+        3
+      ],
+      "winners": [
+        3
+      ]
+    },
+    {
+      "seed": "astra034-stress-4-33",
+      "players": 4,
+      "digital": false,
+      "level": "journeyman",
+      "steps": 144,
+      "scores": [
+        4,
+        -3,
+        -12,
+        6
+      ],
+      "winners": [
+        3
+      ]
+    },
+    {
+      "seed": "astra034-stress-4-34",
+      "players": 4,
+      "digital": false,
+      "level": "master",
+      "steps": 147,
+      "scores": [
+        -7,
+        -10,
+        -4,
+        0
+      ],
+      "winners": [
+        3
+      ]
+    },
+    {
+      "seed": "astra034-stress-4-35",
+      "players": 4,
+      "digital": false,
+      "level": "grandmaster",
+      "steps": 150,
+      "scores": [
+        -8,
+        12,
+        -4,
+        -3
+      ],
+      "winners": [
+        1
+      ]
+    },
+    {
+      "seed": "astra034-stress-4-36",
+      "players": 4,
+      "digital": false,
+      "level": "apprentice",
+      "steps": 146,
+      "scores": [
+        4,
+        -3,
+        -4,
+        -12
+      ],
+      "winners": [
+        0
+      ]
+    },
+    {
+      "seed": "astra034-stress-4-37",
+      "players": 4,
+      "digital": false,
+      "level": "journeyman",
+      "steps": 141,
+      "scores": [
+        -9,
+        6,
+        -12,
+        -8
+      ],
+      "winners": [
+        1
+      ]
+    },
+    {
+      "seed": "astra034-stress-4-38",
+      "players": 4,
+      "digital": false,
+      "level": "master",
+      "steps": 140,
+      "scores": [
+        23,
+        10,
+        -1,
+        14
+      ],
+      "winners": [
+        0
+      ]
+    },
+    {
+      "seed": "astra034-stress-4-39",
+      "players": 4,
+      "digital": false,
+      "level": "grandmaster",
+      "steps": 141,
+      "scores": [
+        5,
+        10,
+        24,
+        26
+      ],
+      "winners": [
+        3
+      ]
+    },
+    {
+      "seed": "astra034-stress-4-40",
+      "players": 4,
+      "digital": false,
+      "level": "apprentice",
+      "steps": 144,
+      "scores": [
+        -4,
+        -12,
+        13,
+        6
+      ],
+      "winners": [
+        2
+      ]
+    },
+    {
+      "seed": "astra034-stress-4-41",
+      "players": 4,
+      "digital": false,
+      "level": "journeyman",
+      "steps": 144,
+      "scores": [
+        -11,
+        -14,
+        -12,
+        -9
+      ],
+      "winners": [
+        3
+      ]
+    },
+    {
+      "seed": "astra034-stress-4-42",
+      "players": 4,
+      "digital": false,
+      "level": "master",
+      "steps": 140,
+      "scores": [
+        10,
+        3,
+        -10,
+        1
+      ],
+      "winners": [
+        0
+      ]
+    },
+    {
+      "seed": "astra034-stress-4-43",
+      "players": 4,
+      "digital": false,
+      "level": "grandmaster",
+      "steps": 150,
+      "scores": [
+        2,
+        7,
+        3,
+        -1
+      ],
+      "winners": [
+        1
+      ]
+    },
+    {
+      "seed": "astra034-stress-4-44",
+      "players": 4,
+      "digital": false,
+      "level": "apprentice",
+      "steps": 142,
+      "scores": [
+        -3,
+        -14,
+        -11,
+        -2
+      ],
+      "winners": [
+        3
+      ]
+    },
+    {
+      "seed": "astra034-stress-4-45",
+      "players": 4,
+      "digital": false,
+      "level": "journeyman",
+      "steps": 143,
+      "scores": [
+        12,
+        -10,
+        22,
+        13
+      ],
+      "winners": [
+        2
+      ]
+    },
+    {
+      "seed": "astra034-stress-4-46",
+      "players": 4,
+      "digital": false,
+      "level": "master",
+      "steps": 136,
+      "scores": [
+        -9,
+        -2,
+        9,
+        4
+      ],
+      "winners": [
+        2
+      ]
+    },
+    {
+      "seed": "astra034-stress-4-47",
+      "players": 4,
+      "digital": false,
+      "level": "grandmaster",
+      "steps": 149,
+      "scores": [
+        -12,
+        -6,
+        2,
+        13
+      ],
+      "winners": [
+        3
+      ]
+    },
+    {
+      "seed": "astra034-stress-4-48",
+      "players": 4,
+      "digital": false,
+      "level": "apprentice",
+      "steps": 148,
+      "scores": [
+        6,
+        -9,
+        7,
+        -3
+      ],
+      "winners": [
+        2
+      ]
+    },
+    {
+      "seed": "astra034-stress-4-49",
+      "players": 4,
+      "digital": false,
+      "level": "journeyman",
+      "steps": 143,
+      "scores": [
+        -14,
+        13,
+        4,
+        -6
+      ],
+      "winners": [
+        1
+      ]
+    },
+    {
+      "seed": "astra034-stress-4-50",
+      "players": 4,
+      "digital": false,
+      "level": "master",
+      "steps": 142,
+      "scores": [
+        7,
+        -10,
+        9,
+        14
+      ],
+      "winners": [
+        3
+      ]
+    },
+    {
+      "seed": "astra034-stress-4-51",
+      "players": 4,
+      "digital": false,
+      "level": "grandmaster",
+      "steps": 133,
+      "scores": [
+        1,
+        11,
+        17,
+        -11
+      ],
+      "winners": [
+        2
+      ]
+    },
+    {
+      "seed": "astra034-stress-4-52",
+      "players": 4,
+      "digital": false,
+      "level": "apprentice",
+      "steps": 149,
+      "scores": [
+        -4,
+        -9,
+        -5,
+        -11
+      ],
+      "winners": [
+        0
+      ]
+    },
+    {
+      "seed": "astra034-stress-4-53",
+      "players": 4,
+      "digital": false,
+      "level": "journeyman",
+      "steps": 147,
+      "scores": [
+        -6,
+        12,
+        -1,
+        -10
+      ],
+      "winners": [
+        1
+      ]
+    },
+    {
+      "seed": "astra034-stress-4-54",
+      "players": 4,
+      "digital": false,
+      "level": "master",
+      "steps": 143,
+      "scores": [
+        3,
+        11,
+        -5,
+        13
+      ],
+      "winners": [
+        3
+      ]
+    },
+    {
+      "seed": "astra034-stress-4-55",
+      "players": 4,
+      "digital": false,
+      "level": "grandmaster",
+      "steps": 147,
+      "scores": [
+        5,
+        -4,
+        -5,
+        -12
+      ],
+      "winners": [
+        0
+      ]
+    },
+    {
+      "seed": "astra034-stress-4-56",
+      "players": 4,
+      "digital": false,
+      "level": "apprentice",
+      "steps": 145,
+      "scores": [
+        -6,
+        -1,
+        -2,
+        6
+      ],
+      "winners": [
+        3
+      ]
+    },
+    {
+      "seed": "astra034-stress-4-57",
+      "players": 4,
+      "digital": false,
+      "level": "journeyman",
+      "steps": 137,
+      "scores": [
+        -2,
+        7,
+        8,
+        -10
+      ],
+      "winners": [
+        2
+      ]
+    },
+    {
+      "seed": "astra034-stress-4-58",
+      "players": 4,
+      "digital": false,
+      "level": "master",
+      "steps": 143,
+      "scores": [
+        -6,
+        -5,
+        9,
+        -3
+      ],
+      "winners": [
+        2
+      ]
+    },
+    {
+      "seed": "astra034-stress-4-59",
+      "players": 4,
+      "digital": false,
+      "level": "grandmaster",
+      "steps": 147,
+      "scores": [
+        -6,
+        3,
+        -11,
+        -9
+      ],
+      "winners": [
+        1
+      ]
+    },
+    {
+      "seed": "astra034-stress-4-60",
+      "players": 4,
+      "digital": true,
+      "level": "apprentice",
+      "steps": 145,
+      "scores": [
+        5,
+        38,
+        22,
+        26
+      ],
+      "winners": [
+        1
+      ]
+    },
+    {
+      "seed": "astra034-stress-4-61",
+      "players": 4,
+      "digital": true,
+      "level": "journeyman",
+      "steps": 144,
+      "scores": [
+        -12,
+        24,
+        29,
+        36
+      ],
+      "winners": [
+        3
+      ]
+    },
+    {
+      "seed": "astra034-stress-4-62",
+      "players": 4,
+      "digital": true,
+      "level": "master",
+      "steps": 163,
+      "scores": [
+        4,
+        31,
+        35,
+        39
+      ],
+      "winners": [
+        3
+      ]
+    },
+    {
+      "seed": "astra034-stress-4-63",
+      "players": 4,
+      "digital": true,
+      "level": "grandmaster",
+      "steps": 168,
+      "scores": [
+        4,
+        45,
+        32,
+        36
+      ],
+      "winners": [
+        1
+      ]
+    },
+    {
+      "seed": "astra034-stress-4-64",
+      "players": 4,
+      "digital": true,
+      "level": "apprentice",
+      "steps": 147,
+      "scores": [
+        -10,
+        27,
+        24,
+        26
+      ],
+      "winners": [
+        1
+      ]
+    },
+    {
+      "seed": "astra034-stress-4-65",
+      "players": 4,
+      "digital": true,
+      "level": "journeyman",
+      "steps": 149,
+      "scores": [
+        17,
+        36,
+        33,
+        36
+      ],
+      "winners": [
+        1
+      ]
+    },
+    {
+      "seed": "astra034-stress-4-66",
+      "players": 4,
+      "digital": true,
+      "level": "master",
+      "steps": 157,
+      "scores": [
+        13,
+        30,
+        37,
+        57
+      ],
+      "winners": [
+        3
+      ]
+    },
+    {
+      "seed": "astra034-stress-4-67",
+      "players": 4,
+      "digital": true,
+      "level": "grandmaster",
+      "steps": 165,
+      "scores": [
+        -3,
+        40,
+        43,
+        52
+      ],
+      "winners": [
+        3
+      ]
+    },
+    {
+      "seed": "astra034-stress-4-68",
+      "players": 4,
+      "digital": true,
+      "level": "apprentice",
+      "steps": 148,
+      "scores": [
+        -2,
+        29,
+        26,
+        37
+      ],
+      "winners": [
+        3
+      ]
+    },
+    {
+      "seed": "astra034-stress-4-69",
+      "players": 4,
+      "digital": true,
+      "level": "journeyman",
+      "steps": 146,
+      "scores": [
+        -9,
+        36,
+        44,
+        30
+      ],
+      "winners": [
+        2
+      ]
+    },
+    {
+      "seed": "astra034-stress-4-70",
+      "players": 4,
+      "digital": true,
+      "level": "master",
+      "steps": 164,
+      "scores": [
+        1,
+        33,
+        49,
+        43
+      ],
+      "winners": [
+        2
+      ]
+    },
+    {
+      "seed": "astra034-stress-4-71",
+      "players": 4,
+      "digital": true,
+      "level": "grandmaster",
+      "steps": 169,
+      "scores": [
+        0,
+        42,
+        44,
+        40
+      ],
+      "winners": [
+        2
+      ]
+    },
+    {
+      "seed": "astra034-stress-4-72",
+      "players": 4,
+      "digital": true,
+      "level": "apprentice",
+      "steps": 153,
+      "scores": [
+        -1,
+        27,
+        38,
+        23
+      ],
+      "winners": [
+        2
+      ]
+    },
+    {
+      "seed": "astra034-stress-4-73",
+      "players": 4,
+      "digital": true,
+      "level": "journeyman",
+      "steps": 146,
+      "scores": [
+        -1,
+        31,
+        21,
+        26
+      ],
+      "winners": [
+        1
+      ]
+    },
+    {
+      "seed": "astra034-stress-4-74",
+      "players": 4,
+      "digital": true,
+      "level": "master",
+      "steps": 154,
+      "scores": [
+        7,
+        46,
+        35,
+        15
+      ],
+      "winners": [
+        1
+      ]
+    },
+    {
+      "seed": "astra034-stress-4-75",
+      "players": 4,
+      "digital": true,
+      "level": "grandmaster",
+      "steps": 164,
+      "scores": [
+        9,
+        51,
+        53,
+        60
+      ],
+      "winners": [
+        3
+      ]
+    },
+    {
+      "seed": "astra034-stress-4-76",
+      "players": 4,
+      "digital": true,
+      "level": "apprentice",
+      "steps": 143,
+      "scores": [
+        -12,
+        23,
+        29,
+        30
+      ],
+      "winners": [
+        3
+      ]
+    },
+    {
+      "seed": "astra034-stress-4-77",
+      "players": 4,
+      "digital": true,
+      "level": "journeyman",
+      "steps": 143,
+      "scores": [
+        8,
+        32,
+        29,
+        42
+      ],
+      "winners": [
+        3
+      ]
+    },
+    {
+      "seed": "astra034-stress-4-78",
+      "players": 4,
+      "digital": true,
+      "level": "master",
+      "steps": 156,
+      "scores": [
+        3,
+        38,
+        33,
+        42
+      ],
+      "winners": [
+        3
+      ]
+    },
+    {
+      "seed": "astra034-stress-4-79",
+      "players": 4,
+      "digital": true,
+      "level": "grandmaster",
+      "steps": 169,
+      "scores": [
+        16,
+        46,
+        53,
+        40
+      ],
+      "winners": [
+        2
+      ]
+    }
+  ]
+}

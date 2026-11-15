@@ -1,0 +1,17 @@
+import assert from 'node:assert/strict';
+import {execFileSync} from 'node:child_process';
+import {readFileSync,writeFileSync,mkdtempSync} from 'node:fs';
+import {tmpdir} from 'node:os';
+import {join} from 'node:path';
+import {fileURLToPath} from 'node:url';
+import {createHash} from 'node:crypto';
+import {PLAN_DECK,ROW,LEVELS} from '../../src/mincmistr.mjs';
+const root=fileURLToPath(new URL('../../',import.meta.url));
+const output=join(mkdtempSync(join(tmpdir(),'kutna-audit-')),'rebuilt.html');
+execFileSync(process.execPath,[join(root,'build.mjs'),output]);
+const rebuilt=readFileSync(output),shipped=readFileSync(join(root,'Kutna_Hora_Solo.html'));
+assert.deepEqual(rebuilt,shipped);assert.deepEqual(JSON.parse(readFileSync(join(root,'mincmistr/print/cards.json'))),{deck:PLAN_DECK,row:ROW,levels:LEVELS});
+assert.deepEqual(readFileSync(join(root,'mincmistr/Mincmistr_Rules.md')),readFileSync(join(root,'mincmistr/print/rules.md')));
+const hash=p=>createHash('sha256').update(readFileSync(join(root,p))).digest('hex');
+const result={commit:'5ec3ca8814cb7df04ff9a52a2fcfecfc0bc0878e',htmlBytes:shipped.length,byteEqual:true,sha256:hash('Kutna_Hora_Solo.html'),paperSha256:hash('mincmistr/Mincmistr_Print_and_Play.pdf'),planSpriteSha256:hash('src/assets/mincmistr-plans.webp'),printedDataMatch:true};
+writeFileSync(new URL('./results/release.json',import.meta.url),JSON.stringify(result,null,2));console.log(JSON.stringify({...result,separateBuild:output},null,2));

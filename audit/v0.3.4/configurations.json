@@ -1,0 +1,299 @@
+[
+  {
+    "boards": 12,
+    "prefix": "astra034-levels-2",
+    "players": 2,
+    "level": "apprentice",
+    "policy": "standard",
+    "deck": "shared",
+    "events": true
+  },
+  {
+    "boards": 12,
+    "prefix": "astra034-levels-2",
+    "players": 2,
+    "level": "journeyman",
+    "policy": "standard",
+    "deck": "shared",
+    "events": true
+  },
+  {
+    "boards": 12,
+    "prefix": "astra034-levels-2",
+    "players": 2,
+    "level": "master",
+    "policy": "standard",
+    "deck": "shared",
+    "events": true
+  },
+  {
+    "boards": 12,
+    "prefix": "astra034-levels-2",
+    "players": 2,
+    "level": "grandmaster",
+    "policy": "standard",
+    "deck": "shared",
+    "events": true
+  },
+  {
+    "boards": 8,
+    "prefix": "astra034-strategy-2",
+    "players": 2,
+    "level": "master",
+    "policy": "quick",
+    "deck": "shared",
+    "events": true
+  },
+  {
+    "boards": 8,
+    "prefix": "astra034-strategy-2",
+    "players": 2,
+    "level": "master",
+    "policy": "builder",
+    "deck": "shared",
+    "events": true
+  },
+  {
+    "boards": 8,
+    "prefix": "astra034-strategy-2",
+    "players": 2,
+    "level": "master",
+    "policy": "miner",
+    "deck": "shared",
+    "events": true
+  },
+  {
+    "boards": 8,
+    "prefix": "astra034-strategy-2",
+    "players": 2,
+    "level": "master",
+    "policy": "council",
+    "deck": "shared",
+    "events": true
+  },
+  {
+    "boards": 8,
+    "prefix": "astra034-strategy-2",
+    "players": 2,
+    "level": "master",
+    "policy": "denial",
+    "deck": "shared",
+    "events": true
+  },
+  {
+    "boards": 8,
+    "prefix": "astra034-strategy-2",
+    "players": 2,
+    "level": "master",
+    "policy": "rights-denial",
+    "deck": "shared",
+    "events": true
+  },
+  {
+    "boards": 8,
+    "prefix": "astra034-strategy-2",
+    "players": 2,
+    "level": "master",
+    "policy": "planner",
+    "deck": "shared",
+    "events": true
+  },
+  {
+    "boards": 12,
+    "prefix": "astra034-levels-3",
+    "players": 3,
+    "level": "apprentice",
+    "policy": "standard",
+    "deck": "shared",
+    "events": false
+  },
+  {
+    "boards": 12,
+    "prefix": "astra034-levels-3",
+    "players": 3,
+    "level": "journeyman",
+    "policy": "standard",
+    "deck": "shared",
+    "events": false
+  },
+  {
+    "boards": 12,
+    "prefix": "astra034-levels-3",
+    "players": 3,
+    "level": "master",
+    "policy": "standard",
+    "deck": "shared",
+    "events": false
+  },
+  {
+    "boards": 12,
+    "prefix": "astra034-levels-3",
+    "players": 3,
+    "level": "grandmaster",
+    "policy": "standard",
+    "deck": "shared",
+    "events": false
+  },
+  {
+    "boards": 8,
+    "prefix": "astra034-strategy-3",
+    "players": 3,
+    "level": "master",
+    "policy": "quick",
+    "deck": "shared",
+    "events": false
+  },
+  {
+    "boards": 8,
+    "prefix": "astra034-strategy-3",
+    "players": 3,
+    "level": "master",
+    "policy": "builder",
+    "deck": "shared",
+    "events": false
+  },
+  {
+    "boards": 8,
+    "prefix": "astra034-strategy-3",
+    "players": 3,
+    "level": "master",
+    "policy": "miner",
+    "deck": "shared",
+    "events": false
+  },
+  {
+    "boards": 8,
+    "prefix": "astra034-strategy-3",
+    "players": 3,
+    "level": "master",
+    "policy": "council",
+    "deck": "shared",
+    "events": false
+  },
+  {
+    "boards": 8,
+    "prefix": "astra034-strategy-3",
+    "players": 3,
+    "level": "master",
+    "policy": "denial",
+    "deck": "shared",
+    "events": false
+  },
+  {
+    "boards": 8,
+    "prefix": "astra034-strategy-3",
+    "players": 3,
+    "level": "master",
+    "policy": "rights-denial",
+    "deck": "shared",
+    "events": false
+  },
+  {
+    "boards": 8,
+    "prefix": "astra034-strategy-3",
+    "players": 3,
+    "level": "master",
+    "policy": "planner",
+    "deck": "shared",
+    "events": false
+  },
+  {
+    "boards": 12,
+    "prefix": "astra034-levels-4",
+    "players": 4,
+    "level": "apprentice",
+    "policy": "standard",
+    "deck": "shared",
+    "events": false
+  },
+  {
+    "boards": 12,
+    "prefix": "astra034-levels-4",
+    "players": 4,
+    "level": "journeyman",
+    "policy": "standard",
+    "deck": "shared",
+    "events": false
+  },
+  {
+    "boards": 12,
+    "prefix": "astra034-levels-4",
+    "players": 4,
+    "level": "master",
+    "policy": "standard",
+    "deck": "shared",
+    "events": false
+  },
+  {
+    "boards": 12,
+    "prefix": "astra034-levels-4",
+    "players": 4,
+    "level": "grandmaster",
+    "policy": "standard",
+    "deck": "shared",
+    "events": false
+  },
+  {
+    "boards": 8,
+    "prefix": "astra034-strategy-4",
+    "players": 4,
+    "level": "master",
+    "policy": "quick",
+    "deck": "shared",
+    "events": false
+  },
+  {
+    "boards": 8,
+    "prefix": "astra034-strategy-4",
+    "players": 4,
+    "level": "master",
+    "policy": "builder",
+    "deck": "shared",
+    "events": false
+  },
+  {
+    "boards": 8,
+    "prefix": "astra034-strategy-4",
+    "players": 4,
+    "level": "master",
+    "policy": "miner",
+    "deck": "shared",
+    "events": false
+  },
+  {
+    "boards": 8,
+    "prefix": "astra034-strategy-4",
+    "players": 4,
+    "level": "master",
+    "policy": "council",
+    "deck": "shared",
+    "events": false
+  },
+  {
+    "boards": 8,
+    "prefix": "astra034-strategy-4",
+    "players": 4,
+    "level": "master",
+    "policy": "denial",
+    "deck": "shared",
+    "events": false
+  },
+  {
+    "boards": 8,
+    "prefix": "astra034-strategy-4",
+    "players": 4,
+    "level": "master",
+    "policy": "rights-denial",
+    "deck": "shared",
+    "events": false
+  },
+  {
+    "boards": 8,
+    "prefix": "astra034-strategy-4",
+    "players": 4,
+    "level": "master",
+    "policy": "planner",
+    "deck": "shared",
+    "events": false
+  }
+]

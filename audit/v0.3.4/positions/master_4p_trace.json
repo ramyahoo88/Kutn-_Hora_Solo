@@ -1,0 +1,2034 @@
+{
+  "seed": "astra034-flow-4-0",
+  "playerCount": 4,
+  "level": "master",
+  "setup": 1,
+  "side": 0,
+  "starter": 0,
+  "events": true,
+  "result": {
+    "scores": [
+      {
+        "earned": 10,
+        "town": 12,
+        "mines": 5,
+        "income": 6,
+        "reputation": 10,
+        "extras": 2,
+        "total": 45,
+        "coins": 18
+      },
+      {
+        "earned": 12,
+        "town": 8,
+        "mines": 9,
+        "income": 9,
+        "reputation": 10,
+        "extras": 2,
+        "total": 50,
+        "coins": 54
+      },
+      {
+        "earned": 7,
+        "town": 12,
+        "mines": 10,
+        "income": 9,
+        "reputation": 8,
+        "extras": 1,
+        "total": 47,
+        "coins": 5
+      },
+      {
+        "earned": 10,
+        "town": 10,
+        "mines": 9,
+        "income": 7,
+        "reputation": 4,
+        "extras": 1,
+        "total": 41,
+        "coins": 3
+      }
+    ],
+    "winner": 1,
+    "winners": [
+      1
+    ]
+  },
+  "trace": [
+    {
+      "round": 1,
+      "turn": 0,
+      "actor": 0,
+      "phase": "action",
+      "action": {
+        "kind": "plot",
+        "space": 18,
+        "cost": 5,
+        "card": 1
+      }
+    },
+    {
+      "round": 1,
+      "turn": 0,
+      "actor": 0,
+      "phase": "action",
+      "action": {
+        "kind": "rights",
+        "id": "airshaft",
+        "cost": 1,
+        "card": 4
+      }
+    },
+    {
+      "round": 1,
+      "turn": 1,
+      "actor": 1,
+      "phase": "action",
+      "plan": 2,
+      "action": {
+        "kind": "rights",
+        "id": "hammer",
+        "cost": 1,
+        "card": 5
+      }
+    },
+    {
+      "round": 1,
+      "turn": 1,
+      "actor": 1,
+      "phase": "action",
+      "plan": 8,
+      "action": {
+        "kind": "mine",
+        "refill": 0,
+        "cost": 0,
+        "card": 0
+      }
+    },
+    {
+      "round": 1,
+      "turn": 1,
+      "actor": 1,
+      "phase": "action",
+      "pending": "mine-place",
+      "plan": 8,
+      "action": {
+        "kind": "place-mine",
+        "id": "m1-6",
+        "space": 5,
+        "cost": 4
+      }
+    },
+    {
+      "round": 1,
+      "turn": 2,
+      "actor": 2,
+      "phase": "action",
+      "plan": 4,
+      "action": {
+        "kind": "mine",
+        "refill": 0,
+        "cost": 0,
+        "card": 0
+      }
+    },
+    {
+      "round": 1,
+      "turn": 2,
+      "actor": 2,
+      "phase": "action",
+      "pending": "mine-place",
+      "plan": 4,
+      "action": {
+        "kind": "place-mine",
+        "id": "m1-3",
+        "space": 1,
+        "cost": 6
+      }
+    },
+    {
+      "round": 1,
+      "turn": 2,
+      "actor": 2,
+      "phase": "action",
+      "plan": 15,
+      "action": {
+        "kind": "rights",
+        "id": "assay",
+        "cost": 1,
+        "card": 5
+      }
+    },
+    {
+      "round": 1,
+      "turn": 3,
+      "actor": 3,
+      "phase": "action",
+      "plan": 15,
+      "action": {
+        "kind": "rights",
+        "id": "butcher",
+        "cost": 1,
+        "card": 5
+      }
+    },
+    {
+      "round": 1,
+      "turn": 3,
+      "actor": 3,
+      "phase": "action",
+      "plan": 11,
+      "action": {
+        "kind": "plot",
+        "space": 0,
+        "cost": 5,
+        "card": 1
+      }
+    },
+    {
+      "round": 1,
+      "turn": 4,
+      "actor": 0,
+      "phase": "action",
+      "action": {
+        "kind": "build",
+        "id": "airshaft",
+        "space": 18,
+        "cost": 6,
+        "card": 3
+      }
+    },
+    {
+      "round": 1,
+      "turn": 4,
+      "actor": 0,
+      "phase": "action",
+      "pending": "technology",
+      "action": {
+        "kind": "technology",
+        "id": "t1",
+        "space": 0,
+        "cost": 0
+      }
+    },
+    {
+      "round": 1,
+      "turn": 4,
+      "actor": 0,
+      "phase": "action",
+      "action": {
+        "kind": "mine",
+        "refill": 0,
+        "cost": 0,
+        "card": 0
+      }
+    },
+    {
+      "round": 1,
+      "turn": 4,
+      "actor": 0,
+      "phase": "action",
+      "pending": "mine-place",
+      "action": {
+        "kind": "place-mine",
+        "id": "m1-1",
+        "space": 7,
+        "cost": 3
+      }
+    },
+    {
+      "round": 1,
+      "turn": 5,
+      "actor": 1,
+      "phase": "action",
+      "plan": 7,
+      "action": {
+        "kind": "plot",
+        "space": 24,
+        "cost": 3,
+        "card": 1
+      }
+    },
+    {
+      "round": 1,
+      "turn": 5,
+      "actor": 1,
+      "phase": "action",
+      "plan": 6,
+      "action": {
+        "kind": "build",
+        "id": "hammer",
+        "space": 24,
+        "cost": 12,
+        "card": 2
+      }
+    },
+    {
+      "round": 1,
+      "turn": 6,
+      "actor": 2,
+      "phase": "action",
+      "plan": 1,
+      "action": {
+        "kind": "plot",
+        "space": 12,
+        "cost": 3,
+        "card": 1
+      }
+    },
+    {
+      "round": 1,
+      "turn": 6,
+      "actor": 2,
+      "phase": "action",
+      "plan": 8,
+      "action": {
+        "kind": "build",
+        "id": "assay",
+        "space": 12,
+        "cost": 15,
+        "card": 2
+      }
+    },
+    {
+      "round": 1,
+      "turn": 6,
+      "actor": 2,
+      "phase": "action",
+      "pending": "right",
+      "plan": 8,
+      "action": {
+        "kind": "rights",
+        "id": "high-church",
+        "cost": 0
+      }
+    },
+    {
+      "round": 1,
+      "turn": 7,
+      "actor": 3,
+      "phase": "action",
+      "plan": 5,
+      "action": {
+        "kind": "build",
+        "id": "butcher",
+        "space": 0,
+        "cost": 24,
+        "card": 2
+      }
+    },
+    {
+      "round": 1,
+      "turn": 7,
+      "actor": 3,
+      "phase": "action",
+      "plan": 10,
+      "action": {
+        "kind": "income",
+        "gross": 10,
+        "card": 4
+      }
+    },
+    {
+      "round": 1,
+      "turn": 8,
+      "actor": 0,
+      "phase": "action",
+      "action": {
+        "kind": "income",
+        "gross": 9,
+        "card": 2
+      }
+    },
+    {
+      "round": 1,
+      "turn": 9,
+      "actor": 1,
+      "phase": "action",
+      "plan": 14,
+      "action": {
+        "kind": "rights",
+        "id": "smelter",
+        "cost": 8,
+        "card": 4
+      }
+    },
+    {
+      "round": 1,
+      "turn": 10,
+      "actor": 2,
+      "phase": "action",
+      "plan": 12,
+      "action": {
+        "kind": "income",
+        "gross": 18,
+        "card": 4
+      }
+    },
+    {
+      "round": 1,
+      "turn": 11,
+      "actor": 3,
+      "phase": "action",
+      "plan": 12,
+      "action": {
+        "kind": "mine",
+        "refill": 0,
+        "cost": 0,
+        "card": 0
+      }
+    },
+    {
+      "round": 1,
+      "turn": 11,
+      "actor": 3,
+      "phase": "action",
+      "pending": "mine-place",
+      "plan": 12,
+      "action": {
+        "kind": "place-mine",
+        "id": "m1-5",
+        "space": 14,
+        "cost": 3
+      }
+    },
+    {
+      "round": 2,
+      "turn": 0,
+      "actor": 1,
+      "phase": "action",
+      "plan": 1,
+      "action": {
+        "kind": "income",
+        "gross": 15,
+        "card": 2
+      }
+    },
+    {
+      "round": 2,
+      "turn": 0,
+      "actor": 1,
+      "phase": "action",
+      "plan": 10,
+      "action": {
+        "kind": "plot",
+        "space": 25,
+        "cost": 4,
+        "card": 1
+      }
+    },
+    {
+      "round": 2,
+      "turn": 1,
+      "actor": 2,
+      "phase": "action",
+      "plan": 11,
+      "action": {
+        "kind": "plot",
+        "space": 6,
+        "cost": 8,
+        "card": 1
+      }
+    },
+    {
+      "round": 2,
+      "turn": 1,
+      "actor": 2,
+      "phase": "action",
+      "plan": 3,
+      "action": {
+        "kind": "rights",
+        "id": "tavern",
+        "cost": 4,
+        "card": 5
+      }
+    },
+    {
+      "round": 2,
+      "turn": 2,
+      "actor": 3,
+      "phase": "action",
+      "plan": 2,
+      "action": {
+        "kind": "rights",
+        "id": "limekiln",
+        "cost": 1,
+        "card": 5
+      }
+    },
+    {
+      "round": 2,
+      "turn": 2,
+      "actor": 3,
+      "phase": "action",
+      "plan": 1,
+      "action": {
+        "kind": "income",
+        "gross": 18,
+        "card": 2
+      }
+    },
+    {
+      "round": 2,
+      "turn": 3,
+      "actor": 0,
+      "phase": "action",
+      "action": {
+        "kind": "plot",
+        "space": 19,
+        "cost": 3,
+        "card": 3
+      }
+    },
+    {
+      "round": 2,
+      "turn": 3,
+      "actor": 0,
+      "phase": "action",
+      "action": {
+        "kind": "rights",
+        "id": "pump",
+        "cost": 4,
+        "card": 5
+      }
+    },
+    {
+      "round": 2,
+      "turn": 4,
+      "actor": 1,
+      "phase": "action",
+      "plan": 3,
+      "action": {
+        "kind": "build",
+        "id": "smelter",
+        "space": 25,
+        "cost": 21,
+        "card": 3
+      }
+    },
+    {
+      "round": 2,
+      "turn": 4,
+      "actor": 1,
+      "phase": "action",
+      "plan": 12,
+      "action": {
+        "kind": "income",
+        "gross": 19,
+        "card": 4
+      }
+    },
+    {
+      "round": 2,
+      "turn": 5,
+      "actor": 2,
+      "phase": "action",
+      "plan": 13,
+      "action": {
+        "kind": "mine",
+        "refill": 0,
+        "cost": 0,
+        "card": 0
+      }
+    },
+    {
+      "round": 2,
+      "turn": 5,
+      "actor": 2,
+      "phase": "action",
+      "pending": "mine-place",
+      "plan": 13,
+      "action": {
+        "kind": "place-mine",
+        "id": "m2-4",
+        "space": 21,
+        "cost": 6
+      }
+    },
+    {
+      "round": 2,
+      "turn": 5,
+      "actor": 2,
+      "phase": "action",
+      "plan": 9,
+      "action": {
+        "kind": "income",
+        "gross": 28,
+        "card": 2
+      }
+    },
+    {
+      "round": 2,
+      "turn": 6,
+      "actor": 3,
+      "phase": "action",
+      "plan": 7,
+      "action": {
+        "kind": "plot",
+        "space": 26,
+        "cost": 4,
+        "card": 1
+      }
+    },
+    {
+      "round": 2,
+      "turn": 6,
+      "actor": 3,
+      "phase": "action",
+      "plan": 3,
+      "action": {
+        "kind": "build",
+        "id": "limekiln",
+        "space": 26,
+        "cost": 9,
+        "card": 3
+      }
+    },
+    {
+      "round": 2,
+      "turn": 7,
+      "actor": 0,
+      "phase": "action",
+      "action": {
+        "kind": "build",
+        "id": "pump",
+        "space": 19,
+        "cost": 6,
+        "card": 2
+      }
+    },
+    {
+      "round": 2,
+      "turn": 7,
+      "actor": 0,
+      "phase": "action",
+      "pending": "technology",
+      "action": {
+        "kind": "technology",
+        "id": "t2",
+        "space": 22,
+        "cost": 0
+      }
+    },
+    {
+      "round": 2,
+      "turn": 7,
+      "actor": 0,
+      "phase": "action",
+      "action": {
+        "kind": "income",
+        "gross": 18,
+        "card": 4
+      }
+    },
+    {
+      "round": 2,
+      "turn": 8,
+      "actor": 1,
+      "phase": "action",
+      "plan": 9,
+      "action": {
+        "kind": "rights",
+        "id": "furnace",
+        "cost": 5,
+        "card": 5
+      }
+    },
+    {
+      "round": 2,
+      "turn": 9,
+      "actor": 2,
+      "phase": "action",
+      "plan": 2,
+      "action": {
+        "kind": "build",
+        "id": "tavern",
+        "space": 6,
+        "cost": 10,
+        "card": 3
+      }
+    },
+    {
+      "round": 2,
+      "turn": 10,
+      "actor": 3,
+      "phase": "action",
+      "plan": 6,
+      "action": {
+        "kind": "mine",
+        "refill": 0,
+        "cost": 0,
+        "card": 0
+      }
+    },
+    {
+      "round": 2,
+      "turn": 10,
+      "actor": 3,
+      "phase": "action",
+      "pending": "mine-place",
+      "plan": 6,
+      "action": {
+        "kind": "place-mine",
+        "id": "m2-7",
+        "space": 8,
+        "cost": 6
+      }
+    },
+    {
+      "round": 2,
+      "turn": 11,
+      "actor": 0,
+      "phase": "action",
+      "action": {
+        "kind": "mine",
+        "refill": 0,
+        "cost": 0,
+        "card": 0
+      }
+    },
+    {
+      "round": 2,
+      "turn": 11,
+      "actor": 0,
+      "phase": "action",
+      "pending": "mine-place",
+      "action": {
+        "kind": "place-mine",
+        "id": "m2-5",
+        "space": 2,
+        "cost": 6
+      }
+    },
+    {
+      "round": 2,
+      "turn": 12,
+      "actor": 1,
+      "phase": "tax",
+      "plan": 9,
+      "action": {
+        "kind": "tax",
+        "cost": 1
+      }
+    },
+    {
+      "round": 2,
+      "turn": 12,
+      "actor": 2,
+      "phase": "tax",
+      "plan": 2,
+      "action": {
+        "kind": "tax",
+        "cost": 1
+      }
+    },
+    {
+      "round": 2,
+      "turn": 12,
+      "actor": 3,
+      "phase": "tax",
+      "plan": 6,
+      "action": {
+        "kind": "tax",
+        "cost": 1
+      }
+    },
+    {
+      "round": 2,
+      "turn": 12,
+      "actor": 0,
+      "phase": "tax",
+      "action": {
+        "kind": "tax",
+        "cost": 1
+      }
+    },
+    {
+      "round": 3,
+      "turn": 0,
+      "actor": 2,
+      "phase": "action",
+      "plan": 14,
+      "action": {
+        "kind": "plot",
+        "space": 7,
+        "cost": 4,
+        "card": 1
+      }
+    },
+    {
+      "round": 3,
+      "turn": 0,
+      "actor": 2,
+      "phase": "action",
+      "plan": 6,
+      "action": {
+        "kind": "mine",
+        "refill": 0,
+        "cost": 0,
+        "card": 0
+      }
+    },
+    {
+      "round": 3,
+      "turn": 0,
+      "actor": 2,
+      "phase": "action",
+      "pending": "mine-place",
+      "plan": 6,
+      "action": {
+        "kind": "place-mine",
+        "id": "m3-3",
+        "space": 23,
+        "cost": 4
+      }
+    },
+    {
+      "round": 3,
+      "turn": 1,
+      "actor": 3,
+      "phase": "action",
+      "plan": 9,
+      "action": {
+        "kind": "income",
+        "gross": 25,
+        "card": 2
+      }
+    },
+    {
+      "round": 3,
+      "turn": 1,
+      "actor": 3,
+      "phase": "action",
+      "plan": 13,
+      "action": {
+        "kind": "mine",
+        "refill": 0,
+        "cost": 0,
+        "card": 0
+      }
+    },
+    {
+      "round": 3,
+      "turn": 1,
+      "actor": 3,
+      "phase": "action",
+      "pending": "mine-place",
+      "plan": 13,
+      "action": {
+        "kind": "place-mine",
+        "id": "m3-9",
+        "space": 24,
+        "cost": 4
+      }
+    },
+    {
+      "round": 3,
+      "turn": 2,
+      "actor": 0,
+      "phase": "action",
+      "action": {
+        "kind": "income",
+        "gross": 16,
+        "card": 4
+      }
+    },
+    {
+      "round": 3,
+      "turn": 2,
+      "actor": 0,
+      "phase": "action",
+      "action": {
+        "kind": "mine",
+        "refill": 0,
+        "cost": 0,
+        "card": 0
+      }
+    },
+    {
+      "round": 3,
+      "turn": 2,
+      "actor": 0,
+      "phase": "action",
+      "pending": "mine-place",
+      "action": {
+        "kind": "place-mine",
+        "id": "m3-8",
+        "space": 12,
+        "cost": 8
+      }
+    },
+    {
+      "round": 3,
+      "turn": 3,
+      "actor": 1,
+      "phase": "action",
+      "plan": 15,
+      "action": {
+        "kind": "income",
+        "gross": 37,
+        "card": 2
+      }
+    },
+    {
+      "round": 3,
+      "turn": 3,
+      "actor": 1,
+      "phase": "action",
+      "plan": 5,
+      "action": {
+        "kind": "plot",
+        "space": 20,
+        "cost": 1,
+        "card": 1
+      }
+    },
+    {
+      "round": 3,
+      "turn": 4,
+      "actor": 2,
+      "phase": "action",
+      "plan": 7,
+      "action": {
+        "kind": "build",
+        "id": "high-church",
+        "space": 7,
+        "cost": 24,
+        "card": 2
+      }
+    },
+    {
+      "round": 3,
+      "turn": 4,
+      "actor": 2,
+      "phase": "action",
+      "plan": 5,
+      "action": {
+        "kind": "income",
+        "gross": 40,
+        "card": 4
+      }
+    },
+    {
+      "round": 3,
+      "turn": 5,
+      "actor": 3,
+      "phase": "action",
+      "plan": 4,
+      "action": {
+        "kind": "mine",
+        "refill": 2,
+        "cost": 6,
+        "card": 1
+      }
+    },
+    {
+      "round": 3,
+      "turn": 5,
+      "actor": 3,
+      "phase": "action",
+      "pending": "mine-place",
+      "plan": 4,
+      "action": {
+        "kind": "place-mine",
+        "id": "m2-8",
+        "space": 25,
+        "cost": 3
+      }
+    },
+    {
+      "round": 3,
+      "turn": 5,
+      "actor": 3,
+      "phase": "action",
+      "plan": 8,
+      "action": {
+        "kind": "rights",
+        "id": "mining-office",
+        "cost": 18,
+        "card": 5
+      }
+    },
+    {
+      "round": 3,
+      "turn": 6,
+      "actor": 0,
+      "phase": "action",
+      "action": {
+        "kind": "plot",
+        "space": 13,
+        "cost": 1,
+        "card": 1
+      }
+    },
+    {
+      "round": 3,
+      "turn": 6,
+      "actor": 0,
+      "phase": "action",
+      "action": {
+        "kind": "rights",
+        "id": "horse-mill",
+        "cost": 6,
+        "card": 5
+      }
+    },
+    {
+      "round": 3,
+      "turn": 7,
+      "actor": 1,
+      "phase": "action",
+      "plan": 4,
+      "action": {
+        "kind": "mine",
+        "refill": 0,
+        "cost": 0,
+        "card": 0
+      }
+    },
+    {
+      "round": 3,
+      "turn": 7,
+      "actor": 1,
+      "phase": "action",
+      "pending": "mine-place",
+      "plan": 4,
+      "action": {
+        "kind": "place-mine",
+        "id": "m2-1",
+        "space": 26,
+        "cost": 3
+      }
+    },
+    {
+      "round": 3,
+      "turn": 7,
+      "actor": 1,
+      "phase": "action",
+      "plan": 13,
+      "action": {
+        "kind": "build",
+        "id": "furnace",
+        "space": 20,
+        "cost": 21,
+        "card": 3
+      }
+    },
+    {
+      "round": 3,
+      "turn": 8,
+      "actor": 2,
+      "phase": "action",
+      "plan": 10,
+      "action": {
+        "kind": "rights",
+        "id": "courthouse",
+        "cost": 18,
+        "card": 5
+      }
+    },
+    {
+      "round": 3,
+      "turn": 8,
+      "actor": 2,
+      "phase": "action",
+      "plan": 3,
+      "action": {
+        "kind": "plot",
+        "space": 1,
+        "cost": 1,
+        "card": 3
+      }
+    },
+    {
+      "round": 3,
+      "turn": 9,
+      "actor": 3,
+      "phase": "action",
+      "plan": 14,
+      "action": {
+        "kind": "income",
+        "gross": 42,
+        "card": 4
+      }
+    },
+    {
+      "round": 3,
+      "turn": 9,
+      "actor": 3,
+      "phase": "action",
+      "plan": 6,
+      "action": {
+        "kind": "plot",
+        "space": 8,
+        "cost": 12,
+        "card": 3
+      }
+    },
+    {
+      "round": 3,
+      "turn": 10,
+      "actor": 0,
+      "phase": "action",
+      "action": {
+        "kind": "build",
+        "id": "horse-mill",
+        "space": 13,
+        "cost": 9,
+        "card": 2
+      }
+    },
+    {
+      "round": 3,
+      "turn": 10,
+      "actor": 0,
+      "phase": "action",
+      "pending": "technology",
+      "action": {
+        "kind": "technology",
+        "id": "t3",
+        "space": 27,
+        "cost": 0
+      }
+    },
+    {
+      "round": 3,
+      "turn": 11,
+      "actor": 1,
+      "phase": "action",
+      "plan": 11,
+      "action": {
+        "kind": "rights",
+        "id": "washworks",
+        "cost": 6,
+        "card": 5
+      }
+    },
+    {
+      "round": 3,
+      "turn": 11,
+      "actor": 1,
+      "phase": "action",
+      "plan": 5,
+      "action": {
+        "kind": "rights",
+        "id": "mason",
+        "cost": 12,
+        "card": 4
+      }
+    },
+    {
+      "round": 3,
+      "turn": 12,
+      "actor": 2,
+      "phase": "tax",
+      "plan": 3,
+      "action": {
+        "kind": "tax",
+        "cost": 7
+      }
+    },
+    {
+      "round": 3,
+      "turn": 12,
+      "actor": 3,
+      "phase": "tax",
+      "plan": 6,
+      "action": {
+        "kind": "tax",
+        "cost": 7
+      }
+    },
+    {
+      "round": 3,
+      "turn": 12,
+      "actor": 0,
+      "phase": "tax",
+      "action": {
+        "kind": "tax",
+        "cost": 7
+      }
+    },
+    {
+      "round": 3,
+      "turn": 12,
+      "actor": 1,
+      "phase": "tax",
+      "plan": 5,
+      "action": {
+        "kind": "tax",
+        "cost": 7
+      }
+    },
+    {
+      "round": 4,
+      "turn": 0,
+      "actor": 3,
+      "phase": "action",
+      "plan": 1,
+      "action": {
+        "kind": "build",
+        "id": "mining-office",
+        "space": 8,
+        "cost": 21,
+        "card": 2
+      }
+    },
+    {
+      "round": 4,
+      "turn": 0,
+      "actor": 3,
+      "phase": "action",
+      "pending": "right",
+      "plan": 1,
+      "action": {
+        "kind": "rights",
+        "id": "bartholomew",
+        "cost": 0
+      }
+    },
+    {
+      "round": 4,
+      "turn": 0,
+      "actor": 3,
+      "phase": "action",
+      "plan": 15,
+      "action": {
+        "kind": "income",
+        "gross": 54,
+        "card": 4
+      }
+    },
+    {
+      "round": 4,
+      "turn": 1,
+      "actor": 0,
+      "phase": "action",
+      "action": {
+        "kind": "income",
+        "gross": 22,
+        "card": 2
+      }
+    },
+    {
+      "round": 4,
+      "turn": 1,
+      "actor": 0,
+      "phase": "action",
+      "action": {
+        "kind": "plot",
+        "space": 14,
+        "cost": 1,
+        "card": 3
+      }
+    },
+    {
+      "round": 4,
+      "turn": 2,
+      "actor": 1,
+      "phase": "action",
+      "plan": 15,
+      "action": {
+        "kind": "income",
+        "gross": 52,
+        "card": 2
+      }
+    },
+    {
+      "round": 4,
+      "turn": 2,
+      "actor": 1,
+      "phase": "action",
+      "plan": 6,
+      "action": {
+        "kind": "mine",
+        "refill": 0,
+        "cost": 0,
+        "card": 0
+      }
+    },
+    {
+      "round": 4,
+      "turn": 2,
+      "actor": 1,
+      "phase": "action",
+      "pending": "mine-place",
+      "plan": 6,
+      "action": {
+        "kind": "place-mine",
+        "id": "m2-3",
+        "space": 13,
+        "cost": 15
+      }
+    },
+    {
+      "round": 4,
+      "turn": 3,
+      "actor": 2,
+      "phase": "action",
+      "plan": 6,
+      "action": {
+        "kind": "income",
+        "gross": 36,
+        "card": 2
+      }
+    },
+    {
+      "round": 4,
+      "turn": 3,
+      "actor": 2,
+      "phase": "action",
+      "plan": 7,
+      "action": {
+        "kind": "build",
+        "id": "courthouse",
+        "space": 1,
+        "cost": 30,
+        "card": 3
+      }
+    },
+    {
+      "round": 4,
+      "turn": 3,
+      "actor": 2,
+      "phase": "action",
+      "pending": "right",
+      "plan": 7,
+      "action": {
+        "kind": "rights",
+        "id": "our-lady",
+        "cost": 0
+      }
+    },
+    {
+      "round": 4,
+      "turn": 4,
+      "actor": 3,
+      "phase": "action",
+      "plan": 13,
+      "action": {
+        "kind": "mine",
+        "refill": 0,
+        "cost": 0,
+        "card": 0
+      }
+    },
+    {
+      "round": 4,
+      "turn": 4,
+      "actor": 3,
+      "phase": "action",
+      "pending": "mine-place",
+      "plan": 13,
+      "action": {
+        "kind": "place-mine",
+        "id": "m3-10",
+        "space": 3,
+        "cost": 12
+      }
+    },
+    {
+      "round": 4,
+      "turn": 4,
+      "actor": 3,
+      "phase": "action",
+      "plan": 10,
+      "action": {
+        "kind": "plot",
+        "space": 2,
+        "cost": 10,
+        "card": 1
+      }
+    },
+    {
+      "round": 4,
+      "turn": 5,
+      "actor": 0,
+      "phase": "action",
+      "action": {
+        "kind": "rights",
+        "id": "smithy",
+        "cost": 3,
+        "card": 5
+      }
+    },
+    {
+      "round": 4,
+      "turn": 5,
+      "actor": 0,
+      "phase": "action",
+      "action": {
+        "kind": "build",
+        "id": "smithy",
+        "space": 14,
+        "cost": 12,
+        "card": 0,
+        "as": "build"
+      }
+    },
+    {
+      "round": 4,
+      "turn": 5,
+      "actor": 0,
+      "phase": "action",
+      "pending": "technology",
+      "action": {
+        "kind": "technology",
+        "id": "t4",
+        "space": 20,
+        "cost": 0
+      }
+    },
+    {
+      "round": 4,
+      "turn": 6,
+      "actor": 1,
+      "phase": "action",
+      "plan": 13,
+      "action": {
+        "kind": "mine",
+        "refill": 2,
+        "cost": 4,
+        "card": 1
+      }
+    },
+    {
+      "round": 4,
+      "turn": 6,
+      "actor": 1,
+      "phase": "action",
+      "pending": "mine-place",
+      "plan": 13,
+      "action": {
+        "kind": "place-mine",
+        "id": "m3-7",
+        "space": 4,
+        "cost": 12
+      }
+    },
+    {
+      "round": 4,
+      "turn": 6,
+      "actor": 1,
+      "phase": "action",
+      "plan": 9,
+      "action": {
+        "kind": "plot",
+        "space": 9,
+        "cost": 1,
+        "card": 3
+      }
+    },
+    {
+      "round": 4,
+      "turn": 7,
+      "actor": 2,
+      "phase": "action",
+      "plan": 9,
+      "action": {
+        "kind": "plot",
+        "space": 21,
+        "cost": 1,
+        "card": 1
+      }
+    },
+    {
+      "round": 4,
+      "turn": 7,
+      "actor": 2,
+      "phase": "action",
+      "plan": 10,
+      "action": {
+        "kind": "rights",
+        "id": "bathhouse",
+        "cost": 1,
+        "card": 5
+      }
+    },
+    {
+      "round": 4,
+      "turn": 8,
+      "actor": 3,
+      "phase": "action",
+      "plan": 9,
+      "action": {
+        "kind": "build",
+        "id": "bartholomew",
+        "space": 2,
+        "cost": 36,
+        "card": 3
+      }
+    },
+    {
+      "round": 4,
+      "turn": 8,
+      "actor": 3,
+      "phase": "action",
+      "plan": 12,
+      "action": {
+        "kind": "rights",
+        "id": "bread",
+        "cost": 1,
+        "card": 5
+      }
+    },
+    {
+      "round": 4,
+      "turn": 9,
+      "actor": 0,
+      "phase": "action",
+      "action": {
+        "kind": "income",
+        "gross": 28,
+        "card": 4
+      }
+    },
+    {
+      "round": 4,
+      "turn": 10,
+      "actor": 1,
+      "phase": "action",
+      "plan": 8,
+      "action": {
+        "kind": "income",
+        "gross": 52,
+        "card": 4
+      }
+    },
+    {
+      "round": 4,
+      "turn": 10,
+      "actor": 1,
+      "phase": "action",
+      "plan": 12,
+      "action": {
+        "kind": "skip",
+        "card": 5
+      }
+    },
+    {
+      "round": 4,
+      "turn": 11,
+      "actor": 2,
+      "phase": "action",
+      "plan": 14,
+      "action": {
+        "kind": "mine",
+        "refill": 2,
+        "cost": 4,
+        "card": 0
+      }
+    },
+    {
+      "round": 4,
+      "turn": 11,
+      "actor": 2,
+      "phase": "action",
+      "pending": "mine-place",
+      "plan": 14,
+      "action": {
+        "kind": "place-mine",
+        "id": "m3-4",
+        "space": 10,
+        "cost": 16
+      }
+    },
+    {
+      "round": 4,
+      "turn": 11,
+      "actor": 2,
+      "phase": "action",
+      "plan": 12,
+      "action": {
+        "kind": "income",
+        "gross": 62,
+        "card": 4
+      }
+    },
+    {
+      "round": 4,
+      "turn": 12,
+      "actor": 3,
+      "phase": "tax",
+      "plan": 12,
+      "action": {
+        "kind": "penalty",
+        "loss": 2
+      }
+    },
+    {
+      "round": 4,
+      "turn": 12,
+      "actor": 0,
+      "phase": "tax",
+      "action": {
+        "kind": "tax",
+        "cost": 20
+      }
+    },
+    {
+      "round": 4,
+      "turn": 12,
+      "actor": 1,
+      "phase": "tax",
+      "plan": 12,
+      "action": {
+        "kind": "tax",
+        "cost": 20
+      }
+    },
+    {
+      "round": 4,
+      "turn": 12,
+      "actor": 2,
+      "phase": "tax",
+      "plan": 12,
+      "action": {
+        "kind": "tax",
+        "cost": 20
+      }
+    },
+    {
+      "round": 5,
+      "turn": 0,
+      "actor": 0,
+      "phase": "action",
+      "action": {
+        "kind": "plot",
+        "space": 15,
+        "cost": 1,
+        "card": 0,
+        "as": "plot"
+      }
+    },
+    {
+      "round": 5,
+      "turn": 0,
+      "actor": 0,
+      "phase": "action",
+      "action": {
+        "kind": "rights",
+        "id": "smallcastle",
+        "cost": 1,
+        "card": 4
+      }
+    },
+    {
+      "round": 5,
+      "turn": 1,
+      "actor": 1,
+      "phase": "action",
+      "plan": 3,
+      "action": {
+        "kind": "build",
+        "id": "washworks",
+        "space": 9,
+        "cost": 32,
+        "card": 2
+      }
+    },
+    {
+      "round": 5,
+      "turn": 1,
+      "actor": 1,
+      "phase": "action",
+      "plan": 7,
+      "action": {
+        "kind": "plot",
+        "space": 3,
+        "cost": 1,
+        "card": 1
+      }
+    },
+    {
+      "round": 5,
+      "turn": 2,
+      "actor": 2,
+      "phase": "action",
+      "plan": 13,
+      "action": {
+        "kind": "mine",
+        "refill": 0,
+        "cost": 0,
+        "card": 0
+      }
+    },
+    {
+      "round": 5,
+      "turn": 2,
+      "actor": 2,
+      "phase": "action",
+      "pending": "mine-place",
+      "plan": 13,
+      "action": {
+        "kind": "place-mine",
+        "id": "m2-2",
+        "space": 17,
+        "cost": 12
+      }
+    },
+    {
+      "round": 5,
+      "turn": 2,
+      "actor": 2,
+      "phase": "action",
+      "plan": 2,
+      "action": {
+        "kind": "build",
+        "id": "bathhouse",
+        "space": 21,
+        "cost": 28,
+        "card": 2
+      }
+    },
+    {
+      "round": 5,
+      "turn": 3,
+      "actor": 3,
+      "phase": "action",
+      "plan": 4,
+      "action": {
+        "kind": "income",
+        "gross": 63,
+        "card": 2
+      }
+    },
+    {
+      "round": 5,
+      "turn": 3,
+      "actor": 3,
+      "phase": "action",
+      "plan": 5,
+      "action": {
+        "kind": "plot",
+        "space": 27,
+        "cost": 8,
+        "card": 1
+      }
+    },
+    {
+      "round": 5,
+      "turn": 4,
+      "actor": 0,
+      "phase": "action",
+      "action": {
+        "kind": "rights",
+        "id": "fish",
+        "cost": 8,
+        "card": 5
+      }
+    },
+    {
+      "round": 5,
+      "turn": 4,
+      "actor": 0,
+      "phase": "action",
+      "action": {
+        "kind": "income",
+        "gross": 42,
+        "card": 2
+      }
+    },
+    {
+      "round": 5,
+      "turn": 5,
+      "actor": 1,
+      "phase": "action",
+      "plan": 14,
+      "action": {
+        "kind": "build",
+        "id": "mason",
+        "space": 3,
+        "cost": 20,
+        "card": 3
+      }
+    },
+    {
+      "round": 5,
+      "turn": 5,
+      "actor": 1,
+      "phase": "action",
+      "pending": "right",
+      "plan": 14,
+      "action": {
+        "kind": "rights",
+        "id": "coal-market",
+        "cost": 0
+      }
+    },
+    {
+      "round": 5,
+      "turn": 5,
+      "actor": 1,
+      "phase": "action",
+      "plan": 4,
+      "action": {
+        "kind": "income",
+        "gross": 86,
+        "card": 4
+      }
+    },
+    {
+      "round": 5,
+      "turn": 6,
+      "actor": 2,
+      "phase": "action",
+      "plan": 15,
+      "action": {
+        "kind": "income",
+        "gross": 81,
+        "card": 4
+      }
+    },
+    {
+      "round": 5,
+      "turn": 6,
+      "actor": 2,
+      "phase": "action",
+      "plan": 5,
+      "action": {
+        "kind": "barbara",
+        "card": 5
+      }
+    },
+    {
+      "round": 5,
+      "turn": 6,
+      "actor": 2,
+      "phase": "action",
+      "pending": "plot",
+      "plan": 5,
+      "action": {
+        "kind": "plot",
+        "space": 4,
+        "cost": 0
+      }
+    },
+    {
+      "round": 5,
+      "turn": 7,
+      "actor": 3,
+      "phase": "action",
+      "plan": 7,
+      "action": {
+        "kind": "build",
+        "id": "bread",
+        "space": 27,
+        "cost": 18,
+        "card": 3
+      }
+    },
+    {
+      "round": 5,
+      "turn": 7,
+      "actor": 3,
+      "phase": "action",
+      "plan": 14,
+      "action": {
+        "kind": "barbara",
+        "card": 5
+      }
+    },
+    {
+      "round": 5,
+      "turn": 7,
+      "actor": 3,
+      "phase": "action",
+      "pending": "patrician",
+      "plan": 14,
+      "action": {
+        "kind": "patrician",
+        "color": "red"
+      }
+    },
+    {
+      "round": 5,
+      "turn": 8,
+      "actor": 0,
+      "phase": "action",
+      "action": {
+        "kind": "build",
+        "id": "fish",
+        "space": 15,
+        "cost": 27,
+        "card": 3
+      }
+    },
+    {
+      "round": 5,
+      "turn": 8,
+      "actor": 0,
+      "phase": "action",
+      "pending": "right",
+      "action": {
+        "kind": "rights",
+        "id": "st-mary",
+        "cost": 0
+      }
+    },
+    {
+      "round": 5,
+      "turn": 9,
+      "actor": 1,
+      "phase": "action",
+      "plan": 10,
+      "action": {
+        "kind": "rights",
+        "id": "brewery",
+        "cost": 8,
+        "card": 5
+      }
+    },
+    {
+      "round": 5,
+      "turn": 9,
+      "actor": 1,
+      "phase": "action",
+      "plan": 2,
+      "action": {
+        "kind": "mine",
+        "refill": 0,
+        "cost": 0,
+        "card": 0
+      }
+    },
+    {
+      "round": 5,
+      "turn": 9,
+      "actor": 1,
+      "phase": "action",
+      "pending": "mine-place",
+      "plan": 2,
+      "action": {
+        "kind": "place-mine",
+        "id": "m3-12",
+        "space": 18,
+        "cost": 8
+      }
+    },
+    {
+      "round": 5,
+      "turn": 10,
+      "actor": 2,
+      "phase": "action",
+      "plan": 4,
+      "action": {
+        "kind": "mine",
+        "refill": 2,
+        "cost": 4,
+        "card": 1
+      }
+    },
+    {
+      "round": 5,
+      "turn": 10,
+      "actor": 2,
+      "phase": "action",
+      "pending": "mine-place",
+      "plan": 4,
+      "action": {
+        "kind": "place-mine",
+        "id": "m3-11",
+        "space": 16,
+        "cost": 8
+      }
+    },
+    {
+      "round": 5,
+      "turn": 10,
+      "actor": 2,
+      "phase": "action",
+      "plan": 11,
+      "action": {
+        "kind": "build",
+        "id": "our-lady",
+        "space": 4,
+        "cost": 48,
+        "card": 3
+      }
+    },
+    {
+      "round": 5,
+      "turn": 11,
+      "actor": 3,
+      "phase": "action",
+      "plan": 2,
+      "action": {
+        "kind": "rights",
+        "id": "sawmill",
+        "cost": 4,
+        "card": 4
+      }
+    },
+    {
+      "round": 5,
+      "turn": 11,
+      "actor": 3,
+      "phase": "action",
+      "plan": 11,
+      "action": {
+        "kind": "mine",
+        "refill": 2,
+        "cost": 4,
+        "card": 0
+      }
+    },
+    {
+      "round": 5,
+      "turn": 11,
+      "actor": 3,
+      "phase": "action",
+      "pending": "mine-place",
+      "plan": 11,
+      "action": {
+        "kind": "place-mine",
+        "id": "m3-2",
+        "space": 6,
+        "cost": 16
+      }
+    },
+    {
+      "round": 5,
+      "turn": 12,
+      "actor": 0,
+      "phase": "tax",
+      "action": {
+        "kind": "tax",
+        "cost": 18
+      }
+    },
+    {
+      "round": 5,
+      "turn": 12,
+      "actor": 1,
+      "phase": "tax",
+      "plan": 2,
+      "action": {
+        "kind": "tax",
+        "cost": 18
+      }
+    },
+    {
+      "round": 5,
+      "turn": 12,
+      "actor": 2,
+      "phase": "tax",
+      "plan": 11,
+      "action": {
+        "kind": "tax",
+        "cost": 18
+      }
+    },
+    {
+      "round": 5,
+      "turn": 12,
+      "actor": 3,
+      "phase": "tax",
+      "plan": 11,
+      "action": {
+        "kind": "tax",
+        "cost": 18
+      }
+    }
+  ]
+}

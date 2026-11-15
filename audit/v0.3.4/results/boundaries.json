@@ -1,0 +1,15 @@
+{
+  "mineRanks": 1008,
+  "checks": [
+    "supply and board 2p",
+    "supply and board 3p",
+    "supply and board 4p",
+    "mid-draw reshuffle, no duplicate or missing mine",
+    "ore cap at Ius event boundary",
+    "four-way exact tie, cash tiebreak, VP precedence",
+    "Groschen +3 ore and cathedral tax capped; King +3 population capped",
+    "legacy fixture v0.1.0_III-3.json",
+    "legacy fixture v0.1.0_Completed_Game.json",
+    "legacy fixture v0.2.3_Mine_Pending.json"
+  ]
+}
