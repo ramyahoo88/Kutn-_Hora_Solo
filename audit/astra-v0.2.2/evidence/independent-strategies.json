@@ -1,0 +1,6162 @@
+{
+  "summary": [
+    {
+      "group": "astra-v022-discovery",
+      "policy": "industry",
+      "games": 18,
+      "rivalWins": 15,
+      "draws": 0,
+      "rivalLosses": 3,
+      "averageMargin": 11.222222222222221
+    },
+    {
+      "group": "astra-v022-discovery",
+      "policy": "mining",
+      "games": 18,
+      "rivalWins": 16,
+      "draws": 0,
+      "rivalLosses": 2,
+      "averageMargin": 11.11111111111111
+    },
+    {
+      "group": "astra-v022-discovery",
+      "policy": "council",
+      "games": 18,
+      "rivalWins": 17,
+      "draws": 0,
+      "rivalLosses": 1,
+      "averageMargin": 13.61111111111111
+    },
+    {
+      "group": "astra-v022-discovery",
+      "policy": "blockade",
+      "games": 18,
+      "rivalWins": 15,
+      "draws": 0,
+      "rivalLosses": 3,
+      "averageMargin": 8.666666666666666
+    },
+    {
+      "group": "astra-v022-confirm",
+      "policy": "industry",
+      "games": 18,
+      "rivalWins": 14,
+      "draws": 0,
+      "rivalLosses": 4,
+      "averageMargin": 9.722222222222221
+    },
+    {
+      "group": "astra-v022-confirm",
+      "policy": "mining",
+      "games": 18,
+      "rivalWins": 15,
+      "draws": 0,
+      "rivalLosses": 3,
+      "averageMargin": 10.5
+    },
+    {
+      "group": "astra-v022-confirm",
+      "policy": "council",
+      "games": 18,
+      "rivalWins": 16,
+      "draws": 0,
+      "rivalLosses": 2,
+      "averageMargin": 13
+    },
+    {
+      "group": "astra-v022-confirm",
+      "policy": "blockade",
+      "games": 18,
+      "rivalWins": 15,
+      "draws": 0,
+      "rivalLosses": 3,
+      "averageMargin": 11.88888888888889
+    }
+  ],
+  "records": [
+    {
+      "group": "astra-v022-discovery",
+      "policy": "industry",
+      "seed": "astra-v022-discovery-0",
+      "setup": 1,
+      "side": 0,
+      "starter": 0,
+      "rivalSeat": 0,
+      "steps": 87,
+      "winner": 0,
+      "rivalWin": true,
+      "draw": false,
+      "margin": 17,
+      "scores": [
+        59,
+        42
+      ],
+      "actions": [
+        {
+          "plot": 6,
+          "rights": 8,
+          "income": 9,
+          "mine": 4,
+          "place-mine": 4,
+          "penalty": 2,
+          "build": 6,
+          "tax": 3,
+          "technology": 1
+        },
+        {
+          "rights": 8,
+          "plot": 7,
+          "build": 5,
+          "income": 8,
+          "penalty": 1,
+          "tax": 4,
+          "mine": 5,
+          "place-mine": 5,
+          "barbara": 1
+        }
+      ]
+    },
+    {
+      "group": "astra-v022-discovery",
+      "policy": "industry",
+      "seed": "astra-v022-discovery-0",
+      "setup": 1,
+      "side": 0,
+      "starter": 0,
+      "rivalSeat": 1,
+      "steps": 89,
+      "winner": 0,
+      "rivalWin": false,
+      "draw": false,
+      "margin": -5,
+      "scores": [
+        44,
+        39
+      ],
+      "actions": [
+        {
+          "rights": 8,
+          "plot": 7,
+          "build": 6,
+          "income": 7,
+          "penalty": 2,
+          "technology": 2,
+          "mine": 4,
+          "place-mine": 4,
+          "tax": 3
+        },
+        {
+          "plot": 4,
+          "rights": 5,
+          "mine": 8,
+          "place-mine": 8,
+          "income": 10,
+          "penalty": 2,
+          "build": 4,
+          "tax": 3,
+          "house": 2
+        }
+      ]
+    },
+    {
+      "group": "astra-v022-discovery",
+      "policy": "industry",
+      "seed": "astra-v022-discovery-1",
+      "setup": 2,
+      "side": 1,
+      "starter": 0,
+      "rivalSeat": 0,
+      "steps": 81,
+      "winner": 0,
+      "rivalWin": true,
+      "draw": false,
+      "margin": 22,
+      "scores": [
+        61,
+        39
+      ],
+      "actions": [
+        {
+          "plot": 5,
+          "rights": 7,
+          "mine": 7,
+          "place-mine": 6,
+          "build": 5,
+          "income": 7,
+          "skip": 1,
+          "tax": 3,
+          "barbara": 1
+        },
+        {
+          "rights": 8,
+          "plot": 6,
+          "build": 5,
+          "income": 8,
+          "mine": 4,
+          "place-mine": 4,
+          "skip": 1,
+          "tax": 3
+        }
+      ]
+    },
+    {
+      "group": "astra-v022-discovery",
+      "policy": "industry",
+      "seed": "astra-v022-discovery-1",
+      "setup": 2,
+      "side": 1,
+      "starter": 0,
+      "rivalSeat": 1,
+      "steps": 83,
+      "winner": 1,
+      "rivalWin": true,
+      "draw": false,
+      "margin": 12,
+      "scores": [
+        54,
+        66
+      ],
+      "actions": [
+        {
+          "rights": 10,
+          "plot": 7,
+          "build": 7,
+          "income": 6,
+          "mine": 3,
+          "place-mine": 3,
+          "tax": 3
+        },
+        {
+          "plot": 7,
+          "rights": 7,
+          "mine": 5,
+          "place-mine": 5,
+          "build": 6,
+          "income": 9,
+          "penalty": 1,
+          "barbara": 2,
+          "tax": 2
+        }
+      ]
+    },
+    {
+      "group": "astra-v022-discovery",
+      "policy": "industry",
+      "seed": "astra-v022-discovery-2",
+      "setup": 3,
+      "side": 0,
+      "starter": 1,
+      "rivalSeat": 0,
+      "steps": 81,
+      "winner": 0,
+      "rivalWin": true,
+      "draw": false,
+      "margin": 18,
+      "scores": [
+        59,
+        41
+      ],
+      "actions": [
+        {
+          "plot": 6,
+          "rights": 6,
+          "build": 6,
+          "income": 7,
+          "mine": 4,
+          "place-mine": 4,
+          "tax": 4,
+          "barbara": 2,
+          "patrician": 1
+        },
+        {
+          "rights": 8,
+          "plot": 6,
+          "build": 5,
+          "income": 6,
+          "tax": 4,
+          "mine": 5,
+          "place-mine": 5,
+          "barbara": 1,
+          "house": 1
+        }
+      ]
+    },
+    {
+      "group": "astra-v022-discovery",
+      "policy": "industry",
+      "seed": "astra-v022-discovery-2",
+      "setup": 3,
+      "side": 0,
+      "starter": 1,
+      "rivalSeat": 1,
+      "steps": 83,
+      "winner": 1,
+      "rivalWin": true,
+      "draw": false,
+      "margin": 10,
+      "scores": [
+        53,
+        63
+      ],
+      "actions": [
+        {
+          "rights": 8,
+          "plot": 8,
+          "build": 7,
+          "income": 6,
+          "mine": 2,
+          "place-mine": 2,
+          "technology": 1,
+          "tax": 4
+        },
+        {
+          "plot": 5,
+          "rights": 7,
+          "build": 4,
+          "mine": 8,
+          "place-mine": 8,
+          "income": 7,
+          "penalty": 1,
+          "tax": 3,
+          "barbara": 1,
+          "house": 1
+        }
+      ]
+    },
+    {
+      "group": "astra-v022-discovery",
+      "policy": "industry",
+      "seed": "astra-v022-discovery-3",
+      "setup": 4,
+      "side": 1,
+      "starter": 1,
+      "rivalSeat": 0,
+      "steps": 81,
+      "winner": 0,
+      "rivalWin": true,
+      "draw": false,
+      "margin": 17,
+      "scores": [
+        61,
+        44
+      ],
+      "actions": [
+        {
+          "plot": 5,
+          "rights": 6,
+          "mine": 9,
+          "place-mine": 9,
+          "build": 4,
+          "income": 6,
+          "penalty": 3,
+          "tax": 1
+        },
+        {
+          "rights": 7,
+          "plot": 7,
+          "build": 4,
+          "income": 9,
+          "tax": 4,
+          "mine": 3,
+          "place-mine": 3,
+          "skip": 1
+        }
+      ]
+    },
+    {
+      "group": "astra-v022-discovery",
+      "policy": "industry",
+      "seed": "astra-v022-discovery-3",
+      "setup": 4,
+      "side": 1,
+      "starter": 1,
+      "rivalSeat": 1,
+      "steps": 82,
+      "winner": 0,
+      "rivalWin": false,
+      "draw": false,
+      "margin": -17,
+      "scores": [
+        41,
+        24
+      ],
+      "actions": [
+        {
+          "rights": 9,
+          "plot": 7,
+          "build": 6,
+          "income": 6,
+          "tax": 3,
+          "mine": 3,
+          "place-mine": 3,
+          "penalty": 1
+        },
+        {
+          "plot": 1,
+          "rights": 3,
+          "income": 10,
+          "mine": 10,
+          "skip": 8,
+          "place-mine": 7,
+          "penalty": 3,
+          "build": 1,
+          "tax": 1
+        }
+      ]
+    },
+    {
+      "group": "astra-v022-discovery",
+      "policy": "industry",
+      "seed": "astra-v022-discovery-4",
+      "setup": 5,
+      "side": 0,
+      "starter": 0,
+      "rivalSeat": 0,
+      "steps": 84,
+      "winner": 0,
+      "rivalWin": true,
+      "draw": false,
+      "margin": 8,
+      "scores": [
+        44,
+        36
+      ],
+      "actions": [
+        {
+          "plot": 5,
+          "rights": 7,
+          "mine": 7,
+          "place-mine": 6,
+          "income": 6,
+          "build": 5,
+          "penalty": 1,
+          "tax": 3,
+          "skip": 1,
+          "technology": 1,
+          "barbara": 1,
+          "house": 2
+        },
+        {
+          "rights": 8,
+          "plot": 7,
+          "build": 5,
+          "income": 6,
+          "tax": 3,
+          "mine": 4,
+          "place-mine": 4,
+          "skip": 1,
+          "penalty": 1
+        }
+      ]
+    },
+    {
+      "group": "astra-v022-discovery",
+      "policy": "industry",
+      "seed": "astra-v022-discovery-4",
+      "setup": 5,
+      "side": 0,
+      "starter": 0,
+      "rivalSeat": 1,
+      "steps": 82,
+      "winner": 1,
+      "rivalWin": true,
+      "draw": false,
+      "margin": 3,
+      "scores": [
+        46,
+        49
+      ],
+      "actions": [
+        {
+          "rights": 9,
+          "plot": 8,
+          "build": 6,
+          "mine": 4,
+          "place-mine": 4,
+          "income": 6,
+          "tax": 4,
+          "house": 1
+        },
+        {
+          "plot": 6,
+          "rights": 5,
+          "build": 5,
+          "income": 9,
+          "mine": 4,
+          "place-mine": 4,
+          "tax": 4,
+          "barbara": 2,
+          "house": 1
+        }
+      ]
+    },
+    {
+      "group": "astra-v022-discovery",
+      "policy": "industry",
+      "seed": "astra-v022-discovery-5",
+      "setup": 6,
+      "side": 1,
+      "starter": 0,
+      "rivalSeat": 0,
+      "steps": 85,
+      "winner": 0,
+      "rivalWin": true,
+      "draw": false,
+      "margin": 8,
+      "scores": [
+        46,
+        38
+      ],
+      "actions": [
+        {
+          "plot": 6,
+          "rights": 7,
+          "income": 7,
+          "mine": 6,
+          "skip": 1,
+          "place-mine": 5,
+          "build": 5,
+          "barbara": 2,
+          "tax": 4,
+          "house": 2
+        },
+        {
+          "rights": 8,
+          "plot": 7,
+          "build": 5,
+          "income": 7,
+          "mine": 4,
+          "place-mine": 4,
+          "tax": 3,
+          "technology": 1,
+          "penalty": 1
+        }
+      ]
+    },
+    {
+      "group": "astra-v022-discovery",
+      "policy": "industry",
+      "seed": "astra-v022-discovery-5",
+      "setup": 6,
+      "side": 1,
+      "starter": 0,
+      "rivalSeat": 1,
+      "steps": 83,
+      "winner": 1,
+      "rivalWin": true,
+      "draw": false,
+      "margin": 20,
+      "scores": [
+        46,
+        66
+      ],
+      "actions": [
+        {
+          "rights": 9,
+          "plot": 8,
+          "build": 6,
+          "income": 6,
+          "tax": 4,
+          "mine": 2,
+          "place-mine": 2
+        },
+        {
+          "mine": 6,
+          "skip": 1,
+          "place-mine": 5,
+          "plot": 5,
+          "rights": 8,
+          "build": 5,
+          "technology": 2,
+          "income": 6,
+          "barbara": 2,
+          "house": 1,
+          "tax": 4,
+          "patrician": 1
+        }
+      ]
+    },
+    {
+      "group": "astra-v022-discovery",
+      "policy": "industry",
+      "seed": "astra-v022-discovery-6",
+      "setup": 7,
+      "side": 0,
+      "starter": 1,
+      "rivalSeat": 0,
+      "steps": 87,
+      "winner": 1,
+      "rivalWin": false,
+      "draw": false,
+      "margin": -3,
+      "scores": [
+        29,
+        32
+      ],
+      "actions": [
+        {
+          "plot": 5,
+          "rights": 6,
+          "income": 7,
+          "mine": 8,
+          "skip": 3,
+          "penalty": 3,
+          "place-mine": 6,
+          "build": 4,
+          "tax": 3,
+          "technology": 1
+        },
+        {
+          "rights": 7,
+          "plot": 7,
+          "build": 6,
+          "income": 8,
+          "penalty": 1,
+          "tax": 5,
+          "mine": 3,
+          "place-mine": 3,
+          "barbara": 1
+        }
+      ]
+    },
+    {
+      "group": "astra-v022-discovery",
+      "policy": "industry",
+      "seed": "astra-v022-discovery-6",
+      "setup": 7,
+      "side": 0,
+      "starter": 1,
+      "rivalSeat": 1,
+      "steps": 87,
+      "winner": 1,
+      "rivalWin": true,
+      "draw": false,
+      "margin": 22,
+      "scores": [
+        44,
+        66
+      ],
+      "actions": [
+        {
+          "rights": 8,
+          "plot": 6,
+          "build": 5,
+          "penalty": 1,
+          "income": 7,
+          "tax": 5,
+          "mine": 6,
+          "place-mine": 6,
+          "technology": 1
+        },
+        {
+          "plot": 6,
+          "rights": 7,
+          "mine": 5,
+          "place-mine": 4,
+          "build": 6,
+          "penalty": 2,
+          "income": 7,
+          "tax": 4,
+          "skip": 1
+        }
+      ]
+    },
+    {
+      "group": "astra-v022-discovery",
+      "policy": "industry",
+      "seed": "astra-v022-discovery-7",
+      "setup": 8,
+      "side": 1,
+      "starter": 1,
+      "rivalSeat": 0,
+      "steps": 82,
+      "winner": 0,
+      "rivalWin": true,
+      "draw": false,
+      "margin": 20,
+      "scores": [
+        60,
+        40
+      ],
+      "actions": [
+        {
+          "plot": 6,
+          "rights": 6,
+          "mine": 5,
+          "place-mine": 5,
+          "income": 7,
+          "build": 5,
+          "barbara": 2,
+          "house": 1,
+          "penalty": 1,
+          "tax": 4,
+          "patrician": 1
+        },
+        {
+          "rights": 8,
+          "plot": 7,
+          "build": 5,
+          "income": 6,
+          "penalty": 2,
+          "mine": 2,
+          "place-mine": 2,
+          "skip": 2,
+          "tax": 3,
+          "technology": 1,
+          "barbara": 1
+        }
+      ]
+    },
+    {
+      "group": "astra-v022-discovery",
+      "policy": "industry",
+      "seed": "astra-v022-discovery-7",
+      "setup": 8,
+      "side": 1,
+      "starter": 1,
+      "rivalSeat": 1,
+      "steps": 81,
+      "winner": 1,
+      "rivalWin": true,
+      "draw": false,
+      "margin": 19,
+      "scores": [
+        26,
+        45
+      ],
+      "actions": [
+        {
+          "rights": 8,
+          "plot": 6,
+          "build": 5,
+          "income": 7,
+          "penalty": 3,
+          "mine": 2,
+          "place-mine": 2,
+          "skip": 3,
+          "tax": 2
+        },
+        {
+          "plot": 5,
+          "rights": 5,
+          "mine": 6,
+          "place-mine": 6,
+          "income": 8,
+          "build": 5,
+          "penalty": 4,
+          "barbara": 2,
+          "tax": 1,
+          "patrician": 1
+        }
+      ]
+    },
+    {
+      "group": "astra-v022-discovery",
+      "policy": "industry",
+      "seed": "astra-v022-discovery-8",
+      "setup": 9,
+      "side": 0,
+      "starter": 0,
+      "rivalSeat": 0,
+      "steps": 85,
+      "winner": 0,
+      "rivalWin": true,
+      "draw": false,
+      "margin": 16,
+      "scores": [
+        61,
+        45
+      ],
+      "actions": [
+        {
+          "plot": 5,
+          "rights": 6,
+          "build": 5,
+          "technology": 3,
+          "mine": 7,
+          "place-mine": 6,
+          "income": 6,
+          "skip": 1,
+          "penalty": 2,
+          "tax": 3,
+          "barbara": 1,
+          "house": 1
+        },
+        {
+          "rights": 9,
+          "plot": 7,
+          "build": 6,
+          "income": 6,
+          "penalty": 1,
+          "tax": 4,
+          "mine": 3,
+          "place-mine": 3
+        }
+      ]
+    },
+    {
+      "group": "astra-v022-discovery",
+      "policy": "industry",
+      "seed": "astra-v022-discovery-8",
+      "setup": 9,
+      "side": 0,
+      "starter": 0,
+      "rivalSeat": 1,
+      "steps": 89,
+      "winner": 1,
+      "rivalWin": true,
+      "draw": false,
+      "margin": 15,
+      "scores": [
+        40,
+        55
+      ],
+      "actions": [
+        {
+          "rights": 8,
+          "plot": 8,
+          "build": 5,
+          "technology": 3,
+          "income": 8,
+          "tax": 5,
+          "mine": 2,
+          "place-mine": 2
+        },
+        {
+          "plot": 5,
+          "rights": 7,
+          "mine": 9,
+          "place-mine": 9,
+          "build": 4,
+          "income": 8,
+          "tax": 4,
+          "barbara": 1,
+          "penalty": 1
+        }
+      ]
+    },
+    {
+      "group": "astra-v022-discovery",
+      "policy": "mining",
+      "seed": "astra-v022-discovery-0",
+      "setup": 1,
+      "side": 0,
+      "starter": 0,
+      "rivalSeat": 0,
+      "steps": 87,
+      "winner": 0,
+      "rivalWin": true,
+      "draw": false,
+      "margin": 3,
+      "scores": [
+        30,
+        27
+      ],
+      "actions": [
+        {
+          "plot": 3,
+          "rights": 5,
+          "income": 13,
+          "mine": 8,
+          "place-mine": 7,
+          "penalty": 1,
+          "skip": 1,
+          "tax": 4,
+          "build": 3
+        },
+        {
+          "rights": 8,
+          "plot": 6,
+          "build": 5,
+          "penalty": 2,
+          "income": 8,
+          "mine": 5,
+          "place-mine": 5,
+          "tax": 3
+        }
+      ]
+    },
+    {
+      "group": "astra-v022-discovery",
+      "policy": "mining",
+      "seed": "astra-v022-discovery-0",
+      "setup": 1,
+      "side": 0,
+      "starter": 0,
+      "rivalSeat": 1,
+      "steps": 87,
+      "winner": 1,
+      "rivalWin": true,
+      "draw": false,
+      "margin": 2,
+      "scores": [
+        36,
+        38
+      ],
+      "actions": [
+        {
+          "rights": 7,
+          "plot": 6,
+          "build": 4,
+          "penalty": 1,
+          "income": 8,
+          "mine": 7,
+          "place-mine": 7,
+          "tax": 4
+        },
+        {
+          "plot": 5,
+          "rights": 6,
+          "mine": 6,
+          "place-mine": 6,
+          "income": 9,
+          "penalty": 3,
+          "build": 5,
+          "tax": 2,
+          "barbara": 1
+        }
+      ]
+    },
+    {
+      "group": "astra-v022-discovery",
+      "policy": "mining",
+      "seed": "astra-v022-discovery-1",
+      "setup": 2,
+      "side": 1,
+      "starter": 0,
+      "rivalSeat": 0,
+      "steps": 77,
+      "winner": 0,
+      "rivalWin": true,
+      "draw": false,
+      "margin": 32,
+      "scores": [
+        93,
+        61
+      ],
+      "actions": [
+        {
+          "plot": 8,
+          "rights": 8,
+          "mine": 3,
+          "place-mine": 3,
+          "build": 7,
+          "income": 7,
+          "penalty": 2,
+          "house": 1,
+          "tax": 1
+        },
+        {
+          "rights": 9,
+          "plot": 7,
+          "build": 7,
+          "income": 7,
+          "mine": 2,
+          "place-mine": 2,
+          "tax": 3
+        }
+      ]
+    },
+    {
+      "group": "astra-v022-discovery",
+      "policy": "mining",
+      "seed": "astra-v022-discovery-1",
+      "setup": 2,
+      "side": 1,
+      "starter": 0,
+      "rivalSeat": 1,
+      "steps": 76,
+      "winner": 1,
+      "rivalWin": true,
+      "draw": false,
+      "margin": 18,
+      "scores": [
+        49,
+        67
+      ],
+      "actions": [
+        {
+          "rights": 8,
+          "plot": 8,
+          "build": 6,
+          "income": 8,
+          "mine": 2,
+          "place-mine": 2,
+          "penalty": 1,
+          "tax": 2
+        },
+        {
+          "plot": 7,
+          "rights": 8,
+          "mine": 3,
+          "place-mine": 3,
+          "build": 7,
+          "income": 8,
+          "tax": 3
+        }
+      ]
+    },
+    {
+      "group": "astra-v022-discovery",
+      "policy": "mining",
+      "seed": "astra-v022-discovery-2",
+      "setup": 3,
+      "side": 0,
+      "starter": 1,
+      "rivalSeat": 0,
+      "steps": 79,
+      "winner": 0,
+      "rivalWin": true,
+      "draw": false,
+      "margin": 9,
+      "scores": [
+        48,
+        39
+      ],
+      "actions": [
+        {
+          "plot": 5,
+          "rights": 6,
+          "build": 5,
+          "income": 7,
+          "mine": 6,
+          "place-mine": 6,
+          "penalty": 1,
+          "barbara": 1,
+          "house": 1,
+          "tax": 4
+        },
+        {
+          "rights": 8,
+          "plot": 8,
+          "build": 6,
+          "income": 8,
+          "tax": 5,
+          "mine": 1,
+          "place-mine": 1
+        }
+      ]
+    },
+    {
+      "group": "astra-v022-discovery",
+      "policy": "mining",
+      "seed": "astra-v022-discovery-2",
+      "setup": 3,
+      "side": 0,
+      "starter": 1,
+      "rivalSeat": 1,
+      "steps": 80,
+      "winner": 1,
+      "rivalWin": true,
+      "draw": false,
+      "margin": 22,
+      "scores": [
+        52,
+        74
+      ],
+      "actions": [
+        {
+          "rights": 8,
+          "plot": 6,
+          "build": 6,
+          "income": 6,
+          "mine": 4,
+          "place-mine": 3,
+          "tax": 4,
+          "skip": 1
+        },
+        {
+          "plot": 6,
+          "rights": 7,
+          "build": 6,
+          "mine": 5,
+          "place-mine": 5,
+          "income": 8,
+          "penalty": 1,
+          "tax": 3,
+          "house": 1
+        }
+      ]
+    },
+    {
+      "group": "astra-v022-discovery",
+      "policy": "mining",
+      "seed": "astra-v022-discovery-3",
+      "setup": 4,
+      "side": 1,
+      "starter": 1,
+      "rivalSeat": 0,
+      "steps": 85,
+      "winner": 0,
+      "rivalWin": true,
+      "draw": false,
+      "margin": 21,
+      "scores": [
+        52,
+        31
+      ],
+      "actions": [
+        {
+          "plot": 5,
+          "rights": 5,
+          "mine": 9,
+          "place-mine": 9,
+          "build": 4,
+          "income": 7,
+          "tax": 4,
+          "penalty": 1
+        },
+        {
+          "rights": 7,
+          "plot": 6,
+          "penalty": 2,
+          "mine": 5,
+          "place-mine": 5,
+          "income": 8,
+          "build": 4,
+          "tax": 3,
+          "skip": 1
+        }
+      ]
+    },
+    {
+      "group": "astra-v022-discovery",
+      "policy": "mining",
+      "seed": "astra-v022-discovery-3",
+      "setup": 4,
+      "side": 1,
+      "starter": 1,
+      "rivalSeat": 1,
+      "steps": 80,
+      "winner": 1,
+      "rivalWin": true,
+      "draw": false,
+      "margin": 8,
+      "scores": [
+        36,
+        44
+      ],
+      "actions": [
+        {
+          "rights": 8,
+          "plot": 6,
+          "build": 5,
+          "income": 8,
+          "mine": 4,
+          "place-mine": 4,
+          "tax": 4
+        },
+        {
+          "plot": 4,
+          "rights": 5,
+          "income": 10,
+          "mine": 7,
+          "place-mine": 6,
+          "skip": 1,
+          "build": 4,
+          "penalty": 1,
+          "tax": 3
+        }
+      ]
+    },
+    {
+      "group": "astra-v022-discovery",
+      "policy": "mining",
+      "seed": "astra-v022-discovery-4",
+      "setup": 5,
+      "side": 0,
+      "starter": 0,
+      "rivalSeat": 0,
+      "steps": 80,
+      "winner": 0,
+      "rivalWin": true,
+      "draw": false,
+      "margin": 21,
+      "scores": [
+        56,
+        35
+      ],
+      "actions": [
+        {
+          "plot": 6,
+          "rights": 8,
+          "mine": 6,
+          "place-mine": 6,
+          "income": 8,
+          "build": 5,
+          "tax": 4
+        },
+        {
+          "rights": 9,
+          "plot": 7,
+          "build": 7,
+          "income": 6,
+          "mine": 2,
+          "place-mine": 2,
+          "tax": 2,
+          "penalty": 2
+        }
+      ]
+    },
+    {
+      "group": "astra-v022-discovery",
+      "policy": "mining",
+      "seed": "astra-v022-discovery-4",
+      "setup": 5,
+      "side": 0,
+      "starter": 0,
+      "rivalSeat": 1,
+      "steps": 82,
+      "winner": 1,
+      "rivalWin": true,
+      "draw": false,
+      "margin": 3,
+      "scores": [
+        46,
+        49
+      ],
+      "actions": [
+        {
+          "rights": 9,
+          "plot": 8,
+          "build": 6,
+          "mine": 4,
+          "place-mine": 4,
+          "income": 6,
+          "tax": 4,
+          "house": 1
+        },
+        {
+          "plot": 6,
+          "rights": 5,
+          "build": 5,
+          "income": 9,
+          "mine": 4,
+          "place-mine": 4,
+          "tax": 4,
+          "barbara": 2,
+          "house": 1
+        }
+      ]
+    },
+    {
+      "group": "astra-v022-discovery",
+      "policy": "mining",
+      "seed": "astra-v022-discovery-5",
+      "setup": 6,
+      "side": 1,
+      "starter": 0,
+      "rivalSeat": 0,
+      "steps": 82,
+      "winner": 0,
+      "rivalWin": true,
+      "draw": false,
+      "margin": 12,
+      "scores": [
+        48,
+        36
+      ],
+      "actions": [
+        {
+          "plot": 5,
+          "rights": 6,
+          "income": 8,
+          "mine": 7,
+          "place-mine": 7,
+          "build": 5,
+          "tax": 3,
+          "penalty": 1
+        },
+        {
+          "rights": 7,
+          "plot": 7,
+          "build": 4,
+          "income": 8,
+          "mine": 4,
+          "place-mine": 4,
+          "technology": 1,
+          "tax": 3,
+          "penalty": 1,
+          "skip": 1
+        }
+      ]
+    },
+    {
+      "group": "astra-v022-discovery",
+      "policy": "mining",
+      "seed": "astra-v022-discovery-5",
+      "setup": 6,
+      "side": 1,
+      "starter": 0,
+      "rivalSeat": 1,
+      "steps": 85,
+      "winner": 1,
+      "rivalWin": true,
+      "draw": false,
+      "margin": 12,
+      "scores": [
+        36,
+        48
+      ],
+      "actions": [
+        {
+          "rights": 8,
+          "plot": 8,
+          "build": 5,
+          "income": 7,
+          "mine": 3,
+          "place-mine": 3,
+          "tax": 4
+        },
+        {
+          "mine": 8,
+          "skip": 1,
+          "place-mine": 7,
+          "plot": 5,
+          "rights": 6,
+          "build": 5,
+          "technology": 2,
+          "income": 8,
+          "penalty": 2,
+          "tax": 2,
+          "house": 1
+        }
+      ]
+    },
+    {
+      "group": "astra-v022-discovery",
+      "policy": "mining",
+      "seed": "astra-v022-discovery-6",
+      "setup": 7,
+      "side": 0,
+      "starter": 1,
+      "rivalSeat": 0,
+      "steps": 84,
+      "winner": 0,
+      "rivalWin": true,
+      "draw": false,
+      "margin": 9,
+      "scores": [
+        47,
+        38
+      ],
+      "actions": [
+        {
+          "plot": 6,
+          "rights": 5,
+          "mine": 7,
+          "place-mine": 7,
+          "income": 7,
+          "penalty": 2,
+          "skip": 1,
+          "build": 5,
+          "tax": 4
+        },
+        {
+          "rights": 8,
+          "plot": 7,
+          "build": 7,
+          "penalty": 3,
+          "income": 6,
+          "mine": 3,
+          "place-mine": 3,
+          "tax": 3
+        }
+      ]
+    },
+    {
+      "group": "astra-v022-discovery",
+      "policy": "mining",
+      "seed": "astra-v022-discovery-6",
+      "setup": 7,
+      "side": 0,
+      "starter": 1,
+      "rivalSeat": 1,
+      "steps": 88,
+      "winner": 0,
+      "rivalWin": false,
+      "draw": false,
+      "margin": -7,
+      "scores": [
+        53,
+        46
+      ],
+      "actions": [
+        {
+          "rights": 9,
+          "plot": 7,
+          "build": 6,
+          "penalty": 3,
+          "mine": 3,
+          "place-mine": 3,
+          "income": 8,
+          "tax": 3
+        },
+        {
+          "plot": 5,
+          "rights": 6,
+          "mine": 9,
+          "place-mine": 8,
+          "build": 4,
+          "penalty": 3,
+          "income": 7,
+          "tax": 3,
+          "skip": 1
+        }
+      ]
+    },
+    {
+      "group": "astra-v022-discovery",
+      "policy": "mining",
+      "seed": "astra-v022-discovery-7",
+      "setup": 8,
+      "side": 1,
+      "starter": 1,
+      "rivalSeat": 0,
+      "steps": 86,
+      "winner": 0,
+      "rivalWin": true,
+      "draw": false,
+      "margin": 15,
+      "scores": [
+        41,
+        26
+      ],
+      "actions": [
+        {
+          "plot": 5,
+          "rights": 6,
+          "mine": 9,
+          "place-mine": 9,
+          "income": 9,
+          "build": 4,
+          "penalty": 2,
+          "tax": 3
+        },
+        {
+          "rights": 7,
+          "plot": 6,
+          "income": 9,
+          "mine": 4,
+          "place-mine": 4,
+          "build": 4,
+          "penalty": 4,
+          "tax": 1
+        }
+      ]
+    },
+    {
+      "group": "astra-v022-discovery",
+      "policy": "mining",
+      "seed": "astra-v022-discovery-7",
+      "setup": 8,
+      "side": 1,
+      "starter": 1,
+      "rivalSeat": 1,
+      "steps": 87,
+      "winner": 0,
+      "rivalWin": false,
+      "draw": false,
+      "margin": -3,
+      "scores": [
+        39,
+        36
+      ],
+      "actions": [
+        {
+          "rights": 7,
+          "plot": 6,
+          "build": 5,
+          "income": 7,
+          "penalty": 3,
+          "mine": 4,
+          "place-mine": 3,
+          "skip": 2,
+          "barbara": 2,
+          "tax": 2
+        },
+        {
+          "plot": 4,
+          "rights": 5,
+          "mine": 8,
+          "place-mine": 7,
+          "income": 7,
+          "build": 3,
+          "penalty": 2,
+          "barbara": 3,
+          "house": 1,
+          "tax": 3,
+          "patrician": 1,
+          "skip": 1,
+          "score-building": 1
+        }
+      ]
+    },
+    {
+      "group": "astra-v022-discovery",
+      "policy": "mining",
+      "seed": "astra-v022-discovery-8",
+      "setup": 9,
+      "side": 0,
+      "starter": 0,
+      "rivalSeat": 0,
+      "steps": 87,
+      "winner": 0,
+      "rivalWin": true,
+      "draw": false,
+      "margin": 15,
+      "scores": [
+        66,
+        51
+      ],
+      "actions": [
+        {
+          "plot": 6,
+          "rights": 6,
+          "build": 6,
+          "technology": 4,
+          "mine": 5,
+          "place-mine": 5,
+          "income": 6,
+          "tax": 4,
+          "penalty": 1,
+          "barbara": 1,
+          "house": 1
+        },
+        {
+          "rights": 8,
+          "plot": 7,
+          "build": 5,
+          "income": 7,
+          "tax": 5,
+          "mine": 5,
+          "place-mine": 5
+        }
+      ]
+    },
+    {
+      "group": "astra-v022-discovery",
+      "policy": "mining",
+      "seed": "astra-v022-discovery-8",
+      "setup": 9,
+      "side": 0,
+      "starter": 0,
+      "rivalSeat": 1,
+      "steps": 88,
+      "winner": 1,
+      "rivalWin": true,
+      "draw": false,
+      "margin": 8,
+      "scores": [
+        42,
+        50
+      ],
+      "actions": [
+        {
+          "rights": 8,
+          "plot": 7,
+          "build": 5,
+          "technology": 3,
+          "income": 7,
+          "tax": 4,
+          "mine": 3,
+          "place-mine": 3,
+          "penalty": 1,
+          "barbara": 1
+        },
+        {
+          "plot": 5,
+          "rights": 6,
+          "mine": 8,
+          "place-mine": 8,
+          "build": 4,
+          "income": 9,
+          "tax": 4,
+          "barbara": 1,
+          "penalty": 1
+        }
+      ]
+    },
+    {
+      "group": "astra-v022-discovery",
+      "policy": "council",
+      "seed": "astra-v022-discovery-0",
+      "setup": 1,
+      "side": 0,
+      "starter": 0,
+      "rivalSeat": 0,
+      "steps": 86,
+      "winner": 0,
+      "rivalWin": true,
+      "draw": false,
+      "margin": 10,
+      "scores": [
+        36,
+        26
+      ],
+      "actions": [
+        {
+          "plot": 4,
+          "rights": 6,
+          "income": 11,
+          "mine": 7,
+          "place-mine": 6,
+          "penalty": 1,
+          "skip": 1,
+          "tax": 4,
+          "build": 4,
+          "technology": 1
+        },
+        {
+          "rights": 8,
+          "plot": 6,
+          "build": 6,
+          "penalty": 2,
+          "income": 8,
+          "mine": 4,
+          "place-mine": 4,
+          "tax": 3
+        }
+      ]
+    },
+    {
+      "group": "astra-v022-discovery",
+      "policy": "council",
+      "seed": "astra-v022-discovery-0",
+      "setup": 1,
+      "side": 0,
+      "starter": 0,
+      "rivalSeat": 1,
+      "steps": 85,
+      "winner": 1,
+      "rivalWin": true,
+      "draw": false,
+      "margin": 17,
+      "scores": [
+        48,
+        65
+      ],
+      "actions": [
+        {
+          "rights": 9,
+          "plot": 6,
+          "build": 6,
+          "penalty": 2,
+          "income": 7,
+          "mine": 4,
+          "place-mine": 3,
+          "tax": 3,
+          "skip": 1,
+          "technology": 2
+        },
+        {
+          "plot": 6,
+          "rights": 5,
+          "mine": 6,
+          "place-mine": 6,
+          "income": 9,
+          "penalty": 2,
+          "build": 5,
+          "tax": 3
+        }
+      ]
+    },
+    {
+      "group": "astra-v022-discovery",
+      "policy": "council",
+      "seed": "astra-v022-discovery-1",
+      "setup": 2,
+      "side": 1,
+      "starter": 0,
+      "rivalSeat": 0,
+      "steps": 80,
+      "winner": 0,
+      "rivalWin": true,
+      "draw": false,
+      "margin": 9,
+      "scores": [
+        58,
+        49
+      ],
+      "actions": [
+        {
+          "plot": 5,
+          "rights": 5,
+          "mine": 7,
+          "place-mine": 5,
+          "build": 5,
+          "income": 8,
+          "skip": 2,
+          "tax": 3,
+          "barbara": 2,
+          "patrician": 1
+        },
+        {
+          "rights": 9,
+          "plot": 7,
+          "build": 6,
+          "income": 7,
+          "technology": 1,
+          "tax": 3,
+          "mine": 2,
+          "place-mine": 2
+        }
+      ]
+    },
+    {
+      "group": "astra-v022-discovery",
+      "policy": "council",
+      "seed": "astra-v022-discovery-1",
+      "setup": 2,
+      "side": 1,
+      "starter": 0,
+      "rivalSeat": 1,
+      "steps": 80,
+      "winner": 1,
+      "rivalWin": true,
+      "draw": false,
+      "margin": 15,
+      "scores": [
+        72,
+        87
+      ],
+      "actions": [
+        {
+          "rights": 9,
+          "plot": 7,
+          "build": 7,
+          "income": 7,
+          "mine": 2,
+          "place-mine": 2,
+          "penalty": 1,
+          "tax": 2,
+          "house": 1,
+          "barbara": 1
+        },
+        {
+          "plot": 7,
+          "rights": 8,
+          "mine": 4,
+          "place-mine": 4,
+          "build": 7,
+          "income": 7,
+          "tax": 3,
+          "technology": 1
+        }
+      ]
+    },
+    {
+      "group": "astra-v022-discovery",
+      "policy": "council",
+      "seed": "astra-v022-discovery-2",
+      "setup": 3,
+      "side": 0,
+      "starter": 1,
+      "rivalSeat": 0,
+      "steps": 80,
+      "winner": 0,
+      "rivalWin": true,
+      "draw": false,
+      "margin": 15,
+      "scores": [
+        48,
+        33
+      ],
+      "actions": [
+        {
+          "plot": 5,
+          "rights": 7,
+          "build": 5,
+          "income": 7,
+          "mine": 6,
+          "place-mine": 6,
+          "penalty": 1,
+          "barbara": 1,
+          "house": 1,
+          "tax": 4,
+          "technology": 1
+        },
+        {
+          "rights": 8,
+          "plot": 8,
+          "build": 7,
+          "income": 8,
+          "tax": 5
+        }
+      ]
+    },
+    {
+      "group": "astra-v022-discovery",
+      "policy": "council",
+      "seed": "astra-v022-discovery-2",
+      "setup": 3,
+      "side": 0,
+      "starter": 1,
+      "rivalSeat": 1,
+      "steps": 83,
+      "winner": 1,
+      "rivalWin": true,
+      "draw": false,
+      "margin": 26,
+      "scores": [
+        62,
+        88
+      ],
+      "actions": [
+        {
+          "rights": 8,
+          "plot": 7,
+          "build": 6,
+          "income": 7,
+          "mine": 2,
+          "place-mine": 2,
+          "tax": 3,
+          "technology": 1,
+          "penalty": 1,
+          "house": 1,
+          "barbara": 1,
+          "patrician": 1
+        },
+        {
+          "plot": 5,
+          "rights": 8,
+          "build": 5,
+          "mine": 6,
+          "place-mine": 6,
+          "income": 7,
+          "penalty": 1,
+          "tax": 3,
+          "barbara": 1,
+          "house": 1
+        }
+      ]
+    },
+    {
+      "group": "astra-v022-discovery",
+      "policy": "council",
+      "seed": "astra-v022-discovery-3",
+      "setup": 4,
+      "side": 1,
+      "starter": 1,
+      "rivalSeat": 0,
+      "steps": 84,
+      "winner": 0,
+      "rivalWin": true,
+      "draw": false,
+      "margin": 28,
+      "scores": [
+        56,
+        28
+      ],
+      "actions": [
+        {
+          "plot": 4,
+          "rights": 5,
+          "mine": 9,
+          "place-mine": 9,
+          "build": 4,
+          "income": 8,
+          "tax": 4,
+          "penalty": 1
+        },
+        {
+          "rights": 6,
+          "plot": 6,
+          "penalty": 3,
+          "mine": 5,
+          "place-mine": 5,
+          "income": 9,
+          "build": 3,
+          "tax": 2,
+          "skip": 1
+        }
+      ]
+    },
+    {
+      "group": "astra-v022-discovery",
+      "policy": "council",
+      "seed": "astra-v022-discovery-3",
+      "setup": 4,
+      "side": 1,
+      "starter": 1,
+      "rivalSeat": 1,
+      "steps": 81,
+      "winner": 0,
+      "rivalWin": false,
+      "draw": false,
+      "margin": -8,
+      "scores": [
+        40,
+        32
+      ],
+      "actions": [
+        {
+          "rights": 7,
+          "plot": 7,
+          "build": 5,
+          "income": 7,
+          "mine": 4,
+          "place-mine": 4,
+          "tax": 4
+        },
+        {
+          "plot": 4,
+          "rights": 4,
+          "income": 9,
+          "mine": 8,
+          "skip": 4,
+          "place-mine": 6,
+          "build": 3,
+          "penalty": 1,
+          "tax": 3,
+          "technology": 1
+        }
+      ]
+    },
+    {
+      "group": "astra-v022-discovery",
+      "policy": "council",
+      "seed": "astra-v022-discovery-4",
+      "setup": 5,
+      "side": 0,
+      "starter": 0,
+      "rivalSeat": 0,
+      "steps": 81,
+      "winner": 0,
+      "rivalWin": true,
+      "draw": false,
+      "margin": 11,
+      "scores": [
+        48,
+        37
+      ],
+      "actions": [
+        {
+          "plot": 6,
+          "rights": 8,
+          "mine": 6,
+          "place-mine": 5,
+          "income": 6,
+          "build": 6,
+          "barbara": 1,
+          "tax": 4,
+          "skip": 1
+        },
+        {
+          "rights": 8,
+          "plot": 7,
+          "build": 6,
+          "income": 5,
+          "mine": 4,
+          "place-mine": 4,
+          "tax": 3,
+          "penalty": 1
+        }
+      ]
+    },
+    {
+      "group": "astra-v022-discovery",
+      "policy": "council",
+      "seed": "astra-v022-discovery-4",
+      "setup": 5,
+      "side": 0,
+      "starter": 0,
+      "rivalSeat": 1,
+      "steps": 77,
+      "winner": 1,
+      "rivalWin": true,
+      "draw": false,
+      "margin": 8,
+      "scores": [
+        40,
+        48
+      ],
+      "actions": [
+        {
+          "rights": 8,
+          "plot": 8,
+          "build": 6,
+          "mine": 3,
+          "place-mine": 3,
+          "income": 7,
+          "tax": 4
+        },
+        {
+          "plot": 6,
+          "rights": 7,
+          "build": 5,
+          "income": 8,
+          "tax": 4,
+          "mine": 4,
+          "place-mine": 4
+        }
+      ]
+    },
+    {
+      "group": "astra-v022-discovery",
+      "policy": "council",
+      "seed": "astra-v022-discovery-5",
+      "setup": 6,
+      "side": 1,
+      "starter": 0,
+      "rivalSeat": 0,
+      "steps": 83,
+      "winner": 0,
+      "rivalWin": true,
+      "draw": false,
+      "margin": 14,
+      "scores": [
+        46,
+        32
+      ],
+      "actions": [
+        {
+          "plot": 6,
+          "rights": 7,
+          "income": 8,
+          "mine": 6,
+          "place-mine": 6,
+          "build": 5,
+          "tax": 3,
+          "barbara": 2,
+          "house": 1,
+          "penalty": 1
+        },
+        {
+          "rights": 8,
+          "plot": 7,
+          "build": 6,
+          "income": 7,
+          "mine": 2,
+          "place-mine": 2,
+          "skip": 1,
+          "tax": 3,
+          "penalty": 1,
+          "technology": 1
+        }
+      ]
+    },
+    {
+      "group": "astra-v022-discovery",
+      "policy": "council",
+      "seed": "astra-v022-discovery-5",
+      "setup": 6,
+      "side": 1,
+      "starter": 0,
+      "rivalSeat": 1,
+      "steps": 87,
+      "winner": 1,
+      "rivalWin": true,
+      "draw": false,
+      "margin": 20,
+      "scores": [
+        33,
+        53
+      ],
+      "actions": [
+        {
+          "rights": 7,
+          "plot": 7,
+          "build": 4,
+          "income": 7,
+          "mine": 4,
+          "place-mine": 4,
+          "tax": 4,
+          "skip": 2
+        },
+        {
+          "mine": 9,
+          "skip": 2,
+          "place-mine": 8,
+          "plot": 5,
+          "rights": 7,
+          "build": 4,
+          "technology": 1,
+          "income": 7,
+          "penalty": 2,
+          "barbara": 1,
+          "tax": 2
+        }
+      ]
+    },
+    {
+      "group": "astra-v022-discovery",
+      "policy": "council",
+      "seed": "astra-v022-discovery-6",
+      "setup": 7,
+      "side": 0,
+      "starter": 1,
+      "rivalSeat": 0,
+      "steps": 85,
+      "winner": 0,
+      "rivalWin": true,
+      "draw": false,
+      "margin": 13,
+      "scores": [
+        49,
+        36
+      ],
+      "actions": [
+        {
+          "plot": 5,
+          "rights": 5,
+          "mine": 8,
+          "place-mine": 8,
+          "income": 7,
+          "penalty": 2,
+          "skip": 1,
+          "build": 5,
+          "tax": 4
+        },
+        {
+          "rights": 8,
+          "plot": 6,
+          "build": 6,
+          "penalty": 2,
+          "income": 6,
+          "mine": 4,
+          "place-mine": 4,
+          "tax": 4
+        }
+      ]
+    },
+    {
+      "group": "astra-v022-discovery",
+      "policy": "council",
+      "seed": "astra-v022-discovery-6",
+      "setup": 7,
+      "side": 0,
+      "starter": 1,
+      "rivalSeat": 1,
+      "steps": 91,
+      "winner": 1,
+      "rivalWin": true,
+      "draw": false,
+      "margin": 19,
+      "scores": [
+        46,
+        65
+      ],
+      "actions": [
+        {
+          "rights": 8,
+          "plot": 6,
+          "build": 5,
+          "penalty": 3,
+          "mine": 4,
+          "place-mine": 4,
+          "income": 7,
+          "technology": 1,
+          "tax": 3,
+          "barbara": 1,
+          "patrician": 1
+        },
+        {
+          "plot": 5,
+          "rights": 7,
+          "mine": 9,
+          "place-mine": 9,
+          "build": 5,
+          "penalty": 2,
+          "income": 6,
+          "tax": 4,
+          "barbara": 1
+        }
+      ]
+    },
+    {
+      "group": "astra-v022-discovery",
+      "policy": "council",
+      "seed": "astra-v022-discovery-7",
+      "setup": 8,
+      "side": 1,
+      "starter": 1,
+      "rivalSeat": 0,
+      "steps": 86,
+      "winner": 0,
+      "rivalWin": true,
+      "draw": false,
+      "margin": 14,
+      "scores": [
+        45,
+        31
+      ],
+      "actions": [
+        {
+          "plot": 5,
+          "rights": 7,
+          "mine": 8,
+          "place-mine": 8,
+          "income": 8,
+          "build": 5,
+          "penalty": 2,
+          "tax": 3,
+          "house": 1
+        },
+        {
+          "rights": 5,
+          "plot": 6,
+          "income": 10,
+          "build": 5,
+          "penalty": 2,
+          "mine": 4,
+          "place-mine": 4,
+          "tax": 3
+        }
+      ]
+    },
+    {
+      "group": "astra-v022-discovery",
+      "policy": "council",
+      "seed": "astra-v022-discovery-7",
+      "setup": 8,
+      "side": 1,
+      "starter": 1,
+      "rivalSeat": 1,
+      "steps": 82,
+      "winner": 1,
+      "rivalWin": true,
+      "draw": false,
+      "margin": 4,
+      "scores": [
+        41,
+        45
+      ],
+      "actions": [
+        {
+          "rights": 9,
+          "plot": 7,
+          "build": 7,
+          "income": 8,
+          "penalty": 2,
+          "tax": 3,
+          "mine": 1,
+          "place-mine": 1
+        },
+        {
+          "plot": 5,
+          "rights": 6,
+          "mine": 6,
+          "place-mine": 5,
+          "income": 8,
+          "build": 5,
+          "penalty": 2,
+          "skip": 1,
+          "barbara": 2,
+          "house": 1,
+          "tax": 3
+        }
+      ]
+    },
+    {
+      "group": "astra-v022-discovery",
+      "policy": "council",
+      "seed": "astra-v022-discovery-8",
+      "setup": 9,
+      "side": 0,
+      "starter": 0,
+      "rivalSeat": 0,
+      "steps": 81,
+      "winner": 0,
+      "rivalWin": true,
+      "draw": false,
+      "margin": 18,
+      "scores": [
+        77,
+        59
+      ],
+      "actions": [
+        {
+          "plot": 7,
+          "rights": 6,
+          "build": 6,
+          "technology": 2,
+          "mine": 5,
+          "place-mine": 5,
+          "income": 6,
+          "tax": 4,
+          "penalty": 1,
+          "barbara": 1
+        },
+        {
+          "rights": 10,
+          "plot": 7,
+          "build": 7,
+          "income": 7,
+          "tax": 5,
+          "mine": 1,
+          "place-mine": 1
+        }
+      ]
+    },
+    {
+      "group": "astra-v022-discovery",
+      "policy": "council",
+      "seed": "astra-v022-discovery-8",
+      "setup": 9,
+      "side": 0,
+      "starter": 0,
+      "rivalSeat": 1,
+      "steps": 85,
+      "winner": 1,
+      "rivalWin": true,
+      "draw": false,
+      "margin": 12,
+      "scores": [
+        52,
+        64
+      ],
+      "actions": [
+        {
+          "rights": 9,
+          "plot": 7,
+          "build": 6,
+          "technology": 4,
+          "income": 7,
+          "tax": 4,
+          "mine": 1,
+          "place-mine": 1,
+          "penalty": 1
+        },
+        {
+          "plot": 5,
+          "rights": 7,
+          "mine": 7,
+          "place-mine": 7,
+          "build": 5,
+          "income": 9,
+          "tax": 4,
+          "penalty": 1
+        }
+      ]
+    },
+    {
+      "group": "astra-v022-discovery",
+      "policy": "blockade",
+      "seed": "astra-v022-discovery-0",
+      "setup": 1,
+      "side": 0,
+      "starter": 0,
+      "rivalSeat": 0,
+      "steps": 86,
+      "winner": 1,
+      "rivalWin": false,
+      "draw": false,
+      "margin": 0,
+      "scores": [
+        24,
+        24
+      ],
+      "actions": [
+        {
+          "plot": 4,
+          "rights": 6,
+          "income": 13,
+          "mine": 6,
+          "place-mine": 5,
+          "penalty": 1,
+          "skip": 1,
+          "tax": 4,
+          "build": 3
+        },
+        {
+          "rights": 6,
+          "plot": 6,
+          "build": 3,
+          "penalty": 2,
+          "income": 9,
+          "mine": 7,
+          "place-mine": 7,
+          "tax": 3
+        }
+      ]
+    },
+    {
+      "group": "astra-v022-discovery",
+      "policy": "blockade",
+      "seed": "astra-v022-discovery-0",
+      "setup": 1,
+      "side": 0,
+      "starter": 0,
+      "rivalSeat": 1,
+      "steps": 86,
+      "winner": 0,
+      "rivalWin": false,
+      "draw": false,
+      "margin": -6,
+      "scores": [
+        51,
+        45
+      ],
+      "actions": [
+        {
+          "rights": 8,
+          "plot": 5,
+          "build": 5,
+          "penalty": 1,
+          "income": 9,
+          "mine": 6,
+          "place-mine": 6,
+          "tax": 4
+        },
+        {
+          "plot": 6,
+          "rights": 6,
+          "mine": 6,
+          "place-mine": 6,
+          "income": 9,
+          "penalty": 2,
+          "build": 4,
+          "tax": 3
+        }
+      ]
+    },
+    {
+      "group": "astra-v022-discovery",
+      "policy": "blockade",
+      "seed": "astra-v022-discovery-1",
+      "setup": 2,
+      "side": 1,
+      "starter": 0,
+      "rivalSeat": 0,
+      "steps": 79,
+      "winner": 0,
+      "rivalWin": true,
+      "draw": false,
+      "margin": 17,
+      "scores": [
+        52,
+        35
+      ],
+      "actions": [
+        {
+          "plot": 6,
+          "rights": 7,
+          "mine": 6,
+          "place-mine": 6,
+          "build": 6,
+          "income": 7,
+          "tax": 1,
+          "penalty": 2
+        },
+        {
+          "rights": 8,
+          "plot": 8,
+          "build": 5,
+          "income": 6,
+          "skip": 1,
+          "mine": 3,
+          "place-mine": 3,
+          "technology": 1,
+          "tax": 3
+        }
+      ]
+    },
+    {
+      "group": "astra-v022-discovery",
+      "policy": "blockade",
+      "seed": "astra-v022-discovery-1",
+      "setup": 2,
+      "side": 1,
+      "starter": 0,
+      "rivalSeat": 1,
+      "steps": 78,
+      "winner": 1,
+      "rivalWin": true,
+      "draw": false,
+      "margin": 7,
+      "scores": [
+        56,
+        63
+      ],
+      "actions": [
+        {
+          "rights": 9,
+          "plot": 9,
+          "build": 6,
+          "income": 7,
+          "mine": 2,
+          "place-mine": 2,
+          "penalty": 1,
+          "tax": 2,
+          "barbara": 1
+        },
+        {
+          "plot": 7,
+          "rights": 8,
+          "mine": 3,
+          "place-mine": 3,
+          "build": 7,
+          "income": 8,
+          "tax": 3
+        }
+      ]
+    },
+    {
+      "group": "astra-v022-discovery",
+      "policy": "blockade",
+      "seed": "astra-v022-discovery-2",
+      "setup": 3,
+      "side": 0,
+      "starter": 1,
+      "rivalSeat": 0,
+      "steps": 79,
+      "winner": 0,
+      "rivalWin": true,
+      "draw": false,
+      "margin": 9,
+      "scores": [
+        48,
+        39
+      ],
+      "actions": [
+        {
+          "plot": 5,
+          "rights": 6,
+          "build": 5,
+          "income": 7,
+          "mine": 6,
+          "place-mine": 6,
+          "penalty": 1,
+          "barbara": 1,
+          "house": 1,
+          "tax": 4
+        },
+        {
+          "rights": 8,
+          "plot": 8,
+          "build": 6,
+          "income": 8,
+          "tax": 5,
+          "mine": 1,
+          "place-mine": 1
+        }
+      ]
+    },
+    {
+      "group": "astra-v022-discovery",
+      "policy": "blockade",
+      "seed": "astra-v022-discovery-2",
+      "setup": 3,
+      "side": 0,
+      "starter": 1,
+      "rivalSeat": 1,
+      "steps": 76,
+      "winner": 1,
+      "rivalWin": true,
+      "draw": false,
+      "margin": 15,
+      "scores": [
+        30,
+        45
+      ],
+      "actions": [
+        {
+          "rights": 8,
+          "plot": 8,
+          "build": 6,
+          "income": 7,
+          "mine": 1,
+          "place-mine": 1,
+          "tax": 3,
+          "penalty": 1
+        },
+        {
+          "plot": 6,
+          "rights": 7,
+          "build": 5,
+          "mine": 6,
+          "place-mine": 6,
+          "income": 7,
+          "penalty": 2,
+          "tax": 2
+        }
+      ]
+    },
+    {
+      "group": "astra-v022-discovery",
+      "policy": "blockade",
+      "seed": "astra-v022-discovery-3",
+      "setup": 4,
+      "side": 1,
+      "starter": 1,
+      "rivalSeat": 0,
+      "steps": 85,
+      "winner": 0,
+      "rivalWin": true,
+      "draw": false,
+      "margin": 22,
+      "scores": [
+        54,
+        32
+      ],
+      "actions": [
+        {
+          "plot": 5,
+          "rights": 5,
+          "mine": 8,
+          "place-mine": 8,
+          "build": 5,
+          "income": 7,
+          "tax": 3,
+          "penalty": 2
+        },
+        {
+          "rights": 5,
+          "plot": 5,
+          "penalty": 2,
+          "mine": 7,
+          "place-mine": 7,
+          "income": 9,
+          "build": 2,
+          "tax": 3,
+          "skip": 1,
+          "barbara": 1
+        }
+      ]
+    },
+    {
+      "group": "astra-v022-discovery",
+      "policy": "blockade",
+      "seed": "astra-v022-discovery-3",
+      "setup": 4,
+      "side": 1,
+      "starter": 1,
+      "rivalSeat": 1,
+      "steps": 82,
+      "winner": 1,
+      "rivalWin": true,
+      "draw": false,
+      "margin": 1,
+      "scores": [
+        32,
+        33
+      ],
+      "actions": [
+        {
+          "rights": 8,
+          "plot": 6,
+          "build": 5,
+          "income": 8,
+          "mine": 4,
+          "place-mine": 4,
+          "tax": 4
+        },
+        {
+          "plot": 4,
+          "rights": 5,
+          "income": 9,
+          "mine": 9,
+          "place-mine": 8,
+          "skip": 1,
+          "build": 3,
+          "penalty": 2,
+          "tax": 2
+        }
+      ]
+    },
+    {
+      "group": "astra-v022-discovery",
+      "policy": "blockade",
+      "seed": "astra-v022-discovery-4",
+      "setup": 5,
+      "side": 0,
+      "starter": 0,
+      "rivalSeat": 0,
+      "steps": 84,
+      "winner": 0,
+      "rivalWin": true,
+      "draw": false,
+      "margin": 14,
+      "scores": [
+        49,
+        35
+      ],
+      "actions": [
+        {
+          "plot": 5,
+          "rights": 7,
+          "mine": 8,
+          "place-mine": 8,
+          "build": 5,
+          "income": 7,
+          "barbara": 1,
+          "tax": 3,
+          "technology": 1,
+          "penalty": 1
+        },
+        {
+          "rights": 8,
+          "plot": 6,
+          "build": 6,
+          "income": 7,
+          "skip": 1,
+          "mine": 3,
+          "place-mine": 3,
+          "tax": 4
+        }
+      ]
+    },
+    {
+      "group": "astra-v022-discovery",
+      "policy": "blockade",
+      "seed": "astra-v022-discovery-4",
+      "setup": 5,
+      "side": 0,
+      "starter": 0,
+      "rivalSeat": 1,
+      "steps": 80,
+      "winner": 1,
+      "rivalWin": true,
+      "draw": false,
+      "margin": 11,
+      "scores": [
+        42,
+        53
+      ],
+      "actions": [
+        {
+          "rights": 8,
+          "plot": 6,
+          "build": 6,
+          "mine": 5,
+          "place-mine": 4,
+          "income": 7,
+          "tax": 4,
+          "skip": 1
+        },
+        {
+          "plot": 6,
+          "rights": 6,
+          "build": 6,
+          "income": 8,
+          "mine": 3,
+          "place-mine": 3,
+          "tax": 4,
+          "barbara": 2,
+          "house": 1
+        }
+      ]
+    },
+    {
+      "group": "astra-v022-discovery",
+      "policy": "blockade",
+      "seed": "astra-v022-discovery-5",
+      "setup": 6,
+      "side": 1,
+      "starter": 0,
+      "rivalSeat": 0,
+      "steps": 86,
+      "winner": 0,
+      "rivalWin": true,
+      "draw": false,
+      "margin": 15,
+      "scores": [
+        45,
+        30
+      ],
+      "actions": [
+        {
+          "plot": 6,
+          "rights": 5,
+          "income": 8,
+          "mine": 8,
+          "place-mine": 8,
+          "build": 4,
+          "tax": 4,
+          "house": 1
+        },
+        {
+          "rights": 6,
+          "plot": 6,
+          "build": 3,
+          "income": 9,
+          "mine": 6,
+          "place-mine": 6,
+          "technology": 1,
+          "tax": 4,
+          "skip": 1
+        }
+      ]
+    },
+    {
+      "group": "astra-v022-discovery",
+      "policy": "blockade",
+      "seed": "astra-v022-discovery-5",
+      "setup": 6,
+      "side": 1,
+      "starter": 0,
+      "rivalSeat": 1,
+      "steps": 78,
+      "winner": 0,
+      "rivalWin": false,
+      "draw": false,
+      "margin": -6,
+      "scores": [
+        48,
+        42
+      ],
+      "actions": [
+        {
+          "rights": 8,
+          "plot": 7,
+          "income": 9,
+          "mine": 1,
+          "place-mine": 1,
+          "build": 5,
+          "penalty": 1,
+          "tax": 3,
+          "barbara": 1,
+          "patrician": 1
+        },
+        {
+          "mine": 6,
+          "skip": 1,
+          "place-mine": 5,
+          "rights": 6,
+          "plot": 5,
+          "income": 8,
+          "build": 4,
+          "barbara": 1,
+          "house": 1,
+          "tax": 4
+        }
+      ]
+    },
+    {
+      "group": "astra-v022-discovery",
+      "policy": "blockade",
+      "seed": "astra-v022-discovery-6",
+      "setup": 7,
+      "side": 0,
+      "starter": 1,
+      "rivalSeat": 0,
+      "steps": 89,
+      "winner": 0,
+      "rivalWin": true,
+      "draw": false,
+      "margin": 6,
+      "scores": [
+        35,
+        29
+      ],
+      "actions": [
+        {
+          "plot": 5,
+          "rights": 5,
+          "mine": 8,
+          "place-mine": 6,
+          "income": 7,
+          "penalty": 5,
+          "skip": 3,
+          "build": 5,
+          "tax": 1,
+          "house": 1
+        },
+        {
+          "rights": 6,
+          "plot": 6,
+          "build": 3,
+          "penalty": 1,
+          "income": 8,
+          "tax": 5,
+          "mine": 6,
+          "place-mine": 5,
+          "skip": 3
+        }
+      ]
+    },
+    {
+      "group": "astra-v022-discovery",
+      "policy": "blockade",
+      "seed": "astra-v022-discovery-6",
+      "setup": 7,
+      "side": 0,
+      "starter": 1,
+      "rivalSeat": 1,
+      "steps": 89,
+      "winner": 1,
+      "rivalWin": true,
+      "draw": false,
+      "margin": 14,
+      "scores": [
+        41,
+        55
+      ],
+      "actions": [
+        {
+          "rights": 9,
+          "plot": 7,
+          "build": 6,
+          "penalty": 3,
+          "mine": 3,
+          "place-mine": 3,
+          "income": 7,
+          "technology": 1,
+          "tax": 3
+        },
+        {
+          "plot": 5,
+          "rights": 7,
+          "mine": 9,
+          "place-mine": 9,
+          "build": 5,
+          "penalty": 2,
+          "income": 6,
+          "tax": 4
+        }
+      ]
+    },
+    {
+      "group": "astra-v022-discovery",
+      "policy": "blockade",
+      "seed": "astra-v022-discovery-7",
+      "setup": 8,
+      "side": 1,
+      "starter": 1,
+      "rivalSeat": 0,
+      "steps": 87,
+      "winner": 0,
+      "rivalWin": true,
+      "draw": false,
+      "margin": 10,
+      "scores": [
+        37,
+        27
+      ],
+      "actions": [
+        {
+          "plot": 4,
+          "rights": 7,
+          "mine": 9,
+          "place-mine": 9,
+          "income": 7,
+          "build": 4,
+          "penalty": 3,
+          "tax": 2,
+          "barbara": 2,
+          "house": 1
+        },
+        {
+          "rights": 6,
+          "plot": 6,
+          "income": 10,
+          "build": 4,
+          "penalty": 2,
+          "mine": 4,
+          "place-mine": 4,
+          "tax": 3
+        }
+      ]
+    },
+    {
+      "group": "astra-v022-discovery",
+      "policy": "blockade",
+      "seed": "astra-v022-discovery-7",
+      "setup": 8,
+      "side": 1,
+      "starter": 1,
+      "rivalSeat": 1,
+      "steps": 86,
+      "winner": 1,
+      "rivalWin": true,
+      "draw": false,
+      "margin": 1,
+      "scores": [
+        38,
+        39
+      ],
+      "actions": [
+        {
+          "rights": 7,
+          "plot": 7,
+          "build": 5,
+          "income": 7,
+          "penalty": 3,
+          "mine": 3,
+          "place-mine": 3,
+          "skip": 1,
+          "barbara": 2,
+          "tax": 2
+        },
+        {
+          "plot": 4,
+          "rights": 7,
+          "mine": 7,
+          "place-mine": 7,
+          "income": 7,
+          "build": 4,
+          "penalty": 2,
+          "barbara": 2,
+          "house": 1,
+          "tax": 3,
+          "patrician": 1,
+          "technology": 1
+        }
+      ]
+    },
+    {
+      "group": "astra-v022-discovery",
+      "policy": "blockade",
+      "seed": "astra-v022-discovery-8",
+      "setup": 9,
+      "side": 0,
+      "starter": 0,
+      "rivalSeat": 0,
+      "steps": 88,
+      "winner": 0,
+      "rivalWin": true,
+      "draw": false,
+      "margin": 9,
+      "scores": [
+        38,
+        29
+      ],
+      "actions": [
+        {
+          "plot": 6,
+          "rights": 7,
+          "build": 5,
+          "technology": 4,
+          "mine": 4,
+          "place-mine": 4,
+          "income": 8,
+          "penalty": 3,
+          "barbara": 2,
+          "tax": 2
+        },
+        {
+          "rights": 4,
+          "plot": 4,
+          "build": 1,
+          "income": 10,
+          "mine": 8,
+          "place-mine": 8,
+          "penalty": 2,
+          "skip": 3,
+          "tax": 3
+        }
+      ]
+    },
+    {
+      "group": "astra-v022-discovery",
+      "policy": "blockade",
+      "seed": "astra-v022-discovery-8",
+      "setup": 9,
+      "side": 0,
+      "starter": 0,
+      "rivalSeat": 1,
+      "steps": 88,
+      "winner": 1,
+      "rivalWin": true,
+      "draw": false,
+      "margin": 17,
+      "scores": [
+        35,
+        52
+      ],
+      "actions": [
+        {
+          "rights": 8,
+          "plot": 8,
+          "build": 5,
+          "technology": 3,
+          "income": 7,
+          "tax": 3,
+          "mine": 2,
+          "place-mine": 2,
+          "penalty": 2,
+          "barbara": 1
+        },
+        {
+          "plot": 5,
+          "rights": 7,
+          "mine": 8,
+          "place-mine": 8,
+          "build": 4,
+          "income": 9,
+          "tax": 4,
+          "barbara": 1,
+          "penalty": 1
+        }
+      ]
+    },
+    {
+      "group": "astra-v022-confirm",
+      "policy": "industry",
+      "seed": "astra-v022-confirm-0",
+      "setup": 1,
+      "side": 0,
+      "starter": 0,
+      "rivalSeat": 0,
+      "steps": 83,
+      "winner": 0,
+      "rivalWin": true,
+      "draw": false,
+      "margin": 2,
+      "scores": [
+        64,
+        62
+      ],
+      "actions": [
+        {
+          "plot": 7,
+          "rights": 6,
+          "income": 10,
+          "build": 6,
+          "penalty": 1,
+          "technology": 1,
+          "tax": 4,
+          "mine": 3,
+          "place-mine": 3,
+          "barbara": 1,
+          "house": 1
+        },
+        {
+          "rights": 9,
+          "plot": 8,
+          "build": 6,
+          "income": 7,
+          "penalty": 2,
+          "mine": 2,
+          "place-mine": 2,
+          "skip": 1,
+          "tax": 3
+        }
+      ]
+    },
+    {
+      "group": "astra-v022-confirm",
+      "policy": "industry",
+      "seed": "astra-v022-confirm-0",
+      "setup": 1,
+      "side": 0,
+      "starter": 0,
+      "rivalSeat": 1,
+      "steps": 88,
+      "winner": 1,
+      "rivalWin": true,
+      "draw": false,
+      "margin": 2,
+      "scores": [
+        44,
+        46
+      ],
+      "actions": [
+        {
+          "rights": 9,
+          "plot": 9,
+          "build": 6,
+          "income": 6,
+          "penalty": 3,
+          "mine": 3,
+          "place-mine": 3,
+          "tax": 2,
+          "barbara": 1
+        },
+        {
+          "plot": 5,
+          "rights": 6,
+          "income": 7,
+          "mine": 9,
+          "place-mine": 8,
+          "skip": 1,
+          "build": 5,
+          "penalty": 2,
+          "tax": 3
+        }
+      ]
+    },
+    {
+      "group": "astra-v022-confirm",
+      "policy": "industry",
+      "seed": "astra-v022-confirm-1",
+      "setup": 2,
+      "side": 1,
+      "starter": 0,
+      "rivalSeat": 0,
+      "steps": 82,
+      "winner": 0,
+      "rivalWin": true,
+      "draw": false,
+      "margin": 8,
+      "scores": [
+        44,
+        36
+      ],
+      "actions": [
+        {
+          "plot": 4,
+          "rights": 6,
+          "mine": 9,
+          "place-mine": 8,
+          "build": 3,
+          "income": 8,
+          "skip": 1,
+          "tax": 3
+        },
+        {
+          "rights": 9,
+          "plot": 7,
+          "build": 6,
+          "income": 7,
+          "technology": 2,
+          "mine": 3,
+          "place-mine": 3,
+          "tax": 3
+        }
+      ]
+    },
+    {
+      "group": "astra-v022-confirm",
+      "policy": "industry",
+      "seed": "astra-v022-confirm-1",
+      "setup": 2,
+      "side": 1,
+      "starter": 0,
+      "rivalSeat": 1,
+      "steps": 80,
+      "winner": 1,
+      "rivalWin": true,
+      "draw": false,
+      "margin": 24,
+      "scores": [
+        41,
+        65
+      ],
+      "actions": [
+        {
+          "rights": 8,
+          "plot": 8,
+          "build": 5,
+          "mine": 5,
+          "place-mine": 5,
+          "income": 5,
+          "tax": 2,
+          "penalty": 1
+        },
+        {
+          "plot": 6,
+          "rights": 7,
+          "mine": 6,
+          "place-mine": 6,
+          "build": 6,
+          "income": 6,
+          "tax": 3,
+          "technology": 1
+        }
+      ]
+    },
+    {
+      "group": "astra-v022-confirm",
+      "policy": "industry",
+      "seed": "astra-v022-confirm-2",
+      "setup": 3,
+      "side": 0,
+      "starter": 1,
+      "rivalSeat": 0,
+      "steps": 82,
+      "winner": 1,
+      "rivalWin": false,
+      "draw": false,
+      "margin": 0,
+      "scores": [
+        41,
+        41
+      ],
+      "actions": [
+        {
+          "plot": 6,
+          "rights": 5,
+          "mine": 6,
+          "place-mine": 5,
+          "build": 5,
+          "income": 8,
+          "penalty": 2,
+          "skip": 1,
+          "tax": 3
+        },
+        {
+          "rights": 9,
+          "plot": 7,
+          "build": 6,
+          "income": 8,
+          "penalty": 2,
+          "mine": 3,
+          "place-mine": 3,
+          "tax": 3
+        }
+      ]
+    },
+    {
+      "group": "astra-v022-confirm",
+      "policy": "industry",
+      "seed": "astra-v022-confirm-2",
+      "setup": 3,
+      "side": 0,
+      "starter": 1,
+      "rivalSeat": 1,
+      "steps": 85,
+      "winner": 1,
+      "rivalWin": true,
+      "draw": false,
+      "margin": 8,
+      "scores": [
+        32,
+        40
+      ],
+      "actions": [
+        {
+          "rights": 7,
+          "plot": 7,
+          "build": 4,
+          "income": 9,
+          "mine": 4,
+          "place-mine": 4,
+          "technology": 1,
+          "penalty": 1,
+          "tax": 4
+        },
+        {
+          "plot": 5,
+          "rights": 6,
+          "mine": 6,
+          "place-mine": 5,
+          "income": 10,
+          "skip": 1,
+          "build": 5,
+          "penalty": 2,
+          "tax": 3,
+          "house": 1
+        }
+      ]
+    },
+    {
+      "group": "astra-v022-confirm",
+      "policy": "industry",
+      "seed": "astra-v022-confirm-3",
+      "setup": 4,
+      "side": 1,
+      "starter": 1,
+      "rivalSeat": 0,
+      "steps": 87,
+      "winner": 1,
+      "rivalWin": false,
+      "draw": false,
+      "margin": -3,
+      "scores": [
+        40,
+        43
+      ],
+      "actions": [
+        {
+          "plot": 5,
+          "rights": 7,
+          "mine": 8,
+          "place-mine": 8,
+          "income": 7,
+          "penalty": 3,
+          "build": 4,
+          "tax": 2
+        },
+        {
+          "rights": 9,
+          "plot": 7,
+          "build": 6,
+          "technology": 1,
+          "penalty": 2,
+          "income": 7,
+          "mine": 4,
+          "place-mine": 4,
+          "tax": 3
+        }
+      ]
+    },
+    {
+      "group": "astra-v022-confirm",
+      "policy": "industry",
+      "seed": "astra-v022-confirm-3",
+      "setup": 4,
+      "side": 1,
+      "starter": 1,
+      "rivalSeat": 1,
+      "steps": 86,
+      "winner": 1,
+      "rivalWin": true,
+      "draw": false,
+      "margin": 6,
+      "scores": [
+        31,
+        37
+      ],
+      "actions": [
+        {
+          "rights": 7,
+          "plot": 6,
+          "build": 4,
+          "income": 8,
+          "penalty": 1,
+          "mine": 5,
+          "place-mine": 5,
+          "tax": 4
+        },
+        {
+          "plot": 4,
+          "rights": 7,
+          "build": 4,
+          "technology": 2,
+          "mine": 8,
+          "place-mine": 7,
+          "penalty": 2,
+          "income": 8,
+          "skip": 1,
+          "tax": 3
+        }
+      ]
+    },
+    {
+      "group": "astra-v022-confirm",
+      "policy": "industry",
+      "seed": "astra-v022-confirm-4",
+      "setup": 5,
+      "side": 0,
+      "starter": 0,
+      "rivalSeat": 0,
+      "steps": 79,
+      "winner": 0,
+      "rivalWin": true,
+      "draw": false,
+      "margin": 11,
+      "scores": [
+        56,
+        45
+      ],
+      "actions": [
+        {
+          "plot": 5,
+          "rights": 7,
+          "mine": 2,
+          "place-mine": 2,
+          "income": 8,
+          "penalty": 3,
+          "build": 5,
+          "barbara": 4,
+          "technology": 1,
+          "patrician": 1,
+          "tax": 2,
+          "score-building": 1
+        },
+        {
+          "rights": 9,
+          "plot": 8,
+          "build": 6,
+          "income": 7,
+          "penalty": 2,
+          "mine": 1,
+          "place-mine": 1,
+          "tax": 3,
+          "barbara": 1
+        }
+      ]
+    },
+    {
+      "group": "astra-v022-confirm",
+      "policy": "industry",
+      "seed": "astra-v022-confirm-4",
+      "setup": 5,
+      "side": 0,
+      "starter": 0,
+      "rivalSeat": 1,
+      "steps": 86,
+      "winner": 1,
+      "rivalWin": true,
+      "draw": false,
+      "margin": 15,
+      "scores": [
+        41,
+        56
+      ],
+      "actions": [
+        {
+          "rights": 9,
+          "plot": 7,
+          "build": 6,
+          "income": 9,
+          "penalty": 1,
+          "tax": 4,
+          "technology": 1,
+          "mine": 2,
+          "place-mine": 2
+        },
+        {
+          "plot": 5,
+          "rights": 5,
+          "mine": 7,
+          "place-mine": 7,
+          "income": 10,
+          "penalty": 3,
+          "build": 5,
+          "tax": 2,
+          "barbara": 1
+        }
+      ]
+    },
+    {
+      "group": "astra-v022-confirm",
+      "policy": "industry",
+      "seed": "astra-v022-confirm-5",
+      "setup": 6,
+      "side": 1,
+      "starter": 0,
+      "rivalSeat": 0,
+      "steps": 90,
+      "winner": 0,
+      "rivalWin": true,
+      "draw": false,
+      "margin": 11,
+      "scores": [
+        45,
+        34
+      ],
+      "actions": [
+        {
+          "plot": 5,
+          "rights": 7,
+          "mine": 7,
+          "place-mine": 7,
+          "build": 5,
+          "income": 9,
+          "penalty": 2,
+          "tax": 4,
+          "barbara": 1
+        },
+        {
+          "rights": 8,
+          "plot": 8,
+          "build": 5,
+          "income": 8,
+          "penalty": 1,
+          "technology": 1,
+          "mine": 3,
+          "place-mine": 3,
+          "tax": 5,
+          "barbara": 1
+        }
+      ]
+    },
+    {
+      "group": "astra-v022-confirm",
+      "policy": "industry",
+      "seed": "astra-v022-confirm-5",
+      "setup": 6,
+      "side": 1,
+      "starter": 0,
+      "rivalSeat": 1,
+      "steps": 82,
+      "winner": 1,
+      "rivalWin": true,
+      "draw": false,
+      "margin": 18,
+      "scores": [
+        44,
+        62
+      ],
+      "actions": [
+        {
+          "rights": 9,
+          "plot": 8,
+          "build": 6,
+          "income": 6,
+          "penalty": 1,
+          "tax": 5,
+          "mine": 2,
+          "place-mine": 2
+        },
+        {
+          "plot": 7,
+          "rights": 7,
+          "mine": 4,
+          "place-mine": 4,
+          "build": 5,
+          "income": 7,
+          "penalty": 1,
+          "tax": 5,
+          "barbara": 2,
+          "house": 1
+        }
+      ]
+    },
+    {
+      "group": "astra-v022-confirm",
+      "policy": "industry",
+      "seed": "astra-v022-confirm-6",
+      "setup": 7,
+      "side": 0,
+      "starter": 1,
+      "rivalSeat": 0,
+      "steps": 85,
+      "winner": 1,
+      "rivalWin": false,
+      "draw": false,
+      "margin": 0,
+      "scores": [
+        45,
+        45
+      ],
+      "actions": [
+        {
+          "plot": 5,
+          "rights": 5,
+          "income": 9,
+          "mine": 7,
+          "place-mine": 7,
+          "build": 5,
+          "penalty": 1,
+          "tax": 4,
+          "technology": 2
+        },
+        {
+          "rights": 7,
+          "plot": 7,
+          "build": 5,
+          "income": 8,
+          "tax": 4,
+          "mine": 4,
+          "place-mine": 4,
+          "penalty": 1
+        }
+      ]
+    },
+    {
+      "group": "astra-v022-confirm",
+      "policy": "industry",
+      "seed": "astra-v022-confirm-6",
+      "setup": 7,
+      "side": 0,
+      "starter": 1,
+      "rivalSeat": 1,
+      "steps": 85,
+      "winner": 0,
+      "rivalWin": false,
+      "draw": false,
+      "margin": -6,
+      "scores": [
+        43,
+        37
+      ],
+      "actions": [
+        {
+          "rights": 8,
+          "plot": 8,
+          "build": 5,
+          "income": 8,
+          "mine": 4,
+          "place-mine": 4,
+          "tax": 4
+        },
+        {
+          "plot": 4,
+          "rights": 5,
+          "mine": 7,
+          "place-mine": 7,
+          "income": 10,
+          "build": 4,
+          "tax": 3,
+          "barbara": 2,
+          "house": 1,
+          "penalty": 1
+        }
+      ]
+    },
+    {
+      "group": "astra-v022-confirm",
+      "policy": "industry",
+      "seed": "astra-v022-confirm-7",
+      "setup": 8,
+      "side": 1,
+      "starter": 1,
+      "rivalSeat": 0,
+      "steps": 83,
+      "winner": 0,
+      "rivalWin": true,
+      "draw": false,
+      "margin": 26,
+      "scores": [
+        55,
+        29
+      ],
+      "actions": [
+        {
+          "plot": 5,
+          "rights": 6,
+          "build": 4,
+          "mine": 9,
+          "place-mine": 9,
+          "income": 7,
+          "tax": 4
+        },
+        {
+          "rights": 8,
+          "plot": 8,
+          "build": 5,
+          "technology": 2,
+          "income": 7,
+          "penalty": 1,
+          "mine": 2,
+          "place-mine": 2,
+          "skip": 1,
+          "tax": 3
+        }
+      ]
+    },
+    {
+      "group": "astra-v022-confirm",
+      "policy": "industry",
+      "seed": "astra-v022-confirm-7",
+      "setup": 8,
+      "side": 1,
+      "starter": 1,
+      "rivalSeat": 1,
+      "steps": 80,
+      "winner": 1,
+      "rivalWin": true,
+      "draw": false,
+      "margin": 6,
+      "scores": [
+        40,
+        46
+      ],
+      "actions": [
+        {
+          "rights": 9,
+          "plot": 7,
+          "build": 6,
+          "income": 7,
+          "tax": 4,
+          "mine": 2,
+          "place-mine": 2
+        },
+        {
+          "plot": 5,
+          "rights": 6,
+          "mine": 6,
+          "place-mine": 6,
+          "income": 9,
+          "build": 4,
+          "technology": 1,
+          "penalty": 2,
+          "tax": 2,
+          "barbara": 1,
+          "patrician": 1
+        }
+      ]
+    },
+    {
+      "group": "astra-v022-confirm",
+      "policy": "industry",
+      "seed": "astra-v022-confirm-8",
+      "setup": 9,
+      "side": 0,
+      "starter": 0,
+      "rivalSeat": 0,
+      "steps": 82,
+      "winner": 0,
+      "rivalWin": true,
+      "draw": false,
+      "margin": 11,
+      "scores": [
+        54,
+        43
+      ],
+      "actions": [
+        {
+          "plot": 5,
+          "rights": 5,
+          "mine": 6,
+          "place-mine": 6,
+          "income": 8,
+          "build": 4,
+          "technology": 1,
+          "tax": 5,
+          "barbara": 3,
+          "patrician": 1
+        },
+        {
+          "rights": 9,
+          "plot": 7,
+          "build": 6,
+          "income": 7,
+          "tax": 5,
+          "mine": 2,
+          "place-mine": 2
+        }
+      ]
+    },
+    {
+      "group": "astra-v022-confirm",
+      "policy": "industry",
+      "seed": "astra-v022-confirm-8",
+      "setup": 9,
+      "side": 0,
+      "starter": 0,
+      "rivalSeat": 1,
+      "steps": 87,
+      "winner": 1,
+      "rivalWin": true,
+      "draw": false,
+      "margin": 36,
+      "scores": [
+        21,
+        57
+      ],
+      "actions": [
+        {
+          "rights": 7,
+          "plot": 7,
+          "build": 4,
+          "income": 9,
+          "mine": 5,
+          "place-mine": 5,
+          "tax": 3,
+          "penalty": 2
+        },
+        {
+          "plot": 5,
+          "rights": 6,
+          "mine": 8,
+          "place-mine": 8,
+          "build": 5,
+          "income": 7,
+          "barbara": 1,
+          "penalty": 2,
+          "tax": 3
+        }
+      ]
+    },
+    {
+      "group": "astra-v022-confirm",
+      "policy": "mining",
+      "seed": "astra-v022-confirm-0",
+      "setup": 1,
+      "side": 0,
+      "starter": 0,
+      "rivalSeat": 0,
+      "steps": 86,
+      "winner": 0,
+      "rivalWin": true,
+      "draw": false,
+      "margin": 8,
+      "scores": [
+        39,
+        31
+      ],
+      "actions": [
+        {
+          "plot": 5,
+          "rights": 6,
+          "income": 9,
+          "mine": 7,
+          "place-mine": 7,
+          "build": 4,
+          "penalty": 2,
+          "technology": 1,
+          "tax": 3,
+          "barbara": 1
+        },
+        {
+          "rights": 7,
+          "plot": 7,
+          "build": 4,
+          "income": 7,
+          "penalty": 3,
+          "mine": 5,
+          "place-mine": 5,
+          "tax": 2,
+          "skip": 1
+        }
+      ]
+    },
+    {
+      "group": "astra-v022-confirm",
+      "policy": "mining",
+      "seed": "astra-v022-confirm-0",
+      "setup": 1,
+      "side": 0,
+      "starter": 0,
+      "rivalSeat": 1,
+      "steps": 86,
+      "winner": 1,
+      "rivalWin": true,
+      "draw": false,
+      "margin": 6,
+      "scores": [
+        44,
+        50
+      ],
+      "actions": [
+        {
+          "rights": 8,
+          "plot": 8,
+          "build": 5,
+          "income": 8,
+          "penalty": 1,
+          "mine": 4,
+          "place-mine": 4,
+          "tax": 4
+        },
+        {
+          "plot": 5,
+          "rights": 7,
+          "mine": 8,
+          "place-mine": 7,
+          "income": 6,
+          "skip": 1,
+          "build": 5,
+          "penalty": 2,
+          "tax": 3
+        }
+      ]
+    },
+    {
+      "group": "astra-v022-confirm",
+      "policy": "mining",
+      "seed": "astra-v022-confirm-1",
+      "setup": 2,
+      "side": 1,
+      "starter": 0,
+      "rivalSeat": 0,
+      "steps": 79,
+      "winner": 0,
+      "rivalWin": true,
+      "draw": false,
+      "margin": 26,
+      "scores": [
+        64,
+        38
+      ],
+      "actions": [
+        {
+          "plot": 4,
+          "rights": 6,
+          "mine": 8,
+          "place-mine": 8,
+          "build": 4,
+          "income": 8,
+          "tax": 3
+        },
+        {
+          "rights": 8,
+          "plot": 7,
+          "build": 5,
+          "income": 8,
+          "mine": 3,
+          "place-mine": 3,
+          "technology": 1,
+          "tax": 3
+        }
+      ]
+    },
+    {
+      "group": "astra-v022-confirm",
+      "policy": "mining",
+      "seed": "astra-v022-confirm-1",
+      "setup": 2,
+      "side": 1,
+      "starter": 0,
+      "rivalSeat": 1,
+      "steps": 83,
+      "winner": 1,
+      "rivalWin": true,
+      "draw": false,
+      "margin": 24,
+      "scores": [
+        40,
+        64
+      ],
+      "actions": [
+        {
+          "rights": 7,
+          "plot": 6,
+          "penalty": 3,
+          "build": 4,
+          "income": 8,
+          "mine": 6,
+          "place-mine": 6,
+          "tax": 1
+        },
+        {
+          "plot": 6,
+          "rights": 7,
+          "mine": 6,
+          "place-mine": 6,
+          "build": 6,
+          "income": 5,
+          "tax": 4,
+          "barbara": 1,
+          "technology": 1
+        }
+      ]
+    },
+    {
+      "group": "astra-v022-confirm",
+      "policy": "mining",
+      "seed": "astra-v022-confirm-2",
+      "setup": 3,
+      "side": 0,
+      "starter": 1,
+      "rivalSeat": 0,
+      "steps": 87,
+      "winner": 0,
+      "rivalWin": true,
+      "draw": false,
+      "margin": 16,
+      "scores": [
+        39,
+        23
+      ],
+      "actions": [
+        {
+          "plot": 5,
+          "rights": 6,
+          "mine": 8,
+          "place-mine": 8,
+          "build": 4,
+          "income": 8,
+          "penalty": 4,
+          "technology": 1,
+          "tax": 1
+        },
+        {
+          "rights": 5,
+          "plot": 6,
+          "build": 3,
+          "income": 10,
+          "tax": 3,
+          "mine": 6,
+          "place-mine": 6,
+          "penalty": 2,
+          "skip": 1
+        }
+      ]
+    },
+    {
+      "group": "astra-v022-confirm",
+      "policy": "mining",
+      "seed": "astra-v022-confirm-2",
+      "setup": 3,
+      "side": 0,
+      "starter": 1,
+      "rivalSeat": 1,
+      "steps": 87,
+      "winner": 1,
+      "rivalWin": true,
+      "draw": false,
+      "margin": 6,
+      "scores": [
+        35,
+        41
+      ],
+      "actions": [
+        {
+          "rights": 6,
+          "plot": 6,
+          "build": 3,
+          "income": 9,
+          "mine": 5,
+          "place-mine": 5,
+          "technology": 1,
+          "penalty": 1,
+          "tax": 4,
+          "skip": 2
+        },
+        {
+          "plot": 4,
+          "rights": 6,
+          "mine": 8,
+          "place-mine": 7,
+          "income": 10,
+          "skip": 1,
+          "build": 4,
+          "penalty": 2,
+          "tax": 3
+        }
+      ]
+    },
+    {
+      "group": "astra-v022-confirm",
+      "policy": "mining",
+      "seed": "astra-v022-confirm-3",
+      "setup": 4,
+      "side": 1,
+      "starter": 1,
+      "rivalSeat": 0,
+      "steps": 89,
+      "winner": 1,
+      "rivalWin": false,
+      "draw": false,
+      "margin": 0,
+      "scores": [
+        40,
+        40
+      ],
+      "actions": [
+        {
+          "plot": 5,
+          "rights": 7,
+          "mine": 9,
+          "place-mine": 9,
+          "income": 8,
+          "penalty": 3,
+          "build": 4,
+          "tax": 2
+        },
+        {
+          "rights": 8,
+          "plot": 7,
+          "build": 5,
+          "technology": 2,
+          "penalty": 2,
+          "income": 7,
+          "mine": 4,
+          "place-mine": 4,
+          "tax": 3
+        }
+      ]
+    },
+    {
+      "group": "astra-v022-confirm",
+      "policy": "mining",
+      "seed": "astra-v022-confirm-3",
+      "setup": 4,
+      "side": 1,
+      "starter": 1,
+      "rivalSeat": 1,
+      "steps": 87,
+      "winner": 1,
+      "rivalWin": true,
+      "draw": false,
+      "margin": 1,
+      "scores": [
+        31,
+        32
+      ],
+      "actions": [
+        {
+          "rights": 6,
+          "plot": 6,
+          "build": 3,
+          "income": 8,
+          "penalty": 2,
+          "mine": 7,
+          "place-mine": 7,
+          "tax": 3,
+          "skip": 1
+        },
+        {
+          "plot": 4,
+          "rights": 6,
+          "build": 4,
+          "technology": 2,
+          "mine": 6,
+          "place-mine": 6,
+          "penalty": 2,
+          "income": 9,
+          "tax": 3,
+          "barbara": 1,
+          "house": 1
+        }
+      ]
+    },
+    {
+      "group": "astra-v022-confirm",
+      "policy": "mining",
+      "seed": "astra-v022-confirm-4",
+      "setup": 5,
+      "side": 0,
+      "starter": 0,
+      "rivalSeat": 0,
+      "steps": 83,
+      "winner": 0,
+      "rivalWin": true,
+      "draw": false,
+      "margin": 1,
+      "scores": [
+        24,
+        23
+      ],
+      "actions": [
+        {
+          "plot": 3,
+          "rights": 5,
+          "mine": 10,
+          "place-mine": 8,
+          "income": 10,
+          "penalty": 2,
+          "skip": 3,
+          "build": 2,
+          "tax": 3
+        },
+        {
+          "rights": 8,
+          "plot": 8,
+          "income": 9,
+          "penalty": 2,
+          "mine": 1,
+          "place-mine": 1,
+          "build": 5,
+          "tax": 3
+        }
+      ]
+    },
+    {
+      "group": "astra-v022-confirm",
+      "policy": "mining",
+      "seed": "astra-v022-confirm-4",
+      "setup": 5,
+      "side": 0,
+      "starter": 0,
+      "rivalSeat": 1,
+      "steps": 87,
+      "winner": 1,
+      "rivalWin": true,
+      "draw": false,
+      "margin": 29,
+      "scores": [
+        35,
+        64
+      ],
+      "actions": [
+        {
+          "rights": 7,
+          "plot": 7,
+          "build": 4,
+          "penalty": 3,
+          "mine": 5,
+          "place-mine": 4,
+          "income": 8,
+          "tax": 2,
+          "skip": 1,
+          "technology": 1
+        },
+        {
+          "plot": 5,
+          "rights": 8,
+          "mine": 7,
+          "place-mine": 7,
+          "build": 5,
+          "penalty": 1,
+          "income": 7,
+          "tax": 4,
+          "skip": 1
+        }
+      ]
+    },
+    {
+      "group": "astra-v022-confirm",
+      "policy": "mining",
+      "seed": "astra-v022-confirm-5",
+      "setup": 6,
+      "side": 1,
+      "starter": 0,
+      "rivalSeat": 0,
+      "steps": 91,
+      "winner": 0,
+      "rivalWin": true,
+      "draw": false,
+      "margin": 19,
+      "scores": [
+        45,
+        26
+      ],
+      "actions": [
+        {
+          "plot": 5,
+          "rights": 8,
+          "mine": 7,
+          "place-mine": 7,
+          "build": 5,
+          "income": 8,
+          "penalty": 1,
+          "tax": 5
+        },
+        {
+          "rights": 4,
+          "plot": 4,
+          "build": 2,
+          "penalty": 1,
+          "income": 10,
+          "mine": 8,
+          "place-mine": 7,
+          "skip": 4,
+          "tax": 5
+        }
+      ]
+    },
+    {
+      "group": "astra-v022-confirm",
+      "policy": "mining",
+      "seed": "astra-v022-confirm-5",
+      "setup": 6,
+      "side": 1,
+      "starter": 0,
+      "rivalSeat": 1,
+      "steps": 87,
+      "winner": 1,
+      "rivalWin": true,
+      "draw": false,
+      "margin": 1,
+      "scores": [
+        38,
+        39
+      ],
+      "actions": [
+        {
+          "rights": 8,
+          "plot": 6,
+          "build": 5,
+          "income": 8,
+          "penalty": 1,
+          "tax": 5,
+          "mine": 4,
+          "place-mine": 4
+        },
+        {
+          "plot": 6,
+          "rights": 5,
+          "mine": 7,
+          "place-mine": 6,
+          "build": 4,
+          "income": 8,
+          "penalty": 1,
+          "tax": 5,
+          "skip": 1,
+          "barbara": 2,
+          "house": 1
+        }
+      ]
+    },
+    {
+      "group": "astra-v022-confirm",
+      "policy": "mining",
+      "seed": "astra-v022-confirm-6",
+      "setup": 7,
+      "side": 0,
+      "starter": 1,
+      "rivalSeat": 0,
+      "steps": 87,
+      "winner": 0,
+      "rivalWin": true,
+      "draw": false,
+      "margin": 4,
+      "scores": [
+        41,
+        37
+      ],
+      "actions": [
+        {
+          "plot": 6,
+          "rights": 6,
+          "mine": 7,
+          "place-mine": 7,
+          "income": 8,
+          "build": 4,
+          "penalty": 1,
+          "technology": 2,
+          "tax": 4
+        },
+        {
+          "rights": 6,
+          "plot": 5,
+          "build": 3,
+          "income": 9,
+          "tax": 4,
+          "mine": 6,
+          "place-mine": 6,
+          "penalty": 1,
+          "skip": 2
+        }
+      ]
+    },
+    {
+      "group": "astra-v022-confirm",
+      "policy": "mining",
+      "seed": "astra-v022-confirm-6",
+      "setup": 7,
+      "side": 0,
+      "starter": 1,
+      "rivalSeat": 1,
+      "steps": 83,
+      "winner": 0,
+      "rivalWin": false,
+      "draw": false,
+      "margin": -1,
+      "scores": [
+        32,
+        31
+      ],
+      "actions": [
+        {
+          "rights": 5,
+          "plot": 5,
+          "income": 10,
+          "mine": 8,
+          "place-mine": 7,
+          "build": 2,
+          "tax": 4,
+          "skip": 2
+        },
+        {
+          "plot": 5,
+          "rights": 6,
+          "mine": 6,
+          "place-mine": 6,
+          "income": 9,
+          "build": 4,
+          "penalty": 2,
+          "tax": 2
+        }
+      ]
+    },
+    {
+      "group": "astra-v022-confirm",
+      "policy": "mining",
+      "seed": "astra-v022-confirm-7",
+      "setup": 8,
+      "side": 1,
+      "starter": 1,
+      "rivalSeat": 0,
+      "steps": 82,
+      "winner": 0,
+      "rivalWin": true,
+      "draw": false,
+      "margin": 33,
+      "scores": [
+        67,
+        34
+      ],
+      "actions": [
+        {
+          "plot": 5,
+          "rights": 6,
+          "build": 5,
+          "mine": 8,
+          "place-mine": 8,
+          "income": 5,
+          "barbara": 1,
+          "tax": 4
+        },
+        {
+          "rights": 9,
+          "plot": 7,
+          "build": 6,
+          "technology": 3,
+          "mine": 2,
+          "place-mine": 2,
+          "income": 5,
+          "penalty": 2,
+          "tax": 2,
+          "barbara": 1,
+          "house": 1
+        }
+      ]
+    },
+    {
+      "group": "astra-v022-confirm",
+      "policy": "mining",
+      "seed": "astra-v022-confirm-7",
+      "setup": 8,
+      "side": 1,
+      "starter": 1,
+      "rivalSeat": 1,
+      "steps": 82,
+      "winner": 1,
+      "rivalWin": true,
+      "draw": false,
+      "margin": 9,
+      "scores": [
+        35,
+        44
+      ],
+      "actions": [
+        {
+          "rights": 8,
+          "plot": 7,
+          "build": 6,
+          "income": 7,
+          "mine": 3,
+          "place-mine": 3,
+          "penalty": 1,
+          "tax": 3
+        },
+        {
+          "plot": 4,
+          "rights": 5,
+          "mine": 7,
+          "place-mine": 7,
+          "income": 10,
+          "build": 4,
+          "technology": 2,
+          "penalty": 2,
+          "barbara": 1,
+          "tax": 2
+        }
+      ]
+    },
+    {
+      "group": "astra-v022-confirm",
+      "policy": "mining",
+      "seed": "astra-v022-confirm-8",
+      "setup": 9,
+      "side": 0,
+      "starter": 0,
+      "rivalSeat": 0,
+      "steps": 86,
+      "winner": 1,
+      "rivalWin": false,
+      "draw": false,
+      "margin": -11,
+      "scores": [
+        33,
+        44
+      ],
+      "actions": [
+        {
+          "plot": 4,
+          "rights": 5,
+          "mine": 8,
+          "place-mine": 8,
+          "income": 10,
+          "build": 3,
+          "technology": 1,
+          "tax": 4,
+          "penalty": 1
+        },
+        {
+          "rights": 6,
+          "plot": 6,
+          "build": 4,
+          "income": 8,
+          "tax": 5,
+          "mine": 6,
+          "place-mine": 6,
+          "skip": 1
+        }
+      ]
+    },
+    {
+      "group": "astra-v022-confirm",
+      "policy": "mining",
+      "seed": "astra-v022-confirm-8",
+      "setup": 9,
+      "side": 0,
+      "starter": 0,
+      "rivalSeat": 1,
+      "steps": 92,
+      "winner": 1,
+      "rivalWin": true,
+      "draw": false,
+      "margin": 18,
+      "scores": [
+        32,
+        50
+      ],
+      "actions": [
+        {
+          "rights": 6,
+          "plot": 5,
+          "build": 3,
+          "income": 9,
+          "mine": 7,
+          "place-mine": 7,
+          "barbara": 2,
+          "house": 1,
+          "tax": 5,
+          "skip": 1
+        },
+        {
+          "plot": 5,
+          "rights": 5,
+          "mine": 8,
+          "place-mine": 8,
+          "build": 5,
+          "income": 6,
+          "barbara": 3,
+          "penalty": 2,
+          "tax": 3,
+          "patrician": 1
+        }
+      ]
+    },
+    {
+      "group": "astra-v022-confirm",
+      "policy": "council",
+      "seed": "astra-v022-confirm-0",
+      "setup": 1,
+      "side": 0,
+      "starter": 0,
+      "rivalSeat": 0,
+      "steps": 81,
+      "winner": 0,
+      "rivalWin": true,
+      "draw": false,
+      "margin": 0,
+      "scores": [
+        39,
+        39
+      ],
+      "actions": [
+        {
+          "plot": 6,
+          "rights": 6,
+          "income": 9,
+          "mine": 5,
+          "place-mine": 4,
+          "build": 5,
+          "penalty": 2,
+          "technology": 2,
+          "tax": 3,
+          "skip": 1
+        },
+        {
+          "rights": 8,
+          "plot": 7,
+          "build": 5,
+          "income": 9,
+          "penalty": 2,
+          "mine": 2,
+          "place-mine": 2,
+          "tax": 3
+        }
+      ]
+    },
+    {
+      "group": "astra-v022-confirm",
+      "policy": "council",
+      "seed": "astra-v022-confirm-0",
+      "setup": 1,
+      "side": 0,
+      "starter": 0,
+      "rivalSeat": 1,
+      "steps": 83,
+      "winner": 1,
+      "rivalWin": true,
+      "draw": false,
+      "margin": 20,
+      "scores": [
+        51,
+        71
+      ],
+      "actions": [
+        {
+          "rights": 10,
+          "plot": 7,
+          "build": 7,
+          "income": 7,
+          "penalty": 2,
+          "mine": 2,
+          "place-mine": 2,
+          "tax": 3
+        },
+        {
+          "plot": 5,
+          "rights": 6,
+          "mine": 7,
+          "place-mine": 6,
+          "income": 7,
+          "skip": 1,
+          "build": 5,
+          "penalty": 2,
+          "tax": 3,
+          "house": 1
+        }
+      ]
+    },
+    {
+      "group": "astra-v022-confirm",
+      "policy": "council",
+      "seed": "astra-v022-confirm-1",
+      "setup": 2,
+      "side": 1,
+      "starter": 0,
+      "rivalSeat": 0,
+      "steps": 79,
+      "winner": 0,
+      "rivalWin": true,
+      "draw": false,
+      "margin": 18,
+      "scores": [
+        56,
+        38
+      ],
+      "actions": [
+        {
+          "plot": 4,
+          "rights": 6,
+          "mine": 8,
+          "place-mine": 8,
+          "build": 4,
+          "income": 8,
+          "tax": 3
+        },
+        {
+          "rights": 8,
+          "plot": 7,
+          "build": 5,
+          "income": 8,
+          "mine": 3,
+          "place-mine": 3,
+          "technology": 1,
+          "tax": 3
+        }
+      ]
+    },
+    {
+      "group": "astra-v022-confirm",
+      "policy": "council",
+      "seed": "astra-v022-confirm-1",
+      "setup": 2,
+      "side": 1,
+      "starter": 0,
+      "rivalSeat": 1,
+      "steps": 84,
+      "winner": 1,
+      "rivalWin": true,
+      "draw": false,
+      "margin": 26,
+      "scores": [
+        35,
+        61
+      ],
+      "actions": [
+        {
+          "rights": 7,
+          "plot": 6,
+          "penalty": 2,
+          "build": 4,
+          "income": 8,
+          "mine": 6,
+          "place-mine": 6,
+          "tax": 2,
+          "house": 1
+        },
+        {
+          "plot": 6,
+          "rights": 7,
+          "mine": 6,
+          "place-mine": 6,
+          "build": 6,
+          "income": 5,
+          "tax": 4,
+          "barbara": 1,
+          "technology": 1
+        }
+      ]
+    },
+    {
+      "group": "astra-v022-confirm",
+      "policy": "council",
+      "seed": "astra-v022-confirm-2",
+      "setup": 3,
+      "side": 0,
+      "starter": 1,
+      "rivalSeat": 0,
+      "steps": 82,
+      "winner": 0,
+      "rivalWin": true,
+      "draw": false,
+      "margin": 8,
+      "scores": [
+        41,
+        33
+      ],
+      "actions": [
+        {
+          "plot": 5,
+          "rights": 5,
+          "mine": 8,
+          "place-mine": 8,
+          "build": 4,
+          "income": 8,
+          "penalty": 2,
+          "tax": 3
+        },
+        {
+          "rights": 8,
+          "plot": 7,
+          "build": 5,
+          "income": 9,
+          "tax": 5,
+          "mine": 2,
+          "place-mine": 2,
+          "skip": 1
+        }
+      ]
+    },
+    {
+      "group": "astra-v022-confirm",
+      "policy": "council",
+      "seed": "astra-v022-confirm-2",
+      "setup": 3,
+      "side": 0,
+      "starter": 1,
+      "rivalSeat": 1,
+      "steps": 86,
+      "winner": 1,
+      "rivalWin": true,
+      "draw": false,
+      "margin": 4,
+      "scores": [
+        41,
+        45
+      ],
+      "actions": [
+        {
+          "rights": 7,
+          "plot": 6,
+          "build": 4,
+          "income": 9,
+          "mine": 5,
+          "place-mine": 5,
+          "technology": 1,
+          "penalty": 3,
+          "tax": 2
+        },
+        {
+          "plot": 5,
+          "rights": 7,
+          "mine": 7,
+          "place-mine": 5,
+          "income": 9,
+          "skip": 2,
+          "build": 4,
+          "penalty": 3,
+          "tax": 2
+        }
+      ]
+    },
+    {
+      "group": "astra-v022-confirm",
+      "policy": "council",
+      "seed": "astra-v022-confirm-3",
+      "setup": 4,
+      "side": 1,
+      "starter": 1,
+      "rivalSeat": 0,
+      "steps": 85,
+      "winner": 0,
+      "rivalWin": true,
+      "draw": false,
+      "margin": 10,
+      "scores": [
+        51,
+        41
+      ],
+      "actions": [
+        {
+          "plot": 5,
+          "rights": 7,
+          "mine": 8,
+          "place-mine": 8,
+          "income": 8,
+          "penalty": 3,
+          "build": 4,
+          "tax": 2
+        },
+        {
+          "rights": 7,
+          "plot": 7,
+          "build": 5,
+          "technology": 1,
+          "penalty": 3,
+          "income": 9,
+          "mine": 3,
+          "place-mine": 3,
+          "tax": 2
+        }
+      ]
+    },
+    {
+      "group": "astra-v022-confirm",
+      "policy": "council",
+      "seed": "astra-v022-confirm-3",
+      "setup": 4,
+      "side": 1,
+      "starter": 1,
+      "rivalSeat": 1,
+      "steps": 82,
+      "winner": 0,
+      "rivalWin": false,
+      "draw": false,
+      "margin": 0,
+      "scores": [
+        36,
+        36
+      ],
+      "actions": [
+        {
+          "rights": 7,
+          "plot": 6,
+          "build": 5,
+          "income": 9,
+          "penalty": 1,
+          "mine": 3,
+          "place-mine": 3,
+          "tax": 4
+        },
+        {
+          "plot": 6,
+          "rights": 6,
+          "build": 4,
+          "technology": 3,
+          "mine": 6,
+          "place-mine": 5,
+          "penalty": 2,
+          "income": 8,
+          "skip": 1,
+          "tax": 3
+        }
+      ]
+    },
+    {
+      "group": "astra-v022-confirm",
+      "policy": "council",
+      "seed": "astra-v022-confirm-4",
+      "setup": 5,
+      "side": 0,
+      "starter": 0,
+      "rivalSeat": 0,
+      "steps": 85,
+      "winner": 0,
+      "rivalWin": true,
+      "draw": false,
+      "margin": 7,
+      "scores": [
+        41,
+        34
+      ],
+      "actions": [
+        {
+          "plot": 4,
+          "rights": 5,
+          "mine": 9,
+          "place-mine": 7,
+          "income": 9,
+          "penalty": 3,
+          "skip": 3,
+          "build": 3,
+          "tax": 2,
+          "technology": 1
+        },
+        {
+          "rights": 7,
+          "plot": 6,
+          "income": 11,
+          "penalty": 2,
+          "mine": 2,
+          "place-mine": 2,
+          "build": 6,
+          "tax": 3
+        }
+      ]
+    },
+    {
+      "group": "astra-v022-confirm",
+      "policy": "council",
+      "seed": "astra-v022-confirm-4",
+      "setup": 5,
+      "side": 0,
+      "starter": 0,
+      "rivalSeat": 1,
+      "steps": 89,
+      "winner": 1,
+      "rivalWin": true,
+      "draw": false,
+      "margin": 14,
+      "scores": [
+        28,
+        42
+      ],
+      "actions": [
+        {
+          "rights": 7,
+          "plot": 6,
+          "build": 5,
+          "penalty": 1,
+          "income": 10,
+          "mine": 4,
+          "place-mine": 4,
+          "skip": 1,
+          "tax": 4,
+          "house": 1
+        },
+        {
+          "plot": 4,
+          "rights": 7,
+          "mine": 8,
+          "place-mine": 7,
+          "income": 10,
+          "penalty": 2,
+          "build": 4,
+          "skip": 1,
+          "tax": 3
+        }
+      ]
+    },
+    {
+      "group": "astra-v022-confirm",
+      "policy": "council",
+      "seed": "astra-v022-confirm-5",
+      "setup": 6,
+      "side": 1,
+      "starter": 0,
+      "rivalSeat": 0,
+      "steps": 89,
+      "winner": 0,
+      "rivalWin": true,
+      "draw": false,
+      "margin": 22,
+      "scores": [
+        56,
+        34
+      ],
+      "actions": [
+        {
+          "plot": 5,
+          "rights": 8,
+          "mine": 7,
+          "place-mine": 7,
+          "build": 5,
+          "income": 8,
+          "penalty": 1,
+          "tax": 5
+        },
+        {
+          "rights": 7,
+          "plot": 6,
+          "build": 5,
+          "technology": 1,
+          "penalty": 1,
+          "income": 9,
+          "mine": 4,
+          "place-mine": 4,
+          "tax": 5,
+          "house": 1
+        }
+      ]
+    },
+    {
+      "group": "astra-v022-confirm",
+      "policy": "council",
+      "seed": "astra-v022-confirm-5",
+      "setup": 6,
+      "side": 1,
+      "starter": 0,
+      "rivalSeat": 1,
+      "steps": 85,
+      "winner": 1,
+      "rivalWin": true,
+      "draw": false,
+      "margin": 4,
+      "scores": [
+        35,
+        39
+      ],
+      "actions": [
+        {
+          "rights": 9,
+          "plot": 6,
+          "build": 6,
+          "income": 7,
+          "penalty": 1,
+          "tax": 5,
+          "mine": 3,
+          "place-mine": 3
+        },
+        {
+          "plot": 5,
+          "rights": 6,
+          "mine": 6,
+          "place-mine": 5,
+          "build": 5,
+          "income": 8,
+          "penalty": 1,
+          "tax": 5,
+          "skip": 1,
+          "barbara": 1,
+          "house": 2
+        }
+      ]
+    },
+    {
+      "group": "astra-v022-confirm",
+      "policy": "council",
+      "seed": "astra-v022-confirm-6",
+      "setup": 7,
+      "side": 0,
+      "starter": 1,
+      "rivalSeat": 0,
+      "steps": 84,
+      "winner": 0,
+      "rivalWin": true,
+      "draw": false,
+      "margin": 23,
+      "scores": [
+        51,
+        28
+      ],
+      "actions": [
+        {
+          "plot": 5,
+          "rights": 7,
+          "mine": 5,
+          "place-mine": 5,
+          "income": 9,
+          "build": 5,
+          "penalty": 1,
+          "technology": 4,
+          "tax": 4
+        },
+        {
+          "rights": 6,
+          "plot": 7,
+          "build": 5,
+          "income": 9,
+          "tax": 3,
+          "mine": 3,
+          "place-mine": 3,
+          "penalty": 2,
+          "skip": 1
+        }
+      ]
+    },
+    {
+      "group": "astra-v022-confirm",
+      "policy": "council",
+      "seed": "astra-v022-confirm-6",
+      "setup": 7,
+      "side": 0,
+      "starter": 1,
+      "rivalSeat": 1,
+      "steps": 79,
+      "winner": 1,
+      "rivalWin": true,
+      "draw": false,
+      "margin": 17,
+      "scores": [
+        41,
+        58
+      ],
+      "actions": [
+        {
+          "rights": 9,
+          "plot": 7,
+          "income": 8,
+          "build": 6,
+          "tax": 3,
+          "technology": 1,
+          "penalty": 1,
+          "mine": 2,
+          "place-mine": 2
+        },
+        {
+          "plot": 6,
+          "rights": 6,
+          "mine": 4,
+          "place-mine": 4,
+          "income": 9,
+          "build": 6,
+          "penalty": 2,
+          "tax": 2,
+          "house": 1
+        }
+      ]
+    },
+    {
+      "group": "astra-v022-confirm",
+      "policy": "council",
+      "seed": "astra-v022-confirm-7",
+      "setup": 8,
+      "side": 1,
+      "starter": 1,
+      "rivalSeat": 0,
+      "steps": 83,
+      "winner": 0,
+      "rivalWin": true,
+      "draw": false,
+      "margin": 34,
+      "scores": [
+        66,
+        32
+      ],
+      "actions": [
+        {
+          "plot": 5,
+          "rights": 6,
+          "build": 5,
+          "mine": 8,
+          "place-mine": 8,
+          "income": 5,
+          "barbara": 1,
+          "tax": 4
+        },
+        {
+          "rights": 8,
+          "plot": 6,
+          "build": 5,
+          "technology": 3,
+          "mine": 4,
+          "place-mine": 4,
+          "income": 6,
+          "penalty": 1,
+          "tax": 3,
+          "skip": 1
+        }
+      ]
+    },
+    {
+      "group": "astra-v022-confirm",
+      "policy": "council",
+      "seed": "astra-v022-confirm-7",
+      "setup": 8,
+      "side": 1,
+      "starter": 1,
+      "rivalSeat": 1,
+      "steps": 82,
+      "winner": 1,
+      "rivalWin": true,
+      "draw": false,
+      "margin": 6,
+      "scores": [
+        31,
+        37
+      ],
+      "actions": [
+        {
+          "rights": 8,
+          "plot": 6,
+          "build": 6,
+          "income": 7,
+          "mine": 4,
+          "place-mine": 4,
+          "tax": 4
+        },
+        {
+          "plot": 4,
+          "rights": 6,
+          "mine": 6,
+          "place-mine": 6,
+          "income": 9,
+          "build": 3,
+          "technology": 1,
+          "penalty": 1,
+          "barbara": 2,
+          "house": 1,
+          "tax": 3,
+          "patrician": 1
+        }
+      ]
+    },
+    {
+      "group": "astra-v022-confirm",
+      "policy": "council",
+      "seed": "astra-v022-confirm-8",
+      "setup": 9,
+      "side": 0,
+      "starter": 0,
+      "rivalSeat": 0,
+      "steps": 86,
+      "winner": 1,
+      "rivalWin": false,
+      "draw": false,
+      "margin": -7,
+      "scores": [
+        36,
+        43
+      ],
+      "actions": [
+        {
+          "plot": 3,
+          "rights": 6,
+          "mine": 8,
+          "place-mine": 8,
+          "income": 9,
+          "build": 3,
+          "technology": 1,
+          "tax": 4,
+          "barbara": 2,
+          "house": 1,
+          "penalty": 1
+        },
+        {
+          "rights": 9,
+          "plot": 6,
+          "build": 6,
+          "income": 7,
+          "tax": 5,
+          "mine": 3,
+          "place-mine": 3,
+          "skip": 1
+        }
+      ]
+    },
+    {
+      "group": "astra-v022-confirm",
+      "policy": "council",
+      "seed": "astra-v022-confirm-8",
+      "setup": 9,
+      "side": 0,
+      "starter": 0,
+      "rivalSeat": 1,
+      "steps": 90,
+      "winner": 1,
+      "rivalWin": true,
+      "draw": false,
+      "margin": 28,
+      "scores": [
+        41,
+        69
+      ],
+      "actions": [
+        {
+          "rights": 6,
+          "plot": 5,
+          "build": 4,
+          "income": 9,
+          "mine": 5,
+          "place-mine": 5,
+          "barbara": 2,
+          "house": 1,
+          "tax": 5,
+          "patrician": 1
+        },
+        {
+          "plot": 5,
+          "rights": 6,
+          "mine": 8,
+          "place-mine": 8,
+          "build": 5,
+          "income": 8,
+          "barbara": 2,
+          "penalty": 1,
+          "tax": 4
+        }
+      ]
+    },
+    {
+      "group": "astra-v022-confirm",
+      "policy": "blockade",
+      "seed": "astra-v022-confirm-0",
+      "setup": 1,
+      "side": 0,
+      "starter": 0,
+      "rivalSeat": 0,
+      "steps": 79,
+      "winner": 0,
+      "rivalWin": true,
+      "draw": false,
+      "margin": 19,
+      "scores": [
+        48,
+        29
+      ],
+      "actions": [
+        {
+          "plot": 6,
+          "rights": 5,
+          "income": 11,
+          "mine": 4,
+          "place-mine": 3,
+          "build": 5,
+          "penalty": 2,
+          "tax": 3,
+          "technology": 1,
+          "skip": 1
+        },
+        {
+          "rights": 8,
+          "plot": 7,
+          "build": 5,
+          "income": 9,
+          "penalty": 2,
+          "mine": 2,
+          "place-mine": 2,
+          "tax": 3
+        }
+      ]
+    },
+    {
+      "group": "astra-v022-confirm",
+      "policy": "blockade",
+      "seed": "astra-v022-confirm-0",
+      "setup": 1,
+      "side": 0,
+      "starter": 0,
+      "rivalSeat": 1,
+      "steps": 87,
+      "winner": 0,
+      "rivalWin": false,
+      "draw": false,
+      "margin": -3,
+      "scores": [
+        50,
+        47
+      ],
+      "actions": [
+        {
+          "rights": 8,
+          "plot": 7,
+          "build": 5,
+          "income": 9,
+          "penalty": 1,
+          "mine": 4,
+          "place-mine": 4,
+          "tax": 4
+        },
+        {
+          "plot": 4,
+          "rights": 5,
+          "mine": 10,
+          "place-mine": 9,
+          "income": 7,
+          "skip": 1,
+          "build": 4,
+          "penalty": 2,
+          "tax": 3
+        }
+      ]
+    },
+    {
+      "group": "astra-v022-confirm",
+      "policy": "blockade",
+      "seed": "astra-v022-confirm-1",
+      "setup": 2,
+      "side": 1,
+      "starter": 0,
+      "rivalSeat": 0,
+      "steps": 86,
+      "winner": 1,
+      "rivalWin": false,
+      "draw": false,
+      "margin": 0,
+      "scores": [
+        38,
+        38
+      ],
+      "actions": [
+        {
+          "plot": 4,
+          "rights": 5,
+          "mine": 10,
+          "place-mine": 9,
+          "build": 2,
+          "income": 8,
+          "skip": 1,
+          "penalty": 1,
+          "tax": 2,
+          "barbara": 1,
+          "patrician": 1
+        },
+        {
+          "rights": 6,
+          "plot": 6,
+          "build": 4,
+          "income": 9,
+          "mine": 5,
+          "place-mine": 5,
+          "technology": 1,
+          "barbara": 2,
+          "house": 1,
+          "tax": 2,
+          "penalty": 1
+        }
+      ]
+    },
+    {
+      "group": "astra-v022-confirm",
+      "policy": "blockade",
+      "seed": "astra-v022-confirm-1",
+      "setup": 2,
+      "side": 1,
+      "starter": 0,
+      "rivalSeat": 1,
+      "steps": 82,
+      "winner": 1,
+      "rivalWin": true,
+      "draw": false,
+      "margin": 29,
+      "scores": [
+        28,
+        57
+      ],
+      "actions": [
+        {
+          "rights": 7,
+          "plot": 7,
+          "penalty": 2,
+          "build": 4,
+          "income": 8,
+          "mine": 5,
+          "place-mine": 5,
+          "tax": 2
+        },
+        {
+          "plot": 6,
+          "rights": 7,
+          "mine": 6,
+          "place-mine": 6,
+          "build": 6,
+          "income": 5,
+          "tax": 4,
+          "barbara": 1,
+          "technology": 1
+        }
+      ]
+    },
+    {
+      "group": "astra-v022-confirm",
+      "policy": "blockade",
+      "seed": "astra-v022-confirm-2",
+      "setup": 3,
+      "side": 0,
+      "starter": 1,
+      "rivalSeat": 0,
+      "steps": 87,
+      "winner": 0,
+      "rivalWin": true,
+      "draw": false,
+      "margin": 3,
+      "scores": [
+        33,
+        30
+      ],
+      "actions": [
+        {
+          "plot": 5,
+          "rights": 6,
+          "mine": 8,
+          "place-mine": 8,
+          "build": 4,
+          "income": 8,
+          "penalty": 3,
+          "technology": 1,
+          "tax": 2
+        },
+        {
+          "rights": 7,
+          "plot": 6,
+          "build": 4,
+          "income": 10,
+          "tax": 4,
+          "mine": 5,
+          "place-mine": 5,
+          "penalty": 1
+        }
+      ]
+    },
+    {
+      "group": "astra-v022-confirm",
+      "policy": "blockade",
+      "seed": "astra-v022-confirm-2",
+      "setup": 3,
+      "side": 0,
+      "starter": 1,
+      "rivalSeat": 1,
+      "steps": 83,
+      "winner": 1,
+      "rivalWin": true,
+      "draw": false,
+      "margin": 16,
+      "scores": [
+        22,
+        38
+      ],
+      "actions": [
+        {
+          "rights": 5,
+          "plot": 6,
+          "income": 11,
+          "mine": 4,
+          "place-mine": 4,
+          "build": 3,
+          "penalty": 2,
+          "skip": 1,
+          "tax": 3
+        },
+        {
+          "plot": 4,
+          "rights": 6,
+          "mine": 8,
+          "place-mine": 8,
+          "income": 10,
+          "build": 3,
+          "penalty": 1,
+          "tax": 4
+        }
+      ]
+    },
+    {
+      "group": "astra-v022-confirm",
+      "policy": "blockade",
+      "seed": "astra-v022-confirm-3",
+      "setup": 4,
+      "side": 1,
+      "starter": 1,
+      "rivalSeat": 0,
+      "steps": 90,
+      "winner": 1,
+      "rivalWin": false,
+      "draw": false,
+      "margin": -1,
+      "scores": [
+        37,
+        38
+      ],
+      "actions": [
+        {
+          "plot": 5,
+          "rights": 6,
+          "mine": 9,
+          "place-mine": 9,
+          "income": 8,
+          "penalty": 2,
+          "build": 4,
+          "tax": 3,
+          "house": 1
+        },
+        {
+          "rights": 7,
+          "plot": 7,
+          "build": 4,
+          "technology": 2,
+          "penalty": 3,
+          "income": 7,
+          "mine": 5,
+          "place-mine": 5,
+          "tax": 2,
+          "skip": 1
+        }
+      ]
+    },
+    {
+      "group": "astra-v022-confirm",
+      "policy": "blockade",
+      "seed": "astra-v022-confirm-3",
+      "setup": 4,
+      "side": 1,
+      "starter": 1,
+      "rivalSeat": 1,
+      "steps": 85,
+      "winner": 1,
+      "rivalWin": true,
+      "draw": false,
+      "margin": 6,
+      "scores": [
+        28,
+        34
+      ],
+      "actions": [
+        {
+          "rights": 7,
+          "plot": 7,
+          "build": 4,
+          "income": 8,
+          "penalty": 2,
+          "mine": 5,
+          "place-mine": 5,
+          "tax": 3
+        },
+        {
+          "plot": 4,
+          "rights": 5,
+          "build": 3,
+          "technology": 1,
+          "mine": 7,
+          "place-mine": 7,
+          "penalty": 1,
+          "income": 10,
+          "tax": 4,
+          "barbara": 1,
+          "house": 1
+        }
+      ]
+    },
+    {
+      "group": "astra-v022-confirm",
+      "policy": "blockade",
+      "seed": "astra-v022-confirm-4",
+      "setup": 5,
+      "side": 0,
+      "starter": 0,
+      "rivalSeat": 0,
+      "steps": 84,
+      "winner": 0,
+      "rivalWin": true,
+      "draw": false,
+      "margin": 14,
+      "scores": [
+        26,
+        12
+      ],
+      "actions": [
+        {
+          "plot": 4,
+          "rights": 5,
+          "mine": 8,
+          "place-mine": 7,
+          "income": 10,
+          "penalty": 2,
+          "skip": 1,
+          "build": 4,
+          "tax": 3,
+          "technology": 1
+        },
+        {
+          "rights": 4,
+          "plot": 4,
+          "income": 13,
+          "penalty": 2,
+          "mine": 4,
+          "place-mine": 4,
+          "skip": 4,
+          "build": 1,
+          "tax": 3
+        }
+      ]
+    },
+    {
+      "group": "astra-v022-confirm",
+      "policy": "blockade",
+      "seed": "astra-v022-confirm-4",
+      "setup": 5,
+      "side": 0,
+      "starter": 0,
+      "rivalSeat": 1,
+      "steps": 88,
+      "winner": 1,
+      "rivalWin": true,
+      "draw": false,
+      "margin": 18,
+      "scores": [
+        36,
+        54
+      ],
+      "actions": [
+        {
+          "rights": 7,
+          "plot": 6,
+          "build": 4,
+          "penalty": 3,
+          "mine": 5,
+          "place-mine": 4,
+          "income": 10,
+          "skip": 2,
+          "tax": 2
+        },
+        {
+          "plot": 6,
+          "rights": 7,
+          "mine": 7,
+          "place-mine": 7,
+          "build": 5,
+          "penalty": 1,
+          "income": 8,
+          "tax": 4
+        }
+      ]
+    },
+    {
+      "group": "astra-v022-confirm",
+      "policy": "blockade",
+      "seed": "astra-v022-confirm-5",
+      "setup": 6,
+      "side": 1,
+      "starter": 0,
+      "rivalSeat": 0,
+      "steps": 91,
+      "winner": 0,
+      "rivalWin": true,
+      "draw": false,
+      "margin": 19,
+      "scores": [
+        45,
+        26
+      ],
+      "actions": [
+        {
+          "plot": 5,
+          "rights": 8,
+          "mine": 7,
+          "place-mine": 7,
+          "build": 5,
+          "income": 8,
+          "penalty": 1,
+          "tax": 5
+        },
+        {
+          "rights": 4,
+          "plot": 4,
+          "build": 2,
+          "penalty": 1,
+          "income": 10,
+          "mine": 8,
+          "place-mine": 7,
+          "skip": 4,
+          "tax": 5
+        }
+      ]
+    },
+    {
+      "group": "astra-v022-confirm",
+      "policy": "blockade",
+      "seed": "astra-v022-confirm-5",
+      "setup": 6,
+      "side": 1,
+      "starter": 0,
+      "rivalSeat": 1,
+      "steps": 86,
+      "winner": 1,
+      "rivalWin": true,
+      "draw": false,
+      "margin": 16,
+      "scores": [
+        25,
+        41
+      ],
+      "actions": [
+        {
+          "rights": 6,
+          "plot": 6,
+          "build": 5,
+          "income": 9,
+          "penalty": 1,
+          "tax": 5,
+          "mine": 3,
+          "place-mine": 3,
+          "skip": 1
+        },
+        {
+          "plot": 6,
+          "rights": 6,
+          "mine": 6,
+          "place-mine": 6,
+          "build": 5,
+          "income": 7,
+          "penalty": 1,
+          "tax": 5,
+          "barbara": 2,
+          "house": 1,
+          "technology": 2
+        }
+      ]
+    },
+    {
+      "group": "astra-v022-confirm",
+      "policy": "blockade",
+      "seed": "astra-v022-confirm-6",
+      "setup": 7,
+      "side": 0,
+      "starter": 1,
+      "rivalSeat": 0,
+      "steps": 88,
+      "winner": 0,
+      "rivalWin": true,
+      "draw": false,
+      "margin": 2,
+      "scores": [
+        38,
+        36
+      ],
+      "actions": [
+        {
+          "plot": 5,
+          "rights": 7,
+          "mine": 6,
+          "place-mine": 6,
+          "income": 9,
+          "build": 4,
+          "penalty": 1,
+          "technology": 3,
+          "tax": 4
+        },
+        {
+          "rights": 5,
+          "plot": 5,
+          "build": 3,
+          "income": 9,
+          "tax": 4,
+          "mine": 7,
+          "place-mine": 7,
+          "penalty": 1,
+          "skip": 2
+        }
+      ]
+    },
+    {
+      "group": "astra-v022-confirm",
+      "policy": "blockade",
+      "seed": "astra-v022-confirm-6",
+      "setup": 7,
+      "side": 0,
+      "starter": 1,
+      "rivalSeat": 1,
+      "steps": 78,
+      "winner": 1,
+      "rivalWin": true,
+      "draw": false,
+      "margin": 19,
+      "scores": [
+        33,
+        52
+      ],
+      "actions": [
+        {
+          "rights": 6,
+          "plot": 7,
+          "income": 9,
+          "build": 5,
+          "mine": 3,
+          "place-mine": 3,
+          "tax": 4,
+          "skip": 1
+        },
+        {
+          "plot": 5,
+          "rights": 7,
+          "mine": 5,
+          "place-mine": 5,
+          "income": 8,
+          "build": 5,
+          "tax": 4,
+          "barbara": 1
+        }
+      ]
+    },
+    {
+      "group": "astra-v022-confirm",
+      "policy": "blockade",
+      "seed": "astra-v022-confirm-7",
+      "setup": 8,
+      "side": 1,
+      "starter": 1,
+      "rivalSeat": 0,
+      "steps": 83,
+      "winner": 0,
+      "rivalWin": true,
+      "draw": false,
+      "margin": 34,
+      "scores": [
+        66,
+        32
+      ],
+      "actions": [
+        {
+          "plot": 5,
+          "rights": 6,
+          "build": 5,
+          "mine": 8,
+          "place-mine": 8,
+          "income": 5,
+          "barbara": 1,
+          "tax": 4
+        },
+        {
+          "rights": 8,
+          "plot": 6,
+          "build": 5,
+          "technology": 3,
+          "mine": 4,
+          "place-mine": 4,
+          "income": 6,
+          "penalty": 1,
+          "tax": 3,
+          "skip": 1
+        }
+      ]
+    },
+    {
+      "group": "astra-v022-confirm",
+      "policy": "blockade",
+      "seed": "astra-v022-confirm-7",
+      "setup": 8,
+      "side": 1,
+      "starter": 1,
+      "rivalSeat": 1,
+      "steps": 84,
+      "winner": 1,
+      "rivalWin": true,
+      "draw": false,
+      "margin": 4,
+      "scores": [
+        27,
+        31
+      ],
+      "actions": [
+        {
+          "rights": 7,
+          "plot": 6,
+          "build": 4,
+          "income": 7,
+          "mine": 5,
+          "place-mine": 5,
+          "penalty": 2,
+          "skip": 1,
+          "tax": 2
+        },
+        {
+          "plot": 5,
+          "rights": 5,
+          "mine": 6,
+          "place-mine": 6,
+          "income": 9,
+          "build": 4,
+          "technology": 2,
+          "penalty": 3,
+          "barbara": 3,
+          "patrician": 1,
+          "tax": 1
+        }
+      ]
+    },
+    {
+      "group": "astra-v022-confirm",
+      "policy": "blockade",
+      "seed": "astra-v022-confirm-8",
+      "setup": 9,
+      "side": 0,
+      "starter": 0,
+      "rivalSeat": 0,
+      "steps": 87,
+      "winner": 0,
+      "rivalWin": true,
+      "draw": false,
+      "margin": 3,
+      "scores": [
+        43,
+        40
+      ],
+      "actions": [
+        {
+          "plot": 4,
+          "rights": 5,
+          "mine": 8,
+          "place-mine": 8,
+          "income": 10,
+          "build": 4,
+          "technology": 1,
+          "penalty": 3,
+          "barbara": 1,
+          "tax": 2,
+          "house": 1
+        },
+        {
+          "rights": 7,
+          "plot": 7,
+          "income": 8,
+          "build": 5,
+          "tax": 5,
+          "mine": 4,
+          "place-mine": 4
+        }
+      ]
+    },
+    {
+      "group": "astra-v022-confirm",
+      "policy": "blockade",
+      "seed": "astra-v022-confirm-8",
+      "setup": 9,
+      "side": 0,
+      "starter": 0,
+      "rivalSeat": 1,
+      "steps": 90,
+      "winner": 1,
+      "rivalWin": true,
+      "draw": false,
+      "margin": 16,
+      "scores": [
+        39,
+        55
+      ],
+      "actions": [
+        {
+          "rights": 6,
+          "plot": 6,
+          "build": 4,
+          "income": 9,
+          "mine": 4,
+          "place-mine": 4,
+          "barbara": 2,
+          "house": 1,
+          "tax": 5,
+          "skip": 1,
+          "patrician": 1
+        },
+        {
+          "plot": 5,
+          "rights": 6,
+          "mine": 8,
+          "place-mine": 7,
+          "build": 5,
+          "income": 8,
+          "barbara": 2,
+          "penalty": 2,
+          "tax": 3,
+          "skip": 1
+        }
+      ]
+    }
+  ],
+  "visibility": [
+    {
+      "seed": "astra-v022-discovery-0",
+      "rivalSeat": 0,
+      "hiddenChecks": 38
+    },
+    {
+      "seed": "astra-v022-discovery-0",
+      "rivalSeat": 1,
+      "hiddenChecks": 41
+    },
+    {
+      "seed": "astra-v022-discovery-1",
+      "rivalSeat": 0,
+      "hiddenChecks": 39
+    },
+    {
+      "seed": "astra-v022-discovery-1",
+      "rivalSeat": 1,
+      "hiddenChecks": 41
+    },
+    {
+      "seed": "astra-v022-confirm-0",
+      "rivalSeat": 0,
+      "hiddenChecks": 38
+    },
+    {
+      "seed": "astra-v022-confirm-0",
+      "rivalSeat": 1,
+      "hiddenChecks": 41
+    },
+    {
+      "seed": "astra-v022-confirm-1",
+      "rivalSeat": 0,
+      "hiddenChecks": 39
+    },
+    {
+      "seed": "astra-v022-confirm-1",
+      "rivalSeat": 1,
+      "hiddenChecks": 38
+    }
+  ],
+  "checkedStates": 12123,
+  "previewActions": 7672,
+  "previewRounds": {
+    "1": 1806,
+    "2": 990,
+    "3": 1037,
+    "4": 1266,
+    "5": 1321,
+    "6": 1252
+  },
+  "boundaryPreviews": 453,
+  "limits": "Independent policy evaluation, shared transition engine and visibility filter; deterministic short-horizon synthetic opponents, not human strength or an independent rules engine. Seeds cover all nine guild sets, both guild sides and first-player positions; every matchup is seat-swapped. Rival row-order randomization is keyed to setup rather than the evaluated seat. No version-strength comparison is made."
+}

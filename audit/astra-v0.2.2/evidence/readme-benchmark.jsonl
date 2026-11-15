@@ -1,0 +1,7 @@
+{"opponent":"baseline","games":24,"wins":16,"draws":0,"losses":8,"averageMargin":3.21,"rivalCash":21.92,"builds":4.13,"councilVisits":0.63,"skipped":0.29}
+{"opponent":"quick","games":24,"wins":14,"draws":0,"losses":10,"averageMargin":4.08,"rivalCash":25.17,"builds":4.17,"councilVisits":0.5,"skipped":0.29}
+{"opponent":"builder","games":24,"wins":14,"draws":0,"losses":10,"averageMargin":2.04,"rivalCash":27,"builds":4.33,"councilVisits":0.63,"skipped":0.17}
+{"opponent":"miner","games":24,"wins":17,"draws":0,"losses":7,"averageMargin":4.29,"rivalCash":26.63,"builds":4.33,"councilVisits":0.92,"skipped":0.17}
+{"opponent":"council","games":24,"wins":13,"draws":0,"losses":11,"averageMargin":1.58,"rivalCash":21.83,"builds":4.21,"councilVisits":0.58,"skipped":0.25}
+{"opponent":"denial","games":24,"wins":17,"draws":0,"losses":7,"averageMargin":5.13,"rivalCash":23.71,"builds":4.46,"councilVisits":0.88,"skipped":0}
+{"total":{"games":144,"wins":91,"draws":0,"losses":53,"averageMargin":3.39,"rivalCash":24.38,"builds":4.27,"councilVisits":0.69,"skipped":0.19},"seconds":54.65,"seedGroup":"kutna-v020-fresh"}

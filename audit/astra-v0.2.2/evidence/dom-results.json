@@ -1,0 +1,142 @@
+[
+  {
+    "name": "Normal move, pending move, Undo, reload and JSON export/import round trip",
+    "passed": true,
+    "detail": {
+      "pendingReload": true,
+      "undoTwoSteps": true,
+      "exportBlobCreated": true,
+      "importValid": true,
+      "invalidImportPreservesState": true
+    }
+  },
+  {
+    "name": "Rival turn completes and Undo restores the entire rival turn",
+    "passed": true,
+    "detail": {
+      "errors": [],
+      "undoWholeTurn": true
+    }
+  },
+  {
+    "name": "New game setup controls work and Undo restores previous game",
+    "passed": true
+  },
+  {
+    "name": "Complete six-round game through shipped controls, every human apply agrees with engine",
+    "passed": true,
+    "detail": {
+      "seed": "astra-v022-controls-full",
+      "result": {
+        "scores": [
+          {
+            "earned": 15,
+            "town": 8,
+            "mines": 11,
+            "income": 5,
+            "reputation": -1,
+            "extras": 5,
+            "total": 43,
+            "coins": 89
+          },
+          {
+            "earned": 16,
+            "town": 3,
+            "mines": 7,
+            "income": 5,
+            "reputation": -1,
+            "extras": 4,
+            "total": 34,
+            "coins": 16
+          }
+        ],
+        "winner": 0
+      },
+      "humanDecisions": 47,
+      "rivalButtons": 24,
+      "inputOperations": 141,
+      "errors": []
+    }
+  },
+  {
+    "name": "Mine preview includes population and ore; applied result agrees",
+    "passed": true,
+    "detail": {
+      "info": "0 ★ · 4 wood for adjacent expansion · Ore production +2 · Population +1 · Ore deck +2Price changes · Wood 2 → 3 g · Beer 5 → 6 g · Ore 3 → 2 g · Silver 4 → 5 g"
+    }
+  },
+  {
+    "name": "Tavern regression: house-row preview, reputation 1 to 4, Undo and reload",
+    "passed": true,
+    "detail": {
+      "info": " Beer production +2 · Beer price indicator +1 · Population +1 · Tax rate +1 g · Reputation +3 · Advances St. Barbara to tile 3 · Removes one Innkeepers housePrice changes · Food 3 → 4 g · Beer 3 → 2 g",
+      "from": 1,
+      "to": 4,
+      "undo": 1,
+      "reload": 4
+    }
+  },
+  {
+    "name": "Unreadable autosave is protected, recoverable and visibly warned",
+    "passed": true,
+    "detail": {
+      "oldBytesPreserved": true,
+      "recoveryBlobCreated": true,
+      "warning": true
+    }
+  },
+  {
+    "name": "Failed autosave warns and leaves old save intact",
+    "passed": true,
+    "detail": {
+      "visibleWarning": true,
+      "oldSavePreserved": true
+    }
+  },
+  {
+    "name": "New Game identifies seeded rival rows and Ius logs its actual discard count",
+    "passed": true,
+    "detail": {
+      "setupLabel": true,
+      "actualDiscardCount": 3,
+      "reloadPreservesJournal": true
+    }
+  },
+  {
+    "name": "QoL observation: Undo history is lost on reload although game state survives",
+    "passed": true,
+    "detail": {
+      "savedStateRestored": true,
+      "undoDisabledAfterReload": true
+    }
+  },
+  {
+    "name": "QoL observation: tile 7 gives generic text, not computed reputation",
+    "passed": true,
+    "detail": {
+      "seed": "astra-v022-tile7",
+      "info": "Gain 1 reputation for each public building next to each of your buildings.",
+      "actualReputationGain": 2
+    }
+  },
+  {
+    "name": "QoL observation: ordinary market entries expose effects only in hover title",
+    "passed": true,
+    "detail": {
+      "tag": "DIV",
+      "title": "Bathhouse · Innkeepers · Rights 1 g · Build 7 wood · Beer production +2 · Advance beer price indicator · Advances St. Barbara · Population +1",
+      "visibleText": "InnkeepersBathhouse7w · 4 left"
+    }
+  },
+  {
+    "name": "QoL observation: tax penalty has no preview of VP lost below the reputation floor",
+    "passed": true,
+    "detail": {
+      "seed": "astra-v022-tax-floor",
+      "round": 6,
+      "rep": -5,
+      "preview": "",
+      "actualVpLoss": 6
+    }
+  }
+]

@@ -1,0 +1,1002 @@
+{
+  "metadata": {
+    "group": "astra-v022-discovery",
+    "policy": "industry",
+    "seed": "astra-v022-discovery-0",
+    "setup": 1,
+    "side": 0,
+    "starter": 0,
+    "rivalSeat": 0,
+    "steps": 87,
+    "winner": 0,
+    "rivalWin": true,
+    "draw": false,
+    "margin": 17,
+    "scores": [
+      59,
+      42
+    ],
+    "actions": [
+      {
+        "plot": 6,
+        "rights": 8,
+        "income": 9,
+        "mine": 4,
+        "place-mine": 4,
+        "penalty": 2,
+        "build": 6,
+        "tax": 3,
+        "technology": 1
+      },
+      {
+        "rights": 8,
+        "plot": 7,
+        "build": 5,
+        "income": 8,
+        "penalty": 1,
+        "tax": 4,
+        "mine": 5,
+        "place-mine": 5,
+        "barbara": 1
+      }
+    ]
+  },
+  "trace": [
+    {
+      "round": 1,
+      "actor": 0,
+      "pending": null,
+      "action": {
+        "kind": "plot",
+        "space": 19,
+        "cost": 5,
+        "card": 1
+      }
+    },
+    {
+      "round": 1,
+      "actor": 0,
+      "pending": null,
+      "action": {
+        "kind": "rights",
+        "id": "smelter",
+        "cost": 4,
+        "card": 4
+      }
+    },
+    {
+      "round": 1,
+      "actor": 1,
+      "pending": null,
+      "action": {
+        "kind": "rights",
+        "id": "bakery",
+        "cost": 1,
+        "card": 0,
+        "as": "rights"
+      }
+    },
+    {
+      "round": 1,
+      "actor": 1,
+      "pending": null,
+      "action": {
+        "kind": "plot",
+        "space": 2,
+        "cost": 5,
+        "card": 1
+      }
+    },
+    {
+      "round": 1,
+      "actor": 0,
+      "pending": null,
+      "action": {
+        "kind": "rights",
+        "id": "mint",
+        "cost": 1,
+        "card": 5
+      }
+    },
+    {
+      "round": 1,
+      "actor": 0,
+      "pending": null,
+      "action": {
+        "kind": "income",
+        "gross": 0,
+        "card": 2
+      }
+    },
+    {
+      "round": 1,
+      "actor": 1,
+      "pending": null,
+      "action": {
+        "kind": "build",
+        "id": "bakery",
+        "space": 2,
+        "cost": 12,
+        "card": 2
+      }
+    },
+    {
+      "round": 1,
+      "actor": 1,
+      "pending": "right",
+      "action": {
+        "kind": "rights",
+        "id": "st-mary",
+        "cost": 0
+      }
+    },
+    {
+      "round": 1,
+      "actor": 1,
+      "pending": null,
+      "action": {
+        "kind": "plot",
+        "space": 3,
+        "cost": 6,
+        "card": 3
+      }
+    },
+    {
+      "round": 1,
+      "actor": 0,
+      "pending": null,
+      "action": {
+        "kind": "mine",
+        "refill": 1,
+        "cost": 4,
+        "card": 0
+      }
+    },
+    {
+      "round": 1,
+      "actor": 0,
+      "pending": "mine-place",
+      "action": {
+        "kind": "place-mine",
+        "id": "m1-5",
+        "space": 1,
+        "cost": 6
+      }
+    },
+    {
+      "round": 1,
+      "actor": 1,
+      "pending": null,
+      "action": {
+        "kind": "income",
+        "gross": 8,
+        "card": 4
+      }
+    },
+    {
+      "round": 1,
+      "actor": 0,
+      "pending": null,
+      "action": {
+        "kind": "penalty",
+        "loss": 1
+      }
+    },
+    {
+      "round": 1,
+      "actor": 1,
+      "pending": null,
+      "action": {
+        "kind": "penalty",
+        "loss": 1
+      }
+    },
+    {
+      "round": 2,
+      "actor": 1,
+      "pending": null,
+      "action": {
+        "kind": "rights",
+        "id": "assay",
+        "cost": 1,
+        "card": 4
+      }
+    },
+    {
+      "round": 2,
+      "actor": 1,
+      "pending": null,
+      "action": {
+        "kind": "build",
+        "id": "assay",
+        "space": 3,
+        "cost": 15,
+        "card": 2
+      }
+    },
+    {
+      "round": 2,
+      "actor": 0,
+      "pending": null,
+      "action": {
+        "kind": "rights",
+        "id": "hammer",
+        "cost": 1,
+        "card": 4
+      }
+    },
+    {
+      "round": 2,
+      "actor": 0,
+      "pending": null,
+      "action": {
+        "kind": "build",
+        "id": "hammer",
+        "space": 19,
+        "cost": 12,
+        "card": 3
+      }
+    },
+    {
+      "round": 2,
+      "actor": 0,
+      "pending": "right",
+      "action": {
+        "kind": "rights",
+        "id": "st-john",
+        "cost": 0
+      }
+    },
+    {
+      "round": 2,
+      "actor": 1,
+      "pending": null,
+      "action": {
+        "kind": "plot",
+        "space": 13,
+        "cost": 4,
+        "card": 1
+      }
+    },
+    {
+      "round": 2,
+      "actor": 1,
+      "pending": null,
+      "action": {
+        "kind": "income",
+        "gross": 17,
+        "card": 0,
+        "as": "income"
+      }
+    },
+    {
+      "round": 2,
+      "actor": 0,
+      "pending": null,
+      "action": {
+        "kind": "income",
+        "gross": 13,
+        "card": 2
+      }
+    },
+    {
+      "round": 2,
+      "actor": 0,
+      "pending": null,
+      "action": {
+        "kind": "plot",
+        "space": 20,
+        "cost": 4,
+        "card": 1
+      }
+    },
+    {
+      "round": 2,
+      "actor": 1,
+      "pending": null,
+      "action": {
+        "kind": "rights",
+        "id": "bread",
+        "cost": 1,
+        "card": 5
+      }
+    },
+    {
+      "round": 2,
+      "actor": 0,
+      "pending": null,
+      "action": {
+        "kind": "income",
+        "gross": 13,
+        "card": 0,
+        "as": "income"
+      }
+    },
+    {
+      "round": 2,
+      "actor": 1,
+      "pending": null,
+      "action": {
+        "kind": "tax",
+        "cost": 2
+      }
+    },
+    {
+      "round": 2,
+      "actor": 0,
+      "pending": null,
+      "action": {
+        "kind": "tax",
+        "cost": 2
+      }
+    },
+    {
+      "round": 3,
+      "actor": 0,
+      "pending": null,
+      "action": {
+        "kind": "mine",
+        "refill": 0,
+        "cost": 0,
+        "card": 0
+      }
+    },
+    {
+      "round": 3,
+      "actor": 0,
+      "pending": "mine-place",
+      "action": {
+        "kind": "place-mine",
+        "id": "m1-2",
+        "space": 6,
+        "cost": 6
+      }
+    },
+    {
+      "round": 3,
+      "actor": 0,
+      "pending": null,
+      "action": {
+        "kind": "income",
+        "gross": 21,
+        "card": 2
+      }
+    },
+    {
+      "round": 3,
+      "actor": 1,
+      "pending": null,
+      "action": {
+        "kind": "income",
+        "gross": 21,
+        "card": 2
+      }
+    },
+    {
+      "round": 3,
+      "actor": 1,
+      "pending": null,
+      "action": {
+        "kind": "rights",
+        "id": "butcher",
+        "cost": 6,
+        "card": 4
+      }
+    },
+    {
+      "round": 3,
+      "actor": 0,
+      "pending": null,
+      "action": {
+        "kind": "mine",
+        "refill": 1,
+        "cost": 3,
+        "card": 1
+      }
+    },
+    {
+      "round": 3,
+      "actor": 0,
+      "pending": "mine-place",
+      "action": {
+        "kind": "place-mine",
+        "id": "m1-3",
+        "space": 11,
+        "cost": 12
+      }
+    },
+    {
+      "round": 3,
+      "actor": 0,
+      "pending": null,
+      "action": {
+        "kind": "income",
+        "gross": 27,
+        "card": 4
+      }
+    },
+    {
+      "round": 3,
+      "actor": 1,
+      "pending": null,
+      "action": {
+        "kind": "mine",
+        "refill": 0,
+        "cost": 0,
+        "card": 1
+      }
+    },
+    {
+      "round": 3,
+      "actor": 1,
+      "pending": "mine-place",
+      "action": {
+        "kind": "place-mine",
+        "id": "m1-6",
+        "space": 0,
+        "cost": 6
+      }
+    },
+    {
+      "round": 3,
+      "actor": 1,
+      "pending": null,
+      "action": {
+        "kind": "mine",
+        "refill": 0,
+        "cost": 0,
+        "card": 0
+      }
+    },
+    {
+      "round": 3,
+      "actor": 1,
+      "pending": "mine-place",
+      "action": {
+        "kind": "place-mine",
+        "id": "m1-4",
+        "space": 2,
+        "cost": 6
+      }
+    },
+    {
+      "round": 3,
+      "actor": 0,
+      "pending": null,
+      "action": {
+        "kind": "build",
+        "id": "smelter",
+        "space": 20,
+        "cost": 21,
+        "card": 3
+      }
+    },
+    {
+      "round": 3,
+      "actor": 0,
+      "pending": "right",
+      "action": {
+        "kind": "rights",
+        "id": "bartholomew",
+        "cost": 0
+      }
+    },
+    {
+      "round": 3,
+      "actor": 1,
+      "pending": null,
+      "action": {
+        "kind": "plot",
+        "space": 14,
+        "cost": 4,
+        "card": 3
+      }
+    },
+    {
+      "round": 4,
+      "actor": 1,
+      "pending": null,
+      "action": {
+        "kind": "income",
+        "gross": 36,
+        "card": 2
+      }
+    },
+    {
+      "round": 4,
+      "actor": 1,
+      "pending": null,
+      "action": {
+        "kind": "build",
+        "id": "st-mary",
+        "space": 13,
+        "cost": 36,
+        "card": 3
+      }
+    },
+    {
+      "round": 4,
+      "actor": 0,
+      "pending": null,
+      "action": {
+        "kind": "income",
+        "gross": 41,
+        "color": "green",
+        "cost": 10,
+        "card": 2
+      }
+    },
+    {
+      "round": 4,
+      "actor": 0,
+      "pending": null,
+      "action": {
+        "kind": "plot",
+        "space": 21,
+        "cost": 4,
+        "card": 1
+      }
+    },
+    {
+      "round": 4,
+      "actor": 1,
+      "pending": null,
+      "action": {
+        "kind": "income",
+        "gross": 40,
+        "card": 4
+      }
+    },
+    {
+      "round": 4,
+      "actor": 1,
+      "pending": null,
+      "action": {
+        "kind": "rights",
+        "id": "fish",
+        "cost": 8,
+        "card": 5
+      }
+    },
+    {
+      "round": 4,
+      "actor": 0,
+      "pending": null,
+      "action": {
+        "kind": "income",
+        "gross": 41,
+        "card": 4
+      }
+    },
+    {
+      "round": 4,
+      "actor": 0,
+      "pending": null,
+      "action": {
+        "kind": "build",
+        "id": "st-john",
+        "space": 21,
+        "cost": 36,
+        "card": 3
+      }
+    },
+    {
+      "round": 4,
+      "actor": 1,
+      "pending": null,
+      "action": {
+        "kind": "plot",
+        "space": 7,
+        "cost": 9,
+        "card": 1
+      }
+    },
+    {
+      "round": 4,
+      "actor": 0,
+      "pending": null,
+      "action": {
+        "kind": "income",
+        "gross": 41,
+        "color": "green",
+        "cost": 10,
+        "card": 0,
+        "as": "income"
+      }
+    },
+    {
+      "round": 4,
+      "actor": 1,
+      "pending": null,
+      "action": {
+        "kind": "tax",
+        "cost": 14
+      }
+    },
+    {
+      "round": 4,
+      "actor": 0,
+      "pending": null,
+      "action": {
+        "kind": "tax",
+        "cost": 11
+      }
+    },
+    {
+      "round": 5,
+      "actor": 0,
+      "pending": null,
+      "action": {
+        "kind": "plot",
+        "space": 26,
+        "cost": 4,
+        "card": 1
+      }
+    },
+    {
+      "round": 5,
+      "actor": 0,
+      "pending": null,
+      "action": {
+        "kind": "build",
+        "id": "mint",
+        "space": 26,
+        "cost": 32,
+        "card": 3
+      }
+    },
+    {
+      "round": 5,
+      "actor": 1,
+      "pending": null,
+      "action": {
+        "kind": "income",
+        "gross": 40,
+        "card": 2
+      }
+    },
+    {
+      "round": 5,
+      "actor": 1,
+      "pending": null,
+      "action": {
+        "kind": "build",
+        "id": "fish",
+        "space": 7,
+        "cost": 36,
+        "card": 3
+      }
+    },
+    {
+      "round": 5,
+      "actor": 1,
+      "pending": "right",
+      "action": {
+        "kind": "rights",
+        "id": "town-hall",
+        "cost": 0
+      }
+    },
+    {
+      "round": 5,
+      "actor": 0,
+      "pending": null,
+      "action": {
+        "kind": "plot",
+        "space": 27,
+        "cost": 9,
+        "card": 0,
+        "as": "plot"
+      }
+    },
+    {
+      "round": 5,
+      "actor": 0,
+      "pending": null,
+      "action": {
+        "kind": "rights",
+        "id": "horse-mill",
+        "cost": 4,
+        "card": 4
+      }
+    },
+    {
+      "round": 5,
+      "actor": 1,
+      "pending": null,
+      "action": {
+        "kind": "income",
+        "gross": 54,
+        "card": 4
+      }
+    },
+    {
+      "round": 5,
+      "actor": 1,
+      "pending": null,
+      "action": {
+        "kind": "mine",
+        "refill": 1,
+        "cost": 4,
+        "card": 0
+      }
+    },
+    {
+      "round": 5,
+      "actor": 1,
+      "pending": "mine-place",
+      "action": {
+        "kind": "place-mine",
+        "id": "m1-1",
+        "space": 7,
+        "cost": 16
+      }
+    },
+    {
+      "round": 5,
+      "actor": 0,
+      "pending": null,
+      "action": {
+        "kind": "build",
+        "id": "horse-mill",
+        "space": 27,
+        "cost": 12,
+        "card": 2
+      }
+    },
+    {
+      "round": 5,
+      "actor": 0,
+      "pending": "technology",
+      "action": {
+        "kind": "technology",
+        "id": "t1",
+        "space": 8,
+        "cost": 0
+      }
+    },
+    {
+      "round": 5,
+      "actor": 1,
+      "pending": null,
+      "action": {
+        "kind": "mine",
+        "refill": 1,
+        "cost": 4,
+        "card": 1
+      }
+    },
+    {
+      "round": 5,
+      "actor": 1,
+      "pending": "mine-place",
+      "action": {
+        "kind": "place-mine",
+        "id": "m2-9",
+        "space": 3,
+        "cost": 10
+      }
+    },
+    {
+      "round": 5,
+      "actor": 0,
+      "pending": null,
+      "action": {
+        "kind": "penalty",
+        "loss": 2
+      }
+    },
+    {
+      "round": 5,
+      "actor": 1,
+      "pending": null,
+      "action": {
+        "kind": "tax",
+        "cost": 26
+      }
+    },
+    {
+      "round": 6,
+      "actor": 1,
+      "pending": null,
+      "action": {
+        "kind": "income",
+        "gross": 67,
+        "card": 2
+      }
+    },
+    {
+      "round": 6,
+      "actor": 1,
+      "pending": null,
+      "action": {
+        "kind": "build",
+        "id": "bread",
+        "space": 14,
+        "cost": 24,
+        "card": 3
+      }
+    },
+    {
+      "round": 6,
+      "actor": 1,
+      "pending": "right",
+      "action": {
+        "kind": "rights",
+        "id": "our-lady",
+        "cost": 0
+      }
+    },
+    {
+      "round": 6,
+      "actor": 0,
+      "pending": null,
+      "action": {
+        "kind": "income",
+        "gross": 46,
+        "card": 2
+      }
+    },
+    {
+      "round": 6,
+      "actor": 0,
+      "pending": null,
+      "action": {
+        "kind": "plot",
+        "space": 12,
+        "cost": 9,
+        "card": 1
+      }
+    },
+    {
+      "round": 6,
+      "actor": 1,
+      "pending": null,
+      "action": {
+        "kind": "plot",
+        "space": 8,
+        "cost": 7,
+        "card": 1
+      }
+    },
+    {
+      "round": 6,
+      "actor": 1,
+      "pending": null,
+      "action": {
+        "kind": "mine",
+        "refill": 1,
+        "cost": 4,
+        "card": 0
+      }
+    },
+    {
+      "round": 6,
+      "actor": 1,
+      "pending": "mine-place",
+      "action": {
+        "kind": "place-mine",
+        "id": "m2-3",
+        "space": 4,
+        "cost": 12
+      }
+    },
+    {
+      "round": 6,
+      "actor": 0,
+      "pending": null,
+      "action": {
+        "kind": "rights",
+        "id": "furnace",
+        "cost": 1,
+        "card": 4
+      }
+    },
+    {
+      "round": 6,
+      "actor": 0,
+      "pending": null,
+      "action": {
+        "kind": "build",
+        "id": "furnace",
+        "space": 12,
+        "cost": 28,
+        "card": 3
+      }
+    },
+    {
+      "round": 6,
+      "actor": 0,
+      "pending": "right",
+      "action": {
+        "kind": "rights",
+        "id": "smallcastle",
+        "cost": 0
+      }
+    },
+    {
+      "round": 6,
+      "actor": 1,
+      "pending": null,
+      "action": {
+        "kind": "barbara",
+        "card": 5
+      }
+    },
+    {
+      "round": 6,
+      "actor": 1,
+      "pending": "plot",
+      "action": {
+        "kind": "plot",
+        "space": 9,
+        "cost": 0
+      }
+    },
+    {
+      "round": 6,
+      "actor": 0,
+      "pending": null,
+      "action": {
+        "kind": "mine",
+        "refill": 0,
+        "cost": 0,
+        "card": 0
+      }
+    },
+    {
+      "round": 6,
+      "actor": 0,
+      "pending": "mine-place",
+      "action": {
+        "kind": "place-mine",
+        "id": "m2-7",
+        "space": 13,
+        "cost": 4
+      }
+    },
+    {
+      "round": 6,
+      "actor": 1,
+      "pending": null,
+      "action": {
+        "kind": "tax",
+        "cost": 17
+      }
+    },
+    {
+      "round": 6,
+      "actor": 0,
+      "pending": null,
+      "action": {
+        "kind": "tax",
+        "cost": 14
+      }
+    }
+  ],
+  "result": {
+    "scores": [
+      {
+        "earned": 33,
+        "town": 11,
+        "mines": 7,
+        "income": 5,
+        "reputation": -2,
+        "extras": 5,
+        "total": 59,
+        "coins": 14
+      },
+      {
+        "earned": 16,
+        "town": 5,
+        "mines": 8,
+        "income": 7,
+        "reputation": 0,
+        "extras": 6,
+        "total": 42,
+        "coins": 28
+      }
+    ],
+    "winner": 0
+  }
+}

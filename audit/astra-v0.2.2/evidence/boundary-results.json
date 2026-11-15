@@ -1,0 +1,158 @@
+[
+  {
+    "name": "Event abbey resolves its printed end effect",
+    "passed": true,
+    "detail": {
+      "phase": "tax",
+      "round": 1,
+      "pop": 0,
+      "ore": 0
+    }
+  },
+  {
+    "name": "Event fever resolves its printed end effect",
+    "passed": true,
+    "detail": {
+      "phase": "tax",
+      "round": 1,
+      "pop": 2,
+      "ore": 0
+    }
+  },
+  {
+    "name": "Event rush resolves its printed end effect",
+    "passed": true,
+    "detail": {
+      "phase": "action",
+      "round": 2,
+      "pop": 2,
+      "ore": 0
+    }
+  },
+  {
+    "name": "Event siege resolves its printed end effect",
+    "passed": true,
+    "detail": {
+      "phase": "tax",
+      "round": 1,
+      "pop": 0,
+      "ore": 0
+    }
+  },
+  {
+    "name": "Event code resolves its printed end effect",
+    "passed": true,
+    "detail": {
+      "phase": "tax",
+      "round": 1,
+      "pop": 0,
+      "ore": 2
+    }
+  },
+  {
+    "name": "Event cathedral resolves its printed end effect",
+    "passed": true,
+    "detail": {
+      "phase": "tax",
+      "round": 1,
+      "pop": 0,
+      "ore": 2
+    }
+  },
+  {
+    "name": "Event michal resolves its printed end effect",
+    "passed": true,
+    "detail": {
+      "phase": "tax",
+      "round": 4,
+      "pop": 0,
+      "ore": 0
+    }
+  },
+  {
+    "name": "Event groschen resolves its printed end effect",
+    "passed": true,
+    "detail": {
+      "phase": "tax",
+      "round": 4,
+      "pop": 0,
+      "ore": 3
+    }
+  },
+  {
+    "name": "Event king resolves its printed end effect",
+    "passed": true,
+    "detail": {
+      "phase": "tax",
+      "round": 4,
+      "pop": 3,
+      "ore": 0
+    }
+  },
+  {
+    "name": "Event abbot resolves its printed end effect",
+    "passed": true,
+    "detail": {
+      "phase": "tax",
+      "round": 4,
+      "pop": 0,
+      "ore": 0
+    }
+  },
+  {
+    "name": "Cathedral completion and reputation ceiling/floor",
+    "passed": true
+  },
+  {
+    "name": "Barbara 8 current interpretation, both bypassing and ordinary free builds",
+    "passed": true,
+    "detail": [
+      {
+        "id": "tavern",
+        "next": 9,
+        "taxDelta": 1
+      },
+      {
+        "id": "pump",
+        "next": 9,
+        "taxDelta": 0
+      }
+    ]
+  },
+  {
+    "name": "Technology takes reserve first, pool fallback, and allows discard",
+    "passed": true
+  },
+  {
+    "name": "Barbara 9 resolves two draws without using another action card",
+    "passed": true
+  },
+  {
+    "name": "Houses exhausted blocks construction but not unrelated guilds",
+    "passed": true
+  },
+  {
+    "name": "Patrician supply exhaustion and maximum yellow/red/silver scoring",
+    "passed": true
+  },
+  {
+    "name": "No free reputation/VP from repeating exhausted card or stale action",
+    "passed": true
+  },
+  {
+    "name": "Holding limit: three rights and three plots",
+    "passed": true
+  },
+  {
+    "name": "Tracks at maximum remain bounded after a mining effect",
+    "passed": true
+  },
+  {
+    "name": "Documented Ius ruling: discard the remaining stack without recycling",
+    "passed": true,
+    "detail": {
+      "cardsDiscardedByEvent": 1,
+      "expected": "Project interpretation: discard only the available stack, then replenish on a later draw."
+    }
+  }
+]

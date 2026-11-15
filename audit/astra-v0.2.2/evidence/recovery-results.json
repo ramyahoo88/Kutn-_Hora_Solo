@@ -1,0 +1,94 @@
+[
+  {
+    "file": "v0.1.0_III-3.json",
+    "steps": 89,
+    "deckOrderPreserved": true,
+    "gameFinished": true,
+    "result": {
+      "scores": [
+        {
+          "earned": 26,
+          "town": 12,
+          "mines": 14,
+          "income": 7,
+          "reputation": 0,
+          "extras": 3,
+          "total": 62,
+          "coins": 33
+        },
+        {
+          "earned": 33,
+          "town": 14,
+          "mines": 11,
+          "income": 6,
+          "reputation": -2,
+          "extras": 4,
+          "total": 66,
+          "coins": 11
+        }
+      ],
+      "winner": 1
+    }
+  },
+  {
+    "file": "v0.1.0_Completed_Game.json",
+    "steps": 0,
+    "deckOrderPreserved": true,
+    "gameFinished": true,
+    "result": {
+      "scores": [
+        {
+          "earned": 16,
+          "town": 9,
+          "mines": 10,
+          "income": 9,
+          "reputation": 0,
+          "extras": 6,
+          "total": 50,
+          "coins": 28
+        },
+        {
+          "earned": 15,
+          "town": 14,
+          "mines": 0,
+          "income": 5,
+          "reputation": 0,
+          "extras": 8,
+          "total": 42,
+          "coins": 15
+        }
+      ],
+      "winner": 0
+    }
+  },
+  {
+    "name": "Every action voluntarily wasted; tax floor overflow",
+    "steps": 70,
+    "cards": 60,
+    "result": {
+      "scores": [
+        {
+          "earned": -8,
+          "town": 0,
+          "mines": 0,
+          "income": 0,
+          "reputation": -4,
+          "extras": 0,
+          "total": -12,
+          "coins": 40
+        },
+        {
+          "earned": -8,
+          "town": 0,
+          "mines": 0,
+          "income": 0,
+          "reputation": -4,
+          "extras": 0,
+          "total": -12,
+          "coins": 41
+        }
+      ],
+      "winner": 1
+    }
+  }
+]

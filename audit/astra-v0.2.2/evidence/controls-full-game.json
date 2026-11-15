@@ -1,0 +1,593 @@
+{
+  "trace": [
+    {
+      "round": 1,
+      "actor": 1,
+      "kind": "rival-turn"
+    },
+    {
+      "round": 1,
+      "actor": 0,
+      "action": {
+        "kind": "plot",
+        "space": 10,
+        "cost": 5,
+        "card": 1
+      }
+    },
+    {
+      "round": 1,
+      "actor": 0,
+      "action": {
+        "kind": "rights",
+        "id": "airshaft",
+        "cost": 1,
+        "card": 4
+      }
+    },
+    {
+      "round": 1,
+      "actor": 1,
+      "kind": "rival-turn"
+    },
+    {
+      "round": 1,
+      "actor": 0,
+      "action": {
+        "kind": "mine",
+        "refill": 1,
+        "cost": 4,
+        "card": 0
+      }
+    },
+    {
+      "round": 1,
+      "actor": 0,
+      "action": {
+        "kind": "place-mine",
+        "id": "m1-2",
+        "space": 0,
+        "cost": 3
+      }
+    },
+    {
+      "round": 1,
+      "actor": 0,
+      "action": {
+        "kind": "income",
+        "gross": 4,
+        "card": 2
+      }
+    },
+    {
+      "round": 1,
+      "actor": 1,
+      "kind": "rival-turn"
+    },
+    {
+      "round": 1,
+      "actor": 0,
+      "action": {
+        "kind": "rights",
+        "id": "assay",
+        "cost": 1,
+        "card": 5
+      }
+    },
+    {
+      "round": 1,
+      "actor": 1,
+      "kind": "rival-turn"
+    },
+    {
+      "round": 1,
+      "actor": 0,
+      "action": {
+        "kind": "penalty",
+        "loss": 1
+      }
+    },
+    {
+      "round": 2,
+      "actor": 0,
+      "action": {
+        "kind": "mine",
+        "refill": 0,
+        "cost": 0,
+        "card": 0
+      }
+    },
+    {
+      "round": 2,
+      "actor": 0,
+      "action": {
+        "kind": "place-mine",
+        "id": "m1-1",
+        "space": 6,
+        "cost": 3
+      }
+    },
+    {
+      "round": 2,
+      "actor": 0,
+      "action": {
+        "kind": "mine",
+        "refill": 2,
+        "cost": 5,
+        "card": 1
+      }
+    },
+    {
+      "round": 2,
+      "actor": 0,
+      "action": {
+        "kind": "place-mine",
+        "id": "m1-5",
+        "space": 11,
+        "cost": 3
+      }
+    },
+    {
+      "round": 2,
+      "actor": 1,
+      "kind": "rival-turn"
+    },
+    {
+      "round": 2,
+      "actor": 0,
+      "action": {
+        "kind": "build",
+        "id": "assay",
+        "space": 10,
+        "cost": 15,
+        "card": 3
+      }
+    },
+    {
+      "round": 2,
+      "actor": 0,
+      "action": {
+        "kind": "income",
+        "gross": 20,
+        "card": 2
+      }
+    },
+    {
+      "round": 2,
+      "actor": 1,
+      "kind": "rival-turn"
+    },
+    {
+      "round": 2,
+      "actor": 0,
+      "action": {
+        "kind": "income",
+        "gross": 20,
+        "card": 4
+      }
+    },
+    {
+      "round": 2,
+      "actor": 1,
+      "kind": "rival-turn"
+    },
+    {
+      "round": 2,
+      "actor": 0,
+      "action": {
+        "kind": "tax",
+        "cost": 2
+      }
+    },
+    {
+      "round": 2,
+      "actor": 1,
+      "kind": "rival-turn"
+    },
+    {
+      "round": 3,
+      "actor": 1,
+      "kind": "rival-turn"
+    },
+    {
+      "round": 3,
+      "actor": 0,
+      "action": {
+        "kind": "plot",
+        "space": 9,
+        "cost": 5,
+        "card": 1
+      }
+    },
+    {
+      "round": 3,
+      "actor": 0,
+      "action": {
+        "kind": "rights",
+        "id": "brewery",
+        "cost": 1,
+        "card": 4
+      }
+    },
+    {
+      "round": 3,
+      "actor": 1,
+      "kind": "rival-turn"
+    },
+    {
+      "round": 3,
+      "actor": 0,
+      "action": {
+        "kind": "mine",
+        "refill": 1,
+        "cost": 4,
+        "card": 0
+      }
+    },
+    {
+      "round": 3,
+      "actor": 0,
+      "action": {
+        "kind": "place-mine",
+        "id": "m2-1",
+        "space": 3,
+        "cost": 6
+      }
+    },
+    {
+      "round": 3,
+      "actor": 0,
+      "action": {
+        "kind": "income",
+        "gross": 16,
+        "card": 2
+      }
+    },
+    {
+      "round": 3,
+      "actor": 1,
+      "kind": "rival-turn"
+    },
+    {
+      "round": 3,
+      "actor": 0,
+      "action": {
+        "kind": "barbara",
+        "card": 5
+      }
+    },
+    {
+      "round": 3,
+      "actor": 0,
+      "action": {
+        "kind": "house",
+        "id": "beer"
+      }
+    },
+    {
+      "round": 3,
+      "actor": 1,
+      "kind": "rival-turn"
+    },
+    {
+      "round": 3,
+      "actor": 0,
+      "action": {
+        "kind": "tax",
+        "cost": 2
+      }
+    },
+    {
+      "round": 4,
+      "actor": 0,
+      "action": {
+        "kind": "mine",
+        "refill": 0,
+        "cost": 0,
+        "card": 0
+      }
+    },
+    {
+      "round": 4,
+      "actor": 0,
+      "action": {
+        "kind": "skip"
+      }
+    },
+    {
+      "round": 4,
+      "actor": 0,
+      "action": {
+        "kind": "income",
+        "gross": 30,
+        "card": 2
+      }
+    },
+    {
+      "round": 4,
+      "actor": 1,
+      "kind": "rival-turn"
+    },
+    {
+      "round": 4,
+      "actor": 0,
+      "action": {
+        "kind": "income",
+        "gross": 33,
+        "card": 4
+      }
+    },
+    {
+      "round": 4,
+      "actor": 0,
+      "action": {
+        "kind": "mine",
+        "refill": 0,
+        "cost": 0,
+        "card": 1
+      }
+    },
+    {
+      "round": 4,
+      "actor": 0,
+      "action": {
+        "kind": "place-mine",
+        "id": "m2-7",
+        "space": 17,
+        "cost": 16
+      }
+    },
+    {
+      "round": 4,
+      "actor": 1,
+      "kind": "rival-turn"
+    },
+    {
+      "round": 4,
+      "actor": 0,
+      "action": {
+        "kind": "build",
+        "id": "brewery",
+        "space": 9,
+        "cost": 36,
+        "card": 3
+      }
+    },
+    {
+      "round": 4,
+      "actor": 0,
+      "action": {
+        "kind": "rights",
+        "id": "st-mary",
+        "cost": 0
+      }
+    },
+    {
+      "round": 4,
+      "actor": 1,
+      "kind": "rival-turn"
+    },
+    {
+      "round": 4,
+      "actor": 0,
+      "action": {
+        "kind": "tax",
+        "cost": 6
+      }
+    },
+    {
+      "round": 4,
+      "actor": 1,
+      "kind": "rival-turn"
+    },
+    {
+      "round": 5,
+      "actor": 1,
+      "kind": "rival-turn"
+    },
+    {
+      "round": 5,
+      "actor": 0,
+      "action": {
+        "kind": "plot",
+        "space": 3,
+        "cost": 8,
+        "card": 1
+      }
+    },
+    {
+      "round": 5,
+      "actor": 0,
+      "action": {
+        "kind": "income",
+        "gross": 53,
+        "card": 2
+      }
+    },
+    {
+      "round": 5,
+      "actor": 1,
+      "kind": "rival-turn"
+    },
+    {
+      "round": 5,
+      "actor": 0,
+      "action": {
+        "kind": "barbara",
+        "card": 5
+      }
+    },
+    {
+      "round": 5,
+      "actor": 0,
+      "action": {
+        "kind": "patrician",
+        "color": "silver"
+      }
+    },
+    {
+      "round": 5,
+      "actor": 0,
+      "action": {
+        "kind": "rights",
+        "id": "bathhouse",
+        "cost": 1,
+        "card": 4
+      }
+    },
+    {
+      "round": 5,
+      "actor": 1,
+      "kind": "rival-turn"
+    },
+    {
+      "round": 5,
+      "actor": 0,
+      "action": {
+        "kind": "build",
+        "id": "bathhouse",
+        "space": 3,
+        "cost": 28,
+        "card": 3
+      }
+    },
+    {
+      "round": 5,
+      "actor": 0,
+      "action": {
+        "kind": "rights",
+        "id": "town-hall",
+        "cost": 0
+      }
+    },
+    {
+      "round": 5,
+      "actor": 1,
+      "kind": "rival-turn"
+    },
+    {
+      "round": 5,
+      "actor": 0,
+      "action": {
+        "kind": "tax",
+        "cost": 10
+      }
+    },
+    {
+      "round": 6,
+      "actor": 0,
+      "action": {
+        "kind": "plot",
+        "space": 2,
+        "cost": 8,
+        "card": 1
+      }
+    },
+    {
+      "round": 6,
+      "actor": 0,
+      "action": {
+        "kind": "income",
+        "gross": 58,
+        "card": 2
+      }
+    },
+    {
+      "round": 6,
+      "actor": 1,
+      "kind": "rival-turn"
+    },
+    {
+      "round": 6,
+      "actor": 0,
+      "action": {
+        "kind": "plot",
+        "space": 8,
+        "cost": 8,
+        "card": 3
+      }
+    },
+    {
+      "round": 6,
+      "actor": 0,
+      "action": {
+        "kind": "build",
+        "id": "town-hall",
+        "space": 2,
+        "cost": 40,
+        "card": 0,
+        "as": "build"
+      }
+    },
+    {
+      "round": 6,
+      "actor": 0,
+      "action": {
+        "kind": "house",
+        "id": "ore"
+      }
+    },
+    {
+      "round": 6,
+      "actor": 1,
+      "kind": "rival-turn"
+    },
+    {
+      "round": 6,
+      "actor": 0,
+      "action": {
+        "kind": "income",
+        "gross": 58,
+        "color": "red",
+        "cost": 10,
+        "card": 4
+      }
+    },
+    {
+      "round": 6,
+      "actor": 1,
+      "kind": "rival-turn"
+    },
+    {
+      "round": 6,
+      "actor": 0,
+      "action": {
+        "kind": "tax",
+        "cost": 13
+      }
+    },
+    {
+      "round": 6,
+      "actor": 1,
+      "kind": "rival-turn"
+    }
+  ],
+  "result": {
+    "scores": [
+      {
+        "earned": 15,
+        "town": 8,
+        "mines": 11,
+        "income": 5,
+        "reputation": -1,
+        "extras": 5,
+        "total": 43,
+        "coins": 89
+      },
+      {
+        "earned": 16,
+        "town": 3,
+        "mines": 7,
+        "income": 5,
+        "reputation": -1,
+        "extras": 4,
+        "total": 34,
+        "coins": 16
+      }
+    ],
+    "winner": 0
+  },
+  "humanDecisions": 47,
+  "rivalButtons": 24,
+  "inputOperations": 141
+}
