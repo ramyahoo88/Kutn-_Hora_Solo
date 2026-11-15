@@ -173,6 +173,8 @@ select, input[type=text] { min-height: 40px; padding: 7px 9px; border-radius: 6p
 .rival-report li + li { margin-top: 5px; }
 .rival-step { margin-top: 7px; min-height: 42px; }
 .review-body { display: flex; gap: 11px; align-items: flex-start; padding: 10px 12px; }
+.review-actions { min-width: 0; }
+.review-rule { margin-bottom: 7px; color: var(--brass); font-weight: 650; }
 .review-body ul { margin: 0; padding-inline-start: 16px; color: var(--muted); }
 .review-body li + li { margin-top: 4px; }
 .review-plan { width: 112px; flex-shrink: 0; padding: 5px; font-size: .82rem; color: var(--muted); }
@@ -239,6 +241,7 @@ button.offer:hover, .offer.chosen { outline: 1px solid var(--brass); outline-off
 .log-list { list-style: none; padding: 6px 13px 11px; margin: 0; }
 .log-list li { display: grid; grid-template-columns: 25px 50px 1fr; gap: 5px; font-size: .85rem; padding: 4px 0; border-bottom: 1px solid #333439; }
 .log-list li:last-child { border: 0; }
+.journal-rule { display: block; color: var(--quiet); }
 .log-round { color: var(--quiet); }
 .log-seat { color: var(--seat,var(--muted)); }
 .footer { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-top: 13px; padding-bottom: 20px; color: var(--quiet); font-size: .76rem; }
@@ -408,7 +411,7 @@ dialog::backdrop { background: #100f11b9; }
     <section class="hero" aria-label="Kutná Hora: The City of Silver">
       <div class="hero-art" aria-hidden="true"></div>
       <div class="hero-copy">
-        <span class="eyebrow">Unofficial solo playtest · v0.3.5</span>
+        <span class="eyebrow">Unofficial solo playtest · v0.3.6</span>
         <h1>Kutná Hora</h1>
         <p>The City of Silver</p>
       </div>
@@ -492,9 +495,9 @@ dialog::backdrop { background: #100f11b9; }
       <p><strong>Check public information.</strong> Open a tile to inspect its costs and effects. Use <strong>Details</strong> when the tile is an action target. Either player board shows the full house rewards, production and supplies. The rival’s remaining cards are below the turn controls.</p>
       <p><strong>Resume or share a position.</strong> This browser keeps your game and up to five recent Undo steps when local storage is available. If another tab advances the save, choose <strong>Load saved game</strong> to continue from that position. Export a JSON save to move between browsers or share a position. Version 0.1.0 saves keep their existing deck order.</p>
       <p><strong>Rival settings.</strong> Standard and Quick consider the next player's likely card. Planner tries the replies on a copy of the board, explores several possible draws when choices are close, and looks further ahead for builds and final scoring.</p>
-      <p><strong>Mincmistr.</strong> Choose <strong>Play one Plan</strong> to see one card and the actions it produced after its bonuses resolve. <strong>View Plan card</strong> opens the printed face and selectable text. You can also open Plans from the rival hand or the journal. With several Mincmistrs you can share one Plan deck or give each its own.</p>
+      <p><strong>Mincmistr.</strong> Choose <strong>Play one Plan</strong> to see one card, the rule that selected its action, and the moves it made. <strong>View Plan card</strong> opens the printed face and selectable text. You can also open Plans from the rival hand or the journal. With several Mincmistrs you can share one Plan deck or give each its own.</p>
       <p><strong>Playing on the table.</strong> Open <strong>Draw only</strong> for a shared Plan deck. Draw one Plan for each Mincmistr action card. <strong>Rules and reference</strong> has the full paper rules, reference cards and a printable mine choice aid. Your last five draws can be undone after a reload.</p>
-      <p><strong>Mincmistr levels.</strong> Journeyman follows the printed priorities. Apprentice simplifies plot, build and mine choices. Master plays both cards on its last turn in the final three rounds, and Grandmaster does so each round. In three-player games, Master can also double its last turn in rounds 3–6. <a href="https://github.com/ramyahoo88/Kutn-_Hora_Solo/blob/e6806e63babe71706650ba80d6fbe96e6da5a806/mincmistr/Mincmistr_Rules.md" target="_blank" rel="noreferrer">Mincmistr v1.2.2 rules</a></p>
+      <p><strong>Mincmistr levels.</strong> Journeyman follows the printed priorities. Apprentice simplifies plot, build and mine choices. Master plays both cards on its last turn in the final three rounds, and Grandmaster does so each round. In three-player games, Master can also double its last turn in rounds 3–6. <a href="https://github.com/ramyahoo88/Kutn-_Hora_Solo/blob/v0.3.6-playtest/mincmistr/Mincmistr_Rules.md" target="_blank" rel="noreferrer">Mincmistr v1.2.3 rules</a></p>
       <p><a href="https://filemanager.czechgames.com/storage/files/kutna-hora-the-city-of-silver/rules/kutna-hora-rules-en.pdf" target="_blank" rel="noreferrer">CGE rulebook</a> · <a href="https://www.czechgames.com/news/available-now-the-kutna-hora-companion-app" target="_blank" rel="noreferrer">CGE market companion</a> · <a href="https://www.zatrolene-hry.cz/spolecenska-hra/kutna-hora-mesto-stribra-14736/k-stazeni/vlastni-solo-mod-capek-18184/" target="_blank" rel="noreferrer">Capek paper variant</a></p>
       <p class="fine">Banner cropped from <a href="https://commons.wikimedia.org/wiki/File:Kutn%C3%A1_Hora_-_St._Barbara%27s_Church_-_Panoramic_Photocompilation.jpg" target="_blank" rel="noreferrer">St. Barbara’s Church by Txllxt TxllxT</a> under <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noreferrer">CC BY-SA 4.0</a>.</p>
     </div>
@@ -545,7 +548,7 @@ dialog::backdrop { background: #100f11b9; }
       </div>
     </dialog>
     <dialog id="paper-reference" aria-labelledby="paper-reference-title">
-      <div class="panel-head"><h2 id="paper-reference-title">Mincmistr v1.2.2</h2><button type="button" class="flat" id="paper-reference-close" autofocus>Close</button></div>
+      <div class="panel-head"><h2 id="paper-reference-title">Mincmistr v1.2.3</h2><button type="button" class="flat" id="paper-reference-close" autofocus>Close</button></div>
       <div class="reference-nav" role="group" aria-label="Rules and reference sections">
         <button type="button" class="outline" data-reference aria-controls="paper-ref-cards" aria-pressed="true">Reference cards</button>
         <button type="button" class="outline" data-reference aria-controls="paper-ref-mine" aria-pressed="false">Mine choice aid</button>
@@ -631,23 +634,23 @@ dialog::backdrop { background: #100f11b9; }
 <p><strong>Apprentice.</strong> Use the same tile choice. Skip the award calculation. Choose the row with the fewest of its mines, then the cheapest space, then the arrow.</p>
 <p><strong>Arrow.</strong> ◀ picks the first space in reading order (top to bottom, left to right). ▶ picks the last.</p>
 <p>Discard the draw if placement is impossible. Technology and both Mine actions from St. Barbara tile 9 use the same placement priorities at no wood cost. Use reserve miners first for those free mines.</p>
-<p>Mincmistr v1.2.2, rules 5.2, 6.4, 6.5, 7 and 9. Mine scoring follows the table printed on the Kutná Hora board.</p>
+<p>Mincmistr v1.2.3, rules 5.2, 6.4, 6.5, 7 and 9. Mine scoring follows the table printed on the Kutná Hora board.</p>
   <button type="button" class="outline" id="paper-print-mine">Print mine aid</button>
 </section>
 <section id="paper-ref-rules" class="reference-prose" hidden><h1>The Mincmistr</h1>
-<p><strong>A card-driven solo opponent for Kutná Hora</strong> · Version 1.2.2 · 15 Nov 2026</p>
-<p>You play a normal two-player game against the Mincmistr, the mint master. It plays by the same rules as a player. It starts like a player, pays every cost and either pays its taxes or loses reputation. It obeys every limit and scores the same way at the end. It gets no starting points and no hidden information. Instead of a player's judgement, it uses a short checklist, a deck of 15 Plan cards and a fixed row of its six action cards.</p>
+<p><strong>A card-driven solo opponent for Kutná Hora</strong> · Version 1.2.3 · 15 Nov 2026</p>
+<p>Play against one, two or three Mincmistrs, using the normal board and round count for that table size. A Mincmistr starts like a player, pays every cost and either pays its taxes or loses reputation. It obeys the piece limits and scores the same way at the end. It gets no starting points and no hidden information. It makes its choices with a short checklist, a deck of 15 Plan cards and a fixed row of six action cards.</p>
 <p>There are no dice. You flip one card per action, and most actions take one or two checks.</p>
 <h2>Components</h2>
 <p>Print pages 5 to 8 of this file at actual size (100%), on Letter or A4, and cut out the cards. Pages 6 and 8 are optional card backs; print each one on the back of the page before it.</p>
 <ul>
 <li>15 Plan cards.</li>
 <li>3 reference cards: Card play, Goals and Choices.</li>
-<li>From the game box: one player's components for the Mincmistr, including its six action cards.</li>
+<li>From the game box: one set of player components per Mincmistr, including six action cards per set.</li>
 </ul>
 <h2>1. Setup</h2>
 <ol>
-<li>Set up a normal two-player game. Give the Mincmistr everything a player receives: a guild set, houses, miners, coins and reputation. Use the normal starting player and seat order.</li>
+<li>Set up the normal game for your table size. Choose your guild set first from the matching row of the guild setup card. Shuffle the remaining sets and deal one to each Mincmistr. Give each Mincmistr its normal player components, coins and reputation. Use the normal rules for the starting player and seat order.</li>
 <li>Shuffle the Mincmistr's three guilds to set their order, top to bottom, on its player board.</li>
 <li>Shuffle the 15 Plan cards. Put them face down beside its board.</li>
 <li>Lay its six action cards face up in a row, in the order shown in rule 2.</li>
@@ -715,6 +718,7 @@ dialog::backdrop { background: #100f11b9; }
 <h3>6.1 Rights</h3>
 <p>It takes only <strong>guild tiles it could build right now</strong>. The tile must belong to one of its own guilds, that guild's row must still have a house, and the population or ore track must allow that guild's next building. It <strong>never buys public building rights</strong>. Like any player, it gets public rights free from its top house row.</p>
 <p>Of those tiles, it takes the one with the highest <strong>income value</strong>: production × the current price of that commodity. Ties go to the cheaper tile, then the higher market row, then the tile further left.</p>
+<p>If no qualifying tile is available to buy, Rights is not possible. Go to the next check.</p>
 <h3>6.2 Plot</h3>
 <p>It claims the legal plot where one of its held rights would score the <strong>most town points</strong>, counting the matching dots that building would score there. Ties go to the cheaper plot, then the arrow.</p>
 <h3>6.3 Build</h3>
@@ -726,7 +730,7 @@ dialog::backdrop { background: #100f11b9; }
 <p>Free tiles from technology use the same placement rule.</p>
 <h3>6.5 Bonus steps</h3>
 <ul>
-<li><strong>Free building right</strong> (from a house row or St. Barbara): the public tile with the highest <strong>VP + 2 per pelican + 2 per reputation</strong>. Ties go to the first tile offered. If no public tile is offered, it takes the guild tile with the highest income value.</li>
+<li><strong>Free building right</strong> (from a house row or St. Barbara tile 2): among eligible rights, take the public tile with the highest <strong>VP + 2 per pelican + 2 per reputation</strong>. Ties go to the first tile offered. If no public tile is eligible, a house reward gives nothing. On St. Barbara tile 2 only, fall back to the eligible tile from one of its own guilds with the highest income value. Break ties by the first tile offered. Take nothing if no tile is eligible.</li>
 <li><strong>Remove a house</strong>: from the guild row with the most houses already removed. Ties go to the top row. It always takes optional house removals.</li>
 <li><strong>Seat a patrician from the bank</strong>: the colour with the biggest edge (rule 6.6), even if that edge is 0 or less. Ties go green, silver, yellow, red.</li>
 <li><strong>Score a building</strong> (St. Barbara): its building with the most town points. Ties go by the arrow.</li>
@@ -806,7 +810,7 @@ dialog::backdrop { background: #100f11b9; }
 <p>Master and Grandmaster give it extra actions only. They never add points, coins or discounts.</p>
 <p><strong>Fine-tuning.</strong> For a step between levels, give the double last turn to the last N rounds only. Each extra round is worth about 1.5 to 2.5 points (see rule 12). Master is N = 3 and Grandmaster is N = 6.</p>
 <h2>10. Two or three Mincmistrs</h2>
-<p>To face more opponents, set up a three- or four-player game. Give each Mincmistr a player's components and its own row of action cards.</p>
+<p>To face more opponents, set up a three- or four-player game using rule 1. Give each Mincmistr its own row of action cards.</p>
 <ul>
 <li>They can share one Plan deck. Flip a new card for each card play.</li>
 <li>Each Mincmistr follows these rules on its own.</li>
@@ -942,7 +946,7 @@ dialog::backdrop { background: #100f11b9; }
   <script>'use strict';
 const modules={};
 modules.data=(()=>{
-const VERSION = '0.3.5';
+const VERSION = '0.3.6';
 const SAVE_SCHEMA = 3;
 const SETUP_VERSION = 2;
 const RIVAL_SETTINGS = ['standard','quick','planner','mincmistr'];
@@ -2671,7 +2675,7 @@ modules.mincmistr=(()=>{
 // The Mincmistr — a card-driven solo opponent for Kutná Hora.
 // This file is the rules as code. Every numbered comment matches a numbered rule in the printed rulebook.
 // It reads the game state only through what a person can see on the table.
-const {BUILDINGS,CARDS,MINCMISTR_LEVELS,MINCMISTR_PLANS,MINES,PATRICIANS}=modules.data;
+const {BUILDINGS,CARDS,LABEL,MINCMISTR_LEVELS,MINCMISTR_PLANS,MINES,PATRICIANS}=modules.data;
 const {
   canBuildGuild,cityPointsAt,createPlanDeck,drawPlan,legalActions,mineRows,patricianBase,
   plotCount,price,rulesFor,transition,
@@ -2904,6 +2908,22 @@ function describePlan(card) {
   return `Plan ${card.number} · ${order} · ${card.arrow==='low'?'earliest':'latest'} space on ties`;
 }
 
+function describePlanRule(m,action) {
+  // Digital play creates fresh statistics for each decision. cardPlay tallies
+  // exactly the check that found a legal action, including fallback.
+  const [check]=Object.keys(m.stats.rules);
+  if (check==='cash') return 'Rule 4.1 · Short of cash → Income';
+  if (check==='pelicans') return 'Rule 4.2 · Pelicans → St. Barbara';
+  const label=action.kind==='build'?'Build':LABEL[action.kind];
+  if (check.startsWith('goal:')) {
+    const goal=check.slice(5);
+    const name=PLAN_GOALS[goal];
+    const priority=m.card.goals.indexOf(goal)+1;
+    return `Rule 4.3 · Goal ${priority} ${name}${name===label?'':` → ${label}`}`;
+  }
+  return `Rule 4.4 · Fallback → ${label}`;
+}
+
 // Play one decision from a saved digital game. Bonus decisions use the last flipped card.
 function playMincmistr(state) {
   const {mincmistr,actor:seat}=state;
@@ -2923,7 +2943,9 @@ function playMincmistr(state) {
   decks[slot]={rng:m.rng,draw:m.draw,discard:m.discard};
   const lastPlans=[...mincmistr.lastPlans];
   lastPlans[seat-1]=m.card.number-1;
-  const log=state.log?[...state.log,{round:state.round,actor:seat,text:`${describePlan(m.card)}.`}]:null;
+  const log=state.log?[...state.log,{
+    round:state.round,actor:seat,text:`${describePlan(m.card)}.`,rule:describePlanRule(m,action),
+  }]:null;
   return transition({...state,mincmistr:{...mincmistr,decks,lastPlans},log},action);
 }
 
@@ -3049,7 +3071,9 @@ function checkGame(s) {
     ...s.pending.filter(item=>item.kind==='technology').map(item=>item.id)];
   const availableTechnology=TECHNOLOGY.slice(0,s.technology).map(tile=>tile.id);
   ok(new Set(technologyTiles).size===technologyTiles.length&&technologyTiles.every(id=>availableTechnology.includes(id)),'technology stock');
-  ok(Array.isArray(s.log)&&s.log.length<=1500&&s.log.every(row=>row&&integer(row.round,1,rounds)&&(row.actor===null||integer(row.actor,0,count-1))&&typeof row.text==='string'&&row.text.length<=500),'journal');
+  ok(Array.isArray(s.log)&&s.log.length<=1500&&s.log.every(row=>row&&integer(row.round,1,rounds)&&
+    (row.actor===null||integer(row.actor,0,count-1))&&typeof row.text==='string'&&row.text.length<=500&&
+    (row.rule===undefined||(typeof row.rule==='string'&&row.rule.length<=120))),'journal');
   ok(s.phase==='end' ? array(s.result?.scores,count)&&(s.result.winner===null||integer(s.result.winner,0,count-1))&&s.result.scores.every(score=>
     score&&['earned','town','mines','income','reputation','extras','total','coins'].every(key=>integer(score[key],-99999,99999))
   ) : s.result===null,'final result');
@@ -3886,12 +3910,17 @@ function renderDecisions() {
   } else content=renderCardChoices(legalActions(state));
   const last=state.log.filter(entry=>entry.actor>0).slice(-4).map(entry=>noteFor(entry.actor,entry.text));
   const reviewTitle=review?.plan?`Plan ${review.plan}`:'Taxes';
+  const draw=review?.plan?state.log.findLast(entry=>entry.actor===review.seat&&plansByNote.has(entry.text)):null;
+  const rule=draw?.rule&&plansByNote.get(draw.text)===review.plan?draw.rule:'';
   const notes=review?`<section class="panel rival-review" aria-labelledby="review-title"><div class="panel-head">
     <h3 id="review-title">${playerName(review.seat)} · ${reviewTitle}</h3></div>
     <div class="review-body">
       ${review.plan?`<button type="button" class="outline review-plan" data-do="plan-card" data-value="${review.seat}/${review.plan}" aria-haspopup="dialog">
         <span class="printed-plan-face" id="review-plan-face" aria-hidden="true"></span>View Plan card</button>`:''}
-      ${rivalReport.length?`<ul>${rivalReport.map(row=>`<li>${safe(row)}</li>`).join('')}</ul>`:'<p class="muted">Finished resolving the Plan.</p>'}
+      <div class="review-actions">
+        ${rule?`<p class="review-rule">${safe(rule)}</p>`:''}
+        ${rivalReport.length?`<ul>${rivalReport.map(row=>`<li>${safe(row)}</li>`).join('')}</ul>`:'<p class="muted">Finished resolving the Plan.</p>'}
+      </div>
     </div></section>`:
     rivalReport.length||last.length?`<details class="panel rival-report" ${state.players.length===2?'open':''}><summary>Rival notes</summary><ul>${(rivalReport.length?rivalReport:last).map(row=>`<li>${safe(row)}</li>`).join('')}</ul></details>`:'';
   byId('decisions').innerHTML=`<section class="panel decision" aria-label="Turn actions"><div class="panel-head"><h2 id="turn-title" tabindex="-1">${title}</h2>${tag?`<span class="turn-tag">${tag}</span>`:''}</div>
@@ -4058,7 +4087,7 @@ function renderJournal() {
   byId('journal-body').innerHTML=`<ol class="log-list">${entries.map(item=>{
     const plan=state.mincmistr&&item.actor>0?plansByNote.get(item.text):undefined;
     const note=safe(item.text);
-    const content=plan?`<button type="button" class="link plan-card-link" data-do="plan-card" data-value="${item.actor}/${plan}" aria-haspopup="dialog">${note}</button>`:note;
+    const content=plan?`<button type="button" class="link plan-card-link" data-do="plan-card" data-value="${item.actor}/${plan}" aria-haspopup="dialog">${note}</button>${item.rule?`<span class="journal-rule">${safe(item.rule)}</span>`:''}`:note;
     return `<li><span class="log-round">R${item.round}</span><span class="log-seat seat-${item.actor}">${item.actor===null?'Town':playerName(item.actor)}</span><span>${content}</span></li>`;
   }).join('')}</ol>`;
 }

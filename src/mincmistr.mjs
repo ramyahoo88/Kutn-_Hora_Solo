@@ -1,7 +1,7 @@
 // The Mincmistr — a card-driven solo opponent for Kutná Hora.
 // This file is the rules as code. Every numbered comment matches a numbered rule in the printed rulebook.
 // It reads the game state only through what a person can see on the table.
-import {BUILDINGS,CARDS,MINCMISTR_LEVELS,MINCMISTR_PLANS,MINES,PATRICIANS} from './data.mjs';
+import {BUILDINGS,CARDS,LABEL,MINCMISTR_LEVELS,MINCMISTR_PLANS,MINES,PATRICIANS} from './data.mjs';
 import {
   canBuildGuild,cityPointsAt,createPlanDeck,drawPlan,legalActions,mineRows,patricianBase,
   plotCount,price,rulesFor,transition,
@@ -234,6 +234,22 @@ export function describePlan(card) {
   return `Plan ${card.number} · ${order} · ${card.arrow==='low'?'earliest':'latest'} space on ties`;
 }
 
+function describePlanRule(m,action) {
+  // Digital play creates fresh statistics for each decision. cardPlay tallies
+  // exactly the check that found a legal action, including fallback.
+  const [check]=Object.keys(m.stats.rules);
+  if (check==='cash') return 'Rule 4.1 · Short of cash → Income';
+  if (check==='pelicans') return 'Rule 4.2 · Pelicans → St. Barbara';
+  const label=action.kind==='build'?'Build':LABEL[action.kind];
+  if (check.startsWith('goal:')) {
+    const goal=check.slice(5);
+    const name=PLAN_GOALS[goal];
+    const priority=m.card.goals.indexOf(goal)+1;
+    return `Rule 4.3 · Goal ${priority} ${name}${name===label?'':` → ${label}`}`;
+  }
+  return `Rule 4.4 · Fallback → ${label}`;
+}
+
 // Play one decision from a saved digital game. Bonus decisions use the last flipped card.
 export function playMincmistr(state) {
   const {mincmistr,actor:seat}=state;
@@ -253,6 +269,8 @@ export function playMincmistr(state) {
   decks[slot]={rng:m.rng,draw:m.draw,discard:m.discard};
   const lastPlans=[...mincmistr.lastPlans];
   lastPlans[seat-1]=m.card.number-1;
-  const log=state.log?[...state.log,{round:state.round,actor:seat,text:`${describePlan(m.card)}.`}]:null;
+  const log=state.log?[...state.log,{
+    round:state.round,actor:seat,text:`${describePlan(m.card)}.`,rule:describePlanRule(m,action),
+  }]:null;
   return transition({...state,mincmistr:{...mincmistr,decks,lastPlans},log},action);
 }

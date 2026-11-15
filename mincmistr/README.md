@@ -4,14 +4,14 @@ The Mincmistr is a card-driven automa for the physical game. It uses a 15-card P
 
 Developed and tested against this repository's engine at `v0.3.0-playtest` (`0b28294`). The rules engine in `v0.3.1-playtest` is the same, apart from the new Planner rival setting.
 
-To play without printing, open [Kutná Hora Solo](../Kutna_Hora_Solo.html) and choose **New game → Rival difficulty → Mincmistr**. The app uses this v1.2.2 policy and tracks Plan draws and bonus turns for you. Use **Play one Plan** to review each card and its actions. **View Plan card** opens the printed face and selectable text.
+To play without printing, open [Kutná Hora Solo](../Kutna_Hora_Solo.html) and choose **New game → Rival difficulty → Mincmistr**. The app uses this v1.2.3 policy and tracks Plan draws and bonus turns for you. Use **Play one Plan** to review each card, the rule that selected its action, and the moves it made. **View Plan card** opens the printed face and selectable text.
 
 When playing at the table, choose **Draw only** to use the printed Plan faces as a shared deck. Tap **Draw Plan** before each Mincmistr action card. Open **Rules and reference** for the three reference cards, the full rules and the mine choice aid. Use **Print mine aid** for a copy of the award tables and placement priorities at the table.
 
 ## Read or print
 
 - `Mincmistr_Print_and_Play.pdf`: rules on pages 1–4, card sheets on pages 5–8. Print at 100% on Letter or A4.
-- `Mincmistr_Rules.md`: the rulebook text (version 1.2.2, which adds play against two or three Mincmistrs).
+- `Mincmistr_Rules.md`: the v1.2.3 rulebook text, with clarified guild setup, Rights and free rights.
 - `Mincmistr_Sim_Report.md`: design history, test method and results.
 - `Mincmistr_Sample_Game.md`: two rounds of a simulated game, annotated rule by rule.
 - `NOTES.md`: the overnight lab notebook.
@@ -55,6 +55,13 @@ Run every command from the repository root. The scripts import the engine from `
   node mincmistr/print/export_cards.mjs
   python3 mincmistr/print/build.py /tmp/mincmistr.html mincmistr/Mincmistr_Print_and_Play.pdf
   ```
+
+  To regenerate the v1.2.3 rules pages and reuse the existing card sheets, install Python `markdown` and `PyMuPDF` with DejaVu fonts. Set `DEJAVU_FONTS` if the fonts live outside `/usr/share/fonts/truetype/dejavu`.
+
+  ```sh
+  python3 mincmistr/print/build.py --refresh-rules mincmistr/Mincmistr_Print_and_Play.pdf /tmp/Mincmistr_Print_and_Play.pdf
+  ```
+
 - `print/export_app_plans.py` crops the Plan fronts from the PDF for the app. After updating the PDF's cards, run `python3 mincmistr/print/export_app_plans.py` with Poppler and Pillow installed, then rebuild the offline HTML.
 - `print/mine-aid.md` is the mine choice aid. To refresh the app's offline reference after editing the aid, rules, or reference cards, run `python3 mincmistr/print/build.py --app-reference mincmistr/print/app-reference.html`, then rebuild the offline HTML.
 - `results/`: raw results. `results/v1.0/` holds the version 1.0 holdout runs.

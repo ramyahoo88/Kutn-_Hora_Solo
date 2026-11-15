@@ -108,6 +108,8 @@ try {
   assert.deepEqual(afterPlan,playMincmistr(pending));
   assert.equal(afterPlan.pending.length,0);
   assert.equal(afterPlan.mincmistr.decks[0].discard.length,1);
+  assert.equal(await a.locator('.review-rule').textContent(),'Rule 4.3 · Goal 1 Mine');
+  assert.equal(await a.locator('#journal-body .journal-rule').textContent(),'Rule 4.3 · Goal 1 Mine');
   await click(a,'.review-plan');
   await a.locator('#plan-dialog[open]').waitFor();
   await click(a,'#plan-dialog summary');
@@ -115,6 +117,7 @@ try {
   await click(a,'#plan-dialog [data-do="close"]');
   await a.reload();
   await a.getByRole('heading',{name:'Rival 1 · Plan 4',exact:true}).waitFor();
+  assert.equal(await a.locator('.review-rule').textContent(),'Rule 4.3 · Goal 1 Mine');
   await click(a,'#undo');
   await a.locator('#review-title').waitFor({state:'detached'});
   assert.deepEqual(await game(a),opening);

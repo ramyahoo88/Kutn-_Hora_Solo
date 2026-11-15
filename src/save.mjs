@@ -117,7 +117,9 @@ export function checkGame(s) {
     ...s.pending.filter(item=>item.kind==='technology').map(item=>item.id)];
   const availableTechnology=TECHNOLOGY.slice(0,s.technology).map(tile=>tile.id);
   ok(new Set(technologyTiles).size===technologyTiles.length&&technologyTiles.every(id=>availableTechnology.includes(id)),'technology stock');
-  ok(Array.isArray(s.log)&&s.log.length<=1500&&s.log.every(row=>row&&integer(row.round,1,rounds)&&(row.actor===null||integer(row.actor,0,count-1))&&typeof row.text==='string'&&row.text.length<=500),'journal');
+  ok(Array.isArray(s.log)&&s.log.length<=1500&&s.log.every(row=>row&&integer(row.round,1,rounds)&&
+    (row.actor===null||integer(row.actor,0,count-1))&&typeof row.text==='string'&&row.text.length<=500&&
+    (row.rule===undefined||(typeof row.rule==='string'&&row.rule.length<=120))),'journal');
   ok(s.phase==='end' ? array(s.result?.scores,count)&&(s.result.winner===null||integer(s.result.winner,0,count-1))&&s.result.scores.every(score=>
     score&&['earned','town','mines','income','reputation','extras','total','coins'].every(key=>integer(score[key],-99999,99999))
   ) : s.result===null,'final result');

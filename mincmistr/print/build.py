@@ -110,6 +110,54 @@ def app_reference(out_html):
 <section id="paper-ref-rules" class="reference-prose" hidden>{rules}</section>
 ''', encoding='utf-8')
 
+def refresh_rules(source_pdf, out_pdf):
+    """Replace the rules pages while retaining the existing card sheets."""
+    from io import BytesIO
+    import os
+    import fitz
+
+    if pathlib.Path(source_pdf).resolve() == pathlib.Path(out_pdf).resolve():
+        raise ValueError('Choose a separate output path for the refreshed PDF.')
+
+    fonts = pathlib.Path(os.environ.get('DEJAVU_FONTS', '/usr/share/fonts/truetype/dejavu'))
+    font_faces = []
+    for family, stem, italic in [('DejaVu Serif', 'DejaVuSerif', 'Italic'), ('DejaVu Sans', 'DejaVuSans', 'Oblique')]:
+        for suffix, style, weight in [('', 'normal', 'normal'), ('-Bold', 'normal', 'bold'), ('-' + italic, 'italic', 'normal')]:
+            filename = f'{stem}{suffix}.ttf'
+            if not (fonts / filename).is_file():
+                raise FileNotFoundError(f'Set DEJAVU_FONTS to the folder containing {filename}.')
+            font_faces.append(f"@font-face {{font-family:'{family}';font-style:{style};font-weight:{weight};src:url({filename});}}")
+    rules_css = CSS.split('/* ---------- card sheets ---------- */', 1)[0]
+    rules_css = '\n'.join(line for line in rules_css.splitlines() if not line.startswith('@page'))
+    css = '\n'.join(font_faces) + rules_css + """
+        .rules { line-height: 1.17; }
+        .rules h2 { margin-top: 8pt; }
+        .rules h3 { margin-top: 7pt; }
+        .rules p { margin: 2pt 0 3pt; }
+        .rules th, .rules td { padding: 1.6pt 5pt; }
+    """
+    page_starts = ('**4.3 Plan.**', '### 6.5 Bonus steps', '## 10. Two or three Mincmistrs')
+    breaks = [0, *(rules_md.index(heading) for heading in page_starts), len(rules_md)]
+    stream = BytesIO()
+    archive = fitz.Archive(str(fonts))
+    with fitz.DocumentWriter(stream, 'compress') as writer:
+        for page, (start, end) in enumerate(zip(breaks, breaks[1:]), 1):
+            body = markdown.markdown(rules_md[start:end], extensions=['tables'])
+            story = fitz.Story(f'<div class="rules">{body}</div>', user_css=css, archive=archive)
+            more, _ = story.place(fitz.Rect(46.8, 36, 565.2, 756))
+            if more:
+                raise ValueError(f'Rules no longer fit page {page}. Adjust page breaks or use the full Chrome build.')
+            story.draw(writer.begin_page(fitz.paper_rect('letter')))
+            writer.end_page()
+
+    with fitz.open(source_pdf) as source, fitz.open(stream=stream.getvalue(), filetype='pdf') as refreshed:
+        if len(source) != 8:
+            raise ValueError('Use an eight-page Mincmistr PDF with card sheets on pages 5–8.')
+        refreshed.subset_fonts()
+        refreshed.insert_pdf(source, from_page=4, to_page=7)
+        refreshed.set_metadata({'title': 'The Mincmistr — print and play'})
+        refreshed.save(out_pdf, garbage=4, deflate=True, no_new_id=True)
+
 def main(out_html, out_pdf):
     body = markdown.markdown(rules_md, extensions=['tables'])
     deck = data['deck']
@@ -129,5 +177,7 @@ def main(out_html, out_pdf):
 if __name__ == '__main__':
     if sys.argv[1] == '--app-reference':
         app_reference(sys.argv[2])
+    elif sys.argv[1] == '--refresh-rules':
+        refresh_rules(sys.argv[2], sys.argv[3])
     else:
         main(sys.argv[1], sys.argv[2])

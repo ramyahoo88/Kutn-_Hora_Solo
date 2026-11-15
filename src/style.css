@@ -161,6 +161,8 @@ select, input[type=text] { min-height: 40px; padding: 7px 9px; border-radius: 6p
 .rival-report li + li { margin-top: 5px; }
 .rival-step { margin-top: 7px; min-height: 42px; }
 .review-body { display: flex; gap: 11px; align-items: flex-start; padding: 10px 12px; }
+.review-actions { min-width: 0; }
+.review-rule { margin-bottom: 7px; color: var(--brass); font-weight: 650; }
 .review-body ul { margin: 0; padding-inline-start: 16px; color: var(--muted); }
 .review-body li + li { margin-top: 4px; }
 .review-plan { width: 112px; flex-shrink: 0; padding: 5px; font-size: .82rem; color: var(--muted); }
@@ -227,6 +229,7 @@ button.offer:hover, .offer.chosen { outline: 1px solid var(--brass); outline-off
 .log-list { list-style: none; padding: 6px 13px 11px; margin: 0; }
 .log-list li { display: grid; grid-template-columns: 25px 50px 1fr; gap: 5px; font-size: .85rem; padding: 4px 0; border-bottom: 1px solid #333439; }
 .log-list li:last-child { border: 0; }
+.journal-rule { display: block; color: var(--quiet); }
 .log-round { color: var(--quiet); }
 .log-seat { color: var(--seat,var(--muted)); }
 .footer { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-top: 13px; padding-bottom: 20px; color: var(--quiet); font-size: .76rem; }

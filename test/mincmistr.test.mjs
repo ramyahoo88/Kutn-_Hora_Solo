@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {MINCMISTR_PLANS} from '../src/data.mjs';
+import {BUILDINGS,MINCMISTR_PLANS} from '../src/data.mjs';
 import {cardsThisTurn,createGame,createPlanDeck,drawPlan,legalActions,seatAtTurn,transition,validPlanDeck} from '../src/engine.mjs';
 import {botAction} from '../src/bot.mjs';
 import {playMincmistr} from '../src/mincmistr.mjs';
@@ -42,6 +42,51 @@ test('individual decks distinguish seats at the seed length limit',()=>{
   const saved=digital({seed:'A'.repeat(53),playerCount:4,mincmistr:{shared:false}});
   saved.mincmistr.decks=saved.mincmistr.decks.map(()=>structuredClone(saved.mincmistr.decks[0]));
   assert.deepEqual(readSave(writeSave(saved)),saved);
+});
+
+test('the journal records the check that selected a Plan action',()=>{
+  const opening=plan=>{
+    const game=digital({seed:'plan-rule'});
+    const deck=game.mincmistr.decks[0];
+    deck.draw=[plan,...deck.draw.filter(id=>id!==plan)];
+    return game;
+  };
+  const noEligibleRights=game=>{
+    for (let i=0; i<game.market.length; i++) {
+      const guilds=game.players[1].guilds;
+      game.market[i]=game.market[i].filter(stack=>{
+        const tile=BUILDINGS[stack.tiles[0]];
+        if (!tile.public && guilds.includes(tile.group)) {
+          game.marketDiscard.push(...stack.tiles);
+          return false;
+        }
+        return true;
+      });
+    }
+  };
+  const rule=game=>{
+    const after=playMincmistr(game);
+    return readSave(writeSave(after)).log.findLast(fromPlan).rule;
+  };
+  const cash=opening(0);
+  cash.players[1].coins=19;
+  assert.equal(rule(cash),'Rule 4.1 · Short of cash → Income');
+
+  const pelicans=opening(0);
+  pelicans.players[1].pelicans=2;
+  assert.equal(rule(pelicans),'Rule 4.2 · Pelicans → St. Barbara');
+
+  const mine=opening(3); // Plan 4's first goal is Mine.
+  assert.equal(rule(mine),'Rule 4.3 · Goal 1 Mine');
+
+  const otherGoal=opening(0); // Construct then Mine.
+  noEligibleRights(otherGoal);
+  assert.ok(legalActions(otherGoal).some(a=>a.kind==='rights'&&BUILDINGS[a.id].public));
+  assert.equal(rule(otherGoal),'Rule 4.3 · Goal 2 Mine');
+
+  const fallback=opening(4); // Construct then St. Barbara, without pelicans.
+  noEligibleRights(fallback);
+  assert.equal(rule(fallback),'Rule 4.4 · Fallback → Income');
 });
 
 test('last-turn card allowance follows the printed levels at every table size',()=>{

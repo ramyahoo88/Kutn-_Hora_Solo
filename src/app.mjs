@@ -456,12 +456,17 @@ function renderDecisions() {
   } else content=renderCardChoices(legalActions(state));
   const last=state.log.filter(entry=>entry.actor>0).slice(-4).map(entry=>noteFor(entry.actor,entry.text));
   const reviewTitle=review?.plan?`Plan ${review.plan}`:'Taxes';
+  const draw=review?.plan?state.log.findLast(entry=>entry.actor===review.seat&&plansByNote.has(entry.text)):null;
+  const rule=draw?.rule&&plansByNote.get(draw.text)===review.plan?draw.rule:'';
   const notes=review?`<section class="panel rival-review" aria-labelledby="review-title"><div class="panel-head">
     <h3 id="review-title">${playerName(review.seat)} · ${reviewTitle}</h3></div>
     <div class="review-body">
       ${review.plan?`<button type="button" class="outline review-plan" data-do="plan-card" data-value="${review.seat}/${review.plan}" aria-haspopup="dialog">
         <span class="printed-plan-face" id="review-plan-face" aria-hidden="true"></span>View Plan card</button>`:''}
-      ${rivalReport.length?`<ul>${rivalReport.map(row=>`<li>${safe(row)}</li>`).join('')}</ul>`:'<p class="muted">Finished resolving the Plan.</p>'}
+      <div class="review-actions">
+        ${rule?`<p class="review-rule">${safe(rule)}</p>`:''}
+        ${rivalReport.length?`<ul>${rivalReport.map(row=>`<li>${safe(row)}</li>`).join('')}</ul>`:'<p class="muted">Finished resolving the Plan.</p>'}
+      </div>
     </div></section>`:
     rivalReport.length||last.length?`<details class="panel rival-report" ${state.players.length===2?'open':''}><summary>Rival notes</summary><ul>${(rivalReport.length?rivalReport:last).map(row=>`<li>${safe(row)}</li>`).join('')}</ul></details>`:'';
   byId('decisions').innerHTML=`<section class="panel decision" aria-label="Turn actions"><div class="panel-head"><h2 id="turn-title" tabindex="-1">${title}</h2>${tag?`<span class="turn-tag">${tag}</span>`:''}</div>
@@ -628,7 +633,7 @@ function renderJournal() {
   byId('journal-body').innerHTML=`<ol class="log-list">${entries.map(item=>{
     const plan=state.mincmistr&&item.actor>0?plansByNote.get(item.text):undefined;
     const note=safe(item.text);
-    const content=plan?`<button type="button" class="link plan-card-link" data-do="plan-card" data-value="${item.actor}/${plan}" aria-haspopup="dialog">${note}</button>`:note;
+    const content=plan?`<button type="button" class="link plan-card-link" data-do="plan-card" data-value="${item.actor}/${plan}" aria-haspopup="dialog">${note}</button>${item.rule?`<span class="journal-rule">${safe(item.rule)}</span>`:''}`:note;
     return `<li><span class="log-round">R${item.round}</span><span class="log-seat seat-${item.actor}">${item.actor===null?'Town':playerName(item.actor)}</span><span>${content}</span></li>`;
   }).join('')}</ol>`;
 }

@@ -1,8 +1,8 @@
 # The Mincmistr
 
-**A card-driven solo opponent for Kutná Hora** · Version 1.2.2 · 15 Nov 2026
+**A card-driven solo opponent for Kutná Hora** · Version 1.2.3 · 15 Nov 2026
 
-You play a normal two-player game against the Mincmistr, the mint master. It plays by the same rules as a player. It starts like a player, pays every cost and either pays its taxes or loses reputation. It obeys every limit and scores the same way at the end. It gets no starting points and no hidden information. Instead of a player's judgement, it uses a short checklist, a deck of 15 Plan cards and a fixed row of its six action cards.
+Play against one, two or three Mincmistrs, using the normal board and round count for that table size. A Mincmistr starts like a player, pays every cost and either pays its taxes or loses reputation. It obeys the piece limits and scores the same way at the end. It gets no starting points and no hidden information. It makes its choices with a short checklist, a deck of 15 Plan cards and a fixed row of six action cards.
 
 There are no dice. You flip one card per action, and most actions take one or two checks.
 
@@ -12,11 +12,11 @@ Print pages 5 to 8 of this file at actual size (100%), on Letter or A4, and cut 
 
 - 15 Plan cards.
 - 3 reference cards: Card play, Goals and Choices.
-- From the game box: one player's components for the Mincmistr, including its six action cards.
+- From the game box: one set of player components per Mincmistr, including six action cards per set.
 
 ## 1. Setup
 
-1. Set up a normal two-player game. Give the Mincmistr everything a player receives: a guild set, houses, miners, coins and reputation. Use the normal starting player and seat order.
+1. Set up the normal game for your table size. Choose your guild set first from the matching row of the guild setup card. Shuffle the remaining sets and deal one to each Mincmistr. Give each Mincmistr its normal player components, coins and reputation. Use the normal rules for the starting player and seat order.
 2. Shuffle the Mincmistr's three guilds to set their order, top to bottom, on its player board.
 3. Shuffle the 15 Plan cards. Put them face down beside its board.
 4. Lay its six action cards face up in a row, in the order shown in rule 2.
@@ -93,6 +93,8 @@ It takes only **guild tiles it could build right now**. The tile must belong to 
 
 Of those tiles, it takes the one with the highest **income value**: production × the current price of that commodity. Ties go to the cheaper tile, then the higher market row, then the tile further left.
 
+If no qualifying tile is available to buy, Rights is not possible. Go to the next check.
+
 ### 6.2 Plot
 
 It claims the legal plot where one of its held rights would score the **most town points**, counting the matching dots that building would score there. Ties go to the cheaper plot, then the arrow.
@@ -113,7 +115,7 @@ Free tiles from technology use the same placement rule.
 
 ### 6.5 Bonus steps
 
-- **Free building right** (from a house row or St. Barbara): the public tile with the highest **VP + 2 per pelican + 2 per reputation**. Ties go to the first tile offered. If no public tile is offered, it takes the guild tile with the highest income value.
+- **Free building right** (from a house row or St. Barbara tile 2): among eligible rights, take the public tile with the highest **VP + 2 per pelican + 2 per reputation**. Ties go to the first tile offered. If no public tile is eligible, a house reward gives nothing. On St. Barbara tile 2 only, fall back to the eligible tile from one of its own guilds with the highest income value. Break ties by the first tile offered. Take nothing if no tile is eligible.
 - **Remove a house**: from the guild row with the most houses already removed. Ties go to the top row. It always takes optional house removals.
 - **Seat a patrician from the bank**: the colour with the biggest edge (rule 6.6), even if that edge is 0 or less. Ties go green, silver, yellow, red.
 - **Score a building** (St. Barbara): its building with the most town points. Ties go by the arrow.
@@ -164,7 +166,7 @@ Master and Grandmaster give it extra actions only. They never add points, coins 
 
 ## 10. Two or three Mincmistrs
 
-To face more opponents, set up a three- or four-player game. Give each Mincmistr a player's components and its own row of action cards.
+To face more opponents, set up a three- or four-player game using rule 1. Give each Mincmistr its own row of action cards.
 
 - They can share one Plan deck. Flip a new card for each card play.
 - Each Mincmistr follows these rules on its own.

@@ -245,6 +245,9 @@ for (const barbara of [1,9]) {
   assert.equal(a.game().mine.filter(tile=>tile?.owner===1).length,barbara===9?2:1);
   assert.equal(a.game().mincmistr.decks[0].discard.length,1);
   assert.match(a.text('#review-title'),/Rival 1 · Plan 4/);
+  const reason=barbara===9?'Rule 4.2 · Pelicans → St. Barbara':'Rule 4.3 · Goal 1 Mine';
+  assert.equal(a.text('.review-rule'),reason);
+  assert.equal(a.text('#journal-body .journal-rule'),reason);
   await a.click('.review-plan');
   assert.match(a.text('#plan-dialog .plan-text'),/Keep this Plan for the entire action and its bonuses/);
   await a.click('#plan-dialog [data-do="close"]');
@@ -252,11 +255,13 @@ for (const barbara of [1,9]) {
   a.close();
   const b=boot(store);
   assert.equal(b.text('#review-title'),'Rival 1 · Plan 4');
+  assert.equal(b.text('.review-rule'),reason);
   await b.click('#undo');
   assert.deepEqual(b.game(),opening);
   await b.click('[data-do="rival-step"]');
   await until('single Plan replayed',()=>b.get('#review-title'));
   assert.equal(store.get(GAME),stepped);
+  assert.equal(b.text('.review-rule'),reason);
   await b.click('[data-do="rival"]');
   await until('rival batch returned to the player',()=>b.game().actor===0);
   let whole=expected;
