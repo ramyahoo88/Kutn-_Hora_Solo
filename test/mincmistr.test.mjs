@@ -1,13 +1,32 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {MINCMISTR_PLANS} from '../src/data.mjs';
-import {cardsThisTurn,createGame,legalActions,seatAtTurn,transition} from '../src/engine.mjs';
+import {cardsThisTurn,createGame,createPlanDeck,drawPlan,legalActions,seatAtTurn,transition,validPlanDeck} from '../src/engine.mjs';
 import {botAction} from '../src/bot.mjs';
 import {playMincmistr} from '../src/mincmistr.mjs';
 import {checkGame,readSave,writeSave} from '../src/save.mjs';
 
 const digital=(options={})=>createGame({difficulty:'mincmistr',starter:1,...options});
 const fromPlan=entry=>/^Plan \d+ ·/.test(entry.text);
+
+test('the shared Plan deck draws every card before shuffling the discards',()=>{
+  const deck=createPlanDeck('paper-deck',1);
+  const firstOrder=[...deck.draw];
+  const count=MINCMISTR_PLANS.length;
+  assert.deepEqual(Array.from({length:count},()=>drawPlan(deck)),firstOrder);
+  assert.deepEqual(deck.draw,[]);
+  assert.deepEqual(deck.discard,firstOrder);
+
+  const restored=JSON.parse(JSON.stringify(deck));
+  const next=drawPlan(deck);
+  assert.equal(drawPlan(restored),next);
+  assert.deepEqual(deck,restored);
+  assert.deepEqual(deck.discard,[next]);
+  assert.equal(deck.draw.length,count-1);
+  assert.ok(validPlanDeck(deck));
+  const secondOrder=[next,...Array.from({length:count-1},()=>drawPlan(deck))];
+  assert.deepEqual(secondOrder.toSorted((a,b)=>a-b),MINCMISTR_PLANS.map((_,index)=>index));
+});
 
 test('last-turn card allowance follows the printed levels at every table size',()=>{
   for (const count of [2,3,4]) {

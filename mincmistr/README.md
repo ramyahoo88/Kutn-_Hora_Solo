@@ -6,6 +6,8 @@ Developed and tested against this repository's engine at `v0.3.0-playtest` (`0b2
 
 To play without printing, open [Kutná Hora Solo](../Kutna_Hora_Solo.html) and choose **New game → Rival difficulty → Mincmistr**. The app uses this v1.2.2 policy and tracks Plan draws and bonus turns for you. Open **View Plan card** beside a rival's hand or select a Plan in the game journal to see its printed face.
 
+When playing at the table, choose **Draw only** to use the printed Plan faces as a shared deck. Tap **Draw Plan** before each Mincmistr action card. Resolve the Plan using the paper rules.
+
 ## Read or print
 
 - `Mincmistr_Print_and_Play.pdf`: rules on pages 1–4, card sheets on pages 5–8. Print at 100% on Letter or A4.

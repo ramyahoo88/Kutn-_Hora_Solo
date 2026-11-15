@@ -1,8 +1,10 @@
-# Kutná Hora Solo v0.3.3 playtest
+# Kutná Hora Solo v0.3.4 playtest
 
 An unofficial browser playtest for Kutná Hora: The City of Silver. Play one seat against one, two or three rivals. The app handles the town, mines, market, council and game draws. The same HTML works offline. Players can mirror its placements on the table. Export and import a JSON save to move a game between copies.
 
 To play offline, open [Kutna_Hora_Solo.html](Kutna_Hora_Solo.html) on GitHub, choose **Download raw file**, and open the downloaded file in your browser.
+
+For the physical game, choose **Draw only** in the toolbar. Tap **Draw Plan** once per Mincmistr action card and resolve the printed Plan at the table. One shared 15-card deck supports one to three Mincmistrs. The app reshuffles the discards when you draw from an empty stack. It keeps the deck and the last undo separately from your digital save. You can also bookmark the page with `#draw-only` appended to the address.
 
 Choose a rival count in **New game**. Pick your guild set from that player count's setup card and arrange your house rows. The seed assigns each remaining set once and determines the rivals’ house rows. At larger tables, **Play rivals** runs through the consecutive rival turns and tax decisions until you have a choice or the game ends. Earlier two-player saves import as two-player games.
 
@@ -94,6 +96,7 @@ node test/skip-planner-study.mjs /path/to/skip-traces standard,planner --case=4 
 
 ## Playtest checks
 
+- **Draw only.** Draw 15 Plans and record their numbers. The next draw starts a new shuffle. Undo that draw, reload, and confirm that the 15th Plan is showing with 0 cards left. Draw again to see the same Plan from the new shuffle.
 - **Mincmistr.** Use Card 6, seed `app-table-4`, three rivals and Grandmaster. The first Plan draw appears after **Play rivals**. Open **View Plan card** for one rival, then choose **Show all** in the journal and open an earlier Plan. Undo and replay the batch to see the same cards. Export and reimport the save and continue to round 5. Each Mincmistr plays both remaining cards on its last turn of every round.
 
 - **One rival.** Start as the Metallurgists, Miners, and Innkeepers on Card 1 with seed `silver-1308`. The rival’s rows should be Builders, Grocers, and Scribes.

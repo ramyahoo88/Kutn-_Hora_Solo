@@ -3,10 +3,9 @@
 // It reads the game state only through what a person can see on the table.
 import {BUILDINGS,CARDS,MINCMISTR_LEVELS,MINCMISTR_PLANS,MINES,PATRICIANS} from './data.mjs';
 import {
-  canBuildGuild,cityPointsAt,createPlanDeck,legalActions,mineRows,patricianBase,
+  canBuildGuild,cityPointsAt,createPlanDeck,drawPlan,legalActions,mineRows,patricianBase,
   plotCount,price,rulesFor,transition,
 } from './engine.mjs';
-import {shuffle} from './random.mjs';
 
 // Plan deck: 15 cards. Goals in priority order. C = Construct, M = Mine, S = St. Barbara.
 // Arrow: 'low' = earliest space in reading order wins ties, 'high' = latest.
@@ -158,10 +157,7 @@ function goal(state, m, g) {
 
 // ---------- rule 4: a card play ----------
 function flipPlan(m) {
-  if (!m.draw.length) { m.draw=shuffle(m.rng,m.discard); m.discard=[]; }
-  const index=m.draw.shift();
-  m.discard.push(index);
-  m.card=PLAN_DECK[index];
+  m.card=PLAN_DECK[drawPlan(m)];
   m.stats.cards++;
 }
 function cardPlay(state, m) {

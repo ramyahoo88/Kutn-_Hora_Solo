@@ -2,7 +2,7 @@ import {
   BUILDINGS,CARDS,EVENTS,GOODS,GUILD_SETUPS_BY_COUNT,MINCMISTR_LEVELS,MINCMISTR_PLANS,MINE_GROUPS,MINE_ROWS,MINES,PATRICIANS,
   RIVAL_SETTINGS,SAVE_SCHEMA,SETUP_VERSION,TECHNOLOGY,
 } from './data.mjs';
-import {cardsThisTurn,finalResult,legalActions,plotCount,rulesFor,seatAtTurn,turnsPerRound} from './engine.mjs';
+import {cardsThisTurn,finalResult,legalActions,plotCount,rulesFor,seatAtTurn,turnsPerRound,validPlanDeck} from './engine.mjs';
 
 export const SAVE_KIND = 'kutna-hora-solo';
 const integer=(n,min,max)=>Number.isInteger(n)&&n>=min&&n<=max;
@@ -21,11 +21,7 @@ function validMincmistr(s, count) {
   if (!array(m.lastPlans,count-1) || !m.lastPlans.every(id=>id===null || plan(id))) return false;
   if (s.phase==='action' && s.actor>0 && s.pending.length && m.lastPlans[s.actor-1]===null) return false;
   if (!array(m.decks,m.shared?1:count-1)) return false;
-  return m.decks.every(deck=>{
-    if (!integer(deck?.rng?.rng,0,0xffffffff) || !Array.isArray(deck.draw) || !Array.isArray(deck.discard)) return false;
-    const ids=[...deck.draw,...deck.discard];
-    return ids.length===countPlans && new Set(ids).size===countPlans && ids.every(plan);
-  });
+  return m.decks.every(validPlanDeck);
 }
 
 function validTurn(s) {

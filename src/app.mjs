@@ -9,6 +9,7 @@ import {
 } from './engine.mjs';
 import {actionRationale,botAction} from './bot.mjs';
 import {describePlan,PLAN_DECK,playMincmistr,ROW} from './mincmistr.mjs';
+import {setPlanFace,startPaperDrawer} from './paper.mjs';
 import {readSave,writeSave} from './save.mjs';
 
 const STORAGE='kutna-hora-solo-v1';
@@ -26,16 +27,6 @@ let unreadableSave=null;
 let storageReadFailed=false;
 let saveFailed=false;
 let mayReplaceAutosave=false;
-try {
-  const saved=localStorage.getItem(STORAGE);
-  if (saved!==null) {
-    try {state=readSave(saved);} catch {unreadableSave=saved;}
-  }
-} catch {
-  storageReadFailed=true;
-  saveFailed=true;
-}
-state ??= createGame({seed:FIRST_SEED});
 const playerName=seat=>seatName(seat,state.players.length);
 let undo=[];
 let selections=[];
@@ -48,6 +39,21 @@ let rivalReport=[];
 let flashTimer;
 let selectionGroup=null;
 let boardSeat=0;
+
+function startDigitalGame() {
+  if (state) return;
+  try {
+    const saved=localStorage.getItem(STORAGE);
+    if (saved!==null) {
+      try {state=readSave(saved);} catch {unreadableSave=saved;}
+    }
+  } catch {
+    storageReadFailed=true;
+    saveFailed=true;
+  }
+  state ??= createGame({seed:FIRST_SEED});
+  render();
+}
 
 function writeLocal(replace=false) {
   if (replace) mayReplaceAutosave=true;
@@ -321,11 +327,8 @@ function showPlanCard(value) {
   const [seat,number]=value.split('/').map(Number);
   const plan=PLAN_DECK[number-1];
   if (!plan) return;
-  const index=plan.number-1;
   byId('plan-title').textContent=`${playerName(seat)}’s Plan ${plan.number}`;
-  const face=byId('printed-plan-face');
-  face.style.backgroundPosition=`${index%3*50}% ${Math.floor(index/3)*25}%`;
-  face.setAttribute('aria-label',`${describePlan(plan)}. Take Income with fewer than 20 groschen. Take St. Barbara with two pelicans or one on a prize tile.`);
+  setPlanFace(byId('printed-plan-face'),plan);
   byId('plan-dialog').showModal();
 }
 function groupedChoices(actions) {
@@ -811,7 +814,7 @@ document.addEventListener('change',event=>{
     byId('action-option')?.focus({preventScroll:true});
   }
 });
-document.addEventListener('click',event=>{
+byId('digital-game').addEventListener('click',event=>{
   const button=event.target.closest('button[data-do]');
   if (!button||button.disabled) return;
   const {do:action,value}=button.dataset;
@@ -853,4 +856,28 @@ document.addEventListener('click',event=>{
     }
   } catch (error) {say(error.message,true);}
 });
-render();
+
+let drawerStarted=false;
+function showMode() {
+  const digital=byId('digital-game');
+  const drawer=byId('draw-only');
+  const drawOnly=location.hash==='#draw-only';
+  const changed=drawer.hidden===drawOnly;
+  if (changed) {
+    const leaving=drawOnly?digital:drawer;
+    leaving.querySelector('dialog[open]')?.close();
+  }
+  digital.hidden=drawOnly;
+  drawer.hidden=!drawOnly;
+  if (drawOnly) {
+    if (!drawerStarted) {
+      startPaperDrawer();
+      drawerStarted=true;
+    }
+  } else {
+    startDigitalGame();
+  }
+  if (changed) byId(drawOnly?'paper-title':'digital-title').focus();
+}
+window.addEventListener('hashchange',showMode);
+showMode();

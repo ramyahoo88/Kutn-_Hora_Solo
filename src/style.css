@@ -41,6 +41,7 @@ small, .fine { font-size: .79rem; color: var(--quiet); }
 .wordmark { display: flex; align-items: center; gap: 9px; font-weight: 750; letter-spacing: .01em; }
 .mark { display: grid; place-items: center; width: 26px; height: 26px; border: 1px solid #776344; border-radius: 50%; color: var(--brass); font-size: .79rem; }
 .topbar nav { display: flex; align-items: center; gap: 7px; }
+.topbar a.flat { display: inline-flex; align-items: center; text-decoration: none; }
 .flat, .outline, .primary, .link { border: 1px solid transparent; border-radius: 7px; padding: 8px 11px; background: transparent; font-weight: 650; font-size: .92rem; }
 .flat { color: var(--muted); }
 .flat:hover, .outline:hover { background: #ffffff0c; }
@@ -232,9 +233,22 @@ button.offer:hover, .offer.chosen { outline: 1px solid var(--brass); outline-off
 dialog { padding: 0; width: min(620px, calc(100% - 26px)); max-height: calc(100% - 25px); color: var(--ink); background: var(--panel); border: 1px solid #8c775c; border-radius: var(--radius); }
 dialog::backdrop { background: #100f11b9; }
 #plan-dialog { width: min(380px, calc(100% - 26px)); }
-#printed-plan-face { aspect-ratio: 5 / 7; background: #fbf7ef url(/* PLAN_CARDS_ASSET */) 0 0 / 300% 500% no-repeat; }
+.printed-plan-face { aspect-ratio: 5 / 7; background: #fbf7ef url(/* PLAN_CARDS_ASSET */) 0 0 / 300% 500% no-repeat; }
 .dialog-body { padding: 14px; }
 .dialog-body .primary { margin-top: 13px; }
+.frame.paper-drawer { width: min(408px, calc(100% - 24px)); margin: 18px auto 24px; }
+.paper-heading { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-bottom: 12px; }
+.paper-heading h1 { font: 400 2.6rem/1 'Instrument Serif', Georgia, serif; }
+.paper-heading h1 span { display: block; margin-top: 4px; color: var(--muted); font: 650 .85rem/1.2 'DM Sans', sans-serif; }
+.paper-heading a { flex-shrink: 0; }
+.paper-body { display: grid; gap: 10px; }
+.paper-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; }
+.paper-actions .primary { margin-top: 0; }
+.paper-body .primary { flex: 1; }
+#paper-face { width: min(100%, 350px); justify-self: center; }
+#paper-status { color: var(--muted); font-size: .9rem; }
+#paper-confirm { width: min(380px, calc(100% - 26px)); }
+#paper-confirm .paper-actions { margin-top: 12px; }
 .tile-facts { display: grid; grid-template-columns: max-content minmax(0,1fr); gap: 8px 14px; margin: 0; }
 .tile-facts dt { color: var(--quiet); }
 .tile-facts dd { margin: 0; overflow-wrap: anywhere; }
@@ -265,7 +279,7 @@ dialog::backdrop { background: #100f11b9; }
   .wordmark { font-size: .86rem; gap: 5px; white-space: nowrap; }
   .mark { width: 19px; height: 19px; font-size: .56rem; }
   .topbar nav { gap: 2px; }
-  .topbar button { min-height: 40px; font-size: .8rem; padding-inline: 7px; white-space: nowrap; }
+  .topbar :is(button,a) { min-height: 40px; font-size: .8rem; padding-inline: 7px; white-space: nowrap; }
   .hero { min-height: 104px; margin: 9px 0 7px; }
   .hero-copy { padding: 10px 13px; }
   .hero h1 { font-size: 3.72rem; }
@@ -305,5 +319,8 @@ dialog::backdrop { background: #100f11b9; }
   .cell b { font-size: .68rem; }
   .footer { display: block; }
   .footer > span:last-child { margin-top: 5px; }
+}
+@media (max-width: 380px) {
+  .topbar { flex-wrap: wrap; gap: 4px; padding-block: 5px; }
 }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; } }

@@ -7,7 +7,7 @@ const project=dirname(fileURLToPath(import.meta.url));
 const read=(path)=>readFile(resolve(project,'src',path),'utf8');
 const data=async (path,mime)=>`data:${mime};base64,${(await readFile(resolve(project,'src','assets',path))).toString('base64')}`;
 const output=resolve(process.argv[2]??resolve(project,'dist','index.html'));
-const order=['data','prices','random','engine','bot','mincmistr','save','app'];
+const order=['data','prices','random','engine','bot','mincmistr','save','paper','app'];
 const modules=[];
 for (const entry of order) {
   let source=await read(`${entry}.mjs`);

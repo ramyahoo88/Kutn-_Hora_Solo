@@ -43,6 +43,26 @@ export function createPlanDeck(seed, seat) {
   return {rng,draw:shuffle(rng,MINCMISTR_PLANS.map((_,i)=>i)),discard:[]};
 }
 
+export function drawPlan(deck) {
+  if (!deck.draw.length) {
+    deck.draw=shuffle(deck.rng,deck.discard);
+    deck.discard=[];
+  }
+  const index=deck.draw.shift();
+  deck.discard.push(index);
+  return index;
+}
+
+export function validPlanDeck(deck) {
+  const rng=deck?.rng?.rng;
+  if (!Number.isInteger(rng) || rng<0 || rng>0xffffffff ||
+    !Array.isArray(deck.draw) || !Array.isArray(deck.discard)) return false;
+  const count=MINCMISTR_PLANS.length;
+  if (deck.draw.length+deck.discard.length!==count) return false;
+  const ids=[...deck.draw,...deck.discard];
+  return new Set(ids).size===count && ids.every(id=>Number.isInteger(id)&&id>=0&&id<count);
+}
+
 function setupMincmistr(seed, count, options) {
   const level=Object.hasOwn(MINCMISTR_LEVELS,options.level)?options.level:'journeyman';
   const tougher=count===3&&level==='master'&&options.tougher===true;
