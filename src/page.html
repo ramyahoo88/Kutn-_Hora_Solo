@@ -37,6 +37,7 @@
     <section class="save-status" id="save-status" aria-label="Save status" hidden>
       <p id="save-warning" role="status"></p>
       <div class="save-actions">
+        <button type="button" class="outline" id="load-saved-game" data-do="load-saved" hidden>Load saved game</button>
         <button type="button" class="outline" data-do="export">Export current game</button>
         <button type="button" class="outline" id="export-unreadable" data-do="export-unreadable" hidden>Download unreadable save</button>
       </div>
@@ -71,7 +72,10 @@
   </dialog>
   <dialog id="plan-dialog" aria-labelledby="plan-title">
     <div class="panel-head"><h2 id="plan-title"></h2><button type="button" class="flat" data-do="close" autofocus>Close</button></div>
-    <div class="dialog-body"><div class="printed-plan-face" id="printed-plan-face" role="img"></div></div>
+    <div class="dialog-body">
+      <div class="printed-plan-face" id="printed-plan-face" role="img"></div>
+      <details class="plan-transcript"><summary>Read Plan text</summary><div class="plan-text"></div></details>
+    </div>
   </dialog>
   <dialog id="setup-dialog" aria-labelledby="setup-title">
     <form id="setup-form">
@@ -106,10 +110,10 @@
       <p><strong>Follow the grid.</strong> Town and mine coordinates are read left to right, top to bottom. Colored dots are printed scoring matches. A striped guild offer can sell Rights while new construction of that guild is unavailable.</p>
       <p><strong>Win on points.</strong> Patricians score in the last three rounds. The final count adds town matches, mine row awards, final income, reputation and unused items to earned points. Coins break a points tie. Any players still tied for first share the win.</p>
       <p><strong>Check public information.</strong> Open a tile to inspect its costs and effects. Use <strong>Details</strong> when the tile is an action target. Either player board shows the full house rewards, production and supplies. The rival’s remaining cards are below the turn controls.</p>
-      <p><strong>Resume or share a position.</strong> This browser keeps your current game where local storage is available. Reloading clears Undo history. Export a JSON save to move between browsers or share a position. Version 0.1.0 saves keep their existing deck order. New games use the updated shuffle, so an old seed produces a different setup.</p>
+      <p><strong>Resume or share a position.</strong> This browser keeps your game and up to five recent Undo steps when local storage is available. If another tab advances the save, choose <strong>Load saved game</strong> to continue from that position. Export a JSON save to move between browsers or share a position. Version 0.1.0 saves keep their existing deck order.</p>
       <p><strong>Rival settings.</strong> Standard and Quick consider the next player's likely card. Planner tries the replies on a copy of the board, explores several possible draws when choices are close, and looks further ahead for builds and final scoring.</p>
-      <p><strong>Mincmistr.</strong> Choose a level in New game. The app flips a Plan for each card played and keeps it through bonus choices. Use <strong>View Plan card</strong> beside a rival’s action cards or choose a Plan in the game journal to see its printed face. With several Mincmistrs you can share one Plan deck or give each its own.</p>
-      <p><strong>Playing on the table.</strong> Open <strong>Draw only</strong> for a shared Plan deck. Draw one Plan for each Mincmistr action card you play using the paper rules. The deck can be resumed separately from a digital game.</p>
+      <p><strong>Mincmistr.</strong> Choose <strong>Play one Plan</strong> to see one card and the actions it produced after its bonuses resolve. <strong>View Plan card</strong> opens the printed face and selectable text. You can also open Plans from the rival hand or the journal. With several Mincmistrs you can share one Plan deck or give each its own.</p>
+      <p><strong>Playing on the table.</strong> Open <strong>Draw only</strong> for a shared Plan deck. Draw one Plan for each Mincmistr action card. <strong>Rules and reference</strong> has the full paper rules, reference cards and a printable mine choice aid. Your last five draws can be undone after a reload.</p>
       <p><strong>Mincmistr levels.</strong> Journeyman follows the printed priorities. Apprentice simplifies plot, build and mine choices. Master plays both cards on its last turn in the final three rounds, and Grandmaster does so each round. In three-player games, Master can also double its last turn in rounds 3–6. <a href="https://github.com/ramyahoo88/Kutn-_Hora_Solo/blob/e6806e63babe71706650ba80d6fbe96e6da5a806/mincmistr/Mincmistr_Rules.md" target="_blank" rel="noreferrer">Mincmistr v1.2.2 rules</a></p>
       <p><a href="https://filemanager.czechgames.com/storage/files/kutna-hora-the-city-of-silver/rules/kutna-hora-rules-en.pdf" target="_blank" rel="noreferrer">CGE rulebook</a> · <a href="https://www.czechgames.com/news/available-now-the-kutna-hora-companion-app" target="_blank" rel="noreferrer">CGE market companion</a> · <a href="https://www.zatrolene-hry.cz/spolecenska-hra/kutna-hora-mesto-stribra-14736/k-stazeni/vlastni-solo-mod-capek-18184/" target="_blank" rel="noreferrer">Capek paper variant</a></p>
       <p class="fine">Banner cropped from <a href="https://commons.wikimedia.org/wiki/File:Kutn%C3%A1_Hora_-_St._Barbara%27s_Church_-_Panoramic_Photocompilation.jpg" target="_blank" rel="noreferrer">St. Barbara’s Church by Txllxt TxllxT</a> under <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noreferrer">CC BY-SA 4.0</a>.</p>
@@ -124,22 +128,55 @@
     <section class="panel" aria-label="Plan deck">
       <div class="panel-head">
         <p id="paper-status" role="status"></p>
-        <button type="button" class="flat" id="paper-new" aria-haspopup="dialog">New deck</button>
+        <div class="paper-actions">
+          <button type="button" class="flat" id="paper-open-reference" aria-haspopup="dialog">Rules and reference</button>
+          <button type="button" class="flat" id="paper-new" aria-haspopup="dialog">New deck</button>
+        </div>
       </div>
       <div class="panel-body paper-body">
+        <div class="save-status paper-save-status" id="paper-save-status" hidden>
+          <p id="paper-warning" role="status"></p>
+          <div class="save-actions">
+            <button type="button" class="outline" id="paper-load" hidden>Load saved deck</button>
+            <button type="button" class="outline" id="paper-export-unreadable" hidden>Download unreadable deck</button>
+          </div>
+        </div>
         <div class="paper-actions">
           <button type="button" class="primary" id="paper-draw">Draw Plan</button>
           <button type="button" class="outline" id="paper-undo" disabled>Undo draw</button>
         </div>
         <p class="muted" id="paper-instruction">Draw one Plan each time a paper Mincmistr plays an action card.</p>
-        <div class="printed-plan-face" id="paper-face" role="img" hidden></div>
-        <p class="fine" id="paper-warning" role="status" hidden></p>
+        <section id="paper-recent" aria-labelledby="paper-recent-title" hidden>
+          <h2 id="paper-recent-title">Recent Plans</h2>
+          <ol id="paper-recent-list" aria-label="Revealed Plans, oldest to newest"></ol>
+        </section>
+        <div id="paper-current" hidden>
+          <p class="fine" id="paper-draw-count"></p>
+          <div class="printed-plan-face" id="paper-face" role="img"></div>
+          <details class="plan-transcript"><summary>Read Plan text</summary><div class="plan-text"></div></details>
+        </div>
       </div>
     </section>
+    <dialog id="paper-plan-dialog" aria-labelledby="paper-plan-title">
+      <div class="panel-head"><h2 id="paper-plan-title"></h2><button type="button" class="flat" id="paper-plan-close" autofocus>Close</button></div>
+      <div class="dialog-body">
+        <div class="printed-plan-face" role="img"></div>
+        <details class="plan-transcript"><summary>Read Plan text</summary><div class="plan-text"></div></details>
+      </div>
+    </dialog>
+    <dialog id="paper-reference" aria-labelledby="paper-reference-title">
+      <div class="panel-head"><h2 id="paper-reference-title">Mincmistr v1.2.2</h2><button type="button" class="flat" id="paper-reference-close" autofocus>Close</button></div>
+      <div class="reference-nav" role="group" aria-label="Rules and reference sections">
+        <button type="button" class="outline" data-reference aria-controls="paper-ref-cards" aria-pressed="true">Reference cards</button>
+        <button type="button" class="outline" data-reference aria-controls="paper-ref-mine" aria-pressed="false">Mine choice aid</button>
+        <button type="button" class="outline" data-reference aria-controls="paper-ref-rules" aria-pressed="false">Full rules</button>
+      </div>
+      <div class="dialog-body reference-body">/* PAPER_REFERENCE */</div>
+    </dialog>
     <dialog id="paper-confirm" aria-labelledby="paper-confirm-title">
       <div class="panel-head"><h2 id="paper-confirm-title">New Plan deck</h2></div>
       <div class="dialog-body">
-        <p class="muted">Start a fresh shuffled deck and clear the current draw.</p>
+        <p class="muted">Replace the saved deck with a new shuffle and clear its draw history.</p>
         <div class="paper-actions">
           <button type="button" class="primary" id="paper-reset">Shuffle new deck</button>
           <button type="button" class="flat" id="paper-cancel" autofocus>Cancel</button>

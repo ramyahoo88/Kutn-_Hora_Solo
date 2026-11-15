@@ -7,7 +7,7 @@ const project=dirname(fileURLToPath(import.meta.url));
 const read=(path)=>readFile(resolve(project,'src',path),'utf8');
 const data=async (path,mime)=>`data:${mime};base64,${(await readFile(resolve(project,'src','assets',path))).toString('base64')}`;
 const output=resolve(process.argv[2]??resolve(project,'dist','index.html'));
-const order=['data','prices','random','engine','bot','mincmistr','save','paper','app'];
+const order=['data','prices','random','engine','bot','mincmistr','save','storage','paper','app'];
 const modules=[];
 for (const entry of order) {
   let source=await read(`${entry}.mjs`);
@@ -36,7 +36,9 @@ const css=(await read('style.css'))
   .replace('/* PLAN_CARDS_ASSET */',await data('mincmistr-plans.webp','image/webp'));
 const js=`'use strict';\nconst modules={};\n${modules.join('\n')}`.replace(/<\/script/gi,'<\\/script');
 const licenses=await Promise.all(['DM-Sans-OFL.txt','Instrument-Serif-OFL.txt'].map(file=>read(`assets/${file}`)));
-const html=(await read('page.html')).replace('APP_VERSION',VERSION).replace('/* BUNDLE_CSS */',()=>css).replace('/* BUNDLE_JS */',()=>js);
+const reference=await readFile(resolve(project,'mincmistr','print','app-reference.html'),'utf8');
+const html=(await read('page.html')).replace('APP_VERSION',VERSION).replace('/* BUNDLE_CSS */',()=>css)
+  .replace('/* BUNDLE_JS */',()=>js).replace('/* PAPER_REFERENCE */',()=>reference);
 await mkdir(dirname(output),{recursive:true});
 await writeFile(output,html.replace('</html>',()=>`<!-- Font licenses\n${licenses.join('\n\n')}\n-->\n</html>`));
 console.log(output);

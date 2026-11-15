@@ -18,9 +18,8 @@ export const ROW = [0,5,1,2,4,3];
 // Difficulty levels (rule 9).
 export const LEVELS = MINCMISTR_LEVELS;
 
-const CASH = 20;      // rule 4.1
-const PELICANS = 2;   // rule 4.2
-const GOOD_TILES = [6,7,8,9,11]; // rule 4.2: St. Barbara tiles worth a single pelican
+// Keep the on-screen card text in step with the thresholds in rules 4.1 and 4.2.
+export const PLAN_PRIORITIES = {cash:20, pelicans:2, prizeTiles:[6,7,8,9,11]};
 
 export function createMincmistr(state, seat, level='journeyman') {
   return {seat,level,settings:LEVELS[level],...createPlanDeck(state.seed,seat),card:null,
@@ -163,9 +162,10 @@ function flipPlan(m) {
 function cardPlay(state, m) {
   flipPlan(m);                                                     // 4.0 flip a plan card
   const p=me(state,m);
-  if (p.coins<CASH) { const a=income(state,m); if (a) { tally(m,'cash'); return a; } }          // 4.1
-  const goodTile=GOOD_TILES.includes(Math.min(state.barbara,12));
-  if (p.pelicans>=PELICANS || (p.pelicans>=1 && goodTile)) { const a=barbara(state,m); if (a) { tally(m,'pelicans'); return a; } }  // 4.2
+  const {cash,pelicans,prizeTiles}=PLAN_PRIORITIES;
+  if (p.coins<cash) { const a=income(state,m); if (a) { tally(m,'cash'); return a; } }          // 4.1
+  const goodTile=prizeTiles.includes(Math.min(state.barbara,12));
+  if (p.pelicans>=pelicans || (p.pelicans>=1 && goodTile)) { const a=barbara(state,m); if (a) { tally(m,'pelicans'); return a; } }  // 4.2
   for (const g of m.card.goals) { const a=goal(state,m,g); if (a) { tally(m,`goal:${g}`); return a; } } // 4.3
   for (const [key,fn] of [['fallback:I',()=>income(state,m)],['fallback:M',()=>mine(state,m)]]) { // 4.4
     const a=fn(); if (a) { tally(m,key); return a; }
@@ -228,9 +228,9 @@ export function mincmistrCardsThisTurn(state, m) {
   return state.left===1 && n===2 ? 2 : null;
 }
 
-const goals={C:'Construct',M:'Mine',S:'St. Barbara'};
+export const PLAN_GOALS={C:'Construct',M:'Mine',S:'St. Barbara'};
 export function describePlan(card) {
-  const order=card.goals.map(goal=>goals[goal]).join(' → ');
+  const order=card.goals.map(goal=>PLAN_GOALS[goal]).join(' → ');
   return `Plan ${card.number} · ${order} · ${card.arrow==='low'?'earliest':'latest'} space on ties`;
 }
 

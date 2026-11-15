@@ -1,14 +1,16 @@
-# Kutná Hora Solo v0.3.4 playtest
+# Kutná Hora Solo v0.3.5 playtest
 
 An unofficial browser playtest for Kutná Hora: The City of Silver. Play one seat against one, two or three rivals. The app handles the town, mines, market, council and game draws. The same HTML works offline. Players can mirror its placements on the table. Export and import a JSON save to move a game between copies.
 
 To play offline, open [Kutna_Hora_Solo.html](Kutna_Hora_Solo.html) on GitHub, choose **Download raw file**, and open the downloaded file in your browser.
 
-For the physical game, choose **Draw only** in the toolbar. Tap **Draw Plan** once per Mincmistr action card and resolve the printed Plan at the table. One shared 15-card deck supports one to three Mincmistrs. The app reshuffles the discards when you draw from an empty stack. It keeps the deck and the last undo separately from your digital save. You can also bookmark the page with `#draw-only` appended to the address.
+For the physical game, choose **Draw only** in the toolbar. Tap **Draw Plan** once per Mincmistr action card and resolve the printed Plan at the table. One shared 15-card deck supports one to three Mincmistrs. **Rules and reference** opens the three reference cards, full v1.2.2 rules and a printable mine choice aid offline. You can view the five most recent revealed Plans and undo up to five draws, including after a reshuffle or reload. Bookmark the page with `#draw-only` to open the deck directly.
 
 Choose a rival count in **New game**. Pick your guild set from that player count's setup card and arrange your house rows. The seed assigns each remaining set once and determines the rivals’ house rows. At larger tables, **Play rivals** runs through the consecutive rival turns and tax decisions until you have a choice or the game ends. Earlier two-player saves import as two-player games.
 
-Choose **Mincmistr** under **Rival difficulty** to play the v1.2.2 tabletop variant directly in the app. Choose Apprentice, Journeyman, Master or Grandmaster for one to three Mincmistrs. With several Mincmistrs, the default is one shared Plan deck and you can choose individual decks. At a three-player table, Master offers the tougher rounds 3–6 option from rule 10. The app resolves each Plan and bonus step. Choose **View Plan card** beside a rival’s cards or select a Plan in the game journal to open the printed face offline. Saves include the Plan decks and their current positions. Open Mincmistr saves with v0.3.2 or later. [Tabletop rules and printables](mincmistr/README.md)
+Choose **Mincmistr** under **Rival difficulty** to play the v1.2.2 tabletop variant directly in the app. Choose Apprentice, Journeyman, Master or Grandmaster for one to three Mincmistrs. With several Mincmistrs, the default is one shared Plan deck and you can choose individual decks. At a three-player table, Master offers the tougher rounds 3–6 option from rule 10. **Play one Plan** resolves that card and its bonus choices, then shows the card and moves. Open **View Plan card** or a journal entry to see the printed face and selectable text. Saves include the Plan decks and their current positions. Open Mincmistr saves with v0.3.2 or later. [Tabletop rules and printables](mincmistr/README.md)
+
+The digital game keeps up to five Undo steps after reload. Each mode uses its own autosave. If another tab advances a save, load the latest position when prompted. Draw only preserves unreadable saved decks until an explicit reset. Individual Mincmistr decks use different seat inputs even with a 64-character seed. [v0.3.4 audit](https://github.com/ramyahoo88/Kutn-_Hora_Solo/blob/c6149d3350981c5507b3ca7279c579d9e767d5f6/docs/Astra_Audit_v0.3.4.md)
 
 Choose **Planner (playtest)** under **Rival difficulty** at any table size. It forecasts intervening turns before choosing its follow-up, compares five possible tile orders when leading plans are close, checks whether it can use the exact plot or right it is about to buy, and scores likely finishes once it has three cards left in the final round. Standard is the default. Open Planner saves with v0.3.1 or later.
 
@@ -22,7 +24,7 @@ The larger boards use their printed rock layouts, edge villages and mine rank aw
 
 The board uses original diagram styling and component facts. The banner is cropped from [St. Barbara’s Church by Txllxt TxllxT](https://commons.wikimedia.org/wiki/File:Kutn%C3%A1_Hora_-_St._Barbara%27s_Church_-_Panoramic_Photocompilation.jpg) under [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/). The font licenses are bundled with the source and HTML.
 
-Version 0.2.3 previews the VP cost of tax penalties and the reputation gained on St. Barbara tile 7. Open a market tile, held right or placed tile to see its details. Both player boards show the full house reward tracks, and unavailable actions say what they need. The Guide explains that reloading clears Undo history. See the [second audit](https://github.com/ramyahoo88/Kutn-_Hora_Solo/blob/d9340884701993512529426f72a620059fab7390/docs/Astra_Audit_2_v0.2.2.md).
+Version 0.2.3 previews the VP cost of tax penalties and the reputation gained on St. Barbara tile 7. Open a market tile, held right or placed tile to see its details. Both player boards show the full house reward tracks, and unavailable actions say what they need. See the [second audit](https://github.com/ramyahoo88/Kutn-_Hora_Solo/blob/d9340884701993512529426f72a620059fab7390/docs/Astra_Audit_2_v0.2.2.md).
 
 Version 0.2.2 gives the rival a seeded random order for its three guild house rows. The same seed gives the same order, and the market, mine board, and decks follow their existing shuffle sequence. Existing saves keep both players’ guild orders. The Guide explains the choice of guild set.
 
@@ -38,6 +40,8 @@ cmp dist/index.html Kutna_Hora_Solo.html
 node --test test/*.test.mjs
 node test/rival-study.mjs 12 v030-check
 ```
+
+Run the browser and DOM smoke checks with the [test instructions](test/README.md).
 
 Standard values progress toward the reputation discount, and favors rights and plots it can use together. It searches the current turn and up to one extra card, then adjusts its best plans for a likely legal card from the next player. Quick checks fewer continuations. The public game seed can vary close choices. Resuming a save reproduces the same decision. The rival estimates unseen tiles from the public position.
 
@@ -96,8 +100,8 @@ node test/skip-planner-study.mjs /path/to/skip-traces standard,planner --case=4 
 
 ## Playtest checks
 
-- **Draw only.** Draw 15 Plans and record their numbers. The next draw starts a new shuffle. Undo that draw, reload, and confirm that the 15th Plan is showing with 0 cards left. Draw again to see the same Plan from the new shuffle.
-- **Mincmistr.** Use Card 6, seed `app-table-4`, three rivals and Grandmaster. The first Plan draw appears after **Play rivals**. Open **View Plan card** for one rival, then choose **Show all** in the journal and open an earlier Plan. Undo and replay the batch to see the same cards. Export and reimport the save and continue to round 5. Each Mincmistr plays both remaining cards on its last turn of every round.
+- **Draw only.** Draw 16 Plans. Reload and undo twice to reach draw 14 of 15. Draw twice and confirm the same two Plans appear across the reshuffle. Open **Rules and reference**, then close it and confirm the same Plan is visible. Test **Print mine aid** on your page size.
+- **Mincmistr.** Use Card 6, seed `app-table-4`, three rivals and Grandmaster. Start a rival and choose **Play one Plan**. Check the resolved action and card, then use **Play rivals** to continue. Open an earlier Plan from the journal. Reload, Undo, and replay the batch to see the same cards. Export and reimport the save and continue to round 5. Each Mincmistr plays both remaining cards on its last turn of every round.
 
 - **One rival.** Start as the Metallurgists, Miners, and Innkeepers on Card 1 with seed `silver-1308`. The rival’s rows should be Builders, Grocers, and Scribes.
 - **Two rivals.** Use Card 6 and seed `app-table-3`. Check the larger boards, six rounds, each rival's cards and the council starting in round 4.

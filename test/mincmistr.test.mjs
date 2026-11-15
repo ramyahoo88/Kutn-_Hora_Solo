@@ -28,6 +28,22 @@ test('the shared Plan deck draws every card before shuffling the discards',()=>{
   assert.deepEqual(secondOrder.toSorted((a,b)=>a-b),MINCMISTR_PLANS.map((_,index)=>index));
 });
 
+test('individual decks distinguish seats at the seed length limit',()=>{
+  for (const length of [52,53,64]) {
+    const game=digital({seed:'A'.repeat(length),playerCount:4,mincmistr:{shared:false}});
+    assert.equal(game.mincmistr.decks.length,3);
+    assert.equal(new Set(game.mincmistr.decks.map(deck=>deck.draw.join('/'))).size,3);
+    assert.deepEqual(readSave(writeSave(game)),game);
+  }
+  // Reproduce the last short seed's pre-fix order.
+  assert.deepEqual(createPlanDeck('A'.repeat(52),1).draw.slice(0,5),[4,8,1,10,5]);
+
+  // Existing games with the same deck order are still valid saves.
+  const saved=digital({seed:'A'.repeat(53),playerCount:4,mincmistr:{shared:false}});
+  saved.mincmistr.decks=saved.mincmistr.decks.map(()=>structuredClone(saved.mincmistr.decks[0]));
+  assert.deepEqual(readSave(writeSave(saved)),saved);
+});
+
 test('last-turn card allowance follows the printed levels at every table size',()=>{
   for (const count of [2,3,4]) {
     const rounds=count===4?5:6;

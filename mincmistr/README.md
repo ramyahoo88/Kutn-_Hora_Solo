@@ -4,9 +4,9 @@ The Mincmistr is a card-driven automa for the physical game. It uses a 15-card P
 
 Developed and tested against this repository's engine at `v0.3.0-playtest` (`0b28294`). The rules engine in `v0.3.1-playtest` is the same, apart from the new Planner rival setting.
 
-To play without printing, open [Kutná Hora Solo](../Kutna_Hora_Solo.html) and choose **New game → Rival difficulty → Mincmistr**. The app uses this v1.2.2 policy and tracks Plan draws and bonus turns for you. Open **View Plan card** beside a rival's hand or select a Plan in the game journal to see its printed face.
+To play without printing, open [Kutná Hora Solo](../Kutna_Hora_Solo.html) and choose **New game → Rival difficulty → Mincmistr**. The app uses this v1.2.2 policy and tracks Plan draws and bonus turns for you. Use **Play one Plan** to review each card and its actions. **View Plan card** opens the printed face and selectable text.
 
-When playing at the table, choose **Draw only** to use the printed Plan faces as a shared deck. Tap **Draw Plan** before each Mincmistr action card. Resolve the Plan using the paper rules.
+When playing at the table, choose **Draw only** to use the printed Plan faces as a shared deck. Tap **Draw Plan** before each Mincmistr action card. Open **Rules and reference** for the three reference cards, the full rules and the mine choice aid. Use **Print mine aid** for a copy of the award tables and placement priorities at the table.
 
 ## Read or print
 
@@ -56,4 +56,5 @@ Run every command from the repository root. The scripts import the engine from `
   python3 mincmistr/print/build.py /tmp/mincmistr.html mincmistr/Mincmistr_Print_and_Play.pdf
   ```
 - `print/export_app_plans.py` crops the Plan fronts from the PDF for the app. After updating the PDF's cards, run `python3 mincmistr/print/export_app_plans.py` with Poppler and Pillow installed, then rebuild the offline HTML.
+- `print/mine-aid.md` is the mine choice aid. To refresh the app's offline reference after editing the aid, rules, or reference cards, run `python3 mincmistr/print/build.py --app-reference mincmistr/print/app-reference.html`, then rebuild the offline HTML.
 - `results/`: raw results. `results/v1.0/` holds the version 1.0 holdout runs.

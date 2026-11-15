@@ -5,8 +5,8 @@ import json, pathlib, subprocess, sys, html
 import markdown
 
 HERE = pathlib.Path(__file__).parent
-data = json.loads((HERE / 'cards.json').read_text())
-rules_md = (HERE / 'rules.md').read_text()
+data = json.loads((HERE / 'cards.json').read_text(encoding='utf-8'))
+rules_md = (HERE / 'rules.md').read_text(encoding='utf-8')
 
 GOALS = {
     'C': ('Construct', 'Build ▸ Plot ▸ Rights', '#9b3b2e'),
@@ -98,6 +98,18 @@ def sheet(cards, cls='sheet', note=''):
     foot = f'<div class="sheetnote">{note}</div>' if note else ''
     return f'<section class="{cls}"><div class="grid">{cells}</div>{foot}</section>'
 
+def app_reference(out_html):
+    cards = ''.join(ref_cards())
+    mine = markdown.markdown((HERE / 'mine-aid.md').read_text(encoding='utf-8'), extensions=['tables'])
+    rules = markdown.markdown(rules_md, extensions=['tables'])
+    pathlib.Path(out_html).write_text(f'''<div id="paper-ref-cards">{cards}</div>
+<section id="paper-ref-mine" class="reference-prose" hidden>
+  {mine}
+  <button type="button" class="outline" id="paper-print-mine">Print mine aid</button>
+</section>
+<section id="paper-ref-rules" class="reference-prose" hidden>{rules}</section>
+''', encoding='utf-8')
+
 def main(out_html, out_pdf):
     body = markdown.markdown(rules_md, extensions=['tables'])
     deck = data['deck']
@@ -115,4 +127,7 @@ def main(out_html, out_pdf):
                    stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
 if __name__ == '__main__':
-    main(sys.argv[1], sys.argv[2])
+    if sys.argv[1] == '--app-reference':
+        app_reference(sys.argv[2])
+    else:
+        main(sys.argv[1], sys.argv[2])

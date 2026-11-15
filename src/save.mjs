@@ -5,6 +5,7 @@ import {
 import {cardsThisTurn,finalResult,legalActions,plotCount,rulesFor,seatAtTurn,turnsPerRound,validPlanDeck} from './engine.mjs';
 
 export const SAVE_KIND = 'kutna-hora-solo';
+export const AUTOSAVE_UNDO_LIMIT = 5;
 const integer=(n,min,max)=>Number.isInteger(n)&&n>=min&&n<=max;
 const array=(items,n)=>Array.isArray(items)&&items.length===n;
 const known=(table,id)=>typeof id==='string'&&Object.hasOwn(table,id);
@@ -137,11 +138,54 @@ function migrateSave(s) {
   return {...s,schema:SAVE_SCHEMA,setupVersion:1};
 }
 
-export function readSave(text) {
-  const game=JSON.parse(text);
-  if (game?.kind!==SAVE_KIND) throw Error('Choose a Kutná Hora Solo JSON save.');
-  const state=checkGame(migrateSave(game.state));
+function savedState(value) {
+  const state=checkGame(migrateSave(value));
   if (state.phase==='end') state.result=finalResult(state);
   return state;
 }
+
+function saveRecord(text) {
+  const game=JSON.parse(text);
+  if (game?.kind!==SAVE_KIND) throw Error('Choose a Kutná Hora Solo JSON save.');
+  return game;
+}
+
+export function readSave(text) {
+  return savedState(saveRecord(text).state);
+}
 export const writeSave=state=>JSON.stringify({kind:SAVE_KIND,state});
+
+function readSnapshot(snapshot) {
+  const state=savedState(snapshot.state);
+  const rivalReport=Array.isArray(snapshot.rivalReport)
+    ? snapshot.rivalReport.slice(0,150).filter(note=>typeof note==='string' && note.length<=600)
+    : [];
+  const review=snapshot.review;
+  const validReview=state.mincmistr && integer(review?.seat,1,state.players.length-1) &&
+    (review.plan===null || integer(review.plan,1,MINCMISTR_PLANS.length));
+  return {state,rivalReport,review:validReview?{seat:review.seat,plan:review.plan}:null};
+}
+
+export function readAutosave(text) {
+  const saved=saveRecord(text);
+  const current=readSnapshot(saved);
+  const undo=[];
+  if (Array.isArray(saved.undo)) {
+    // A damaged history entry should never hide a valid current position.
+    for (const entry of saved.undo.slice(-AUTOSAVE_UNDO_LIMIT).reverse()) {
+      try { undo.unshift(readSnapshot(entry)); } catch { break; }
+    }
+  }
+  return {current,undo};
+}
+
+export function writeAutosave(current, history) {
+  const saved={kind:SAVE_KIND,...current,undo:history.slice(-AUTOSAVE_UNDO_LIMIT)};
+  let text=JSON.stringify(saved);
+  // Leave room in browser storage when some imported snapshots have long journals.
+  while (text.length>1_000_000 && saved.undo.length) {
+    saved.undo.shift();
+    text=JSON.stringify(saved);
+  }
+  return text;
+}

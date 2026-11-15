@@ -31,15 +31,20 @@ const commodityRecord = () => Object.fromEntries(GOODS.map(key => [key,0]));
 const tokenRecord = count => Object.fromEntries(PATRICIANS.map(key => [key,count]));
 const empty = count => Array(count).fill(null);
 
-export function seedNumber(value) {
-  const normalized = String(value ?? 'silver-1308').trim().slice(0,64) || 'silver-1308';
+function hashSeed(text) {
   let hash = 2166136261;
-  for (const character of normalized) hash = Math.imul(hash ^ character.codePointAt(0),16777619);
+  for (const character of text) hash = Math.imul(hash ^ character.codePointAt(0),16777619);
   return hash >>> 0;
 }
 
+export function seedNumber(value) {
+  const normalized = String(value ?? 'silver-1308').trim().slice(0,64) || 'silver-1308';
+  return hashSeed(normalized);
+}
+
 export function createPlanDeck(seed, seat) {
-  const rng={rng:seedNumber(`mincmistr/${seed}/${seat}`)};
+  // The user seed is already limited by setup. Keep the seat suffix in the hash.
+  const rng={rng:hashSeed(`mincmistr/${seed}/${seat}`)};
   return {rng,draw:shuffle(rng,MINCMISTR_PLANS.map((_,i)=>i)),discard:[]};
 }
 

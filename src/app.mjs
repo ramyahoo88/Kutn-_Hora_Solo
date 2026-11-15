@@ -9,10 +9,12 @@ import {
 } from './engine.mjs';
 import {actionRationale,botAction} from './bot.mjs';
 import {describePlan,PLAN_DECK,playMincmistr,ROW} from './mincmistr.mjs';
-import {setPlanFace,startPaperDrawer} from './paper.mjs';
-import {readSave,writeSave} from './save.mjs';
+import {setPlanFace,showPlan,startPaperDrawer} from './paper.mjs';
+import {readAutosave,readSave,writeAutosave,writeSave} from './save.mjs';
+import {downloadJson,storageSlot} from './storage.mjs';
 
 const STORAGE='kutna-hora-solo-v1';
+const savedGame=storageSlot(STORAGE);
 const FIRST_SEED='silver-1308';
 const byId=id=>document.getElementById(id);
 const safe=value=>String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -24,9 +26,8 @@ const cap=text=>text[0].toUpperCase()+text.slice(1);
 const plansByNote=new Map(PLAN_DECK.map(plan=>[`${describePlan(plan)}.`,plan.number]));
 let state;
 let unreadableSave=null;
-let storageReadFailed=false;
 let saveFailed=false;
-let mayReplaceAutosave=false;
+let saveConflict=false;
 const playerName=seat=>seatName(seat,state.players.length);
 let undo=[];
 let selections=[];
@@ -36,58 +37,74 @@ let detailsOpen=false;
 let busy=false;
 let allJournal=false;
 let rivalReport=[];
+let review=null;
 let flashTimer;
 let selectionGroup=null;
 let boardSeat=0;
 
-function startDigitalGame() {
-  if (state) return;
+function restoreAutosave() {
   try {
-    const saved=localStorage.getItem(STORAGE);
-    if (saved!==null) {
-      try {state=readSave(saved);} catch {unreadableSave=saved;}
+    const saved=savedGame.read();
+    unreadableSave=null;
+    saveFailed=false;
+    saveConflict=false;
+    if (saved===null) return;
+    try {
+      const loaded=readAutosave(saved);
+      ({state,rivalReport,review}=loaded.current);
+      undo=loaded.undo;
+      boardSeat=0;
+      resetSelection();
+      return true;
+    } catch {
+      unreadableSave=saved;
     }
   } catch {
-    storageReadFailed=true;
     saveFailed=true;
   }
+}
+
+function startDigitalGame() {
+  if (state) return;
+  restoreAutosave();
   state ??= createGame({seed:FIRST_SEED});
+  savedGame.watch(changed=>{
+    saveConflict=changed;
+    renderSaveStatus();
+  });
   render();
 }
 
-function writeLocal(replace=false) {
-  if (replace) mayReplaceAutosave=true;
-  if (unreadableSave!==null && !mayReplaceAutosave) return;
-  try {
-    if (storageReadFailed && !mayReplaceAutosave) {
-      // Storage may become accessible after launch. Keep any prior game intact.
-      unreadableSave=localStorage.getItem(STORAGE);
-      storageReadFailed=false;
-      if (unreadableSave!==null) {
-        saveFailed=false;
-        return;
-      }
-    }
-    localStorage.setItem(STORAGE,writeSave(state));
-    unreadableSave=null;
-    storageReadFailed=false;
-    saveFailed=false;
-  } catch {
-    if (!saveFailed) say('Autosave is unavailable. Export your current game to keep your progress.',true);
-    saveFailed=true;
-  }
+async function storePosition(next, {replace=false, undoing=false}={}) {
+  const history=undoing?undo.slice(0,-1):[...undo,{state,rivalReport,review}].slice(-20);
+  const contents=unreadableSave!==null && !replace?null:writeAutosave(next,history);
+  const result=await savedGame.write(contents,{replace});
+  saveConflict=result==='conflict';
+  if (saveConflict) return false;
+  const previousGame=replace || state.seed!==next.state.seed || state.players.length!==next.state.players.length;
+  ({state,rivalReport,review}=next);
+  if (previousGame) boardSeat=0;
+  undo=history;
+  resetSelection();
+  saveFailed=result==='unavailable';
+  if (result==='saved') unreadableSave=null;
+  return true;
 }
 function renderSaveStatus() {
   const protectedSave=unreadableSave!==null;
   let warning='';
-  if (saveFailed) warning='Autosave is unavailable. Export your current game to keep your progress.';
-  if (protectedSave) {
-    warning += `${warning?' ':''}Your previous autosave could not be opened.`;
-    if (!mayReplaceAutosave) warning += ' Autosave is paused. Start a new game or import a save to resume it.';
-  }
+  if (saveConflict) warning='The saved game changed. Load it to continue. You can export the position in this tab first.';
+  else if (saveFailed) warning='Autosave is unavailable. Export your current game to keep your progress.';
+  else if (protectedSave) warning='Your previous autosave could not be opened. Autosave is paused. Start a new game or import a save to resume it.';
   if (byId('save-warning').textContent!==warning) byId('save-warning').textContent=warning;
   byId('save-status').hidden=!warning;
-  byId('export-unreadable').hidden=!protectedSave;
+  byId('load-saved-game').hidden=!saveConflict && !saveFailed;
+  byId('load-saved-game').disabled=busy;
+  byId('export-unreadable').hidden=!protectedSave || saveConflict;
+  byId('undo').disabled=busy || saveConflict || undo.length===0;
+  for (const button of byId('decisions').querySelectorAll('[data-do="commit"],[data-do="rival"],[data-do="rival-step"]')) {
+    button.disabled=busy || saveConflict;
+  }
 }
 function resetSelection() {
   cardPick=null;
@@ -328,8 +345,9 @@ function showPlanCard(value) {
   const plan=PLAN_DECK[number-1];
   if (!plan) return;
   byId('plan-title').textContent=`${playerName(seat)}’s Plan ${plan.number}`;
-  setPlanFace(byId('printed-plan-face'),plan);
-  byId('plan-dialog').showModal();
+  const dialog=byId('plan-dialog');
+  showPlan(dialog,plan);
+  dialog.showModal();
 }
 function groupedChoices(actions) {
   if (!actions.every(a=>a.kind==='place-mine'||a.kind==='build'||a.kind==='skip') || new Set(actions.filter(a=>a.id).map(a=>a.id)).size<2) return actions;
@@ -426,7 +444,9 @@ function renderDecisions() {
     title=`${playerName(state.actor)} ${state.phase==='tax'?'taxes':'turn'}`;
     const what=multiple?'Play rivals':state.phase==='tax'?'Resolve rival taxes':'Play rival turn';
     const flow=multiple?'Resolves rival turns and taxes until your next decision.':'';
-    content=`${flow?`<p class="muted rival-flow">${flow}</p>`:''}<button type="button" class="primary fill" data-do="rival" ${busy?'disabled aria-busy="true"':''}>${busy?'Rival planning…':what}</button>`;
+    const step=state.phase==='tax'?'Resolve these taxes':state.pending.length?'Finish this Plan':'Play one Plan';
+    content=`${flow?`<p class="muted rival-flow">${flow}</p>`:''}<button type="button" class="primary fill" data-do="rival" ${busy?'aria-busy="true"':''}>${busy?'Rival planning…':what}</button>
+      ${state.mincmistr&&(state.phase==='action'||multiple)?`<button type="button" class="outline fill rival-step" data-do="rival-step">${step}</button>`:''}`;
   } else if (state.phase==='tax') {
     title='Your taxes';
     content=renderChoices(legalActions(state),'Pay or lose reputation','Your choices include any plot surcharges.');
@@ -435,10 +455,19 @@ function renderDecisions() {
     content=renderPending(legalActions(state));
   } else content=renderCardChoices(legalActions(state));
   const last=state.log.filter(entry=>entry.actor>0).slice(-4).map(entry=>noteFor(entry.actor,entry.text));
+  const reviewTitle=review?.plan?`Plan ${review.plan}`:'Taxes';
+  const notes=review?`<section class="panel rival-review" aria-labelledby="review-title"><div class="panel-head">
+    <h3 id="review-title">${playerName(review.seat)} · ${reviewTitle}</h3></div>
+    <div class="review-body">
+      ${review.plan?`<button type="button" class="outline review-plan" data-do="plan-card" data-value="${review.seat}/${review.plan}" aria-haspopup="dialog">
+        <span class="printed-plan-face" id="review-plan-face" aria-hidden="true"></span>View Plan card</button>`:''}
+      ${rivalReport.length?`<ul>${rivalReport.map(row=>`<li>${safe(row)}</li>`).join('')}</ul>`:'<p class="muted">Finished resolving the Plan.</p>'}
+    </div></section>`:
+    rivalReport.length||last.length?`<details class="panel rival-report" ${state.players.length===2?'open':''}><summary>Rival notes</summary><ul>${(rivalReport.length?rivalReport:last).map(row=>`<li>${safe(row)}</li>`).join('')}</ul></details>`:'';
   byId('decisions').innerHTML=`<section class="panel decision" aria-label="Turn actions"><div class="panel-head"><h2 id="turn-title" tabindex="-1">${title}</h2>${tag?`<span class="turn-tag">${tag}</span>`:''}</div>
     <div class="panel-body">${content}</div></section>
-    ${state.phase==='end'?'':renderRivalHand()}
-    ${rivalReport.length||last.length?`<details class="panel rival-report" ${state.players.length===2?'open':''}><summary>Rival notes</summary><ul>${(rivalReport.length?rivalReport:last).map(row=>`<li>${safe(row)}</li>`).join('')}</ul></details>`:''}`;
+    ${review?notes:''}${state.phase==='end'?'':renderRivalHand()}${review?'':notes}`;
+  if (review?.plan) setPlanFace(byId('review-plan-face'),PLAN_DECK[review.plan-1]);
 }
 
 function noteFor(seat, text) {
@@ -616,37 +645,41 @@ function render() {
   renderJournal();
   renderSaveStatus();
   if (byId('player-board-dialog').open) renderPlayerBoard();
-  byId('undo').disabled=busy||undo.length===0;
   if (focused && !focus.isConnected) {
     const next=[...document.querySelectorAll('[data-do]')].find(el=>el.dataset.do===focused.action&&el.dataset.value===focused.value&&!el.disabled);
     if (next) next.focus({preventScroll:true});
   }
 }
-function saveUndo() {
-  undo.push({state,rivalReport});
-  if (undo.length>20) undo.shift();
+async function changeGame(change, {focus=false, planning=false}={}) {
+  if (busy || saveConflict) return;
+  busy=true;
+  if (planning) renderDecisions();
+  renderSaveStatus();
+  try { await change(); }
+  catch (error) { say(error.message,true); }
+  finally {
+    busy=false;
+    render();
+    if (focus && !byId('digital-game').hidden && !document.querySelector('dialog[open]')) {
+      byId(saveConflict?'load-saved-game':'turn-title').focus({preventScroll:true});
+    }
+  }
 }
+
 function commit() {
   const a=selections[choice];
-  if (!a || busy || state.actor!==0) return;
-  const next=transition(state,a);
-  saveUndo();
-  state=next;
-  resetSelection();
-  writeLocal();
-  render();
-  byId('turn-title').focus({preventScroll:true});
+  if (!a || state.actor!==0) return;
+  changeGame(()=>storePosition({state:transition(state,a),rivalReport,review}),{focus:true});
 }
-async function runRival() {
-  if (busy||state.actor===0||state.phase==='end') return;
-  busy=true;
-  render();
-  const start=state;
-  const multiple=state.players.length>2;
-  try {
+function runRival(onePlan=false) {
+  if (state.actor===0 || state.phase==='end' || (onePlan && !state.mincmistr)) return;
+  changeGame(async()=>{
+    const start=state;
+    const multiple=start.players.length>2;
     await new Promise(resolve=>setTimeout(resolve,24));
     let next=start;
     const notes=[];
+    let planNumber=null;
     let steps=0;
     while (next.actor!==0&&next.phase!=='end') {
       const turn=next;
@@ -654,33 +687,31 @@ async function runRival() {
         if (++steps>120) throw Error('The rivals’ turns did not finish.');
         const previousEntries=next.log.length;
         let why;
-        if (next.mincmistr) next=playMincmistr(next);
-        else {
+        if (next.mincmistr) {
+          next=playMincmistr(next);
+          if (onePlan && start.phase==='action') planNumber=next.mincmistr.lastPlans[start.actor-1]+1;
+        } else {
           const action=botAction(next);
           if (!action) throw Error('No legal rival action.');
           if (!multiple&&['rights','build','place-mine','technology','income'].includes(action.kind)) why=actionRationale(next,action);
           next=transition(next,action);
         }
         const entries=next.log.slice(previousEntries).filter(entry=>entry.actor===turn.actor);
-        for (const entry of entries) notes.push(noteFor(turn.actor,entry.text));
+        for (const entry of entries) {
+          if (onePlan && plansByNote.has(entry.text)) continue;
+          notes.push(onePlan?entry.text:noteFor(turn.actor,entry.text));
+        }
         if (why) notes.push(why);
-      } while(next.actor===turn.actor&&next.phase===turn.phase&&next.round===turn.round&&next.turn===turn.turn);
-      if (!multiple) break;
+      } while(onePlan?next.pending.length>0:
+        next.actor===turn.actor&&next.phase===turn.phase&&next.round===turn.round&&next.turn===turn.turn);
+      if (onePlan || !multiple || saveConflict) break;
       // Let the browser update between rivals on larger tables.
       if (next.actor!==0&&next.phase!=='end') await new Promise(resolve=>setTimeout(resolve,0));
     }
-    saveUndo();
-    state=next;
-    rivalReport=multiple?notes:notes.slice(0,6);
-    resetSelection();
-    writeLocal();
-  } catch (error) {
-    say(error.message,true);
-  } finally {
-    busy=false;
-    render();
-    byId('turn-title').focus({preventScroll:true});
-  }
+    if (saveConflict) return;
+    await storePosition({state:next,rivalReport:onePlan||multiple?notes:notes.slice(0,6),
+      review:onePlan?{seat:start.actor,plan:planNumber}:null});
+  },{focus:true,planning:true});
 }
 function changeAction(card,kind) {
   const wasOpen=byId('decisions').querySelector('details')?.open??false;
@@ -753,18 +784,14 @@ function openDialog(kind) {
   }
   byId(`${kind}-dialog`).showModal();
 }
-function downloadSave(contents,filename) {
-  const link=document.createElement('a');
-  const url=URL.createObjectURL(new Blob([contents],{type:'application/json'}));
-  link.href=url;
-  link.download=filename;
-  link.click();
-  setTimeout(()=>URL.revokeObjectURL(url),5000);
-}
-
 byId('setup-form').addEventListener('submit',event=>{
   event.preventDefault();
   if (busy) return;
+  if (saveConflict) {
+    byId('setup-dialog').close();
+    byId('load-saved-game').focus();
+    return;
+  }
   const form=new FormData(event.currentTarget);
   const playerCount=Number(form.get('playerCount'));
   const setup=Number(form.get('setup'));
@@ -775,14 +802,11 @@ byId('setup-form').addEventListener('submit',event=>{
     mincmistr:{level:form.get('mincmistrLevel'),shared:form.get('mincmistrDecks')!=='individual',tougher:form.has('mincmistrTougher')},
     orders:[guildOrders(GUILD_SETUPS_BY_COUNT[playerCount][setup][side])[Number(form.get('rows'))]],
   });
-  saveUndo();
-  state=next;
-  rivalReport=[];
-  resetSelection();
-  writeLocal(true);
-  byId('setup-dialog').close();
-  render();
-  if (!saveFailed) say('New game ready.');
+  changeGame(async()=>{
+    const applied=await storePosition({state:next,rivalReport:[],review:null},{replace:true});
+    byId('setup-dialog').close();
+    if (applied && !saveFailed) say('New game ready.');
+  },{focus:true});
 });
 byId('guild-side').addEventListener('change',()=>fillSetup(false));
 byId('guild-setup').addEventListener('change',()=>fillSetup());
@@ -797,14 +821,11 @@ byId('file').addEventListener('change',async event=>{
   try {
     if (file.size>1_000_000) throw Error('That save is larger than 1 MB.');
     const next=readSave(await file.text());
-    if (busy || state!==previous) throw Error('The game changed while the file was opening. Try importing again.');
-    saveUndo();
-    state=next;
-    rivalReport=[];
-    resetSelection();
-    writeLocal(true);
-    render();
-    if (!saveFailed) say('Save imported.');
+    if (busy || saveConflict || state!==previous) throw Error('The game changed while the file was opening. Try importing again.');
+    await changeGame(async()=>{
+      const applied=await storePosition({state:next,rivalReport:[],review:null},{replace:true});
+      if (applied && !saveFailed) say('Save imported.');
+    },{focus:true});
   } catch (error) {say(error instanceof SyntaxError?'This file does not contain valid save data.':error.message,true);}
 });
 document.addEventListener('change',event=>{
@@ -837,20 +858,28 @@ byId('digital-game').addEventListener('click',event=>{
       case 'option': choice=Number(value); render(); break;
       case 'commit': commit(); break;
       case 'rival': runRival(); break;
+      case 'rival-step': runRival(true); break;
       case 'undo': {
-        const previous=undo.pop();
+        const previous=undo.at(-1);
         if (!previous) return;
-        ({state,rivalReport}=previous);
-        resetSelection();
-        writeLocal();
+        changeGame(async()=>{
+          const applied=await storePosition(previous,{undoing:true});
+          if (applied && !saveFailed) say('Last move undone.');
+        },{focus:true});
+        break;
+      }
+      case 'load-saved': {
+        const loaded=restoreAutosave();
         render();
-        if (!saveFailed) say('Last move undone.');
+        if (loaded) say('Saved game loaded.');
+        else if (!saveFailed && unreadableSave===null) say('There is no saved game in this browser.');
+        byId('turn-title').focus({preventScroll:true});
         break;
       }
       case 'journal': allJournal=!allJournal; renderJournal(); break;
-      case 'export': downloadSave(writeSave(state),'Kutna_Hora_Solo_Save.json'); break;
+      case 'export': downloadJson(writeSave(state),'Kutna_Hora_Solo_Save.json'); break;
       case 'export-unreadable':
-        if (unreadableSave!==null) downloadSave(unreadableSave,'Kutna_Hora_Unreadable_Save.json');
+        if (unreadableSave!==null) downloadJson(unreadableSave,'Kutna_Hora_Unreadable_Save.json');
         break;
       case 'import': byId('file').click(); break;
     }
