@@ -1,0 +1,181 @@
+diff --git a/src/bot.mjs b/src/bot.mjs
+index 39b93f85d3a766b1f1a02e11d49430b330953949..b8f4bb307ecb5ebd9c5bc268b5f454bb677d6a1e 100644
+--- a/src/bot.mjs
++++ b/src/bot.mjs
+@@ -24,7 +24,8 @@ const EXPERIMENTS={
+   construction:{construction:true},
+   planner,
+   shortlist:{...planner,diverse:true},
+-  'build-sequence':{...planner,fullBuild:true},
++  'full-turn':{...planner,fullBuild:true,dedicatedBuild:false},
++  'build-sequence':{...planner,fullBuild:true,dedicatedBuild:true},
+   'contested-reply':{...planner,contested:true},
+ };
+ 
+@@ -590,14 +591,14 @@ function buildRequirement(root, end, seat) {
+   };
+ }
+ 
+-function completedBuildValue(root, node, seat, settings) {
++function completedBuildValue(root, node, seat, settings, dedicatedBuild) {
+   const end=node.turnEnd;
+   const next=nextOwnTurn(end,seat,settings,end.round+1);
+   const afterReply=evaluate(next,seat,settings,false);
+   const shallow={...settings,width:4};
+   const cards=next.left;
+   const open=rankPlans(next,shallow,cards)[0];
+-  const build=buildRequirement(root,end,seat);
++  const build=dedicatedBuild?buildRequirement(root,end,seat):null;
+   const construction=build?rankPlans(next,shallow,cards,undefined,build)[0]:null;
+   const projected=Math.max(open?.value??afterReply,construction?.value??-Infinity);
+   return node.afterCurrent+replyWeight(afterReply-node.afterCurrent)+(projected-afterReply)*0.68;
+@@ -615,7 +616,9 @@ function replannedValue(node, seat, settings, experiment, root) {
+   if (!node.turnEnd) return node.value;
+   const end=node.turnEnd;
+   const rounds=rulesFor(end).rounds;
+-  if (experiment.fullBuild&&end.round<rounds) return completedBuildValue(root,node,seat,settings);
++  if (experiment.fullBuild&&end.round<rounds) {
++    return completedBuildValue(root,node,seat,settings,experiment.dedicatedBuild);
++  }
+   let next;
+   let followGain=0;
+   let score;
+diff --git a/test/planner-build-ablation.mjs b/test/planner-build-ablation.mjs
+new file mode 100644
+index 0000000000000000000000000000000000000000..48d6e18ff0f41595d5339596afd477096a817efd
+--- /dev/null
++++ b/test/planner-build-ablation.mjs
+@@ -0,0 +1,120 @@
++import assert from 'node:assert/strict';
++import {appendFileSync,writeFileSync} from 'node:fs';
++import {isDeepStrictEqual} from 'node:util';
++import {isMainThread,parentPort,Worker,workerData} from 'node:worker_threads';
++import {botAction} from '../src/bot.mjs';
++import {createGame,plotCount,seedNumber,transition} from '../src/engine.mjs';
++import {checkGame,writeSave} from '../src/save.mjs';
++
++const POLICIES=['full-turn','build-sequence'];
++const STYLES=['builder','miner','council'];
++const resultStats=()=>({decisions:0,cpuUs:0,builds:0});
++
++function decide(game,policy,stats) {
++  const before=process.threadCpuUsage();
++  const action=botAction(game,policy);
++  const used=process.threadCpuUsage(before);
++  stats.cpuUs+=used.user+used.system;
++  stats.decisions++;
++  stats.builds+=Number(action.kind==='build');
++  return action;
++}
++
++function finish(game,seat,policy,opponents,stats) {
++  let steps=0;
++  while(game.phase!=='end') {
++    assert.ok(++steps<=300,`Stalled at ${game.seed}`);
++    const action=game.actor===seat?decide(game,policy,stats):botAction(game,opponents[game.actor]);
++    game=checkGame(transition(game,action));
++  }
++  return game;
++}
++
++function summarize(game,seat,stats) {
++  const vp=game.result.scores.map(score=>score.total);
++  return {...stats,vp,coins:game.result.scores.map(score=>score.coins),
++    margin:vp[seat]-Math.max(...vp.filter((_,i)=>i!==seat)),
++    win:game.result.winner===seat,shared:game.result.winner===null&&game.result.winners.includes(seat),
++    plots:plotCount(game,seat),rights:game.players[seat].held.length};
++}
++
++function opponentsAt(start,seat,panel) {
++  const n=start.playerCount;
++  const rotation=seedNumber(start.seed)%STYLES.length;
++  return Array.from({length:n},(_,i)=>{
++    if(i===seat||panel==='planner') return 'planner';
++    return STYLES[(rotation+(i-seat+n)%n-1)%STYLES.length];
++  });
++}
++
++function playPair(start,seat,panel) {
++  const stats=POLICIES.map(resultStats);
++  const opponents=opponentsAt(start,seat,panel);
++  const compared={cards:0,pending:0,tax:0,cpuUs:[0,0]};
++  let game=createGame(start);
++  let step=0;
++  while(game.phase!=='end') {
++    assert.ok(++step<=300,`Stalled at ${start.seed}`);
++    if(game.actor!==seat) {
++      game=checkGame(transition(game,botAction(game,opponents[game.actor])));
++      continue;
++    }
++    const measure=stats.map(row=>row.cpuUs);
++    const first=(step+seat)%2;
++    const choices=[];
++    for(const index of [first,1-first]) choices[index]=decide(game,POLICIES[index],stats[index]);
++    compared.cpuUs=compared.cpuUs.map((us,i)=>us+stats[i].cpuUs-measure[i]);
++    if(game.phase==='tax') compared.tax++;
++    else if(game.pending.length) compared.pending++;
++    else compared.cards++;
++
++    if(!isDeepStrictEqual(...choices)) {
++      const firstDifference={round:game.round,turn:game.turn,left:game.left,phase:game.phase,pending:game.pending,
++        choices,save:writeSave(game)};
++      const results=choices.map((action,i)=>{
++        const next=checkGame(transition(game,action));
++        return summarize(finish(next,seat,POLICIES[i],opponents,stats[i]),seat,stats[i]);
++      });
++      return {seat,opponents,compared,firstDifference,results};
++    }
++    game=checkGame(transition(game,choices[0]));
++  }
++  return {seat,opponents,compared,firstDifference:null,results:stats.map(row=>summarize(game,seat,row))};
++}
++
++if(!isMainThread) {
++  for(const {panel,start} of workerData) {
++    const seats=Array.from({length:start.playerCount},(_,seat)=>seat);
++    let rows;
++    if(panel==='control') {
++      const game=finish(createGame(start),-1,'planner',seats.map(()=> 'planner'),resultStats());
++      rows=seats.map(seat=>({seat,result:summarize(game,seat,resultStats())}));
++    } else rows=seats.map(seat=>playPair(start,seat,panel));
++    parentPort.postMessage({panel,start,rows});
++  }
++} else {
++  const [panel,countText,prefix,output]=process.argv.slice(2);
++  const count=Number(countText);
++  const jobs=Number(process.env.KUTNA_JOBS??6);
++  assert.ok(['planner','specialists','control'].includes(panel)&&Number.isInteger(count)&&count>0&&prefix&&output,
++    'node test/planner-build-ablation.mjs <planner|specialists|control> <boards-per-size> <seed-prefix> <results.jsonl>');
++  assert.ok(Number.isInteger(jobs)&&jobs>0);
++  const starts=[4,3,2].flatMap(playerCount=>Array.from({length:count},(_,i)=>({panel,start:{
++    playerCount,seed:`${prefix}-${playerCount}-${i}`,setup:i%9+1,
++    side:Math.floor(i/2)%playerCount,starter:i%playerCount,events:i%2===1,
++  }})));
++  writeFileSync(output,'');
++  const workers=Math.min(jobs,starts.length);
++  let completed=0;
++  await Promise.all(Array.from({length:workers},(_,i)=>new Promise((resolve,reject)=>{
++    const batch=starts.filter((_,j)=>j%workers===i);
++    const worker=new Worker(new URL(import.meta.url),{workerData:batch});
++    worker.on('message',row=>{
++      appendFileSync(output,JSON.stringify(row)+'\n');
++      completed++;
++      if(completed%6===0||completed===starts.length) console.error(`${completed}/${starts.length} starting boards complete`);
++    });
++    worker.once('error',reject);
++    worker.once('exit',code=>code===0?resolve():reject(Error(`Worker ${i} exited with ${code}`)));
++  })));
++}
+diff --git a/test/planner.test.mjs b/test/planner.test.mjs
+index 5f9213aa00480576d916ce0c32c84d8760a01ec4..93ddd00537463f4369b0f82b8b14cef18aed1914 100644
+--- a/test/planner.test.mjs
++++ b/test/planner.test.mjs
+@@ -70,7 +70,7 @@ test('Planner and the trial policies reproduce saved moves without using conceal
+     const restored=readSave(original);
+     assert.equal(restored.difficulty,'planner');
+     const legal=new Set(legalActions(game).map(actionKey));
+-    for (const policy of ['planner','shortlist','build-sequence','contested-reply']) {
++    for (const policy of ['planner','shortlist','full-turn','build-sequence','contested-reply']) {
+       const move=actionKey(botAction(game,policy));
+       assert.ok(legal.has(move),`${policy} at ${playerCount} players`);
+       assert.equal(actionKey(botAction(different,policy)),move);
