@@ -33,10 +33,10 @@ export function showPlan(view, plan) {
       <li>Try the goals below in order. Stop at the first possible goal.
         <ol>${plan.goals.map(goal => `<li><strong>${PLAN_GOALS[goal]}.</strong> ${goalText[goal]}</li>`).join('')}</ol>
       </li>
-      <li>If neither goal works, take Income, then Mine. If neither is possible, play the leftmost card with no effect.</li>
+      <li>If neither goal is possible, take Income if possible. Otherwise, take a Mine action. If neither action is possible, discard the leftmost remaining action card with no effect.</li>
     </ol>
     <p><strong>Space ties.</strong> ${arrow}</p>
-    <p>Skip any unavailable step. Use the leftmost matching action card. The Joker is never used. Keep this Plan for the entire action and its bonuses.</p>`;
+    <p>Skip any unavailable step. Use the leftmost matching action card. Never use the Joker. Keep this Plan for the entire action and its bonuses. Bonuses use no additional action card.</p>`;
 }
 
 function deckSnapshot(deck, recent = deck.discard.slice(-RECENT_LIMIT)) {

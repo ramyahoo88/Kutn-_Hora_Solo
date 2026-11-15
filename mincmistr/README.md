@@ -1,6 +1,6 @@
 # The Mincmistr: a tabletop solo opponent for Kutná Hora
 
-The Mincmistr is a card-driven automa for the physical game. It uses a 15-card Plan deck, a fixed row for its six action cards and a four-step checklist. There are no dice and no starting points. It pays every cost and follows every rule a player follows, except that it never uses the Joker.
+The Mincmistr is a card-driven automa for the physical game. It uses a 15-card Plan deck, a fixed row for its six action cards and a four-step checklist. There are no dice and no starting points. It uses normal costs, component limits and scoring, with the action priorities and difficulty changes described in these rules. It never uses the Joker.
 
 Developed and tested against this repository's engine at `v0.3.0-playtest` (`0b28294`). The rules engine in `v0.3.1-playtest` is the same, apart from the new Planner rival setting.
 
@@ -11,11 +11,13 @@ When playing at the table, choose **Draw only** to use the printed Plan faces as
 ## Read or print
 
 - `Mincmistr_Print_and_Play.pdf`: rules on pages 1–4, card sheets on pages 5–8. Print at 100% on Letter or A4.
-- `Mincmistr_Rules.md`: the v1.2.3 rulebook text, with clarified guild setup, Rights and free rights.
+- `Mincmistr_Rules.md`: the v1.2.4 rulebook text, with clarified bonus timing, placement priorities, Rights and four-player Grandmaster.
 - [One-page table reference](print/reference-sheet.md). Print it from the app, or build a Letter or A4 PDF using the command below.
 - `Mincmistr_Sim_Report.md`: design history, test method and results.
 - `Mincmistr_Sample_Game.md`: two rounds of a simulated game, annotated rule by rule.
 - `NOTES.md`: the overnight lab notebook.
+
+To update a printed v1.2.3 set, replace the rules on pages 1–4 and the reference cards on page 7. The earlier Plan deck works with these rules. The new fronts say “2+ pelicans” to make the threshold explicit.
 
 ## Strength (holdout seeds, Mincmistr's win rate and margin)
 
@@ -50,17 +52,23 @@ Run every command from the repository root. The scripts import the engine from `
 - `policies.mjs`: rejects rival names the engine does not define, because `botAction` would otherwise play Standard.
 - `multisim.mjs` and `multisum.mjs`: three- and four-player tests, covering you against several Mincmistrs, or one Mincmistr at a table of rivals.
 - `multi.mjs`, `mirror.mjs`, `overhead.mjs`, `exploit.mjs`, `rollout*.mjs`, `samplegame.mjs`: supporting studies.
-- `print/build.py`: rebuilds the PDF from `print/rules.md` and the card data. Needs Python `markdown` and headless Chrome:
+- `print/build.py`: rebuilds the PDF from `print/rules.md` and the card data. Needs Python `markdown` and headless Chrome or Chromium:
 
   ```
   node mincmistr/print/export_cards.mjs
   python3 mincmistr/print/build.py /tmp/mincmistr.html mincmistr/Mincmistr_Print_and_Play.pdf
   ```
 
-  To regenerate the v1.2.3 rules pages and reuse the existing card sheets, install Python `markdown` and `PyMuPDF` with DejaVu fonts. Set `DEJAVU_FONTS` if the fonts live outside `/usr/share/fonts/truetype/dejavu`.
+  To regenerate only the rules pages and reuse the existing card sheets, install Python `markdown` and `PyMuPDF` with DejaVu fonts. Set `DEJAVU_FONTS` if the fonts live outside `/usr/share/fonts/truetype/dejavu`.
 
   ```sh
   python3 mincmistr/print/build.py --refresh-rules mincmistr/Mincmistr_Print_and_Play.pdf /tmp/Mincmistr_Print_and_Play.pdf
+  ```
+
+  To reproduce the v1.2.4 print release while retaining the card frames and backs, use the PDF from [v0.3.9-playtest](https://github.com/ramyahoo88/Kutn-_Hora_Solo/blob/v0.3.9-playtest/mincmistr/Mincmistr_Print_and_Play.pdf) as the input to `--refresh-copy`:
+
+  ```sh
+  python3 mincmistr/print/build.py --refresh-copy /tmp/Mincmistr_v1.2.3.pdf /tmp/Mincmistr_v1.2.4.pdf
   ```
 
 - `print/export_app_plans.py` crops the Plan fronts from the PDF for the app. After updating the PDF's cards, run `python3 mincmistr/print/export_app_plans.py` with Poppler and Pillow installed, then rebuild the offline HTML.

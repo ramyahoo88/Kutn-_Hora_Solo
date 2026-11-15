@@ -61,16 +61,17 @@ body { margin: 0; font-family: "DejaVu Serif", Georgia, serif; color: #1d1b18; }
 .bsub { font-size: 8pt; letter-spacing: 4pt; text-transform: uppercase; color: #c9a66b; }
 
 /* reference cards */
-.ref { background: #fffdf8; padding: 3.4mm 3.6mm 2.6mm; font-size: 6.9pt; line-height: 1.32; color: #2a221c; border: 2.4mm solid #fffdf8; box-shadow: inset 0 0 0 .5mm #6e4b33; }
+.ref { background: #fffdf8; padding: 3.4mm 3.6mm 2.6mm; font-size: 6.9pt; line-height: 1.24; color: #2a221c; border: 2.4mm solid #fffdf8; box-shadow: inset 0 0 0 .5mm #6e4b33; }
 .rhead { font-family: "DejaVu Serif", serif; font-weight: bold; font-size: 11pt; color: #5b2a1f; border-bottom: .4mm solid #c9b79c; margin-bottom: 1.6mm; padding-bottom: .6mm; text-transform: uppercase; letter-spacing: 1pt; }
-.rhead2 { font-family: "DejaVu Serif", serif; font-weight: bold; font-size: 9pt; color: #5b2a1f; margin-top: 2mm; text-transform: uppercase; letter-spacing: 1pt; }
-.ref p { margin: 0 0 1.5mm; }
+.rhead2 { font-family: "DejaVu Serif", serif; font-weight: bold; font-size: 9pt; color: #5b2a1f; margin-top: 1.4mm; text-transform: uppercase; letter-spacing: 1pt; }
+.ref p { margin: 0 0 1mm; }
 .ref .small { font-size: 6.6pt; color: #4a3f36; }
-.ref ol.steps { margin: 0 0 2mm; padding-left: 4.5mm; font-size: 8pt; }
-.ref ol.steps li { margin-bottom: 1mm; }
+.ref .levels { margin-top: 1.5mm; }
+.ref ol.steps { margin: 0 0 1.2mm; padding-left: 4.5mm; font-size: 7.6pt; }
+.ref ol.steps li { margin-bottom: .7mm; }
 .rsub { font-size: 6.6pt; color: #4a3f36; margin: 1mm 0; }
 .ref ol.row { margin: 0; padding-left: 4.5mm; font-size: 7.6pt; font-weight: bold; color: #3d4f63; }
-.edge { font-size: 6.6pt; line-height: 1.5; }
+.edge { font-size: 6.6pt; line-height: 1.35; }
 .dot { display: inline-block; width: 2.6mm; height: 2.6mm; border-radius: 50%; border: .25mm solid #555; vertical-align: -.5mm; margin-right: .8mm; }
 
 .sheetnote { position: absolute; bottom: 1.6mm; left: 0; right: 0; text-align: center; font-family: "DejaVu Sans", sans-serif; font-size: 6.2pt; color: #8a7764; }

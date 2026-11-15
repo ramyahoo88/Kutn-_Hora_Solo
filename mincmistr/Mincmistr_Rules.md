@@ -1,10 +1,10 @@
 # The Mincmistr
 
-**A card-driven solo opponent for Kutná Hora** · Version 1.2.3 · 15 Nov 2026
+**A card-driven solo opponent for Kutná Hora** · Version 1.2.4 · 15 Nov 2026
 
 Play against one, two or three Mincmistrs, using the normal board and round count for that table size. A Mincmistr starts like a player, pays every cost and either pays its taxes or loses reputation. It obeys the piece limits and scores the same way at the end. It gets no starting points and no hidden information. It makes its choices with a short checklist, a deck of 15 Plan cards and a fixed row of six action cards.
 
-There are no dice. You flip one card per action, and most actions take one or two checks.
+There are no dice. Flip one Plan per action card. Most card plays take one or two checks.
 
 ## Components
 
@@ -30,11 +30,11 @@ The Mincmistr's action cards always sit in this order, left to right:
 |---|---|---|---|---|---|
 | Mine / Joker | Rights / St. Barbara | Mine / Plot | Build / Income | Rights / Income | Build / Plot |
 
-When it takes an action, it uses **the leftmost card still in its row that shows that action**. Remove the card from the row as it is played. At the start of each round, all six cards return to the row in the same order.
+For each card play, it uses **the leftmost card still in its row that shows the chosen action**. Remove the card from the row as it is played. At the start of each round, all six cards return to the row in the same order.
 
 The Mincmistr **never uses the Joker**. It uses its Mine / Joker card only for Mine.
 
-An action is **not possible** if no card in the row shows it, or if it would be illegal or unaffordable right now. Skip it and go on to the next check.
+For an action chosen under rule 4, skip it if no matching card remains or if it would be illegal or unaffordable.
 
 ## 3. Plan cards
 
@@ -49,7 +49,7 @@ When the deck runs out, shuffle the discards to form a new deck.
 
 ## 4. When the Mincmistr plays a card
 
-Each time the Mincmistr must play an action card, follow these steps.
+Each time the Mincmistr must play an action card, follow these steps. Resolve the chosen action and all its bonuses before playing another action card.
 
 **4.0 Flip.** Flip the top Plan card face up onto the discard pile. This is the current Plan card.
 
@@ -61,7 +61,7 @@ The prize tiles are *Seat a patrician* (tile 6), *Public neighbours* (7), *Free 
 
 **4.3 Plan.** Try the goals on the current Plan card, top first. It does the first goal that is possible. Stop here.
 
-**4.4 Nothing worked.** It takes Income. If that is not possible, it Mines. If that is not possible either, it discards its leftmost card with no effect.
+**4.4 Nothing worked.** Take Income if possible. Otherwise, take a Mine action. If neither action is possible, discard the leftmost remaining action card with no effect.
 
 Skip any step that is not possible. For example, if it has 12 g but has already played both Income cards this round, skip 4.1 and go to 4.2.
 
@@ -89,7 +89,7 @@ If it has a pelican, it contributes to St. Barbara and resolves the current St. 
 
 ### 6.1 Rights
 
-It takes only **guild tiles it could build right now**. The tile must belong to one of its own guilds, that guild's row must still have a house, and the population or ore track must allow that guild's next building. It **never buys public building rights**. Like any player, it gets public rights free from its top house row.
+It buys only **affordable rights on offer from its own guilds**. The guild's house row must have a house left, and the population or ore track must allow the guild's next building. It can buy a right without a plot, a Build card or enough money for construction. It never buys public rights. Apply these extra checks only when choosing rights to buy. Use rule 6.5 for free rights.
 
 Of those tiles, it takes the one with the highest **income value**: production × the current price of that commodity. Ties go to the cheaper tile, then the higher market row, then the tile further left.
 
@@ -97,11 +97,13 @@ If no qualifying tile is available to buy, Rights is not possible. Go to the nex
 
 ### 6.2 Plot
 
-It claims the legal plot where one of its held rights would score the **most town points**, counting the matching dots that building would score there. Ties go to the cheaper plot, then the arrow.
+For Plot and Build choices, count the matching dots the proposed building would make at that space, including matches on the board edge. Count a public tile's matches for placement too. Only owned buildings earn town points at final scoring.
+
+For each legal plot, find the highest matching-dot count among its held rights. If it holds no rights, give every legal plot a count of zero. Choose the highest count, then the lowest cost, then the Plan arrow. Every legal plot costs 0 g for a free Plot.
 
 ### 6.3 Build
 
-It builds the held right with the **most production**. Public buildings count as 0, so it builds one only when no guild building can be built. It places the building on the plot where it scores the **most town points**. Ties go by the arrow, then to the right it took first.
+Among legal, affordable builds, choose the **most production** (public buildings count as 0), then the **most matching dots** at the plot, then the Plan arrow, then the earliest acquired right.
 
 ### 6.4 Mine tiles
 
@@ -115,8 +117,10 @@ Free tiles from technology use the same placement rule.
 
 ### 6.5 Bonus steps
 
-- **Free building right** (from a house row or St. Barbara tile 2): among eligible rights, take the public tile with the highest **VP + 2 per pelican + 2 per reputation**. Ties go to the first tile offered. If no public tile is eligible, a house reward gives nothing. On St. Barbara tile 2 only, fall back to the eligible tile from one of its own guilds with the highest income value. Break ties by the first tile offered. Take nothing if no tile is eligible.
-- **Remove a house**: from the guild row with the most houses already removed. Ties go to the top row. It always takes optional house removals.
+Keep the current Plan and its arrow for bonus choices. Bonus actions and placements use no additional action card or Plan and do not repeat rule 4. Follow the bonus effect's costs and normal component limits.
+
+- **Free building right** (house reward or St. Barbara tile 2): take the eligible public tile with the highest **VP + 2 per pelican + 2 per reputation**. If no public tile is eligible, tile 2 takes an eligible right from its own guilds with the highest income value. A house reward takes only public rights. Break either tie by market reading order (higher row, then further left). If no right qualifies, take nothing. The three-right limit still applies.
+- **Remove a house**: among guild rows that still have a house, choose the row with the most houses already removed. Ties go to the topmost eligible row. It always takes optional house removals.
 - **Seat a patrician from the bank**: the colour with the biggest edge (rule 6.6), even if that edge is 0 or less. Ties go green, silver, yellow, red.
 - **Score a building** (St. Barbara): its building with the most town points. Ties go by the arrow.
 - **Dig twice** (St. Barbara tile 9): it takes both free Mine actions, as the tile says, using miners from its reserve first. Placement is free; place each tile by rule 6.4.
@@ -149,20 +153,20 @@ This applies to town plots, building placement and mine spaces.
 - **Taxes**: it pays if it can. Otherwise it loses reputation.
 - **Events**: they affect it exactly as they affect a player.
 - **Limits**: 3 rights, 3 plots, miners, houses and every other limit apply as normal.
-- **End of game**: it scores exactly like a player. The higher total wins. Use the normal tie-breaker.
+- **End of game**: it scores exactly like a player. The highest total wins. Use the normal tie-breaker.
 
 ## 9. Difficulty
 
 | Level | Change from the rules above |
 |---|---|
-| **Apprentice** | Skip the point calculations. Rule 6.2: it claims the cheapest plot, then by arrow. Rule 6.3: it builds the right with the most production, then places it by arrow. Rule 6.4: it places mine tiles in the row where it has the fewest mines, then the cheapest space, then by arrow. |
+| **Apprentice** | Skip point calculations for placement. **Plot:** lowest cost, then arrow. **Build:** most production, then arrow, then earliest acquired right. **Mine:** keep the normal tile choice. Place in the row with the fewest own mines, then the cheapest space, then by arrow. |
 | **Journeyman** | None. Play the rules as written. |
-| **Master** | In the last three rounds (rounds 4–6, or rounds 3–5 with four players), its last turn of the round plays **both** of its remaining cards instead of one. Each card is a full card play (rule 4). |
+| **Master** | On its last turn in each of the final three rounds (rounds 4–6, or rounds 3–5 with four players), it plays **both** remaining cards instead of one. Each card is a full card play (rule 4). |
 | **Grandmaster** | As Master, but in every round. |
 
 Master and Grandmaster give it extra actions only. They never add points, coins or discounts.
 
-**Fine-tuning.** For a step between levels, give the double last turn to the last N rounds only. Each extra round is worth about 1.5 to 2.5 points (see rule 12). Master is N = 3 and Grandmaster is N = 6.
+**Fine-tuning.** Give the double last turn to the last N rounds. Choose N from 0 to the number of rounds in the game. Master is N = 3. Grandmaster uses every round (N = 6 with two or three players and N = 5 with four). Each extra round is worth about 1.5 to 2.5 points in the two-player simulations in rule 12.
 
 ## 10. Two or three Mincmistrs
 
@@ -202,7 +206,7 @@ Against two or three Mincmistrs, here is how often the app's Standard rival wins
 | 2 Mincmistrs (3 players, fair share 33%) | 70% | 57% | 39% | 18% |
 | 3 Mincmistrs (4 players, fair share 25%) | 64% | 48% | 25% | 19% |
 
-Fine-tuning against the Standard rival, by the number of final rounds with a double last turn (768 games each):
+Fine-tuning in two-player games against the Standard rival, by the number of final rounds with a double last turn (768 games each):
 
 | N | 0 (Journeyman) | 1 | 2 | 3 (Master) | 4 | 5 | 6 (Grandmaster) |
 |---|---|---|---|---|---|---|---|
@@ -215,6 +219,6 @@ Fine-tuning against the Standard rival, by the number of final rounds with a dou
 2. Fewer than 20 g: **Income**.
 3. 2 or more pelicans, or 1 on a prize tile: **St. Barbara**.
 4. Otherwise, the first possible goal on the Plan card.
-5. Otherwise Income, then Mine, then discard the leftmost card.
+5. Otherwise take **Income** if possible, else **Mine**, else discard the leftmost card with no effect.
 
-It always uses the leftmost card in the row that shows the action, and never the Joker.
+Take the first possible action. Use the leftmost card in the row that shows it, and never the Joker. Keep the same Plan through all bonuses.

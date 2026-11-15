@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Build the Mincmistr print-and-play: rules pages + Plan cards + reference cards -> one HTML -> PDF.
 Card data comes from cards.json, exported from mincmistr.mjs, so the printed deck always matches the code."""
-import json, pathlib, re, subprocess, sys, html
+import json, pathlib, re, shutil, subprocess, sys, html
 import markdown
 
 HERE = pathlib.Path(__file__).parent
@@ -29,6 +29,8 @@ ICONS = {
 
 def esc(s): return html.escape(s, quote=False)
 
+PLAN_CHECKS = '<b>&lt;20 g</b>: Income<br><b>2+ pelicans</b>, or 1 on a prize tile: St. Barbara'
+
 def plan_card(card):
     rows = []
     for i, g in enumerate(card['goals']):
@@ -41,7 +43,7 @@ def plan_card(card):
             else 'ties: latest space <span class="arr">▶</span>')
     return f'''<div class="card plan">
       <div class="phead"><span class="ptitle">Plan</span><span class="pnum">{card['number']}/15</span></div>
-      <div class="pre"><b>&lt;20 g</b>: Income<br><b>2 pelicans</b>, or 1 on a prize tile: St. Barbara</div>
+      <div class="pre">{PLAN_CHECKS}</div>
       <div class="goals">{''.join(rows)}</div>
       <div class="band {arrow}">{band}</div>
     </div>'''
@@ -53,42 +55,47 @@ def back_card():
 
 ROW_NAMES = {0: 'Mine / Joker', 1: 'Mine / Plot', 2: 'Build / Income', 3: 'Build / Plot', 4: 'Rights / Income', 5: 'Rights / St. Barbara'}
 
-def ref_cards():
+def ref_cards(headings=True):
+    def start(title):
+        heading = f'<div class="rhead">{title}</div>' if headings else ''
+        return f'<div class="card ref">{heading}'
+
     row = ''.join(f'<li>{ROW_NAMES[c]}</li>' for c in data['row'])
     dot = lambda c: f'<span class="dot" style="background:{c}"></span>'
-    c1 = f'''<div class="card ref"><div class="rhead">Card play</div>
+    c1 = f'''{start('Card play')}
       <ol class="steps">
-        <li><b>Flip</b> a Plan card.</li>
-        <li>Fewer than <b>20 g</b>: <b>Income</b>.</li>
-        <li><b>2+ pelicans</b>, or 1 on prize tile 6–9 or 11: <b>St. Barbara</b>.</li>
-        <li>Else the first <b>possible goal</b> on the Plan card, top to bottom.</li>
+        <li><b>Flip</b> a Plan. Keep it for bonuses.</li>
+        <li>Under <b>20 g</b>: <b>Income</b>.</li>
+        <li><b>2+ pelicans</b> or 1 on tile 6–9 or 11: <b>St. Barbara</b>.</li>
+        <li>First <b>possible goal</b>, top first.</li>
         <li>Else <b>Income</b>, else <b>Mine</b>, else discard the leftmost card.</li>
       </ol>
       <div class="rhead2">Row</div>
-      <div class="rsub">Left to right. Use the leftmost card that shows the action. Never the Joker.</div>
+      <div class="rsub">Skip unavailable actions. Use the leftmost matching card. Never use the Joker.</div>
       <ol class="row">{row}</ol>
       <p class="small">Taxes: pays if able.</p></div>'''
-    c2 = f'''<div class="card ref"><div class="rhead">Goals</div>
+    c2 = f'''{start('Goals')}
       <p><b style="color:#9b3b2e">Construct</b>, first possible:<br>
-      1. <b>Build</b> if it holds a right and a plot.<br>
+      1. <b>Build</b> with a right and a plot.<br>
       2. <b>Plot</b> if rights &gt; plots and plots &lt; 3.<br>
-      3. <b>Rights</b> if it holds fewer than 2 rights.</p>
-      <p><b style="color:#3d4f63">Mine</b>: use a pool miner; if none, recruit up to 2.</p>
-      <p><b style="color:#a0761c">St. Barbara</b>: contribute a pelican.</p>
-      <p><b style="color:#5a4a86">Income</b>: seats the patrician with the biggest <b>edge ≥ 1</b> if it can pay 10 g (ties: green, silver, yellow, red).</p>
-      <p class="small">Edge = points one patrician gives it − the most it gives any opponent:</p>
-      <div class="edge">{dot('#3f8a4a')} 1 per public building next to each of its buildings<br>
+      3. <b>Rights</b> with fewer than 2 rights.</p>
+      <p><b style="color:#3d4f63">Mine</b>: use a pool miner, or recruit up to 2 if empty.</p>
+      <p><b style="color:#a0761c">St. Barbara</b>: spend a pelican.</p>
+      <p><b style="color:#5a4a86">Income</b>: seat the available patrician with the biggest <b>edge ≥ 1</b> if it can pay 10 g. Ties: green, silver, yellow, red.</p>
+      <p class="small"><b>Edge</b>: own VP per patrician minus the best opponent's.</p>
+      <div class="edge">{dot('#3f8a4a')} 1 per public neighbour of each of its buildings<br>
       {dot('#a9b0b8')} 3 per 2 pelicans used<br>
       {dot('#d8b43a')} 2 per mine in its weakest row (max 2)<br>
-      {dot('#b8432f')} 3 per full column of removed houses</div></div>'''
-    c3 = '''<div class="card ref"><div class="rhead">Choices</div>
-      <p><b>Rights</b>: buildable guild tile, most production × price. Never public. Ties: cheaper, higher row.</p>
-      <p><b>Plot</b>: most town points for a held right. Ties: cheaper, arrow.</p>
-      <p><b>Build</b>: most production (public = 0), on the plot with most town points. Ties: arrow.</p>
-      <p><b>Mine tile</b>: keep most stars + ore + VP. Place for most row points gained; ties: cheapest, fewest of its mines, arrow.</p>
-      <p><b>Free right</b>: public, most VP + 2/pelican + 2/rep. <b>House</b>: row with most removed.</p>
-      <div class="rhead2">Difficulty</div>
-      <p class="small"><b>Apprentice</b>: no point maths in Plot, Build, Mine.<br><b>Journeyman</b>: as written.<br><b>Master</b>: last 3 rounds, last turn plays both.<br><b>Grandmaster</b>: same, every round.</p></div>'''
+      {dot('#b8432f')} 3 per full column of removed houses</div>
+      <p class="levels small"><b>Journeyman</b>: as written. <b>Master</b>: play both remaining cards on its last turn in the final 3 rounds. <b>Grandmaster</b>: every round.</p></div>'''
+    c3 = f'''{start('Choices')}
+      <p><b>Buy Rights</b>: affordable own guild, house left, demand permits building. Most production × price, then cost, higher row, leftmost.</p>
+      <p><b>Plot</b>: best dot count of any held right (0 if none), then cost, then arrow.</p>
+      <p><b>Build</b>: production (0 for public), dots, arrow, first acquired.</p>
+      <p><b>Mine</b>: keep most ★ + ore + VP, then most ★, first drawn. Place by row VP gain, cost, fewest own mines in row, arrow.</p>
+      <p><b>Free right</b>: house rewards are public only. St. Barbara 2: eligible public, else eligible own guild. Rank by VP + 2/pelican + 2/rep (public) or production × price (guild). Ties: higher row, leftmost.</p>
+      <p><b>Remove house</b>: nonempty row with most removed. Topmost if tied.</p>
+      <p class="small"><b>Apprentice</b>: Plot by cost, arrow. Build skips dots. Keep the normal mine tile choice. Place by fewest own mines in row, cost, arrow.</p></div>'''
     return [c1, c2, c3]
 
 CSS = (HERE / 'style.css').read_text()
@@ -174,8 +181,54 @@ def table_reference(size, out_pdf):
     doc.build(story, onFirstPage=footer, onLaterPages=footer,
               canvasmaker=lambda *args, **kwargs: Canvas(*args, **{**kwargs, 'invariant': 1}))
 
-def refresh_rules(source_pdf, out_pdf):
-    """Replace the rules pages while retaining the existing card sheets."""
+def refresh_card_text(doc, fonts_css, archive):
+    """Replace copy inside the existing frames, keeping the cut marks and backs."""
+    import fitz
+
+    plan_css = fonts_css + """
+        body { margin: 0; font-family: 'DejaVu Sans'; font-size: 6.2pt;
+            line-height: 1.25; color: #6b5a4a; text-align: center; }
+    """
+    ref_css = fonts_css + CSS.split('/* reference cards */', 1)[1].split('.sheetnote', 1)[0] + """
+        body { margin: 0; font-family: 'DejaVu Sans'; }
+        .ref { padding: 0; border: 0; background: transparent; }
+    """
+    refs = [
+        re.sub(r'<span class="dot" style="background:(#[0-9a-f]+)"></span>',
+               r'<span style="color:\1">●</span>', card)
+        for card in ref_cards(headings=False)
+    ]
+    for page_number, plan_count in [(5, 9), (7, 6)]:
+        page = doc[page_number - 1]
+        if page.rect != fitz.paper_rect('letter'):
+            raise ValueError(f'Expected a Letter card sheet on page {page_number}.')
+        boxes = []
+        for index in range(9):
+            row, column = divmod(index, 3)
+            # Centered 3 × 3 grid of 2.5 × 3.5 inch cards on US Letter.
+            left, top = 36 + 180 * column, 18 + 252 * row
+            if index < plan_count:
+                box = fitz.Rect(left + 15, top + 35.5, left + 165, top + 52)
+                boxes.append((box, PLAN_CHECKS, plan_css))
+                page.add_redact_annot(box, fill=False, cross_out=False)
+            else:
+                box = fitz.Rect(left + 16.8, top + 36.5, left + 163.5, top + 244)
+                boxes.append((box, refs[index - plan_count], ref_css))
+                # Cover the old legend's coloured markers as well as the text.
+                cover = box + (-2, 0, 2, -2)
+                page.add_redact_annot(cover, fill=(1, 253 / 255, 248 / 255), cross_out=False)
+        page.apply_redactions(
+            images=fitz.PDF_REDACT_IMAGE_NONE,
+            graphics=fitz.PDF_REDACT_LINE_ART_NONE,
+        )
+        for index, (box, markup, css) in enumerate(boxes, 1):
+            spare, _ = page.insert_htmlbox(box, markup, css=css, archive=archive, scale_low=1)
+            if spare < 0:
+                raise ValueError(f'Card {index} on page {page_number} no longer fits.')
+
+
+def refresh_rules(source_pdf, out_pdf, card_text=False):
+    """Replace the rules pages and optionally refresh text on the card fronts."""
     from io import BytesIO
     import os
     import fitz
@@ -193,8 +246,9 @@ def refresh_rules(source_pdf, out_pdf):
             font_faces.append(f"@font-face {{font-family:'{family}';font-style:{style};font-weight:{weight};src:url({filename});}}")
     rules_css = CSS.split('/* ---------- card sheets ---------- */', 1)[0]
     rules_css = '\n'.join(line for line in rules_css.splitlines() if not line.startswith('@page'))
-    css = '\n'.join(font_faces) + rules_css + """
-        .rules { line-height: 1.17; }
+    fonts_css = '\n'.join(font_faces) + '\n'
+    css = fonts_css + rules_css + """
+        .rules { line-height: 1.14; }
         .rules h2 { margin-top: 8pt; }
         .rules h3 { margin-top: 7pt; }
         .rules p { margin: 2pt 0 3pt; }
@@ -217,12 +271,17 @@ def refresh_rules(source_pdf, out_pdf):
     with fitz.open(source_pdf) as source, fitz.open(stream=stream.getvalue(), filetype='pdf') as refreshed:
         if len(source) != 8:
             raise ValueError('Use an eight-page Mincmistr PDF with card sheets on pages 5–8.')
-        refreshed.subset_fonts()
         refreshed.insert_pdf(source, from_page=4, to_page=7)
+        if card_text:
+            refresh_card_text(refreshed, fonts_css, archive)
+        refreshed.subset_fonts()
         refreshed.set_metadata({'title': 'The Mincmistr — print and play'})
         refreshed.save(out_pdf, garbage=4, deflate=True, no_new_id=True)
 
 def main(out_html, out_pdf):
+    chrome = shutil.which('google-chrome') or shutil.which('chromium')
+    if not chrome:
+        raise FileNotFoundError('Install Google Chrome or Chromium to build the print-and-play PDF.')
     body = markdown.markdown(rules_md, extensions=['tables'])
     deck = data['deck']
     fronts = [plan_card(c) for c in deck]
@@ -234,7 +293,7 @@ def main(out_html, out_pdf):
     pages.append(sheet([back_card() for _ in range(6)], 'sheet backs', 'Optional backs for sheet 2 · print on the reverse, flip on the long edge · reference cards have no back'))
     doc = f'<!DOCTYPE html><html><head><meta charset="utf-8"><title>The Mincmistr — print and play</title><style>{CSS}</style></head><body>{"".join(pages)}</body></html>'
     pathlib.Path(out_html).write_text(doc)
-    subprocess.run(['/usr/bin/google-chrome', '--headless=new', '--no-sandbox', '--disable-gpu', '--no-pdf-header-footer',
+    subprocess.run([chrome, '--headless=new', '--no-sandbox', '--disable-gpu', '--no-pdf-header-footer',
                     f'--print-to-pdf={out_pdf}', f'file://{pathlib.Path(out_html).resolve()}'], check=True,
                    stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
@@ -243,6 +302,8 @@ if __name__ == '__main__':
         app_reference(sys.argv[2])
     elif sys.argv[1] == '--refresh-rules':
         refresh_rules(sys.argv[2], sys.argv[3])
+    elif sys.argv[1] == '--refresh-copy':
+        refresh_rules(sys.argv[2], sys.argv[3], card_text=True)
     elif sys.argv[1] == '--table-reference':
         table_reference(sys.argv[2], sys.argv[3])
     else:

@@ -1,7 +1,7 @@
 import {readFile,writeFile,mkdir} from 'node:fs/promises';
 import {resolve,dirname} from 'node:path';
 import {fileURLToPath} from 'node:url';
-import {VERSION} from './src/data.mjs';
+import {MINCMISTR_RULES_VERSION,VERSION} from './src/data.mjs';
 
 const project=dirname(fileURLToPath(import.meta.url));
 const read=(path)=>readFile(resolve(project,'src',path),'utf8');
@@ -38,7 +38,8 @@ const js=`'use strict';\nconst modules={};\n${modules.join('\n')}`.replace(/<\/s
 const licenses=await Promise.all(['DM-Sans-OFL.txt','Instrument-Serif-OFL.txt'].map(file=>read(`assets/${file}`)));
 const reference=await readFile(resolve(project,'mincmistr','print','app-reference.html'),'utf8');
 const html=(await read('page.html')).replace('APP_VERSION',VERSION).replace('/* BUNDLE_CSS */',()=>css)
-  .replace('/* BUNDLE_JS */',()=>js).replace('/* PAPER_REFERENCE */',()=>reference);
+  .replace('MINCMISTR_RULES_VERSION',MINCMISTR_RULES_VERSION).replace('/* BUNDLE_JS */',()=>js)
+  .replace('/* PAPER_REFERENCE */',()=>reference);
 await mkdir(dirname(output),{recursive:true});
 await writeFile(output,html.replace('</html>',()=>`<!-- Font licenses\n${licenses.join('\n\n')}\n-->\n</html>`));
 console.log(output);

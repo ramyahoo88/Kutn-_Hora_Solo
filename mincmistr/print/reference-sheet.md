@@ -1,16 +1,16 @@
 # Mincmistr table reference
 
-**Kutná Hora: The City of Silver · Mincmistr v1.2.3**
+**Kutná Hora: The City of Silver · Mincmistr v1.2.4**
 
 ## Play one action card
 
-**Skip any check you cannot play.** Use the leftmost matching action card. Never use the Joker. Keep the Plan through all bonuses.
+**Skip any check you cannot play.** Use the leftmost matching action card. Never use the Joker. Keep the Plan through all bonuses. Bonuses use no additional action card.
 
 1. **Flip a Plan.** Reshuffle the discards when the deck runs out.
 2. **Cash below 20 g.** Try Income.
 3. **Two or more pelicans.** Try St. Barbara. One pelican is enough on tile 6, 7, 8, 9 or 11.
 4. **Plan goals.** Take the first possible goal from top to bottom.
-5. **Fallback.** Try Income, then Mine, then discard the leftmost remaining action card.
+5. **Fallback.** Take Income if possible. Otherwise, take Mine. If neither is possible, discard the leftmost remaining action card with no effect.
 
 **Action card row.** Mine / Joker → Rights / St. Barbara → Mine / Plot → Build / Income → Rights / Income → Build / Plot.
 
@@ -20,7 +20,7 @@
 
 **Buying Rights.** Only affordable own-guild tiles with a house left and enough demand qualify. Maximize production × price, then cheapest, higher market row, leftmost. Skip if none qualify.
 
-**Plot.** Most town points a held right could score, then cheapest, then arrow. **Build.** Highest production (public = 0), town points, arrow, earliest acquired right.
+**Plot.** Most matching dots for any held right (0 with no rights), then lowest cost, then arrow. A free Plot costs 0 g. **Build.** Highest production (public = 0), matching dots, arrow, earliest acquired right. Count matching dots for public tiles and on the board edge.
 
 ## Free rights
 
@@ -28,7 +28,7 @@
 
 **St. Barbara tile 2.** Prefer an eligible public right. Otherwise, take an eligible own-guild right with the highest production × price. With no eligible right, take nothing.
 
-Rank public rights by VP + 2 per pelican + 2 per reputation. Break free-right ties by market reading order. The three-right limit applies to both rewards.
+Rank public rights by VP + 2 per pelican + 2 per reputation. Break ties by higher market row, then further left. The three-right limit applies to both rewards.
 
 ## Mine, Income and ties
 

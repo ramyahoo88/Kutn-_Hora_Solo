@@ -4,7 +4,7 @@ import {once} from 'node:events';
 import {readFile} from 'node:fs/promises';
 import {createServer} from 'node:http';
 import {fileURLToPath,pathToFileURL} from 'node:url';
-import {VERSION} from '../src/data.mjs';
+import {MINCMISTR_RULES_VERSION,VERSION} from '../src/data.mjs';
 import {createGame,createPlanDeck,drawPlan} from '../src/engine.mjs';
 import {playMincmistr} from '../src/mincmistr.mjs';
 import {readPosition,writeSave} from '../src/save.mjs';
@@ -255,14 +255,15 @@ try {
   const decodedReport=JSON.parse(report.text);
   assert.equal(decodedReport.playtest.note,'Both free mines resolved.');
   assert.equal(decodedReport.playtest.appVersion,VERSION);
-  assert.equal(decodedReport.playtest.mincmistrRulesVersion,'1.2.3');
+  assert.equal(decodedReport.playtest.mincmistrRulesVersion,MINCMISTR_RULES_VERSION);
   assert.equal(decodedReport.playtest.setup.sharedDeck,false);
   assert.deepEqual(decodedReport.playtest.before.state,doubleMine);
   assert.deepEqual(decodedReport.state,afterDoubleMine);
   await click(phone,'#undo');
   await highlights.last().waitFor({state:'detached'});
   assert.deepEqual(await game(phone),doubleMine);
-  const earlierReport={...decodedReport,playtest:{...decodedReport.playtest,appVersion:'0.3.7'}};
+  const earlierVersions={appVersion:'0.3.7',mincmistrRulesVersion:'1.2.3'};
+  const earlierReport={...decodedReport,playtest:{...decodedReport.playtest,...earlierVersions}};
   await importGame(phone,JSON.stringify(earlierReport));
   assert.deepEqual(await game(phone),afterDoubleMine);
   assert.equal(await highlights.count(),2);
@@ -274,14 +275,14 @@ try {
     const reexport=await downloadFile(phone,PLAYTEST_REPORT);
     const {state,playtest}=JSON.parse(reexport.text);
     assert.equal(playtest.appVersion,VERSION);
-    assert.equal(playtest.mincmistrRulesVersion,'1.2.3');
-    assert.deepEqual(playtest.source,{appVersion:'0.3.7',mincmistrRulesVersion:'1.2.3'});
+    assert.equal(playtest.mincmistrRulesVersion,MINCMISTR_RULES_VERSION);
+    assert.deepEqual(playtest.source,earlierVersions);
     assert.deepEqual(state,afterDoubleMine);
     assert.equal(playtest.note,'Both free mines resolved.');
     assert.deepEqual(playtest.before.state,doubleMine);
     await importGame(phone,reexport.text);
     await phone.getByRole('heading',{name:'Original report · App v0.3.7 · Mincmistr v1.2.3'}).waitFor();
-    assert.equal(await phone.locator('#report-exported-with').innerText(),`Re-exported with App v${VERSION} · Mincmistr v1.2.3`);
+    assert.equal(await phone.locator('#report-exported-with').innerText(),`Re-exported with App v${VERSION} · Mincmistr v${MINCMISTR_RULES_VERSION}`);
   }
 
   const beforeFailedWrite=await raw(phone,GAME);
@@ -303,7 +304,7 @@ try {
   await importGame(phone,recovered.text);
   await phone.reload();
   assert.equal(await phone.locator('#playtest-note').inputValue(),latestDraft);
-  assert.equal(await phone.locator('#report-exported-with').innerText(),`Re-exported with App v${VERSION} · Mincmistr v1.2.3`);
+  assert.equal(await phone.locator('#report-exported-with').innerText(),`Re-exported with App v${VERSION} · Mincmistr v${MINCMISTR_RULES_VERSION}`);
   await click(phone,'#report-before');
   await phone.getByText('Position before the reported step loaded.',{exact:true}).waitFor();
   assert.deepEqual(await game(phone),doubleMine);

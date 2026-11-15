@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Crop the v1.2.2 Plan fronts into a three-column sprite for the offline app.
+"""Crop the printed Plan fronts into a three-column sprite for the offline app.
 
 Requires Poppler's pdftoppm and Pillow with WebP support.
 """
