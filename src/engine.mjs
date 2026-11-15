@@ -1,18 +1,22 @@
 import {
-  BARBARA_TAX, BUILDINGS, BUILDING_GROUPS, CARDS, CITY, CITY_EDGE, COMMODITY,
-  EVENTS, GOODS, GUILDS, GUILD_SETUPS, HOUSE_EFFECTS, LABEL, MINE_ENTRANCES, MINE_GROUPS,
-  MINES, PATRICIANS, REP_LOSS, REP_SCORE, ROCK_LAYOUTS, ROCK_STARS, SAVE_SCHEMA, SETUP_VERSION,
-  TECHNOLOGY, TURN_CARD_COUNTS,
+  BARBARA_TAX, BUILDINGS, BUILDING_GROUPS, CARDS, CARDS_PER_TURN, CITY_WIDTH, COMMODITY,
+  EVENTS, GAME_RULES, GOODS, GUILDS, GUILD_SETUPS_BY_COUNT, HOUSE_EFFECTS, LABEL,
+  MINES, MINE_GROUPS, MINE_ROWS, PATRICIANS, REP_SCORE, ROCK_STARS, SAVE_SCHEMA, SETUP_VERSION,
+  TECHNOLOGY,
 } from './data.mjs';
 import {BUILD_DEMAND, CITY_BUILDS, PRICES} from './prices.mjs';
 import {randomIndex,shuffle} from './random.mjs';
 
-export const SEATS = ['You','Rival'];
+export const seatName = (seat, count) => seat===0?'You':count===2?'Rival':`Rival ${seat}`;
+export const rulesFor = state => GAME_RULES[state.players.length];
+export const turnsPerRound = state => state.players.length*CARDS_PER_TURN.length;
+export const cardsThisTurn = (state, turn=state.turn) => CARDS_PER_TURN[Math.floor(turn/state.players.length)];
+export const seatAtTurn = (state, turn) => (state.starter+turn)%state.players.length;
 const UNPLAYED = (1 << CARDS.length) - 1;
 const FROM_POPULATION = ['wood','food','beer'];
 const FROM_ORE = ['silver','permit'];
 const EFFECT_ID = action => JSON.stringify([action.kind,action.id,action.space,action.refill,action.color,action.card,action.as]);
-export const coordinate = (space, columns) => `${'ABCDEF'[space%columns]}${1+Math.floor(space/columns)}`;
+export const coordinate = (space, columns) => `${'ABCDEFG'[space%columns]}${1+Math.floor(space/columns)}`;
 export const eventNow = state => EVENTS[state.events[state.round-1]];
 export const currentBarbara = state => Math.min(state.barbara,12);
 const commodityRecord = () => Object.fromEntries(GOODS.map(key => [key,0]));
@@ -35,27 +39,34 @@ function player(guilds, coins) {
 
 export function createGame(options = {}) {
   const seed = String(options.seed ?? 'silver-1308').trim().slice(0,64) || 'silver-1308';
-  const setup = Object.hasOwn(GUILD_SETUPS,options.setup) ? Number(options.setup) : 1;
-  const side = options.side===1 ? 1 : 0;
-  const starter = options.starter===1 ? 1 : 0;
+  const count = [2,3,4].includes(options.playerCount)?options.playerCount:2;
+  const rules=GAME_RULES[count];
+  const setupCards=GUILD_SETUPS_BY_COUNT[count];
+  const setup = Object.hasOwn(setupCards,options.setup) ? Number(options.setup) : 1;
+  const seatOption=value=>Number.isInteger(value)&&value>=0&&value<count?value:0;
+  const side=seatOption(options.side);
+  const starter=seatOption(options.starter);
   const rng = seedNumber(seed);
+  const sets=setupCards[setup];
+  const others=sets.filter((_,index)=>index!==side);
+  const guildSets=[sets[side],...shuffle({rng:seedNumber(`guild-sets/${rng}/${setup}/${side}/${count}`)},others)];
   const state = {
     schema:SAVE_SCHEMA, setupVersion:SETUP_VERSION, seed, rng,
-    setup, side, starter, round:1, turn:0, left:TURN_CARD_COUNTS[0],
+    setup, side, starter, round:1, turn:0, left:CARDS_PER_TURN[0],
     actor:starter, phase:'action', pending:[], difficulty:options.difficulty==='quick'?'quick':'standard',
-    players:GUILD_SETUPS[setup].map((_,i) => {
-      const printed = GUILD_SETUPS[setup][i===0?side:1-side];
+    players:guildSets.map((printed,i) => {
       const order = options.orders?.[i];
-      const coins = i===starter?40:41;
+      const coins = 40+(i-starter+count)%count;
       if (Array.isArray(order) && order.length===3 && new Set(order).size===3 && order.every(key=>printed.includes(key))) {
         return player(order,coins);
       }
       if (i===0) return player(printed,coins);
       // Keep the rival's house order independent of the market and deck shuffles.
-      const houseRng = {rng:seedNumber(`rival-houses/${rng}/${setup}/${side}`)};
+      const suffix=count===2?'':`/${count}/${i}`;
+      const houseRng = {rng:seedNumber(`rival-houses/${rng}/${setup}/${side}${suffix}`)};
       return player(shuffle(houseRng,printed),coins);
     }),
-    city:empty(CITY.length), mine:empty(20), market:[], marketDiscard:[],
+    city:empty(rules.board.town.length), mine:empty(MINE_ROWS*rules.board.mineWidth), market:[], marketDiscard:[],
     mineDeck:[], mineDiscard:[], mineMixed:false, technology:0, red:[], events:[],
     pop:0, ore:0, arms:commodityRecord(), tax:0, barbara:1,
     bank:tokenRecord(3), patrons:tokenRecord(0), council:tokenRecord(0),
@@ -71,13 +82,17 @@ export function createGame(options = {}) {
     return [...rows,{group,tiles:shuffle(state,BUILDING_GROUPS[group].map(tile=>tile.id))}];
   });
   state.red = shuffle(state,BUILDING_GROUPS.red.map(tile=>tile.id));
-  state.mineLayout = randomIndex(state,ROCK_LAYOUTS.length);
-  if (Number.isInteger(options.mineLayout) && ROCK_LAYOUTS[options.mineLayout]) state.mineLayout=options.mineLayout;
+  const layouts=rules.board.rockLayouts;
+  state.mineLayout = randomIndex(state,layouts.length);
+  if (Number.isInteger(options.mineLayout) && layouts[options.mineLayout]) state.mineLayout=options.mineLayout;
   const rocks = shuffle(state,ROCK_STARS);
-  for (const [i,space] of ROCK_LAYOUTS[state.mineLayout].entries()) state.mine[space]={rock:true,stars:rocks[i]};
+  for (const [i,space] of layouts[state.mineLayout].entries()) state.mine[space]={rock:true,stars:rocks[i]};
   state.mineDeck = MINE_GROUPS.flatMap(group=>shuffle(state,group.map(tile=>tile.id)));
   const pool = key => Object.keys(EVENTS).filter(id=>EVENTS[id].set===key);
-  state.events = [...shuffle(state,pool('A')).slice(0,3),...shuffle(state,pool('B')).slice(0,2)];
+  if (count===2 || options.events===true) {
+    state.events=[...shuffle(state,pool('A')).slice(0,rules.redRound),
+      ...shuffle(state,pool('B')).slice(0,rules.rounds-rules.redRound-1)];
+  }
   beginRound(state);
   return state;
 }
@@ -86,7 +101,8 @@ export function copyState(state, keepLog = true) {
   return {
     ...state,
     players:state.players.map(p=>({...p,production:{...p.production},houses:[...p.houses],held:[...p.held]})),
-    city:[...state.city], mine:[...state.mine], pending:state.pending.map(item=>({...item,drawn:item.drawn && [...item.drawn]})),
+    city:[...state.city], mine:[...state.mine],
+    pending:state.pending.map(item=>item.drawn?{...item,drawn:[...item.drawn]}:{...item}),
     market:state.market.map(row=>row.map(stack=>({group:stack.group,tiles:[...stack.tiles]}))),
     arms:{...state.arms}, bank:{...state.bank}, patrons:{...state.patrons}, council:{...state.council},
     mineDeck:[...state.mineDeck], mineDiscard:[...state.mineDiscard], marketDiscard:[...state.marketDiscard],
@@ -161,17 +177,12 @@ function produce(state, seat, key, amount, affectsOre = true) {
   if (key==='ore' && affectsOre) advanceDemand(state,'ore',amount);
 }
 
-function townNeighbours(space) {
-  const row = Math.floor(space/6);
-  const col = space%6;
-  return [row>0?space-6:-1,row<4?space+6:-1,col>0?space-1:-1,col<5?space+1:-1].filter(i=>CITY[i]);
-}
-export const TOWN_NEIGHBOURS = CITY.map((open,space)=>open?townNeighbours(space):[]);
 export function plotSpaces(state, seat, free=false, rep=state.players[seat].rep) {
   if (plotCount(state,seat)>=3) return [];
-  const open = CITY.flatMap((active,space)=>active && !state.city[space] ? [space] : []);
+  const {town,neighbours}=rulesFor(state).board;
+  const open = town.flatMap((active,space)=>active && !state.city[space] ? [space] : []);
   const adjacent = open.map(space=>{
-    const costs=TOWN_NEIGHBOURS[space].flatMap(i=>state.city[i]?.id?[BUILDINGS[state.city[i].id].plot]:[]);
+    const costs=neighbours[space].flatMap(i=>state.city[i]?.id?[BUILDINGS[state.city[i].id].plot]:[]);
     return {space,cost:costs.length?Math.max(...costs):null};
   });
   const mustTouch = !free && adjacent.some(item=>item.cost!==null);
@@ -181,15 +192,16 @@ export function plotSpaces(state, seat, free=false, rep=state.players[seat].rep)
 }
 
 export function mineSpaces(state) {
+  const {mineWidth,entrances}=rulesFor(state).board;
   const result=[];
   for (let space=0;space<state.mine.length;space++) {
     if (state.mine[space]) continue;
-    const col=space%5;
-    if (MINE_ENTRANCES.includes(space)) {
+    const col=space%mineWidth;
+    if (entrances.includes(space)) {
       result.push({space,wood:2});
       continue;
     }
-    const adjacent=[col>0?space-1:-1,col<4?space+1:-1,space-5];
+    const adjacent=[col>0?space-1:-1,col<mineWidth-1?space+1:-1,space-mineWidth];
     const costs=adjacent.flatMap(i=>state.mine[i]?.id?[MINES[state.mine[i].id].extend]:[]);
     if (costs.length) result.push({space,wood:Math.max(...costs)});
   }
@@ -336,7 +348,7 @@ export function legalActions(state) {
   const p=state.players[state.actor];
   if (state.phase==='tax') {
     const cost=taxCost(state,state.actor);
-    return [...(p.coins>=cost?[{kind:'tax',cost}]:[]),{kind:'penalty',loss:REP_LOSS[state.round]}];
+    return [...(p.coins>=cost?[{kind:'tax',cost}]:[]),{kind:'penalty',loss:rulesFor(state).repLoss[state.round]}];
   }
   if (state.pending.length) return pendingChoices(state,state.pending[0]);
   const actions=[];
@@ -393,7 +405,7 @@ function placeMine(state, action, free) {
   produce(state,seat,'ore',tile.ore);
   advanceDemand(state,'pop',tile.pop);
   p.vp+=tile.vp;
-  log(state,seat,`Placed ${tile.name} at mine ${coordinate(action.space,5)} for ${action.cost} g.`);
+  log(state,seat,`Placed ${tile.name} at mine ${coordinate(action.space,rulesFor(state).board.mineWidth)} for ${action.cost} g.`);
 }
 
 function claimRights(state, action) {
@@ -411,7 +423,7 @@ function construct(state, action) {
   pay(p,action.cost);
   p.held.splice(p.held.indexOf(tile.id),1);
   state.city[action.space]={id:tile.id,owner:tile.public?null:seat};
-  log(state,seat,`Built ${tile.name} at town ${coordinate(action.space,6)} for ${action.cost} g.`);
+  log(state,seat,`Built ${tile.name} at town ${coordinate(action.space,CITY_WIDTH)} for ${action.cost} g.`);
   if (tile.public) {
     p.vp+=tile.vp;
     p.pelicans+=tile.pelicans;
@@ -483,7 +495,7 @@ function basicEffect(state, action, free=false) {
     case 'plot':
       pay(p,action.cost);
       state.city[action.space]={plot:seat};
-      log(state,seat,`Claimed town ${coordinate(action.space,6)} for ${action.cost} g.`);
+      log(state,seat,`Claimed town ${coordinate(action.space,CITY_WIDTH)} for ${action.cost} g.`);
       break;
     case 'build': construct(state,action); break;
     case 'mine': startMine(state,action,free); break;
@@ -543,15 +555,17 @@ export function cityPointsAt(state, space) {
   const cell=state.city[space];
   if (!cell?.id) return 0;
   const dots=BUILDINGS[cell.id].dots;
-  return matchingDots(dots,CITY_EDGE[space]??'')+TOWN_NEIGHBOURS[space].reduce((sum,i)=>{
+  const {edge,neighbours}=rulesFor(state).board;
+  return matchingDots(dots,edge[space]??'')+neighbours[space].reduce((sum,i)=>{
     const id=state.city[i]?.id;
     return sum+(id?matchingDots(dots,BUILDINGS[id].dots):0);
   },0);
 }
 export function mineRow(state, row) {
-  const cells=state.mine.slice(row*5,row*5+5);
-  const count=[0,0];
-  const stars=[0,0];
+  const width=rulesFor(state).board.mineWidth;
+  const cells=state.mine.slice(row*width,(row+1)*width);
+  const count=state.players.map(()=>0);
+  const stars=state.players.map(()=>0);
   let total=0;
   for (const cell of cells) if (cell) {
     total+=cell.stars;
@@ -560,29 +574,35 @@ export function mineRow(state, row) {
       stars[cell.owner]+=cell.stars;
     }
   }
-  const awards=total<=3?[2,0]:total<=6?[4,1]:[6,2];
-  const vp=stars.map((value,seat)=>value===0?0:awards[Number(value<stars[1-seat])]);
+  const awards=state.players.length===2
+    ? (total<=3?[2,0]:total<=6?[4,1]:[6,2])
+    : (total<=5?[2,1,0]:total<=9?[3,2,1]:[5,3,2]);
+  const vp=stars.map(value=>value===0?0:awards[stars.filter(other=>other>value).length]??0);
   return {count,stars,total,vp,awards};
 }
-export function patricianBase(state, seat) {
+export function mineRows(state) {
+  return Array.from({length:MINE_ROWS},(_,row)=>mineRow(state,row));
+}
+export function patricianBase(state, seat, rows=mineRows(state)) {
   const p=state.players[seat];
+  const {neighbours}=rulesFor(state).board;
   let green=0;
   for (const [i,cell] of state.city.entries()) if (cell?.owner===seat) {
-    green+=TOWN_NEIGHBOURS[i].filter(i=>state.city[i]?.id && state.city[i].owner===null).length;
+    green+=neighbours[i].filter(i=>state.city[i]?.id && state.city[i].owner===null).length;
   }
-  const yellow=2*Math.min(2,...[0,1,2,3].map(row=>mineRow(state,row).count[seat]));
+  const yellow=2*Math.min(2,...rows.map(row=>row.count[seat]));
   return {green,silver:Math.floor(p.usedPelicans/2)*3,yellow,red:3*Math.min(...p.houses)};
 }
 export function patricianPoints(state, seat) {
   const base=patricianBase(state,seat);
   return PATRICIANS.reduce((sum,color)=>sum+base[color]*state.council[color],0);
 }
-export function scoreBreakdown(state, seat) {
+export function scoreBreakdown(state, seat, rows=mineRows(state)) {
   const p=state.players[seat];
   const parts={
     earned:p.vp,
     town:state.city.reduce((total,cell,i)=>total+(cell?.owner===seat?cityPointsAt(state,i):0),0),
-    mines:[0,1,2,3].reduce((total,row)=>total+mineRow(state,row).vp[seat],0),
+    mines:rows.reduce((total,row)=>total+row.vp[seat],0),
     income:Math.floor(income(state,seat)/10),
     reputation:REP_SCORE[p.rep]??0,
     extras:p.held.length+plotCount(state,seat)+p.pelicans,
@@ -591,9 +611,11 @@ export function scoreBreakdown(state, seat) {
 }
 
 export function finalResult(state) {
-  const scores=[scoreBreakdown(state,0),scoreBreakdown(state,1)];
-  const difference=scores[0].total-scores[1].total || scores[0].coins-scores[1].coins;
-  return {scores,winner:difference===0?null:difference>0?0:1};
+  const rows=mineRows(state);
+  const scores=state.players.map((_,seat)=>scoreBreakdown(state,seat,rows));
+  const best=scores.reduce((a,b)=>b.total>a.total||(b.total===a.total&&b.coins>a.coins)?b:a);
+  const winners=scores.flatMap((score,seat)=>score.total===best.total&&score.coins===best.coins?[seat]:[]);
+  return {scores,winner:winners.length===1?winners[0]:null,winners};
 }
 
 function resolveEvent(state) {
@@ -641,7 +663,7 @@ function resolveEvent(state) {
 function beginRound(state) {
   state.actor=state.starter;
   state.turn=0;
-  state.left=TURN_CARD_COUNTS[0];
+  state.left=CARDS_PER_TURN[0];
   state.phase='action';
   for (const p of state.players) p.hand=UNPLAYED;
   const event=eventNow(state);
@@ -649,38 +671,39 @@ function beginRound(state) {
   log(state,null,`Round ${state.round} begins${event?` · ${event.name}`:''}.`);
 }
 function finishRound(state) {
-  if (state.round>=4) {
-    for (let seat=0;seat<2;seat++) {
+  const {rounds,redRound}=rulesFor(state);
+  if (state.round>redRound) {
+    for (const [seat,player] of state.players.entries()) {
       const points=patricianPoints(state,seat);
-      state.players[seat].vp+=points;
+      player.vp+=points;
       if (points) log(state,seat,`Scored ${points} VP from the town council.`);
     }
   }
-  if (state.round===6) {
+  if (state.round===rounds) {
     state.result=finalResult(state);
     state.phase='end';
     return;
   }
-  if (state.round===3) for (const [i,id] of state.red.entries()) state.market[i].push({group:id,tiles:[id]});
+  if (state.round===redRound) for (const [i,id] of state.red.entries()) state.market[i].push({group:id,tiles:[id]});
   state.round++;
-  state.starter=1-state.starter;
+  state.starter=(state.starter+1)%state.players.length;
   beginRound(state);
 }
 function finishCard(state) {
   if (state.pending.length || state.left>0) return;
   state.turn++;
-  if (state.turn===TURN_CARD_COUNTS.length) {
+  if (state.turn===turnsPerRound(state)) {
     state.actor=state.starter;
     resolveEvent(state);
-    if (state.events[state.round-1]==='rush' || [0,1].every(seat=>taxCost(state,seat)===0)) finishRound(state);
+    if (state.events[state.round-1]==='rush' || state.players.every((_,seat)=>taxCost(state,seat)===0)) finishRound(state);
     else {
       state.phase='tax';
       state.taxIndex=0;
     }
     return;
   }
-  state.actor=1-state.actor;
-  state.left=TURN_CARD_COUNTS[state.turn];
+  state.actor=seatAtTurn(state,state.turn);
+  state.left=cardsThisTurn(state);
 }
 function resolveTax(state, action) {
   const p=state.players[state.actor];
@@ -691,9 +714,9 @@ function resolveTax(state, action) {
     changeRep(p,-action.loss);
     log(state,state.actor,`Accepted −${action.loss} reputation in lieu of tax.`);
   }
-  if (state.taxIndex===0) {
-    state.taxIndex=1;
-    state.actor=1-state.actor;
+  if (state.taxIndex<state.players.length-1) {
+    state.taxIndex++;
+    state.actor=seatAtTurn(state,state.taxIndex);
   } else finishRound(state);
 }
 

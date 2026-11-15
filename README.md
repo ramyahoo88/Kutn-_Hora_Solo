@@ -1,10 +1,20 @@
-# Kutná Hora Solo v0.2.3 playtest
+# Kutná Hora Solo v0.3.0 playtest
 
-An unofficial browser playtest for Kutná Hora: The City of Silver. Play one seat of the base two-player game against a rival. The app owns the city, mines, market, council and game draws. The same HTML works offline. Players can mirror its placements on the table. A game in progress can be moved between the hosted and offline copies by exporting and importing its JSON save.
+An unofficial browser playtest for Kutná Hora: The City of Silver. Play one seat against one, two or three rivals. The app handles the town, mines, market, council and game draws. The same HTML works offline. Players can mirror its placements on the table. Export and import a JSON save to move a game between copies.
 
 To play offline, open [Kutna_Hora_Solo.html](Kutna_Hora_Solo.html) on GitHub, choose **Download raw file**, and open the downloaded file in your browser.
 
-Start with the game already on screen, or use **New game** to choose a seed, one of the nine setup cards, a seat, house order, starting player and rival setting. The current default is card 1, the Metallurgists, Miners and Innkeepers seat, and Standard. The board uses original diagram styling and component facts. The banner is cropped from [St. Barbara’s Church by Txllxt TxllxT](https://commons.wikimedia.org/wiki/File:Kutn%C3%A1_Hora_-_St._Barbara%27s_Church_-_Panoramic_Photocompilation.jpg) under [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/). The font licenses are bundled with the source and HTML.
+Choose a rival count in **New game**. Pick your guild set from that player count's setup card and arrange your house rows. The seed assigns each remaining set once and determines the rivals’ house rows. At larger tables, **Play rivals** runs through the consecutive rival turns and tax decisions until you have a choice or the game ends. Earlier two-player saves import as two-player games.
+
+| Rivals | Total players | Rounds | Board | Red buildings enter after | Events |
+| ---: | ---: | ---: | --- | ---: | --- |
+| 1 | 2 | 6 | 18 town spaces, 5 mine columns | Round 3 | On |
+| 2 | 3 | 6 | 30 town spaces, 7 mine columns | Round 3 | Optional, default off |
+| 3 | 4 | 5 | 30 town spaces, 7 mine columns | Round 2 | Optional, default off |
+
+The larger boards use their printed rock layouts, edge villages and mine rank awards. The council scores in the last three rounds at every table. Optional events use A cards before the red buildings arrive, B cards afterward, and leave the final round empty. [CGE English rulebook](https://filemanager.czechgames.com/storage/files/kutna-hora-the-city-of-silver/rules/kutna-hora-rules-en.pdf)
+
+The board uses original diagram styling and component facts. The banner is cropped from [St. Barbara’s Church by Txllxt TxllxT](https://commons.wikimedia.org/wiki/File:Kutn%C3%A1_Hora_-_St._Barbara%27s_Church_-_Panoramic_Photocompilation.jpg) under [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/). The font licenses are bundled with the source and HTML.
 
 Version 0.2.3 previews the VP cost of tax penalties and the reputation gained on St. Barbara tile 7. Open a market tile, held right or placed tile to see its details. Both player boards show the full house reward tracks, and unavailable actions say what they need. The Guide explains that reloading clears Undo history. See the [second audit](https://github.com/ramyahoo88/Kutn-_Hora_Solo/blob/d9340884701993512529426f72a620059fab7390/docs/Astra_Audit_2_v0.2.2.md).
 
@@ -19,27 +29,32 @@ Version 0.2.0 added the rival’s visible hand and both player boards, previews 
 ```sh
 node build.mjs
 cmp dist/index.html Kutna_Hora_Solo.html
-node --test test/engine.test.mjs
-node test/arena.mjs 12 baseline,quick,builder,miner,council,denial kutna-v020-fresh
+node --test test/*.test.mjs
+node test/rival-study.mjs 12 v030-check
 ```
 
-The engine and browser use the same legal actions and state transitions. Standard considers the current turn and, when available, one more card. It values both players’ town and mine scores, income, reputation, money and council prospects. It samples unseen mine faces and market orders from the public position. It treats the other player’s current board as fixed during its short lookahead. Quick searches fewer continuations. Neither uses score bonuses or starting resources beyond the ordinary two-player setup.
+Standard values progress toward the reputation discount, and favors rights and plots it can use together. It searches the current turn and up to one extra card, then adjusts its best plans for a likely legal card from the next player. Quick checks fewer continuations. The public game seed can vary close choices. Resuming a save reproduces the same decision. The rival estimates unseen tiles from the public position.
 
-In the v0.2.2 benchmark, Standard won 91 of 144 games and averaged +3.39 VP. Each pairing used 12 seeds, with Standard assigned to both seats in separate games. The benchmark uses scripted policies and measures relative performance in that environment. Human difficulty and tabletop usability still need playtests.
+The study uses 24 starts in two seed groups. Each starts a game with both seats on the v0.2.3 policy, and two head-to-head games with the revised Standard in each seat in turn. The v0.2.3 policy reproduced 794 decisions and final scores against the original code across nine complete games. The revised policy won 15/24 in the first group and 14/24 in the second, for 29/48 and a +2.98 VP mean margin. The scripted comparison measures outcomes against the earlier policy. Human difficulty is open for playtesting.
 
-| Opponent | Standard wins / games | Mean VP difference |
+| Measure | v0.2.3 policy | Revised Standard |
 | --- | ---: | ---: |
-| Earlier planning evaluator | 16 / 24 | +3.21 |
-| Quick | 14 / 24 | +4.08 |
-| City construction | 14 / 24 | +2.04 |
-| Mining | 17 / 24 | +4.29 |
-| Council | 13 / 24 | +1.58 |
-| Denial | 17 / 24 | +5.13 |
+| Affordable nonzero tax bills declined | 63 / 204 | 14 / 211 |
+| Mean final reputation | 0.10 | 5.17 |
+| Mean unused rights | 1.79 | 0.88 |
+| Mean unused plots | 0.88 | 0.85 |
+| Mean buildings completed | 4.08 | 4.13 |
+| Mean council seats / cathedral actions | 0.48 / 0.75 | 0.83 / 1.29 |
+| Distinct first-round action sequences | 12 | 22 |
+| Mean cards played for no effect | 0.31 | 0.56 |
+
+The same study ran 12 three-player and 12 four-player games with Standard, Quick and specialist policies. Half of the games at each count enabled events. All 24 reached final scoring, with 3,246 state checks after transitions. Standard averaged about 9 ms per decision at three players and 10 ms at four on the test machine.
 
 ## Playtest checks
 
-- **Game 1.** Start as the Metallurgists, Miners, and Innkeepers on Card 1 with seed `silver-1308`. The rival’s rows should be Builders, Grocers, and Scribes. Play through final scoring.
-- **Game 2.** Use Card 6, the second guild set, Rival starts, and seed `kutna-v022-playtest-2`. The rival’s rows should be Scribes, Miners, and Innkeepers. Export and reimport a save before finishing.
+- **One rival.** Start as the Metallurgists, Miners, and Innkeepers on Card 1 with seed `silver-1308`. The rival’s rows should be Builders, Grocers, and Scribes.
+- **Two rivals.** Use Card 6 and seed `app-table-3`. Check the larger boards, six rounds, each rival's cards and the council starting in round 4.
+- **Three rivals.** Use Card 6, Rival 1 starts and seed `app-table-4`. Use **Play rivals** and check that each rival acts before play returns to you. Export and reimport a save. Check red buildings after round 2 and scoring after round 5.
 - **Safari.** Start a game, open the rival’s player board, and reload. Import the [Ius Regale short-stack save](test/fixtures/Ius_Regale_Short_Stack.json). Use **Play a card with no effect** and confirm the last card of Round 1. The event raises ore by 2 and discards all three remaining mine tiles. The journal reports the discard count. Your next Mine draw refills the stack from the discards.
 
 ## Sources and current rulings
@@ -48,7 +63,7 @@ In the v0.2.2 benchmark, Standard won 91 of 144 games and averaged +3.39 VP. Eac
 - [CGE English rulebook](https://filemanager.czechgames.com/storage/files/kutna-hora-the-city-of-silver/rules/kutna-hora-rules-en.pdf), especially pp. 4–20. CGE’s [two-player article](https://www.czechgames.com/news/diving-into-the-two-player-game-experience-in-kutna-hora) shows the smaller city, board-edge dots and two-player mine award table.
 - [CGE companion](https://kutnahora.czechgames.com/) for numerical prices, construction cutoffs, market increments and guild setups. [Printed component faces](https://www.ludex.dev/kutna-hora/cards/) for buildings, mine tiles, setup cards and events. Artist assets and rulebook pages are kept out of the game bundle.
 - [Capek listing](https://www.zatrolene-hry.cz/spolecenska-hra/kutna-hora-mesto-stribra-14736/k-stazeni/vlastni-solo-mod-capek-18184/) and [author discussion](https://boardgamegeek.com/filepage/279202/2024-solomode-capek) were consulted. This implementation is an independent rival using base game actions. The hosted Capek PDF download requires a sign-in, so its full procedure has not been compared here.
-- The game automatically continues through a round where both tax bills are zero. It accepts a draw after a VP and groschen tie. Promo events and importing an externally shuffled physical game are outside this build.
+- The game automatically continues when all tax bills are zero. Players tied for the highest VP and groschen share first place.
 - **Ius Regale Montanorum:** Advance the ore track by 2 and discard the next five mine tiles from the current stack. If fewer remain, discard the rest. The next Mine draw from an empty stack triggers the reshuffle (rulebook p. 19). This is the app’s interpretation of the event card.
 - When you build a red public building and have houses left, remove the leftmost house from a row of your choice. The removed house gives no reward (rulebook pp. 12 and 20). The option on p. 19 to play a card for no effect applies to the whole action. St. Barbara tile 3 specifically allows skipping its house removal.
 - St. Barbara tile 8 is current until the nested Building action finishes, following the resolve-then-flip text on p. 14. If that building itself flips a cathedral tile, the build uses the current tile and its tax. The overlapping flip timing is an interpretation awaiting a published ruling. Tile 3 grants ore production without advancing the ore deck, as in the CGE companion.

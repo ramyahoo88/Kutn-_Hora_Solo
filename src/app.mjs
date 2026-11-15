@@ -1,11 +1,11 @@
 import {
-  BARBARA, BUILDINGS, CARDS, CITY, CITY_EDGE, COMMODITY, GOODS, GUILDS,
-  GUILD_SETUPS, HOUSE_EFFECTS, LABEL, MINE_ENTRANCES, MINES, PATRICIANS, REP_SCORE,
+  BARBARA, BUILDINGS, CARDS, CITY_WIDTH, COMMODITY, GAME_RULES, GOODS, GUILDS,
+  GUILD_SETUPS_BY_COUNT, HOUSE_EFFECTS, LABEL, MINES, PATRICIANS, REP_SCORE,
 } from './data.mjs';
 import {
-  SEATS, applyKnownAction, canBuildGuild, cityPointsAt, copyState, coordinate, createGame, currentBarbara,
-  eventNow, income, legalActions, marketOffer, mineRow, patricianBase, plotCount, price,
-  reputationChange, scoreBreakdown, transition, unavailableActionReason,
+  applyKnownAction, canBuildGuild, cityPointsAt, copyState, coordinate, createGame, currentBarbara,
+  eventNow, income, legalActions, marketOffer, mineRows, patricianBase, plotCount, price,
+  reputationChange, rulesFor, scoreBreakdown, seatName, transition, unavailableActionReason,
 } from './engine.mjs';
 import {actionRationale,botAction} from './bot.mjs';
 import {readSave,writeSave} from './save.mjs';
@@ -34,6 +34,7 @@ try {
   saveFailed=true;
 }
 state ??= createGame({seed:FIRST_SEED});
+const playerName=seat=>seatName(seat,state.players.length);
 let undo=[];
 let selections=[];
 let cardPick=null;
@@ -162,16 +163,16 @@ function appliedEffects(action) {
 }
 function actionLabel(a) {
   switch(a.kind) {
-    case 'plot': return `Town ${coordinate(a.space,6)} · ${money(a.cost)}`;
+    case 'plot': return `Town ${coordinate(a.space,CITY_WIDTH)} · ${money(a.cost)}`;
     case 'rights': return `${BUILDINGS[a.id].name} · ${money(a.cost)}`;
-    case 'build': return `${BUILDINGS[a.id].name} at ${coordinate(a.space,6)} · ${money(a.cost)}`;
+    case 'build': return `${BUILDINGS[a.id].name} at ${coordinate(a.space,CITY_WIDTH)} · ${money(a.cost)}`;
     case 'income': return a.color ? `Collect ${money(a.gross)} and seat ${a.color} · 10 g` : `Collect ${money(a.gross)}`;
     case 'mine': return a.refill ? `Recruit ${a.refill} · ${money(a.cost)}, then draw` : 'Draw without buying a permit';
-    case 'place-mine': case 'technology': return `${MINES[a.id].name} at mine ${coordinate(a.space,5)} · ${money(a.cost)}`;
+    case 'place-mine': case 'technology': return `${MINES[a.id].name} at mine ${coordinate(a.space,rulesFor(state).board.mineWidth)} · ${money(a.cost)}`;
     case 'barbara': return `Spend one pelican · ${BARBARA[currentBarbara(state)][0]}`;
     case 'house': return `Remove a ${GUILDS[a.id]} house`;
     case 'patrician': return `Seat ${a.color} directly`;
-    case 'score-building': return `Score ${BUILDINGS[state.city[a.space].id].name} at ${coordinate(a.space,6)}`;
+    case 'score-building': return `Score ${BUILDINGS[state.city[a.space].id].name} at ${coordinate(a.space,CITY_WIDTH)}`;
     case 'tax': return `Pay ${money(a.cost)}`;
     case 'penalty': {
       const before=state.players[state.actor].rep;
@@ -217,26 +218,41 @@ function publicLink(id) {
 
 function renderDashboard() {
   const event=eventNow(state);
-  const title=state.phase==='end'?'Game complete':`Round ${state.round} of 6`;
-  const rounds=Array.from({length:6},(_,i)=>`<span title="Round ${i+1}" class="round-dot ${i+1===state.round?'now':''} ${i+1<state.round?'done':''}"></span>`).join('');
-  byId('dashboard').innerHTML=`<div class="round-label"><strong>${title}</strong><span class="round-dots" aria-hidden="true">${rounds}</span></div>
-    <div class="event"><strong>${event?'Current event':'Town council'} · ${event?event.name:'Final round'}</strong><span>${event?event.detail:'Patricians score after taxes, followed by final scoring.'}</span></div>
+  const {rounds,redRound}=rulesFor(state);
+  const title=state.phase==='end'?'Game complete':`Round ${state.round} of ${rounds}`;
+  const dots=Array.from({length:rounds},(_,i)=>`<span title="Round ${i+1}" class="round-dot ${i+1===state.round?'now':''} ${i+1<state.round?'done':''}"></span>`).join('');
+  let heading='Building market';
+  let detail=`Red public buildings enter after round ${redRound}.`;
+  if (state.round>redRound) {
+    heading='Town council';
+    detail=state.round===rounds?'Patricians score after taxes, followed by final scoring.':'Patricians score after taxes.';
+  }
+  if (event) {
+    heading=event.name;
+    detail=event.detail;
+  }
+  byId('dashboard').innerHTML=`<div class="round-label"><strong>${title}</strong><span class="round-dots" aria-hidden="true">${dots}</span></div>
+    <div class="event"><strong>${heading}</strong><span>${detail}</span></div>
     <div class="tax-label"><span>Tax rate</span><strong>${money(state.tax)}</strong></div>`;
 }
 function renderOverview() {
+  const rows=mineRows(state);
   const output=state.players.map((p,seat)=>{
-    const {total}=scoreBreakdown(state,seat);
+    const {total}=scoreBreakdown(state,seat,rows);
     return `<article class="player panel seat-${seat} ${state.actor===seat&&state.phase!=='end'?'on-move':''}">
-      <div class="player-title"><span class="seat-mark" aria-hidden="true"></span><h2>${SEATS[seat]}</h2><span class="guild-line">${p.guilds.map(id=>GUILDS[id]).join(' · ')}</span></div>
+      <div class="player-title"><span class="seat-mark" aria-hidden="true"></span><h2>${playerName(seat)}</h2><span class="guild-line">${p.guilds.map(id=>GUILDS[id]).join(' · ')}</span></div>
       <div class="player-values">
         <span><b>${p.coins}</b><small><span class="metric-long">Groschen</span><span class="metric-short" aria-hidden="true">Cash</span></small></span><span><b>${income(state,seat)}</b><small>Income</small></span>
         <span><b>${p.rep}</b><small><span class="metric-long">Reputation</span><span class="metric-short" aria-hidden="true">Rep</span></small></span><span><b>${p.vp}</b><small><span class="metric-long">Earned VP</span><span class="metric-short" aria-hidden="true">VP</span></small></span>
       </div>
       <div class="player-foot"><span>${p.pelicans} unused pelican${p.pelicans===1?'':'s'} · ${p.pool} ready ${p.pool===1?'miner':'miners'}</span><span>${total} VP ${state.phase==='end'?'final':'if scored now'}</span></div>
-      <button type="button" class="link board-link" data-do="player-board" data-value="${seat}" aria-label="View ${seat===0?'your':'the rival’s'} player board">Player board</button>
+      <button type="button" class="link board-link" data-do="player-board" data-value="${seat}" aria-label="View ${seat===0?'your':playerName(seat)+'’s'} player board">Player board</button>
     </article>`;
   });
-  byId('overview').innerHTML=output.join('')+`<section class="panel economy" aria-label="Commodity prices">
+  const overview=byId('overview');
+  overview.classList.toggle('many-seats',state.players.length>2);
+  overview.style.setProperty('--seats',state.players.length);
+  overview.innerHTML=output.join('')+`<section class="panel economy" aria-label="Commodity prices">
     <div class="economy-copy"><strong>Market prices</strong><small>Population ${state.pop} · Ore ${state.ore}</small></div>
     <div class="prices">${GOODS.map(g=>`<span class="price"><span class="commodity-sign commodity-${g}" aria-hidden="true">${signs[g]}</span><span>${COMMODITY[g]}</span><b>${price(state,g)}</b></span>`).join('')}</div>
   </section>`;
@@ -251,7 +267,7 @@ function houseReward(reward) {
 }
 function renderPlayerBoard() {
   const p=state.players[boardSeat];
-  byId('player-board-title').textContent=boardSeat===0?'Your player board':'Rival player board';
+  byId('player-board-title').textContent=boardSeat===0?'Your player board':`${playerName(boardSeat)} player board`;
   const goods=GOODS.map(key=>`<tr><th scope="row">${COMMODITY[key]}</th><td>${p.production[key]}</td><td>${money(price(state,key))}</td><td>${money(p.production[key]*price(state,key))}</td></tr>`).join('');
   const houses=p.guilds.map((key,row)=>{
     const removed=p.houses[row];
@@ -275,12 +291,17 @@ function renderPlayerBoard() {
     <p class="muted">Pelicans · ${p.pelicans} unused · ${p.usedPelicans} used</p>`;
 }
 function renderRivalHand() {
-  const hand=state.players[1].hand;
-  const cards=CARDS.filter((_,index)=>hand&(1<<index));
   const open=byId('rival-hand')?.open??true;
+  const hands=state.players.slice(1).map((player,i)=>{
+    const seat=i+1;
+    const cards=CARDS.filter((_,index)=>player.hand&(1<<index));
+    return `<div class="rival-cards seat-${seat}">
+      <strong>${playerName(seat)} <small>${cards.length} in hand</small></strong>
+      <ul aria-label="${playerName(seat)} action cards">${cards.map(pair=>`<li>${pair.map(kind=>LABEL[kind]).join(' / ')}</li>`).join('')}</ul>
+    </div>`;
+  });
   return `<details id="rival-hand" class="panel rival-hand" ${open?'open':''}>
-    <summary>Rival action cards <span class="fine">${cards.length} in hand</span></summary>
-    <ul aria-label="Cards in the rival’s hand">${cards.map(pair=>`<li>${pair.map(kind=>LABEL[kind]).join(' / ')}</li>`).join('')}</ul>
+    <summary>Rival action cards</summary>${hands.join('')}
   </details>`;
 }
 function groupedChoices(actions) {
@@ -355,13 +376,14 @@ function renderPending(actions) {
   return renderChoices(actions,...titles[item.kind]);
 }
 function renderResult() {
-  const {scores,winner}=state.result;
-  const title=winner===null?'A draw':winner===0?'You won':'The rival won';
-  const tied=scores[0].total===scores[1].total && winner!==null;
+  const {scores,winner,winners}=state.result;
+  const title=winner===null?'Shared first place':winner===0?'You won':`${playerName(winner)} won`;
+  const note=winner===null?winners.map(playerName).join(' · '):
+    scores.some((score,seat)=>seat!==winner&&score.total===scores[winner].total)?'Groschen decided the tie.':'';
   const lines=[['earned','Earned during play'],['town','Town adjacency'],['mines','Mine rows'],['income','Final income'],['reputation','Reputation'],['extras','Unused pieces'],['total','Total VP'],['coins','Groschen']];
-  return `<h3 class="result-title">${title}</h3>${tied?'<p class="muted">Groschen decided the tie.</p>':''}<table class="score-table">
-    <thead><tr><th scope="col">Score</th><th scope="col">You</th><th scope="col">Rival</th></tr></thead>
-    <tbody>${lines.map(([key,label])=>`<tr class="${key==='total'?'total':''}"><th scope="row">${label}</th><td>${scores[0][key]}</td><td>${scores[1][key]}</td></tr>`).join('')}</tbody>
+  return `<h3 class="result-title">${title}</h3>${note?`<p class="muted">${note}</p>`:''}<table class="score-table final-score">
+    <thead><tr><th scope="col">Score</th>${scores.map((_,seat)=>`<th scope="col">${playerName(seat)}</th>`).join('')}</tr></thead>
+    <tbody>${lines.map(([key,label])=>`<tr class="${key==='total'?'total':''}"><th scope="row">${label}</th>${scores.map(score=>`<td>${score[key]}</td>`).join('')}</tr>`).join('')}</tbody>
     </table><button type="button" class="primary fill" data-do="dialog" data-value="setup">New game</button>`;
 }
 function renderDecisions() {
@@ -372,10 +394,12 @@ function renderDecisions() {
   if (state.phase==='end') {
     title='Final scoring';
     content=renderResult();
-  } else if (state.actor===1) {
-    title=state.phase==='tax'?'Rival taxes':'Rival turn';
-    const what=state.phase==='tax'?'Resolve rival taxes':'Play rival turn';
-    content=`<p class="muted">${state.phase==='tax'?'The rival decides whether to pay its taxes.':'The rival checks legal actions and plans what to do with its remaining cards.'}</p><button type="button" class="primary fill" data-do="rival" ${busy?'disabled aria-busy="true"':''}>${busy?'Rival is planning…':what}</button>`;
+  } else if (state.actor!==0) {
+    const multiple=state.players.length>2;
+    title=`${playerName(state.actor)} ${state.phase==='tax'?'taxes':'turn'}`;
+    const what=multiple?'Play rivals':state.phase==='tax'?'Resolve rival taxes':'Play rival turn';
+    const flow=multiple?'Resolves rival turns and taxes until your next decision.':'';
+    content=`${flow?`<p class="muted rival-flow">${flow}</p>`:''}<button type="button" class="primary fill" data-do="rival" ${busy?'disabled aria-busy="true"':''}>${busy?'Rival planning…':what}</button>`;
   } else if (state.phase==='tax') {
     title='Your taxes';
     content=renderChoices(legalActions(state),'Pay or lose reputation','Your choices include any plot surcharges.');
@@ -383,11 +407,15 @@ function renderDecisions() {
     tag='Resolve effect';
     content=renderPending(legalActions(state));
   } else content=renderCardChoices(legalActions(state));
-  const last = state.log.filter(x=>x.actor===1).slice(-4).reverse();
+  const last=state.log.filter(entry=>entry.actor>0).slice(-4).map(entry=>noteFor(entry.actor,entry.text));
   byId('decisions').innerHTML=`<section class="panel decision" aria-label="Turn actions"><div class="panel-head"><h2 id="turn-title" tabindex="-1">${title}</h2>${tag?`<span class="turn-tag">${tag}</span>`:''}</div>
     <div class="panel-body">${content}</div></section>
     ${state.phase==='end'?'':renderRivalHand()}
-    ${rivalReport.length||last.length?`<section class="panel rival-report"><div class="panel-head"><h2>Rival notes</h2></div><ul>${(rivalReport.length?rivalReport.slice(0,6):last.map(x=>x.text)).map(row=>`<li>${safe(row)}</li>`).join('')}</ul></section>`:''}`;
+    ${rivalReport.length||last.length?`<details class="panel rival-report" ${state.players.length===2?'open':''}><summary>Rival notes</summary><ul>${(rivalReport.length?rivalReport:last).map(row=>`<li>${safe(row)}</li>`).join('')}</ul></details>`:''}`;
+}
+
+function noteFor(seat, text) {
+  return state.players.length===2?text:`${playerName(seat)} · ${text}`;
 }
 
 function inspectAttributes(reference, label) {
@@ -407,7 +435,7 @@ function inspectTile(reference, trigger) {
   const space=Number(key);
   if (area==='mine') {
     const cell=state.mine[space];
-    const location=`Mine ${coordinate(space,5)}`;
+    const location=`Mine ${coordinate(space,rulesFor(state).board.mineWidth)}`;
     if (cell?.rock) {
       showTileDetails(trigger,'Rock',[['Location',location],['Stars',`${cell.stars} toward the row total`]]);
       return;
@@ -420,7 +448,7 @@ function inspectTile(reference, trigger) {
     if (tile.vp) effects.push(`VP +${tile.vp}`);
     showTileDetails(trigger,tile.name,[
       ['Location',location],
-      ['Owner',SEATS[cell.owner]],
+      ['Owner',playerName(cell.owner)],
       ['Stars',cell.stars],
       ['Expansion value',`${tile.extend} wood`],
       ['Printed effects',effects.join(' · ')||'No immediate production, population or VP'],
@@ -434,9 +462,9 @@ function inspectTile(reference, trigger) {
   if (!tile) return;
   const facts=[['Type',tile.public?'Public building':GUILDS[tile.group]]];
   if (offer) facts.push(['Rights price',money(offer.cost)],['Tiles in stack',offer.count]);
-  if (held) facts.push(['Held by',SEATS[space]]);
+  if (held) facts.push(['Held by',playerName(space)]);
   if (cell) {
-    facts.push(['Location',`Town ${coordinate(space,6)}`],['Owner',cell.owner===null?'Public':SEATS[cell.owner]]);
+    facts.push(['Location',`Town ${coordinate(space,CITY_WIDTH)}`],['Owner',cell.owner===null?'Public':playerName(cell.owner)]);
     if (!tile.public) facts.push(['Town score now',`${cityPointsAt(state,space)} VP`]);
   }
   facts.push(
@@ -451,24 +479,26 @@ function inspectTile(reference, trigger) {
   showTileDetails(trigger,tile.name,facts);
 }
 
-function mapCell(value, i, columns, area) {
+function mapCell(value, i, columns, area, board) {
   const id=coordinate(i,columns);
   const tile=area==='town'?BUILDINGS[value?.id]:MINES[value?.id];
   const selectedAction=selections[choice];
   const matching=selections.findIndex(a=>a.space===i&&(
     area==='town'?['plot','build','score-building'].includes(a.kind):['place-mine','technology'].includes(a.kind)));
   const active=matching>=0&&selectedAction?.space===i;
-  const owner=value?.owner!==undefined?value.owner:value?.plot;
-  const tokenClass=owner===0?'human':owner===1?'rival':value?'neutral':'open';
+  const owner=value?.owner??value?.plot;
+  const tokenClass=owner!==undefined?`seat-${owner}`:value?'neutral':'open';
+  const entrance=area==='mine'&&board.entrances.includes(i)&&!value;
   const classes=[`cell ${tokenClass}`,matching>=0?'target':'',active?'selected':'',value?.rock?'rock':'',
-    area==='mine'&&MINE_ENTRANCES.includes(i)&&!value?'entrance':''].join(' ');
-  const name=value?.rock?`Rock`:tile?.name??(value?'Reserved plot':area==='mine'&&MINE_ENTRANCES.includes(i)?'Entrance':'Open space');
-  const title=`${area==='town'?'Town':'Mine'} ${id} · ${name}${owner===0?' · You':owner===1?' · Rival':''}${value?.rock?` · ${value.stars} ★`:''}`;
-  const edge=area==='town'&&CITY_EDGE[i];
+    entrance?'entrance':''].join(' ');
+  const name=value?.rock?'Rock':tile?.name??(value?'Reserved plot':entrance?'Entrance':'Open space');
+  const positionOwner=owner!==undefined?playerName(owner):tile?.public?'Public':'';
+  const title=`${area==='town'?'Town':'Mine'} ${id} · ${name}${positionOwner?` · ${positionOwner}`:''}${value?.rock?` · ${value.stars} ★`:''}`;
+  const edge=area==='town'&&board.edge[i];
   const edgeMark=edge?`<span class="cell-edge" title="Board edge · ${dotLabels[edge]}"><span class="sr-only">Board edge</span>${dots({dots:edge})}</span>`:'';
   const details=area==='town'?dots(tile)+edgeMark:
     value?`<small>${value.stars} ★${tile?` · ${tile.extend}w`:''}</small>`:'';
-  const content=`<span class="cell-id">${id}</span>${value||area==='mine'&&MINE_ENTRANCES.includes(i)?`<b>${safe(name)}</b>`:''}${details}`;
+  const content=`<span class="cell-id">${id}</span>${value||entrance?`<b>${safe(name)}</b>`:''}${details}`;
   const attributes=`class="${classes}" title="${safe(title)}"`;
   const reference=`${area}/${i}`;
   const inspectable=tile||value?.rock;
@@ -480,15 +510,17 @@ function mapCell(value, i, columns, area) {
   return `<div ${attributes}>${content}</div>`;
 }
 function renderBoards() {
-  const town=state.city.map((v,i)=>CITY[i]?mapCell(v,i,6,'town'):'<div class="void" aria-hidden="true"></div>').join('');
-  const mine=state.mine.map((v,i)=>mapCell(v,i,5,'mine')).join('');
-  const rows=Array.from({length:4},(_,i)=>{
-    const row=mineRow(state,i);
-    return `<span title="Row ${i+1}, ${row.total} total stars"><small>Row ${i+1}</small><b>${row.vp[0]} / ${row.vp[1]}</b></span>`;
-  }).join('');
-  byId('boards').innerHTML=`<section class="panel board" aria-label="Town board"><div class="panel-head"><h2>Town</h2><div class="legend"><span class="you-dot">You</span><span class="rival-dot">Rival</span><span class="public-dot">Public</span></div></div><div class="town-grid">${town}</div></section>
+  const {board}=rulesFor(state);
+  const town=state.city.map((v,i)=>board.town[i]?mapCell(v,i,CITY_WIDTH,'town',board):'<div class="void" aria-hidden="true"></div>').join('');
+  const mine=state.mine.map((v,i)=>mapCell(v,i,board.mineWidth,'mine',board)).join('');
+  const rows=mineRows(state);
+  const columns=rows.map((row,i)=>`<th scope="col" title="${row.total} total stars">Row ${i+1}</th>`).join('');
+  const rowScores=state.players.map((_,seat)=>`<tr><th class="seat-${seat}" scope="row">${playerName(seat)}</th>${rows.map(row=>`<td>${row.vp[seat]}</td>`).join('')}</tr>`).join('');
+  const legend=state.players.map((_,seat)=>`<span class="seat-${seat}">${playerName(seat)}</span>`).join('');
+  byId('boards').innerHTML=`<section class="panel board" aria-label="Town board"><div class="panel-head"><h2>Town</h2><div class="legend">${legend}<span>Public</span></div></div><div class="town-grid">${town}</div></section>
     <section class="panel board" aria-label="Mine board"><div class="panel-head"><h2>Mines</h2><span class="fine">Draw ${state.technology+1} · ${state.mineDeck.length} in stack</span></div>
-    <div class="mine-grid">${mine}</div><div class="mine-scores"><span class="fine">Row VP<br>You / Rival</span>${rows}</div></section>`;
+    <div class="mine-grid" style="--mine-columns:${board.mineWidth}">${mine}</div>
+    <div class="mine-scores"><table class="score-table" aria-label="Mine row scores"><thead><tr><th scope="col">Mine VP</th>${columns}</tr></thead><tbody>${rowScores}</tbody></table></div></section>`;
 }
 
 function renderMarket() {
@@ -512,17 +544,23 @@ function renderMarket() {
     return `<button type="button" ${attributes} ${inspectAttributes(reference,`Inspect ${tile.name}`)}>${fields}</button>`;
   }).join(''));
   const held=state.players.map((p,seat)=>{
-    const tiles=p.held.map(id=>`<button type="button" class="link" ${inspectAttributes(`held/${seat}/${id}`,`Inspect ${BUILDINGS[id].name} held by ${seat===0?'you':'the rival'}`)}>${safe(BUILDINGS[id].name)}</button>`);
-    return `<div class="held-row"><span>${SEATS[seat]}</span><div class="held-tiles">${tiles.join('')||'—'}</div></div>`;
+    const tiles=p.held.map(id=>`<button type="button" class="link" ${inspectAttributes(`held/${seat}/${id}`,`Inspect ${BUILDINGS[id].name} held by ${seat===0?'you':playerName(seat)}`)}>${safe(BUILDINGS[id].name)}</button>`);
+    return `<div class="held-row"><span class="seat-${seat}">${playerName(seat)}</span><div class="held-tiles">${tiles.join('')||'—'}</div></div>`;
   }).join('');
-  const baseValues=state.players.map((_,seat)=>patricianBase(state,seat));
-  const patricians=PATRICIANS.map(color=>`<div title="Scores ${publicLink(color)}" class="council-row"><span class="patrician-${color}">${cap(color)}</span><span>${state.patrons[color]}</span><span>${state.council[color]}</span><strong>${baseValues[0][color]*state.council[color]} / ${baseValues[1][color]*state.council[color]}</strong></div>`).join('');
+  const standings=mineRows(state);
+  const baseValues=state.players.map((_,seat)=>patricianBase(state,seat,standings));
+  const patricians=PATRICIANS.map(color=>{
+    const points=baseValues.map((base,seat)=>`<span class="seat-${seat}" aria-label="${playerName(seat)} ${base[color]*state.council[color]} VP">${base[color]*state.council[color]}</span>`).join('');
+    return `<div title="Scores ${publicLink(color)}" class="council-row"><span class="patrician-${color}">${cap(color)}</span><span>${state.patrons[color]}</span><span>${state.council[color]}</span><strong class="council-points">${points}</strong></div>`;
+  }).join('');
+  const {rounds,redRound}=rulesFor(state);
+  const scoreOrder=state.players.map((_,seat)=>playerName(seat)).join(' / ');
   const number=currentBarbara(state);
   byId('town-hall').innerHTML=`<section class="panel" aria-label="Building offer"><div class="panel-head"><h2>Town hall</h2><span class="fine">Available rights</span></div>
     <div class="market"><span class="sr-only">Tiles list the wood cost and stack count.</span>${heading}<div class="offer-grid">${rows.join('')}</div></div>
     <div class="holdings"><h3>Held rights</h3>${held}</div></section>
-    <section class="panel council"><div class="panel-head"><h2>Council</h2><span class="fine">Scoring rounds 4–6</span></div><div class="panel-body">
-    <div class="council-row council-head"><span>Patrician</span><span>Pool</span><span>Seated</span><span>VP¹</span></div>${patricians}<small class="fine">¹ You / Rival at current standing</small></div></section>
+    <section class="panel council"><div class="panel-head"><h2>Council</h2><span class="fine">Scoring rounds ${redRound+1}–${rounds}</span></div><div class="panel-body">
+    <div class="council-row council-head"><span>Patrician</span><span>Pool</span><span>Seated</span><span>VP</span></div>${patricians}<small class="fine">${scoreOrder}</small></div></section>
     <section class="panel cathedral"><div class="panel-head"><h2>St. Barbara</h2><span class="fine">${number===12?'Complete':`Tile ${number} of 11`}</span></div>
     <div class="panel-body"><strong>${BARBARA[number][0]}</strong><p>${BARBARA[number][1]}</p></div></section>`;
 }
@@ -531,7 +569,7 @@ function renderJournal() {
   button.textContent=allJournal?'Show recent':'Show all';
   button.setAttribute('aria-expanded',String(allJournal));
   const entries=(allJournal?state.log:state.log.slice(-6)).slice().reverse();
-  byId('journal-body').innerHTML=`<ol class="log-list">${entries.map(item=>`<li><span class="log-round">R${item.round}</span><span class="log-seat seat-${item.actor}">${item.actor===null?'Town':SEATS[item.actor]}</span><span>${safe(item.text)}</span></li>`).join('')}</ol>`;
+  byId('journal-body').innerHTML=`<ol class="log-list">${entries.map(item=>`<li><span class="log-round">R${item.round}</span><span class="log-seat seat-${item.actor}">${item.actor===null?'Town':playerName(item.actor)}</span><span>${safe(item.text)}</span></li>`).join('')}</ol>`;
 }
 function render() {
   if (byId('tile-dialog').open) byId('tile-dialog').close();
@@ -566,40 +604,46 @@ function commit() {
   render();
   byId('turn-title').focus({preventScroll:true});
 }
-function runRival() {
-  if (busy||state.actor!==1||state.phase==='end') return;
+async function runRival() {
+  if (busy||state.actor===0||state.phase==='end') return;
   busy=true;
   render();
   const start=state;
-  setTimeout(()=>{
-    try {
-      let next=start;
-      const notes=[];
-      let limit=20;
-      while (limit-- && next.actor===1&&next.phase!=='end'&&next.round===start.round&&next.phase===start.phase&&next.turn===start.turn) {
+  const multiple=state.players.length>2;
+  try {
+    await new Promise(resolve=>setTimeout(resolve,24));
+    let next=start;
+    const notes=[];
+    let steps=0;
+    while (next.actor!==0&&next.phase!=='end') {
+      const turn=next;
+      do {
+        if (++steps>120) throw Error('The rivals’ turns did not finish.');
         const action=botAction(next);
         if (!action) throw Error('No legal rival action.');
         const why=actionRationale(next,action);
         const previousEntries=next.log.length;
         next=transition(next,action);
-        const entries=next.log.slice(previousEntries).filter(entry=>entry.actor===1).map(entry=>entry.text);
-        if (entries.length) notes.push(...entries);
-        if (why && ['rights','build','place-mine','technology','income'].includes(action.kind)) notes.push(why);
-      }
-      if (limit<0) throw Error('The rival’s turn did not finish.');
-      saveUndo();
-      state=next;
-      rivalReport=notes;
-      resetSelection();
-      writeLocal();
-    } catch (error) {
-      say(error.message,true);
-    } finally {
-      busy=false;
-      render();
-      byId('turn-title').focus({preventScroll:true});
+        const entries=next.log.slice(previousEntries).filter(entry=>entry.actor===turn.actor);
+        for (const entry of entries) notes.push(noteFor(turn.actor,entry.text));
+        if (!multiple&&why&&['rights','build','place-mine','technology','income'].includes(action.kind)) notes.push(why);
+      } while(next.actor===turn.actor&&next.phase===turn.phase&&next.round===turn.round&&next.turn===turn.turn);
+      if (!multiple) break;
+      // Let the browser update between rivals on larger tables.
+      if (next.actor!==0&&next.phase!=='end') await new Promise(resolve=>setTimeout(resolve,0));
     }
-  },24);
+    saveUndo();
+    state=next;
+    rivalReport=multiple?notes:notes.slice(0,6);
+    resetSelection();
+    writeLocal();
+  } catch (error) {
+    say(error.message,true);
+  } finally {
+    busy=false;
+    render();
+    byId('turn-title').focus({preventScroll:true});
+  }
 }
 function changeAction(card,kind) {
   const wasOpen=byId('decisions').querySelector('details')?.open??false;
@@ -615,24 +659,41 @@ function randomSeed() {
 function guildOrders(guilds) {
   return guilds.flatMap(a=>guilds.filter(b=>b!==a).map(b=>[a,b,guilds.find(c=>c!==a&&c!==b)]));
 }
+function fillTableOptions() {
+  const count=Number(byId('player-count').value);
+  const starter=byId('setup-form').elements.starter;
+  const previous=Number(starter.value);
+  starter.innerHTML=Array.from({length:count},(_,seat)=>`<option value="${seat}">${seatName(seat,count)}</option>`).join('');
+  starter.value=String(previous<count?previous:0);
+  byId('setup-events').hidden=count===2;
+  byId('setup-form').elements.events.disabled=count===2;
+  fillSetup();
+}
 function fillSetup(changeSide=true) {
   const card=Number(byId('guild-setup').value);
+  const count=Number(byId('player-count').value);
+  const sets=GUILD_SETUPS_BY_COUNT[count][card];
   const select=byId('guild-side');
-  const old=select.value||'0';
-  if (changeSide) select.innerHTML=GUILD_SETUPS[card].map((guilds,i)=>`<option value="${i}">${guilds.map(id=>GUILDS[id]).join(' · ')}</option>`).join('');
-  select.value=old;
-  const guilds=GUILD_SETUPS[card][Number(select.value)];
+  const old=Number(select.value);
+  if (changeSide) select.innerHTML=sets.map((guilds,i)=>`<option value="${i}">${guilds.map(id=>GUILDS[id]).join(' · ')}</option>`).join('');
+  const chosen=old<count?old:0;
+  select.value=String(chosen);
+  const guilds=sets[chosen];
   byId('guild-rows').innerHTML=guildOrders(guilds).map((order,i)=>`<option value="${i}">${order.map(id=>GUILDS[id]).join(' → ')}</option>`).join('');
-  byId('opening-note').textContent=`Rival guild set (row order set by seed) · ${GUILD_SETUPS[card][1-Number(select.value)].map(id=>GUILDS[id]).join(' · ')}`;
+  byId('opening-note').textContent=count===2
+    ? `Rival guild set (row order set by seed) · ${sets[1-chosen].map(id=>GUILDS[id]).join(' · ')}`
+    : `${GAME_RULES[count].rounds} rounds on the larger boards. The seed assigns the remaining guild sets and house rows to rivals.`;
 }
 function openDialog(kind) {
   if (kind==='setup') {
     const form=byId('setup-form');
-    byId('guild-setup').innerHTML=Object.keys(GUILD_SETUPS).map(key=>`<option ${Number(key)===state.setup?'selected':''} value="${key}">Card ${key}</option>`).join('');
+    byId('guild-setup').innerHTML=Object.keys(GUILD_SETUPS_BY_COUNT[2]).map(key=>`<option ${Number(key)===state.setup?'selected':''} value="${key}">Card ${key}</option>`).join('');
+    byId('player-count').value=String(state.players.length);
     form.elements.seed.value=randomSeed();
     form.elements.difficulty.value=state.difficulty;
+    form.elements.events.checked=state.players.length>2&&state.events.length>0;
     form.elements.starter.value='0';
-    fillSetup();
+    fillTableOptions();
     byId('guild-side').value=String(state.side);
     fillSetup(false);
   }
@@ -651,12 +712,16 @@ byId('setup-form').addEventListener('submit',event=>{
   event.preventDefault();
   if (busy) return;
   const form=new FormData(event.currentTarget);
+  const playerCount=Number(form.get('playerCount'));
   const setup=Number(form.get('setup'));
   const side=Number(form.get('side'));
-  saveUndo();
-  state=createGame({setup,side,seed:form.get('seed'),starter:Number(form.get('starter')),difficulty:form.get('difficulty'),
-    orders:[guildOrders(GUILD_SETUPS[setup][side])[Number(form.get('rows'))]],
+  const next=createGame({
+    playerCount,setup,side,events:form.has('events'),seed:form.get('seed'),
+    starter:Number(form.get('starter')),difficulty:form.get('difficulty'),
+    orders:[guildOrders(GUILD_SETUPS_BY_COUNT[playerCount][setup][side])[Number(form.get('rows'))]],
   });
+  saveUndo();
+  state=next;
   rivalReport=[];
   resetSelection();
   writeLocal(true);
@@ -666,6 +731,7 @@ byId('setup-form').addEventListener('submit',event=>{
 });
 byId('guild-side').addEventListener('change',()=>fillSetup(false));
 byId('guild-setup').addEventListener('change',()=>fillSetup());
+byId('player-count').addEventListener('change',fillTableOptions);
 byId('file').addEventListener('change',async event=>{
   const file=event.currentTarget.files[0];
   event.currentTarget.value='';

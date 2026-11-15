@@ -1,5 +1,5 @@
-export const VERSION = '0.2.3';
-export const SAVE_SCHEMA = 2;
+export const VERSION = '0.3.0';
+export const SAVE_SCHEMA = 3;
 export const SETUP_VERSION = 2;
 export const GUILDS = {
   wood: 'Builders', food: 'Grocers', beer: 'Innkeepers',
@@ -16,18 +16,27 @@ export const CARDS = [
   ['mine','joker'], ['mine','plot'], ['build','income'],
   ['build','plot'], ['rights','income'], ['rights','barbara'],
 ];
-export const TURN_CARD_COUNTS = [2,2,2,2,1,1];
-export const GUILD_SETUPS = {
-  1:[['silver','ore','beer'],['wood','permit','food']],
-  2:[['silver','food','ore'],['wood','beer','permit']],
-  3:[['ore','wood','silver'],['food','beer','permit']],
-  4:[['permit','ore','wood'],['beer','silver','food']],
-  5:[['permit','food','ore'],['wood','silver','beer']],
-  6:[['beer','permit','ore'],['silver','wood','food']],
-  7:[['food','ore','wood'],['permit','beer','silver']],
-  8:[['wood','beer','ore'],['permit','food','silver']],
-  9:[['food','ore','beer'],['silver','permit','wood']],
-};
+export const CARDS_PER_TURN = [2,2,1];
+// Match the 2-, 3- and 4-player rows of the nine printed setup cards.
+// Codes follow the CGE companion's guild setup table.
+const guildCode={b:'wood',e:'silver',m:'ore',g:'food',s:'permit',i:'beer'};
+const setupCodes=[
+  ['emi bsg','geb ime sbm','gem ims bie sgb'],
+  ['egm bis','gme ebi bsm','bme ism eig gbs'],
+  ['mbe gis','sbg egi meb','emg ibm bes gsi'],
+  ['smb ieg','egm imb bes','bem img egs sib'],
+  ['sgm bei','seg eib bms','emi gbm bse igs'],
+  ['ism ebg','bgs ise emb','iem gms egb sbi'],
+  ['gmb sie','gie seb bmi','smb igm esi beg'],
+  ['bim sge','gbe bsi eim','gsm mib sbe egi'],
+  ['gmi esb','esg ibe bgm','sim bmg esb ige'],
+];
+export const GUILD_SETUPS_BY_COUNT=Object.fromEntries([2,3,4].map(count=>[count,Object.fromEntries(
+  setupCodes.map((card,i)=>[i+1,card[count-2].split(' ').map(set=>[...set].map(code=>guildCode[code]))]),
+)]));
+export const GUILD_SETUPS=GUILD_SETUPS_BY_COUNT[2];
+export const CITY_WIDTH=6;
+export const MINE_ROWS=4;
 export const CITY = [
   '..xx..', '.xxxx.', 'xxxxxx', '.xxxx.', '..xx..',
 ].join('').split('').map(c => c === 'x');
@@ -39,6 +48,24 @@ export const ROCK_LAYOUTS = [
   [2,5,14,17], [2,8,11,15], [5,8,16,19], [7,12,15,19], [2,7,16,18],
   [6,9,12,18], [5,7,12,14], [5,9,16,18], [2,8,11,17], [2,5,9,12],
 ];
+const largeTown=Array(30).fill(true);
+const largeEdge={5:'y',11:'s',12:'r',17:'r',18:'y',24:'s'};
+const largeRocks=[
+  [2,12,15,25], [9,11,15,19], [9,11,17,24], [8,9,18,19], [8,10,12,24],
+  [8,12,16,18], [4,9,12,15], [8,11,23,26], [10,17,22,26], [9,11,22,26],
+  [8,16,19,24], [8,10,17,19], [8,12,23,25], [11,15,19,23], [3,15,19,24],
+];
+const makeBoard=(town,edge,mineWidth,entrances,rockLayouts)=>({
+  town,edge,mineWidth,entrances,rockLayouts,
+  neighbours:town.map((open,space)=>{
+    if (!open) return [];
+    const col=space%CITY_WIDTH;
+    return [space-CITY_WIDTH,space+CITY_WIDTH,col>0?space-1:-1,
+      col<CITY_WIDTH-1?space+1:-1].filter(i=>town[i]);
+  }),
+});
+const smallBoard=makeBoard(CITY,CITY_EDGE,5,MINE_ENTRANCES,ROCK_LAYOUTS);
+const largeBoard=makeBoard(largeTown,largeEdge,7,[1,5],largeRocks);
 export const HOUSE_EFFECTS = [
   [{public:true},{public:true,vp:1},{public:true,vp:3},{vp:8}],
   [{pelicans:1},{pelicans:1,vp:1},{pelicans:1,vp:3},{vp:8}],
@@ -46,6 +73,12 @@ export const HOUSE_EFFECTS = [
 ];
 export const REP_SCORE = {'-5':-4,'-4':-2,'-3':-1,3:1,4:2,5:4,6:6,7:8,8:10,9:13};
 export const REP_LOSS = [0,1,1,1,2,2,3];
+// Red buildings enter just before the final three council rounds.
+export const GAME_RULES={
+  2:{rounds:6,redRound:3,repLoss:REP_LOSS,board:smallBoard},
+  3:{rounds:6,redRound:3,repLoss:REP_LOSS,board:largeBoard},
+  4:{rounds:5,redRound:2,repLoss:[0,1,1,2,2,3],board:largeBoard},
+};
 export const BARBARA_TAX = [0,0,1,1,1,2,3,2,1,1,1,0];
 export const BARBARA = [null,
   ['Gain standing','Gain 2 reputation.'],
@@ -140,7 +173,7 @@ export const TECHNOLOGY = [1,2,3,3].map((extend,i) => ({id:`t${i+1}`,name:`Techn
 export const MINES = Object.fromEntries([...MINE_GROUPS.flat(),...TECHNOLOGY].map(tile => [tile.id,tile]));
 export const EVENTS = {
   abbey:{name:'Sedlec Abbey',set:'A',tax:2, detail:'At round end, cycle the top tile of each guild stack to its bottom.'},
-  fever:{name:'Silver Fever',set:'A',pop:2, detail:'At round end, population rises 2 and both miner pools refill for free.'},
+  fever:{name:'Silver Fever',set:'A',pop:2, detail:'At round end, population rises 2 and every miner pool refills for free.'},
   rush:{name:'Land Rush',set:'A',tax:4,pop:2, detail:'At round end, population rises 2. Skip all taxes this round.'},
   siege:{name:'Siege of Kutná Hora',set:'A',tax:2, detail:'At round end, discard the top tile of the three original public stacks.'},
   code:{name:'Ius Regale Montanorum',set:'A',ore:2, detail:'At round end, ore rises 2. Discard the next five mine tiles, or the rest of the stack if fewer remain.'},

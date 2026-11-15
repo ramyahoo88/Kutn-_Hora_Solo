@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="color-scheme" content="dark">
   <meta name="theme-color" content="#18191c">
-  <meta name="description" content="An unofficial solo playtest for Kutná Hora: The City of Silver, with a planning rival and a complete two-player board.">
+  <meta name="description" content="An unofficial solo playtest for Kutná Hora: The City of Silver. Play the two-, three-, or four-player game against up to three rivals.">
   <title>Kutná Hora Solo · The City of Silver</title>
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%231d2220'/%3E%3Cpath d='M16 4l12 12-12 12L4 16z' fill='%23d5b988'/%3E%3Cpath d='M16 10l6 6-6 6-6-6z' fill='%231d2220'/%3E%3C/svg%3E">
   <style>/* BUNDLE_CSS */</style>
@@ -71,14 +71,16 @@
     <form id="setup-form">
       <div class="panel-head"><h2 id="setup-title">New game</h2><button type="button" class="flat" data-do="close">Close</button></div>
       <div class="dialog-body">
-        <p class="muted">Play a six-round game against the rival. The app handles the boards, shuffles and scoring.</p>
+        <p class="muted">Play against one to three rivals.</p>
         <div class="field-grid">
+          <label>Rivals<select name="playerCount" id="player-count"><option value="2">1 rival</option><option value="3">2 rivals</option><option value="4">3 rivals</option></select></label>
+          <label>Starting player<select name="starter"><option value="0">You</option></select></label>
           <label>Guild setup<select name="setup" id="guild-setup"></select></label>
-          <label>Starting player<select name="starter"><option value="0">You</option><option value="1">Rival</option></select></label>
+          <label>Rival difficulty<select name="difficulty"><option value="standard">Standard</option><option value="quick">Quick</option></select></label>
           <label class="wide">Your guilds<select name="side" id="guild-side"></select></label>
           <label class="wide">Your house rows<select name="rows" id="guild-rows"></select></label>
-          <label>Rival<select name="difficulty"><option value="standard">Standard</option><option value="quick">Quick</option></select></label>
-          <label>Game seed<span class="input-pair"><input name="seed" type="text" maxlength="64" spellcheck="false" autocomplete="off"><button type="button" class="outline" data-do="seed">Random</button></span></label>
+          <label class="wide">Game seed<span class="input-pair"><input name="seed" type="text" maxlength="64" spellcheck="false" autocomplete="off"><button type="button" class="outline" data-do="seed">Random</button></span></label>
+          <label class="wide event-option" id="setup-events" hidden><input type="checkbox" name="events"> Use optional event cards</label>
         </div>
         <p id="opening-note" class="fine"></p>
         <button type="submit" class="primary">Start game</button>
@@ -88,14 +90,15 @@
   <dialog id="help-dialog" aria-labelledby="help-title">
     <div class="panel-head"><h2 id="help-title">Playing Kutná Hora Solo</h2><button type="button" class="flat" data-do="close">Close</button></div>
     <div class="dialog-body guide">
-      <p>Play one side of the two-player game. Choose a card half, pick a target if needed, and confirm. After two cards on your first two turns and one on your last, your round is complete. Use <strong>Play rival turn</strong> when the rival has the move.</p>
-      <p><strong>Set up your guilds.</strong> The printed setup lets the second player pick a guild set first. In New game you can choose either set and arrange your own house rows. The seed determines the rival’s row order.</p>
+      <p>Choose one, two or three rivals in <strong>New game</strong>. With three rivals the game lasts five rounds. With one or two it lasts six. Two-player games use event cards. Events are optional on the larger boards.</p>
+      <p><strong>Take your turn.</strong> Play two cards on each of your first two turns and one on your last. Pick the card half and target, then confirm. With multiple rivals, <strong>Play rivals</strong> continues until your next card, tax decision or final scoring.</p>
+      <p><strong>Set up your guilds.</strong> Choose your set from the printed setup card and arrange your house rows. The seed assigns the remaining sets and the rivals’ row order.</p>
       <p><strong>Build a guild income.</strong> Take Rights to a building, claim a Plot, then use Building. A Mine can also start ore production. The Income action collects the current value of your production. The market prices affect both players.</p>
       <p><strong>Follow the grid.</strong> Town and mine coordinates are read left to right, top to bottom. Colored dots are printed scoring matches. A striped guild offer can sell Rights while new construction of that guild is unavailable.</p>
-      <p><strong>Win on points.</strong> Patricians score in rounds 4–6. The final count adds town matches, mine row awards, final income, reputation and unused items to earned points. Coins break a points tie.</p>
+      <p><strong>Win on points.</strong> Patricians score in the last three rounds. The final count adds town matches, mine row awards, final income, reputation and unused items to earned points. Coins break a points tie. Any players still tied for first share the win.</p>
       <p><strong>Check public information.</strong> Open a tile to inspect its costs and effects. Use <strong>Details</strong> when the tile is an action target. Either player board shows the full house rewards, production and supplies. The rival’s remaining cards are below the turn controls.</p>
       <p><strong>Resume or share a position.</strong> This browser keeps your current game where local storage is available. Reloading clears Undo history. Export a JSON save to move between browsers or share a position. Version 0.1.0 saves keep their existing deck order. New games use the updated shuffle, so an old seed produces a different setup.</p>
-      <p><strong>Rival settings.</strong> Standard looks beyond its current turn and estimates the effect of both players’ positions. Quick checks fewer continuations. Both use the same rules and public game information.</p>
+      <p><strong>Rival settings.</strong> Both settings consider what the next player may do. Standard searches more continuations. Close choices can vary with the seed.</p>
       <p><a href="https://filemanager.czechgames.com/storage/files/kutna-hora-the-city-of-silver/rules/kutna-hora-rules-en.pdf" target="_blank" rel="noreferrer">CGE rulebook</a> · <a href="https://www.czechgames.com/news/available-now-the-kutna-hora-companion-app" target="_blank" rel="noreferrer">CGE market companion</a> · <a href="https://www.zatrolene-hry.cz/spolecenska-hra/kutna-hora-mesto-stribra-14736/k-stazeni/vlastni-solo-mod-capek-18184/" target="_blank" rel="noreferrer">Capek paper variant</a></p>
       <p class="fine">Banner cropped from <a href="https://commons.wikimedia.org/wiki/File:Kutn%C3%A1_Hora_-_St._Barbara%27s_Church_-_Panoramic_Photocompilation.jpg" target="_blank" rel="noreferrer">St. Barbara’s Church by Txllxt TxllxT</a> under <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noreferrer">CC BY-SA 4.0</a>.</p>
     </div>
