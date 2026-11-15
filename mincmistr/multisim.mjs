@@ -4,14 +4,20 @@
 import {appendFileSync} from 'node:fs';
 import {createGame,transition} from '../src/engine.mjs';
 import {botAction} from '../src/bot.mjs';
+import {checkPolicy} from './policies.mjs';
 import {createMincmistr,mincmistrAction,mincmistrCardsThisTurn} from './mincmistr.mjs';
-const [mode,players,level,bot,seeds,groups,out]=[process.argv[2],Number(process.argv[3]),process.argv[4],process.argv[5],Number(process.argv[6]),process.argv[7].split(','),process.argv[8]];
+const [mode,players,level,bot,seeds,groups,out]=[process.argv[2],Number(process.argv[3]),process.argv[4],checkPolicy(process.argv[5]),Number(process.argv[6]),process.argv[7].split(','),process.argv[8]];
 for (const group of groups) {
   const rows=[];
   for (let i=0;i<seeds;i++) for (let focus=0;focus<players;focus++) {
     let s=createGame({seed:`${group}-${i}`,playerCount:players,setup:1+i%9,side:i%2,starter:i%players});
     const mm=new Map();
-    for (let k=0;k<players;k++) if ((mode==='solo')===(k!==focus)) mm.set(k,createMincmistr(s,k,level));
+    for (let k=0;k<players;k++) if ((mode==='solo')===(k!==focus)) {
+      // 'extra:3.4.5.6' = Journeyman plus the double last turn in those rounds (counted as in a 6-round game).
+      const custom=level.startsWith('extra:'), m=createMincmistr(s,k,custom?'journeyman':level);
+      if (custom) m.settings={...m.settings,extraCard:level.slice(6).split('.').map(Number)};
+      mm.set(k,m);
+    }
     let steps=0;
     while (s.phase!=='end') {
       if (++steps>5000) throw Error(`stall ${s.seed}`);

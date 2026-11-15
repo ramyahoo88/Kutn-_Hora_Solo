@@ -2,7 +2,7 @@
 import {createGame,transition,legalActions} from '../src/engine.mjs';
 import {botAction} from '../src/bot.mjs';
 import {BUILDINGS} from '../src/data.mjs';
-import {createMincmistr,mincmistrAction} from './mincmistr.mjs';
+import {createMincmistr,mincmistrAction,mincmistrCardsThisTurn} from './mincmistr.mjs';
 const level=process.argv[2]??'journeyman', games=Number(process.argv[3]??12);
 const T={}; const add=(k,v=1)=>T[k]=(T[k]??0)+v;
 for (let i=0;i<games;i++) for (const seat of [0,1]) {
@@ -10,6 +10,7 @@ for (let i=0;i<games;i++) for (const seat of [0,1]) {
   const m=createMincmistr(s,seat,level);
   while (s.phase!=='end') {
     if (s.actor===seat) {
+      const extra=mincmistrCardsThisTurn(s,m); if (extra) s.left=extra;
       const a=mincmistrAction(s,m);
       const opts=legalActions(s).filter(x=>x.kind===a.kind && x.card===a.card && !x.as);
       if (s.phase==='tax') add('tax decisions');

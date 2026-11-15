@@ -76,7 +76,7 @@ def ref_cards():
       <p><b style="color:#3d4f63">Mine</b>: use a pool miner; if none, recruit up to 2.</p>
       <p><b style="color:#a0761c">St. Barbara</b>: contribute a pelican.</p>
       <p><b style="color:#5a4a86">Income</b>: seats the patrician with the biggest <b>edge ≥ 1</b> if it can pay 10 g (ties: green, silver, yellow, red).</p>
-      <p class="small">Edge = points one patrician gives it − points it gives you:</p>
+      <p class="small">Edge = points one patrician gives it − the most it gives any opponent:</p>
       <div class="edge">{dot('#3f8a4a')} 1 per public building next to each of its buildings<br>
       {dot('#a9b0b8')} 3 per 2 pelicans used<br>
       {dot('#d8b43a')} 2 per mine in its weakest row (max 2)<br>

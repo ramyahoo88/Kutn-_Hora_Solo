@@ -1,6 +1,6 @@
 # The Mincmistr
 
-**A card-driven solo opponent for Kutná Hora** · Version 1.2 · 15 Nov 2026
+**A card-driven solo opponent for Kutná Hora** · Version 1.2.1 · 15 Nov 2026
 
 You play a normal two-player game against the Mincmistr, the mint master. It plays by the same rules as a player. It starts like a player, pays every cost and either pays its taxes or loses reputation. It obeys every limit and scores the same way at the end. It gets no starting points and no hidden information. Instead of a player's judgement, it uses a short checklist, a deck of 15 Plan cards and a fixed row of its six action cards.
 
@@ -117,7 +117,8 @@ Free tiles from technology use the same placement rule.
 - **Remove a house**: from the guild row with the most houses already removed. Ties go to the top row. It always takes optional house removals.
 - **Seat a patrician from the bank**: the colour with the biggest edge (rule 6.6), even if that edge is 0 or less. Ties go green, silver, yellow, red.
 - **Score a building** (St. Barbara): its building with the most town points. Ties go by the arrow.
-- **Free plot, free building, extra Income or extra Mine**: use rules 6.2, 6.3, 6.6 and 5.2.
+- **Dig twice** (St. Barbara tile 9): it takes both free Mine actions, as the tile says, using miners from its reserve first. Placement is free; place each tile by rule 6.4.
+- **Free plot, free building or extra Income**: use rules 6.2, 6.3 and 6.6.
 
 ### 6.6 Income and patricians
 
@@ -169,6 +170,7 @@ To face more opponents, set up a three- or four-player game. Give each Mincmistr
 - Each Mincmistr follows these rules on its own.
 - Wherever a rule compares it with "you", it compares with the best of its opponents, you and the other Mincmistrs alike.
 - All of them play at the same level.
+- With three players, Master is slightly easy: the Standard rival won about 39% against a fair share of 33%. For an even game, give the double last turn to the last four rounds instead (rule 9, N = 4).
 
 ## 11. Example
 
@@ -195,7 +197,7 @@ Against two or three Mincmistrs, here is how often the app's Standard rival wins
 
 | Opponents | Apprentice | Journeyman | Master | Grandmaster |
 |---|---|---|---|---|
-| 2 Mincmistrs (3 players, fair share 33%) | 70% | 57% | 37% | 18% |
+| 2 Mincmistrs (3 players, fair share 33%) | 70% | 57% | 39% | 18% |
 | 3 Mincmistrs (4 players, fair share 25%) | 64% | 48% | 25% | 19% |
 
 Fine-tuning against the Standard rival, by the number of final rounds with a double last turn (768 games each):

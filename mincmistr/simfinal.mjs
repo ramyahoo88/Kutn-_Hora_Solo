@@ -2,6 +2,7 @@
 import {appendFileSync} from 'node:fs';
 import {createGame,transition,plotCount} from '../src/engine.mjs';
 import {botAction} from '../src/bot.mjs';
+import {checkPolicy} from './policies.mjs';
 import {createMincmistr,mincmistrAction,mincmistrCardsThisTurn} from './mincmistr.mjs';
 export function play({seed,setup,side,starter,seat,level,opponent}) {
   let s=createGame({seed,setup,side,starter});
@@ -19,7 +20,7 @@ export function play({seed,setup,side,starter,seat,level,opponent}) {
   return {s,m,decisions,ms};
 }
 if (import.meta.url===`file://${process.argv[1]}`) {
-  const [level,opps,games,groups,out]=[process.argv[2],process.argv[3].split(','),Number(process.argv[4]),process.argv[5].split(','),process.argv[6]];
+  const [level,opps,games,groups,out]=[process.argv[2],process.argv[3].split(',').map(checkPolicy),Number(process.argv[4]),process.argv[5].split(','),process.argv[6]];
   for (const opponent of opps) for (const group of groups) {
     const rows=[];
     for (let i=0;i<games;i++) for (const seat of [0,1]) {

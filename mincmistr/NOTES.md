@@ -132,3 +132,10 @@ and delivered at 03:30/03:55. Re-verified: deliverables present, equivalence 0 m
   Apprentice 70.1/64.3, Journeyman 57.3/48.4, Master 37.2/24.7, Grandmaster 18.1/18.5. Quick as you vs Journeyman 15.6/14.8.
 - One Mincmistr vs 2/3 Standard: Journeyman 11.1%/13.5%, Master 29.9%/30.2%.
 - Rules 1.2: section 10 "Two or three Mincmistrs", edge vs best opponent, Master = last three rounds.
+
+## 08:20-08:50 — v1.2.1 from GPT audit of e1712d9
+- Fixed Goals reference card (edge vs most any opponent gets), rule 6.5 Dig twice (free, reserve miners first, free placement).
+- policies.mjs: runners reject rival names the engine does not define (bot.mjs falls back to Standard silently).
+- overhead.mjs applies Master's double last turn (33 card plays).
+- 3p Master: x1-x4 37.2%, y1-y4 41.3% (combined 39.2%, 576 games) vs fair 33%; audit 42-44%. N=4 at 3p: 37.8%.
+  Rule 10 now recommends N=4 for three players. 4p Master at fair share (24.7% here; audit 26% separate decks / 21% shared).
