@@ -1,10 +1,11 @@
 import {
   BARBARA, BUILDINGS, CARDS, CITY, CITY_EDGE, COMMODITY, GOODS, GUILDS,
-  GUILD_SETUPS, HOUSE_EFFECTS, LABEL, MINE_ENTRANCES, MINES, PATRICIANS,
+  GUILD_SETUPS, HOUSE_EFFECTS, LABEL, MINE_ENTRANCES, MINES, PATRICIANS, REP_SCORE,
 } from './data.mjs';
 import {
-  SEATS, applyKnownAction, canBuildGuild, copyState, coordinate, createGame, currentBarbara, eventNow, income, legalActions,
-  marketOffer, mineRow, patricianBase, plotCount, price, scoreBreakdown, transition,
+  SEATS, applyKnownAction, canBuildGuild, cityPointsAt, copyState, coordinate, createGame, currentBarbara,
+  eventNow, income, legalActions, marketOffer, mineRow, patricianBase, plotCount, price,
+  reputationChange, scoreBreakdown, transition, unavailableActionReason,
 } from './engine.mjs';
 import {actionRationale,botAction} from './bot.mjs';
 import {readSave,writeSave} from './save.mjs';
@@ -14,6 +15,7 @@ const FIRST_SEED='silver-1308';
 const byId=id=>document.getElementById(id);
 const safe=value=>String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const money=n=>`${n} g`;
+const formatNumber=n=>String(n).replace('-','−');
 const dotLabels={b:'blue',r:'red',y:'yellow',s:'silver',o:'orange'};
 const signs={wood:'⌂',food:'✣',beer:'◈',ore:'⬟',silver:'◇',permit:'▤'};
 const cap=text=>text[0].toUpperCase()+text.slice(1);
@@ -135,6 +137,9 @@ function appliedEffects(action) {
   addChange(effects,'Tax rate',state.tax,next.tax,' g');
   addChange(effects,'VP',before.vp,after.vp);
   addChange(effects,'Reputation',before.rep,after.rep);
+  if (action.kind==='barbara' && before.rep===after.rep) {
+    effects.push(`Reputation stays at ${formatNumber(after.rep)}`);
+  }
   addChange(effects,'Pelicans',before.pelicans,after.pelicans);
   for (const color of PATRICIANS) addChange(effects,`${cap(color)} patrician pool`,state.patrons[color],next.patrons[color]);
   if (next.barbara!==state.barbara) {
@@ -168,7 +173,14 @@ function actionLabel(a) {
     case 'patrician': return `Seat ${a.color} directly`;
     case 'score-building': return `Score ${BUILDINGS[state.city[a.space].id].name} at ${coordinate(a.space,6)}`;
     case 'tax': return `Pay ${money(a.cost)}`;
-    case 'penalty': return `Take −${a.loss} reputation`;
+    case 'penalty': {
+      const before=state.players[state.actor].rep;
+      const {rep,vp}=reputationChange(before,-a.loss);
+      const losses=[];
+      if (rep<before) losses.push(`Lose ${before-rep} reputation`);
+      if (vp<0) losses.push(`Lose ${-vp} VP`);
+      return losses.join(' · ');
+    }
     case 'skip': return state.pending[0]?.kind==='mine-place'?'Discard all drawn mines':'Continue with no effect';
     default: return LABEL[a.kind]??a.kind;
   }
@@ -179,7 +191,23 @@ function choiceInfo(a) {
   if (a.kind==='build') return dots(BUILDINGS[a.id])+' '+appliedEffects(a);
   if (['technology','place-mine','house','score-building'].includes(a.kind)) return appliedEffects(a);
   if (a.kind==='mine') return `<span>Draw up to ${state.technology+1} ${state.technology?'tiles':'tile'}, then choose one or discard the draw.</span>`;
-  if (a.kind==='barbara') return `<span>${BARBARA[currentBarbara(state)][1]}</span>`;
+  if (a.kind==='barbara') {
+    const tile=currentBarbara(state);
+    const rule=`<span>${BARBARA[tile][1]}</span>`;
+    if (tile!==7) return rule;
+    const joker=a.as && state.players[state.actor].rep<6 ? 'Includes the Joker cost. ' : '';
+    return `${rule}<span class="effect-delta">${joker}${appliedEffects(a)}</span>`;
+  }
+  if (a.kind==='penalty') {
+    const before=state.players[state.actor].rep;
+    const {rep,vp}=reputationChange(before,-a.loss);
+    const effects=[rep===before?`Reputation stays at ${formatNumber(rep)}`:`Reputation ${formatNumber(before)} → ${formatNumber(rep)}`];
+    if (vp<0) effects.push(`Lose ${-vp} VP for steps below −5`);
+    const scoreBefore=REP_SCORE[before]??0;
+    const scoreAfter=REP_SCORE[rep]??0;
+    if (scoreBefore!==scoreAfter) effects.push(`Final reputation score ${formatNumber(scoreBefore)} → ${formatNumber(scoreAfter)} VP`);
+    return effects.join(' · ');
+  }
   return '';
 }
 function publicLink(id) {
@@ -213,30 +241,36 @@ function renderOverview() {
     <div class="prices">${GOODS.map(g=>`<span class="price"><span class="commodity-sign commodity-${g}" aria-hidden="true">${signs[g]}</span><span>${COMMODITY[g]}</span><b>${price(state,g)}</b></span>`).join('')}</div>
   </section>`;
 }
-function nextHouseReward(row,removed) {
-  const reward=HOUSE_EFFECTS[row][removed];
-  if (!reward) return 'No houses left';
+function houseReward(reward) {
   const effects=[];
   if (reward.public) effects.push('Free public rights');
   if (reward.pelicans) effects.push(`${reward.pelicans} pelican`);
   if (reward.rep) effects.push(`+${reward.rep} reputation`);
   if (reward.vp) effects.push(`${reward.vp} VP`);
-  return effects.join(' · ');
+  return effects;
 }
 function renderPlayerBoard() {
   const p=state.players[boardSeat];
   byId('player-board-title').textContent=boardSeat===0?'Your player board':'Rival player board';
   const goods=GOODS.map(key=>`<tr><th scope="row">${COMMODITY[key]}</th><td>${p.production[key]}</td><td>${money(price(state,key))}</td><td>${money(p.production[key]*price(state,key))}</td></tr>`).join('');
-  const houses=p.guilds.map((key,row)=>`<tr><th scope="row">${GUILDS[key]}</th><td>${4-p.houses[row]}</td><td>${nextHouseReward(row,p.houses[row])}</td></tr>`).join('');
+  const houses=p.guilds.map((key,row)=>{
+    const removed=p.houses[row];
+    const rewards=HOUSE_EFFECTS[row];
+    const track=rewards.map((reward,index)=>{
+      const status=index<removed?'Removed':index===removed?'Next':'';
+      return `<li class="${status.toLowerCase()}">${status?`<small>${status}</small>`:''}${houseReward(reward).map(text=>`<span>${text}</span>`).join('')}</li>`;
+    }).join('');
+    return `<div class="house-row">
+      <div class="house-row-heading"><strong>${GUILDS[key]}</strong><small>${rewards.length-removed} left</small></div>
+      <ol class="house-track" role="list" aria-label="${GUILDS[key]} house rewards">${track}</ol>
+    </div>`;
+  }).join('');
   byId('player-board-body').innerHTML=`
     <table class="score-table" aria-label="Production and income">
       <thead><tr><th scope="col">Commodity</th><th scope="col">Production</th><th scope="col">Price</th><th scope="col">Income</th></tr></thead>
       <tbody>${goods}</tbody>
     </table>
-    <table class="score-table" aria-label="Guild houses">
-      <thead><tr><th scope="col">Guild</th><th scope="col">Houses left</th><th scope="col">Next build reward</th></tr></thead>
-      <tbody>${houses}</tbody>
-    </table>
+    <section class="house-rows" aria-labelledby="house-rows-title"><h3 id="house-rows-title">Guild houses</h3>${houses}</section>
     <p class="muted">Miners · ${p.pool} ready · ${p.reserve} in reserve</p>
     <p class="muted">Pelicans · ${p.pelicans} unused · ${p.usedPelicans} used</p>`;
 }
@@ -280,7 +314,8 @@ function renderCardChoices(actions) {
   const cardControl=(card,kind)=>{
     const available=actions.some(a=>a.card===card&&(kind==='joker'?a.as:!a.as&&a.kind===kind));
     const isPicked=cardPick?.card===card&&cardPick.kind===kind;
-    return `<button type="button" class="card-action ${isPicked?'selected':''}" data-do="card" data-value="${card}/${kind}" aria-pressed="${isPicked}" ${available?'':'disabled'}>${LABEL[kind]}</button>`;
+    const reason=available?'':unavailableActionReason(state,card,kind);
+    return `<button type="button" class="card-action ${isPicked?'selected':''}" data-do="card" data-value="${card}/${kind}" aria-pressed="${isPicked}" ${available?'':'disabled'}>${LABEL[kind]}${reason?`<small class="card-reason">${safe(reason)}</small>`:''}</button>`;
   };
   const cards=`<div class="hand" aria-label="Action card hand">${CARDS.map((kinds,card)=>`<div class="action-card ${p.hand&(1<<card)?'':'used'}">${kinds.map(kind=>cardControl(card,kind)).join('')}</div>`).join('')}</div>`;
   let choices='<p class="muted action-prompt">Choose one half of an available card.</p>';
@@ -355,6 +390,67 @@ function renderDecisions() {
     ${rivalReport.length||last.length?`<section class="panel rival-report"><div class="panel-head"><h2>Rival notes</h2></div><ul>${(rivalReport.length?rivalReport.slice(0,6):last.map(x=>x.text)).map(row=>`<li>${safe(row)}</li>`).join('')}</ul></section>`:''}`;
 }
 
+function inspectAttributes(reference, label) {
+  return `data-do="inspect" data-value="${safe(reference)}" aria-haspopup="dialog" aria-label="${safe(label)}"`;
+}
+function detailsButton(reference, label) {
+  return `<button type="button" class="tile-details-button" ${inspectAttributes(reference,`Details for ${label}`)}>Details</button>`;
+}
+function showTileDetails(trigger, name, facts) {
+  byId('tile-title').textContent=name;
+  byId('tile-facts').innerHTML=facts.map(([label,value])=>`<dt>${safe(label)}</dt><dd>${safe(value)}</dd>`).join('');
+  trigger.focus({preventScroll:true});
+  byId('tile-dialog').showModal();
+}
+function inspectTile(reference, trigger) {
+  const [area,key,heldId]=reference.split('/');
+  const space=Number(key);
+  if (area==='mine') {
+    const cell=state.mine[space];
+    const location=`Mine ${coordinate(space,5)}`;
+    if (cell?.rock) {
+      showTileDetails(trigger,'Rock',[['Location',location],['Stars',`${cell.stars} toward the row total`]]);
+      return;
+    }
+    const tile=MINES[cell?.id];
+    if (!tile) return;
+    const effects=[];
+    if (tile.ore) effects.push(`Ore production and ore deck +${tile.ore}`);
+    if (tile.pop) effects.push(`Population +${tile.pop}`);
+    if (tile.vp) effects.push(`VP +${tile.vp}`);
+    showTileDetails(trigger,tile.name,[
+      ['Location',location],
+      ['Owner',SEATS[cell.owner]],
+      ['Stars',cell.stars],
+      ['Expansion value',`${tile.extend} wood`],
+      ['Printed effects',effects.join(' · ')||'No immediate production, population or VP'],
+    ]);
+    return;
+  }
+  const offer=area==='market'?marketOffer(state).find(item=>item.id===key):null;
+  const cell=area==='town'?state.city[space]:null;
+  const held=area==='held' && state.players[space]?.held.includes(heldId);
+  const tile=BUILDINGS[offer?.id??cell?.id??(held?heldId:undefined)];
+  if (!tile) return;
+  const facts=[['Type',tile.public?'Public building':GUILDS[tile.group]]];
+  if (offer) facts.push(['Rights price',money(offer.cost)],['Tiles in stack',offer.count]);
+  if (held) facts.push(['Held by',SEATS[space]]);
+  if (cell) {
+    facts.push(['Location',`Town ${coordinate(space,6)}`],['Owner',cell.owner===null?'Public':SEATS[cell.owner]]);
+    if (!tile.public) facts.push(['Town score now',`${cityPointsAt(state,space)} VP`]);
+  }
+  facts.push(
+    ['Build cost',cell?`${tile.wood} wood`:`${tile.wood} wood · ${money(tile.wood*price(state,'wood'))} at current prices`],
+    ['Plot value',money(tile.plot)],
+    ['Matching dots',[...tile.dots].map(dot=>cap(dotLabels[dot])).join(', ')],
+    ['Printed effects',tileEffects(tile)],
+  );
+  if (!cell && !tile.public && !canBuildGuild(state,tile.group)) {
+    facts.push(['Construction','Unavailable at current demand']);
+  }
+  showTileDetails(trigger,tile.name,facts);
+}
+
 function mapCell(value, i, columns, area) {
   const id=coordinate(i,columns);
   const tile=area==='town'?BUILDINGS[value?.id]:MINES[value?.id];
@@ -372,9 +468,16 @@ function mapCell(value, i, columns, area) {
   const edgeMark=edge?`<span class="cell-edge" title="Board edge · ${dotLabels[edge]}"><span class="sr-only">Board edge</span>${dots({dots:edge})}</span>`:'';
   const details=area==='town'?dots(tile)+edgeMark:
     value?`<small>${value.stars} ★${tile?` · ${tile.extend}w`:''}</small>`:'';
-  const prefix=matching>=0?`<button type="button" class="${classes}" data-do="option" data-value="${matching}" aria-label="${safe(`${title} · ${actionLabel(selections[matching])}`)}" aria-pressed="${active}"`:
-    `<div class="${classes}"`;
-  return `${prefix} title="${safe(title)}"><span class="cell-id">${id}</span>${value||area==='mine'&&MINE_ENTRANCES.includes(i)?`<b>${safe(name)}</b>`:''}${details}</${matching>=0?'button':'div'}>`;
+  const content=`<span class="cell-id">${id}</span>${value||area==='mine'&&MINE_ENTRANCES.includes(i)?`<b>${safe(name)}</b>`:''}${details}`;
+  const attributes=`class="${classes}" title="${safe(title)}"`;
+  const reference=`${area}/${i}`;
+  const inspectable=tile||value?.rock;
+  if (matching>=0) {
+    const target=`<button type="button" ${attributes} data-do="option" data-value="${matching}" aria-label="${safe(`${title} · ${actionLabel(selections[matching])}`)}" aria-pressed="${active}">${content}</button>`;
+    return inspectable?`<div class="tile-with-details">${target}${detailsButton(reference,title)}</div>`:target;
+  }
+  if (inspectable) return `<button type="button" ${attributes} ${inspectAttributes(reference,`Inspect ${title}`)}>${content}</button>`;
+  return `<div ${attributes}>${content}</div>`;
 }
 function renderBoards() {
   const town=state.city.map((v,i)=>CITY[i]?mapCell(v,i,6,'town'):'<div class="void" aria-hidden="true"></div>').join('');
@@ -401,9 +504,17 @@ function renderMarket() {
     const title=`${tile.name} · ${tile.public?'Public':GUILDS[tile.group]} · Rights ${money(offer.cost)} · Build ${tile.wood} wood · ${tileEffects(tile)}${closed?' · Construction is unavailable at current demand':''}`;
     const fields=`<span class="offer-guild">${tile.public?'Public':GUILDS[tile.group]}</span><b>${tile.name}</b><span class="offer-foot">${dots(tile)}<small>${tile.wood}w · ${offer.count} left</small></span>`;
     const attributes=`class="offer commodity-${tile.group} ${closed?'closed':''} ${selected?'chosen':''}" title="${safe(title)}"`;
-    return match>=0?`<button type="button" ${attributes} data-do="option" data-value="${match}" aria-label="${safe(title)}" aria-pressed="${selected}">${fields}</button>`:`<div ${attributes}>${fields}</div>`;
+    const reference=`market/${tile.id}`;
+    if (match>=0) {
+      const target=`<button type="button" ${attributes} data-do="option" data-value="${match}" aria-label="${safe(title)}" aria-pressed="${selected}">${fields}</button>`;
+      return `<div class="tile-with-details">${target}${detailsButton(reference,tile.name)}</div>`;
+    }
+    return `<button type="button" ${attributes} ${inspectAttributes(reference,`Inspect ${tile.name}`)}>${fields}</button>`;
   }).join(''));
-  const held=state.players.map((p,seat)=>`<div class="held-row"><span>${SEATS[seat]}</span><b>${p.held.length?p.held.map(id=>BUILDINGS[id].name).join(' · '):'—'}</b></div>`).join('');
+  const held=state.players.map((p,seat)=>{
+    const tiles=p.held.map(id=>`<button type="button" class="link" ${inspectAttributes(`held/${seat}/${id}`,`Inspect ${BUILDINGS[id].name} held by ${seat===0?'you':'the rival'}`)}>${safe(BUILDINGS[id].name)}</button>`);
+    return `<div class="held-row"><span>${SEATS[seat]}</span><div class="held-tiles">${tiles.join('')||'—'}</div></div>`;
+  }).join('');
   const baseValues=state.players.map((_,seat)=>patricianBase(state,seat));
   const patricians=PATRICIANS.map(color=>`<div title="Scores ${publicLink(color)}" class="council-row"><span class="patrician-${color}">${cap(color)}</span><span>${state.patrons[color]}</span><span>${state.council[color]}</span><strong>${baseValues[0][color]*state.council[color]} / ${baseValues[1][color]*state.council[color]}</strong></div>`).join('');
   const number=currentBarbara(state);
@@ -423,6 +534,7 @@ function renderJournal() {
   byId('journal-body').innerHTML=`<ol class="log-list">${entries.map(item=>`<li><span class="log-round">R${item.round}</span><span class="log-seat seat-${item.actor}">${item.actor===null?'Town':SEATS[item.actor]}</span><span>${safe(item.text)}</span></li>`).join('')}</ol>`;
 }
 function render() {
+  if (byId('tile-dialog').open) byId('tile-dialog').close();
   const focus=document.activeElement;
   const focused=focus?.dataset?.do?{action:focus.dataset.do,value:focus.dataset.value}:null;
   renderDashboard();
@@ -592,6 +704,7 @@ document.addEventListener('click',event=>{
         renderPlayerBoard();
         byId('player-board-dialog').showModal();
         break;
+      case 'inspect': inspectTile(value,button); break;
       case 'close': button.closest('dialog').close(); break;
       case 'seed': byId('setup-form').elements.seed.value=randomSeed(); break;
       case 'card': changeAction(...value.split('/')); break;

@@ -1,4 +1,4 @@
-export const VERSION = '0.2.2';
+export const VERSION = '0.2.3';
 export const SAVE_SCHEMA = 2;
 export const SETUP_VERSION = 2;
 export const GUILDS = {

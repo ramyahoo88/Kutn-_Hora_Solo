@@ -1,6 +1,6 @@
 import {
   BARBARA_TAX, BUILDINGS, BUILDING_GROUPS, CARDS, CITY, CITY_EDGE, COMMODITY,
-  EVENTS, GOODS, GUILD_SETUPS, HOUSE_EFFECTS, LABEL, MINE_ENTRANCES, MINE_GROUPS,
+  EVENTS, GOODS, GUILDS, GUILD_SETUPS, HOUSE_EFFECTS, LABEL, MINE_ENTRANCES, MINE_GROUPS,
   MINES, PATRICIANS, REP_LOSS, REP_SCORE, ROCK_LAYOUTS, ROCK_STARS, SAVE_SCHEMA, SETUP_VERSION,
   TECHNOLOGY, TURN_CARD_COUNTS,
 } from './data.mjs';
@@ -98,10 +98,15 @@ function log(state, actor, text) {
   if (state.log) state.log.push({round:state.round,actor,text});
 }
 function addTax(state, amount=0) {state.tax=Math.min(25,state.tax+amount);}
+export function reputationChange(reputation, amount) {
+  const intended = reputation+amount;
+  const rep = Math.min(9,Math.max(-5,intended));
+  return {rep,vp:(intended-rep)*2};
+}
 function changeRep(player, amount) {
-  const intended = player.rep+amount;
-  player.rep = Math.min(9,Math.max(-5,intended));
-  player.vp += (intended-player.rep)*2;
+  const {rep,vp}=reputationChange(player.rep,amount);
+  player.rep=rep;
+  player.vp+=vp;
 }
 
 export function price(state, key) {
@@ -192,25 +197,66 @@ export function mineSpaces(state) {
 }
 export const plotCount = (state,seat) => state.city.filter(cell=>cell?.plot===seat).length;
 
-function rightsChoices(state, seat, settings={}) {
-  const p = state.players[seat];
-  if (p.held.length>=3) return [];
-  return marketOffer(state).flatMap(offer=>{
-    const tile=BUILDINGS[offer.id];
-    const cost=settings.free?0:offer.cost;
-    return (tile.public || (!settings.publicOnly && p.guilds.includes(tile.group))) && p.coins>=cost ? [{kind:'rights',id:tile.id,cost}] : [];
-  });
+function noChoices(explain, reason) {
+  explain?.(reason);
+  return [];
 }
-function buildingChoices(state, seat, free=false) {
+function rightsChoices(state, seat, {free=false,publicOnly=false,explain}={}) {
+  const p = state.players[seat];
+  if (p.held.length>=3) return noChoices(explain,'3 rights already held');
+  const eligible=marketOffer(state).filter(offer=>{
+    const tile=BUILDINGS[offer.id];
+    return tile.public || (!publicOnly && p.guilds.includes(tile.group));
+  });
+  if (!eligible.length) return noChoices(explain,'No eligible rights');
+  const choices=eligible.flatMap(offer=>{
+    const cost=free?0:offer.cost;
+    return p.coins>=cost ? [{kind:'rights',id:offer.id,cost}] : [];
+  });
+  if (!choices.length && explain) explain(`Need ${Math.min(...eligible.map(offer=>offer.cost))} g`);
+  return choices;
+}
+function buildingChoices(state, seat, {free=false,explain}={}) {
   const p=state.players[seat];
   const plots=state.city.flatMap((cell,space)=>cell?.plot===seat?[space]:[]);
-  return p.held.flatMap(id=>{
+  if (!p.held.length) return noChoices(explain,plots.length?'Need a building right':'Need a right and a plot');
+  if (!plots.length) return noChoices(explain,'Need a plot');
+  let minimumCost=Infinity;
+  let guildRestriction='';
+  const choices=p.held.flatMap(id=>{
     const tile=BUILDINGS[id];
+    if (!tile.public) {
+      const row=p.guilds.indexOf(tile.group);
+      if (row<0) {
+        guildRestriction ||= 'Need a right from your guilds or a public building';
+        return [];
+      }
+      if (p.houses[row]>=4) {
+        guildRestriction ||= `No houses for ${GUILDS[tile.group]}`;
+        return [];
+      }
+      if (!canBuildGuild(state,tile.group)) {
+        guildRestriction ||= `Demand too low for ${GUILDS[tile.group]}`;
+        return [];
+      }
+    }
     const cost=free?0:tile.wood*price(state,'wood');
-    const row=p.guilds.indexOf(tile.group);
-    if (p.coins<cost || (!tile.public && (row<0 || p.houses[row]>=4 || !canBuildGuild(state,tile.group)))) return [];
+    minimumCost=Math.min(minimumCost,cost);
+    if (p.coins<cost) return [];
     return plots.map(space=>({kind:'build',id,space,cost}));
   });
+  if (!choices.length && explain) explain(minimumCost<Infinity?`Need ${minimumCost} g`:guildRestriction);
+  return choices;
+}
+function plotChoices(state, seat, {free=false,rep,explain}={}) {
+  const spaces=plotSpaces(state,seat,free,rep);
+  const choices=spaces.filter(move=>move.cost<=state.players[seat].coins).map(move=>({kind:'plot',...move}));
+  if (!choices.length && explain) {
+    if (plotCount(state,seat)>=3) explain('3 plots already held');
+    else if (!spaces.length) explain('No open plots');
+    else explain(`Need ${Math.min(...spaces.map(move=>move.cost))} g`);
+  }
+  return choices;
 }
 function incomeChoices(state, seat) {
   const gross=income(state,seat);
@@ -220,27 +266,36 @@ function incomeChoices(state, seat) {
   }
   return choices;
 }
-function mineStartChoices(state, seat, free) {
+function mineStartChoices(state, seat, {free=false,explain}={}) {
   const p=state.players[seat];
-  if (p.pool+p.reserve===0 || state.mineDeck.length+state.mineDiscard.length===0) return [];
+  if (p.pool+p.reserve===0) return noChoices(explain,'No miners left');
+  if (state.mineDeck.length+state.mineDiscard.length===0) return noChoices(explain,'No mine tiles left');
   if (free) return [{kind:'mine',refill:0,cost:0}];
   const fee = price(state,'permit');
   const choices=p.pool>0?[{kind:'mine',refill:0,cost:0}]:[];
   if (p.coins>=fee) {
     for (let refill=1;refill<=Math.min(p.reserve,2-p.pool);refill++) choices.push({kind:'mine',refill,cost:fee});
   }
+  if (!choices.length && explain) explain(`Need ${fee} g to recruit`);
   return choices;
 }
 function basicChoices(state, seat, kind, settings={}) {
   switch(kind) {
     case 'rights': return rightsChoices(state,seat,settings);
-    case 'plot': return plotSpaces(state,seat,settings.free,settings.rep).filter(move=>move.cost<=state.players[seat].coins).map(move=>({kind,...move}));
-    case 'build': return buildingChoices(state,seat,settings.free);
+    case 'plot': return plotChoices(state,seat,settings);
+    case 'build': return buildingChoices(state,seat,settings);
     case 'income': return incomeChoices(state,seat);
-    case 'mine': return mineStartChoices(state,seat,settings.free);
-    case 'barbara': return state.players[seat].pelicans>0?[{kind}]:[];
+    case 'mine': return mineStartChoices(state,seat,settings);
+    case 'barbara': return state.players[seat].pelicans>0?[{kind}]:noChoices(settings.explain,'Need a pelican');
     default: return [];
   }
+}
+
+export function unavailableActionReason(state, card, kind) {
+  if (!(state.players[state.actor].hand&(1<<card))) return 'Already played';
+  let reason='';
+  basicChoices(state,state.actor,kind,{explain:message=>{reason=message;}});
+  return reason;
 }
 
 function pendingChoices(state, pending) {
@@ -250,9 +305,9 @@ function pendingChoices(state, pending) {
   switch(pending.kind) {
     case 'right': return [...rightsChoices(state,seat,{free:true,publicOnly:pending.publicOnly}),skip];
     case 'plot': return [...basicChoices(state,seat,'plot',{free:true}),skip];
-    case 'build': return [...buildingChoices(state,seat,true),skip];
+    case 'build': return [...buildingChoices(state,seat,{free:true}),skip];
     case 'income': return [...incomeChoices(state,seat),skip];
-    case 'mine': return [...mineStartChoices(state,seat,true),skip];
+    case 'mine': return [...mineStartChoices(state,seat,{free:true}),skip];
     case 'mine-place': {
       const woodPrice=price(state,'wood');
       const spaces=mineSpaces(state).filter(move=>pending.free || move.wood*woodPrice<=p.coins);

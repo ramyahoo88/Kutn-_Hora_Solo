@@ -4,7 +4,7 @@ import {BUILDINGS,GUILD_SETUPS,MINES,ROCK_LAYOUTS,ROCK_STARS} from '../src/data.
 import {botAction,publicPlanningState} from '../src/bot.mjs';
 import {
   actionKey,canBuildGuild,cityPointsAt,createGame,finalResult,income,legalActions,marketOffer,mineRow,mineSpaces,
-  patricianPoints,plotSpaces,price,scoreBreakdown,taxCost,transition,
+  patricianPoints,plotSpaces,price,scoreBreakdown,taxCost,transition,unavailableActionReason,
 } from '../src/engine.mjs';
 import {checkGame,readSave,writeSave} from '../src/save.mjs';
 
@@ -56,6 +56,28 @@ test('a red X blocks new guild construction while preserving the market price',(
   game.pop=3;
   assert.ok(canBuildGuild(game,'wood'));
   assert.ok(legalActions(game).some(a=>a.kind==='build'&&a.cost===8));
+});
+
+test('building guidance follows changes in rights, plots, demand, cash and card availability',()=>{
+  let game=createGame({seed:'building-guidance',side:1});
+  const blocked=reason=>{
+    assert.equal(unavailableActionReason(game,2,'build'),reason);
+    assert.ok(!legalActions(game).some(a=>a.card===2&&a.kind==='build'));
+  };
+  blocked('Need a right and a plot');
+  game.players[0].held=['sawmill'];
+  blocked('Need a plot');
+  game.city[7]={plot:0};
+  game.arms.wood=1;
+  blocked('Demand too low for Builders');
+  game.pop=3;
+  game.players[0].coins=7;
+  blocked('Need 8 g');
+  game.players[0].coins=8;
+  assert.equal(unavailableActionReason(game,2,'build'),'');
+  assert.ok(legalActions(game).some(a=>a.card===2&&a.kind==='build'&&a.cost===8));
+  game=play(game,{kind:'skip',card:2});
+  blocked('Already played');
 });
 
 test('demand thresholds discard a market tile and advance its arm',()=>{

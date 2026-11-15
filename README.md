@@ -1,10 +1,12 @@
-# Kutná Hora Solo v0.2.2 playtest
+# Kutná Hora Solo v0.2.3 playtest
 
 An unofficial browser playtest for Kutná Hora: The City of Silver. Play one seat of the base two-player game against a rival. The app owns the city, mines, market, council and game draws. The same HTML works offline. Players can mirror its placements on the table. A game in progress can be moved between the hosted and offline copies by exporting and importing its JSON save.
 
 To play offline, open [Kutna_Hora_Solo.html](Kutna_Hora_Solo.html) on GitHub, choose **Download raw file**, and open the downloaded file in your browser.
 
 Start with the game already on screen, or use **New game** to choose a seed, one of the nine setup cards, a seat, house order, starting player and rival setting. The current default is card 1, the Metallurgists, Miners and Innkeepers seat, and Standard. The board uses original diagram styling and component facts. The banner is cropped from [St. Barbara’s Church by Txllxt TxllxT](https://commons.wikimedia.org/wiki/File:Kutn%C3%A1_Hora_-_St._Barbara%27s_Church_-_Panoramic_Photocompilation.jpg) under [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/). The font licenses are bundled with the source and HTML.
+
+Version 0.2.3 previews the VP cost of tax penalties and the reputation gained on St. Barbara tile 7. Open a market tile, held right or placed tile to see its details. Both player boards show the full house reward tracks, and unavailable actions say what they need. The Guide explains that reloading clears Undo history. See the [second audit](https://github.com/ramyahoo88/Kutn-_Hora_Solo/blob/d9340884701993512529426f72a620059fab7390/docs/Astra_Audit_2_v0.2.2.md).
 
 Version 0.2.2 gives the rival a seeded random order for its three guild house rows. The same seed gives the same order, and the market, mine board, and decks follow their existing shuffle sequence. Existing saves keep both players’ guild orders. The Guide explains the choice of guild set.
 

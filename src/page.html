@@ -63,6 +63,10 @@
     <div class="panel-head"><h2 id="player-board-title"></h2><button type="button" class="flat" data-do="close">Close</button></div>
     <div class="dialog-body player-board-body" id="player-board-body"></div>
   </dialog>
+  <dialog id="tile-dialog" aria-labelledby="tile-title">
+    <div class="panel-head"><h2 id="tile-title"></h2><button type="button" class="flat" data-do="close" autofocus>Close</button></div>
+    <div class="dialog-body"><dl class="tile-facts" id="tile-facts"></dl></div>
+  </dialog>
   <dialog id="setup-dialog" aria-labelledby="setup-title">
     <form id="setup-form">
       <div class="panel-head"><h2 id="setup-title">New game</h2><button type="button" class="flat" data-do="close">Close</button></div>
@@ -89,8 +93,8 @@
       <p><strong>Build a guild income.</strong> Take Rights to a building, claim a Plot, then use Building. A Mine can also start ore production. The Income action collects the current value of your production. The market prices affect both players.</p>
       <p><strong>Follow the grid.</strong> Town and mine coordinates are read left to right, top to bottom. Colored dots are printed scoring matches. A striped guild offer can sell Rights while new construction of that guild is unavailable.</p>
       <p><strong>Win on points.</strong> Patricians score in rounds 4–6. The final count adds town matches, mine row awards, final income, reputation and unused items to earned points. Coins break a points tie.</p>
-      <p><strong>Check public information.</strong> The remaining rival cards are shown below the turn controls. Open either player board to see production, guild houses and supplies.</p>
-      <p><strong>Resume or share a position.</strong> This browser keeps your current game where local storage is available. Export a JSON save to move between browsers or share a position. Version 0.1.0 saves keep their existing deck order. New games use the updated shuffle, so an old seed produces a different setup.</p>
+      <p><strong>Check public information.</strong> Open a tile to inspect its costs and effects. Use <strong>Details</strong> when the tile is an action target. Either player board shows the full house rewards, production and supplies. The rival’s remaining cards are below the turn controls.</p>
+      <p><strong>Resume or share a position.</strong> This browser keeps your current game where local storage is available. Reloading clears Undo history. Export a JSON save to move between browsers or share a position. Version 0.1.0 saves keep their existing deck order. New games use the updated shuffle, so an old seed produces a different setup.</p>
       <p><strong>Rival settings.</strong> Standard looks beyond its current turn and estimates the effect of both players’ positions. Quick checks fewer continuations. Both use the same rules and public game information.</p>
       <p><a href="https://filemanager.czechgames.com/storage/files/kutna-hora-the-city-of-silver/rules/kutna-hora-rules-en.pdf" target="_blank" rel="noreferrer">CGE rulebook</a> · <a href="https://www.czechgames.com/news/available-now-the-kutna-hora-companion-app" target="_blank" rel="noreferrer">CGE market companion</a> · <a href="https://www.zatrolene-hry.cz/spolecenska-hra/kutna-hora-mesto-stribra-14736/k-stazeni/vlastni-solo-mod-capek-18184/" target="_blank" rel="noreferrer">Capek paper variant</a></p>
       <p class="fine">Banner cropped from <a href="https://commons.wikimedia.org/wiki/File:Kutn%C3%A1_Hora_-_St._Barbara%27s_Church_-_Panoramic_Photocompilation.jpg" target="_blank" rel="noreferrer">St. Barbara’s Church by Txllxt TxllxT</a> under <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noreferrer">CC BY-SA 4.0</a>.</p>
