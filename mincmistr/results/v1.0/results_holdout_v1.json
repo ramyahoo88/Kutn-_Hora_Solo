@@ -1,0 +1,418 @@
+[
+ {
+  "level": "apprentice",
+  "opponent": "quick",
+  "games": 384,
+  "margin": -0.72,
+  "se": 0.48,
+  "winPct": 47.1,
+  "drawPct": 0,
+  "vp": 36.9,
+  "oppVP": 37.6,
+  "marginFirst": -0.39,
+  "marginSecond": -1.05,
+  "checksPerCard": 1.14,
+  "cardsPerGame": 30,
+  "rulesPct": {
+   "goal:C": 51.9,
+   "cash": 24.4,
+   "goal:M": 18.4,
+   "pelicans": 2,
+   "goal:S": 1.7,
+   "fallback:I": 0.9,
+   "fallback:M": 0.5,
+   "discard": 0.2
+  },
+  "parts": {
+   "earned": [
+    10.9,
+    10.8
+   ],
+   "town": [
+    4.2,
+    5.6
+   ],
+   "mines": [
+    7.3,
+    11.7
+   ],
+   "income": [
+    7.3,
+    4.6
+   ],
+   "reputation": [
+    5.1,
+    1.6
+   ],
+   "extras": [
+    2.2,
+    3.3
+   ]
+  },
+  "groups": "h1,h2,h3,h4,h5,h6,h7,h8"
+ },
+ {
+  "level": "apprentice",
+  "opponent": "standard",
+  "games": 384,
+  "margin": -9.53,
+  "se": 0.54,
+  "winPct": 20.1,
+  "drawPct": 0,
+  "vp": 37.5,
+  "oppVP": 47,
+  "marginFirst": -10.06,
+  "marginSecond": -8.99,
+  "checksPerCard": 1.13,
+  "cardsPerGame": 30,
+  "rulesPct": {
+   "goal:C": 52.8,
+   "cash": 23.3,
+   "goal:M": 18.6,
+   "pelicans": 2.1,
+   "goal:S": 1.8,
+   "fallback:I": 0.8,
+   "fallback:M": 0.4,
+   "discard": 0.2
+  },
+  "parts": {
+   "earned": [
+    11.2,
+    15.2
+   ],
+   "town": [
+    4.2,
+    8.1
+   ],
+   "mines": [
+    7,
+    11.3
+   ],
+   "income": [
+    7.5,
+    5.6
+   ],
+   "reputation": [
+    5.3,
+    4.3
+   ],
+   "extras": [
+    2.3,
+    2.5
+   ]
+  },
+  "groups": "h1,h2,h3,h4,h5,h6,h7,h8"
+ },
+ {
+  "level": "journeyman",
+  "opponent": "quick",
+  "games": 384,
+  "margin": 1.59,
+  "se": 0.5,
+  "winPct": 58.1,
+  "drawPct": 0,
+  "vp": 39.7,
+  "oppVP": 38.1,
+  "marginFirst": 1.83,
+  "marginSecond": 1.35,
+  "checksPerCard": 1.14,
+  "cardsPerGame": 30,
+  "rulesPct": {
+   "goal:C": 51.8,
+   "cash": 24.6,
+   "goal:M": 18.4,
+   "pelicans": 2,
+   "goal:S": 1.7,
+   "fallback:I": 0.8,
+   "fallback:M": 0.5,
+   "discard": 0.3
+  },
+  "parts": {
+   "earned": [
+    11,
+    11.4
+   ],
+   "town": [
+    6.9,
+    5.7
+   ],
+   "mines": [
+    7.2,
+    11.5
+   ],
+   "income": [
+    7.2,
+    4.5
+   ],
+   "reputation": [
+    5.2,
+    1.5
+   ],
+   "extras": [
+    2.3,
+    3.5
+   ]
+  },
+  "groups": "h1,h2,h3,h4,h5,h6,h7,h8"
+ },
+ {
+  "level": "journeyman",
+  "opponent": "standard",
+  "games": 384,
+  "margin": -6.84,
+  "se": 0.57,
+  "winPct": 26.6,
+  "drawPct": 0,
+  "vp": 40.9,
+  "oppVP": 47.7,
+  "marginFirst": -6.55,
+  "marginSecond": -7.14,
+  "checksPerCard": 1.13,
+  "cardsPerGame": 30,
+  "rulesPct": {
+   "goal:C": 52.6,
+   "cash": 23.6,
+   "goal:M": 18.5,
+   "pelicans": 2.2,
+   "goal:S": 1.7,
+   "fallback:I": 0.7,
+   "fallback:M": 0.4,
+   "discard": 0.2
+  },
+  "parts": {
+   "earned": [
+    11.5,
+    15.5
+   ],
+   "town": [
+    7.3,
+    8.3
+   ],
+   "mines": [
+    7.2,
+    11.3
+   ],
+   "income": [
+    7.5,
+    5.5
+   ],
+   "reputation": [
+    5.2,
+    4.7
+   ],
+   "extras": [
+    2.2,
+    2.5
+   ]
+  },
+  "groups": "h1,h2,h3,h4,h5,h6,h7,h8"
+ },
+ {
+  "level": "master",
+  "opponent": "quick",
+  "games": 384,
+  "margin": 6.13,
+  "se": 0.5,
+  "winPct": 73.7,
+  "drawPct": 0,
+  "vp": 44.3,
+  "oppVP": 38.1,
+  "marginFirst": 5.9,
+  "marginSecond": 6.36,
+  "checksPerCard": 1.24,
+  "cardsPerGame": 33,
+  "rulesPct": {
+   "goal:C": 50.8,
+   "cash": 22.8,
+   "goal:M": 18.3,
+   "pelicans": 2,
+   "goal:S": 1.9,
+   "fallback:I": 1.7,
+   "discard": 1.6,
+   "fallback:M": 1
+  },
+  "parts": {
+   "earned": [
+    13,
+    11.5
+   ],
+   "town": [
+    7.5,
+    5.5
+   ],
+   "mines": [
+    8.1,
+    11.8
+   ],
+   "income": [
+    7.7,
+    4.5
+   ],
+   "reputation": [
+    5.4,
+    1.4
+   ],
+   "extras": [
+    2.7,
+    3.4
+   ]
+  },
+  "groups": "h1,h2,h3,h4,h5,h6,h7,h8"
+ },
+ {
+  "level": "master",
+  "opponent": "standard",
+  "games": 384,
+  "margin": -1.98,
+  "se": 0.6,
+  "winPct": 46.9,
+  "drawPct": 0,
+  "vp": 45.8,
+  "oppVP": 47.8,
+  "marginFirst": -1.92,
+  "marginSecond": -2.04,
+  "checksPerCard": 1.23,
+  "cardsPerGame": 33,
+  "rulesPct": {
+   "goal:C": 51.8,
+   "cash": 21.7,
+   "goal:M": 18.5,
+   "pelicans": 2.2,
+   "goal:S": 1.8,
+   "fallback:I": 1.6,
+   "discard": 1.5,
+   "fallback:M": 0.9
+  },
+  "parts": {
+   "earned": [
+    13.8,
+    15.7
+   ],
+   "town": [
+    7.9,
+    8.5
+   ],
+   "mines": [
+    8,
+    11.1
+   ],
+   "income": [
+    8.2,
+    5.6
+   ],
+   "reputation": [
+    5.3,
+    4.4
+   ],
+   "extras": [
+    2.6,
+    2.5
+   ]
+  },
+  "groups": "h1,h2,h3,h4,h5,h6,h7,h8"
+ },
+ {
+  "level": "grandmaster",
+  "opponent": "quick",
+  "games": 384,
+  "margin": 10.51,
+  "se": 0.54,
+  "winPct": 87,
+  "drawPct": 0,
+  "vp": 49.1,
+  "oppVP": 38.5,
+  "marginFirst": 9.72,
+  "marginSecond": 11.29,
+  "checksPerCard": 1.36,
+  "cardsPerGame": 36,
+  "rulesPct": {
+   "goal:C": 49.6,
+   "cash": 21.3,
+   "goal:M": 18.4,
+   "discard": 3.7,
+   "pelicans": 2.1,
+   "fallback:I": 1.8,
+   "goal:S": 1.7,
+   "fallback:M": 1.4
+  },
+  "parts": {
+   "earned": [
+    15.1,
+    11.9
+   ],
+   "town": [
+    8.1,
+    5.7
+   ],
+   "mines": [
+    8.7,
+    11.7
+   ],
+   "income": [
+    8.2,
+    4.6
+   ],
+   "reputation": [
+    6.2,
+    1.4
+   ],
+   "extras": [
+    2.6,
+    3.2
+   ]
+  },
+  "groups": "h1,h2,h3,h4,h5,h6,h7,h8"
+ },
+ {
+  "level": "grandmaster",
+  "opponent": "standard",
+  "games": 384,
+  "margin": 2.94,
+  "se": 0.64,
+  "winPct": 63.3,
+  "drawPct": 0,
+  "vp": 51.8,
+  "oppVP": 48.9,
+  "marginFirst": 3.13,
+  "marginSecond": 2.74,
+  "checksPerCard": 1.32,
+  "cardsPerGame": 36,
+  "rulesPct": {
+   "goal:C": 50.8,
+   "cash": 20.4,
+   "goal:M": 18.6,
+   "discard": 3.3,
+   "pelicans": 2.1,
+   "fallback:I": 1.8,
+   "goal:S": 1.8,
+   "fallback:M": 1.2
+  },
+  "parts": {
+   "earned": [
+    16.1,
+    16
+   ],
+   "town": [
+    8.9,
+    8.8
+   ],
+   "mines": [
+    8.9,
+    11.2
+   ],
+   "income": [
+    8.9,
+    5.8
+   ],
+   "reputation": [
+    6.4,
+    4.6
+   ],
+   "extras": [
+    2.7,
+    2.5
+   ]
+  },
+  "groups": "h1,h2,h3,h4,h5,h6,h7,h8"
+ }
+]

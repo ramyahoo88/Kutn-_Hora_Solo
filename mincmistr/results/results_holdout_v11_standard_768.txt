@@ -1,0 +1,8 @@
+extra:6      standard  n=768 margin  -3.65 ±0.41 win 39.5% vp 44.4 vs 48.1 | 1st -4.59 2nd -2.72 | checks/card 1.19
+extra:3.4.5.6 standard  n=768 margin   2.19 ±0.43 win 58.1% vp 50.4 vs 48.2 | 1st 1.17 2nd 3.21 | checks/card 1.29
+extra:5.6    standard  n=768 margin  -2.12 ±0.41 win 43.8% vp 45.9 vs 48.1 | 1st -2.58 2nd -1.65 | checks/card 1.22
+extra:2.3.4.5.6 standard  n=768 margin   4.01 ±0.45 win 66.9% vp 52.3 vs 48.3 | 1st 2.55 2nd 5.47 | checks/card 1.31
+apprentice   standard  n=768 margin  -9.09 ±0.39 win 19.7% vp 38.6 vs 47.7 | 1st -10.28 2nd -7.89 | checks/card 1.15
+journeyman   standard  n=768 margin  -5.14 ±0.4 win 32.7% vp 42.9 vs 48 | 1st -6.08 2nd -4.2 | checks/card 1.15
+master       standard  n=768 margin  -0.29 ±0.42 win 50.4% vp 47.9 vs 48.2 | 1st -0.86 2nd 0.28 | checks/card 1.26
+grandmaster  standard  n=768 margin    5.5 ±0.42 win 71% vp 54.3 vs 48.8 | 1st 5.06 2nd 5.95 | checks/card 1.34

@@ -1,0 +1,165 @@
+{
+ "deck": [
+  {
+   "number": 1,
+   "goals": [
+    "C",
+    "M"
+   ],
+   "arrow": "low"
+  },
+  {
+   "number": 2,
+   "goals": [
+    "C",
+    "M"
+   ],
+   "arrow": "high"
+  },
+  {
+   "number": 3,
+   "goals": [
+    "C",
+    "M"
+   ],
+   "arrow": "low"
+  },
+  {
+   "number": 4,
+   "goals": [
+    "M",
+    "C"
+   ],
+   "arrow": "high"
+  },
+  {
+   "number": 5,
+   "goals": [
+    "C",
+    "S"
+   ],
+   "arrow": "low"
+  },
+  {
+   "number": 6,
+   "goals": [
+    "M",
+    "C"
+   ],
+   "arrow": "high"
+  },
+  {
+   "number": 7,
+   "goals": [
+    "C",
+    "S"
+   ],
+   "arrow": "low"
+  },
+  {
+   "number": 8,
+   "goals": [
+    "M",
+    "C"
+   ],
+   "arrow": "high"
+  },
+  {
+   "number": 9,
+   "goals": [
+    "C",
+    "M"
+   ],
+   "arrow": "low"
+  },
+  {
+   "number": 10,
+   "goals": [
+    "C",
+    "S"
+   ],
+   "arrow": "high"
+  },
+  {
+   "number": 11,
+   "goals": [
+    "S",
+    "C"
+   ],
+   "arrow": "low"
+  },
+  {
+   "number": 12,
+   "goals": [
+    "C",
+    "M"
+   ],
+   "arrow": "high"
+  },
+  {
+   "number": 13,
+   "goals": [
+    "M",
+    "C"
+   ],
+   "arrow": "low"
+  },
+  {
+   "number": 14,
+   "goals": [
+    "C",
+    "M"
+   ],
+   "arrow": "high"
+  },
+  {
+   "number": 15,
+   "goals": [
+    "C",
+    "M"
+   ],
+   "arrow": "low"
+  }
+ ],
+ "row": [
+  0,
+  5,
+  1,
+  2,
+  4,
+  3
+ ],
+ "levels": {
+  "apprentice": {
+   "townPoints": false,
+   "rowPoints": false,
+   "extraCard": []
+  },
+  "journeyman": {
+   "townPoints": true,
+   "rowPoints": true,
+   "extraCard": []
+  },
+  "master": {
+   "townPoints": true,
+   "rowPoints": true,
+   "extraCard": [
+    4,
+    5,
+    6
+   ]
+  },
+  "grandmaster": {
+   "townPoints": true,
+   "rowPoints": true,
+   "extraCard": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+   ]
+  }
+ }
+}

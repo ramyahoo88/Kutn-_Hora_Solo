@@ -1,0 +1,938 @@
+[
+ {
+  "level": "extra:6",
+  "opponent": "standard",
+  "games": 384,
+  "margin": -4.39,
+  "se": 0.56,
+  "winPct": 36.5,
+  "drawPct": 0,
+  "vp": 44,
+  "oppVP": 48.4,
+  "marginFirst": -5.17,
+  "marginSecond": -3.61,
+  "checksPerCard": 1.18,
+  "cardsPerGame": 31,
+  "rulesPct": {
+   "goal:C": 52.1,
+   "cash": 22.6,
+   "goal:M": 18.6,
+   "pelicans": 3.2,
+   "goal:S": 1.3,
+   "fallback:I": 1,
+   "fallback:M": 0.6,
+   "discard": 0.6
+  },
+  "parts": {
+   "earned": [
+    13.1,
+    15.7
+   ],
+   "town": [
+    7.4,
+    8.5
+   ],
+   "mines": [
+    8.4,
+    11.4
+   ],
+   "income": [
+    7.7,
+    5.6
+   ],
+   "reputation": [
+    5.3,
+    4.9
+   ],
+   "extras": [
+    2.2,
+    2.4
+   ]
+  },
+  "groups": "h1,h2,h3,h4,h5,h6,h7,h8"
+ },
+ {
+  "level": "extra:3.4.5.6",
+  "opponent": "standard",
+  "games": 384,
+  "margin": 1.62,
+  "se": 0.6,
+  "winPct": 54.7,
+  "drawPct": 0.3,
+  "vp": 50.1,
+  "oppVP": 48.5,
+  "marginFirst": 1.06,
+  "marginSecond": 2.18,
+  "checksPerCard": 1.28,
+  "cardsPerGame": 34,
+  "rulesPct": {
+   "goal:C": 51.4,
+   "cash": 20.9,
+   "goal:M": 18.4,
+   "pelicans": 3.1,
+   "discard": 1.8,
+   "fallback:I": 1.7,
+   "goal:S": 1.4,
+   "fallback:M": 1.2
+  },
+  "parts": {
+   "earned": [
+    15.8,
+    15.6
+   ],
+   "town": [
+    8.4,
+    8.6
+   ],
+   "mines": [
+    9.2,
+    11.4
+   ],
+   "income": [
+    8.4,
+    5.6
+   ],
+   "reputation": [
+    5.9,
+    4.6
+   ],
+   "extras": [
+    2.4,
+    2.6
+   ]
+  },
+  "groups": "h1,h2,h3,h4,h5,h6,h7,h8"
+ },
+ {
+  "level": "extra:5.6",
+  "opponent": "standard",
+  "games": 384,
+  "margin": -2.61,
+  "se": 0.56,
+  "winPct": 41.1,
+  "drawPct": 0,
+  "vp": 45.8,
+  "oppVP": 48.4,
+  "marginFirst": -2.72,
+  "marginSecond": -2.51,
+  "checksPerCard": 1.21,
+  "cardsPerGame": 32,
+  "rulesPct": {
+   "goal:C": 51.9,
+   "cash": 21.9,
+   "goal:M": 18.7,
+   "pelicans": 3.2,
+   "goal:S": 1.3,
+   "fallback:I": 1.3,
+   "discard": 0.9,
+   "fallback:M": 0.8
+  },
+  "parts": {
+   "earned": [
+    13.9,
+    15.7
+   ],
+   "town": [
+    7.5,
+    8.5
+   ],
+   "mines": [
+    8.7,
+    11.3
+   ],
+   "income": [
+    7.9,
+    5.6
+   ],
+   "reputation": [
+    5.4,
+    4.8
+   ],
+   "extras": [
+    2.4,
+    2.4
+   ]
+  },
+  "groups": "h1,h2,h3,h4,h5,h6,h7,h8"
+ },
+ {
+  "level": "extra:2.3.4.5.6",
+  "opponent": "standard",
+  "games": 384,
+  "margin": 3.66,
+  "se": 0.62,
+  "winPct": 67.2,
+  "drawPct": 0,
+  "vp": 51.9,
+  "oppVP": 48.2,
+  "marginFirst": 2.41,
+  "marginSecond": 4.91,
+  "checksPerCard": 1.31,
+  "cardsPerGame": 35,
+  "rulesPct": {
+   "goal:C": 51.1,
+   "cash": 20.4,
+   "goal:M": 18.6,
+   "pelicans": 3.2,
+   "discard": 2.2,
+   "fallback:I": 1.9,
+   "goal:S": 1.3,
+   "fallback:M": 1.3
+  },
+  "parts": {
+   "earned": [
+    16.8,
+    15.4
+   ],
+   "town": [
+    8.5,
+    8.5
+   ],
+   "mines": [
+    9.4,
+    11.6
+   ],
+   "income": [
+    8.6,
+    5.7
+   ],
+   "reputation": [
+    6.3,
+    4.5
+   ],
+   "extras": [
+    2.3,
+    2.6
+   ]
+  },
+  "groups": "h1,h2,h3,h4,h5,h6,h7,h8"
+ },
+ {
+  "level": "apprentice",
+  "opponent": "quick",
+  "games": 384,
+  "margin": 0.04,
+  "se": 0.49,
+  "winPct": 51.6,
+  "drawPct": 0,
+  "vp": 37.5,
+  "oppVP": 37.5,
+  "marginFirst": 0.32,
+  "marginSecond": -0.23,
+  "checksPerCard": 1.15,
+  "cardsPerGame": 30,
+  "rulesPct": {
+   "goal:C": 51.3,
+   "cash": 24.3,
+   "goal:M": 18.4,
+   "pelicans": 2.9,
+   "goal:S": 1.5,
+   "fallback:I": 0.9,
+   "fallback:M": 0.5,
+   "discard": 0.2
+  },
+  "parts": {
+   "earned": [
+    11.9,
+    10.7
+   ],
+   "town": [
+    4.1,
+    5.5
+   ],
+   "mines": [
+    7.3,
+    11.7
+   ],
+   "income": [
+    7.2,
+    4.6
+   ],
+   "reputation": [
+    5.1,
+    1.7
+   ],
+   "extras": [
+    2,
+    3.3
+   ]
+  },
+  "groups": "h1,h2,h3,h4,h5,h6,h7,h8"
+ },
+ {
+  "level": "apprentice",
+  "opponent": "standard",
+  "games": 384,
+  "margin": -8.88,
+  "se": 0.54,
+  "winPct": 21.4,
+  "drawPct": 0,
+  "vp": 38.3,
+  "oppVP": 47.2,
+  "marginFirst": -9.29,
+  "marginSecond": -8.46,
+  "checksPerCard": 1.15,
+  "cardsPerGame": 30,
+  "rulesPct": {
+   "goal:C": 52.4,
+   "cash": 23.2,
+   "goal:M": 18.4,
+   "pelicans": 3.1,
+   "goal:S": 1.4,
+   "fallback:I": 0.8,
+   "fallback:M": 0.5,
+   "discard": 0.2
+  },
+  "parts": {
+   "earned": [
+    12.5,
+    15.2
+   ],
+   "town": [
+    4.1,
+    8.1
+   ],
+   "mines": [
+    6.9,
+    11.4
+   ],
+   "income": [
+    7.4,
+    5.7
+   ],
+   "reputation": [
+    5.2,
+    4.4
+   ],
+   "extras": [
+    2,
+    2.5
+   ]
+  },
+  "groups": "h1,h2,h3,h4,h5,h6,h7,h8"
+ },
+ {
+  "level": "journeyman",
+  "opponent": "baseline",
+  "games": 192,
+  "margin": -0.86,
+  "se": 0.72,
+  "winPct": 46.4,
+  "drawPct": 0,
+  "vp": 43.6,
+  "oppVP": 44.5,
+  "marginFirst": -1.89,
+  "marginSecond": 0.16,
+  "checksPerCard": 1.14,
+  "cardsPerGame": 30,
+  "rulesPct": {
+   "goal:C": 52.5,
+   "cash": 23,
+   "goal:M": 18.2,
+   "pelicans": 3.2,
+   "goal:S": 1.7,
+   "fallback:I": 0.7,
+   "fallback:M": 0.6,
+   "discard": 0.1
+  },
+  "parts": {
+   "earned": [
+    13,
+    15.7
+   ],
+   "town": [
+    7.2,
+    7.8
+   ],
+   "mines": [
+    8.2,
+    11.3
+   ],
+   "income": [
+    7.4,
+    5.7
+   ],
+   "reputation": [
+    5.7,
+    0.4
+   ],
+   "extras": [
+    2,
+    3.7
+   ]
+  },
+  "groups": "h1,h2,h3,h4"
+ },
+ {
+  "level": "journeyman",
+  "opponent": "builder",
+  "games": 192,
+  "margin": -0.18,
+  "se": 0.74,
+  "winPct": 51,
+  "drawPct": 0,
+  "vp": 44,
+  "oppVP": 44.2,
+  "marginFirst": -0.66,
+  "marginSecond": 0.3,
+  "checksPerCard": 1.14,
+  "cardsPerGame": 30,
+  "rulesPct": {
+   "goal:C": 52.9,
+   "cash": 22.8,
+   "goal:M": 18,
+   "pelicans": 3.5,
+   "goal:S": 1.6,
+   "fallback:I": 0.7,
+   "fallback:M": 0.5,
+   "discard": 0.1
+  },
+  "parts": {
+   "earned": [
+    13.2,
+    15.4
+   ],
+   "town": [
+    7.2,
+    8.7
+   ],
+   "mines": [
+    8.3,
+    10.2
+   ],
+   "income": [
+    7.6,
+    5.8
+   ],
+   "reputation": [
+    5.8,
+    0.3
+   ],
+   "extras": [
+    2,
+    3.8
+   ]
+  },
+  "groups": "h1,h2,h3,h4"
+ },
+ {
+  "level": "journeyman",
+  "opponent": "classic",
+  "games": 192,
+  "margin": -3.52,
+  "se": 0.66,
+  "winPct": 34.4,
+  "drawPct": 0,
+  "vp": 42.9,
+  "oppVP": 46.4,
+  "marginFirst": -3.98,
+  "marginSecond": -3.06,
+  "checksPerCard": 1.15,
+  "cardsPerGame": 30,
+  "rulesPct": {
+   "goal:C": 52.5,
+   "cash": 23,
+   "goal:M": 18,
+   "pelicans": 3.4,
+   "goal:S": 1.6,
+   "fallback:I": 0.8,
+   "fallback:M": 0.6,
+   "discard": 0.2
+  },
+  "parts": {
+   "earned": [
+    13.2,
+    16.5
+   ],
+   "town": [
+    7.3,
+    8.4
+   ],
+   "mines": [
+    7.4,
+    11.6
+   ],
+   "income": [
+    7.4,
+    5.9
+   ],
+   "reputation": [
+    5.6,
+    0.4
+   ],
+   "extras": [
+    2,
+    3.7
+   ]
+  },
+  "groups": "h1,h2,h3,h4"
+ },
+ {
+  "level": "journeyman",
+  "opponent": "council",
+  "games": 192,
+  "margin": 0.02,
+  "se": 0.67,
+  "winPct": 50.5,
+  "drawPct": 0,
+  "vp": 43.9,
+  "oppVP": 43.8,
+  "marginFirst": -0.06,
+  "marginSecond": 0.09,
+  "checksPerCard": 1.15,
+  "cardsPerGame": 30,
+  "rulesPct": {
+   "goal:C": 52.4,
+   "cash": 23.2,
+   "goal:M": 17.8,
+   "pelicans": 3.6,
+   "goal:S": 1.6,
+   "fallback:I": 0.6,
+   "fallback:M": 0.5,
+   "discard": 0.3
+  },
+  "parts": {
+   "earned": [
+    13.5,
+    16.3
+   ],
+   "town": [
+    6.9,
+    7.2
+   ],
+   "mines": [
+    8.5,
+    11
+   ],
+   "income": [
+    7.4,
+    5.8
+   ],
+   "reputation": [
+    5.5,
+    0.1
+   ],
+   "extras": [
+    2.1,
+    3.5
+   ]
+  },
+  "groups": "h1,h2,h3,h4"
+ },
+ {
+  "level": "journeyman",
+  "opponent": "denial",
+  "games": 192,
+  "margin": 1.23,
+  "se": 0.68,
+  "winPct": 54.7,
+  "drawPct": 0,
+  "vp": 41.6,
+  "oppVP": 40.4,
+  "marginFirst": 1.04,
+  "marginSecond": 1.42,
+  "checksPerCard": 1.14,
+  "cardsPerGame": 30,
+  "rulesPct": {
+   "goal:C": 52,
+   "cash": 23.5,
+   "goal:M": 18.2,
+   "pelicans": 3.1,
+   "goal:S": 1.9,
+   "fallback:I": 0.7,
+   "fallback:M": 0.6,
+   "discard": 0.2
+  },
+  "parts": {
+   "earned": [
+    11.9,
+    12.1
+   ],
+   "town": [
+    6.7,
+    6.8
+   ],
+   "mines": [
+    7.4,
+    12.1
+   ],
+   "income": [
+    7.3,
+    5.5
+   ],
+   "reputation": [
+    6.3,
+    0
+   ],
+   "extras": [
+    2,
+    4
+   ]
+  },
+  "groups": "h1,h2,h3,h4"
+ },
+ {
+  "level": "journeyman",
+  "opponent": "miner",
+  "games": 192,
+  "margin": 1.92,
+  "se": 0.71,
+  "winPct": 56.3,
+  "drawPct": 0,
+  "vp": 42.8,
+  "oppVP": 40.9,
+  "marginFirst": 0.9,
+  "marginSecond": 2.95,
+  "checksPerCard": 1.14,
+  "cardsPerGame": 30,
+  "rulesPct": {
+   "goal:C": 51.7,
+   "cash": 23.8,
+   "goal:M": 18.3,
+   "pelicans": 3.3,
+   "goal:S": 1.5,
+   "fallback:I": 0.8,
+   "fallback:M": 0.4,
+   "discard": 0.2
+  },
+  "parts": {
+   "earned": [
+    13,
+    12.9
+   ],
+   "town": [
+    6.6,
+    6
+   ],
+   "mines": [
+    8.1,
+    12.6
+   ],
+   "income": [
+    7.4,
+    5.3
+   ],
+   "reputation": [
+    5.6,
+    0.1
+   ],
+   "extras": [
+    2.1,
+    4
+   ]
+  },
+  "groups": "h1,h2,h3,h4"
+ },
+ {
+  "level": "journeyman",
+  "opponent": "quick",
+  "games": 384,
+  "margin": 3.33,
+  "se": 0.51,
+  "winPct": 64.3,
+  "drawPct": 0,
+  "vp": 41.4,
+  "oppVP": 38,
+  "marginFirst": 3.28,
+  "marginSecond": 3.38,
+  "checksPerCard": 1.15,
+  "cardsPerGame": 30,
+  "rulesPct": {
+   "goal:C": 51.4,
+   "cash": 24.2,
+   "goal:M": 18.3,
+   "pelicans": 2.8,
+   "goal:S": 1.7,
+   "fallback:I": 0.7,
+   "fallback:M": 0.5,
+   "discard": 0.3
+  },
+  "parts": {
+   "earned": [
+    12,
+    11.5
+   ],
+   "town": [
+    6.7,
+    5.6
+   ],
+   "mines": [
+    8.3,
+    11.5
+   ],
+   "income": [
+    7.2,
+    4.5
+   ],
+   "reputation": [
+    5.1,
+    1.7
+   ],
+   "extras": [
+    2.1,
+    3.2
+   ]
+  },
+  "groups": "h1,h2,h3,h4,h5,h6,h7,h8"
+ },
+ {
+  "level": "journeyman",
+  "opponent": "standard",
+  "games": 384,
+  "margin": -5.82,
+  "se": 0.55,
+  "winPct": 30.2,
+  "drawPct": 0,
+  "vp": 42.5,
+  "oppVP": 48.3,
+  "marginFirst": -6.45,
+  "marginSecond": -5.19,
+  "checksPerCard": 1.14,
+  "cardsPerGame": 30,
+  "rulesPct": {
+   "goal:C": 52.3,
+   "cash": 23.1,
+   "goal:M": 18.6,
+   "pelicans": 3.3,
+   "goal:S": 1.4,
+   "fallback:I": 0.7,
+   "fallback:M": 0.4,
+   "discard": 0.2
+  },
+  "parts": {
+   "earned": [
+    12.5,
+    15.7
+   ],
+   "town": [
+    7.2,
+    8.4
+   ],
+   "mines": [
+    8,
+    11.4
+   ],
+   "income": [
+    7.5,
+    5.5
+   ],
+   "reputation": [
+    5.4,
+    4.9
+   ],
+   "extras": [
+    2,
+    2.4
+   ]
+  },
+  "groups": "h1,h2,h3,h4,h5,h6,h7,h8"
+ },
+ {
+  "level": "master",
+  "opponent": "quick",
+  "games": 384,
+  "margin": 7.57,
+  "se": 0.53,
+  "winPct": 77.3,
+  "drawPct": 0,
+  "vp": 46.2,
+  "oppVP": 38.6,
+  "marginFirst": 7.38,
+  "marginSecond": 7.77,
+  "checksPerCard": 1.26,
+  "cardsPerGame": 33,
+  "rulesPct": {
+   "goal:C": 50.6,
+   "cash": 22.4,
+   "goal:M": 18.4,
+   "pelicans": 2.8,
+   "fallback:I": 1.7,
+   "discard": 1.7,
+   "goal:S": 1.5,
+   "fallback:M": 0.9
+  },
+  "parts": {
+   "earned": [
+    13.8,
+    11.8
+   ],
+   "town": [
+    7.4,
+    5.7
+   ],
+   "mines": [
+    9.3,
+    11.7
+   ],
+   "income": [
+    7.8,
+    4.5
+   ],
+   "reputation": [
+    5.3,
+    1.7
+   ],
+   "extras": [
+    2.5,
+    3.3
+   ]
+  },
+  "groups": "h1,h2,h3,h4,h5,h6,h7,h8"
+ },
+ {
+  "level": "master",
+  "opponent": "standard",
+  "games": 384,
+  "margin": -0.97,
+  "se": 0.58,
+  "winPct": 50.3,
+  "drawPct": 0,
+  "vp": 47.5,
+  "oppVP": 48.5,
+  "marginFirst": -0.86,
+  "marginSecond": -1.08,
+  "checksPerCard": 1.26,
+  "cardsPerGame": 33,
+  "rulesPct": {
+   "goal:C": 51.4,
+   "cash": 21.3,
+   "goal:M": 18.5,
+   "pelicans": 3.2,
+   "discard": 1.7,
+   "fallback:I": 1.6,
+   "goal:S": 1.4,
+   "fallback:M": 1
+  },
+  "parts": {
+   "earned": [
+    14.9,
+    15.7
+   ],
+   "town": [
+    7.8,
+    8.5
+   ],
+   "mines": [
+    9,
+    11.4
+   ],
+   "income": [
+    8.1,
+    5.6
+   ],
+   "reputation": [
+    5.4,
+    4.8
+   ],
+   "extras": [
+    2.3,
+    2.4
+   ]
+  },
+  "groups": "h1,h2,h3,h4,h5,h6,h7,h8"
+ },
+ {
+  "level": "grandmaster",
+  "opponent": "quick",
+  "games": 384,
+  "margin": 12.16,
+  "se": 0.58,
+  "winPct": 86.7,
+  "drawPct": 0,
+  "vp": 50.8,
+  "oppVP": 38.6,
+  "marginFirst": 11.39,
+  "marginSecond": 12.94,
+  "checksPerCard": 1.37,
+  "cardsPerGame": 36,
+  "rulesPct": {
+   "goal:C": 49.5,
+   "cash": 21.1,
+   "goal:M": 18.4,
+   "discard": 3.6,
+   "pelicans": 3,
+   "fallback:I": 1.8,
+   "fallback:M": 1.4,
+   "goal:S": 1.3
+  },
+  "parts": {
+   "earned": [
+    16.3,
+    11.7
+   ],
+   "town": [
+    8,
+    5.6
+   ],
+   "mines": [
+    9.6,
+    11.7
+   ],
+   "income": [
+    8.3,
+    4.6
+   ],
+   "reputation": [
+    6.2,
+    1.7
+   ],
+   "extras": [
+    2.4,
+    3.3
+   ]
+  },
+  "groups": "h1,h2,h3,h4,h5,h6,h7,h8"
+ },
+ {
+  "level": "grandmaster",
+  "opponent": "standard",
+  "games": 384,
+  "margin": 4.53,
+  "se": 0.59,
+  "winPct": 70.3,
+  "drawPct": 0.3,
+  "vp": 53.6,
+  "oppVP": 49.1,
+  "marginFirst": 4.85,
+  "marginSecond": 4.2,
+  "checksPerCard": 1.35,
+  "cardsPerGame": 36,
+  "rulesPct": {
+   "goal:C": 50.6,
+   "cash": 19.9,
+   "goal:M": 18.7,
+   "discard": 3.3,
+   "pelicans": 3.1,
+   "fallback:I": 1.8,
+   "goal:S": 1.4,
+   "fallback:M": 1.2
+  },
+  "parts": {
+   "earned": [
+    17.3,
+    16.1
+   ],
+   "town": [
+    8.7,
+    8.8
+   ],
+   "mines": [
+    10,
+    11.4
+   ],
+   "income": [
+    8.9,
+    5.8
+   ],
+   "reputation": [
+    6.4,
+    4.4
+   ],
+   "extras": [
+    2.4,
+    2.5
+   ]
+  },
+  "groups": "h1,h2,h3,h4,h5,h6,h7,h8"
+ }
+]
