@@ -511,7 +511,7 @@ function fillSetup(changeSide=true) {
   select.value=old;
   const guilds=GUILD_SETUPS[card][Number(select.value)];
   byId('guild-rows').innerHTML=guildOrders(guilds).map((order,i)=>`<option value="${i}">${order.map(id=>GUILDS[id]).join(' → ')}</option>`).join('');
-  byId('opening-note').textContent=`Rival guilds · ${GUILD_SETUPS[card][1-Number(select.value)].map(id=>GUILDS[id]).join(' · ')}`;
+  byId('opening-note').textContent=`Rival guild set (row order set by seed) · ${GUILD_SETUPS[card][1-Number(select.value)].map(id=>GUILDS[id]).join(' · ')}`;
 }
 function openDialog(kind) {
   if (kind==='setup') {

@@ -38,7 +38,7 @@ In the v0.2.2 benchmark, Standard won 91 of 144 games and averaged +3.39 VP. Eac
 
 - **Game 1.** Start as the Metallurgists, Miners, and Innkeepers on Card 1 with seed `silver-1308`. The rival’s rows should be Builders, Grocers, and Scribes. Play through final scoring.
 - **Game 2.** Use Card 6, the second guild set, Rival starts, and seed `kutna-v022-playtest-2`. The rival’s rows should be Scribes, Miners, and Innkeepers. Export and reimport a save before finishing.
-- **Safari.** Start a game, open the rival’s player board, and reload. Import the [Ius Regale short-stack save](test/fixtures/Ius_Regale_Short_Stack.json). Use **Play a card with no effect** and confirm the last card of Round 1. The event raises ore by 2 and discards all three remaining mine tiles. Your next Mine draw refills the stack from the discards.
+- **Safari.** Start a game, open the rival’s player board, and reload. Import the [Ius Regale short-stack save](test/fixtures/Ius_Regale_Short_Stack.json). Use **Play a card with no effect** and confirm the last card of Round 1. The event raises ore by 2 and discards all three remaining mine tiles. The journal reports the discard count. Your next Mine draw refills the stack from the discards.
 
 ## Sources and current rulings
 

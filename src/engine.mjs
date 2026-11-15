@@ -567,7 +567,9 @@ function resolveEvent(state) {
       // Discard from the current stack. A later Mine draw triggers recycling.
       const discarded=state.mineDeck.splice(0,5);
       state.mineDiscard.push(...discarded);
-      break;
+      const count=discarded.length;
+      log(state,null,`${event.name} discarded ${count} mine ${count===1?'tile':'tiles'}.`);
+      return;
     }
     case 'cathedral': for (const p of state.players) p.pelicans++; break;
     case 'michal':

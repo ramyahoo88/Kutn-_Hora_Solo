@@ -292,8 +292,8 @@ test('explicit house orders are respected without changing the seeded boards or 
   assert.deepEqual(readSave(writeSave(seeded)).players,seeded.players);
 });
 
-test('Ius Regale discards at most five tiles and only the next draw recycles an empty stack',()=>{
-  for (const remaining of [0,3,5,7]) {
+test('Ius Regale logs the discard count and only the next draw recycles an empty stack',()=>{
+  for (const remaining of [0,1,3,5,7]) {
     let g=createGame({seed:'ius-regale-boundary'});
     g.events=['code','fever','rush','michal','king'];
     g.tax=0;
@@ -305,12 +305,15 @@ test('Ius Regale discards at most five tiles and only the next draw recycles an 
 
     for (let i=0; i<10; i++) g=transition(g,legalActions(g).find(a=>a.kind==='skip'));
     const discarded=Math.min(split+5,deck.length);
+    const count=discarded-split;
     assert.equal(g.round,2);
     assert.equal(g.ore,2);
     assert.deepEqual(g.mineDiscard,deck.slice(0,discarded));
     assert.deepEqual(g.mineDeck,deck.slice(discarded));
     assert.equal(g.mineMixed,false);
     assert.equal(g.rng,beforeRng);
+    const eventLog=g.log.filter(entry=>entry.text.startsWith('Ius Regale Montanorum'));
+    assert.deepEqual(eventLog,[{round:1,actor:null,text:`Ius Regale Montanorum discarded ${count} mine ${count===1?'tile':'tiles'}.`}]);
     checkGame(g);
 
     const next=play(g,{kind:'mine',refill:0,card:0});
