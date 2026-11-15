@@ -251,8 +251,8 @@ button.offer:hover, .offer.chosen { outline: 1px solid var(--brass); outline-off
 .journal-rule { display: block; color: var(--quiet); }
 .log-round { color: var(--quiet); }
 .log-seat { color: var(--seat,var(--muted)); }
-.report-source { margin: 0 13px 7px; padding: 8px 10px; border: 1px solid var(--line); border-radius: 7px; }
-.report-source h3 { color: var(--muted); font-size: .85rem; overflow-wrap: anywhere; }
+.report-source { margin: 0 13px 7px; padding: 8px 10px; border: 1px solid var(--line); border-radius: 7px; overflow-wrap: anywhere; }
+.report-source h3 { color: var(--muted); font-size: .85rem; }
 .report-source button { margin-top: 5px; }
 .report-note { padding: 0 13px 10px; color: var(--muted); }
 .report-note summary { cursor: pointer; padding: 5px 0; font-size: .84rem; color: var(--brass); }

@@ -56,8 +56,8 @@ function restorePlaytestNote(note='') {
 
 function reportVersions() {
   if (!importedReport) return undefined;
-  const {appVersion,mincmistrRulesVersion}=importedReport;
-  return {appVersion,mincmistrRulesVersion};
+  const {appVersion,mincmistrRulesVersion,source}=importedReport;
+  return {appVersion,mincmistrRulesVersion,source};
 }
 
 function restoreAutosave() {
@@ -143,8 +143,8 @@ noteInput.addEventListener('input',()=>{
 function renderSaveStatus() {
   const protectedSave=unreadableSave!==null;
   let warning='';
-  if (saveConflict) warning='The saved game changed. Load it to continue. You can export the position in this tab first.';
-  else if (saveFailed) warning='Autosave is unavailable. Export your current game to keep your progress.';
+  if (saveConflict) warning='The saved game changed. Load it to continue. You can export this tab’s game and note first.';
+  else if (saveFailed) warning='Autosave is unavailable. Export your game and note to keep your progress.';
   else if (protectedSave) warning='Your previous autosave could not be opened. Autosave is paused. Start a new game or import a save to resume it.';
   if (byId('save-warning').textContent!==warning) byId('save-warning').textContent=warning;
   byId('save-status').hidden=!warning;
@@ -718,6 +718,13 @@ function renderMarket() {
     <section class="panel cathedral"><div class="panel-head"><h2>St. Barbara</h2><span class="fine">${number===12?'Complete':`Tile ${number} of 11`}</span></div>
     <div class="panel-body"><strong>${BARBARA[number][0]}</strong><p>${BARBARA[number][1]}</p></div></section>`;
 }
+function formatReportVersions({appVersion,mincmistrRulesVersion}) {
+  const versions=[];
+  if (appVersion) versions.push(`App v${appVersion}`);
+  if (mincmistrRulesVersion) versions.push(`Mincmistr v${mincmistrRulesVersion}`);
+  return versions.join(' · ');
+}
+
 function renderJournal() {
   const button=byId('journal-toggle');
   button.textContent=allJournal?'Show recent':'Show all';
@@ -732,10 +739,13 @@ function renderJournal() {
   byId('report-source').hidden=!importedReport;
   byId('report-before').hidden=!importedReport?.before;
   if (importedReport) {
-    const versions=['Imported playtest report'];
-    if (importedReport.appVersion) versions.push(`App v${importedReport.appVersion}`);
-    if (importedReport.mincmistrRulesVersion) versions.push(`Mincmistr v${importedReport.mincmistrRulesVersion}`);
-    byId('report-source-title').textContent=versions.join(' · ');
+    const original=formatReportVersions(importedReport.source??importedReport);
+    const exporter=formatReportVersions(importedReport);
+    const showExporter=Boolean(importedReport.source && exporter && original!==exporter);
+    const title=showExporter?'Original report':'Imported playtest report';
+    byId('report-source-title').textContent=original?`${title} · ${original}`:title;
+    byId('report-exported-with').hidden=!showExporter;
+    byId('report-exported-with').textContent=showExporter?`Re-exported with ${exporter}`:'';
   }
 }
 function render() {
@@ -864,10 +874,11 @@ function runRival(onePlan=false) {
           if (!multiple&&['rights','build','place-mine','technology','income'].includes(action.kind)) why=actionRationale(next,action);
           next=transition(next,action);
         }
-        const entries=next.log.slice(previousEntries,afterAction?.log.length).filter(entry=>entry.actor===turn.actor);
-        for (const entry of entries) {
-          if (onePlan && plansByNote.has(entry.text)) continue;
-          notes.push(onePlan?entry.text:noteFor(turn.actor,entry.text));
+        const entries=next.log.slice(previousEntries,afterAction?.log.length);
+        for (const {actor,text} of entries) {
+          if (actor!==turn.actor && !(onePlan && actor===null)) continue;
+          if (onePlan && plansByNote.has(text)) continue;
+          notes.push(onePlan?text:noteFor(turn.actor,text));
         }
         if (why) notes.push(why);
       } while(onePlan?next.pending.length>0:

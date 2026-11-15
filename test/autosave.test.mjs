@@ -1,5 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import {MINCMISTR_RULES_VERSION,VERSION} from '../src/data.mjs';
 import {createGame,legalActions,transition} from '../src/engine.mjs';
 import {readAutosave,readPosition,readSave,writeAutosave,writePlaytestReport,writeSave} from '../src/save.mjs';
 
@@ -35,4 +36,18 @@ test('a bad earlier position does not erase the current position or report note'
     assert.equal(loaded.playtestNote,'Report note');
     assert.equal(loaded.importedReport.before,undefined);
   }
+});
+
+test('report exports keep the original app and rules versions across autosaves',()=>{
+  const state=createGame({seed:'old-report',difficulty:'mincmistr'});
+  const report=JSON.parse(writePlaytestReport({state,rivalReport:[],review:null}));
+  const oldVersions={appVersion:'0.3.5',mincmistrRulesVersion:'1.2.2'};
+  Object.assign(report.playtest,oldVersions);
+  report.playtest.source={appVersion:7,mincmistrRulesVersion:'invalid version'.repeat(3)};
+  const {current}=readAutosave(writeAutosave(readPosition(JSON.stringify(report)),[]));
+  assert.deepEqual(current.importedReport,oldVersions);
+  const {playtest}=JSON.parse(writePlaytestReport(current));
+  assert.equal(playtest.appVersion,VERSION);
+  assert.equal(playtest.mincmistrRulesVersion,MINCMISTR_RULES_VERSION);
+  assert.deepEqual(playtest.source,oldVersions);
 });

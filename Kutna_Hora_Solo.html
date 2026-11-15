@@ -263,8 +263,8 @@ button.offer:hover, .offer.chosen { outline: 1px solid var(--brass); outline-off
 .journal-rule { display: block; color: var(--quiet); }
 .log-round { color: var(--quiet); }
 .log-seat { color: var(--seat,var(--muted)); }
-.report-source { margin: 0 13px 7px; padding: 8px 10px; border: 1px solid var(--line); border-radius: 7px; }
-.report-source h3 { color: var(--muted); font-size: .85rem; overflow-wrap: anywhere; }
+.report-source { margin: 0 13px 7px; padding: 8px 10px; border: 1px solid var(--line); border-radius: 7px; overflow-wrap: anywhere; }
+.report-source h3 { color: var(--muted); font-size: .85rem; }
 .report-source button { margin-top: 5px; }
 .report-note { padding: 0 13px 10px; color: var(--muted); }
 .report-note summary { cursor: pointer; padding: 5px 0; font-size: .84rem; color: var(--brass); }
@@ -445,7 +445,7 @@ dialog::backdrop { background: #100f11b9; }
     <section class="hero" aria-label="Kutná Hora: The City of Silver">
       <div class="hero-art" aria-hidden="true"></div>
       <div class="hero-copy">
-        <span class="eyebrow">Unofficial solo playtest · v0.3.8</span>
+        <span class="eyebrow">Unofficial solo playtest · v0.3.9</span>
         <h1>Kutná Hora</h1>
         <p>The City of Silver</p>
       </div>
@@ -455,7 +455,7 @@ dialog::backdrop { background: #100f11b9; }
       <p id="save-warning" role="status"></p>
       <div class="save-actions">
         <button type="button" class="outline" id="load-saved-game" data-do="load-saved" hidden>Load saved game</button>
-        <button type="button" class="outline" data-do="export">Export current game</button>
+        <button type="button" class="outline" data-do="report">Export game and note</button>
         <button type="button" class="outline" id="export-unreadable" data-do="export-unreadable" hidden>Download unreadable save</button>
       </div>
     </section>
@@ -477,6 +477,7 @@ dialog::backdrop { background: #100f11b9; }
       <div id="journal-body"></div>
       <section class="report-source" id="report-source" aria-labelledby="report-source-title" hidden>
         <h3 id="report-source-title"></h3>
+        <p class="fine" id="report-exported-with" hidden></p>
         <button type="button" class="outline" id="report-before" data-do="report-before" hidden>Load position before this step</button>
       </section>
       <details class="report-note">
@@ -542,7 +543,7 @@ dialog::backdrop { background: #100f11b9; }
       <p><strong>Resume or share a position.</strong> This browser keeps your game and up to five recent Undo steps when local storage is available. If another tab advances the save, choose <strong>Load saved game</strong> to continue from that position. Export a JSON save to move between browsers or share a position. Version 0.1.0 saves keep their existing deck order.</p>
       <p><strong>Rival settings.</strong> Standard and Quick consider the next player's likely card. Planner tries the replies on a copy of the board, explores several possible draws when choices are close, and looks further ahead for builds and final scoring.</p>
       <p><strong>Mincmistr.</strong> Choose <strong>Play one Plan</strong> to see the moves, resources and board spaces changed. The review also shows any automatic round-end effects. Expand <strong>Why this move?</strong> for the checks and tie-breaks, or tap a rule number to read it offline.</p>
-      <p><strong>Report a playtest.</strong> The journal saves your <strong>Playtest note</strong> with the game. Use <strong>Export playtest report</strong> to share the game and note. Open a report with <strong>Import save</strong>, then use <strong>Load position before this step</strong> in the journal if an earlier position is included. Undo returns to the imported position.</p>
+      <p><strong>Report a playtest.</strong> The journal saves your <strong>Playtest note</strong> with the game. Use <strong>Export playtest report</strong> to share the game and note. If autosave is paused, <strong>Export game and note</strong> in the save warning makes the same kind of copy. Open a report with <strong>Import save</strong>, then use <strong>Load position before this step</strong> in the journal if an earlier position is included. Undo returns to the imported position.</p>
       <p><strong>Playing on the table.</strong> Open <strong>Draw only</strong> for a shared Plan deck. Draw one Plan for each Mincmistr action card. <strong>Rules and reference</strong> has the full rules and two printable aids. Use <strong>Export deck</strong> and <strong>Import deck</strong> to move the current deck and five recent Undo steps between devices.</p>
       <p><strong>Mincmistr levels.</strong> Journeyman follows the printed priorities. Apprentice simplifies plot, build and mine choices. Master plays both cards on its last turn in the final three rounds, and Grandmaster does so each round. In three-player games, Master can also double its last turn in rounds 3–6. <button type="button" class="link guide-rule" data-do="rule" data-value="9" aria-haspopup="dialog">Read rule 9</button></p>
       <p><a href="https://filemanager.czechgames.com/storage/files/kutna-hora-the-city-of-silver/rules/kutna-hora-rules-en.pdf" target="_blank" rel="noreferrer">CGE rulebook</a> · <a href="https://www.czechgames.com/news/available-now-the-kutna-hora-companion-app" target="_blank" rel="noreferrer">CGE market companion</a> · <a href="https://www.zatrolene-hry.cz/spolecenska-hra/kutna-hora-mesto-stribra-14736/k-stazeni/vlastni-solo-mod-capek-18184/" target="_blank" rel="noreferrer">Capek paper variant</a></p>
@@ -1030,7 +1031,7 @@ dialog::backdrop { background: #100f11b9; }
   <script>'use strict';
 const modules={};
 modules.data=(()=>{
-const VERSION = '0.3.8';
+const VERSION = '0.3.9';
 const MINCMISTR_RULES_VERSION = '1.2.3';
 const PLAN_EXPLANATION_LIMIT = 32;
 const SAVE_SCHEMA = 3;
@@ -3359,18 +3360,27 @@ function isPriorPosition(before,state) {
   });
 }
 
+function readReportVersions(report) {
+  const version=value=>shortText(value,24)?value:null;
+  return {
+    appVersion:version(report?.appVersion),
+    mincmistrRulesVersion:version(report?.mincmistrRulesVersion),
+  };
+}
+
 function readReportSource(report,state) {
   if (!report || typeof report!=='object' || Array.isArray(report)) return undefined;
-  const version=value=>shortText(value,24)?value:null;
-  const source={appVersion:version(report.appVersion),mincmistrRulesVersion:version(report.mincmistrRulesVersion)};
+  const imported=readReportVersions(report);
+  const source=readReportVersions(report.source);
+  if (source.appVersion || source.mincmistrRulesVersion) imported.source=source;
   if (report.before?.kind===SAVE_KIND) {
     // A damaged replay position should not prevent opening the report itself.
     try {
       const before=savedState(report.before.state);
-      if (isPriorPosition(before,state)) source.before={kind:SAVE_KIND,state:before};
+      if (isPriorPosition(before,state)) imported.before={kind:SAVE_KIND,state:before};
     } catch {}
   }
-  return source;
+  return imported;
 }
 
 function readSnapshot(snapshot) {
@@ -3406,6 +3416,7 @@ const readPosition=text=>readSnapshot(saveRecord(text));
 function writePlaytestReport(current,previous,note=current.playtestNote??'',createdAt=new Date()) {
   const {state,rivalReport,review,importedReport}=current;
   const before=importedReport?.before?.state??(previous?.replaced?null:previous?.state);
+  const source=readReportVersions(importedReport?.source??importedReport);
   return JSON.stringify({
     kind:SAVE_KIND,state,rivalReport,review,
     playtest:{
@@ -3417,7 +3428,8 @@ function writePlaytestReport(current,previous,note=current.playtestNote??'',crea
         difficulty:state.difficulty,level:state.mincmistr?.level??null,sharedDeck:state.mincmistr?.shared??null,
         tougherMaster:state.mincmistr?.tougher??false,events:state.events.length>0,
       },
-      note:note.trim().slice(0,1000),
+      note:note.slice(0,1000),
+      ...(source.appVersion||source.mincmistrRulesVersion?{source}:{}),
       ...(isPriorPosition(before,state)?{before:{kind:SAVE_KIND,state:before}}:{}),
     },
   });
@@ -3871,8 +3883,8 @@ function restorePlaytestNote(note='') {
 
 function reportVersions() {
   if (!importedReport) return undefined;
-  const {appVersion,mincmistrRulesVersion}=importedReport;
-  return {appVersion,mincmistrRulesVersion};
+  const {appVersion,mincmistrRulesVersion,source}=importedReport;
+  return {appVersion,mincmistrRulesVersion,source};
 }
 
 function restoreAutosave() {
@@ -3958,8 +3970,8 @@ noteInput.addEventListener('input',()=>{
 function renderSaveStatus() {
   const protectedSave=unreadableSave!==null;
   let warning='';
-  if (saveConflict) warning='The saved game changed. Load it to continue. You can export the position in this tab first.';
-  else if (saveFailed) warning='Autosave is unavailable. Export your current game to keep your progress.';
+  if (saveConflict) warning='The saved game changed. Load it to continue. You can export this tab’s game and note first.';
+  else if (saveFailed) warning='Autosave is unavailable. Export your game and note to keep your progress.';
   else if (protectedSave) warning='Your previous autosave could not be opened. Autosave is paused. Start a new game or import a save to resume it.';
   if (byId('save-warning').textContent!==warning) byId('save-warning').textContent=warning;
   byId('save-status').hidden=!warning;
@@ -4533,6 +4545,13 @@ function renderMarket() {
     <section class="panel cathedral"><div class="panel-head"><h2>St. Barbara</h2><span class="fine">${number===12?'Complete':`Tile ${number} of 11`}</span></div>
     <div class="panel-body"><strong>${BARBARA[number][0]}</strong><p>${BARBARA[number][1]}</p></div></section>`;
 }
+function formatReportVersions({appVersion,mincmistrRulesVersion}) {
+  const versions=[];
+  if (appVersion) versions.push(`App v${appVersion}`);
+  if (mincmistrRulesVersion) versions.push(`Mincmistr v${mincmistrRulesVersion}`);
+  return versions.join(' · ');
+}
+
 function renderJournal() {
   const button=byId('journal-toggle');
   button.textContent=allJournal?'Show recent':'Show all';
@@ -4547,10 +4566,13 @@ function renderJournal() {
   byId('report-source').hidden=!importedReport;
   byId('report-before').hidden=!importedReport?.before;
   if (importedReport) {
-    const versions=['Imported playtest report'];
-    if (importedReport.appVersion) versions.push(`App v${importedReport.appVersion}`);
-    if (importedReport.mincmistrRulesVersion) versions.push(`Mincmistr v${importedReport.mincmistrRulesVersion}`);
-    byId('report-source-title').textContent=versions.join(' · ');
+    const original=formatReportVersions(importedReport.source??importedReport);
+    const exporter=formatReportVersions(importedReport);
+    const showExporter=Boolean(importedReport.source && exporter && original!==exporter);
+    const title=showExporter?'Original report':'Imported playtest report';
+    byId('report-source-title').textContent=original?`${title} · ${original}`:title;
+    byId('report-exported-with').hidden=!showExporter;
+    byId('report-exported-with').textContent=showExporter?`Re-exported with ${exporter}`:'';
   }
 }
 function render() {
@@ -4679,10 +4701,11 @@ function runRival(onePlan=false) {
           if (!multiple&&['rights','build','place-mine','technology','income'].includes(action.kind)) why=actionRationale(next,action);
           next=transition(next,action);
         }
-        const entries=next.log.slice(previousEntries,afterAction?.log.length).filter(entry=>entry.actor===turn.actor);
-        for (const entry of entries) {
-          if (onePlan && plansByNote.has(entry.text)) continue;
-          notes.push(onePlan?entry.text:noteFor(turn.actor,entry.text));
+        const entries=next.log.slice(previousEntries,afterAction?.log.length);
+        for (const {actor,text} of entries) {
+          if (actor!==turn.actor && !(onePlan && actor===null)) continue;
+          if (onePlan && plansByNote.has(text)) continue;
+          notes.push(onePlan?text:noteFor(turn.actor,text));
         }
         if (why) notes.push(why);
       } while(onePlan?next.pending.length>0:

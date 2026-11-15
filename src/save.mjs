@@ -188,18 +188,27 @@ function isPriorPosition(before,state) {
   });
 }
 
+function readReportVersions(report) {
+  const version=value=>shortText(value,24)?value:null;
+  return {
+    appVersion:version(report?.appVersion),
+    mincmistrRulesVersion:version(report?.mincmistrRulesVersion),
+  };
+}
+
 function readReportSource(report,state) {
   if (!report || typeof report!=='object' || Array.isArray(report)) return undefined;
-  const version=value=>shortText(value,24)?value:null;
-  const source={appVersion:version(report.appVersion),mincmistrRulesVersion:version(report.mincmistrRulesVersion)};
+  const imported=readReportVersions(report);
+  const source=readReportVersions(report.source);
+  if (source.appVersion || source.mincmistrRulesVersion) imported.source=source;
   if (report.before?.kind===SAVE_KIND) {
     // A damaged replay position should not prevent opening the report itself.
     try {
       const before=savedState(report.before.state);
-      if (isPriorPosition(before,state)) source.before={kind:SAVE_KIND,state:before};
+      if (isPriorPosition(before,state)) imported.before={kind:SAVE_KIND,state:before};
     } catch {}
   }
-  return source;
+  return imported;
 }
 
 function readSnapshot(snapshot) {
@@ -235,6 +244,7 @@ export const readPosition=text=>readSnapshot(saveRecord(text));
 export function writePlaytestReport(current,previous,note=current.playtestNote??'',createdAt=new Date()) {
   const {state,rivalReport,review,importedReport}=current;
   const before=importedReport?.before?.state??(previous?.replaced?null:previous?.state);
+  const source=readReportVersions(importedReport?.source??importedReport);
   return JSON.stringify({
     kind:SAVE_KIND,state,rivalReport,review,
     playtest:{
@@ -246,7 +256,8 @@ export function writePlaytestReport(current,previous,note=current.playtestNote??
         difficulty:state.difficulty,level:state.mincmistr?.level??null,sharedDeck:state.mincmistr?.shared??null,
         tougherMaster:state.mincmistr?.tougher??false,events:state.events.length>0,
       },
-      note:note.trim().slice(0,1000),
+      note:note.slice(0,1000),
+      ...(source.appVersion||source.mincmistrRulesVersion?{source}:{}),
       ...(isPriorPosition(before,state)?{before:{kind:SAVE_KIND,state:before}}:{}),
     },
   });

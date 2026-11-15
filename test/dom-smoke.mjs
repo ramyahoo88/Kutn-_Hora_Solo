@@ -4,7 +4,7 @@ import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {createGame,createPlanDeck,drawPlan,legalActions,transition} from '../src/engine.mjs';
 import {playMincmistr} from '../src/mincmistr.mjs';
-import {readSave,writeSave} from '../src/save.mjs';
+import {readPosition,readSave,writeSave} from '../src/save.mjs';
 
 const {JSDOM,VirtualConsole}=await import(process.env.JSDOM_MODULE??'jsdom');
 const html=readFileSync(new URL('../Kutna_Hora_Solo.html',import.meta.url),'utf8');
@@ -66,6 +66,17 @@ async function until(observed,check) {
 async function selectMine(ui) {
   await ui.click('[data-value="0/mine"]');
   await ui.click('[data-do="commit"]');
+}
+
+async function downloadPosition(ui,selector) {
+  await ui.click(selector);
+  const contents=await new Promise((resolve,reject)=>{
+    const reader=new ui.w.FileReader();
+    reader.onload=()=>resolve(reader.result);
+    reader.onerror=()=>reject(reader.error);
+    reader.readAsText(ui.downloads.at(-1));
+  });
+  return readPosition(contents);
 }
 
 // F1, digital game. Omit the storage event to exercise the pre-write check.
@@ -280,14 +291,21 @@ console.log('PASS one Plan, free double mine, continued rival batch and exact re
   assert.match(a.text('#decisions'),/Place a mine/);
   assert.match(a.text('#save-warning'),/Autosave is unavailable/);
   assert.equal(store.get(GAME),before);
-  await a.click('footer [data-do="export"]');
+  const after=await downloadPosition(a,'footer [data-do="export"]');
   assert.equal(a.downloads.length,1);
-  const after=await new Promise(resolve=>{
-    const reader=new a.w.FileReader();
-    reader.onload=()=>resolve(readSave(reader.result));
-    reader.readAsText(a.downloads[0]);
-  });
-  assert.deepEqual(after,transition(state,legalActions(state).find(action=>action.kind==='mine'&&action.card===0)));
+  assert.deepEqual(after.state,transition(state,legalActions(state).find(action=>action.kind==='mine'&&action.card===0)));
   a.close();
-  console.log('PASS failed writes preserve the old save and export the current position');
+
+  const broken='{truncated';
+  const protectedStore=new Map([[GAME,broken]]);
+  const b=boot(protectedStore);
+  const note=b.get('#playtest-note');
+  note.value='A note typed while autosave was paused.';
+  note.dispatchEvent(new b.w.Event('input'));
+  const recovered=await downloadPosition(b,'#save-status [data-do="report"]');
+  assert.deepEqual(recovered.state,createGame());
+  assert.equal(recovered.playtestNote,note.value);
+  assert.equal(protectedStore.get(GAME),broken);
+  b.close();
+  console.log('PASS recovery exports the current position and note while protecting unreadable or unwritable saves');
 }
