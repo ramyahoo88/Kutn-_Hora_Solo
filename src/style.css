@@ -150,6 +150,8 @@ small, .fine { font-size: .79rem; color: var(--quiet); }
 .rival-cards > strong { display: block; color: var(--seat); padding: 0 10px 4px; font-size: .82rem; }
 .rival-cards small { margin-left: 4px; font-weight: 500; }
 .rival-plan { margin: 0; padding: 0 10px 5px; color: var(--muted); font-size: .75rem; }
+.plan-card-link { font: inherit; color: var(--brass); text-align: left; }
+.log-list .plan-card-link { padding: 0; border: 0; }
 .rival-hand ul { list-style: none; display: flex; flex-wrap: wrap; gap: 4px; margin: 0; padding: 0 10px 10px; }
 .rival-hand li { padding: 3px 6px; border: 1px solid var(--tile-edge); border-radius: 5px; background: var(--tile-bg); font-size: .74rem; }
 select, input[type=text] { min-height: 40px; padding: 7px 9px; border-radius: 6px; border: 1px solid #66625d; background: #222225; width: 100%; min-width: 0; }
@@ -229,6 +231,8 @@ button.offer:hover, .offer.chosen { outline: 1px solid var(--brass); outline-off
 .final-score thead th { font-size: .76rem; }
 dialog { padding: 0; width: min(620px, calc(100% - 26px)); max-height: calc(100% - 25px); color: var(--ink); background: var(--panel); border: 1px solid #8c775c; border-radius: var(--radius); }
 dialog::backdrop { background: #100f11b9; }
+#plan-dialog { width: min(380px, calc(100% - 26px)); }
+#printed-plan-face { aspect-ratio: 5 / 7; background: #fbf7ef url(/* PLAN_CARDS_ASSET */) 0 0 / 300% 500% no-repeat; }
 .dialog-body { padding: 14px; }
 .dialog-body .primary { margin-top: 13px; }
 .tile-facts { display: grid; grid-template-columns: max-content minmax(0,1fr); gap: 8px 14px; margin: 0; }

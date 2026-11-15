@@ -20,6 +20,7 @@ const formatNumber=n=>String(n).replace('-','−');
 const dotLabels={b:'blue',r:'red',y:'yellow',s:'silver',o:'orange'};
 const signs={wood:'⌂',food:'✣',beer:'◈',ore:'⬟',silver:'◇',permit:'▤'};
 const cap=text=>text[0].toUpperCase()+text.slice(1);
+const plansByNote=new Map(PLAN_DECK.map(plan=>[`${describePlan(plan)}.`,plan.number]));
 let state;
 let unreadableSave=null;
 let storageReadFailed=false;
@@ -302,9 +303,12 @@ function renderRivalHand() {
     const cards=order.filter(index=>player.hand&(1<<index)).map(index=>CARDS[index]);
     const plan=m?PLAN_DECK[m.lastPlans[i]]:null;
     const count=m&&!shared?` · ${m.decks[m.shared?0:i].draw.length} Plans left`:'';
+    const planText=plan
+      ? `${describePlan(plan)} <button type="button" class="link plan-card-link" data-do="plan-card" data-value="${seat}/${plan.number}" aria-haspopup="dialog" aria-label="View ${playerName(seat)}’s Plan ${plan.number} card">View Plan card</button>`
+      : 'Waiting for first Plan';
     return `<div class="rival-cards seat-${seat}">
       <strong>${playerName(seat)} <small>${cards.length} in hand${count}</small></strong>
-      ${m?`<p class="rival-plan">${plan?describePlan(plan):'Waiting for first Plan'}</p>`:''}
+      ${m?`<p class="rival-plan">${planText}</p>`:''}
       <ul aria-label="${playerName(seat)} action cards">${cards.map(pair=>`<li>${pair.map(kind=>LABEL[kind]).join(' / ')}</li>`).join('')}</ul>
     </div>`;
   });
@@ -312,6 +316,17 @@ function renderRivalHand() {
     <summary>${title}</summary>
     ${shared?`<p class="rival-plan">Shared Plan deck · ${m.decks[0].draw.length} left</p>`:''}${hands.join('')}
   </details>`;
+}
+function showPlanCard(value) {
+  const [seat,number]=value.split('/').map(Number);
+  const plan=PLAN_DECK[number-1];
+  if (!plan) return;
+  const index=plan.number-1;
+  byId('plan-title').textContent=`${playerName(seat)}’s Plan ${plan.number}`;
+  const face=byId('printed-plan-face');
+  face.style.backgroundPosition=`${index%3*50}% ${Math.floor(index/3)*25}%`;
+  face.setAttribute('aria-label',`${describePlan(plan)}. Take Income with fewer than 20 groschen. Take St. Barbara with two pelicans or one on a prize tile.`);
+  byId('plan-dialog').showModal();
 }
 function groupedChoices(actions) {
   if (!actions.every(a=>a.kind==='place-mine'||a.kind==='build'||a.kind==='skip') || new Set(actions.filter(a=>a.id).map(a=>a.id)).size<2) return actions;
@@ -578,10 +593,16 @@ function renderJournal() {
   button.textContent=allJournal?'Show recent':'Show all';
   button.setAttribute('aria-expanded',String(allJournal));
   const entries=(allJournal?state.log:state.log.slice(-6)).slice().reverse();
-  byId('journal-body').innerHTML=`<ol class="log-list">${entries.map(item=>`<li><span class="log-round">R${item.round}</span><span class="log-seat seat-${item.actor}">${item.actor===null?'Town':playerName(item.actor)}</span><span>${safe(item.text)}</span></li>`).join('')}</ol>`;
+  byId('journal-body').innerHTML=`<ol class="log-list">${entries.map(item=>{
+    const plan=state.mincmistr&&item.actor>0?plansByNote.get(item.text):undefined;
+    const note=safe(item.text);
+    const content=plan?`<button type="button" class="link plan-card-link" data-do="plan-card" data-value="${item.actor}/${plan}" aria-haspopup="dialog">${note}</button>`:note;
+    return `<li><span class="log-round">R${item.round}</span><span class="log-seat seat-${item.actor}">${item.actor===null?'Town':playerName(item.actor)}</span><span>${content}</span></li>`;
+  }).join('')}</ol>`;
 }
 function render() {
   if (byId('tile-dialog').open) byId('tile-dialog').close();
+  if (byId('plan-dialog').open) byId('plan-dialog').close();
   const focus=document.activeElement;
   const focused=focus?.dataset?.do?{action:focus.dataset.do,value:focus.dataset.value}:null;
   renderDashboard();
@@ -804,6 +825,7 @@ document.addEventListener('click',event=>{
         byId('player-board-dialog').showModal();
         break;
       case 'inspect': inspectTile(value,button); break;
+      case 'plan-card': showPlanCard(value); break;
       case 'close': button.closest('dialog').close(); break;
       case 'seed': byId('setup-form').elements.seed.value=randomSeed(); break;
       case 'card': changeAction(...value.split('/')); break;

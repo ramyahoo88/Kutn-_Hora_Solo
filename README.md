@@ -1,4 +1,4 @@
-# Kutná Hora Solo v0.3.2 playtest
+# Kutná Hora Solo v0.3.3 playtest
 
 An unofficial browser playtest for Kutná Hora: The City of Silver. Play one seat against one, two or three rivals. The app handles the town, mines, market, council and game draws. The same HTML works offline. Players can mirror its placements on the table. Export and import a JSON save to move a game between copies.
 
@@ -6,7 +6,7 @@ To play offline, open [Kutna_Hora_Solo.html](Kutna_Hora_Solo.html) on GitHub, ch
 
 Choose a rival count in **New game**. Pick your guild set from that player count's setup card and arrange your house rows. The seed assigns each remaining set once and determines the rivals’ house rows. At larger tables, **Play rivals** runs through the consecutive rival turns and tax decisions until you have a choice or the game ends. Earlier two-player saves import as two-player games.
 
-Choose **Mincmistr** under **Rival difficulty** to play the v1.2.2 tabletop variant directly in the app. Choose Apprentice, Journeyman, Master or Grandmaster for one to three Mincmistrs. With several Mincmistrs, the default is one shared Plan deck and you can choose individual decks. At a three-player table, Master offers the tougher rounds 3–6 option from rule 10. The app resolves each Plan and bonus step and shows the last Plan beside each rival's action cards. Saves include the Plan decks and their current positions. Open Mincmistr saves with v0.3.2 or later. [Tabletop rules and printables](mincmistr/README.md)
+Choose **Mincmistr** under **Rival difficulty** to play the v1.2.2 tabletop variant directly in the app. Choose Apprentice, Journeyman, Master or Grandmaster for one to three Mincmistrs. With several Mincmistrs, the default is one shared Plan deck and you can choose individual decks. At a three-player table, Master offers the tougher rounds 3–6 option from rule 10. The app resolves each Plan and bonus step. Choose **View Plan card** beside a rival’s cards or select a Plan in the game journal to open the printed face offline. Saves include the Plan decks and their current positions. Open Mincmistr saves with v0.3.2 or later. [Tabletop rules and printables](mincmistr/README.md)
 
 Choose **Planner (playtest)** under **Rival difficulty** at any table size. It forecasts intervening turns before choosing its follow-up, compares five possible tile orders when leading plans are close, checks whether it can use the exact plot or right it is about to buy, and scores likely finishes once it has three cards left in the final round. Standard is the default. Open Planner saves with v0.3.1 or later.
 
@@ -94,7 +94,7 @@ node test/skip-planner-study.mjs /path/to/skip-traces standard,planner --case=4 
 
 ## Playtest checks
 
-- **Mincmistr.** Use Card 6, seed `app-table-4`, three rivals and Grandmaster. The first Plan draw appears after **Play rivals**. Undo and replay the batch to see the same cards. Export and reimport the save and continue to round 5. Each Mincmistr plays both remaining cards on its last turn of every round.
+- **Mincmistr.** Use Card 6, seed `app-table-4`, three rivals and Grandmaster. The first Plan draw appears after **Play rivals**. Open **View Plan card** for one rival, then choose **Show all** in the journal and open an earlier Plan. Undo and replay the batch to see the same cards. Export and reimport the save and continue to round 5. Each Mincmistr plays both remaining cards on its last turn of every round.
 
 - **One rival.** Start as the Metallurgists, Miners, and Innkeepers on Card 1 with seed `silver-1308`. The rival’s rows should be Builders, Grocers, and Scribes.
 - **Two rivals.** Use Card 6 and seed `app-table-3`. Check the larger boards, six rounds, each rival's cards and the council starting in round 4.

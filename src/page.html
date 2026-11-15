@@ -67,6 +67,10 @@
     <div class="panel-head"><h2 id="tile-title"></h2><button type="button" class="flat" data-do="close" autofocus>Close</button></div>
     <div class="dialog-body"><dl class="tile-facts" id="tile-facts"></dl></div>
   </dialog>
+  <dialog id="plan-dialog" aria-labelledby="plan-title">
+    <div class="panel-head"><h2 id="plan-title"></h2><button type="button" class="flat" data-do="close" autofocus>Close</button></div>
+    <div class="dialog-body"><div id="printed-plan-face" role="img"></div></div>
+  </dialog>
   <dialog id="setup-dialog" aria-labelledby="setup-title">
     <form id="setup-form">
       <div class="panel-head"><h2 id="setup-title">New game</h2><button type="button" class="flat" data-do="close">Close</button></div>
@@ -102,7 +106,7 @@
       <p><strong>Check public information.</strong> Open a tile to inspect its costs and effects. Use <strong>Details</strong> when the tile is an action target. Either player board shows the full house rewards, production and supplies. The rival’s remaining cards are below the turn controls.</p>
       <p><strong>Resume or share a position.</strong> This browser keeps your current game where local storage is available. Reloading clears Undo history. Export a JSON save to move between browsers or share a position. Version 0.1.0 saves keep their existing deck order. New games use the updated shuffle, so an old seed produces a different setup.</p>
       <p><strong>Rival settings.</strong> Standard and Quick consider the next player's likely card. Planner tries the replies on a copy of the board, explores several possible draws when choices are close, and looks further ahead for builds and final scoring.</p>
-      <p><strong>Mincmistr.</strong> Choose a level in New game. The app flips a Plan for each card played, keeps it through bonus choices, and shows the last Plan with the rival’s action cards. With several Mincmistrs you can share one Plan deck or give each its own.</p>
+      <p><strong>Mincmistr.</strong> Choose a level in New game. The app flips a Plan for each card played and keeps it through bonus choices. Use <strong>View Plan card</strong> beside a rival’s action cards or choose a Plan in the game journal to see its printed face. With several Mincmistrs you can share one Plan deck or give each its own.</p>
       <p><strong>Mincmistr levels.</strong> Journeyman follows the printed priorities. Apprentice simplifies plot, build and mine choices. Master plays both cards on its last turn in the final three rounds, and Grandmaster does so each round. In three-player games, Master can also double its last turn in rounds 3–6. <a href="https://github.com/ramyahoo88/Kutn-_Hora_Solo/blob/e6806e63babe71706650ba80d6fbe96e6da5a806/mincmistr/Mincmistr_Rules.md" target="_blank" rel="noreferrer">Mincmistr v1.2.2 rules</a></p>
       <p><a href="https://filemanager.czechgames.com/storage/files/kutna-hora-the-city-of-silver/rules/kutna-hora-rules-en.pdf" target="_blank" rel="noreferrer">CGE rulebook</a> · <a href="https://www.czechgames.com/news/available-now-the-kutna-hora-companion-app" target="_blank" rel="noreferrer">CGE market companion</a> · <a href="https://www.zatrolene-hry.cz/spolecenska-hra/kutna-hora-mesto-stribra-14736/k-stazeni/vlastni-solo-mod-capek-18184/" target="_blank" rel="noreferrer">Capek paper variant</a></p>
       <p class="fine">Banner cropped from <a href="https://commons.wikimedia.org/wiki/File:Kutn%C3%A1_Hora_-_St._Barbara%27s_Church_-_Panoramic_Photocompilation.jpg" target="_blank" rel="noreferrer">St. Barbara’s Church by Txllxt TxllxT</a> under <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noreferrer">CC BY-SA 4.0</a>.</p>

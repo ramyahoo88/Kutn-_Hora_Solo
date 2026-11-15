@@ -30,7 +30,10 @@ const fonts=[
 ];
 const cssFonts=[];
 for (const [family,weight,path,range] of fonts) cssFonts.push(`@font-face{font-family:'${family}';font-weight:${weight};font-display:swap;${range}src:url(${await data(path,'font/woff2')}) format('woff2');}`);
-const css=(await read('style.css')).replace('/* LOCAL_FONTS */',()=>cssFonts.join('\n')).replace('/* HERO_ASSET */',await data('cathedral.webp','image/webp'));
+const css=(await read('style.css'))
+  .replace('/* LOCAL_FONTS */',()=>cssFonts.join('\n'))
+  .replace('/* HERO_ASSET */',await data('cathedral.webp','image/webp'))
+  .replace('/* PLAN_CARDS_ASSET */',await data('mincmistr-plans.webp','image/webp'));
 const js=`'use strict';\nconst modules={};\n${modules.join('\n')}`.replace(/<\/script/gi,'<\\/script');
 const licenses=await Promise.all(['DM-Sans-OFL.txt','Instrument-Serif-OFL.txt'].map(file=>read(`assets/${file}`)));
 const html=(await read('page.html')).replace('APP_VERSION',VERSION).replace('/* BUNDLE_CSS */',()=>css).replace('/* BUNDLE_JS */',()=>js);

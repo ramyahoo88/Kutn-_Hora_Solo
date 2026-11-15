@@ -4,7 +4,7 @@ The Mincmistr is a card-driven automa for the physical game. It uses a 15-card P
 
 Developed and tested against this repository's engine at `v0.3.0-playtest` (`0b28294`). The rules engine in `v0.3.1-playtest` is the same, apart from the new Planner rival setting.
 
-To play without printing, open [Kutná Hora Solo](../Kutna_Hora_Solo.html) and choose **New game → Rival difficulty → Mincmistr**. The app uses this v1.2.2 policy and tracks Plan draws and bonus turns for you.
+To play without printing, open [Kutná Hora Solo](../Kutna_Hora_Solo.html) and choose **New game → Rival difficulty → Mincmistr**. The app uses this v1.2.2 policy and tracks Plan draws and bonus turns for you. Open **View Plan card** beside a rival's hand or select a Plan in the game journal to see its printed face.
 
 ## Read or print
 
@@ -53,4 +53,5 @@ Run every command from the repository root. The scripts import the engine from `
   node mincmistr/print/export_cards.mjs
   python3 mincmistr/print/build.py /tmp/mincmistr.html mincmistr/Mincmistr_Print_and_Play.pdf
   ```
+- `print/export_app_plans.py` crops the Plan fronts from the PDF for the app. After updating the PDF's cards, run `python3 mincmistr/print/export_app_plans.py` with Poppler and Pillow installed, then rebuild the offline HTML.
 - `results/`: raw results. `results/v1.0/` holds the version 1.0 holdout runs.

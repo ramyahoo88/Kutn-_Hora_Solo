@@ -1,4 +1,4 @@
-export const VERSION = '0.3.2';
+export const VERSION = '0.3.3';
 export const SAVE_SCHEMA = 3;
 export const SETUP_VERSION = 2;
 export const RIVAL_SETTINGS = ['standard','quick','planner','mincmistr'];
