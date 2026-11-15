@@ -1,0 +1,2880 @@
+{
+ "summary": {
+  "command": "node test/rival-study.mjs 12 audit-fresh-nov15",
+  "twoPlayer": {
+   "classic": {
+    "seatGames": 48,
+    "wins": 24,
+    "declinedAffordable": 82,
+    "affordableBills": 218
+   },
+   "standard": {
+    "seatGames": 48,
+    "wins": 30,
+    "meanMargin": 3.25,
+    "declinedAffordable": 15,
+    "affordableBills": 216
+   }
+  },
+  "tables": {
+   "3": {
+    "games": 12,
+    "standardWins": 7,
+    "meanMargin": 2.58
+   },
+   "4": {
+    "games": 12,
+    "standardWins": 9,
+    "meanMargin": 0.17
+   }
+  }
+ },
+ "twoPlayer": [
+  {
+   "group": "rival-plans-pilot",
+   "options": {
+    "seed": "audit-fresh-nov15-rival-plans-pilot-0",
+    "setup": 1,
+    "side": 0,
+    "starter": 0
+   },
+   "control": [
+    {
+     "policy": "classic",
+     "vp": 34,
+     "margin": 7,
+     "win": true,
+     "rep": -1,
+     "unusedRights": 2,
+     "unusedPlots": 0,
+     "affordableBills": 5,
+     "declinedAffordable": 1,
+     "cardsForNoEffect": 0
+    },
+    {
+     "policy": "classic",
+     "vp": 27,
+     "margin": -7,
+     "win": false,
+     "rep": -2,
+     "unusedRights": 3,
+     "unusedPlots": 3,
+     "affordableBills": 4,
+     "declinedAffordable": 1,
+     "cardsForNoEffect": 2
+    }
+   ],
+   "standardSeat0": {
+    "policy": "standard",
+    "vp": 34,
+    "margin": 1,
+    "win": true,
+    "rep": 7,
+    "unusedRights": 2,
+    "unusedPlots": 1,
+    "affordableBills": 5,
+    "declinedAffordable": 0,
+    "cardsForNoEffect": 1
+   },
+   "standardSeat1": {
+    "policy": "standard",
+    "vp": 35,
+    "margin": -9,
+    "win": false,
+    "rep": 3,
+    "unusedRights": 1,
+    "unusedPlots": 1,
+    "affordableBills": 4,
+    "declinedAffordable": 0,
+    "cardsForNoEffect": 0
+   }
+  },
+  {
+   "group": "rival-plans-pilot",
+   "options": {
+    "seed": "audit-fresh-nov15-rival-plans-pilot-1",
+    "setup": 2,
+    "side": 1,
+    "starter": 0
+   },
+   "control": [
+    {
+     "policy": "classic",
+     "vp": 49,
+     "margin": 8,
+     "win": true,
+     "rep": -3,
+     "unusedRights": 1,
+     "unusedPlots": 0,
+     "affordableBills": 4,
+     "declinedAffordable": 1,
+     "cardsForNoEffect": 0
+    },
+    {
+     "policy": "classic",
+     "vp": 41,
+     "margin": -8,
+     "win": false,
+     "rep": -1,
+     "unusedRights": 2,
+     "unusedPlots": 1,
+     "affordableBills": 4,
+     "declinedAffordable": 3,
+     "cardsForNoEffect": 0
+    }
+   ],
+   "standardSeat0": {
+    "policy": "standard",
+    "vp": 42,
+    "margin": -3,
+    "win": false,
+    "rep": 1,
+    "unusedRights": 2,
+    "unusedPlots": 1,
+    "affordableBills": 3,
+    "declinedAffordable": 0,
+    "cardsForNoEffect": 0
+   },
+   "standardSeat1": {
+    "policy": "standard",
+    "vp": 47,
+    "margin": 7,
+    "win": true,
+    "rep": 8,
+    "unusedRights": 0,
+    "unusedPlots": 1,
+    "affordableBills": 4,
+    "declinedAffordable": 0,
+    "cardsForNoEffect": 0
+   }
+  },
+  {
+   "group": "rival-plans-pilot",
+   "options": {
+    "seed": "audit-fresh-nov15-rival-plans-pilot-2",
+    "setup": 3,
+    "side": 0,
+    "starter": 1
+   },
+   "control": [
+    {
+     "policy": "classic",
+     "vp": 44,
+     "margin": 0,
+     "win": true,
+     "rep": -3,
+     "unusedRights": 2,
+     "unusedPlots": 0,
+     "affordableBills": 5,
+     "declinedAffordable": 3,
+     "cardsForNoEffect": 0
+    },
+    {
+     "policy": "classic",
+     "vp": 44,
+     "margin": 0,
+     "win": false,
+     "rep": -2,
+     "unusedRights": 1,
+     "unusedPlots": 0,
+     "affordableBills": 5,
+     "declinedAffordable": 2,
+     "cardsForNoEffect": 1
+    }
+   ],
+   "standardSeat0": {
+    "policy": "standard",
+    "vp": 60,
+    "margin": 4,
+    "win": true,
+    "rep": 9,
+    "unusedRights": 0,
+    "unusedPlots": 1,
+    "affordableBills": 5,
+    "declinedAffordable": 0,
+    "cardsForNoEffect": 0
+   },
+   "standardSeat1": {
+    "policy": "standard",
+    "vp": 27,
+    "margin": -15,
+    "win": false,
+    "rep": 0,
+    "unusedRights": 2,
+    "unusedPlots": 0,
+    "affordableBills": 5,
+    "declinedAffordable": 1,
+    "cardsForNoEffect": 3
+   }
+  },
+  {
+   "group": "rival-plans-pilot",
+   "options": {
+    "seed": "audit-fresh-nov15-rival-plans-pilot-3",
+    "setup": 4,
+    "side": 1,
+    "starter": 1
+   },
+   "control": [
+    {
+     "policy": "classic",
+     "vp": 57,
+     "margin": 3,
+     "win": true,
+     "rep": -2,
+     "unusedRights": 1,
+     "unusedPlots": 1,
+     "affordableBills": 5,
+     "declinedAffordable": 1,
+     "cardsForNoEffect": 0
+    },
+    {
+     "policy": "classic",
+     "vp": 54,
+     "margin": -3,
+     "win": false,
+     "rep": -2,
+     "unusedRights": 1,
+     "unusedPlots": 0,
+     "affordableBills": 4,
+     "declinedAffordable": 1,
+     "cardsForNoEffect": 0
+    }
+   ],
+   "standardSeat0": {
+    "policy": "standard",
+    "vp": 56,
+    "margin": 8,
+    "win": true,
+    "rep": 6,
+    "unusedRights": 1,
+    "unusedPlots": 1,
+    "affordableBills": 5,
+    "declinedAffordable": 0,
+    "cardsForNoEffect": 0
+   },
+   "standardSeat1": {
+    "policy": "standard",
+    "vp": 50,
+    "margin": 8,
+    "win": true,
+    "rep": 9,
+    "unusedRights": 0,
+    "unusedPlots": 0,
+    "affordableBills": 5,
+    "declinedAffordable": 0,
+    "cardsForNoEffect": 0
+   }
+  },
+  {
+   "group": "rival-plans-pilot",
+   "options": {
+    "seed": "audit-fresh-nov15-rival-plans-pilot-4",
+    "setup": 5,
+    "side": 0,
+    "starter": 0
+   },
+   "control": [
+    {
+     "policy": "classic",
+     "vp": 38,
+     "margin": -4,
+     "win": false,
+     "rep": 0,
+     "unusedRights": 3,
+     "unusedPlots": 3,
+     "affordableBills": 6,
+     "declinedAffordable": 3,
+     "cardsForNoEffect": 0
+    },
+    {
+     "policy": "classic",
+     "vp": 42,
+     "margin": 4,
+     "win": true,
+     "rep": -2,
+     "unusedRights": 3,
+     "unusedPlots": 3,
+     "affordableBills": 6,
+     "declinedAffordable": 3,
+     "cardsForNoEffect": 0
+    }
+   ],
+   "standardSeat0": {
+    "policy": "standard",
+    "vp": 34,
+    "margin": -10,
+    "win": false,
+    "rep": -1,
+    "unusedRights": 3,
+    "unusedPlots": 2,
+    "affordableBills": 6,
+    "declinedAffordable": 1,
+    "cardsForNoEffect": 0
+   },
+   "standardSeat1": {
+    "policy": "standard",
+    "vp": 36,
+    "margin": -9,
+    "win": false,
+    "rep": 6,
+    "unusedRights": 0,
+    "unusedPlots": 2,
+    "affordableBills": 6,
+    "declinedAffordable": 0,
+    "cardsForNoEffect": 0
+   }
+  },
+  {
+   "group": "rival-plans-pilot",
+   "options": {
+    "seed": "audit-fresh-nov15-rival-plans-pilot-5",
+    "setup": 6,
+    "side": 1,
+    "starter": 0
+   },
+   "control": [
+    {
+     "policy": "classic",
+     "vp": 57,
+     "margin": 8,
+     "win": true,
+     "rep": -3,
+     "unusedRights": 1,
+     "unusedPlots": 0,
+     "affordableBills": 4,
+     "declinedAffordable": 2,
+     "cardsForNoEffect": 0
+    },
+    {
+     "policy": "classic",
+     "vp": 49,
+     "margin": -8,
+     "win": false,
+     "rep": -4,
+     "unusedRights": 1,
+     "unusedPlots": 1,
+     "affordableBills": 3,
+     "declinedAffordable": 1,
+     "cardsForNoEffect": 1
+    }
+   ],
+   "standardSeat0": {
+    "policy": "standard",
+    "vp": 64,
+    "margin": 26,
+    "win": true,
+    "rep": 9,
+    "unusedRights": 0,
+    "unusedPlots": 0,
+    "affordableBills": 4,
+    "declinedAffordable": 0,
+    "cardsForNoEffect": 0
+   },
+   "standardSeat1": {
+    "policy": "standard",
+    "vp": 48,
+    "margin": 2,
+    "win": true,
+    "rep": 0,
+    "unusedRights": 2,
+    "unusedPlots": 0,
+    "affordableBills": 4,
+    "declinedAffordable": 1,
+    "cardsForNoEffect": 0
+   }
+  },
+  {
+   "group": "rival-plans-pilot",
+   "options": {
+    "seed": "audit-fresh-nov15-rival-plans-pilot-6",
+    "setup": 7,
+    "side": 0,
+    "starter": 1
+   },
+   "control": [
+    {
+     "policy": "classic",
+     "vp": 32,
+     "margin": -14,
+     "win": false,
+     "rep": -2,
+     "unusedRights": 2,
+     "unusedPlots": 1,
+     "affordableBills": 5,
+     "declinedAffordable": 2,
+     "cardsForNoEffect": 0
+    },
+    {
+     "policy": "classic",
+     "vp": 46,
+     "margin": 14,
+     "win": true,
+     "rep": 4,
+     "unusedRights": 2,
+     "unusedPlots": 1,
+     "affordableBills": 5,
+     "declinedAffordable": 1,
+     "cardsForNoEffect": 0
+    }
+   ],
+   "standardSeat0": {
+    "policy": "standard",
+    "vp": 50,
+    "margin": -5,
+    "win": false,
+    "rep": 9,
+    "unusedRights": 0,
+    "unusedPlots": 1,
+    "affordableBills": 5,
+    "declinedAffordable": 0,
+    "cardsForNoEffect": 0
+   },
+   "standardSeat1": {
+    "policy": "standard",
+    "vp": 42,
+    "margin": 9,
+    "win": true,
+    "rep": -2,
+    "unusedRights": 2,
+    "unusedPlots": 0,
+    "affordableBills": 5,
+    "declinedAffordable": 1,
+    "cardsForNoEffect": 0
+   }
+  },
+  {
+   "group": "rival-plans-pilot",
+   "options": {
+    "seed": "audit-fresh-nov15-rival-plans-pilot-7",
+    "setup": 8,
+    "side": 1,
+    "starter": 1
+   },
+   "control": [
+    {
+     "policy": "classic",
+     "vp": 46,
+     "margin": -1,
+     "win": false,
+     "rep": 9,
+     "unusedRights": 3,
+     "unusedPlots": 3,
+     "affordableBills": 3,
+     "declinedAffordable": 0,
+     "cardsForNoEffect": 0
+    },
+    {
+     "policy": "classic",
+     "vp": 47,
+     "margin": 1,
+     "win": true,
+     "rep": 5,
+     "unusedRights": 1,
+     "unusedPlots": 1,
+     "affordableBills": 3,
+     "declinedAffordable": 1,
+     "cardsForNoEffect": 0
+    }
+   ],
+   "standardSeat0": {
+    "policy": "standard",
+    "vp": 55,
+    "margin": 18,
+    "win": true,
+    "rep": 9,
+    "unusedRights": 1,
+    "unusedPlots": 1,
+    "affordableBills": 4,
+    "declinedAffordable": 0,
+    "cardsForNoEffect": 0
+   },
+   "standardSeat1": {
+    "policy": "standard",
+    "vp": 63,
+    "margin": 7,
+    "win": true,
+    "rep": 9,
+    "unusedRights": 0,
+    "unusedPlots": 0,
+    "affordableBills": 3,
+    "declinedAffordable": 0,
+    "cardsForNoEffect": 0
+   }
+  },
+  {
+   "group": "rival-plans-pilot",
+   "options": {
+    "seed": "audit-fresh-nov15-rival-plans-pilot-8",
+    "setup": 9,
+    "side": 0,
+    "starter": 0
+   },
+   "control": [
+    {
+     "policy": "classic",
+     "vp": 36,
+     "margin": -11,
+     "win": false,
+     "rep": -1,
+     "unusedRights": 1,
+     "unusedPlots": 1,
+     "affordableBills": 4,
+     "declinedAffordable": 1,
+     "cardsForNoEffect": 0
+    },
+    {
+     "policy": "classic",
+     "vp": 47,
+     "margin": 11,
+     "win": true,
+     "rep": -2,
+     "unusedRights": 2,
+     "unusedPlots": 0,
+     "affordableBills": 4,
+     "declinedAffordable": 2,
+     "cardsForNoEffect": 0
+    }
+   ],
+   "standardSeat0": {
+    "policy": "standard",
+    "vp": 52,
+    "margin": 11,
+    "win": true,
+    "rep": 9,
+    "unusedRights": 0,
+    "unusedPlots": 0,
+    "affordableBills": 4,
+    "declinedAffordable": 0,
+    "cardsForNoEffect": 0
+   },
+   "standardSeat1": {
+    "policy": "standard",
+    "vp": 42,
+    "margin": 7,
+    "win": true,
+    "rep": 8,
+    "unusedRights": 0,
+    "unusedPlots": 1,
+    "affordableBills": 4,
+    "declinedAffordable": 0,
+    "cardsForNoEffect": 0
+   }
+  },
+  {
+   "group": "rival-plans-pilot",
+   "options": {
+    "seed": "audit-fresh-nov15-rival-plans-pilot-9",
+    "setup": 1,
+    "side": 1,
+    "starter": 0
+   },
+   "control": [
+    {
+     "policy": "classic",
+     "vp": 50,
+     "margin": -9,
+     "win": false,
+     "rep": -4,
+     "unusedRights": 2,
+     "unusedPlots": 2,
+     "affordableBills": 4,
+     "declinedAffordable": 2,
+     "cardsForNoEffect": 1
+    },
+    {
+     "policy": "classic",
+     "vp": 59,
+     "margin": 9,
+     "win": true,
+     "rep": 9,
+     "unusedRights": 1,
+     "unusedPlots": 0,
+     "affordableBills": 4,
+     "declinedAffordable": 0,
+     "cardsForNoEffect": 0
+    }
+   ],
+   "standardSeat0": {
+    "policy": "standard",
+    "vp": 41,
+    "margin": 3,
+    "win": true,
+    "rep": 4,
+    "unusedRights": 1,
+    "unusedPlots": 0,
+    "affordableBills": 4,
+    "declinedAffordable": 0,
+    "cardsForNoEffect": 0
+   },
+   "standardSeat1": {
+    "policy": "standard",
+    "vp": 67,
+    "margin": 15,
+    "win": true,
+    "rep": 9,
+    "unusedRights": 0,
+    "unusedPlots": 0,
+    "affordableBills": 4,
+    "declinedAffordable": 0,
+    "cardsForNoEffect": 0
+   }
+  },
+  {
+   "group": "rival-plans-pilot",
+   "options": {
+    "seed": "audit-fresh-nov15-rival-plans-pilot-10",
+    "setup": 2,
+    "side": 0,
+    "starter": 1
+   },
+   "control": [
+    {
+     "policy": "classic",
+     "vp": 42,
+     "margin": 12,
+     "win": true,
+     "rep": -2,
+     "unusedRights": 2,
+     "unusedPlots": 0,
+     "affordableBills": 5,
+     "declinedAffordable": 2,
+     "cardsForNoEffect": 0
+    },
+    {
+     "policy": "classic",
+     "vp": 30,
+     "margin": -12,
+     "win": false,
+     "rep": 4,
+     "unusedRights": 2,
+     "unusedPlots": 2,
+     "affordableBills": 5,
+     "declinedAffordable": 3,
+     "cardsForNoEffect": 0
+    }
+   ],
+   "standardSeat0": {
+    "policy": "standard",
+    "vp": 45,
+    "margin": 9,
+    "win": true,
+    "rep": -4,
+    "unusedRights": 3,
+    "unusedPlots": 0,
+    "affordableBills": 4,
+    "declinedAffordable": 0,
+    "cardsForNoEffect": 0
+   },
+   "standardSeat1": {
+    "policy": "standard",
+    "vp": 51,
+    "margin": 12,
+    "win": true,
+    "rep": 8,
+    "unusedRights": 0,
+    "unusedPlots": 0,
+    "affordableBills": 5,
+    "declinedAffordable": 1,
+    "cardsForNoEffect": 0
+   }
+  },
+  {
+   "group": "rival-plans-pilot",
+   "options": {
+    "seed": "audit-fresh-nov15-rival-plans-pilot-11",
+    "setup": 3,
+    "side": 1,
+    "starter": 1
+   },
+   "control": [
+    {
+     "policy": "classic",
+     "vp": 39,
+     "margin": -12,
+     "win": false,
+     "rep": -3,
+     "unusedRights": 1,
+     "unusedPlots": 1,
+     "affordableBills": 4,
+     "declinedAffordable": 2,
+     "cardsForNoEffect": 0
+    },
+    {
+     "policy": "classic",
+     "vp": 51,
+     "margin": 12,
+     "win": true,
+     "rep": -1,
+     "unusedRights": 3,
+     "unusedPlots": 1,
+     "affordableBills": 4,
+     "declinedAffordable": 1,
+     "cardsForNoEffect": 0
+    }
+   ],
+   "standardSeat0": {
+    "policy": "standard",
+    "vp": 55,
+    "margin": 20,
+    "win": true,
+    "rep": 9,
+    "unusedRights": 0,
+    "unusedPlots": 1,
+    "affordableBills": 4,
+    "declinedAffordable": 0,
+    "cardsForNoEffect": 0
+   },
+   "standardSeat1": {
+    "policy": "standard",
+    "vp": 44,
+    "margin": -3,
+    "win": false,
+    "rep": 3,
+    "unusedRights": 3,
+    "unusedPlots": 3,
+    "affordableBills": 4,
+    "declinedAffordable": 0,
+    "cardsForNoEffect": 1
+   }
+  },
+  {
+   "group": "rival-plans-confirm",
+   "options": {
+    "seed": "audit-fresh-nov15-rival-plans-confirm-0",
+    "setup": 1,
+    "side": 0,
+    "starter": 0
+   },
+   "control": [
+    {
+     "policy": "classic",
+     "vp": 39,
+     "margin": 6,
+     "win": true,
+     "rep": -1,
+     "unusedRights": 1,
+     "unusedPlots": 0,
+     "affordableBills": 5,
+     "declinedAffordable": 2,
+     "cardsForNoEffect": 0
+    },
+    {
+     "policy": "classic",
+     "vp": 33,
+     "margin": -6,
+     "win": false,
+     "rep": -2,
+     "unusedRights": 1,
+     "unusedPlots": 1,
+     "affordableBills": 5,
+     "declinedAffordable": 1,
+     "cardsForNoEffect": 0
+    }
+   ],
+   "standardSeat0": {
+    "policy": "standard",
+    "vp": 57,
+    "margin": 11,
+    "win": true,
+    "rep": -2,
+    "unusedRights": 2,
+    "unusedPlots": 1,
+    "affordableBills": 5,
+    "declinedAffordable": 1,
+    "cardsForNoEffect": 0
+   },
+   "standardSeat1": {
+    "policy": "standard",
+    "vp": 40,
+    "margin": -6,
+    "win": false,
+    "rep": 5,
+    "unusedRights": 0,
+    "unusedPlots": 0,
+    "affordableBills": 5,
+    "declinedAffordable": 0,
+    "cardsForNoEffect": 0
+   }
+  },
+  {
+   "group": "rival-plans-confirm",
+   "options": {
+    "seed": "audit-fresh-nov15-rival-plans-confirm-1",
+    "setup": 2,
+    "side": 1,
+    "starter": 0
+   },
+   "control": [
+    {
+     "policy": "classic",
+     "vp": 38,
+     "margin": 4,
+     "win": true,
+     "rep": -3,
+     "unusedRights": 2,
+     "unusedPlots": 1,
+     "affordableBills": 4,
+     "declinedAffordable": 2,
+     "cardsForNoEffect": 0
+    },
+    {
+     "policy": "classic",
+     "vp": 34,
+     "margin": -4,
+     "win": false,
+     "rep": -1,
+     "unusedRights": 3,
+     "unusedPlots": 1,
+     "affordableBills": 4,
+     "declinedAffordable": 2,
+     "cardsForNoEffect": 0
+    }
+   ],
+   "standardSeat0": {
+    "policy": "standard",
+    "vp": 47,
+    "margin": 1,
+    "win": true,
+    "rep": 6,
+    "unusedRights": 0,
+    "unusedPlots": 1,
+    "affordableBills": 3,
+    "declinedAffordable": 0,
+    "cardsForNoEffect": 0
+   },
+   "standardSeat1": {
+    "policy": "standard",
+    "vp": 44,
+    "margin": 11,
+    "win": true,
+    "rep": -2,
+    "unusedRights": 0,
+    "unusedPlots": 0,
+    "affordableBills": 4,
+    "declinedAffordable": 1,
+    "cardsForNoEffect": 0
+   }
+  },
+  {
+   "group": "rival-plans-confirm",
+   "options": {
+    "seed": "audit-fresh-nov15-rival-plans-confirm-2",
+    "setup": 3,
+    "side": 0,
+    "starter": 1
+   },
+   "control": [
+    {
+     "policy": "classic",
+     "vp": 34,
+     "margin": -1,
+     "win": false,
+     "rep": -5,
+     "unusedRights": 3,
+     "unusedPlots": 3,
+     "affordableBills": 4,
+     "declinedAffordable": 1,
+     "cardsForNoEffect": 0
+    },
+    {
+     "policy": "classic",
+     "vp": 35,
+     "margin": 1,
+     "win": true,
+     "rep": -2,
+     "unusedRights": 3,
+     "unusedPlots": 1,
+     "affordableBills": 5,
+     "declinedAffordable": 1,
+     "cardsForNoEffect": 0
+    }
+   ],
+   "standardSeat0": {
+    "policy": "standard",
+    "vp": 31,
+    "margin": 5,
+    "win": true,
+    "rep": -2,
+    "unusedRights": 2,
+    "unusedPlots": 1,
+    "affordableBills": 5,
+    "declinedAffordable": 1,
+    "cardsForNoEffect": 0
+   },
+   "standardSeat1": {
+    "policy": "standard",
+    "vp": 38,
+    "margin": -6,
+    "win": false,
+    "rep": -2,
+    "unusedRights": 2,
+    "unusedPlots": 2,
+    "affordableBills": 5,
+    "declinedAffordable": 1,
+    "cardsForNoEffect": 1
+   }
+  },
+  {
+   "group": "rival-plans-confirm",
+   "options": {
+    "seed": "audit-fresh-nov15-rival-plans-confirm-3",
+    "setup": 4,
+    "side": 1,
+    "starter": 1
+   },
+   "control": [
+    {
+     "policy": "classic",
+     "vp": 44,
+     "margin": -3,
+     "win": false,
+     "rep": -3,
+     "unusedRights": 2,
+     "unusedPlots": 1,
+     "affordableBills": 4,
+     "declinedAffordable": 0,
+     "cardsForNoEffect": 0
+    },
+    {
+     "policy": "classic",
+     "vp": 47,
+     "margin": 3,
+     "win": true,
+     "rep": 6,
+     "unusedRights": 1,
+     "unusedPlots": 1,
+     "affordableBills": 4,
+     "declinedAffordable": 0,
+     "cardsForNoEffect": 0
+    }
+   ],
+   "standardSeat0": {
+    "policy": "standard",
+    "vp": 51,
+    "margin": 11,
+    "win": true,
+    "rep": 5,
+    "unusedRights": 1,
+    "unusedPlots": 0,
+    "affordableBills": 4,
+    "declinedAffordable": 0,
+    "cardsForNoEffect": 0
+   },
+   "standardSeat1": {
+    "policy": "standard",
+    "vp": 55,
+    "margin": 2,
+    "win": true,
+    "rep": 9,
+    "unusedRights": 0,
+    "unusedPlots": 0,
+    "affordableBills": 4,
+    "declinedAffordable": 0,
+    "cardsForNoEffect": 0
+   }
+  },
+  {
+   "group": "rival-plans-confirm",
+   "options": {
+    "seed": "audit-fresh-nov15-rival-plans-confirm-4",
+    "setup": 5,
+    "side": 0,
+    "starter": 0
+   },
+   "control": [
+    {
+     "policy": "classic",
+     "vp": 30,
+     "margin": -6,
+     "win": false,
+     "rep": -2,
+     "unusedRights": 3,
+     "unusedPlots": 1,
+     "affordableBills": 5,
+     "declinedAffordable": 2,
+     "cardsForNoEffect": 0
+    },
+    {
+     "policy": "classic",
+     "vp": 36,
+     "margin": 6,
+     "win": true,
+     "rep": -2,
+     "unusedRights": 3,
+     "unusedPlots": 2,
+     "affordableBills": 5,
+     "declinedAffordable": 2,
+     "cardsForNoEffect": 0
+    }
+   ],
+   "standardSeat0": {
+    "policy": "standard",
+    "vp": 26,
+    "margin": 10,
+    "win": true,
+    "rep": -2,
+    "unusedRights": 3,
+    "unusedPlots": 0,
+    "affordableBills": 5,
+    "declinedAffordable": 2,
+    "cardsForNoEffect": 0
+   },
+   "standardSeat1": {
+    "policy": "standard",
+    "vp": 32,
+    "margin": -3,
+    "win": false,
+    "rep": -2,
+    "unusedRights": 1,
+    "unusedPlots": 0,
+    "affordableBills": 5,
+    "declinedAffordable": 1,
+    "cardsForNoEffect": 0
+   }
+  },
+  {
+   "group": "rival-plans-confirm",
+   "options": {
+    "seed": "audit-fresh-nov15-rival-plans-confirm-5",
+    "setup": 6,
+    "side": 1,
+    "starter": 0
+   },
+   "control": [
+    {
+     "policy": "classic",
+     "vp": 56,
+     "margin": 5,
+     "win": true,
+     "rep": -2,
+     "unusedRights": 1,
+     "unusedPlots": 0,
+     "affordableBills": 5,
+     "declinedAffordable": 2,
+     "cardsForNoEffect": 0
+    },
+    {
+     "policy": "classic",
+     "vp": 51,
+     "margin": -5,
+     "win": false,
+     "rep": -2,
+     "unusedRights": 2,
+     "unusedPlots": 1,
+     "affordableBills": 5,
+     "declinedAffordable": 2,
+     "cardsForNoEffect": 0
+    }
+   ],
+   "standardSeat0": {
+    "policy": "standard",
+    "vp": 43,
+    "margin": -11,
+    "win": false,
+    "rep": -2,
+    "unusedRights": 1,
+    "unusedPlots": 0,
+    "affordableBills": 4,
+    "declinedAffordable": 0,
+    "cardsForNoEffect": 0
+   },
+   "standardSeat1": {
+    "policy": "standard",
+    "vp": 59,
+    "margin": 8,
+    "win": true,
+    "rep": 7,
+    "unusedRights": 1,
+    "unusedPlots": 0,
+    "affordableBills": 5,
+    "declinedAffordable": 0,
+    "cardsForNoEffect": 0
+   }
+  },
+  {
+   "group": "rival-plans-confirm",
+   "options": {
+    "seed": "audit-fresh-nov15-rival-plans-confirm-6",
+    "setup": 7,
+    "side": 0,
+    "starter": 1
+   },
+   "control": [
+    {
+     "policy": "classic",
+     "vp": 53,
+     "margin": -8,
+     "win": false,
+     "rep": -1,
+     "unusedRights": 0,
+     "unusedPlots": 0,
+     "affordableBills": 4,
+     "declinedAffordable": 3,
+     "cardsForNoEffect": 0
+    },
+    {
+     "policy": "classic",
+     "vp": 61,
+     "margin": 8,
+     "win": true,
+     "rep": 3,
+     "unusedRights": 0,
+     "unusedPlots": 1,
+     "affordableBills": 4,
+     "declinedAffordable": 1,
+     "cardsForNoEffect": 0
+    }
+   ],
+   "standardSeat0": {
+    "policy": "standard",
+    "vp": 31,
+    "margin": -7,
+    "win": false,
+    "rep": 5,
+    "unusedRights": 1,
+    "unusedPlots": 0,
+    "affordableBills": 4,
+    "declinedAffordable": 0,
+    "cardsForNoEffect": 1
+   },
+   "standardSeat1": {
+    "policy": "standard",
+    "vp": 60,
+    "margin": -6,
+    "win": false,
+    "rep": 0,
+    "unusedRights": 1,
+    "unusedPlots": 1,
+    "affordableBills": 4,
+    "declinedAffordable": 0,
+    "cardsForNoEffect": 0
+   }
+  },
+  {
+   "group": "rival-plans-confirm",
+   "options": {
+    "seed": "audit-fresh-nov15-rival-plans-confirm-7",
+    "setup": 8,
+    "side": 1,
+    "starter": 1
+   },
+   "control": [
+    {
+     "policy": "classic",
+     "vp": 35,
+     "margin": 5,
+     "win": true,
+     "rep": -2,
+     "unusedRights": 3,
+     "unusedPlots": 0,
+     "affordableBills": 5,
+     "declinedAffordable": 4,
+     "cardsForNoEffect": 0
+    },
+    {
+     "policy": "classic",
+     "vp": 30,
+     "margin": -5,
+     "win": false,
+     "rep": -3,
+     "unusedRights": 2,
+     "unusedPlots": 1,
+     "affordableBills": 5,
+     "declinedAffordable": 3,
+     "cardsForNoEffect": 0
+    }
+   ],
+   "standardSeat0": {
+    "policy": "standard",
+    "vp": 50,
+    "margin": 14,
+    "win": true,
+    "rep": 9,
+    "unusedRights": 0,
+    "unusedPlots": 1,
+    "affordableBills": 5,
+    "declinedAffordable": 0,
+    "cardsForNoEffect": 0
+   },
+   "standardSeat1": {
+    "policy": "standard",
+    "vp": 32,
+    "margin": -4,
+    "win": false,
+    "rep": -2,
+    "unusedRights": 2,
+    "unusedPlots": 1,
+    "affordableBills": 4,
+    "declinedAffordable": 0,
+    "cardsForNoEffect": 1
+   }
+  },
+  {
+   "group": "rival-plans-confirm",
+   "options": {
+    "seed": "audit-fresh-nov15-rival-plans-confirm-8",
+    "setup": 9,
+    "side": 0,
+    "starter": 0
+   },
+   "control": [
+    {
+     "policy": "classic",
+     "vp": 32,
+     "margin": -12,
+     "win": false,
+     "rep": 0,
+     "unusedRights": 1,
+     "unusedPlots": 1,
+     "affordableBills": 4,
+     "declinedAffordable": 2,
+     "cardsForNoEffect": 0
+    },
+    {
+     "policy": "classic",
+     "vp": 44,
+     "margin": 12,
+     "win": true,
+     "rep": 7,
+     "unusedRights": 2,
+     "unusedPlots": 0,
+     "affordableBills": 4,
+     "declinedAffordable": 0,
+     "cardsForNoEffect": 0
+    }
+   ],
+   "standardSeat0": {
+    "policy": "standard",
+    "vp": 35,
+    "margin": -3,
+    "win": false,
+    "rep": 5,
+    "unusedRights": 1,
+    "unusedPlots": 1,
+    "affordableBills": 4,
+    "declinedAffordable": 1,
+    "cardsForNoEffect": 0
+   },
+   "standardSeat1": {
+    "policy": "standard",
+    "vp": 45,
+    "margin": 12,
+    "win": true,
+    "rep": 9,
+    "unusedRights": 0,
+    "unusedPlots": 1,
+    "affordableBills": 4,
+    "declinedAffordable": 0,
+    "cardsForNoEffect": 0
+   }
+  },
+  {
+   "group": "rival-plans-confirm",
+   "options": {
+    "seed": "audit-fresh-nov15-rival-plans-confirm-9",
+    "setup": 1,
+    "side": 1,
+    "starter": 0
+   },
+   "control": [
+    {
+     "policy": "classic",
+     "vp": 33,
+     "margin": 7,
+     "win": true,
+     "rep": -2,
+     "unusedRights": 3,
+     "unusedPlots": 1,
+     "affordableBills": 5,
+     "declinedAffordable": 2,
+     "cardsForNoEffect": 1
+    },
+    {
+     "policy": "classic",
+     "vp": 26,
+     "margin": -7,
+     "win": false,
+     "rep": -3,
+     "unusedRights": 3,
+     "unusedPlots": 1,
+     "affordableBills": 5,
+     "declinedAffordable": 3,
+     "cardsForNoEffect": 1
+    }
+   ],
+   "standardSeat0": {
+    "policy": "standard",
+    "vp": 42,
+    "margin": -1,
+    "win": false,
+    "rep": 8,
+    "unusedRights": 0,
+    "unusedPlots": 0,
+    "affordableBills": 5,
+    "declinedAffordable": 1,
+    "cardsForNoEffect": 0
+   },
+   "standardSeat1": {
+    "policy": "standard",
+    "vp": 34,
+    "margin": -9,
+    "win": false,
+    "rep": 6,
+    "unusedRights": 0,
+    "unusedPlots": 2,
+    "affordableBills": 5,
+    "declinedAffordable": 1,
+    "cardsForNoEffect": 0
+   }
+  },
+  {
+   "group": "rival-plans-confirm",
+   "options": {
+    "seed": "audit-fresh-nov15-rival-plans-confirm-10",
+    "setup": 2,
+    "side": 0,
+    "starter": 1
+   },
+   "control": [
+    {
+     "policy": "classic",
+     "vp": 51,
+     "margin": 8,
+     "win": true,
+     "rep": -1,
+     "unusedRights": 1,
+     "unusedPlots": 0,
+     "affordableBills": 5,
+     "declinedAffordable": 2,
+     "cardsForNoEffect": 0
+    },
+    {
+     "policy": "classic",
+     "vp": 43,
+     "margin": -8,
+     "win": false,
+     "rep": -1,
+     "unusedRights": 1,
+     "unusedPlots": 2,
+     "affordableBills": 5,
+     "declinedAffordable": 1,
+     "cardsForNoEffect": 0
+    }
+   ],
+   "standardSeat0": {
+    "policy": "standard",
+    "vp": 53,
+    "margin": 3,
+    "win": true,
+    "rep": 7,
+    "unusedRights": 0,
+    "unusedPlots": 0,
+    "affordableBills": 5,
+    "declinedAffordable": 0,
+    "cardsForNoEffect": 0
+   },
+   "standardSeat1": {
+    "policy": "standard",
+    "vp": 42,
+    "margin": -4,
+    "win": false,
+    "rep": -1,
+    "unusedRights": 0,
+    "unusedPlots": 0,
+    "affordableBills": 4,
+    "declinedAffordable": 0,
+    "cardsForNoEffect": 1
+   }
+  },
+  {
+   "group": "rival-plans-confirm",
+   "options": {
+    "seed": "audit-fresh-nov15-rival-plans-confirm-11",
+    "setup": 3,
+    "side": 1,
+    "starter": 1
+   },
+   "control": [
+    {
+     "policy": "classic",
+     "vp": 35,
+     "margin": -14,
+     "win": false,
+     "rep": -1,
+     "unusedRights": 2,
+     "unusedPlots": 0,
+     "affordableBills": 6,
+     "declinedAffordable": 3,
+     "cardsForNoEffect": 0
+    },
+    {
+     "policy": "classic",
+     "vp": 49,
+     "margin": 14,
+     "win": true,
+     "rep": -1,
+     "unusedRights": 2,
+     "unusedPlots": 0,
+     "affordableBills": 6,
+     "declinedAffordable": 2,
+     "cardsForNoEffect": 0
+    }
+   ],
+   "standardSeat0": {
+    "policy": "standard",
+    "vp": 47,
+    "margin": 4,
+    "win": true,
+    "rep": 0,
+    "unusedRights": 0,
+    "unusedPlots": 0,
+    "affordableBills": 6,
+    "declinedAffordable": 0,
+    "cardsForNoEffect": 0
+   },
+   "standardSeat1": {
+    "policy": "standard",
+    "vp": 47,
+    "margin": 11,
+    "win": true,
+    "rep": -1,
+    "unusedRights": 2,
+    "unusedPlots": 1,
+    "affordableBills": 6,
+    "declinedAffordable": 0,
+    "cardsForNoEffect": 0
+   }
+  }
+ ],
+ "tables": [
+  {
+   "options": {
+    "playerCount": 3,
+    "seed": "audit-fresh-nov15-table-3-0",
+    "setup": 1,
+    "side": 0,
+    "starter": 0,
+    "events": false
+   },
+   "policies": [
+    "standard",
+    "quick",
+    "builder"
+   ],
+   "seats": [
+    {
+     "policy": "standard",
+     "vp": 43,
+     "margin": -14,
+     "win": false,
+     "rep": 3,
+     "unusedRights": 0,
+     "unusedPlots": 1,
+     "affordableBills": 5,
+     "declinedAffordable": 0,
+     "cardsForNoEffect": 0
+    },
+    {
+     "policy": "quick",
+     "vp": 57,
+     "margin": 2,
+     "win": true,
+     "rep": -2,
+     "unusedRights": 0,
+     "unusedPlots": 1,
+     "affordableBills": 5,
+     "declinedAffordable": 0,
+     "cardsForNoEffect": 0
+    },
+    {
+     "policy": "builder",
+     "vp": 55,
+     "margin": -2,
+     "win": false,
+     "rep": 5,
+     "unusedRights": 1,
+     "unusedPlots": 1,
+     "affordableBills": 5,
+     "declinedAffordable": 0,
+     "cardsForNoEffect": 0
+    }
+   ]
+  },
+  {
+   "options": {
+    "playerCount": 3,
+    "seed": "audit-fresh-nov15-table-3-1",
+    "setup": 2,
+    "side": 1,
+    "starter": 0,
+    "events": true
+   },
+   "policies": [
+    "standard",
+    "quick",
+    "builder"
+   ],
+   "seats": [
+    {
+     "policy": "standard",
+     "vp": 60,
+     "margin": 3,
+     "win": true,
+     "rep": 9,
+     "unusedRights": 0,
+     "unusedPlots": 0,
+     "affordableBills": 5,
+     "declinedAffordable": 0,
+     "cardsForNoEffect": 0
+    },
+    {
+     "policy": "quick",
+     "vp": 57,
+     "margin": -3,
+     "win": false,
+     "rep": -1,
+     "unusedRights": 1,
+     "unusedPlots": 0,
+     "affordableBills": 5,
+     "declinedAffordable": 2,
+     "cardsForNoEffect": 0
+    },
+    {
+     "policy": "builder",
+     "vp": 48,
+     "margin": -12,
+     "win": false,
+     "rep": -1,
+     "unusedRights": 1,
+     "unusedPlots": 1,
+     "affordableBills": 5,
+     "declinedAffordable": 2,
+     "cardsForNoEffect": 0
+    }
+   ]
+  },
+  {
+   "options": {
+    "playerCount": 3,
+    "seed": "audit-fresh-nov15-table-3-2",
+    "setup": 3,
+    "side": 2,
+    "starter": 1,
+    "events": false
+   },
+   "policies": [
+    "standard",
+    "quick",
+    "builder"
+   ],
+   "seats": [
+    {
+     "policy": "standard",
+     "vp": 54,
+     "margin": -14,
+     "win": false,
+     "rep": 8,
+     "unusedRights": 0,
+     "unusedPlots": 0,
+     "affordableBills": 4,
+     "declinedAffordable": 0,
+     "cardsForNoEffect": 0
+    },
+    {
+     "policy": "quick",
+     "vp": 52,
+     "margin": -16,
+     "win": false,
+     "rep": 5,
+     "unusedRights": 0,
+     "unusedPlots": 0,
+     "affordableBills": 4,
+     "declinedAffordable": 0,
+     "cardsForNoEffect": 1
+    },
+    {
+     "policy": "builder",
+     "vp": 68,
+     "margin": 14,
+     "win": true,
+     "rep": 6,
+     "unusedRights": 0,
+     "unusedPlots": 0,
+     "affordableBills": 4,
+     "declinedAffordable": 1,
+     "cardsForNoEffect": 0
+    }
+   ]
+  },
+  {
+   "options": {
+    "playerCount": 3,
+    "seed": "audit-fresh-nov15-table-3-3",
+    "setup": 4,
+    "side": 0,
+    "starter": 1,
+    "events": true
+   },
+   "policies": [
+    "standard",
+    "quick",
+    "builder"
+   ],
+   "seats": [
+    {
+     "policy": "standard",
+     "vp": 80,
+     "margin": 20,
+     "win": true,
+     "rep": 9,
+     "unusedRights": 0,
+     "unusedPlots": 1,
+     "affordableBills": 4,
+     "declinedAffordable": 0,
+     "cardsForNoEffect": 0
+    },
+    {
+     "policy": "quick",
+     "vp": 56,
+     "margin": -24,
+     "win": false,
+     "rep": -2,
+     "unusedRights": 2,
+     "unusedPlots": 1,
+     "affordableBills": 4,
+     "declinedAffordable": 0,
+     "cardsForNoEffect": 0
+    },
+    {
+     "policy": "builder",
+     "vp": 60,
+     "margin": -20,
+     "win": false,
+     "rep": 6,
+     "unusedRights": 0,
+     "unusedPlots": 1,
+     "affordableBills": 4,
+     "declinedAffordable": 1,
+     "cardsForNoEffect": 0
+    }
+   ]
+  },
+  {
+   "options": {
+    "playerCount": 3,
+    "seed": "audit-fresh-nov15-table-3-4",
+    "setup": 5,
+    "side": 1,
+    "starter": 2,
+    "events": false
+   },
+   "policies": [
+    "standard",
+    "quick",
+    "builder"
+   ],
+   "seats": [
+    {
+     "policy": "standard",
+     "vp": 70,
+     "margin": -1,
+     "win": false,
+     "rep": 9,
+     "unusedRights": 0,
+     "unusedPlots": 1,
+     "affordableBills": 4,
+     "declinedAffordable": 0,
+     "cardsForNoEffect": 0
+    },
+    {
+     "policy": "quick",
+     "vp": 58,
+     "margin": -13,
+     "win": false,
+     "rep": 4,
+     "unusedRights": 1,
+     "unusedPlots": 1,
+     "affordableBills": 4,
+     "declinedAffordable": 0,
+     "cardsForNoEffect": 0
+    },
+    {
+     "policy": "builder",
+     "vp": 71,
+     "margin": 1,
+     "win": true,
+     "rep": 7,
+     "unusedRights": 1,
+     "unusedPlots": 1,
+     "affordableBills": 4,
+     "declinedAffordable": 0,
+     "cardsForNoEffect": 0
+    }
+   ]
+  },
+  {
+   "options": {
+    "playerCount": 3,
+    "seed": "audit-fresh-nov15-table-3-5",
+    "setup": 6,
+    "side": 2,
+    "starter": 2,
+    "events": true
+   },
+   "policies": [
+    "standard",
+    "quick",
+    "builder"
+   ],
+   "seats": [
+    {
+     "policy": "standard",
+     "vp": 60,
+     "margin": 1,
+     "win": true,
+     "rep": 9,
+     "unusedRights": 1,
+     "unusedPlots": 0,
+     "affordableBills": 2,
+     "declinedAffordable": 0,
+     "cardsForNoEffect": 0
+    },
+    {
+     "policy": "quick",
+     "vp": 45,
+     "margin": -15,
+     "win": false,
+     "rep": 3,
+     "unusedRights": 1,
+     "unusedPlots": 1,
+     "affordableBills": 3,
+     "declinedAffordable": 0,
+     "cardsForNoEffect": 0
+    },
+    {
+     "policy": "builder",
+     "vp": 59,
+     "margin": -1,
+     "win": false,
+     "rep": -1,
+     "unusedRights": 0,
+     "unusedPlots": 0,
+     "affordableBills": 3,
+     "declinedAffordable": 1,
+     "cardsForNoEffect": 0
+    }
+   ]
+  },
+  {
+   "options": {
+    "playerCount": 3,
+    "seed": "audit-fresh-nov15-table-3-6",
+    "setup": 7,
+    "side": 0,
+    "starter": 0,
+    "events": false
+   },
+   "policies": [
+    "standard",
+    "quick",
+    "builder"
+   ],
+   "seats": [
+    {
+     "policy": "standard",
+     "vp": 69,
+     "margin": 14,
+     "win": true,
+     "rep": 9,
+     "unusedRights": 0,
+     "unusedPlots": 0,
+     "affordableBills": 3,
+     "declinedAffordable": 0,
+     "cardsForNoEffect": 0
+    },
+    {
+     "policy": "quick",
+     "vp": 55,
+     "margin": -14,
+     "win": false,
+     "rep": -1,
+     "unusedRights": 1,
+     "unusedPlots": 0,
+     "affordableBills": 3,
+     "declinedAffordable": 0,
+     "cardsForNoEffect": 0
+    },
+    {
+     "policy": "builder",
+     "vp": 49,
+     "margin": -20,
+     "win": false,
+     "rep": 5,
+     "unusedRights": 0,
+     "unusedPlots": 0,
+     "affordableBills": 3,
+     "declinedAffordable": 0,
+     "cardsForNoEffect": 0
+    }
+   ]
+  },
+  {
+   "options": {
+    "playerCount": 3,
+    "seed": "audit-fresh-nov15-table-3-7",
+    "setup": 8,
+    "side": 1,
+    "starter": 0,
+    "events": true
+   },
+   "policies": [
+    "standard",
+    "quick",
+    "builder"
+   ],
+   "seats": [
+    {
+     "policy": "standard",
+     "vp": 45,
+     "margin": -3,
+     "win": false,
+     "rep": 6,
+     "unusedRights": 2,
+     "unusedPlots": 0,
+     "affordableBills": 6,
+     "declinedAffordable": 0,
+     "cardsForNoEffect": 0
+    },
+    {
+     "policy": "quick",
+     "vp": 48,
+     "margin": 0,
+     "win": true,
+     "rep": 5,
+     "unusedRights": 1,
+     "unusedPlots": 0,
+     "affordableBills": 6,
+     "declinedAffordable": 0,
+     "cardsForNoEffect": 0
+    },
+    {
+     "policy": "builder",
+     "vp": 48,
+     "margin": 0,
+     "win": false,
+     "rep": -1,
+     "unusedRights": 2,
+     "unusedPlots": 0,
+     "affordableBills": 6,
+     "declinedAffordable": 2,
+     "cardsForNoEffect": 0
+    }
+   ]
+  },
+  {
+   "options": {
+    "playerCount": 3,
+    "seed": "audit-fresh-nov15-table-3-8",
+    "setup": 9,
+    "side": 2,
+    "starter": 1,
+    "events": false
+   },
+   "policies": [
+    "standard",
+    "quick",
+    "builder"
+   ],
+   "seats": [
+    {
+     "policy": "standard",
+     "vp": 65,
+     "margin": 14,
+     "win": true,
+     "rep": 9,
+     "unusedRights": 2,
+     "unusedPlots": 1,
+     "affordableBills": 3,
+     "declinedAffordable": 0,
+     "cardsForNoEffect": 0
+    },
+    {
+     "policy": "quick",
+     "vp": 51,
+     "margin": -14,
+     "win": false,
+     "rep": 9,
+     "unusedRights": 0,
+     "unusedPlots": 1,
+     "affordableBills": 3,
+     "declinedAffordable": 0,
+     "cardsForNoEffect": 0
+    },
+    {
+     "policy": "builder",
+     "vp": 50,
+     "margin": -15,
+     "win": false,
+     "rep": 7,
+     "unusedRights": 1,
+     "unusedPlots": 0,
+     "affordableBills": 3,
+     "declinedAffordable": 0,
+     "cardsForNoEffect": 0
+    }
+   ]
+  },
+  {
+   "options": {
+    "playerCount": 3,
+    "seed": "audit-fresh-nov15-table-3-9",
+    "setup": 1,
+    "side": 0,
+    "starter": 1,
+    "events": true
+   },
+   "policies": [
+    "standard",
+    "quick",
+    "builder"
+   ],
+   "seats": [
+    {
+     "policy": "standard",
+     "vp": 59,
+     "margin": -5,
+     "win": false,
+     "rep": 9,
+     "unusedRights": 0,
+     "unusedPlots": 2,
+     "affordableBills": 5,
+     "declinedAffordable": 1,
+     "cardsForNoEffect": 0
+    },
+    {
+     "policy": "quick",
+     "vp": 40,
+     "margin": -24,
+     "win": false,
+     "rep": 3,
+     "unusedRights": 1,
+     "unusedPlots": 1,
+     "affordableBills": 5,
+     "declinedAffordable": 2,
+     "cardsForNoEffect": 0
+    },
+    {
+     "policy": "builder",
+     "vp": 64,
+     "margin": 5,
+     "win": true,
+     "rep": -3,
+     "unusedRights": 2,
+     "unusedPlots": 0,
+     "affordableBills": 5,
+     "declinedAffordable": 3,
+     "cardsForNoEffect": 0
+    }
+   ]
+  },
+  {
+   "options": {
+    "playerCount": 3,
+    "seed": "audit-fresh-nov15-table-3-10",
+    "setup": 2,
+    "side": 1,
+    "starter": 2,
+    "events": false
+   },
+   "policies": [
+    "standard",
+    "quick",
+    "builder"
+   ],
+   "seats": [
+    {
+     "policy": "standard",
+     "vp": 70,
+     "margin": 5,
+     "win": true,
+     "rep": 9,
+     "unusedRights": 1,
+     "unusedPlots": 1,
+     "affordableBills": 4,
+     "declinedAffordable": 0,
+     "cardsForNoEffect": 0
+    },
+    {
+     "policy": "quick",
+     "vp": 65,
+     "margin": -5,
+     "win": false,
+     "rep": -1,
+     "unusedRights": 3,
+     "unusedPlots": 2,
+     "affordableBills": 4,
+     "declinedAffordable": 1,
+     "cardsForNoEffect": 0
+    },
+    {
+     "policy": "builder",
+     "vp": 51,
+     "margin": -19,
+     "win": false,
+     "rep": -2,
+     "unusedRights": 1,
+     "unusedPlots": 1,
+     "affordableBills": 4,
+     "declinedAffordable": 1,
+     "cardsForNoEffect": 0
+    }
+   ]
+  },
+  {
+   "options": {
+    "playerCount": 3,
+    "seed": "audit-fresh-nov15-table-3-11",
+    "setup": 3,
+    "side": 2,
+    "starter": 2,
+    "events": true
+   },
+   "policies": [
+    "standard",
+    "quick",
+    "builder"
+   ],
+   "seats": [
+    {
+     "policy": "standard",
+     "vp": 52,
+     "margin": 11,
+     "win": true,
+     "rep": -1,
+     "unusedRights": 0,
+     "unusedPlots": 0,
+     "affordableBills": 4,
+     "declinedAffordable": 1,
+     "cardsForNoEffect": 0
+    },
+    {
+     "policy": "quick",
+     "vp": 31,
+     "margin": -21,
+     "win": false,
+     "rep": -1,
+     "unusedRights": 1,
+     "unusedPlots": 1,
+     "affordableBills": 4,
+     "declinedAffordable": 0,
+     "cardsForNoEffect": 0
+    },
+    {
+     "policy": "builder",
+     "vp": 41,
+     "margin": -11,
+     "win": false,
+     "rep": -1,
+     "unusedRights": 2,
+     "unusedPlots": 1,
+     "affordableBills": 4,
+     "declinedAffordable": 1,
+     "cardsForNoEffect": 0
+    }
+   ]
+  },
+  {
+   "options": {
+    "playerCount": 4,
+    "seed": "audit-fresh-nov15-table-4-0",
+    "setup": 1,
+    "side": 0,
+    "starter": 0,
+    "events": false
+   },
+   "policies": [
+    "standard",
+    "quick",
+    "builder",
+    "council"
+   ],
+   "seats": [
+    {
+     "policy": "standard",
+     "vp": 32,
+     "margin": 9,
+     "win": true,
+     "rep": 0,
+     "unusedRights": 1,
+     "unusedPlots": 1,
+     "affordableBills": 2,
+     "declinedAffordable": 0,
+     "cardsForNoEffect": 1
+    },
+    {
+     "policy": "quick",
+     "vp": 17,
+     "margin": -15,
+     "win": false,
+     "rep": -1,
+     "unusedRights": 2,
+     "unusedPlots": 1,
+     "affordableBills": 2,
+     "declinedAffordable": 0,
+     "cardsForNoEffect": 3
+    },
+    {
+     "policy": "builder",
+     "vp": 23,
+     "margin": -9,
+     "win": false,
+     "rep": 0,
+     "unusedRights": 1,
+     "unusedPlots": 2,
+     "affordableBills": 2,
+     "declinedAffordable": 0,
+     "cardsForNoEffect": 0
+    },
+    {
+     "policy": "council",
+     "vp": 17,
+     "margin": -15,
+     "win": false,
+     "rep": -1,
+     "unusedRights": 3,
+     "unusedPlots": 2,
+     "affordableBills": 2,
+     "declinedAffordable": 0,
+     "cardsForNoEffect": 0
+    }
+   ]
+  },
+  {
+   "options": {
+    "playerCount": 4,
+    "seed": "audit-fresh-nov15-table-4-1",
+    "setup": 2,
+    "side": 1,
+    "starter": 0,
+    "events": true
+   },
+   "policies": [
+    "standard",
+    "quick",
+    "builder",
+    "council"
+   ],
+   "seats": [
+    {
+     "policy": "standard",
+     "vp": 37,
+     "margin": -22,
+     "win": false,
+     "rep": 7,
+     "unusedRights": 0,
+     "unusedPlots": 0,
+     "affordableBills": 3,
+     "declinedAffordable": 0,
+     "cardsForNoEffect": 0
+    },
+    {
+     "policy": "quick",
+     "vp": 39,
+     "margin": -20,
+     "win": false,
+     "rep": 3,
+     "unusedRights": 0,
+     "unusedPlots": 0,
+     "affordableBills": 3,
+     "declinedAffordable": 0,
+     "cardsForNoEffect": 0
+    },
+    {
+     "policy": "builder",
+     "vp": 59,
+     "margin": 13,
+     "win": true,
+     "rep": -3,
+     "unusedRights": 0,
+     "unusedPlots": 0,
+     "affordableBills": 3,
+     "declinedAffordable": 0,
+     "cardsForNoEffect": 0
+    },
+    {
+     "policy": "council",
+     "vp": 46,
+     "margin": -13,
+     "win": false,
+     "rep": 0,
+     "unusedRights": 0,
+     "unusedPlots": 0,
+     "affordableBills": 3,
+     "declinedAffordable": 0,
+     "cardsForNoEffect": 0
+    }
+   ]
+  },
+  {
+   "options": {
+    "playerCount": 4,
+    "seed": "audit-fresh-nov15-table-4-2",
+    "setup": 3,
+    "side": 2,
+    "starter": 1,
+    "events": false
+   },
+   "policies": [
+    "standard",
+    "quick",
+    "builder",
+    "council"
+   ],
+   "seats": [
+    {
+     "policy": "standard",
+     "vp": 45,
+     "margin": 12,
+     "win": true,
+     "rep": 0,
+     "unusedRights": 2,
+     "unusedPlots": 0,
+     "affordableBills": 3,
+     "declinedAffordable": 0,
+     "cardsForNoEffect": 0
+    },
+    {
+     "policy": "quick",
+     "vp": 26,
+     "margin": -19,
+     "win": false,
+     "rep": 0,
+     "unusedRights": 3,
+     "unusedPlots": 1,
+     "affordableBills": 3,
+     "declinedAffordable": 0,
+     "cardsForNoEffect": 0
+    },
+    {
+     "policy": "builder",
+     "vp": 33,
+     "margin": -12,
+     "win": false,
+     "rep": -1,
+     "unusedRights": 3,
+     "unusedPlots": 1,
+     "affordableBills": 3,
+     "declinedAffordable": 0,
+     "cardsForNoEffect": 0
+    },
+    {
+     "policy": "council",
+     "vp": 25,
+     "margin": -20,
+     "win": false,
+     "rep": 0,
+     "unusedRights": 2,
+     "unusedPlots": 1,
+     "affordableBills": 4,
+     "declinedAffordable": 1,
+     "cardsForNoEffect": 0
+    }
+   ]
+  },
+  {
+   "options": {
+    "playerCount": 4,
+    "seed": "audit-fresh-nov15-table-4-3",
+    "setup": 4,
+    "side": 3,
+    "starter": 1,
+    "events": true
+   },
+   "policies": [
+    "standard",
+    "quick",
+    "builder",
+    "council"
+   ],
+   "seats": [
+    {
+     "policy": "standard",
+     "vp": 49,
+     "margin": 4,
+     "win": true,
+     "rep": 9,
+     "unusedRights": 1,
+     "unusedPlots": 1,
+     "affordableBills": 3,
+     "declinedAffordable": 0,
+     "cardsForNoEffect": 0
+    },
+    {
+     "policy": "quick",
+     "vp": 45,
+     "margin": -4,
+     "win": false,
+     "rep": 6,
+     "unusedRights": 0,
+     "unusedPlots": 0,
+     "affordableBills": 3,
+     "declinedAffordable": 0,
+     "cardsForNoEffect": 0
+    },
+    {
+     "policy": "builder",
+     "vp": 35,
+     "margin": -14,
+     "win": false,
+     "rep": -1,
+     "unusedRights": 0,
+     "unusedPlots": 0,
+     "affordableBills": 3,
+     "declinedAffordable": 1,
+     "cardsForNoEffect": 0
+    },
+    {
+     "policy": "council",
+     "vp": 43,
+     "margin": -6,
+     "win": false,
+     "rep": -2,
+     "unusedRights": 1,
+     "unusedPlots": 0,
+     "affordableBills": 3,
+     "declinedAffordable": 0,
+     "cardsForNoEffect": 0
+    }
+   ]
+  },
+  {
+   "options": {
+    "playerCount": 4,
+    "seed": "audit-fresh-nov15-table-4-4",
+    "setup": 5,
+    "side": 0,
+    "starter": 2,
+    "events": false
+   },
+   "policies": [
+    "standard",
+    "quick",
+    "builder",
+    "council"
+   ],
+   "seats": [
+    {
+     "policy": "standard",
+     "vp": 30,
+     "margin": 6,
+     "win": true,
+     "rep": -2,
+     "unusedRights": 2,
+     "unusedPlots": 0,
+     "affordableBills": 2,
+     "declinedAffordable": 0,
+     "cardsForNoEffect": 1
+    },
+    {
+     "policy": "quick",
+     "vp": 14,
+     "margin": -16,
+     "win": false,
+     "rep": 0,
+     "unusedRights": 3,
+     "unusedPlots": 1,
+     "affordableBills": 2,
+     "declinedAffordable": 0,
+     "cardsForNoEffect": 4
+    },
+    {
+     "policy": "builder",
+     "vp": 21,
+     "margin": -9,
+     "win": false,
+     "rep": 0,
+     "unusedRights": 2,
+     "unusedPlots": 2,
+     "affordableBills": 2,
+     "declinedAffordable": 0,
+     "cardsForNoEffect": 0
+    },
+    {
+     "policy": "council",
+     "vp": 24,
+     "margin": -6,
+     "win": false,
+     "rep": -1,
+     "unusedRights": 2,
+     "unusedPlots": 2,
+     "affordableBills": 2,
+     "declinedAffordable": 0,
+     "cardsForNoEffect": 0
+    }
+   ]
+  },
+  {
+   "options": {
+    "playerCount": 4,
+    "seed": "audit-fresh-nov15-table-4-5",
+    "setup": 6,
+    "side": 1,
+    "starter": 2,
+    "events": true
+   },
+   "policies": [
+    "standard",
+    "quick",
+    "builder",
+    "council"
+   ],
+   "seats": [
+    {
+     "policy": "standard",
+     "vp": 20,
+     "margin": 5,
+     "win": true,
+     "rep": 0,
+     "unusedRights": 3,
+     "unusedPlots": 2,
+     "affordableBills": 3,
+     "declinedAffordable": 0,
+     "cardsForNoEffect": 1
+    },
+    {
+     "policy": "quick",
+     "vp": 15,
+     "margin": -5,
+     "win": false,
+     "rep": -3,
+     "unusedRights": 3,
+     "unusedPlots": 2,
+     "affordableBills": 3,
+     "declinedAffordable": 0,
+     "cardsForNoEffect": 3
+    },
+    {
+     "policy": "builder",
+     "vp": 15,
+     "margin": -5,
+     "win": false,
+     "rep": -3,
+     "unusedRights": 2,
+     "unusedPlots": 1,
+     "affordableBills": 3,
+     "declinedAffordable": 1,
+     "cardsForNoEffect": 1
+    },
+    {
+     "policy": "council",
+     "vp": 13,
+     "margin": -7,
+     "win": false,
+     "rep": -2,
+     "unusedRights": 3,
+     "unusedPlots": 2,
+     "affordableBills": 3,
+     "declinedAffordable": 1,
+     "cardsForNoEffect": 5
+    }
+   ]
+  },
+  {
+   "options": {
+    "playerCount": 4,
+    "seed": "audit-fresh-nov15-table-4-6",
+    "setup": 7,
+    "side": 2,
+    "starter": 3,
+    "events": false
+   },
+   "policies": [
+    "standard",
+    "quick",
+    "builder",
+    "council"
+   ],
+   "seats": [
+    {
+     "policy": "standard",
+     "vp": 47,
+     "margin": 4,
+     "win": true,
+     "rep": 0,
+     "unusedRights": 1,
+     "unusedPlots": 0,
+     "affordableBills": 2,
+     "declinedAffordable": 0,
+     "cardsForNoEffect": 0
+    },
+    {
+     "policy": "quick",
+     "vp": 38,
+     "margin": -9,
+     "win": false,
+     "rep": 4,
+     "unusedRights": 1,
+     "unusedPlots": 0,
+     "affordableBills": 2,
+     "declinedAffordable": 0,
+     "cardsForNoEffect": 0
+    },
+    {
+     "policy": "builder",
+     "vp": 43,
+     "margin": -4,
+     "win": false,
+     "rep": 6,
+     "unusedRights": 1,
+     "unusedPlots": 1,
+     "affordableBills": 3,
+     "declinedAffordable": 0,
+     "cardsForNoEffect": 0
+    },
+    {
+     "policy": "council",
+     "vp": 39,
+     "margin": -8,
+     "win": false,
+     "rep": 0,
+     "unusedRights": 2,
+     "unusedPlots": 1,
+     "affordableBills": 3,
+     "declinedAffordable": 0,
+     "cardsForNoEffect": 0
+    }
+   ]
+  },
+  {
+   "options": {
+    "playerCount": 4,
+    "seed": "audit-fresh-nov15-table-4-7",
+    "setup": 8,
+    "side": 3,
+    "starter": 3,
+    "events": true
+   },
+   "policies": [
+    "standard",
+    "quick",
+    "builder",
+    "council"
+   ],
+   "seats": [
+    {
+     "policy": "standard",
+     "vp": 52,
+     "margin": 5,
+     "win": true,
+     "rep": -2,
+     "unusedRights": 1,
+     "unusedPlots": 1,
+     "affordableBills": 4,
+     "declinedAffordable": 1,
+     "cardsForNoEffect": 0
+    },
+    {
+     "policy": "quick",
+     "vp": 40,
+     "margin": -12,
+     "win": false,
+     "rep": 3,
+     "unusedRights": 0,
+     "unusedPlots": 0,
+     "affordableBills": 4,
+     "declinedAffordable": 0,
+     "cardsForNoEffect": 0
+    },
+    {
+     "policy": "builder",
+     "vp": 47,
+     "margin": -5,
+     "win": false,
+     "rep": -1,
+     "unusedRights": 1,
+     "unusedPlots": 1,
+     "affordableBills": 4,
+     "declinedAffordable": 2,
+     "cardsForNoEffect": 0
+    },
+    {
+     "policy": "council",
+     "vp": 44,
+     "margin": -8,
+     "win": false,
+     "rep": -4,
+     "unusedRights": 2,
+     "unusedPlots": 0,
+     "affordableBills": 4,
+     "declinedAffordable": 2,
+     "cardsForNoEffect": 0
+    }
+   ]
+  },
+  {
+   "options": {
+    "playerCount": 4,
+    "seed": "audit-fresh-nov15-table-4-8",
+    "setup": 9,
+    "side": 0,
+    "starter": 0,
+    "events": false
+   },
+   "policies": [
+    "standard",
+    "quick",
+    "builder",
+    "council"
+   ],
+   "seats": [
+    {
+     "policy": "standard",
+     "vp": 21,
+     "margin": -18,
+     "win": false,
+     "rep": 3,
+     "unusedRights": 2,
+     "unusedPlots": 1,
+     "affordableBills": 1,
+     "declinedAffordable": 0,
+     "cardsForNoEffect": 4
+    },
+    {
+     "policy": "quick",
+     "vp": 36,
+     "margin": -3,
+     "win": false,
+     "rep": -1,
+     "unusedRights": 0,
+     "unusedPlots": 0,
+     "affordableBills": 1,
+     "declinedAffordable": 1,
+     "cardsForNoEffect": 0
+    },
+    {
+     "policy": "builder",
+     "vp": 39,
+     "margin": 3,
+     "win": true,
+     "rep": 9,
+     "unusedRights": 0,
+     "unusedPlots": 1,
+     "affordableBills": 1,
+     "declinedAffordable": 0,
+     "cardsForNoEffect": 0
+    },
+    {
+     "policy": "council",
+     "vp": 22,
+     "margin": -17,
+     "win": false,
+     "rep": 0,
+     "unusedRights": 2,
+     "unusedPlots": 1,
+     "affordableBills": 1,
+     "declinedAffordable": 0,
+     "cardsForNoEffect": 3
+    }
+   ]
+  },
+  {
+   "options": {
+    "playerCount": 4,
+    "seed": "audit-fresh-nov15-table-4-9",
+    "setup": 1,
+    "side": 1,
+    "starter": 0,
+    "events": true
+   },
+   "policies": [
+    "standard",
+    "quick",
+    "builder",
+    "council"
+   ],
+   "seats": [
+    {
+     "policy": "standard",
+     "vp": 27,
+     "margin": -16,
+     "win": false,
+     "rep": -2,
+     "unusedRights": 2,
+     "unusedPlots": 1,
+     "affordableBills": 4,
+     "declinedAffordable": 1,
+     "cardsForNoEffect": 0
+    },
+    {
+     "policy": "quick",
+     "vp": 34,
+     "margin": -9,
+     "win": false,
+     "rep": 0,
+     "unusedRights": 3,
+     "unusedPlots": 1,
+     "affordableBills": 4,
+     "declinedAffordable": 0,
+     "cardsForNoEffect": 3
+    },
+    {
+     "policy": "builder",
+     "vp": 43,
+     "margin": 9,
+     "win": true,
+     "rep": 9,
+     "unusedRights": 1,
+     "unusedPlots": 2,
+     "affordableBills": 4,
+     "declinedAffordable": 0,
+     "cardsForNoEffect": 0
+    },
+    {
+     "policy": "council",
+     "vp": 22,
+     "margin": -21,
+     "win": false,
+     "rep": -2,
+     "unusedRights": 2,
+     "unusedPlots": 1,
+     "affordableBills": 4,
+     "declinedAffordable": 1,
+     "cardsForNoEffect": 1
+    }
+   ]
+  },
+  {
+   "options": {
+    "playerCount": 4,
+    "seed": "audit-fresh-nov15-table-4-10",
+    "setup": 2,
+    "side": 2,
+    "starter": 1,
+    "events": false
+   },
+   "policies": [
+    "standard",
+    "quick",
+    "builder",
+    "council"
+   ],
+   "seats": [
+    {
+     "policy": "standard",
+     "vp": 42,
+     "margin": 8,
+     "win": true,
+     "rep": -1,
+     "unusedRights": 3,
+     "unusedPlots": 2,
+     "affordableBills": 3,
+     "declinedAffordable": 0,
+     "cardsForNoEffect": 1
+    },
+    {
+     "policy": "quick",
+     "vp": 26,
+     "margin": -16,
+     "win": false,
+     "rep": 3,
+     "unusedRights": 2,
+     "unusedPlots": 2,
+     "affordableBills": 3,
+     "declinedAffordable": 0,
+     "cardsForNoEffect": 0
+    },
+    {
+     "policy": "builder",
+     "vp": 34,
+     "margin": -8,
+     "win": false,
+     "rep": -1,
+     "unusedRights": 1,
+     "unusedPlots": 0,
+     "affordableBills": 3,
+     "declinedAffordable": 0,
+     "cardsForNoEffect": 0
+    },
+    {
+     "policy": "council",
+     "vp": 29,
+     "margin": -13,
+     "win": false,
+     "rep": 0,
+     "unusedRights": 2,
+     "unusedPlots": 1,
+     "affordableBills": 3,
+     "declinedAffordable": 0,
+     "cardsForNoEffect": 0
+    }
+   ]
+  },
+  {
+   "options": {
+    "playerCount": 4,
+    "seed": "audit-fresh-nov15-table-4-11",
+    "setup": 3,
+    "side": 3,
+    "starter": 1,
+    "events": true
+   },
+   "policies": [
+    "standard",
+    "quick",
+    "builder",
+    "council"
+   ],
+   "seats": [
+    {
+     "policy": "standard",
+     "vp": 39,
+     "margin": 5,
+     "win": true,
+     "rep": 7,
+     "unusedRights": 0,
+     "unusedPlots": 0,
+     "affordableBills": 4,
+     "declinedAffordable": 0,
+     "cardsForNoEffect": 0
+    },
+    {
+     "policy": "quick",
+     "vp": 34,
+     "margin": -5,
+     "win": false,
+     "rep": -1,
+     "unusedRights": 1,
+     "unusedPlots": 1,
+     "affordableBills": 4,
+     "declinedAffordable": 1,
+     "cardsForNoEffect": 0
+    },
+    {
+     "policy": "builder",
+     "vp": 28,
+     "margin": -11,
+     "win": false,
+     "rep": 4,
+     "unusedRights": 1,
+     "unusedPlots": 0,
+     "affordableBills": 4,
+     "declinedAffordable": 2,
+     "cardsForNoEffect": 0
+    },
+    {
+     "policy": "council",
+     "vp": 22,
+     "margin": -17,
+     "win": false,
+     "rep": -4,
+     "unusedRights": 3,
+     "unusedPlots": 0,
+     "affordableBills": 4,
+     "declinedAffordable": 2,
+     "cardsForNoEffect": 0
+    }
+   ]
+  }
+ ]
+}
