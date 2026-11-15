@@ -1,6 +1,19 @@
-export const VERSION = '0.3.0';
+export const VERSION = '0.3.2';
 export const SAVE_SCHEMA = 3;
 export const SETUP_VERSION = 2;
+export const RIVAL_SETTINGS = ['standard','quick','planner','mincmistr'];
+export const MINCMISTR_LEVELS = {
+  apprentice:  {townPoints:false, rowPoints:false, extraCard:[]},
+  journeyman:  {townPoints:true,  rowPoints:true,  extraCard:[]},
+  master:      {townPoints:true,  rowPoints:true,  extraCard:[4,5,6]},
+  grandmaster: {townPoints:true,  rowPoints:true,  extraCard:[1,2,3,4,5,6]},
+};
+// Mincmistr v1.2.2 Plan cards, in print order. C = Construct, M = Mine, S = St. Barbara.
+export const MINCMISTR_PLANS = [
+  ['CM','low'], ['CM','high'], ['CM','low'], ['MC','high'], ['CS','low'],
+  ['MC','high'], ['CS','low'], ['MC','high'], ['CM','low'], ['CS','high'],
+  ['SC','low'], ['CM','high'], ['MC','low'], ['CM','high'], ['CM','low'],
+].map(([goals,arrow],i)=>({number:i+1,goals:goals.split(''),arrow}));
 export const GUILDS = {
   wood: 'Builders', food: 'Grocers', beer: 'Innkeepers',
   ore: 'Miners', silver: 'Metallurgists', permit: 'Scribes',

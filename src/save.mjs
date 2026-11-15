@@ -1,6 +1,6 @@
 import {
-  BUILDINGS,CARDS,EVENTS,GOODS,GUILD_SETUPS_BY_COUNT,MINE_GROUPS,MINE_ROWS,MINES,PATRICIANS,
-  SAVE_SCHEMA,SETUP_VERSION,TECHNOLOGY,
+  BUILDINGS,CARDS,EVENTS,GOODS,GUILD_SETUPS_BY_COUNT,MINCMISTR_LEVELS,MINCMISTR_PLANS,MINE_GROUPS,MINE_ROWS,MINES,PATRICIANS,
+  RIVAL_SETTINGS,SAVE_SCHEMA,SETUP_VERSION,TECHNOLOGY,
 } from './data.mjs';
 import {cardsThisTurn,finalResult,legalActions,plotCount,rulesFor,seatAtTurn,turnsPerRound} from './engine.mjs';
 
@@ -10,6 +10,23 @@ const array=(items,n)=>Array.isArray(items)&&items.length===n;
 const known=(table,id)=>typeof id==='string'&&Object.hasOwn(table,id);
 const tally=(record,keys,max)=>record&&keys.every(key=>integer(record[key],0,max));
 const regularMine=id=>known(MINES,id)&&MINES[id].tier!==undefined;
+
+function validMincmistr(s, count) {
+  const m=s.mincmistr;
+  if (s.difficulty!=='mincmistr') return m===undefined;
+  if (!m || !known(MINCMISTR_LEVELS,m.level) || typeof m.shared!=='boolean' || typeof m.tougher!=='boolean') return false;
+  if (m.tougher && (count!==3 || m.level!=='master')) return false;
+  const countPlans=MINCMISTR_PLANS.length;
+  const plan=id=>integer(id,0,countPlans-1);
+  if (!array(m.lastPlans,count-1) || !m.lastPlans.every(id=>id===null || plan(id))) return false;
+  if (s.phase==='action' && s.actor>0 && s.pending.length && m.lastPlans[s.actor-1]===null) return false;
+  if (!array(m.decks,m.shared?1:count-1)) return false;
+  return m.decks.every(deck=>{
+    if (!integer(deck?.rng?.rng,0,0xffffffff) || !Array.isArray(deck.draw) || !Array.isArray(deck.discard)) return false;
+    const ids=[...deck.draw,...deck.discard];
+    return ids.length===countPlans && new Set(ids).size===countPlans && ids.every(plan);
+  });
+}
 
 function validTurn(s) {
   const played = s.players.map(()=>0);
@@ -41,11 +58,12 @@ export function checkGame(s) {
   const guildSets=GUILD_SETUPS_BY_COUNT[count][s.setup];
   ok(Object.hasOwn(GUILD_SETUPS_BY_COUNT[count],s.setup)&&integer(s.side,0,count-1)&&
     integer(s.mineLayout,0,board.rockLayouts.length-1),'setup');
-  ok(['standard','quick'].includes(s.difficulty),'rival setting');
+  ok(RIVAL_SETTINGS.includes(s.difficulty),'rival setting');
   ok(integer(s.round,1,rounds)&&integer(s.starter,0,count-1)&&integer(s.actor,0,count-1)&&
     integer(s.turn,0,turnsPerRound(s))&&integer(s.left,0,2),'turn');
   ok(['action','tax','end'].includes(s.phase)&&Array.isArray(s.pending)&&s.pending.length<=4,'phase');
   ok(s.phase!=='tax'||integer(s.taxIndex,0,count-1),'tax order');
+  ok(validMincmistr(s,count),'Mincmistr settings or Plan deck');
   const assigned=new Set();
   for (const [seat,p] of s.players.entries()) {
     ok(p&&integer(p.coins,0,99999)&&integer(p.vp,-99999,99999)&&integer(p.rep,-5,9),'player total');

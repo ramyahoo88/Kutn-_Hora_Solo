@@ -161,6 +161,7 @@ small, .fine { font-size: .79rem; color: var(--quiet); }
 .rival-hand summary, .rival-report summary { padding: 9px 12px; cursor: pointer; font-weight: 650; }
 .rival-cards > strong { display: block; color: var(--seat); padding: 0 10px 4px; font-size: .82rem; }
 .rival-cards small { margin-left: 4px; font-weight: 500; }
+.rival-plan { margin: 0; padding: 0 10px 5px; color: var(--muted); font-size: .75rem; }
 .rival-hand ul { list-style: none; display: flex; flex-wrap: wrap; gap: 4px; margin: 0; padding: 0 10px 10px; }
 .rival-hand li { padding: 3px 6px; border: 1px solid var(--tile-edge); border-radius: 5px; background: var(--tile-bg); font-size: .74rem; }
 select, input[type=text] { min-height: 40px; padding: 7px 9px; border-radius: 6px; border: 1px solid #66625d; background: #222225; width: 100%; min-width: 0; }
@@ -249,7 +250,7 @@ dialog::backdrop { background: #100f11b9; }
 .field-grid label { display: grid; gap: 4px; color: var(--muted); font-weight: 650; }
 .field-grid .wide { grid-column: 1 / -1; }
 .field-grid .event-option { display: flex; align-items: center; gap: 7px; min-height: 36px; }
-.field-grid .event-option[hidden] { display: none; }
+.field-grid [hidden] { display: none; }
 .event-option input { accent-color: var(--brass); }
 .input-pair { display: flex; gap: 5px; }
 .guide { display: grid; gap: 10px; }
@@ -332,7 +333,7 @@ dialog::backdrop { background: #100f11b9; }
     <section class="hero" aria-label="Kutná Hora: The City of Silver">
       <div class="hero-art" aria-hidden="true"></div>
       <div class="hero-copy">
-        <span class="eyebrow">Unofficial solo playtest · v0.3.0</span>
+        <span class="eyebrow">Unofficial solo playtest · v0.3.2</span>
         <h1>Kutná Hora</h1>
         <p>The City of Silver</p>
       </div>
@@ -382,7 +383,10 @@ dialog::backdrop { background: #100f11b9; }
           <label>Rivals<select name="playerCount" id="player-count"><option value="2">1 rival</option><option value="3">2 rivals</option><option value="4">3 rivals</option></select></label>
           <label>Starting player<select name="starter"><option value="0">You</option></select></label>
           <label>Guild setup<select name="setup" id="guild-setup"></select></label>
-          <label>Rival difficulty<select name="difficulty"><option value="standard">Standard</option><option value="quick">Quick</option></select></label>
+          <label>Rival difficulty<select name="difficulty" id="rival-difficulty"><option value="standard">Standard</option><option value="quick">Quick</option><option value="planner">Planner (playtest)</option><option value="mincmistr">Mincmistr</option></select></label>
+          <label id="mincmistr-level-option" hidden>Level<select name="mincmistrLevel" id="mincmistr-level" disabled><option value="apprentice">Apprentice</option><option value="journeyman" selected>Journeyman</option><option value="master">Master</option><option value="grandmaster">Grandmaster</option></select></label>
+          <label id="mincmistr-deck-option" hidden>Plan decks<select name="mincmistrDecks" disabled><option value="shared">Shared deck</option><option value="individual">One deck per Mincmistr</option></select></label>
+          <label class="wide event-option" id="mincmistr-tougher-option" hidden><input type="checkbox" name="mincmistrTougher" disabled> Tougher Master · Double the last turn in rounds 3–6</label>
           <label class="wide">Your guilds<select name="side" id="guild-side"></select></label>
           <label class="wide">Your house rows<select name="rows" id="guild-rows"></select></label>
           <label class="wide">Game seed<span class="input-pair"><input name="seed" type="text" maxlength="64" spellcheck="false" autocomplete="off"><button type="button" class="outline" data-do="seed">Random</button></span></label>
@@ -404,7 +408,9 @@ dialog::backdrop { background: #100f11b9; }
       <p><strong>Win on points.</strong> Patricians score in the last three rounds. The final count adds town matches, mine row awards, final income, reputation and unused items to earned points. Coins break a points tie. Any players still tied for first share the win.</p>
       <p><strong>Check public information.</strong> Open a tile to inspect its costs and effects. Use <strong>Details</strong> when the tile is an action target. Either player board shows the full house rewards, production and supplies. The rival’s remaining cards are below the turn controls.</p>
       <p><strong>Resume or share a position.</strong> This browser keeps your current game where local storage is available. Reloading clears Undo history. Export a JSON save to move between browsers or share a position. Version 0.1.0 saves keep their existing deck order. New games use the updated shuffle, so an old seed produces a different setup.</p>
-      <p><strong>Rival settings.</strong> Both settings consider what the next player may do. Standard searches more continuations. Close choices can vary with the seed.</p>
+      <p><strong>Rival settings.</strong> Standard and Quick consider the next player's likely card. Planner tries the replies on a copy of the board, explores several possible draws when choices are close, and looks further ahead for builds and final scoring.</p>
+      <p><strong>Mincmistr.</strong> Choose a level in New game. The app flips a Plan for each card played, keeps it through bonus choices, and shows the last Plan with the rival’s action cards. With several Mincmistrs you can share one Plan deck or give each its own.</p>
+      <p><strong>Mincmistr levels.</strong> Journeyman follows the printed priorities. Apprentice simplifies plot, build and mine choices. Master plays both cards on its last turn in the final three rounds, and Grandmaster does so each round. In three-player games, Master can also double its last turn in rounds 3–6. <a href="https://github.com/ramyahoo88/Kutn-_Hora_Solo/blob/e6806e63babe71706650ba80d6fbe96e6da5a806/mincmistr/Mincmistr_Rules.md" target="_blank" rel="noreferrer">Mincmistr v1.2.2 rules</a></p>
       <p><a href="https://filemanager.czechgames.com/storage/files/kutna-hora-the-city-of-silver/rules/kutna-hora-rules-en.pdf" target="_blank" rel="noreferrer">CGE rulebook</a> · <a href="https://www.czechgames.com/news/available-now-the-kutna-hora-companion-app" target="_blank" rel="noreferrer">CGE market companion</a> · <a href="https://www.zatrolene-hry.cz/spolecenska-hra/kutna-hora-mesto-stribra-14736/k-stazeni/vlastni-solo-mod-capek-18184/" target="_blank" rel="noreferrer">Capek paper variant</a></p>
       <p class="fine">Banner cropped from <a href="https://commons.wikimedia.org/wiki/File:Kutn%C3%A1_Hora_-_St._Barbara%27s_Church_-_Panoramic_Photocompilation.jpg" target="_blank" rel="noreferrer">St. Barbara’s Church by Txllxt TxllxT</a> under <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noreferrer">CC BY-SA 4.0</a>.</p>
     </div>
@@ -412,9 +418,22 @@ dialog::backdrop { background: #100f11b9; }
   <script>'use strict';
 const modules={};
 modules.data=(()=>{
-const VERSION = '0.3.0';
+const VERSION = '0.3.2';
 const SAVE_SCHEMA = 3;
 const SETUP_VERSION = 2;
+const RIVAL_SETTINGS = ['standard','quick','planner','mincmistr'];
+const MINCMISTR_LEVELS = {
+  apprentice:  {townPoints:false, rowPoints:false, extraCard:[]},
+  journeyman:  {townPoints:true,  rowPoints:true,  extraCard:[]},
+  master:      {townPoints:true,  rowPoints:true,  extraCard:[4,5,6]},
+  grandmaster: {townPoints:true,  rowPoints:true,  extraCard:[1,2,3,4,5,6]},
+};
+// Mincmistr v1.2.2 Plan cards, in print order. C = Construct, M = Mine, S = St. Barbara.
+const MINCMISTR_PLANS = [
+  ['CM','low'], ['CM','high'], ['CM','low'], ['MC','high'], ['CS','low'],
+  ['MC','high'], ['CS','low'], ['MC','high'], ['CM','low'], ['CS','high'],
+  ['SC','low'], ['CM','high'], ['MC','low'], ['CM','high'], ['CM','low'],
+].map(([goals,arrow],i)=>({number:i+1,goals:goals.split(''),arrow}));
 const GUILDS = {
   wood: 'Builders', food: 'Grocers', beer: 'Innkeepers',
   ore: 'Miners', silver: 'Metallurgists', permit: 'Scribes',
@@ -598,7 +617,7 @@ const EVENTS = {
   abbot:{name:'Abbot Heidenreich',set:'B',tax:3, detail:'At round end, move each leftmost stack to the end of its row.'},
 };
 
-return {VERSION,SAVE_SCHEMA,SETUP_VERSION,GUILDS,GOODS,COMMODITY,PATRICIANS,LABEL,CARDS,CARDS_PER_TURN,GUILD_SETUPS_BY_COUNT,GUILD_SETUPS,CITY_WIDTH,MINE_ROWS,CITY,CITY_EDGE,MINE_ENTRANCES,ROCK_STARS,ROCK_LAYOUTS,HOUSE_EFFECTS,REP_SCORE,REP_LOSS,GAME_RULES,BARBARA_TAX,BARBARA,BUILDING_GROUPS,BUILDINGS,MINE_GROUPS,TECHNOLOGY,MINES,EVENTS};
+return {VERSION,SAVE_SCHEMA,SETUP_VERSION,RIVAL_SETTINGS,MINCMISTR_LEVELS,MINCMISTR_PLANS,GUILDS,GOODS,COMMODITY,PATRICIANS,LABEL,CARDS,CARDS_PER_TURN,GUILD_SETUPS_BY_COUNT,GUILD_SETUPS,CITY_WIDTH,MINE_ROWS,CITY,CITY_EDGE,MINE_ENTRANCES,ROCK_STARS,ROCK_LAYOUTS,HOUSE_EFFECTS,REP_SCORE,REP_LOSS,GAME_RULES,BARBARA_TAX,BARBARA,BUILDING_GROUPS,BUILDINGS,MINE_GROUPS,TECHNOLOGY,MINES,EVENTS};
 })();
 modules.prices=(()=>{
 // Numeric card-face prices, cross-checked against the CGE companion.
@@ -716,7 +735,8 @@ modules.engine=(()=>{
 const {
   BARBARA_TAX, BUILDINGS, BUILDING_GROUPS, CARDS, CARDS_PER_TURN, CITY_WIDTH, COMMODITY,
   EVENTS, GAME_RULES, GOODS, GUILDS, GUILD_SETUPS_BY_COUNT, HOUSE_EFFECTS, LABEL,
-  MINES, MINE_GROUPS, MINE_ROWS, PATRICIANS, REP_SCORE, ROCK_STARS, SAVE_SCHEMA, SETUP_VERSION,
+  MINCMISTR_LEVELS, MINCMISTR_PLANS, MINES, MINE_GROUPS, MINE_ROWS, PATRICIANS,
+  REP_SCORE, RIVAL_SETTINGS, ROCK_STARS, SAVE_SCHEMA, SETUP_VERSION,
   TECHNOLOGY,
 }=modules.data;
 const {BUILD_DEMAND, CITY_BUILDS, PRICES}=modules.prices;
@@ -725,8 +745,15 @@ const {randomIndex,shuffle}=modules.random;
 const seatName = (seat, count) => seat===0?'You':count===2?'Rival':`Rival ${seat}`;
 const rulesFor = state => GAME_RULES[state.players.length];
 const turnsPerRound = state => state.players.length*CARDS_PER_TURN.length;
-const cardsThisTurn = (state, turn=state.turn) => CARDS_PER_TURN[Math.floor(turn/state.players.length)];
 const seatAtTurn = (state, turn) => (state.starter+turn)%state.players.length;
+function cardsThisTurn(state, turn=state.turn) {
+  const cards=CARDS_PER_TURN[Math.floor(turn/state.players.length)];
+  if (cards!==1 || !state.mincmistr || seatAtTurn(state,turn)===0) return cards;
+  const {level,tougher}=state.mincmistr;
+  const asSixRounds=state.round+6-rulesFor(state).rounds;
+  const double=MINCMISTR_LEVELS[level].extraCard.includes(asSixRounds) || (tougher && asSixRounds===3);
+  return double?2:cards;
+}
 const UNPLAYED = (1 << CARDS.length) - 1;
 const FROM_POPULATION = ['wood','food','beer'];
 const FROM_ORE = ['silver','permit'];
@@ -743,6 +770,19 @@ function seedNumber(value) {
   let hash = 2166136261;
   for (const character of normalized) hash = Math.imul(hash ^ character.codePointAt(0),16777619);
   return hash >>> 0;
+}
+
+function createPlanDeck(seed, seat) {
+  const rng={rng:seedNumber(`mincmistr/${seed}/${seat}`)};
+  return {rng,draw:shuffle(rng,MINCMISTR_PLANS.map((_,i)=>i)),discard:[]};
+}
+
+function setupMincmistr(seed, count, options) {
+  const level=Object.hasOwn(MINCMISTR_LEVELS,options.level)?options.level:'journeyman';
+  const tougher=count===3&&level==='master'&&options.tougher===true;
+  const shared=count===2||options.shared!==false;
+  const decks=Array.from({length:shared?1:count-1},(_,i)=>createPlanDeck(seed,i+1));
+  return {level,tougher,shared,decks,lastPlans:empty(count-1)};
 }
 
 function player(guilds, coins) {
@@ -768,7 +808,7 @@ function createGame(options = {}) {
   const state = {
     schema:SAVE_SCHEMA, setupVersion:SETUP_VERSION, seed, rng,
     setup, side, starter, round:1, turn:0, left:CARDS_PER_TURN[0],
-    actor:starter, phase:'action', pending:[], difficulty:options.difficulty==='quick'?'quick':'standard',
+    actor:starter, phase:'action', pending:[], difficulty:RIVAL_SETTINGS.includes(options.difficulty)?options.difficulty:'standard',
     players:guildSets.map((printed,i) => {
       const order = options.orders?.[i];
       const coins = 40+(i-starter+count)%count;
@@ -787,6 +827,7 @@ function createGame(options = {}) {
     bank:tokenRecord(3), patrons:tokenRecord(0), council:tokenRecord(0),
     log:[], result:null, mineLayout:0,
   };
+  if (state.difficulty==='mincmistr') state.mincmistr=setupMincmistr(seed,count,options.mincmistr??{});
   const guildStacks = shuffle(state,GOODS);
   const publicStacks = ['green','civicSilver','yellow'];
   state.market = publicStacks.map((group,i) => {
@@ -1461,12 +1502,12 @@ function transition(state, requested) {
   return next;
 }
 
-return {seatName,rulesFor,turnsPerRound,cardsThisTurn,seatAtTurn,coordinate,eventNow,currentBarbara,seedNumber,createGame,copyState,reputationChange,price,canBuildGuild,income,marketOffer,plotSpaces,mineSpaces,plotCount,unavailableActionReason,taxCost,legalActions,actionKey,cityPointsAt,mineRow,mineRows,patricianBase,patricianPoints,scoreBreakdown,finalResult,applyKnownAction,transition};
+return {seatName,rulesFor,turnsPerRound,seatAtTurn,cardsThisTurn,coordinate,eventNow,currentBarbara,seedNumber,createPlanDeck,createGame,copyState,reputationChange,price,canBuildGuild,income,marketOffer,plotSpaces,mineSpaces,plotCount,unavailableActionReason,taxCost,legalActions,actionKey,cityPointsAt,mineRow,mineRows,patricianBase,patricianPoints,scoreBreakdown,finalResult,finishCard,applyKnownAction,transition};
 })();
 modules.bot=(()=>{
-const {BUILDINGS,CARDS,CITY_WIDTH,COMMODITY,MINE_GROUPS,MINES,PATRICIANS,REP_SCORE}=modules.data;
+const {BUILDINGS,CARDS,CITY_WIDTH,COMMODITY,EVENTS,MINE_GROUPS,MINES,PATRICIANS,REP_SCORE}=modules.data;
 const {
-  actionKey,applyKnownAction,canBuildGuild,cardsThisTurn,coordinate,copyState,income,legalActions,marketOffer,mineRow,mineRows,
+  actionKey,applyKnownAction,canBuildGuild,cardsThisTurn,coordinate,copyState,finishCard,income,legalActions,marketOffer,mineRow,mineRows,
   patricianBase,plotCount,price,reputationChange,rulesFor,scoreBreakdown,seatAtTurn,seedNumber,taxCost,turnsPerRound,
 }=modules.engine;
 const {randomIndex,shuffle}=modules.random;
@@ -1482,6 +1523,14 @@ const POLICIES = {
   council:{width:5,extend:1,opponent:0.73,city:1,mine:0.85,council:1.45},
   denial:{width:6,extend:1,opponent:1.23,city:1,mine:1.25,council:1.12},
 };
+const EXPERIMENTS={
+  reply:{},
+  sampling:{samples:5},
+  closing:{closing:true},
+  construction:{construction:true},
+  planner:{samples:5,closing:true,construction:true},
+};
+const BOT_POLICIES=[...Object.keys(POLICIES),...Object.keys(EXPERIMENTS)];
 
 function publicPlanningState(state, sample=0) {
   const copy=copyState(state,false);
@@ -1715,6 +1764,12 @@ function forecastNextCard(state) {
   if (state.phase!=='action'||state.pending.length||turn>=turnsPerRound(state)) return null;
   const seat=seatAtTurn(state,turn);
   const next={...state,actor:seat,turn,left:cardsThisTurn(state,turn)};
+  const action=forecastCard(next,legalActions(next));
+  return action?{seat,turn,action}:null;
+}
+
+function forecastCard(state, options) {
+  const seat=state.actor;
   const player=state.players[seat];
   const gross=income(state,seat);
   const wood=price(state,'wood');
@@ -1745,7 +1800,7 @@ function forecastNextCard(state) {
   };
   let best=null;
   let bestScore=-Infinity;
-  for (const action of legalActions(next)) {
+  for (const action of options) {
     const score=priorities[action.kind](action)-(action.cost??0)*0.055-
       Number(!!action.as&&player.rep<6)*0.75;
     if (score>bestScore) {
@@ -1753,7 +1808,7 @@ function forecastNextCard(state) {
       bestScore=score;
     }
   }
-  return best?{seat,turn,action:best}:null;
+  return best;
 }
 
 function replyAdjustment(position, seat, settings) {
@@ -1766,8 +1821,10 @@ function replyAdjustment(position, seat, settings) {
   applyKnownAction(projected,reply.action,true);
   const swing=evaluate(projected,seat,settings,false)-evaluate(position,seat,settings,false)-
     settings.opponent*pendingEstimate(projected)*0.35;
-  return Math.max(-2.7,Math.min(2.7,swing))*0.42;
+  return replyWeight(swing);
 }
+
+const replyWeight=swing=>Math.max(-2.7,Math.min(2.7,swing))*0.42;
 
 function variation(state, action, amplitude) {
   if (!amplitude||state.round===rulesFor(state).rounds) return 0;
@@ -1794,14 +1851,11 @@ function trim(items,width) {
   return kept;
 }
 
-function search(state, settings, sample) {
-  const root=publicPlanningState(state,sample);
+function rankPlans(root, settings, target, firstAction) {
   const seat=root.actor;
-  const throughTurn=state.left;
-  const target=Math.min(cardsLeft(state.players[seat]),throughTurn+settings.extend);
-  const start=evaluate(root,seat,settings);
+  const throughTurn=root.left;
   const finished=[];
-  let beam=[{state:root,first:null,value:start,order:0,spent:0,afterCurrent:null,turnEnd:null}];
+  let beam=[{state:root,first:null,value:evaluate(root,seat,settings),order:0,spent:0,afterCurrent:null,turnEnd:null}];
   let order=0;
   for (let depth=0;beam.length&&depth<18;depth++) {
     const next=[];
@@ -1811,7 +1865,7 @@ function search(state, settings, sample) {
         finished.push(node);
         continue;
       }
-      const actions=legalActions(node.state);
+      const actions=!node.first&&firstAction?[firstAction]:legalActions(node.state);
       for (const action of actions) {
         const child=copyState(node.state,false);
         applyKnownAction(child,action,true);
@@ -1834,28 +1888,207 @@ function search(state, settings, sample) {
     }
     beam=trim(next,settings.width);
   }
-  const ranked=(finished.length?finished:beam).sort(compare);
-  if (!settings.replyChoices) return ranked[0]?.first;
-  const shortList=[];
+  return (finished.length?finished:beam).sort(compare);
+}
+
+function turnPlans(root, settings, firstAction) {
+  const cards=Math.min(cardsLeft(root.players[root.actor]),root.left+settings.extend);
+  return rankPlans(root,settings,cards,firstAction);
+}
+
+function distinctPlans(ranked, limit) {
+  const result=[];
   const seen=new Set();
   for (const node of ranked) {
+    if (!node.first) continue;
     const key=actionKey(node.first);
     if (seen.has(key)) continue;
     seen.add(key);
-    const reply=node.turnEnd?replyAdjustment(node.turnEnd,seat,settings):0;
-    shortList.push({...node,value:node.value+reply+variation(state,node.first,settings.variety)});
-    if (shortList.length===settings.replyChoices) break;
+    result.push(node);
+    if (result.length===limit) break;
   }
+  return result;
+}
+
+function search(state, settings, sample) {
+  const root=publicPlanningState(state,sample);
+  const ranked=turnPlans(root,settings);
+  if (!settings.replyChoices) return ranked[0]?.first;
+  const shortList=distinctPlans(ranked,settings.replyChoices).map(node=>{
+    const reply=node.turnEnd?replyAdjustment(node.turnEnd,root.actor,settings):0;
+    return {...node,value:node.value+reply+variation(state,node.first,settings.variety)};
+  });
   return shortList.sort(compare)[0]?.first;
+}
+
+function forecastMove(state, settings) {
+  const options=legalActions(state);
+  if (options.length===1) return options[0];
+  if (state.phase==='tax') return taxDecision(state,options,settings);
+  if (!state.pending.length) return forecastCard(state,options);
+
+  let best=options[0];
+  let bestScore=-Infinity;
+  for (const action of options) {
+    const next=copyState(state,false);
+    applyKnownAction(next,action,true);
+    const score=evaluate(next,state.actor,settings);
+    if (score>bestScore) {
+      bestScore=score;
+      best=action;
+    }
+  }
+  return best;
+}
+
+// The caller supplies a sampled board at the end of a completed turn.
+function nextOwnTurn(position, seat=position.actor, settings=POLICIES.standard, lastRound=position.round) {
+  const next=copyState(position,false);
+  finishCard(next);
+  let steps=0;
+  while (next.phase!=='end' && next.round<=lastRound) {
+    if (next.phase==='action' && next.actor===seat) return next;
+    if (++steps>90) throw Error('The forecast did not reach the next turn.');
+    applyKnownAction(next,forecastMove(next,settings));
+  }
+  return next.phase==='end'?next:null;
+}
+
+function remainingBuildValue(state, asset, settings) {
+  const seat=state.actor;
+  const matching=choice=>choice.kind==='build' &&
+    (asset.kind==='rights'?choice.id===asset.id:choice.space===asset.space);
+  let best=-Infinity;
+  const base=evaluate(state,seat,settings,false);
+  function tryBuild(position, options, prepCost) {
+    for (const action of options.filter(matching)) {
+      const next=copyState(position,false);
+      applyKnownAction(next,action,true);
+      const shortage=Math.max(0,taxCost(next,seat)-next.players[seat].coins);
+      const value=evaluate(next,seat,settings)-prepCost-Math.min(0.9,shortage*0.10);
+      best=Math.max(best,value-base);
+    }
+  }
+  const options=legalActions(state);
+  tryBuild(state,options,0);
+  if (state.left>1) {
+    const missing=asset.kind==='rights'?'plot':'rights';
+    for (const action of options) {
+      if (action.kind!==missing && !(action.kind==='income'&&action.gross>0&&!action.color)) continue;
+      const next=copyState(state,false);
+      applyKnownAction(next,action,true);
+      tryBuild(next,legalActions(next),0.85);
+    }
+  }
+  return Number.isFinite(best)?best:null;
+}
+
+function replannedValue(node, seat, settings, experiment) {
+  if (!node.turnEnd) return node.value;
+  const end=node.turnEnd;
+  const rounds=rulesFor(end).rounds;
+  let next;
+  let followGain=0;
+  let score;
+  if (end.turn+end.players.length>=turnsPerRound(end)) {
+    score=node.value+replyAdjustment(end,seat,settings);
+  } else {
+    next=nextOwnTurn(end,seat,settings,end.round);
+    const afterReply=evaluate(next,seat,settings,false);
+    const follow=rankPlans(next,{...settings,width:4},1)[0];
+    followGain=follow?follow.value-afterReply:0;
+    score=node.afterCurrent+replyWeight(afterReply-node.afterCurrent)+followGain*0.68;
+  }
+  if (!experiment.construction || end.round===rounds) return score;
+  const asset=node.first;
+  const stillHeld=asset.kind==='rights'&&end.players[seat].held.includes(asset.id);
+  const stillReserved=asset.kind==='plot'&&end.city[asset.space]?.plot===seat;
+  if (!stillHeld&&!stillReserved) return score;
+  next ??= nextOwnTurn(end,seat,settings,end.round+1);
+  if (!next || next.phase==='end') return score;
+  const gain=remainingBuildValue(next,asset,settings);
+  if (gain===null) return score-0.40;
+  return score+Math.min(1.25,Math.max(0,gain-followGain)*0.42);
+}
+
+function settledMargin(state, seat) {
+  const own=state.result.scores[seat];
+  const other=state.result.scores.filter((_,i)=>i!==seat).reduce((a,b)=>
+    b.total>a.total || (b.total===a.total&&b.coins>a.coins)?b:a);
+  // The cash bonus is always smaller than one VP.
+  return own.total-other.total+Math.atan((own.coins-other.coins)/10)*0.01;
+}
+
+function closingValue(end, seat, settings) {
+  const next=nextOwnTurn(end,seat,settings,end.round);
+  if (next.phase==='end') return settledMargin(next,seat);
+  const finishes=distinctPlans(rankPlans(next,{...settings,width:7},next.left),3);
+  let best=-Infinity;
+  for (const finish of finishes) {
+    if (!finish.turnEnd) continue;
+    const result=nextOwnTurn(finish.turnEnd,seat,settings,end.round);
+    if (result.phase==='end') best=Math.max(best,settledMargin(result,seat));
+  }
+  return Number.isFinite(best)?best:null;
+}
+
+function imaginedBoard(state, sample, experiment) {
+  const root=publicPlanningState(state,sample);
+  const {rounds,redRound}=rulesFor(state);
+  if (experiment.construction&&state.events.length>0&&state.round+1<rounds) {
+    const group=state.round+1<=redRound?'A':'B';
+    const unknown=Object.keys(EVENTS).filter(id=>EVENTS[id].set===group&&!root.events.includes(id));
+    const rng={rng:seedNumber(`forecast-event/${root.rng}`)};
+    root.events.push(unknown[randomIndex(rng,unknown.length)]);
+  }
+  return root;
+}
+
+function changesHiddenTiles(root, node) {
+  if (root.mineDeck.some((id,i)=>node.state.mineDeck[i]!==id) || root.mineDeck.length!==node.state.mineDeck.length) return true;
+  const before=marketOffer(root).map(offer=>offer.id).sort().join('/');
+  const after=marketOffer(node.state).map(offer=>offer.id).sort().join('/');
+  return before!==after;
+}
+
+function replan(state, settings, experiment) {
+  const root=imaginedBoard(state,0,experiment);
+  const seat=root.actor;
+  const closing=experiment.closing&&root.round===rulesFor(root).rounds&&cardsLeft(root.players[seat])<=3;
+  const value=node=>{
+    if (closing&&node.turnEnd) {
+      const final=closingValue(node.turnEnd,seat,settings);
+      if (final!==null) return final;
+    }
+    return replannedValue(node,seat,settings,experiment);
+  };
+  const finalists=distinctPlans(turnPlans(root,settings),settings.replyChoices).map(node=>({
+    ...node,value:value(node)+variation(state,node.first,settings.variety),
+  })).sort(compare);
+  const close=finalists.filter(node=>finalists[0].value-node.value<=3.0).slice(0,4);
+  if (!experiment.samples||close.length<2||!close.some(node=>changesHiddenTiles(root,node))) return finalists[0]?.first;
+
+  const boards=Array.from({length:experiment.samples},(_,sample)=>imaginedBoard(state,sample,experiment));
+  const shallow={...settings,width:4};
+  const revised=close.map(node=>{
+    const total=boards.reduce((sum,board)=>{
+      // Keep the current action fixed across worlds. Later choices can respond to a revealed draw.
+      const continuation=turnPlans(board,shallow,node.first)[0];
+      return sum+(continuation?value(continuation):node.value);
+    },0);
+    return {...node,value:total/boards.length+variation(state,node.first,settings.variety)};
+  });
+  return revised.sort(compare)[0]?.first;
 }
 
 function botAction(state, strategy=state.difficulty) {
   const options=legalActions(state);
   if (!options.length) return null;
-  const settings=POLICIES[strategy]??POLICIES.standard;
+  const settings=Object.hasOwn(POLICIES,strategy)?POLICIES[strategy]:POLICIES.standard;
   if (state.phase==='tax') return taxDecision(state,options,settings);
   if (options.length===1) return options[0];
-  const selected=search(state,settings,0);
+  const experiment=Object.hasOwn(EXPERIMENTS,strategy)?EXPERIMENTS[strategy]:null;
+  const selected=experiment?replan(state,settings,experiment):search(state,settings,0);
   return options.find(action=>actionKey(action)===actionKey(selected??{}))??options[0];
 }
 
@@ -1883,12 +2116,278 @@ function actionRationale(state, action) {
   }
 }
 
-return {publicPlanningState,forecastNextCard,botAction,actionRationale};
+return {BOT_POLICIES,publicPlanningState,forecastNextCard,nextOwnTurn,botAction,actionRationale};
+})();
+modules.mincmistr=(()=>{
+// The Mincmistr — a card-driven solo opponent for Kutná Hora.
+// This file is the rules as code. Every numbered comment matches a numbered rule in the printed rulebook.
+// It reads the game state only through what a person can see on the table.
+const {BUILDINGS,CARDS,MINCMISTR_LEVELS,MINCMISTR_PLANS,MINES,PATRICIANS}=modules.data;
+const {
+  canBuildGuild,cityPointsAt,createPlanDeck,legalActions,mineRows,patricianBase,
+  plotCount,price,rulesFor,transition,
+}=modules.engine;
+const {shuffle}=modules.random;
+
+// Plan deck: 15 cards. Goals in priority order. C = Construct, M = Mine, S = St. Barbara.
+// Arrow: 'low' = earliest space in reading order wins ties, 'high' = latest.
+const PLAN_DECK = MINCMISTR_PLANS;
+
+// Rule 2: the Mincmistr's action cards, left to right. Card numbers as in the engine:
+// 0 Mine/Joker, 1 Mine/Plot, 2 Build/Income, 3 Build/Plot, 4 Rights/Income, 5 Rights/St. Barbara.
+const ROW = [0,5,1,2,4,3];
+
+// Difficulty levels (rule 9).
+const LEVELS = MINCMISTR_LEVELS;
+
+const CASH = 20;      // rule 4.1
+const PELICANS = 2;   // rule 4.2
+const GOOD_TILES = [6,7,8,9,11]; // rule 4.2: St. Barbara tiles worth a single pelican
+
+function createMincmistr(state, seat, level='journeyman') {
+  return {seat,level,settings:LEVELS[level],...createPlanDeck(state.seed,seat),card:null,
+    stats:{cards:0,checks:0,rules:{}}};
+}
+
+// ---------- helpers ----------
+const me = (state,m) => state.players[m.seat];
+const rivals = (state,m) => state.players.map((_,k)=>k).filter(k=>k!==m.seat);
+const ofKind = (state,kind) => legalActions(state).filter(a=>a.kind===kind && !a.as);
+const tally = (m,key) => { m.stats.rules[key]=(m.stats.rules[key]??0)+1; };
+// Rule 7 (arrow): ties between spaces go to the earliest (low) or latest (high) space in reading order.
+const byArrow = m => (a,b) => m.card.arrow==='low' ? a-b : b-a;
+// Rule 2: the leftmost card still in the row that shows the action.
+function rowCard(state, m, kind) {
+  const hand=me(state,m).hand;
+  return ROW.find(card=>(hand&(1<<card)) && CARDS[card].includes(kind)) ?? null;
+}
+function withRowCard(state, m, kind) {
+  const card=rowCard(state,m,kind);
+  if (card===null) return [];
+  return ofKind(state,kind).filter(a=>a.card===card);
+}
+// Rule 6.1: a tile's income value is its production times the current price of its commodity.
+const incomeValue = (state,id) => BUILDINGS[id].production*price(state,BUILDINGS[id].group);
+// Rule 6.5: a public tile's value is VP + 2 per pelican + 2 per reputation.
+const publicValue = id => { const t=BUILDINGS[id]; return t.vp+2*t.pelicans+2*t.rep; };
+// Rule 6.6: a patrician colour's edge is the Mincmistr's council score for it minus the best rival's.
+function edge(state, m, color) {
+  const own=patricianBase(state,m.seat)[color];
+  return own-Math.max(...rivals(state,m).map(k=>patricianBase(state,k)[color]));
+}
+function townPointsIf(state, space, id) {
+  const city=[...state.city];
+  city[space]={id,owner:0};
+  return cityPointsAt({...state,city},space);
+}
+
+// ---------- rule 6: choices ----------
+function chooseRights(state, m, options) {
+  // 6.1 Guild tiles only: in its own guilds, buildable now, with a house left in that row. Most income value, then cheapest, then market order.
+  const p=me(state,m);
+  const xs=options.filter(a=>{const t=BUILDINGS[a.id]; return !t.public && canBuildGuild(state,t.group) && p.houses[p.guilds.indexOf(t.group)]<4;});
+  return xs.sort((a,b)=>incomeValue(state,b.id)-incomeValue(state,a.id)||a.cost-b.cost)[0] ?? null;
+}
+function choosePlot(state, m, options) {
+  // 6.2 The plot where one of its held rights would score the most town points, then cheapest, then arrow.
+  // Apprentice: cheapest, then arrow.
+  const held=me(state,m).held;
+  const pts=a=>m.settings.townPoints ? Math.max(0,...held.map(id=>townPointsIf(state,a.space,id))) : 0;
+  return options.map(a=>({a,v:pts(a)})).sort((x,y)=>y.v-x.v||x.a.cost-y.a.cost||byArrow(m)(x.a.space,y.a.space))[0].a;
+}
+function chooseBuild(state, m, options) {
+  // 6.3 The held right with the most production (public buildings count 0), on the plot where it scores the most town points, then arrow.
+  // Apprentice: ignores town points.
+  const prod=a=>BUILDINGS[a.id].public?0:BUILDINGS[a.id].production;
+  const pts=a=>m.settings.townPoints ? townPointsIf(state,a.space,a.id) : 0;
+  return options.map(a=>({a,p:prod(a),v:pts(a)})).sort((x,y)=>y.p-x.p||y.v-x.v||byArrow(m)(x.a.space,y.a.space))[0].a;
+}
+function chooseIncome(state, m, options) {
+  // 6.6 Seat the patrician with the biggest edge if that edge is at least 1 (ties: green, silver, yellow, red). Otherwise plain Income.
+  const seats=options.filter(a=>a.color && edge(state,m,a.color)>=1);
+  if (!seats.length) return options.find(a=>!a.color) ?? null;
+  return seats.sort((a,b)=>edge(state,m,b.color)-edge(state,m,a.color)||PATRICIANS.indexOf(a.color)-PATRICIANS.indexOf(b.color))[0];
+}
+function chooseMineStart(options) {
+  // 5.2 Use a miner from its pool; with none, recruit as many as it can (up to 2).
+  return options.find(a=>a.refill===0) ?? options.sort((a,b)=>b.refill-a.refill)[0] ?? null;
+}
+// Rule 6.4: mine-row award for a seat, as in the normal scoring (2 players: total stars 0-3: 2/0, 4-6: 4/1, 7+: 6/2).
+function rowAward(stars, total, seat, players) {
+  const awards=players===2?(total<=3?[2,0]:total<=6?[4,1]:[6,2]):(total<=5?[2,1,0]:total<=9?[3,2,1]:[5,3,2]);
+  return stars[seat]===0 ? 0 : awards[stars.filter(o=>o>stars[seat]).length] ?? 0;
+}
+function choosePlacement(state, m, options) {
+  // 6.4 Keep the drawn tile with the most stars + ore + VP (ties: more stars, then first drawn).
+  // Place it where it gains the most mine-row points now; ties: cheapest space, then the row with fewest of its mines, then arrow.
+  // If it cannot pay for any space, discard.
+  const ids=[...new Set(options.filter(a=>a.kind==='place-mine'||a.kind==='technology').map(a=>a.id))];
+  if (!ids.length) return options.find(a=>a.kind==='skip');
+  const sum=id=>MINES[id].stars+MINES[id].ore+MINES[id].vp;
+  const keep=ids.sort((a,b)=>sum(b)-sum(a)||MINES[b].stars-MINES[a].stars)[0];
+  const width=rulesFor(state).board.mineWidth, rows=mineRows(state), n=state.players.length;
+  const row=a=>rows[Math.floor(a.space/width)];
+  const mines=a=>row(a).count[m.seat];
+  const gain=a=>{
+    const r=row(a), stars=[...r.stars]; stars[m.seat]+=MINES[keep].stars;
+    return rowAward(stars,r.total+MINES[keep].stars,m.seat,n)-r.vp[m.seat];
+  };
+  // Apprentice: no row-point calculation; the row with the fewest of its mines, then the cheapest space, then arrow.
+  if (!m.settings.rowPoints) return options.filter(a=>a.id===keep).sort((x,y)=>mines(x)-mines(y)||x.cost-y.cost||byArrow(m)(x.space,y.space))[0];
+  return options.filter(a=>a.id===keep).sort((x,y)=>gain(y)-gain(x)||x.cost-y.cost||mines(x)-mines(y)||byArrow(m)(x.space,y.space))[0];
+}
+
+// ---------- rule 5: goals ----------
+function construct(state, m) {
+  // 5.1 Build ▸ Plot ▸ Rights.
+  const p=me(state,m), plots=plotCount(state,m.seat);
+  m.stats.checks++;
+  if (p.held.length && plots) {
+    const xs=withRowCard(state,m,'build');
+    if (xs.length) return chooseBuild(state,m,xs);
+  }
+  if (p.held.length>plots && plots<3) {
+    const xs=withRowCard(state,m,'plot');
+    if (xs.length) return choosePlot(state,m,xs);
+  }
+  if (p.held.length<2) {
+    const xs=withRowCard(state,m,'rights');
+    if (xs.length) return chooseRights(state,m,xs);
+  }
+  return null;
+}
+function mine(state, m) {
+  m.stats.checks++;
+  return chooseMineStart(withRowCard(state,m,'mine'));
+}
+function income(state, m) {
+  m.stats.checks++;
+  const xs=withRowCard(state,m,'income');
+  return xs.length ? chooseIncome(state,m,xs) : null;
+}
+function barbara(state, m) {
+  m.stats.checks++;
+  return withRowCard(state,m,'barbara')[0] ?? null;
+}
+function goal(state, m, g) {
+  switch (g) {
+    case 'C': return construct(state,m);
+    case 'M': return mine(state,m);
+    case 'S': return barbara(state,m);
+  }
+}
+
+// ---------- rule 4: a card play ----------
+function flipPlan(m) {
+  if (!m.draw.length) { m.draw=shuffle(m.rng,m.discard); m.discard=[]; }
+  const index=m.draw.shift();
+  m.discard.push(index);
+  m.card=PLAN_DECK[index];
+  m.stats.cards++;
+}
+function cardPlay(state, m) {
+  flipPlan(m);                                                     // 4.0 flip a plan card
+  const p=me(state,m);
+  if (p.coins<CASH) { const a=income(state,m); if (a) { tally(m,'cash'); return a; } }          // 4.1
+  const goodTile=GOOD_TILES.includes(Math.min(state.barbara,12));
+  if (p.pelicans>=PELICANS || (p.pelicans>=1 && goodTile)) { const a=barbara(state,m); if (a) { tally(m,'pelicans'); return a; } }  // 4.2
+  for (const g of m.card.goals) { const a=goal(state,m,g); if (a) { tally(m,`goal:${g}`); return a; } } // 4.3
+  for (const [key,fn] of [['fallback:I',()=>income(state,m)],['fallback:M',()=>mine(state,m)]]) { // 4.4
+    const a=fn(); if (a) { tally(m,key); return a; }
+  }
+  tally(m,'discard');
+  const card=ROW.find(c=>p.hand&(1<<c));
+  return legalActions(state).find(a=>a.kind==='skip'&&a.card===card);
+}
+
+// ---------- rule 6.5, 6.7: bonus steps from tiles and St. Barbara ----------
+function bonus(state, m) {
+  const options=legalActions(state), item=state.pending[0], p=me(state,m);
+  const skip=options.find(a=>a.kind==='skip');
+  const pick=kind=>options.filter(a=>a.kind===kind);
+  switch (item.kind) {
+    case 'mine-place': case 'technology': return choosePlacement(state,m,options);
+    case 'right': {
+      const xs=pick('rights'); if (!xs.length) return skip;
+      const pubs=xs.filter(a=>BUILDINGS[a.id].public);
+      if (pubs.length) return pubs.sort((a,b)=>publicValue(b.id)-publicValue(a.id))[0];
+      return xs.sort((a,b)=>incomeValue(state,b.id)-incomeValue(state,a.id))[0];
+    }
+    case 'house': {
+      const xs=pick('house'); if (!xs.length) return skip;
+      const removed=a=>p.houses[p.guilds.indexOf(a.id)], row=a=>p.guilds.indexOf(a.id);
+      return xs.sort((a,b)=>removed(b)-removed(a)||row(a)-row(b))[0];
+    }
+    case 'patrician': {
+      const xs=pick('patrician'); if (!xs.length) return skip;
+      return xs.sort((a,b)=>edge(state,m,b.color)-edge(state,m,a.color))[0];
+    }
+    case 'score-building': {
+      const xs=pick('score-building'); if (!xs.length) return skip;
+      return xs.sort((a,b)=>cityPointsAt(state,b.space)-cityPointsAt(state,a.space)||byArrow(m)(a.space,b.space))[0];
+    }
+    case 'plot': { const xs=pick('plot'); return xs.length?choosePlot(state,m,xs):skip; }
+    case 'build': { const xs=pick('build'); return xs.length?chooseBuild(state,m,xs):skip; }
+    case 'income': { const xs=pick('income'); return xs.length?chooseIncome(state,m,xs):skip; }
+    case 'mine': { const xs=pick('mine'); return xs.length?xs[0]:skip; }
+  }
+  return skip ?? options[0];
+}
+
+// ---------- entry points ----------
+function mincmistrAction(state, m) {
+  if (state.phase==='tax') {                         // rule 8: pay tax if it can
+    const options=legalActions(state);
+    return options.find(a=>a.kind==='tax') ?? options.find(a=>a.kind==='penalty');
+  }
+  if (state.pending.length) return bonus(state,m);
+  return cardPlay(state,m);
+}
+// Rule 9: at Master and Grandmaster, in the listed rounds, the Mincmistr's last turn plays both remaining cards.
+function mincmistrCardsThisTurn(state, m) {
+  if (state.phase!=='action' || state.pending.length || state.actor!==m.seat) return null;
+  // Round numbers are counted as in a 6-round game, so with 5 rounds (4 players) Master covers rounds 3-5.
+  const asSixRounds=state.round+6-rulesFor(state).rounds;
+  if (state.turn<2*state.players.length || !m.settings.extraCard.includes(asSixRounds)) return null;
+  let hand=me(state,m).hand, n=0; while (hand) { n+=hand&1; hand>>=1; }
+  return state.left===1 && n===2 ? 2 : null;
+}
+
+const goals={C:'Construct',M:'Mine',S:'St. Barbara'};
+function describePlan(card) {
+  const order=card.goals.map(goal=>goals[goal]).join(' → ');
+  return `Plan ${card.number} · ${order} · ${card.arrow==='low'?'earliest':'latest'} space on ties`;
+}
+
+// Play one decision from a saved digital game. Bonus decisions use the last flipped card.
+function playMincmistr(state) {
+  const {mincmistr,actor:seat}=state;
+  if (!mincmistr || seat===0 || state.phase==='end') throw Error('Choose a Mincmistr turn.');
+  const slot=mincmistr.shared?0:seat-1;
+  const deck=mincmistr.decks[slot];
+  const m={
+    seat,settings:LEVELS[mincmistr.level],
+    rng:{...deck.rng},draw:[...deck.draw],discard:[...deck.discard],
+    card:PLAN_DECK[mincmistr.lastPlans[seat-1]]??null,stats:{cards:0,checks:0,rules:{}},
+  };
+  const action=mincmistrAction(state,m);
+  if (!m.stats.cards) return transition(state,action);
+
+  // Save the new deck and the move together so Undo and reload reproduce the same draw.
+  const decks=[...mincmistr.decks];
+  decks[slot]={rng:m.rng,draw:m.draw,discard:m.discard};
+  const lastPlans=[...mincmistr.lastPlans];
+  lastPlans[seat-1]=m.card.number-1;
+  const log=state.log?[...state.log,{round:state.round,actor:seat,text:`${describePlan(m.card)}.`}]:null;
+  return transition({...state,mincmistr:{...mincmistr,decks,lastPlans},log},action);
+}
+
+return {PLAN_DECK,ROW,LEVELS,createMincmistr,mincmistrAction,mincmistrCardsThisTurn,describePlan,playMincmistr};
 })();
 modules.save=(()=>{
 const {
-  BUILDINGS,CARDS,EVENTS,GOODS,GUILD_SETUPS_BY_COUNT,MINE_GROUPS,MINE_ROWS,MINES,PATRICIANS,
-  SAVE_SCHEMA,SETUP_VERSION,TECHNOLOGY,
+  BUILDINGS,CARDS,EVENTS,GOODS,GUILD_SETUPS_BY_COUNT,MINCMISTR_LEVELS,MINCMISTR_PLANS,MINE_GROUPS,MINE_ROWS,MINES,PATRICIANS,
+  RIVAL_SETTINGS,SAVE_SCHEMA,SETUP_VERSION,TECHNOLOGY,
 }=modules.data;
 const {cardsThisTurn,finalResult,legalActions,plotCount,rulesFor,seatAtTurn,turnsPerRound}=modules.engine;
 
@@ -1898,6 +2397,23 @@ const array=(items,n)=>Array.isArray(items)&&items.length===n;
 const known=(table,id)=>typeof id==='string'&&Object.hasOwn(table,id);
 const tally=(record,keys,max)=>record&&keys.every(key=>integer(record[key],0,max));
 const regularMine=id=>known(MINES,id)&&MINES[id].tier!==undefined;
+
+function validMincmistr(s, count) {
+  const m=s.mincmistr;
+  if (s.difficulty!=='mincmistr') return m===undefined;
+  if (!m || !known(MINCMISTR_LEVELS,m.level) || typeof m.shared!=='boolean' || typeof m.tougher!=='boolean') return false;
+  if (m.tougher && (count!==3 || m.level!=='master')) return false;
+  const countPlans=MINCMISTR_PLANS.length;
+  const plan=id=>integer(id,0,countPlans-1);
+  if (!array(m.lastPlans,count-1) || !m.lastPlans.every(id=>id===null || plan(id))) return false;
+  if (s.phase==='action' && s.actor>0 && s.pending.length && m.lastPlans[s.actor-1]===null) return false;
+  if (!array(m.decks,m.shared?1:count-1)) return false;
+  return m.decks.every(deck=>{
+    if (!integer(deck?.rng?.rng,0,0xffffffff) || !Array.isArray(deck.draw) || !Array.isArray(deck.discard)) return false;
+    const ids=[...deck.draw,...deck.discard];
+    return ids.length===countPlans && new Set(ids).size===countPlans && ids.every(plan);
+  });
+}
 
 function validTurn(s) {
   const played = s.players.map(()=>0);
@@ -1929,11 +2445,12 @@ function checkGame(s) {
   const guildSets=GUILD_SETUPS_BY_COUNT[count][s.setup];
   ok(Object.hasOwn(GUILD_SETUPS_BY_COUNT[count],s.setup)&&integer(s.side,0,count-1)&&
     integer(s.mineLayout,0,board.rockLayouts.length-1),'setup');
-  ok(['standard','quick'].includes(s.difficulty),'rival setting');
+  ok(RIVAL_SETTINGS.includes(s.difficulty),'rival setting');
   ok(integer(s.round,1,rounds)&&integer(s.starter,0,count-1)&&integer(s.actor,0,count-1)&&
     integer(s.turn,0,turnsPerRound(s))&&integer(s.left,0,2),'turn');
   ok(['action','tax','end'].includes(s.phase)&&Array.isArray(s.pending)&&s.pending.length<=4,'phase');
   ok(s.phase!=='tax'||integer(s.taxIndex,0,count-1),'tax order');
+  ok(validMincmistr(s,count),'Mincmistr settings or Plan deck');
   const assigned=new Set();
   for (const [seat,p] of s.players.entries()) {
     ok(p&&integer(p.coins,0,99999)&&integer(p.vp,-99999,99999)&&integer(p.rep,-5,9),'player total');
@@ -2033,6 +2550,7 @@ const {
   reputationChange, rulesFor, scoreBreakdown, seatName, transition, unavailableActionReason,
 }=modules.engine;
 const {actionRationale,botAction}=modules.bot;
+const {describePlan,PLAN_DECK,playMincmistr,ROW}=modules.mincmistr;
 const {readSave,writeSave}=modules.save;
 
 const STORAGE='kutna-hora-solo-v1';
@@ -2317,16 +2835,24 @@ function renderPlayerBoard() {
 }
 function renderRivalHand() {
   const open=byId('rival-hand')?.open??true;
+  const m=state.mincmistr;
+  const order=m?ROW:CARDS.map((_,i)=>i);
+  const shared=m?.shared&&state.players.length>2;
+  const title=m?`Mincmistr · ${cap(m.level)}${m.tougher?' · Rounds 3–6':''}`:'Rival action cards';
   const hands=state.players.slice(1).map((player,i)=>{
     const seat=i+1;
-    const cards=CARDS.filter((_,index)=>player.hand&(1<<index));
+    const cards=order.filter(index=>player.hand&(1<<index)).map(index=>CARDS[index]);
+    const plan=m?PLAN_DECK[m.lastPlans[i]]:null;
+    const count=m&&!shared?` · ${m.decks[m.shared?0:i].draw.length} Plans left`:'';
     return `<div class="rival-cards seat-${seat}">
-      <strong>${playerName(seat)} <small>${cards.length} in hand</small></strong>
+      <strong>${playerName(seat)} <small>${cards.length} in hand${count}</small></strong>
+      ${m?`<p class="rival-plan">${plan?describePlan(plan):'Waiting for first Plan'}</p>`:''}
       <ul aria-label="${playerName(seat)} action cards">${cards.map(pair=>`<li>${pair.map(kind=>LABEL[kind]).join(' / ')}</li>`).join('')}</ul>
     </div>`;
   });
   return `<details id="rival-hand" class="panel rival-hand" ${open?'open':''}>
-    <summary>Rival action cards</summary>${hands.join('')}
+    <summary>${title}</summary>
+    ${shared?`<p class="rival-plan">Shared Plan deck · ${m.decks[0].draw.length} left</p>`:''}${hands.join('')}
   </details>`;
 }
 function groupedChoices(actions) {
@@ -2644,14 +3170,18 @@ async function runRival() {
       const turn=next;
       do {
         if (++steps>120) throw Error('The rivals’ turns did not finish.');
-        const action=botAction(next);
-        if (!action) throw Error('No legal rival action.');
-        const why=actionRationale(next,action);
         const previousEntries=next.log.length;
-        next=transition(next,action);
+        let why;
+        if (next.mincmistr) next=playMincmistr(next);
+        else {
+          const action=botAction(next);
+          if (!action) throw Error('No legal rival action.');
+          if (!multiple&&['rights','build','place-mine','technology','income'].includes(action.kind)) why=actionRationale(next,action);
+          next=transition(next,action);
+        }
         const entries=next.log.slice(previousEntries).filter(entry=>entry.actor===turn.actor);
         for (const entry of entries) notes.push(noteFor(turn.actor,entry.text));
-        if (!multiple&&why&&['rights','build','place-mine','technology','income'].includes(action.kind)) notes.push(why);
+        if (why) notes.push(why);
       } while(next.actor===turn.actor&&next.phase===turn.phase&&next.round===turn.round&&next.turn===turn.turn);
       if (!multiple) break;
       // Let the browser update between rivals on larger tables.
@@ -2684,6 +3214,19 @@ function randomSeed() {
 function guildOrders(guilds) {
   return guilds.flatMap(a=>guilds.filter(b=>b!==a).map(b=>[a,b,guilds.find(c=>c!==a&&c!==b)]));
 }
+function fillMincmistrOptions() {
+  const form=byId('setup-form');
+  const count=Number(form.elements.playerCount.value);
+  const active=form.elements.difficulty.value==='mincmistr';
+  const several=active&&count>2;
+  const tougher=active&&count===3&&form.elements.mincmistrLevel.value==='master';
+  byId('mincmistr-level-option').hidden=!active;
+  form.elements.mincmistrLevel.disabled=!active;
+  byId('mincmistr-deck-option').hidden=!several;
+  form.elements.mincmistrDecks.disabled=!several;
+  byId('mincmistr-tougher-option').hidden=!tougher;
+  form.elements.mincmistrTougher.disabled=!tougher;
+}
 function fillTableOptions() {
   const count=Number(byId('player-count').value);
   const starter=byId('setup-form').elements.starter;
@@ -2692,6 +3235,7 @@ function fillTableOptions() {
   starter.value=String(previous<count?previous:0);
   byId('setup-events').hidden=count===2;
   byId('setup-form').elements.events.disabled=count===2;
+  fillMincmistrOptions();
   fillSetup();
 }
 function fillSetup(changeSide=true) {
@@ -2716,6 +3260,9 @@ function openDialog(kind) {
     byId('player-count').value=String(state.players.length);
     form.elements.seed.value=randomSeed();
     form.elements.difficulty.value=state.difficulty;
+    form.elements.mincmistrLevel.value=state.mincmistr?.level??'journeyman';
+    form.elements.mincmistrDecks.value=state.mincmistr?.shared===false?'individual':'shared';
+    form.elements.mincmistrTougher.checked=state.mincmistr?.tougher??false;
     form.elements.events.checked=state.players.length>2&&state.events.length>0;
     form.elements.starter.value='0';
     fillTableOptions();
@@ -2743,6 +3290,7 @@ byId('setup-form').addEventListener('submit',event=>{
   const next=createGame({
     playerCount,setup,side,events:form.has('events'),seed:form.get('seed'),
     starter:Number(form.get('starter')),difficulty:form.get('difficulty'),
+    mincmistr:{level:form.get('mincmistrLevel'),shared:form.get('mincmistrDecks')!=='individual',tougher:form.has('mincmistrTougher')},
     orders:[guildOrders(GUILD_SETUPS_BY_COUNT[playerCount][setup][side])[Number(form.get('rows'))]],
   });
   saveUndo();
@@ -2757,6 +3305,8 @@ byId('setup-form').addEventListener('submit',event=>{
 byId('guild-side').addEventListener('change',()=>fillSetup(false));
 byId('guild-setup').addEventListener('change',()=>fillSetup());
 byId('player-count').addEventListener('change',fillTableOptions);
+byId('rival-difficulty').addEventListener('change',fillMincmistrOptions);
+byId('mincmistr-level').addEventListener('change',fillMincmistrOptions);
 byId('file').addEventListener('change',async event=>{
   const file=event.currentTarget.files[0];
   event.currentTarget.value='';

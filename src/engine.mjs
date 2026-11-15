@@ -1,7 +1,8 @@
 import {
   BARBARA_TAX, BUILDINGS, BUILDING_GROUPS, CARDS, CARDS_PER_TURN, CITY_WIDTH, COMMODITY,
   EVENTS, GAME_RULES, GOODS, GUILDS, GUILD_SETUPS_BY_COUNT, HOUSE_EFFECTS, LABEL,
-  MINES, MINE_GROUPS, MINE_ROWS, PATRICIANS, REP_SCORE, ROCK_STARS, SAVE_SCHEMA, SETUP_VERSION,
+  MINCMISTR_LEVELS, MINCMISTR_PLANS, MINES, MINE_GROUPS, MINE_ROWS, PATRICIANS,
+  REP_SCORE, RIVAL_SETTINGS, ROCK_STARS, SAVE_SCHEMA, SETUP_VERSION,
   TECHNOLOGY,
 } from './data.mjs';
 import {BUILD_DEMAND, CITY_BUILDS, PRICES} from './prices.mjs';
@@ -10,8 +11,15 @@ import {randomIndex,shuffle} from './random.mjs';
 export const seatName = (seat, count) => seat===0?'You':count===2?'Rival':`Rival ${seat}`;
 export const rulesFor = state => GAME_RULES[state.players.length];
 export const turnsPerRound = state => state.players.length*CARDS_PER_TURN.length;
-export const cardsThisTurn = (state, turn=state.turn) => CARDS_PER_TURN[Math.floor(turn/state.players.length)];
 export const seatAtTurn = (state, turn) => (state.starter+turn)%state.players.length;
+export function cardsThisTurn(state, turn=state.turn) {
+  const cards=CARDS_PER_TURN[Math.floor(turn/state.players.length)];
+  if (cards!==1 || !state.mincmistr || seatAtTurn(state,turn)===0) return cards;
+  const {level,tougher}=state.mincmistr;
+  const asSixRounds=state.round+6-rulesFor(state).rounds;
+  const double=MINCMISTR_LEVELS[level].extraCard.includes(asSixRounds) || (tougher && asSixRounds===3);
+  return double?2:cards;
+}
 const UNPLAYED = (1 << CARDS.length) - 1;
 const FROM_POPULATION = ['wood','food','beer'];
 const FROM_ORE = ['silver','permit'];
@@ -28,6 +36,19 @@ export function seedNumber(value) {
   let hash = 2166136261;
   for (const character of normalized) hash = Math.imul(hash ^ character.codePointAt(0),16777619);
   return hash >>> 0;
+}
+
+export function createPlanDeck(seed, seat) {
+  const rng={rng:seedNumber(`mincmistr/${seed}/${seat}`)};
+  return {rng,draw:shuffle(rng,MINCMISTR_PLANS.map((_,i)=>i)),discard:[]};
+}
+
+function setupMincmistr(seed, count, options) {
+  const level=Object.hasOwn(MINCMISTR_LEVELS,options.level)?options.level:'journeyman';
+  const tougher=count===3&&level==='master'&&options.tougher===true;
+  const shared=count===2||options.shared!==false;
+  const decks=Array.from({length:shared?1:count-1},(_,i)=>createPlanDeck(seed,i+1));
+  return {level,tougher,shared,decks,lastPlans:empty(count-1)};
 }
 
 function player(guilds, coins) {
@@ -53,7 +74,7 @@ export function createGame(options = {}) {
   const state = {
     schema:SAVE_SCHEMA, setupVersion:SETUP_VERSION, seed, rng,
     setup, side, starter, round:1, turn:0, left:CARDS_PER_TURN[0],
-    actor:starter, phase:'action', pending:[], difficulty:options.difficulty==='quick'?'quick':'standard',
+    actor:starter, phase:'action', pending:[], difficulty:RIVAL_SETTINGS.includes(options.difficulty)?options.difficulty:'standard',
     players:guildSets.map((printed,i) => {
       const order = options.orders?.[i];
       const coins = 40+(i-starter+count)%count;
@@ -72,6 +93,7 @@ export function createGame(options = {}) {
     bank:tokenRecord(3), patrons:tokenRecord(0), council:tokenRecord(0),
     log:[], result:null, mineLayout:0,
   };
+  if (state.difficulty==='mincmistr') state.mincmistr=setupMincmistr(seed,count,options.mincmistr??{});
   const guildStacks = shuffle(state,GOODS);
   const publicStacks = ['green','civicSilver','yellow'];
   state.market = publicStacks.map((group,i) => {
@@ -689,7 +711,7 @@ function finishRound(state) {
   state.starter=(state.starter+1)%state.players.length;
   beginRound(state);
 }
-function finishCard(state) {
+export function finishCard(state) {
   if (state.pending.length || state.left>0) return;
   state.turn++;
   if (state.turn===turnsPerRound(state)) {

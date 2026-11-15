@@ -149,6 +149,7 @@ small, .fine { font-size: .79rem; color: var(--quiet); }
 .rival-hand summary, .rival-report summary { padding: 9px 12px; cursor: pointer; font-weight: 650; }
 .rival-cards > strong { display: block; color: var(--seat); padding: 0 10px 4px; font-size: .82rem; }
 .rival-cards small { margin-left: 4px; font-weight: 500; }
+.rival-plan { margin: 0; padding: 0 10px 5px; color: var(--muted); font-size: .75rem; }
 .rival-hand ul { list-style: none; display: flex; flex-wrap: wrap; gap: 4px; margin: 0; padding: 0 10px 10px; }
 .rival-hand li { padding: 3px 6px; border: 1px solid var(--tile-edge); border-radius: 5px; background: var(--tile-bg); font-size: .74rem; }
 select, input[type=text] { min-height: 40px; padding: 7px 9px; border-radius: 6px; border: 1px solid #66625d; background: #222225; width: 100%; min-width: 0; }
@@ -237,7 +238,7 @@ dialog::backdrop { background: #100f11b9; }
 .field-grid label { display: grid; gap: 4px; color: var(--muted); font-weight: 650; }
 .field-grid .wide { grid-column: 1 / -1; }
 .field-grid .event-option { display: flex; align-items: center; gap: 7px; min-height: 36px; }
-.field-grid .event-option[hidden] { display: none; }
+.field-grid [hidden] { display: none; }
 .event-option input { accent-color: var(--brass); }
 .input-pair { display: flex; gap: 5px; }
 .guide { display: grid; gap: 10px; }

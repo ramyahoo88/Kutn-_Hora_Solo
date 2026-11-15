@@ -8,6 +8,7 @@ import {
   reputationChange, rulesFor, scoreBreakdown, seatName, transition, unavailableActionReason,
 } from './engine.mjs';
 import {actionRationale,botAction} from './bot.mjs';
+import {describePlan,PLAN_DECK,playMincmistr,ROW} from './mincmistr.mjs';
 import {readSave,writeSave} from './save.mjs';
 
 const STORAGE='kutna-hora-solo-v1';
@@ -292,16 +293,24 @@ function renderPlayerBoard() {
 }
 function renderRivalHand() {
   const open=byId('rival-hand')?.open??true;
+  const m=state.mincmistr;
+  const order=m?ROW:CARDS.map((_,i)=>i);
+  const shared=m?.shared&&state.players.length>2;
+  const title=m?`Mincmistr · ${cap(m.level)}${m.tougher?' · Rounds 3–6':''}`:'Rival action cards';
   const hands=state.players.slice(1).map((player,i)=>{
     const seat=i+1;
-    const cards=CARDS.filter((_,index)=>player.hand&(1<<index));
+    const cards=order.filter(index=>player.hand&(1<<index)).map(index=>CARDS[index]);
+    const plan=m?PLAN_DECK[m.lastPlans[i]]:null;
+    const count=m&&!shared?` · ${m.decks[m.shared?0:i].draw.length} Plans left`:'';
     return `<div class="rival-cards seat-${seat}">
-      <strong>${playerName(seat)} <small>${cards.length} in hand</small></strong>
+      <strong>${playerName(seat)} <small>${cards.length} in hand${count}</small></strong>
+      ${m?`<p class="rival-plan">${plan?describePlan(plan):'Waiting for first Plan'}</p>`:''}
       <ul aria-label="${playerName(seat)} action cards">${cards.map(pair=>`<li>${pair.map(kind=>LABEL[kind]).join(' / ')}</li>`).join('')}</ul>
     </div>`;
   });
   return `<details id="rival-hand" class="panel rival-hand" ${open?'open':''}>
-    <summary>Rival action cards</summary>${hands.join('')}
+    <summary>${title}</summary>
+    ${shared?`<p class="rival-plan">Shared Plan deck · ${m.decks[0].draw.length} left</p>`:''}${hands.join('')}
   </details>`;
 }
 function groupedChoices(actions) {
@@ -619,14 +628,18 @@ async function runRival() {
       const turn=next;
       do {
         if (++steps>120) throw Error('The rivals’ turns did not finish.');
-        const action=botAction(next);
-        if (!action) throw Error('No legal rival action.');
-        const why=actionRationale(next,action);
         const previousEntries=next.log.length;
-        next=transition(next,action);
+        let why;
+        if (next.mincmistr) next=playMincmistr(next);
+        else {
+          const action=botAction(next);
+          if (!action) throw Error('No legal rival action.');
+          if (!multiple&&['rights','build','place-mine','technology','income'].includes(action.kind)) why=actionRationale(next,action);
+          next=transition(next,action);
+        }
         const entries=next.log.slice(previousEntries).filter(entry=>entry.actor===turn.actor);
         for (const entry of entries) notes.push(noteFor(turn.actor,entry.text));
-        if (!multiple&&why&&['rights','build','place-mine','technology','income'].includes(action.kind)) notes.push(why);
+        if (why) notes.push(why);
       } while(next.actor===turn.actor&&next.phase===turn.phase&&next.round===turn.round&&next.turn===turn.turn);
       if (!multiple) break;
       // Let the browser update between rivals on larger tables.
@@ -659,6 +672,19 @@ function randomSeed() {
 function guildOrders(guilds) {
   return guilds.flatMap(a=>guilds.filter(b=>b!==a).map(b=>[a,b,guilds.find(c=>c!==a&&c!==b)]));
 }
+function fillMincmistrOptions() {
+  const form=byId('setup-form');
+  const count=Number(form.elements.playerCount.value);
+  const active=form.elements.difficulty.value==='mincmistr';
+  const several=active&&count>2;
+  const tougher=active&&count===3&&form.elements.mincmistrLevel.value==='master';
+  byId('mincmistr-level-option').hidden=!active;
+  form.elements.mincmistrLevel.disabled=!active;
+  byId('mincmistr-deck-option').hidden=!several;
+  form.elements.mincmistrDecks.disabled=!several;
+  byId('mincmistr-tougher-option').hidden=!tougher;
+  form.elements.mincmistrTougher.disabled=!tougher;
+}
 function fillTableOptions() {
   const count=Number(byId('player-count').value);
   const starter=byId('setup-form').elements.starter;
@@ -667,6 +693,7 @@ function fillTableOptions() {
   starter.value=String(previous<count?previous:0);
   byId('setup-events').hidden=count===2;
   byId('setup-form').elements.events.disabled=count===2;
+  fillMincmistrOptions();
   fillSetup();
 }
 function fillSetup(changeSide=true) {
@@ -691,6 +718,9 @@ function openDialog(kind) {
     byId('player-count').value=String(state.players.length);
     form.elements.seed.value=randomSeed();
     form.elements.difficulty.value=state.difficulty;
+    form.elements.mincmistrLevel.value=state.mincmistr?.level??'journeyman';
+    form.elements.mincmistrDecks.value=state.mincmistr?.shared===false?'individual':'shared';
+    form.elements.mincmistrTougher.checked=state.mincmistr?.tougher??false;
     form.elements.events.checked=state.players.length>2&&state.events.length>0;
     form.elements.starter.value='0';
     fillTableOptions();
@@ -718,6 +748,7 @@ byId('setup-form').addEventListener('submit',event=>{
   const next=createGame({
     playerCount,setup,side,events:form.has('events'),seed:form.get('seed'),
     starter:Number(form.get('starter')),difficulty:form.get('difficulty'),
+    mincmistr:{level:form.get('mincmistrLevel'),shared:form.get('mincmistrDecks')!=='individual',tougher:form.has('mincmistrTougher')},
     orders:[guildOrders(GUILD_SETUPS_BY_COUNT[playerCount][setup][side])[Number(form.get('rows'))]],
   });
   saveUndo();
@@ -732,6 +763,8 @@ byId('setup-form').addEventListener('submit',event=>{
 byId('guild-side').addEventListener('change',()=>fillSetup(false));
 byId('guild-setup').addEventListener('change',()=>fillSetup());
 byId('player-count').addEventListener('change',fillTableOptions);
+byId('rival-difficulty').addEventListener('change',fillMincmistrOptions);
+byId('mincmistr-level').addEventListener('change',fillMincmistrOptions);
 byId('file').addEventListener('change',async event=>{
   const file=event.currentTarget.files[0];
   event.currentTarget.value='';
