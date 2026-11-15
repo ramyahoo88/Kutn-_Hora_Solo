@@ -1,0 +1,14 @@
+3p standard (as you) vs 2 Mincmistr journeyman: n=288 | focus wins 57.3% (fair 33%) | vs best other 2.4 ±0.6 | vs avg other 6.2 ±0.6 | avg rank 1.55 | avg score 52.7
+4p standard (as you) vs 3 Mincmistr journeyman: n=384 | focus wins 48.4% (fair 25%) | vs best other 0.3 ±0.4 | vs avg other 5.5 ±0.4 | avg rank 1.77 | avg score 37.9
+3p standard (as you) vs 2 Mincmistr master: n=288 | focus wins 37.2% (fair 33%) | vs best other -3.5 ±0.6 | vs avg other 0.6 ±0.6 | avg rank 1.93 | avg score 53.0
+4p standard (as you) vs 3 Mincmistr master: n=384 | focus wins 24.7% (fair 25%) | vs best other -5.2 ±0.5 | vs avg other 0.8 ±0.5 | avg rank 2.39 | avg score 37.8
+3p quick (as you) vs 2 Mincmistr journeyman: n=288 | focus wins 15.6% (fair 33%) | vs best other -8.2 ±0.5 | vs avg other -4.3 ±0.5 | avg rank 2.34 | avg score 40.7
+4p quick (as you) vs 3 Mincmistr journeyman: n=384 | focus wins 14.8% (fair 25%) | vs best other -8.1 ±0.4 | vs avg other -2.9 ±0.4 | avg rank 2.79 | avg score 28.6
+3p standard (as you) vs 2 Mincmistr apprentice: n=288 | focus wins 70.1% (fair 33%) | vs best other 6.2 ±0.6 | vs avg other 10.0 ±0.6 | avg rank 1.33 | avg score 51.1
+4p standard (as you) vs 3 Mincmistr apprentice: n=384 | focus wins 64.3% (fair 25%) | vs best other 3.2 ±0.5 | vs avg other 8.2 ±0.4 | avg rank 1.54 | avg score 36.8
+3p standard (as you) vs 2 Mincmistr grandmaster: n=288 | focus wins 18.1% (fair 33%) | vs best other -10.3 ±0.7 | vs avg other -5.8 ±0.7 | avg rank 2.33 | avg score 52.4
+4p standard (as you) vs 3 Mincmistr grandmaster: n=384 | focus wins 18.5% (fair 25%) | vs best other -8.3 ±0.5 | vs avg other -2.2 ±0.5 | avg rank 2.72 | avg score 37.9
+3p 1 Mincmistr journeyman vs 2 standard: n=144 | focus wins 11.1% (fair 33%) | vs best other -10.7 ±0.8 | vs avg other -6.6 ±0.8 | avg rank 2.45 | avg score 48.2
+4p 1 Mincmistr journeyman vs 3 standard: n=192 | focus wins 13.5% (fair 25%) | vs best other -9.4 ±0.6 | vs avg other -3.7 ±0.6 | avg rank 2.87 | avg score 33.4
+3p 1 Mincmistr master vs 2 standard: n=144 | focus wins 29.9% (fair 33%) | vs best other -5.5 ±1.0 | vs avg other -1.1 ±1.0 | avg rank 2.06 | avg score 53.9
+4p 1 Mincmistr master vs 3 standard: n=192 | focus wins 30.2% (fair 25%) | vs best other -5.2 ±0.6 | vs avg other 0.5 ±0.5 | avg rank 2.34 | avg score 37.7

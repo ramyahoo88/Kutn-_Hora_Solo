@@ -88,7 +88,7 @@ def ref_cards():
       <p><b>Mine tile</b>: keep most stars + ore + VP. Place for most row points gained; ties: cheapest, fewest of its mines, arrow.</p>
       <p><b>Free right</b>: public, most VP + 2/pelican + 2/rep. <b>House</b>: row with most removed.</p>
       <div class="rhead2">Difficulty</div>
-      <p class="small"><b>Apprentice</b>: no point maths in Plot, Build, Mine.<br><b>Journeyman</b>: as written.<br><b>Master</b>: rounds 4–6, last turn plays both.<br><b>Grandmaster</b>: same, every round.</p></div>'''
+      <p class="small"><b>Apprentice</b>: no point maths in Plot, Build, Mine.<br><b>Journeyman</b>: as written.<br><b>Master</b>: last 3 rounds, last turn plays both.<br><b>Grandmaster</b>: same, every round.</p></div>'''
     return [c1, c2, c3]
 
 CSS = (HERE / 'style.css').read_text()

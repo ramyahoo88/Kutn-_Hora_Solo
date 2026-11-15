@@ -125,3 +125,10 @@ and delivered at 03:30/03:55. Re-verified: deliverables present, equivalence 0 m
 - Rules = code: equivalence 0 mismatches at all four levels; flow check 0 mismatches (1200 card plays).
 - PDF re-rendered and reviewed: 8 pages, rules 1-4, card fronts/backs 5-8, no overflow.
 - Deliverables re-sent. v1.1 final.
+
+## 07:15-08:00 — v1.2 (multi-player), pushed to claude-mincmistr
+- Extra-card rounds now counted as in a 6-round game (4p: Master = rounds 3-5). 2p unchanged (equivalence 0 mismatches).
+- multisim.mjs (fresh seeds x1-x4). Standard as you vs 2/3 Mincmistrs, win rate (fair 33/25%):
+  Apprentice 70.1/64.3, Journeyman 57.3/48.4, Master 37.2/24.7, Grandmaster 18.1/18.5. Quick as you vs Journeyman 15.6/14.8.
+- One Mincmistr vs 2/3 Standard: Journeyman 11.1%/13.5%, Master 29.9%/30.2%.
+- Rules 1.2: section 10 "Two or three Mincmistrs", edge vs best opponent, Master = last three rounds.

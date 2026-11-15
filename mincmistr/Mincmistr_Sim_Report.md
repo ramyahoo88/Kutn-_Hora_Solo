@@ -1,6 +1,6 @@
 # The Mincmistr: design and simulation report
 
-15 Nov 2026 · rules version 1.1 · engine: Kutná Hora Solo v0.3.0 (`0b28294`, `src/` unchanged)
+15 Nov 2026 · rules version 1.2 · engine: Kutná Hora Solo v0.3.0 (`0b28294`, `src/` unchanged)
 
 ## Summary
 
@@ -105,6 +105,28 @@ Margins are against Standard on the tuning groups at the time of each change. La
 - A grid over the cash threshold (15/20/25), the rights limit (2/3) and mine placement found the adopted settings best. Contest placement was the one exception, and v1.1 adopts it.
 - Economic privileges as difficulty: +10 g per Income was worth +2.7, free mine placement +3, free plots +1.3. All were weaker per unit of cheating than one extra card play, and less transparent.
 
+## Three and four players
+
+Version 1.2 adds play against two or three Mincmistrs. Each one compares edge against its best opponent. In a four-player game, which has five rounds, Master's extra card play covers the last three rounds (3–5). Two-player behaviour is unchanged, and the decision-by-decision check still finds 0 mismatches. All seeds below are fresh (`x1–x4`).
+
+**You against two or three Mincmistrs.** The app's Standard rival takes your seat, which rotates through every seat. The table shows its win rate and its margin over the best Mincmistr.
+
+| Players | Apprentice | Journeyman | Master | Grandmaster |
+|---|---|---|---|---|
+| 3 (fair share 33%), 288 games each | 70.1%, +6.2 | 57.3%, +2.4 | 37.2%, −3.5 | 18.1%, −10.3 |
+| 4 (fair share 25%), 384 games each | 64.3%, +3.2 | 48.4%, +0.3 | 24.7%, −5.2 | 18.5%, −8.3 |
+
+With the Quick rival in your seat against Journeyman Mincmistrs, it wins 15.6% at 3 players and 14.8% at 4.
+
+**One Mincmistr at a table of Standard rivals.** The table shows the Mincmistr's win rate and its margin over the rivals' average.
+
+| Players | Journeyman | Master |
+|---|---|---|
+| 3 (fair share 33%), 144 games | 11.1%, −6.6 | 29.9%, −1.1 |
+| 4 (fair share 25%), 192 games | 13.5%, −3.7 | 30.2%, +0.5 |
+
+The two-player ladder carries over. Master plays about as well as the Standard rival at every player count, and against Master Mincmistrs the Standard rival wins almost exactly its fair share. Journeyman is the gentler choice. Grandmaster's lead narrows with more players, because a single human is now beating several opponents who each get extra plays.
+
 ## Exploit tests
 
 I gave the Standard rival knowledge of the Mincmistr's rules and had it deny the predictable choices. Each test ran 192 holdout games (`h1–h4`); baseline Journeyman vs Standard on those seeds is −4.8.
@@ -118,7 +140,7 @@ None of these denial strategies is a usable exploit. Untested: longer-range mani
 ## Limitations
 
 - **Bots, not people.** The opponents are bots, so how these numbers translate to human play is an estimate. An experienced player may well be stronger than the Standard rival. For them, Master or Grandmaster is likely the right level.
-- **Two players only.** The rules are written for two players. Two or three Mincmistrs in a 3- or 4-player game ran without stalls in a quick check, using the edge against the best other player. Balance there is untested.
+- **Player count.** Three- and four-player results are smaller samples (144–384 games per cell) than the two-player ones, and were measured only against the Standard and Quick rivals.
 - **Engine interpretation.** Where the app's engine interprets the printed rules, the Mincmistr inherits that reading. Examples are paying the 10 g patrician fee from the Income being collected, and plot pricing at reputation 3+.
 - **Not a regular player in two ways.** It never uses the Joker. At Master and Grandmaster it takes extra card plays.
 

@@ -233,7 +233,9 @@ export function mincmistrAction(state, m) {
 // Rule 9: at Master and Grandmaster, in the listed rounds, the Mincmistr's last turn plays both remaining cards.
 export function mincmistrCardsThisTurn(state, m) {
   if (state.phase!=='action' || state.pending.length || state.actor!==m.seat) return null;
-  if (state.turn<2*state.players.length || !m.settings.extraCard.includes(state.round)) return null;
+  // Round numbers are counted as in a 6-round game, so with 5 rounds (4 players) Master covers rounds 3-5.
+  const asSixRounds=state.round+6-rulesFor(state).rounds;
+  if (state.turn<2*state.players.length || !m.settings.extraCard.includes(asSixRounds)) return null;
   let hand=me(state,m).hand, n=0; while (hand) { n+=hand&1; hand>>=1; }
   return state.left===1 && n===2 ? 2 : null;
 }
