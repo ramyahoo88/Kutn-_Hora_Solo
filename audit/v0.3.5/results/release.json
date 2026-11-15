@@ -1,0 +1,33 @@
+{
+  "repository": "ramyahoo88/Kutn-_Hora_Solo",
+  "branch": "v0.3.5-playtest",
+  "commit": "6a6f00e4fe9c6bce205ee55df8d0291023c6b00b",
+  "tree": "b1b5487fba9e7e26888030313d0553efd0e322bd",
+  "app_version": "0.3.5",
+  "save_schema": 3,
+  "paper_rules": "Mincmistr v1.2.2 (15 Nov 2026)",
+  "node": "v22.23.4",
+  "chromium": "Playwright 1.63 bundled Chromium",
+  "sha256": {
+    "Kutna_Hora_Solo.html (shipped and rebuilt)": "117eccb1524738905b0966367484f889a42675abf43a85589193a15c2b0a56f8",
+    "mincmistr/Mincmistr_Print_and_Play.pdf": "5c9e94b8d0223f11fdb67ee78ea2e4f15d719970b611be364a67d56ff44e8d80",
+    "src/assets/mincmistr-plans.webp (shipped and regenerated)": "d440fa8052675364629c11d2ba46a2119c3f225febdcdb8c3eb8157baa0d76a2",
+    "mincmistr/Mincmistr_Rules.md": "401d36e8495a8206ee55d016c0d520b7c719edd6946da0d7d1190f4d04bf1b99",
+    "mincmistr/print/app-reference.html (shipped and rebuilt)": "2be5ad5bb951a1051adb6ba983529983ec8ac437f5bb33e6688575c8b98b2f14"
+  },
+  "checks": {
+    "node build.mjs <separate path> && cmp": "byte-identical (583,454 bytes)",
+    "build.py --app-reference && cmp": "byte-identical",
+    "export_plans_audit.py && cmp": "byte-identical sprite",
+    "pdf-compare.py": "8 pages; extracted text identical; all 8 pages pixel-identical at 60 dpi (bytes differ only by embedded creation time)",
+    "export_cards.mjs": "cards.json unchanged",
+    "node --test test/*.test.mjs": "38/38 pass",
+    "node test/browser-smoke.mjs (chromium)": "6/6 PASS",
+    "node test/dom-smoke.mjs": "not run: jsdom not installable here (package installs blocked)",
+    "firefox / webkit": "not run: engines not installed here",
+    "mincmistr/equiv.mjs": "2,109 decisions, 0 mismatches",
+    "mincmistr/flowcheck.mjs": "1,200 card plays, 0 mismatches",
+    "mincmistr/samplegame.mjs sample-12 2": "byte-identical to Mincmistr_Sample_Game.md",
+    "node test/rival-study.mjs 12 v030-check": "reproduces every README v0.3.0 study figure"
+  }
+}

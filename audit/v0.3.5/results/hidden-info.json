@@ -1,0 +1,61 @@
+{
+ "2p standard": {
+  "positions": 33,
+  "same": 33,
+  "diff": 0,
+  "examples": []
+ },
+ "2p quick": {
+  "positions": 40,
+  "same": 40,
+  "diff": 0,
+  "examples": []
+ },
+ "2p planner": {
+  "positions": 18,
+  "same": 18,
+  "diff": 0,
+  "examples": []
+ },
+ "3p standard": {
+  "positions": 85,
+  "same": 85,
+  "diff": 0,
+  "examples": []
+ },
+ "3p quick": {
+  "positions": 86,
+  "same": 86,
+  "diff": 0,
+  "examples": []
+ },
+ "3p planner": {
+  "positions": 38,
+  "same": 38,
+  "diff": 0,
+  "examples": []
+ },
+ "4p standard": {
+  "positions": 97,
+  "same": 97,
+  "diff": 0,
+  "examples": []
+ },
+ "4p quick": {
+  "positions": 101,
+  "same": 101,
+  "diff": 0,
+  "examples": []
+ },
+ "4p planner": {
+  "positions": 50,
+  "same": 50,
+  "diff": 0,
+  "examples": []
+ },
+ "Mincmistr master (all table sizes)": {
+  "positions": 526,
+  "same": 522,
+  "diff": 4
+ }
+}

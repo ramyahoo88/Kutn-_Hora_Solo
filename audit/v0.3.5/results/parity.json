@@ -1,0 +1,6424 @@
+{
+ "games": 352,
+ "decisions": 33352,
+ "cardPlays": 22864,
+ "mismatches": [],
+ "rules": {
+  "4.3C": 11928,
+  "4.3M": 4212,
+  "4.1": 4942,
+  "4.3S": 214,
+  "4.2": 812,
+  "4.4M": 205,
+  "4.4I": 217,
+  "4.4X": 334
+ },
+ "cardCounts": {
+  "ok": 4224,
+  "bad": []
+ },
+ "roundTrips": 751,
+ "scores": [
+  {
+   "seed": "claude035-2-apprentice-s-0",
+   "cfg": {
+    "count": 2,
+    "level": "apprentice",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    -13,
+    41
+   ],
+   "winners": [
+    1
+   ]
+  },
+  {
+   "seed": "claude035-2-apprentice-s-1",
+   "cfg": {
+    "count": 2,
+    "level": "apprentice",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    55,
+    39
+   ],
+   "winners": [
+    0
+   ]
+  },
+  {
+   "seed": "claude035-2-apprentice-s-2",
+   "cfg": {
+    "count": 2,
+    "level": "apprentice",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    7,
+    35
+   ],
+   "winners": [
+    1
+   ]
+  },
+  {
+   "seed": "claude035-2-apprentice-s-3",
+   "cfg": {
+    "count": 2,
+    "level": "apprentice",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    44,
+    32
+   ],
+   "winners": [
+    0
+   ]
+  },
+  {
+   "seed": "claude035-2-apprentice-s-4",
+   "cfg": {
+    "count": 2,
+    "level": "apprentice",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    12,
+    53
+   ],
+   "winners": [
+    1
+   ]
+  },
+  {
+   "seed": "claude035-2-apprentice-s-5",
+   "cfg": {
+    "count": 2,
+    "level": "apprentice",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    42,
+    38
+   ],
+   "winners": [
+    0
+   ]
+  },
+  {
+   "seed": "claude035-2-apprentice-s-6",
+   "cfg": {
+    "count": 2,
+    "level": "apprentice",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    11,
+    43
+   ],
+   "winners": [
+    1
+   ]
+  },
+  {
+   "seed": "claude035-2-apprentice-s-7",
+   "cfg": {
+    "count": 2,
+    "level": "apprentice",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    60,
+    33
+   ],
+   "winners": [
+    0
+   ]
+  },
+  {
+   "seed": "claude035-2-apprentice-s-8",
+   "cfg": {
+    "count": 2,
+    "level": "apprentice",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    0,
+    27
+   ],
+   "winners": [
+    1
+   ]
+  },
+  {
+   "seed": "claude035-2-apprentice-s-9",
+   "cfg": {
+    "count": 2,
+    "level": "apprentice",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    43,
+    46
+   ],
+   "winners": [
+    1
+   ]
+  },
+  {
+   "seed": "claude035-2-apprentice-s-10",
+   "cfg": {
+    "count": 2,
+    "level": "apprentice",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    32,
+    28
+   ],
+   "winners": [
+    0
+   ]
+  },
+  {
+   "seed": "claude035-2-apprentice-s-11",
+   "cfg": {
+    "count": 2,
+    "level": "apprentice",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    40,
+    42
+   ],
+   "winners": [
+    1
+   ]
+  },
+  {
+   "seed": "claude035-2-apprentice-s-12",
+   "cfg": {
+    "count": 2,
+    "level": "apprentice",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    14,
+    41
+   ],
+   "winners": [
+    1
+   ]
+  },
+  {
+   "seed": "claude035-2-apprentice-s-13",
+   "cfg": {
+    "count": 2,
+    "level": "apprentice",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    49,
+    42
+   ],
+   "winners": [
+    0
+   ]
+  },
+  {
+   "seed": "claude035-2-apprentice-s-14",
+   "cfg": {
+    "count": 2,
+    "level": "apprentice",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    2,
+    32
+   ],
+   "winners": [
+    1
+   ]
+  },
+  {
+   "seed": "claude035-2-apprentice-s-15",
+   "cfg": {
+    "count": 2,
+    "level": "apprentice",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    53,
+    42
+   ],
+   "winners": [
+    0
+   ]
+  },
+  {
+   "seed": "claude035-2-journeyman-s-0",
+   "cfg": {
+    "count": 2,
+    "level": "journeyman",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    -9,
+    43
+   ],
+   "winners": [
+    1
+   ]
+  },
+  {
+   "seed": "claude035-2-journeyman-s-1",
+   "cfg": {
+    "count": 2,
+    "level": "journeyman",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    40,
+    42
+   ],
+   "winners": [
+    1
+   ]
+  },
+  {
+   "seed": "claude035-2-journeyman-s-2",
+   "cfg": {
+    "count": 2,
+    "level": "journeyman",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    15,
+    45
+   ],
+   "winners": [
+    1
+   ]
+  },
+  {
+   "seed": "claude035-2-journeyman-s-3",
+   "cfg": {
+    "count": 2,
+    "level": "journeyman",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    52,
+    41
+   ],
+   "winners": [
+    0
+   ]
+  },
+  {
+   "seed": "claude035-2-journeyman-s-4",
+   "cfg": {
+    "count": 2,
+    "level": "journeyman",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    -3,
+    51
+   ],
+   "winners": [
+    1
+   ]
+  },
+  {
+   "seed": "claude035-2-journeyman-s-5",
+   "cfg": {
+    "count": 2,
+    "level": "journeyman",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    58,
+    51
+   ],
+   "winners": [
+    0
+   ]
+  },
+  {
+   "seed": "claude035-2-journeyman-s-6",
+   "cfg": {
+    "count": 2,
+    "level": "journeyman",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    8,
+    57
+   ],
+   "winners": [
+    1
+   ]
+  },
+  {
+   "seed": "claude035-2-journeyman-s-7",
+   "cfg": {
+    "count": 2,
+    "level": "journeyman",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    38,
+    37
+   ],
+   "winners": [
+    0
+   ]
+  },
+  {
+   "seed": "claude035-2-journeyman-s-8",
+   "cfg": {
+    "count": 2,
+    "level": "journeyman",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    -14,
+    49
+   ],
+   "winners": [
+    1
+   ]
+  },
+  {
+   "seed": "claude035-2-journeyman-s-9",
+   "cfg": {
+    "count": 2,
+    "level": "journeyman",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    47,
+    56
+   ],
+   "winners": [
+    1
+   ]
+  },
+  {
+   "seed": "claude035-2-journeyman-s-10",
+   "cfg": {
+    "count": 2,
+    "level": "journeyman",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    -10,
+    43
+   ],
+   "winners": [
+    1
+   ]
+  },
+  {
+   "seed": "claude035-2-journeyman-s-11",
+   "cfg": {
+    "count": 2,
+    "level": "journeyman",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    41,
+    48
+   ],
+   "winners": [
+    1
+   ]
+  },
+  {
+   "seed": "claude035-2-journeyman-s-12",
+   "cfg": {
+    "count": 2,
+    "level": "journeyman",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    -7,
+    47
+   ],
+   "winners": [
+    1
+   ]
+  },
+  {
+   "seed": "claude035-2-journeyman-s-13",
+   "cfg": {
+    "count": 2,
+    "level": "journeyman",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    46,
+    35
+   ],
+   "winners": [
+    0
+   ]
+  },
+  {
+   "seed": "claude035-2-journeyman-s-14",
+   "cfg": {
+    "count": 2,
+    "level": "journeyman",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    4,
+    46
+   ],
+   "winners": [
+    1
+   ]
+  },
+  {
+   "seed": "claude035-2-journeyman-s-15",
+   "cfg": {
+    "count": 2,
+    "level": "journeyman",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    69,
+    46
+   ],
+   "winners": [
+    0
+   ]
+  },
+  {
+   "seed": "claude035-2-master-s-0",
+   "cfg": {
+    "count": 2,
+    "level": "master",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    -6,
+    45
+   ],
+   "winners": [
+    1
+   ]
+  },
+  {
+   "seed": "claude035-2-master-s-1",
+   "cfg": {
+    "count": 2,
+    "level": "master",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    51,
+    50
+   ],
+   "winners": [
+    0
+   ]
+  },
+  {
+   "seed": "claude035-2-master-s-2",
+   "cfg": {
+    "count": 2,
+    "level": "master",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    -5,
+    53
+   ],
+   "winners": [
+    1
+   ]
+  },
+  {
+   "seed": "claude035-2-master-s-3",
+   "cfg": {
+    "count": 2,
+    "level": "master",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    59,
+    65
+   ],
+   "winners": [
+    1
+   ]
+  },
+  {
+   "seed": "claude035-2-master-s-4",
+   "cfg": {
+    "count": 2,
+    "level": "master",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    1,
+    58
+   ],
+   "winners": [
+    1
+   ]
+  },
+  {
+   "seed": "claude035-2-master-s-5",
+   "cfg": {
+    "count": 2,
+    "level": "master",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    45,
+    50
+   ],
+   "winners": [
+    1
+   ]
+  },
+  {
+   "seed": "claude035-2-master-s-6",
+   "cfg": {
+    "count": 2,
+    "level": "master",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    -10,
+    49
+   ],
+   "winners": [
+    1
+   ]
+  },
+  {
+   "seed": "claude035-2-master-s-7",
+   "cfg": {
+    "count": 2,
+    "level": "master",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    55,
+    58
+   ],
+   "winners": [
+    1
+   ]
+  },
+  {
+   "seed": "claude035-2-master-s-8",
+   "cfg": {
+    "count": 2,
+    "level": "master",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    -4,
+    48
+   ],
+   "winners": [
+    1
+   ]
+  },
+  {
+   "seed": "claude035-2-master-s-9",
+   "cfg": {
+    "count": 2,
+    "level": "master",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    45,
+    52
+   ],
+   "winners": [
+    1
+   ]
+  },
+  {
+   "seed": "claude035-2-master-s-10",
+   "cfg": {
+    "count": 2,
+    "level": "master",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    -14,
+    39
+   ],
+   "winners": [
+    1
+   ]
+  },
+  {
+   "seed": "claude035-2-master-s-11",
+   "cfg": {
+    "count": 2,
+    "level": "master",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    41,
+    54
+   ],
+   "winners": [
+    1
+   ]
+  },
+  {
+   "seed": "claude035-2-master-s-12",
+   "cfg": {
+    "count": 2,
+    "level": "master",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    13,
+    61
+   ],
+   "winners": [
+    1
+   ]
+  },
+  {
+   "seed": "claude035-2-master-s-13",
+   "cfg": {
+    "count": 2,
+    "level": "master",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    75,
+    33
+   ],
+   "winners": [
+    0
+   ]
+  },
+  {
+   "seed": "claude035-2-master-s-14",
+   "cfg": {
+    "count": 2,
+    "level": "master",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    -1,
+    41
+   ],
+   "winners": [
+    1
+   ]
+  },
+  {
+   "seed": "claude035-2-master-s-15",
+   "cfg": {
+    "count": 2,
+    "level": "master",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    45,
+    49
+   ],
+   "winners": [
+    1
+   ]
+  },
+  {
+   "seed": "claude035-2-grandmaster-s-0",
+   "cfg": {
+    "count": 2,
+    "level": "grandmaster",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    18,
+    35
+   ],
+   "winners": [
+    1
+   ]
+  },
+  {
+   "seed": "claude035-2-grandmaster-s-1",
+   "cfg": {
+    "count": 2,
+    "level": "grandmaster",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    41,
+    45
+   ],
+   "winners": [
+    1
+   ]
+  },
+  {
+   "seed": "claude035-2-grandmaster-s-2",
+   "cfg": {
+    "count": 2,
+    "level": "grandmaster",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    -4,
+    50
+   ],
+   "winners": [
+    1
+   ]
+  },
+  {
+   "seed": "claude035-2-grandmaster-s-3",
+   "cfg": {
+    "count": 2,
+    "level": "grandmaster",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    50,
+    52
+   ],
+   "winners": [
+    1
+   ]
+  },
+  {
+   "seed": "claude035-2-grandmaster-s-4",
+   "cfg": {
+    "count": 2,
+    "level": "grandmaster",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    -8,
+    57
+   ],
+   "winners": [
+    1
+   ]
+  },
+  {
+   "seed": "claude035-2-grandmaster-s-5",
+   "cfg": {
+    "count": 2,
+    "level": "grandmaster",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    34,
+    41
+   ],
+   "winners": [
+    1
+   ]
+  },
+  {
+   "seed": "claude035-2-grandmaster-s-6",
+   "cfg": {
+    "count": 2,
+    "level": "grandmaster",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    1,
+    64
+   ],
+   "winners": [
+    1
+   ]
+  },
+  {
+   "seed": "claude035-2-grandmaster-s-7",
+   "cfg": {
+    "count": 2,
+    "level": "grandmaster",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    46,
+    65
+   ],
+   "winners": [
+    1
+   ]
+  },
+  {
+   "seed": "claude035-2-grandmaster-s-8",
+   "cfg": {
+    "count": 2,
+    "level": "grandmaster",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    3,
+    59
+   ],
+   "winners": [
+    1
+   ]
+  },
+  {
+   "seed": "claude035-2-grandmaster-s-9",
+   "cfg": {
+    "count": 2,
+    "level": "grandmaster",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    44,
+    48
+   ],
+   "winners": [
+    1
+   ]
+  },
+  {
+   "seed": "claude035-2-grandmaster-s-10",
+   "cfg": {
+    "count": 2,
+    "level": "grandmaster",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    -2,
+    36
+   ],
+   "winners": [
+    1
+   ]
+  },
+  {
+   "seed": "claude035-2-grandmaster-s-11",
+   "cfg": {
+    "count": 2,
+    "level": "grandmaster",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    53,
+    42
+   ],
+   "winners": [
+    0
+   ]
+  },
+  {
+   "seed": "claude035-2-grandmaster-s-12",
+   "cfg": {
+    "count": 2,
+    "level": "grandmaster",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    4,
+    45
+   ],
+   "winners": [
+    1
+   ]
+  },
+  {
+   "seed": "claude035-2-grandmaster-s-13",
+   "cfg": {
+    "count": 2,
+    "level": "grandmaster",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    48,
+    58
+   ],
+   "winners": [
+    1
+   ]
+  },
+  {
+   "seed": "claude035-2-grandmaster-s-14",
+   "cfg": {
+    "count": 2,
+    "level": "grandmaster",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    11,
+    52
+   ],
+   "winners": [
+    1
+   ]
+  },
+  {
+   "seed": "claude035-2-grandmaster-s-15",
+   "cfg": {
+    "count": 2,
+    "level": "grandmaster",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    42,
+    45
+   ],
+   "winners": [
+    1
+   ]
+  },
+  {
+   "seed": "claude035-3-apprentice-s-0",
+   "cfg": {
+    "count": 3,
+    "level": "apprentice",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    5,
+    37,
+    34
+   ],
+   "winners": [
+    1
+   ]
+  },
+  {
+   "seed": "claude035-3-apprentice-s-1",
+   "cfg": {
+    "count": 3,
+    "level": "apprentice",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    43,
+    30,
+    37
+   ],
+   "winners": [
+    0
+   ]
+  },
+  {
+   "seed": "claude035-3-apprentice-s-2",
+   "cfg": {
+    "count": 3,
+    "level": "apprentice",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    -12,
+    41,
+    44
+   ],
+   "winners": [
+    2
+   ]
+  },
+  {
+   "seed": "claude035-3-apprentice-s-3",
+   "cfg": {
+    "count": 3,
+    "level": "apprentice",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    54,
+    49,
+    65
+   ],
+   "winners": [
+    2
+   ]
+  },
+  {
+   "seed": "claude035-3-apprentice-s-4",
+   "cfg": {
+    "count": 3,
+    "level": "apprentice",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    31,
+    72,
+    39
+   ],
+   "winners": [
+    1
+   ]
+  },
+  {
+   "seed": "claude035-3-apprentice-s-5",
+   "cfg": {
+    "count": 3,
+    "level": "apprentice",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    54,
+    45,
+    37
+   ],
+   "winners": [
+    0
+   ]
+  },
+  {
+   "seed": "claude035-3-apprentice-s-6",
+   "cfg": {
+    "count": 3,
+    "level": "apprentice",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    -3,
+    48,
+    39
+   ],
+   "winners": [
+    1
+   ]
+  },
+  {
+   "seed": "claude035-3-apprentice-s-7",
+   "cfg": {
+    "count": 3,
+    "level": "apprentice",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    25,
+    39,
+    39
+   ],
+   "winners": [
+    1
+   ]
+  },
+  {
+   "seed": "claude035-3-apprentice-s-8",
+   "cfg": {
+    "count": 3,
+    "level": "apprentice",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    -2,
+    39,
+    30
+   ],
+   "winners": [
+    1
+   ]
+  },
+  {
+   "seed": "claude035-3-apprentice-s-9",
+   "cfg": {
+    "count": 3,
+    "level": "apprentice",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    53,
+    45,
+    52
+   ],
+   "winners": [
+    0
+   ]
+  },
+  {
+   "seed": "claude035-3-apprentice-s-10",
+   "cfg": {
+    "count": 3,
+    "level": "apprentice",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    1,
+    45,
+    38
+   ],
+   "winners": [
+    1
+   ]
+  },
+  {
+   "seed": "claude035-3-apprentice-s-11",
+   "cfg": {
+    "count": 3,
+    "level": "apprentice",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    52,
+    48,
+    51
+   ],
+   "winners": [
+    0
+   ]
+  },
+  {
+   "seed": "claude035-3-apprentice-s-12",
+   "cfg": {
+    "count": 3,
+    "level": "apprentice",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    5,
+    36,
+    40
+   ],
+   "winners": [
+    2
+   ]
+  },
+  {
+   "seed": "claude035-3-apprentice-s-13",
+   "cfg": {
+    "count": 3,
+    "level": "apprentice",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    47,
+    47,
+    43
+   ],
+   "winners": [
+    0
+   ]
+  },
+  {
+   "seed": "claude035-3-apprentice-s-14",
+   "cfg": {
+    "count": 3,
+    "level": "apprentice",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    12,
+    43,
+    46
+   ],
+   "winners": [
+    2
+   ]
+  },
+  {
+   "seed": "claude035-3-apprentice-s-15",
+   "cfg": {
+    "count": 3,
+    "level": "apprentice",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    31,
+    35,
+    43
+   ],
+   "winners": [
+    2
+   ]
+  },
+  {
+   "seed": "claude035-3-apprentice-i-0",
+   "cfg": {
+    "count": 3,
+    "level": "apprentice",
+    "shared": false,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    8,
+    34,
+    51
+   ],
+   "winners": [
+    2
+   ]
+  },
+  {
+   "seed": "claude035-3-apprentice-i-1",
+   "cfg": {
+    "count": 3,
+    "level": "apprentice",
+    "shared": false,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    66,
+    54,
+    55
+   ],
+   "winners": [
+    0
+   ]
+  },
+  {
+   "seed": "claude035-3-apprentice-i-2",
+   "cfg": {
+    "count": 3,
+    "level": "apprentice",
+    "shared": false,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    -5,
+    27,
+    30
+   ],
+   "winners": [
+    2
+   ]
+  },
+  {
+   "seed": "claude035-3-apprentice-i-3",
+   "cfg": {
+    "count": 3,
+    "level": "apprentice",
+    "shared": false,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    49,
+    32,
+    35
+   ],
+   "winners": [
+    0
+   ]
+  },
+  {
+   "seed": "claude035-3-apprentice-i-4",
+   "cfg": {
+    "count": 3,
+    "level": "apprentice",
+    "shared": false,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    6,
+    41,
+    50
+   ],
+   "winners": [
+    2
+   ]
+  },
+  {
+   "seed": "claude035-3-apprentice-i-5",
+   "cfg": {
+    "count": 3,
+    "level": "apprentice",
+    "shared": false,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    47,
+    37,
+    28
+   ],
+   "winners": [
+    0
+   ]
+  },
+  {
+   "seed": "claude035-3-apprentice-i-6",
+   "cfg": {
+    "count": 3,
+    "level": "apprentice",
+    "shared": false,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    3,
+    37,
+    37
+   ],
+   "winners": [
+    2
+   ]
+  },
+  {
+   "seed": "claude035-3-apprentice-i-7",
+   "cfg": {
+    "count": 3,
+    "level": "apprentice",
+    "shared": false,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    63,
+    40,
+    41
+   ],
+   "winners": [
+    0
+   ]
+  },
+  {
+   "seed": "claude035-3-apprentice-i-8",
+   "cfg": {
+    "count": 3,
+    "level": "apprentice",
+    "shared": false,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    -1,
+    33,
+    35
+   ],
+   "winners": [
+    2
+   ]
+  },
+  {
+   "seed": "claude035-3-apprentice-i-9",
+   "cfg": {
+    "count": 3,
+    "level": "apprentice",
+    "shared": false,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    61,
+    50,
+    36
+   ],
+   "winners": [
+    0
+   ]
+  },
+  {
+   "seed": "claude035-3-apprentice-i-10",
+   "cfg": {
+    "count": 3,
+    "level": "apprentice",
+    "shared": false,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    1,
+    55,
+    47
+   ],
+   "winners": [
+    1
+   ]
+  },
+  {
+   "seed": "claude035-3-apprentice-i-11",
+   "cfg": {
+    "count": 3,
+    "level": "apprentice",
+    "shared": false,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    50,
+    38,
+    38
+   ],
+   "winners": [
+    0
+   ]
+  },
+  {
+   "seed": "claude035-3-apprentice-i-12",
+   "cfg": {
+    "count": 3,
+    "level": "apprentice",
+    "shared": false,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    -7,
+    38,
+    36
+   ],
+   "winners": [
+    1
+   ]
+  },
+  {
+   "seed": "claude035-3-apprentice-i-13",
+   "cfg": {
+    "count": 3,
+    "level": "apprentice",
+    "shared": false,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    46,
+    48,
+    41
+   ],
+   "winners": [
+    1
+   ]
+  },
+  {
+   "seed": "claude035-3-apprentice-i-14",
+   "cfg": {
+    "count": 3,
+    "level": "apprentice",
+    "shared": false,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    -4,
+    24,
+    38
+   ],
+   "winners": [
+    2
+   ]
+  },
+  {
+   "seed": "claude035-3-apprentice-i-15",
+   "cfg": {
+    "count": 3,
+    "level": "apprentice",
+    "shared": false,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    53,
+    38,
+    30
+   ],
+   "winners": [
+    0
+   ]
+  },
+  {
+   "seed": "claude035-3-journeyman-s-0",
+   "cfg": {
+    "count": 3,
+    "level": "journeyman",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    -2,
+    66,
+    81
+   ],
+   "winners": [
+    2
+   ]
+  },
+  {
+   "seed": "claude035-3-journeyman-s-1",
+   "cfg": {
+    "count": 3,
+    "level": "journeyman",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    60,
+    42,
+    35
+   ],
+   "winners": [
+    0
+   ]
+  },
+  {
+   "seed": "claude035-3-journeyman-s-2",
+   "cfg": {
+    "count": 3,
+    "level": "journeyman",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    -3,
+    36,
+    27
+   ],
+   "winners": [
+    1
+   ]
+  },
+  {
+   "seed": "claude035-3-journeyman-s-3",
+   "cfg": {
+    "count": 3,
+    "level": "journeyman",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    56,
+    75,
+    41
+   ],
+   "winners": [
+    1
+   ]
+  },
+  {
+   "seed": "claude035-3-journeyman-s-4",
+   "cfg": {
+    "count": 3,
+    "level": "journeyman",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    -16,
+    36,
+    43
+   ],
+   "winners": [
+    2
+   ]
+  },
+  {
+   "seed": "claude035-3-journeyman-s-5",
+   "cfg": {
+    "count": 3,
+    "level": "journeyman",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    49,
+    35,
+    50
+   ],
+   "winners": [
+    2
+   ]
+  },
+  {
+   "seed": "claude035-3-journeyman-s-6",
+   "cfg": {
+    "count": 3,
+    "level": "journeyman",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    7,
+    48,
+    47
+   ],
+   "winners": [
+    1
+   ]
+  },
+  {
+   "seed": "claude035-3-journeyman-s-7",
+   "cfg": {
+    "count": 3,
+    "level": "journeyman",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    52,
+    46,
+    48
+   ],
+   "winners": [
+    0
+   ]
+  },
+  {
+   "seed": "claude035-3-journeyman-s-8",
+   "cfg": {
+    "count": 3,
+    "level": "journeyman",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    3,
+    44,
+    41
+   ],
+   "winners": [
+    1
+   ]
+  },
+  {
+   "seed": "claude035-3-journeyman-s-9",
+   "cfg": {
+    "count": 3,
+    "level": "journeyman",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    69,
+    63,
+    50
+   ],
+   "winners": [
+    0
+   ]
+  },
+  {
+   "seed": "claude035-3-journeyman-s-10",
+   "cfg": {
+    "count": 3,
+    "level": "journeyman",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    17,
+    47,
+    50
+   ],
+   "winners": [
+    2
+   ]
+  },
+  {
+   "seed": "claude035-3-journeyman-s-11",
+   "cfg": {
+    "count": 3,
+    "level": "journeyman",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    41,
+    51,
+    65
+   ],
+   "winners": [
+    2
+   ]
+  },
+  {
+   "seed": "claude035-3-journeyman-s-12",
+   "cfg": {
+    "count": 3,
+    "level": "journeyman",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    0,
+    42,
+    64
+   ],
+   "winners": [
+    2
+   ]
+  },
+  {
+   "seed": "claude035-3-journeyman-s-13",
+   "cfg": {
+    "count": 3,
+    "level": "journeyman",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    53,
+    41,
+    52
+   ],
+   "winners": [
+    0
+   ]
+  },
+  {
+   "seed": "claude035-3-journeyman-s-14",
+   "cfg": {
+    "count": 3,
+    "level": "journeyman",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    -5,
+    41,
+    45
+   ],
+   "winners": [
+    2
+   ]
+  },
+  {
+   "seed": "claude035-3-journeyman-s-15",
+   "cfg": {
+    "count": 3,
+    "level": "journeyman",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    41,
+    43,
+    44
+   ],
+   "winners": [
+    2
+   ]
+  },
+  {
+   "seed": "claude035-3-journeyman-i-0",
+   "cfg": {
+    "count": 3,
+    "level": "journeyman",
+    "shared": false,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    3,
+    50,
+    48
+   ],
+   "winners": [
+    1
+   ]
+  },
+  {
+   "seed": "claude035-3-journeyman-i-1",
+   "cfg": {
+    "count": 3,
+    "level": "journeyman",
+    "shared": false,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    50,
+    32,
+    41
+   ],
+   "winners": [
+    0
+   ]
+  },
+  {
+   "seed": "claude035-3-journeyman-i-2",
+   "cfg": {
+    "count": 3,
+    "level": "journeyman",
+    "shared": false,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    17,
+    58,
+    50
+   ],
+   "winners": [
+    1
+   ]
+  },
+  {
+   "seed": "claude035-3-journeyman-i-3",
+   "cfg": {
+    "count": 3,
+    "level": "journeyman",
+    "shared": false,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    62,
+    60,
+    65
+   ],
+   "winners": [
+    2
+   ]
+  },
+  {
+   "seed": "claude035-3-journeyman-i-4",
+   "cfg": {
+    "count": 3,
+    "level": "journeyman",
+    "shared": false,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    -5,
+    43,
+    47
+   ],
+   "winners": [
+    2
+   ]
+  },
+  {
+   "seed": "claude035-3-journeyman-i-5",
+   "cfg": {
+    "count": 3,
+    "level": "journeyman",
+    "shared": false,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    53,
+    55,
+    39
+   ],
+   "winners": [
+    1
+   ]
+  },
+  {
+   "seed": "claude035-3-journeyman-i-6",
+   "cfg": {
+    "count": 3,
+    "level": "journeyman",
+    "shared": false,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    22,
+    39,
+    48
+   ],
+   "winners": [
+    2
+   ]
+  },
+  {
+   "seed": "claude035-3-journeyman-i-7",
+   "cfg": {
+    "count": 3,
+    "level": "journeyman",
+    "shared": false,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    60,
+    43,
+    35
+   ],
+   "winners": [
+    0
+   ]
+  },
+  {
+   "seed": "claude035-3-journeyman-i-8",
+   "cfg": {
+    "count": 3,
+    "level": "journeyman",
+    "shared": false,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    12,
+    35,
+    49
+   ],
+   "winners": [
+    2
+   ]
+  },
+  {
+   "seed": "claude035-3-journeyman-i-9",
+   "cfg": {
+    "count": 3,
+    "level": "journeyman",
+    "shared": false,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    55,
+    50,
+    49
+   ],
+   "winners": [
+    0
+   ]
+  },
+  {
+   "seed": "claude035-3-journeyman-i-10",
+   "cfg": {
+    "count": 3,
+    "level": "journeyman",
+    "shared": false,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    11,
+    45,
+    54
+   ],
+   "winners": [
+    2
+   ]
+  },
+  {
+   "seed": "claude035-3-journeyman-i-11",
+   "cfg": {
+    "count": 3,
+    "level": "journeyman",
+    "shared": false,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    59,
+    45,
+    38
+   ],
+   "winners": [
+    0
+   ]
+  },
+  {
+   "seed": "claude035-3-journeyman-i-12",
+   "cfg": {
+    "count": 3,
+    "level": "journeyman",
+    "shared": false,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    20,
+    71,
+    57
+   ],
+   "winners": [
+    1
+   ]
+  },
+  {
+   "seed": "claude035-3-journeyman-i-13",
+   "cfg": {
+    "count": 3,
+    "level": "journeyman",
+    "shared": false,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    45,
+    38,
+    48
+   ],
+   "winners": [
+    2
+   ]
+  },
+  {
+   "seed": "claude035-3-journeyman-i-14",
+   "cfg": {
+    "count": 3,
+    "level": "journeyman",
+    "shared": false,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    -14,
+    47,
+    38
+   ],
+   "winners": [
+    1
+   ]
+  },
+  {
+   "seed": "claude035-3-journeyman-i-15",
+   "cfg": {
+    "count": 3,
+    "level": "journeyman",
+    "shared": false,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    55,
+    46,
+    62
+   ],
+   "winners": [
+    2
+   ]
+  },
+  {
+   "seed": "claude035-3-master-s-0",
+   "cfg": {
+    "count": 3,
+    "level": "master",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    5,
+    35,
+    64
+   ],
+   "winners": [
+    2
+   ]
+  },
+  {
+   "seed": "claude035-3-master-s-1",
+   "cfg": {
+    "count": 3,
+    "level": "master",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    53,
+    40,
+    64
+   ],
+   "winners": [
+    2
+   ]
+  },
+  {
+   "seed": "claude035-3-master-s-2",
+   "cfg": {
+    "count": 3,
+    "level": "master",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    5,
+    57,
+    46
+   ],
+   "winners": [
+    1
+   ]
+  },
+  {
+   "seed": "claude035-3-master-s-3",
+   "cfg": {
+    "count": 3,
+    "level": "master",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    63,
+    59,
+    38
+   ],
+   "winners": [
+    0
+   ]
+  },
+  {
+   "seed": "claude035-3-master-s-4",
+   "cfg": {
+    "count": 3,
+    "level": "master",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    8,
+    67,
+    55
+   ],
+   "winners": [
+    1
+   ]
+  },
+  {
+   "seed": "claude035-3-master-s-5",
+   "cfg": {
+    "count": 3,
+    "level": "master",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    68,
+    60,
+    61
+   ],
+   "winners": [
+    0
+   ]
+  },
+  {
+   "seed": "claude035-3-master-s-6",
+   "cfg": {
+    "count": 3,
+    "level": "master",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    -14,
+    50,
+    42
+   ],
+   "winners": [
+    1
+   ]
+  },
+  {
+   "seed": "claude035-3-master-s-7",
+   "cfg": {
+    "count": 3,
+    "level": "master",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    68,
+    58,
+    59
+   ],
+   "winners": [
+    0
+   ]
+  },
+  {
+   "seed": "claude035-3-master-s-8",
+   "cfg": {
+    "count": 3,
+    "level": "master",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    -12,
+    46,
+    78
+   ],
+   "winners": [
+    2
+   ]
+  },
+  {
+   "seed": "claude035-3-master-s-9",
+   "cfg": {
+    "count": 3,
+    "level": "master",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    98,
+    63,
+    60
+   ],
+   "winners": [
+    0
+   ]
+  },
+  {
+   "seed": "claude035-3-master-s-10",
+   "cfg": {
+    "count": 3,
+    "level": "master",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    1,
+    47,
+    41
+   ],
+   "winners": [
+    1
+   ]
+  },
+  {
+   "seed": "claude035-3-master-s-11",
+   "cfg": {
+    "count": 3,
+    "level": "master",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    69,
+    39,
+    36
+   ],
+   "winners": [
+    0
+   ]
+  },
+  {
+   "seed": "claude035-3-master-s-12",
+   "cfg": {
+    "count": 3,
+    "level": "master",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    -9,
+    60,
+    68
+   ],
+   "winners": [
+    2
+   ]
+  },
+  {
+   "seed": "claude035-3-master-s-13",
+   "cfg": {
+    "count": 3,
+    "level": "master",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    56,
+    51,
+    45
+   ],
+   "winners": [
+    0
+   ]
+  },
+  {
+   "seed": "claude035-3-master-s-14",
+   "cfg": {
+    "count": 3,
+    "level": "master",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    -1,
+    47,
+    41
+   ],
+   "winners": [
+    1
+   ]
+  },
+  {
+   "seed": "claude035-3-master-s-15",
+   "cfg": {
+    "count": 3,
+    "level": "master",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    51,
+    43,
+    51
+   ],
+   "winners": [
+    2
+   ]
+  },
+  {
+   "seed": "claude035-3-master-st-0",
+   "cfg": {
+    "count": 3,
+    "level": "master",
+    "shared": true,
+    "tougher": true
+   },
+   "mode": "random",
+   "totals": [
+    5,
+    61,
+    77
+   ],
+   "winners": [
+    2
+   ]
+  },
+  {
+   "seed": "claude035-3-master-st-1",
+   "cfg": {
+    "count": 3,
+    "level": "master",
+    "shared": true,
+    "tougher": true
+   },
+   "mode": "standard",
+   "totals": [
+    52,
+    61,
+    48
+   ],
+   "winners": [
+    1
+   ]
+  },
+  {
+   "seed": "claude035-3-master-st-2",
+   "cfg": {
+    "count": 3,
+    "level": "master",
+    "shared": true,
+    "tougher": true
+   },
+   "mode": "random",
+   "totals": [
+    -16,
+    46,
+    39
+   ],
+   "winners": [
+    1
+   ]
+  },
+  {
+   "seed": "claude035-3-master-st-3",
+   "cfg": {
+    "count": 3,
+    "level": "master",
+    "shared": true,
+    "tougher": true
+   },
+   "mode": "standard",
+   "totals": [
+    101,
+    53,
+    48
+   ],
+   "winners": [
+    0
+   ]
+  },
+  {
+   "seed": "claude035-3-master-st-4",
+   "cfg": {
+    "count": 3,
+    "level": "master",
+    "shared": true,
+    "tougher": true
+   },
+   "mode": "random",
+   "totals": [
+    -8,
+    46,
+    44
+   ],
+   "winners": [
+    1
+   ]
+  },
+  {
+   "seed": "claude035-3-master-st-5",
+   "cfg": {
+    "count": 3,
+    "level": "master",
+    "shared": true,
+    "tougher": true
+   },
+   "mode": "standard",
+   "totals": [
+    70,
+    52,
+    67
+   ],
+   "winners": [
+    0
+   ]
+  },
+  {
+   "seed": "claude035-3-master-st-6",
+   "cfg": {
+    "count": 3,
+    "level": "master",
+    "shared": true,
+    "tougher": true
+   },
+   "mode": "random",
+   "totals": [
+    -16,
+    40,
+    24
+   ],
+   "winners": [
+    1
+   ]
+  },
+  {
+   "seed": "claude035-3-master-st-7",
+   "cfg": {
+    "count": 3,
+    "level": "master",
+    "shared": true,
+    "tougher": true
+   },
+   "mode": "standard",
+   "totals": [
+    37,
+    55,
+    57
+   ],
+   "winners": [
+    2
+   ]
+  },
+  {
+   "seed": "claude035-3-master-st-8",
+   "cfg": {
+    "count": 3,
+    "level": "master",
+    "shared": true,
+    "tougher": true
+   },
+   "mode": "random",
+   "totals": [
+    0,
+    59,
+    68
+   ],
+   "winners": [
+    2
+   ]
+  },
+  {
+   "seed": "claude035-3-master-st-9",
+   "cfg": {
+    "count": 3,
+    "level": "master",
+    "shared": true,
+    "tougher": true
+   },
+   "mode": "standard",
+   "totals": [
+    57,
+    54,
+    62
+   ],
+   "winners": [
+    2
+   ]
+  },
+  {
+   "seed": "claude035-3-master-st-10",
+   "cfg": {
+    "count": 3,
+    "level": "master",
+    "shared": true,
+    "tougher": true
+   },
+   "mode": "random",
+   "totals": [
+    -8,
+    59,
+    56
+   ],
+   "winners": [
+    1
+   ]
+  },
+  {
+   "seed": "claude035-3-master-st-11",
+   "cfg": {
+    "count": 3,
+    "level": "master",
+    "shared": true,
+    "tougher": true
+   },
+   "mode": "standard",
+   "totals": [
+    45,
+    54,
+    70
+   ],
+   "winners": [
+    2
+   ]
+  },
+  {
+   "seed": "claude035-3-master-st-12",
+   "cfg": {
+    "count": 3,
+    "level": "master",
+    "shared": true,
+    "tougher": true
+   },
+   "mode": "random",
+   "totals": [
+    -7,
+    55,
+    55
+   ],
+   "winners": [
+    1
+   ]
+  },
+  {
+   "seed": "claude035-3-master-st-13",
+   "cfg": {
+    "count": 3,
+    "level": "master",
+    "shared": true,
+    "tougher": true
+   },
+   "mode": "standard",
+   "totals": [
+    64,
+    56,
+    69
+   ],
+   "winners": [
+    2
+   ]
+  },
+  {
+   "seed": "claude035-3-master-st-14",
+   "cfg": {
+    "count": 3,
+    "level": "master",
+    "shared": true,
+    "tougher": true
+   },
+   "mode": "random",
+   "totals": [
+    5,
+    53,
+    33
+   ],
+   "winners": [
+    1
+   ]
+  },
+  {
+   "seed": "claude035-3-master-st-15",
+   "cfg": {
+    "count": 3,
+    "level": "master",
+    "shared": true,
+    "tougher": true
+   },
+   "mode": "standard",
+   "totals": [
+    63,
+    42,
+    64
+   ],
+   "winners": [
+    2
+   ]
+  },
+  {
+   "seed": "claude035-3-master-i-0",
+   "cfg": {
+    "count": 3,
+    "level": "master",
+    "shared": false,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    -14,
+    41,
+    50
+   ],
+   "winners": [
+    2
+   ]
+  },
+  {
+   "seed": "claude035-3-master-i-1",
+   "cfg": {
+    "count": 3,
+    "level": "master",
+    "shared": false,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    74,
+    61,
+    66
+   ],
+   "winners": [
+    0
+   ]
+  },
+  {
+   "seed": "claude035-3-master-i-2",
+   "cfg": {
+    "count": 3,
+    "level": "master",
+    "shared": false,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    5,
+    45,
+    55
+   ],
+   "winners": [
+    2
+   ]
+  },
+  {
+   "seed": "claude035-3-master-i-3",
+   "cfg": {
+    "count": 3,
+    "level": "master",
+    "shared": false,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    70,
+    44,
+    39
+   ],
+   "winners": [
+    0
+   ]
+  },
+  {
+   "seed": "claude035-3-master-i-4",
+   "cfg": {
+    "count": 3,
+    "level": "master",
+    "shared": false,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    2,
+    72,
+    88
+   ],
+   "winners": [
+    2
+   ]
+  },
+  {
+   "seed": "claude035-3-master-i-5",
+   "cfg": {
+    "count": 3,
+    "level": "master",
+    "shared": false,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    48,
+    35,
+    52
+   ],
+   "winners": [
+    2
+   ]
+  },
+  {
+   "seed": "claude035-3-master-i-6",
+   "cfg": {
+    "count": 3,
+    "level": "master",
+    "shared": false,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    -7,
+    50,
+    38
+   ],
+   "winners": [
+    1
+   ]
+  },
+  {
+   "seed": "claude035-3-master-i-7",
+   "cfg": {
+    "count": 3,
+    "level": "master",
+    "shared": false,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    45,
+    48,
+    57
+   ],
+   "winners": [
+    2
+   ]
+  },
+  {
+   "seed": "claude035-3-master-i-8",
+   "cfg": {
+    "count": 3,
+    "level": "master",
+    "shared": false,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    11,
+    66,
+    75
+   ],
+   "winners": [
+    2
+   ]
+  },
+  {
+   "seed": "claude035-3-master-i-9",
+   "cfg": {
+    "count": 3,
+    "level": "master",
+    "shared": false,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    45,
+    55,
+    58
+   ],
+   "winners": [
+    2
+   ]
+  },
+  {
+   "seed": "claude035-3-master-i-10",
+   "cfg": {
+    "count": 3,
+    "level": "master",
+    "shared": false,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    -16,
+    43,
+    50
+   ],
+   "winners": [
+    2
+   ]
+  },
+  {
+   "seed": "claude035-3-master-i-11",
+   "cfg": {
+    "count": 3,
+    "level": "master",
+    "shared": false,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    52,
+    58,
+    54
+   ],
+   "winners": [
+    1
+   ]
+  },
+  {
+   "seed": "claude035-3-master-i-12",
+   "cfg": {
+    "count": 3,
+    "level": "master",
+    "shared": false,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    -16,
+    40,
+    44
+   ],
+   "winners": [
+    2
+   ]
+  },
+  {
+   "seed": "claude035-3-master-i-13",
+   "cfg": {
+    "count": 3,
+    "level": "master",
+    "shared": false,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    53,
+    58,
+    49
+   ],
+   "winners": [
+    1
+   ]
+  },
+  {
+   "seed": "claude035-3-master-i-14",
+   "cfg": {
+    "count": 3,
+    "level": "master",
+    "shared": false,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    -13,
+    40,
+    49
+   ],
+   "winners": [
+    2
+   ]
+  },
+  {
+   "seed": "claude035-3-master-i-15",
+   "cfg": {
+    "count": 3,
+    "level": "master",
+    "shared": false,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    57,
+    59,
+    42
+   ],
+   "winners": [
+    1
+   ]
+  },
+  {
+   "seed": "claude035-3-master-it-0",
+   "cfg": {
+    "count": 3,
+    "level": "master",
+    "shared": false,
+    "tougher": true
+   },
+   "mode": "random",
+   "totals": [
+    15,
+    63,
+    67
+   ],
+   "winners": [
+    2
+   ]
+  },
+  {
+   "seed": "claude035-3-master-it-1",
+   "cfg": {
+    "count": 3,
+    "level": "master",
+    "shared": false,
+    "tougher": true
+   },
+   "mode": "standard",
+   "totals": [
+    59,
+    50,
+    51
+   ],
+   "winners": [
+    0
+   ]
+  },
+  {
+   "seed": "claude035-3-master-it-2",
+   "cfg": {
+    "count": 3,
+    "level": "master",
+    "shared": false,
+    "tougher": true
+   },
+   "mode": "random",
+   "totals": [
+    -2,
+    38,
+    51
+   ],
+   "winners": [
+    2
+   ]
+  },
+  {
+   "seed": "claude035-3-master-it-3",
+   "cfg": {
+    "count": 3,
+    "level": "master",
+    "shared": false,
+    "tougher": true
+   },
+   "mode": "standard",
+   "totals": [
+    68,
+    70,
+    69
+   ],
+   "winners": [
+    1
+   ]
+  },
+  {
+   "seed": "claude035-3-master-it-4",
+   "cfg": {
+    "count": 3,
+    "level": "master",
+    "shared": false,
+    "tougher": true
+   },
+   "mode": "random",
+   "totals": [
+    -15,
+    74,
+    46
+   ],
+   "winners": [
+    1
+   ]
+  },
+  {
+   "seed": "claude035-3-master-it-5",
+   "cfg": {
+    "count": 3,
+    "level": "master",
+    "shared": false,
+    "tougher": true
+   },
+   "mode": "standard",
+   "totals": [
+    54,
+    36,
+    61
+   ],
+   "winners": [
+    2
+   ]
+  },
+  {
+   "seed": "claude035-3-master-it-6",
+   "cfg": {
+    "count": 3,
+    "level": "master",
+    "shared": false,
+    "tougher": true
+   },
+   "mode": "random",
+   "totals": [
+    5,
+    45,
+    49
+   ],
+   "winners": [
+    2
+   ]
+  },
+  {
+   "seed": "claude035-3-master-it-7",
+   "cfg": {
+    "count": 3,
+    "level": "master",
+    "shared": false,
+    "tougher": true
+   },
+   "mode": "standard",
+   "totals": [
+    60,
+    56,
+    76
+   ],
+   "winners": [
+    2
+   ]
+  },
+  {
+   "seed": "claude035-3-master-it-8",
+   "cfg": {
+    "count": 3,
+    "level": "master",
+    "shared": false,
+    "tougher": true
+   },
+   "mode": "random",
+   "totals": [
+    -15,
+    49,
+    46
+   ],
+   "winners": [
+    1
+   ]
+  },
+  {
+   "seed": "claude035-3-master-it-9",
+   "cfg": {
+    "count": 3,
+    "level": "master",
+    "shared": false,
+    "tougher": true
+   },
+   "mode": "standard",
+   "totals": [
+    68,
+    87,
+    64
+   ],
+   "winners": [
+    1
+   ]
+  },
+  {
+   "seed": "claude035-3-master-it-10",
+   "cfg": {
+    "count": 3,
+    "level": "master",
+    "shared": false,
+    "tougher": true
+   },
+   "mode": "random",
+   "totals": [
+    31,
+    69,
+    77
+   ],
+   "winners": [
+    2
+   ]
+  },
+  {
+   "seed": "claude035-3-master-it-11",
+   "cfg": {
+    "count": 3,
+    "level": "master",
+    "shared": false,
+    "tougher": true
+   },
+   "mode": "standard",
+   "totals": [
+    75,
+    62,
+    58
+   ],
+   "winners": [
+    0
+   ]
+  },
+  {
+   "seed": "claude035-3-master-it-12",
+   "cfg": {
+    "count": 3,
+    "level": "master",
+    "shared": false,
+    "tougher": true
+   },
+   "mode": "random",
+   "totals": [
+    4,
+    51,
+    46
+   ],
+   "winners": [
+    1
+   ]
+  },
+  {
+   "seed": "claude035-3-master-it-13",
+   "cfg": {
+    "count": 3,
+    "level": "master",
+    "shared": false,
+    "tougher": true
+   },
+   "mode": "standard",
+   "totals": [
+    40,
+    39,
+    46
+   ],
+   "winners": [
+    2
+   ]
+  },
+  {
+   "seed": "claude035-3-master-it-14",
+   "cfg": {
+    "count": 3,
+    "level": "master",
+    "shared": false,
+    "tougher": true
+   },
+   "mode": "random",
+   "totals": [
+    4,
+    45,
+    52
+   ],
+   "winners": [
+    2
+   ]
+  },
+  {
+   "seed": "claude035-3-master-it-15",
+   "cfg": {
+    "count": 3,
+    "level": "master",
+    "shared": false,
+    "tougher": true
+   },
+   "mode": "standard",
+   "totals": [
+    45,
+    63,
+    61
+   ],
+   "winners": [
+    1
+   ]
+  },
+  {
+   "seed": "claude035-3-grandmaster-s-0",
+   "cfg": {
+    "count": 3,
+    "level": "grandmaster",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    15,
+    68,
+    77
+   ],
+   "winners": [
+    2
+   ]
+  },
+  {
+   "seed": "claude035-3-grandmaster-s-1",
+   "cfg": {
+    "count": 3,
+    "level": "grandmaster",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    55,
+    61,
+    54
+   ],
+   "winners": [
+    1
+   ]
+  },
+  {
+   "seed": "claude035-3-grandmaster-s-2",
+   "cfg": {
+    "count": 3,
+    "level": "grandmaster",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    5,
+    50,
+    53
+   ],
+   "winners": [
+    2
+   ]
+  },
+  {
+   "seed": "claude035-3-grandmaster-s-3",
+   "cfg": {
+    "count": 3,
+    "level": "grandmaster",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    46,
+    60,
+    59
+   ],
+   "winners": [
+    1
+   ]
+  },
+  {
+   "seed": "claude035-3-grandmaster-s-4",
+   "cfg": {
+    "count": 3,
+    "level": "grandmaster",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    12,
+    60,
+    52
+   ],
+   "winners": [
+    1
+   ]
+  },
+  {
+   "seed": "claude035-3-grandmaster-s-5",
+   "cfg": {
+    "count": 3,
+    "level": "grandmaster",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    62,
+    42,
+    44
+   ],
+   "winners": [
+    0
+   ]
+  },
+  {
+   "seed": "claude035-3-grandmaster-s-6",
+   "cfg": {
+    "count": 3,
+    "level": "grandmaster",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    -11,
+    57,
+    41
+   ],
+   "winners": [
+    1
+   ]
+  },
+  {
+   "seed": "claude035-3-grandmaster-s-7",
+   "cfg": {
+    "count": 3,
+    "level": "grandmaster",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    47,
+    64,
+    65
+   ],
+   "winners": [
+    2
+   ]
+  },
+  {
+   "seed": "claude035-3-grandmaster-s-8",
+   "cfg": {
+    "count": 3,
+    "level": "grandmaster",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    18,
+    89,
+    57
+   ],
+   "winners": [
+    1
+   ]
+  },
+  {
+   "seed": "claude035-3-grandmaster-s-9",
+   "cfg": {
+    "count": 3,
+    "level": "grandmaster",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    70,
+    68,
+    63
+   ],
+   "winners": [
+    0
+   ]
+  },
+  {
+   "seed": "claude035-3-grandmaster-s-10",
+   "cfg": {
+    "count": 3,
+    "level": "grandmaster",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    -13,
+    53,
+    53
+   ],
+   "winners": [
+    1
+   ]
+  },
+  {
+   "seed": "claude035-3-grandmaster-s-11",
+   "cfg": {
+    "count": 3,
+    "level": "grandmaster",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    54,
+    51,
+    54
+   ],
+   "winners": [
+    2
+   ]
+  },
+  {
+   "seed": "claude035-3-grandmaster-s-12",
+   "cfg": {
+    "count": 3,
+    "level": "grandmaster",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    14,
+    65,
+    71
+   ],
+   "winners": [
+    2
+   ]
+  },
+  {
+   "seed": "claude035-3-grandmaster-s-13",
+   "cfg": {
+    "count": 3,
+    "level": "grandmaster",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    65,
+    53,
+    57
+   ],
+   "winners": [
+    0
+   ]
+  },
+  {
+   "seed": "claude035-3-grandmaster-s-14",
+   "cfg": {
+    "count": 3,
+    "level": "grandmaster",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    -10,
+    63,
+    62
+   ],
+   "winners": [
+    1
+   ]
+  },
+  {
+   "seed": "claude035-3-grandmaster-s-15",
+   "cfg": {
+    "count": 3,
+    "level": "grandmaster",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    54,
+    61,
+    37
+   ],
+   "winners": [
+    1
+   ]
+  },
+  {
+   "seed": "claude035-3-grandmaster-i-0",
+   "cfg": {
+    "count": 3,
+    "level": "grandmaster",
+    "shared": false,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    -13,
+    62,
+    66
+   ],
+   "winners": [
+    2
+   ]
+  },
+  {
+   "seed": "claude035-3-grandmaster-i-1",
+   "cfg": {
+    "count": 3,
+    "level": "grandmaster",
+    "shared": false,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    38,
+    68,
+    43
+   ],
+   "winners": [
+    1
+   ]
+  },
+  {
+   "seed": "claude035-3-grandmaster-i-2",
+   "cfg": {
+    "count": 3,
+    "level": "grandmaster",
+    "shared": false,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    -6,
+    52,
+    52
+   ],
+   "winners": [
+    1
+   ]
+  },
+  {
+   "seed": "claude035-3-grandmaster-i-3",
+   "cfg": {
+    "count": 3,
+    "level": "grandmaster",
+    "shared": false,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    67,
+    55,
+    46
+   ],
+   "winners": [
+    0
+   ]
+  },
+  {
+   "seed": "claude035-3-grandmaster-i-4",
+   "cfg": {
+    "count": 3,
+    "level": "grandmaster",
+    "shared": false,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    -8,
+    48,
+    48
+   ],
+   "winners": [
+    2
+   ]
+  },
+  {
+   "seed": "claude035-3-grandmaster-i-5",
+   "cfg": {
+    "count": 3,
+    "level": "grandmaster",
+    "shared": false,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    49,
+    49,
+    51
+   ],
+   "winners": [
+    2
+   ]
+  },
+  {
+   "seed": "claude035-3-grandmaster-i-6",
+   "cfg": {
+    "count": 3,
+    "level": "grandmaster",
+    "shared": false,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    -6,
+    67,
+    71
+   ],
+   "winners": [
+    2
+   ]
+  },
+  {
+   "seed": "claude035-3-grandmaster-i-7",
+   "cfg": {
+    "count": 3,
+    "level": "grandmaster",
+    "shared": false,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    61,
+    71,
+    75
+   ],
+   "winners": [
+    2
+   ]
+  },
+  {
+   "seed": "claude035-3-grandmaster-i-8",
+   "cfg": {
+    "count": 3,
+    "level": "grandmaster",
+    "shared": false,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    -15,
+    52,
+    53
+   ],
+   "winners": [
+    2
+   ]
+  },
+  {
+   "seed": "claude035-3-grandmaster-i-9",
+   "cfg": {
+    "count": 3,
+    "level": "grandmaster",
+    "shared": false,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    47,
+    70,
+    59
+   ],
+   "winners": [
+    1
+   ]
+  },
+  {
+   "seed": "claude035-3-grandmaster-i-10",
+   "cfg": {
+    "count": 3,
+    "level": "grandmaster",
+    "shared": false,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    -10,
+    66,
+    83
+   ],
+   "winners": [
+    2
+   ]
+  },
+  {
+   "seed": "claude035-3-grandmaster-i-11",
+   "cfg": {
+    "count": 3,
+    "level": "grandmaster",
+    "shared": false,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    46,
+    39,
+    42
+   ],
+   "winners": [
+    0
+   ]
+  },
+  {
+   "seed": "claude035-3-grandmaster-i-12",
+   "cfg": {
+    "count": 3,
+    "level": "grandmaster",
+    "shared": false,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    -5,
+    72,
+    65
+   ],
+   "winners": [
+    1
+   ]
+  },
+  {
+   "seed": "claude035-3-grandmaster-i-13",
+   "cfg": {
+    "count": 3,
+    "level": "grandmaster",
+    "shared": false,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    55,
+    54,
+    33
+   ],
+   "winners": [
+    0
+   ]
+  },
+  {
+   "seed": "claude035-3-grandmaster-i-14",
+   "cfg": {
+    "count": 3,
+    "level": "grandmaster",
+    "shared": false,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    -14,
+    63,
+    47
+   ],
+   "winners": [
+    1
+   ]
+  },
+  {
+   "seed": "claude035-3-grandmaster-i-15",
+   "cfg": {
+    "count": 3,
+    "level": "grandmaster",
+    "shared": false,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    41,
+    44,
+    54
+   ],
+   "winners": [
+    2
+   ]
+  },
+  {
+   "seed": "claude035-4-apprentice-s-0",
+   "cfg": {
+    "count": 4,
+    "level": "apprentice",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    -8,
+    27,
+    35,
+    24
+   ],
+   "winners": [
+    2
+   ]
+  },
+  {
+   "seed": "claude035-4-apprentice-s-1",
+   "cfg": {
+    "count": 4,
+    "level": "apprentice",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    26,
+    26,
+    29,
+    24
+   ],
+   "winners": [
+    2
+   ]
+  },
+  {
+   "seed": "claude035-4-apprentice-s-2",
+   "cfg": {
+    "count": 4,
+    "level": "apprentice",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    -6,
+    36,
+    33,
+    36
+   ],
+   "winners": [
+    3
+   ]
+  },
+  {
+   "seed": "claude035-4-apprentice-s-3",
+   "cfg": {
+    "count": 4,
+    "level": "apprentice",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    53,
+    31,
+    28,
+    34
+   ],
+   "winners": [
+    0
+   ]
+  },
+  {
+   "seed": "claude035-4-apprentice-s-4",
+   "cfg": {
+    "count": 4,
+    "level": "apprentice",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    8,
+    33,
+    40,
+    22
+   ],
+   "winners": [
+    2
+   ]
+  },
+  {
+   "seed": "claude035-4-apprentice-s-5",
+   "cfg": {
+    "count": 4,
+    "level": "apprentice",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    29,
+    30,
+    24,
+    25
+   ],
+   "winners": [
+    1
+   ]
+  },
+  {
+   "seed": "claude035-4-apprentice-s-6",
+   "cfg": {
+    "count": 4,
+    "level": "apprentice",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    -6,
+    39,
+    43,
+    22
+   ],
+   "winners": [
+    2
+   ]
+  },
+  {
+   "seed": "claude035-4-apprentice-s-7",
+   "cfg": {
+    "count": 4,
+    "level": "apprentice",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    34,
+    29,
+    32,
+    28
+   ],
+   "winners": [
+    0
+   ]
+  },
+  {
+   "seed": "claude035-4-apprentice-s-8",
+   "cfg": {
+    "count": 4,
+    "level": "apprentice",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    -10,
+    22,
+    32,
+    27
+   ],
+   "winners": [
+    2
+   ]
+  },
+  {
+   "seed": "claude035-4-apprentice-s-9",
+   "cfg": {
+    "count": 4,
+    "level": "apprentice",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    38,
+    35,
+    28,
+    26
+   ],
+   "winners": [
+    0
+   ]
+  },
+  {
+   "seed": "claude035-4-apprentice-s-10",
+   "cfg": {
+    "count": 4,
+    "level": "apprentice",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    -8,
+    35,
+    43,
+    24
+   ],
+   "winners": [
+    2
+   ]
+  },
+  {
+   "seed": "claude035-4-apprentice-s-11",
+   "cfg": {
+    "count": 4,
+    "level": "apprentice",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    39,
+    32,
+    30,
+    42
+   ],
+   "winners": [
+    3
+   ]
+  },
+  {
+   "seed": "claude035-4-apprentice-s-12",
+   "cfg": {
+    "count": 4,
+    "level": "apprentice",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    1,
+    25,
+    38,
+    30
+   ],
+   "winners": [
+    2
+   ]
+  },
+  {
+   "seed": "claude035-4-apprentice-s-13",
+   "cfg": {
+    "count": 4,
+    "level": "apprentice",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    51,
+    30,
+    39,
+    27
+   ],
+   "winners": [
+    0
+   ]
+  },
+  {
+   "seed": "claude035-4-apprentice-s-14",
+   "cfg": {
+    "count": 4,
+    "level": "apprentice",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    6,
+    28,
+    34,
+    27
+   ],
+   "winners": [
+    2
+   ]
+  },
+  {
+   "seed": "claude035-4-apprentice-s-15",
+   "cfg": {
+    "count": 4,
+    "level": "apprentice",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    36,
+    27,
+    27,
+    12
+   ],
+   "winners": [
+    0
+   ]
+  },
+  {
+   "seed": "claude035-4-apprentice-i-0",
+   "cfg": {
+    "count": 4,
+    "level": "apprentice",
+    "shared": false,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    -7,
+    31,
+    32,
+    47
+   ],
+   "winners": [
+    3
+   ]
+  },
+  {
+   "seed": "claude035-4-apprentice-i-1",
+   "cfg": {
+    "count": 4,
+    "level": "apprentice",
+    "shared": false,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    22,
+    26,
+    29,
+    28
+   ],
+   "winners": [
+    2
+   ]
+  },
+  {
+   "seed": "claude035-4-apprentice-i-2",
+   "cfg": {
+    "count": 4,
+    "level": "apprentice",
+    "shared": false,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    -7,
+    32,
+    27,
+    19
+   ],
+   "winners": [
+    1
+   ]
+  },
+  {
+   "seed": "claude035-4-apprentice-i-3",
+   "cfg": {
+    "count": 4,
+    "level": "apprentice",
+    "shared": false,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    22,
+    24,
+    25,
+    24
+   ],
+   "winners": [
+    2
+   ]
+  },
+  {
+   "seed": "claude035-4-apprentice-i-4",
+   "cfg": {
+    "count": 4,
+    "level": "apprentice",
+    "shared": false,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    -11,
+    27,
+    19,
+    19
+   ],
+   "winners": [
+    1
+   ]
+  },
+  {
+   "seed": "claude035-4-apprentice-i-5",
+   "cfg": {
+    "count": 4,
+    "level": "apprentice",
+    "shared": false,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    32,
+    22,
+    26,
+    28
+   ],
+   "winners": [
+    0
+   ]
+  },
+  {
+   "seed": "claude035-4-apprentice-i-6",
+   "cfg": {
+    "count": 4,
+    "level": "apprentice",
+    "shared": false,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    -3,
+    38,
+    28,
+    30
+   ],
+   "winners": [
+    1
+   ]
+  },
+  {
+   "seed": "claude035-4-apprentice-i-7",
+   "cfg": {
+    "count": 4,
+    "level": "apprentice",
+    "shared": false,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    25,
+    26,
+    27,
+    29
+   ],
+   "winners": [
+    3
+   ]
+  },
+  {
+   "seed": "claude035-4-apprentice-i-8",
+   "cfg": {
+    "count": 4,
+    "level": "apprentice",
+    "shared": false,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    -4,
+    20,
+    34,
+    34
+   ],
+   "winners": [
+    3
+   ]
+  },
+  {
+   "seed": "claude035-4-apprentice-i-9",
+   "cfg": {
+    "count": 4,
+    "level": "apprentice",
+    "shared": false,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    30,
+    24,
+    34,
+    24
+   ],
+   "winners": [
+    2
+   ]
+  },
+  {
+   "seed": "claude035-4-apprentice-i-10",
+   "cfg": {
+    "count": 4,
+    "level": "apprentice",
+    "shared": false,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    2,
+    38,
+    36,
+    27
+   ],
+   "winners": [
+    1
+   ]
+  },
+  {
+   "seed": "claude035-4-apprentice-i-11",
+   "cfg": {
+    "count": 4,
+    "level": "apprentice",
+    "shared": false,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    51,
+    26,
+    35,
+    42
+   ],
+   "winners": [
+    0
+   ]
+  },
+  {
+   "seed": "claude035-4-apprentice-i-12",
+   "cfg": {
+    "count": 4,
+    "level": "apprentice",
+    "shared": false,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    -10,
+    21,
+    18,
+    18
+   ],
+   "winners": [
+    1
+   ]
+  },
+  {
+   "seed": "claude035-4-apprentice-i-13",
+   "cfg": {
+    "count": 4,
+    "level": "apprentice",
+    "shared": false,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    42,
+    24,
+    30,
+    26
+   ],
+   "winners": [
+    0
+   ]
+  },
+  {
+   "seed": "claude035-4-apprentice-i-14",
+   "cfg": {
+    "count": 4,
+    "level": "apprentice",
+    "shared": false,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    9,
+    26,
+    30,
+    22
+   ],
+   "winners": [
+    2
+   ]
+  },
+  {
+   "seed": "claude035-4-apprentice-i-15",
+   "cfg": {
+    "count": 4,
+    "level": "apprentice",
+    "shared": false,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    36,
+    22,
+    29,
+    33
+   ],
+   "winners": [
+    0
+   ]
+  },
+  {
+   "seed": "claude035-4-journeyman-s-0",
+   "cfg": {
+    "count": 4,
+    "level": "journeyman",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    -15,
+    35,
+    24,
+    27
+   ],
+   "winners": [
+    1
+   ]
+  },
+  {
+   "seed": "claude035-4-journeyman-s-1",
+   "cfg": {
+    "count": 4,
+    "level": "journeyman",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    47,
+    31,
+    34,
+    38
+   ],
+   "winners": [
+    0
+   ]
+  },
+  {
+   "seed": "claude035-4-journeyman-s-2",
+   "cfg": {
+    "count": 4,
+    "level": "journeyman",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    -6,
+    33,
+    44,
+    28
+   ],
+   "winners": [
+    2
+   ]
+  },
+  {
+   "seed": "claude035-4-journeyman-s-3",
+   "cfg": {
+    "count": 4,
+    "level": "journeyman",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    44,
+    35,
+    42,
+    57
+   ],
+   "winners": [
+    3
+   ]
+  },
+  {
+   "seed": "claude035-4-journeyman-s-4",
+   "cfg": {
+    "count": 4,
+    "level": "journeyman",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    -10,
+    28,
+    15,
+    26
+   ],
+   "winners": [
+    1
+   ]
+  },
+  {
+   "seed": "claude035-4-journeyman-s-5",
+   "cfg": {
+    "count": 4,
+    "level": "journeyman",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    27,
+    50,
+    33,
+    28
+   ],
+   "winners": [
+    1
+   ]
+  },
+  {
+   "seed": "claude035-4-journeyman-s-6",
+   "cfg": {
+    "count": 4,
+    "level": "journeyman",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    -17,
+    25,
+    28,
+    26
+   ],
+   "winners": [
+    2
+   ]
+  },
+  {
+   "seed": "claude035-4-journeyman-s-7",
+   "cfg": {
+    "count": 4,
+    "level": "journeyman",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    35,
+    33,
+    29,
+    24
+   ],
+   "winners": [
+    0
+   ]
+  },
+  {
+   "seed": "claude035-4-journeyman-s-8",
+   "cfg": {
+    "count": 4,
+    "level": "journeyman",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    8,
+    29,
+    48,
+    44
+   ],
+   "winners": [
+    2
+   ]
+  },
+  {
+   "seed": "claude035-4-journeyman-s-9",
+   "cfg": {
+    "count": 4,
+    "level": "journeyman",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    55,
+    39,
+    26,
+    47
+   ],
+   "winners": [
+    0
+   ]
+  },
+  {
+   "seed": "claude035-4-journeyman-s-10",
+   "cfg": {
+    "count": 4,
+    "level": "journeyman",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    -14,
+    36,
+    36,
+    34
+   ],
+   "winners": [
+    1
+   ]
+  },
+  {
+   "seed": "claude035-4-journeyman-s-11",
+   "cfg": {
+    "count": 4,
+    "level": "journeyman",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    37,
+    40,
+    31,
+    42
+   ],
+   "winners": [
+    3
+   ]
+  },
+  {
+   "seed": "claude035-4-journeyman-s-12",
+   "cfg": {
+    "count": 4,
+    "level": "journeyman",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    -4,
+    35,
+    30,
+    31
+   ],
+   "winners": [
+    1
+   ]
+  },
+  {
+   "seed": "claude035-4-journeyman-s-13",
+   "cfg": {
+    "count": 4,
+    "level": "journeyman",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    25,
+    34,
+    26,
+    29
+   ],
+   "winners": [
+    1
+   ]
+  },
+  {
+   "seed": "claude035-4-journeyman-s-14",
+   "cfg": {
+    "count": 4,
+    "level": "journeyman",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    -4,
+    26,
+    31,
+    36
+   ],
+   "winners": [
+    3
+   ]
+  },
+  {
+   "seed": "claude035-4-journeyman-s-15",
+   "cfg": {
+    "count": 4,
+    "level": "journeyman",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    40,
+    40,
+    40,
+    37
+   ],
+   "winners": [
+    0,
+    2
+   ]
+  },
+  {
+   "seed": "claude035-4-journeyman-i-0",
+   "cfg": {
+    "count": 4,
+    "level": "journeyman",
+    "shared": false,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    -9,
+    23,
+    35,
+    27
+   ],
+   "winners": [
+    2
+   ]
+  },
+  {
+   "seed": "claude035-4-journeyman-i-1",
+   "cfg": {
+    "count": 4,
+    "level": "journeyman",
+    "shared": false,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    48,
+    35,
+    40,
+    38
+   ],
+   "winners": [
+    0
+   ]
+  },
+  {
+   "seed": "claude035-4-journeyman-i-2",
+   "cfg": {
+    "count": 4,
+    "level": "journeyman",
+    "shared": false,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    16,
+    44,
+    31,
+    34
+   ],
+   "winners": [
+    1
+   ]
+  },
+  {
+   "seed": "claude035-4-journeyman-i-3",
+   "cfg": {
+    "count": 4,
+    "level": "journeyman",
+    "shared": false,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    31,
+    31,
+    33,
+    29
+   ],
+   "winners": [
+    2
+   ]
+  },
+  {
+   "seed": "claude035-4-journeyman-i-4",
+   "cfg": {
+    "count": 4,
+    "level": "journeyman",
+    "shared": false,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    -6,
+    38,
+    31,
+    31
+   ],
+   "winners": [
+    1
+   ]
+  },
+  {
+   "seed": "claude035-4-journeyman-i-5",
+   "cfg": {
+    "count": 4,
+    "level": "journeyman",
+    "shared": false,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    37,
+    38,
+    28,
+    42
+   ],
+   "winners": [
+    3
+   ]
+  },
+  {
+   "seed": "claude035-4-journeyman-i-6",
+   "cfg": {
+    "count": 4,
+    "level": "journeyman",
+    "shared": false,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    0,
+    22,
+    36,
+    18
+   ],
+   "winners": [
+    2
+   ]
+  },
+  {
+   "seed": "claude035-4-journeyman-i-7",
+   "cfg": {
+    "count": 4,
+    "level": "journeyman",
+    "shared": false,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    31,
+    29,
+    30,
+    29
+   ],
+   "winners": [
+    0
+   ]
+  },
+  {
+   "seed": "claude035-4-journeyman-i-8",
+   "cfg": {
+    "count": 4,
+    "level": "journeyman",
+    "shared": false,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    -9,
+    29,
+    53,
+    33
+   ],
+   "winners": [
+    2
+   ]
+  },
+  {
+   "seed": "claude035-4-journeyman-i-9",
+   "cfg": {
+    "count": 4,
+    "level": "journeyman",
+    "shared": false,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    32,
+    27,
+    23,
+    29
+   ],
+   "winners": [
+    0
+   ]
+  },
+  {
+   "seed": "claude035-4-journeyman-i-10",
+   "cfg": {
+    "count": 4,
+    "level": "journeyman",
+    "shared": false,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    -8,
+    37,
+    29,
+    38
+   ],
+   "winners": [
+    3
+   ]
+  },
+  {
+   "seed": "claude035-4-journeyman-i-11",
+   "cfg": {
+    "count": 4,
+    "level": "journeyman",
+    "shared": false,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    36,
+    39,
+    33,
+    36
+   ],
+   "winners": [
+    1
+   ]
+  },
+  {
+   "seed": "claude035-4-journeyman-i-12",
+   "cfg": {
+    "count": 4,
+    "level": "journeyman",
+    "shared": false,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    -10,
+    31,
+    28,
+    16
+   ],
+   "winners": [
+    1
+   ]
+  },
+  {
+   "seed": "claude035-4-journeyman-i-13",
+   "cfg": {
+    "count": 4,
+    "level": "journeyman",
+    "shared": false,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    37,
+    30,
+    30,
+    28
+   ],
+   "winners": [
+    0
+   ]
+  },
+  {
+   "seed": "claude035-4-journeyman-i-14",
+   "cfg": {
+    "count": 4,
+    "level": "journeyman",
+    "shared": false,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    -9,
+    31,
+    28,
+    25
+   ],
+   "winners": [
+    1
+   ]
+  },
+  {
+   "seed": "claude035-4-journeyman-i-15",
+   "cfg": {
+    "count": 4,
+    "level": "journeyman",
+    "shared": false,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    47,
+    29,
+    30,
+    38
+   ],
+   "winners": [
+    0
+   ]
+  },
+  {
+   "seed": "claude035-4-master-s-0",
+   "cfg": {
+    "count": 4,
+    "level": "master",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    -6,
+    49,
+    38,
+    37
+   ],
+   "winners": [
+    1
+   ]
+  },
+  {
+   "seed": "claude035-4-master-s-1",
+   "cfg": {
+    "count": 4,
+    "level": "master",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    48,
+    48,
+    41,
+    40
+   ],
+   "winners": [
+    1
+   ]
+  },
+  {
+   "seed": "claude035-4-master-s-2",
+   "cfg": {
+    "count": 4,
+    "level": "master",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    -1,
+    43,
+    35,
+    40
+   ],
+   "winners": [
+    1
+   ]
+  },
+  {
+   "seed": "claude035-4-master-s-3",
+   "cfg": {
+    "count": 4,
+    "level": "master",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    35,
+    34,
+    33,
+    20
+   ],
+   "winners": [
+    0
+   ]
+  },
+  {
+   "seed": "claude035-4-master-s-4",
+   "cfg": {
+    "count": 4,
+    "level": "master",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    0,
+    36,
+    43,
+    24
+   ],
+   "winners": [
+    2
+   ]
+  },
+  {
+   "seed": "claude035-4-master-s-5",
+   "cfg": {
+    "count": 4,
+    "level": "master",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    37,
+    32,
+    33,
+    34
+   ],
+   "winners": [
+    0
+   ]
+  },
+  {
+   "seed": "claude035-4-master-s-6",
+   "cfg": {
+    "count": 4,
+    "level": "master",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    0,
+    43,
+    46,
+    32
+   ],
+   "winners": [
+    2
+   ]
+  },
+  {
+   "seed": "claude035-4-master-s-7",
+   "cfg": {
+    "count": 4,
+    "level": "master",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    30,
+    41,
+    37,
+    43
+   ],
+   "winners": [
+    3
+   ]
+  },
+  {
+   "seed": "claude035-4-master-s-8",
+   "cfg": {
+    "count": 4,
+    "level": "master",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    -10,
+    38,
+    28,
+    36
+   ],
+   "winners": [
+    1
+   ]
+  },
+  {
+   "seed": "claude035-4-master-s-9",
+   "cfg": {
+    "count": 4,
+    "level": "master",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    52,
+    31,
+    25,
+    31
+   ],
+   "winners": [
+    0
+   ]
+  },
+  {
+   "seed": "claude035-4-master-s-10",
+   "cfg": {
+    "count": 4,
+    "level": "master",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    14,
+    40,
+    45,
+    33
+   ],
+   "winners": [
+    2
+   ]
+  },
+  {
+   "seed": "claude035-4-master-s-11",
+   "cfg": {
+    "count": 4,
+    "level": "master",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    32,
+    48,
+    29,
+    41
+   ],
+   "winners": [
+    1
+   ]
+  },
+  {
+   "seed": "claude035-4-master-s-12",
+   "cfg": {
+    "count": 4,
+    "level": "master",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    -4,
+    36,
+    48,
+    37
+   ],
+   "winners": [
+    2
+   ]
+  },
+  {
+   "seed": "claude035-4-master-s-13",
+   "cfg": {
+    "count": 4,
+    "level": "master",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    29,
+    38,
+    46,
+    39
+   ],
+   "winners": [
+    2
+   ]
+  },
+  {
+   "seed": "claude035-4-master-s-14",
+   "cfg": {
+    "count": 4,
+    "level": "master",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    -6,
+    44,
+    38,
+    40
+   ],
+   "winners": [
+    1
+   ]
+  },
+  {
+   "seed": "claude035-4-master-s-15",
+   "cfg": {
+    "count": 4,
+    "level": "master",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    50,
+    33,
+    32,
+    31
+   ],
+   "winners": [
+    0
+   ]
+  },
+  {
+   "seed": "claude035-4-master-i-0",
+   "cfg": {
+    "count": 4,
+    "level": "master",
+    "shared": false,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    9,
+    37,
+    40,
+    27
+   ],
+   "winners": [
+    2
+   ]
+  },
+  {
+   "seed": "claude035-4-master-i-1",
+   "cfg": {
+    "count": 4,
+    "level": "master",
+    "shared": false,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    25,
+    48,
+    30,
+    30
+   ],
+   "winners": [
+    1
+   ]
+  },
+  {
+   "seed": "claude035-4-master-i-2",
+   "cfg": {
+    "count": 4,
+    "level": "master",
+    "shared": false,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    7,
+    47,
+    47,
+    46
+   ],
+   "winners": [
+    2
+   ]
+  },
+  {
+   "seed": "claude035-4-master-i-3",
+   "cfg": {
+    "count": 4,
+    "level": "master",
+    "shared": false,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    33,
+    12,
+    30,
+    44
+   ],
+   "winners": [
+    3
+   ]
+  },
+  {
+   "seed": "claude035-4-master-i-4",
+   "cfg": {
+    "count": 4,
+    "level": "master",
+    "shared": false,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    3,
+    38,
+    39,
+    33
+   ],
+   "winners": [
+    2
+   ]
+  },
+  {
+   "seed": "claude035-4-master-i-5",
+   "cfg": {
+    "count": 4,
+    "level": "master",
+    "shared": false,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    66,
+    41,
+    26,
+    35
+   ],
+   "winners": [
+    0
+   ]
+  },
+  {
+   "seed": "claude035-4-master-i-6",
+   "cfg": {
+    "count": 4,
+    "level": "master",
+    "shared": false,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    -8,
+    28,
+    44,
+    29
+   ],
+   "winners": [
+    2
+   ]
+  },
+  {
+   "seed": "claude035-4-master-i-7",
+   "cfg": {
+    "count": 4,
+    "level": "master",
+    "shared": false,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    32,
+    39,
+    32,
+    40
+   ],
+   "winners": [
+    3
+   ]
+  },
+  {
+   "seed": "claude035-4-master-i-8",
+   "cfg": {
+    "count": 4,
+    "level": "master",
+    "shared": false,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    3,
+    45,
+    35,
+    40
+   ],
+   "winners": [
+    1
+   ]
+  },
+  {
+   "seed": "claude035-4-master-i-9",
+   "cfg": {
+    "count": 4,
+    "level": "master",
+    "shared": false,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    29,
+    36,
+    38,
+    41
+   ],
+   "winners": [
+    3
+   ]
+  },
+  {
+   "seed": "claude035-4-master-i-10",
+   "cfg": {
+    "count": 4,
+    "level": "master",
+    "shared": false,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    -4,
+    32,
+    42,
+    46
+   ],
+   "winners": [
+    3
+   ]
+  },
+  {
+   "seed": "claude035-4-master-i-11",
+   "cfg": {
+    "count": 4,
+    "level": "master",
+    "shared": false,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    41,
+    29,
+    35,
+    35
+   ],
+   "winners": [
+    0
+   ]
+  },
+  {
+   "seed": "claude035-4-master-i-12",
+   "cfg": {
+    "count": 4,
+    "level": "master",
+    "shared": false,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    -4,
+    37,
+    34,
+    42
+   ],
+   "winners": [
+    3
+   ]
+  },
+  {
+   "seed": "claude035-4-master-i-13",
+   "cfg": {
+    "count": 4,
+    "level": "master",
+    "shared": false,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    28,
+    29,
+    38,
+    26
+   ],
+   "winners": [
+    2
+   ]
+  },
+  {
+   "seed": "claude035-4-master-i-14",
+   "cfg": {
+    "count": 4,
+    "level": "master",
+    "shared": false,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    0,
+    34,
+    37,
+    48
+   ],
+   "winners": [
+    3
+   ]
+  },
+  {
+   "seed": "claude035-4-master-i-15",
+   "cfg": {
+    "count": 4,
+    "level": "master",
+    "shared": false,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    37,
+    48,
+    29,
+    46
+   ],
+   "winners": [
+    1
+   ]
+  },
+  {
+   "seed": "claude035-4-grandmaster-s-0",
+   "cfg": {
+    "count": 4,
+    "level": "grandmaster",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    4,
+    33,
+    36,
+    35
+   ],
+   "winners": [
+    2
+   ]
+  },
+  {
+   "seed": "claude035-4-grandmaster-s-1",
+   "cfg": {
+    "count": 4,
+    "level": "grandmaster",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    52,
+    36,
+    57,
+    33
+   ],
+   "winners": [
+    2
+   ]
+  },
+  {
+   "seed": "claude035-4-grandmaster-s-2",
+   "cfg": {
+    "count": 4,
+    "level": "grandmaster",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    -7,
+    36,
+    48,
+    37
+   ],
+   "winners": [
+    2
+   ]
+  },
+  {
+   "seed": "claude035-4-grandmaster-s-3",
+   "cfg": {
+    "count": 4,
+    "level": "grandmaster",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    26,
+    35,
+    34,
+    33
+   ],
+   "winners": [
+    1
+   ]
+  },
+  {
+   "seed": "claude035-4-grandmaster-s-4",
+   "cfg": {
+    "count": 4,
+    "level": "grandmaster",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    -12,
+    41,
+    37,
+    40
+   ],
+   "winners": [
+    1
+   ]
+  },
+  {
+   "seed": "claude035-4-grandmaster-s-5",
+   "cfg": {
+    "count": 4,
+    "level": "grandmaster",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    32,
+    42,
+    63,
+    35
+   ],
+   "winners": [
+    2
+   ]
+  },
+  {
+   "seed": "claude035-4-grandmaster-s-6",
+   "cfg": {
+    "count": 4,
+    "level": "grandmaster",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    5,
+    42,
+    35,
+    52
+   ],
+   "winners": [
+    3
+   ]
+  },
+  {
+   "seed": "claude035-4-grandmaster-s-7",
+   "cfg": {
+    "count": 4,
+    "level": "grandmaster",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    34,
+    53,
+    44,
+    41
+   ],
+   "winners": [
+    1
+   ]
+  },
+  {
+   "seed": "claude035-4-grandmaster-s-8",
+   "cfg": {
+    "count": 4,
+    "level": "grandmaster",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    -7,
+    39,
+    26,
+    33
+   ],
+   "winners": [
+    1
+   ]
+  },
+  {
+   "seed": "claude035-4-grandmaster-s-9",
+   "cfg": {
+    "count": 4,
+    "level": "grandmaster",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    39,
+    41,
+    41,
+    28
+   ],
+   "winners": [
+    2
+   ]
+  },
+  {
+   "seed": "claude035-4-grandmaster-s-10",
+   "cfg": {
+    "count": 4,
+    "level": "grandmaster",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    -14,
+    53,
+    40,
+    41
+   ],
+   "winners": [
+    1
+   ]
+  },
+  {
+   "seed": "claude035-4-grandmaster-s-11",
+   "cfg": {
+    "count": 4,
+    "level": "grandmaster",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    27,
+    44,
+    41,
+    34
+   ],
+   "winners": [
+    1
+   ]
+  },
+  {
+   "seed": "claude035-4-grandmaster-s-12",
+   "cfg": {
+    "count": 4,
+    "level": "grandmaster",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    3,
+    44,
+    34,
+    42
+   ],
+   "winners": [
+    1
+   ]
+  },
+  {
+   "seed": "claude035-4-grandmaster-s-13",
+   "cfg": {
+    "count": 4,
+    "level": "grandmaster",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    34,
+    55,
+    43,
+    53
+   ],
+   "winners": [
+    1
+   ]
+  },
+  {
+   "seed": "claude035-4-grandmaster-s-14",
+   "cfg": {
+    "count": 4,
+    "level": "grandmaster",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    -9,
+    53,
+    43,
+    60
+   ],
+   "winners": [
+    3
+   ]
+  },
+  {
+   "seed": "claude035-4-grandmaster-s-15",
+   "cfg": {
+    "count": 4,
+    "level": "grandmaster",
+    "shared": true,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    30,
+    39,
+    37,
+    40
+   ],
+   "winners": [
+    3
+   ]
+  },
+  {
+   "seed": "claude035-4-grandmaster-i-0",
+   "cfg": {
+    "count": 4,
+    "level": "grandmaster",
+    "shared": false,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    -6,
+    31,
+    36,
+    30
+   ],
+   "winners": [
+    2
+   ]
+  },
+  {
+   "seed": "claude035-4-grandmaster-i-1",
+   "cfg": {
+    "count": 4,
+    "level": "grandmaster",
+    "shared": false,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    46,
+    37,
+    38,
+    46
+   ],
+   "winners": [
+    3
+   ]
+  },
+  {
+   "seed": "claude035-4-grandmaster-i-2",
+   "cfg": {
+    "count": 4,
+    "level": "grandmaster",
+    "shared": false,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    -10,
+    51,
+    34,
+    53
+   ],
+   "winners": [
+    3
+   ]
+  },
+  {
+   "seed": "claude035-4-grandmaster-i-3",
+   "cfg": {
+    "count": 4,
+    "level": "grandmaster",
+    "shared": false,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    48,
+    33,
+    37,
+    35
+   ],
+   "winners": [
+    0
+   ]
+  },
+  {
+   "seed": "claude035-4-grandmaster-i-4",
+   "cfg": {
+    "count": 4,
+    "level": "grandmaster",
+    "shared": false,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    -10,
+    48,
+    37,
+    38
+   ],
+   "winners": [
+    1
+   ]
+  },
+  {
+   "seed": "claude035-4-grandmaster-i-5",
+   "cfg": {
+    "count": 4,
+    "level": "grandmaster",
+    "shared": false,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    36,
+    44,
+    43,
+    35
+   ],
+   "winners": [
+    1
+   ]
+  },
+  {
+   "seed": "claude035-4-grandmaster-i-6",
+   "cfg": {
+    "count": 4,
+    "level": "grandmaster",
+    "shared": false,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    -9,
+    45,
+    45,
+    32
+   ],
+   "winners": [
+    2
+   ]
+  },
+  {
+   "seed": "claude035-4-grandmaster-i-7",
+   "cfg": {
+    "count": 4,
+    "level": "grandmaster",
+    "shared": false,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    36,
+    48,
+    44,
+    37
+   ],
+   "winners": [
+    1
+   ]
+  },
+  {
+   "seed": "claude035-4-grandmaster-i-8",
+   "cfg": {
+    "count": 4,
+    "level": "grandmaster",
+    "shared": false,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    -12,
+    41,
+    34,
+    45
+   ],
+   "winners": [
+    3
+   ]
+  },
+  {
+   "seed": "claude035-4-grandmaster-i-9",
+   "cfg": {
+    "count": 4,
+    "level": "grandmaster",
+    "shared": false,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    50,
+    36,
+    46,
+    38
+   ],
+   "winners": [
+    0
+   ]
+  },
+  {
+   "seed": "claude035-4-grandmaster-i-10",
+   "cfg": {
+    "count": 4,
+    "level": "grandmaster",
+    "shared": false,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    -12,
+    51,
+    41,
+    51
+   ],
+   "winners": [
+    3
+   ]
+  },
+  {
+   "seed": "claude035-4-grandmaster-i-11",
+   "cfg": {
+    "count": 4,
+    "level": "grandmaster",
+    "shared": false,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    37,
+    35,
+    41,
+    50
+   ],
+   "winners": [
+    3
+   ]
+  },
+  {
+   "seed": "claude035-4-grandmaster-i-12",
+   "cfg": {
+    "count": 4,
+    "level": "grandmaster",
+    "shared": false,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    -8,
+    24,
+    34,
+    23
+   ],
+   "winners": [
+    2
+   ]
+  },
+  {
+   "seed": "claude035-4-grandmaster-i-13",
+   "cfg": {
+    "count": 4,
+    "level": "grandmaster",
+    "shared": false,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    44,
+    29,
+    35,
+    41
+   ],
+   "winners": [
+    0
+   ]
+  },
+  {
+   "seed": "claude035-4-grandmaster-i-14",
+   "cfg": {
+    "count": 4,
+    "level": "grandmaster",
+    "shared": false,
+    "tougher": false
+   },
+   "mode": "random",
+   "totals": [
+    -7,
+    36,
+    41,
+    32
+   ],
+   "winners": [
+    2
+   ]
+  },
+  {
+   "seed": "claude035-4-grandmaster-i-15",
+   "cfg": {
+    "count": 4,
+    "level": "grandmaster",
+    "shared": false,
+    "tougher": false
+   },
+   "mode": "standard",
+   "totals": [
+    11,
+    34,
+    25,
+    38
+   ],
+   "winners": [
+    3
+   ]
+  }
+ ]
+}

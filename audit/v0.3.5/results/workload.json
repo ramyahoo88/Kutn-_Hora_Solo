@@ -1,0 +1,98 @@
+{
+ "2p journeyman": {
+  "perMincmistr": {
+   "cardPlays": 30,
+   "bonusSteps": 7.5,
+   "taxDecisions": 4.8,
+   "minePlacements": 5.1,
+   "rowsComparedPerPlacement": 2.24,
+   "plots": 6.1,
+   "plotSpacesPerPlot": 7,
+   "plotRightPairsPerPlot": 7.4,
+   "builds": 5.5,
+   "buildOptionsPerBuild": 1.7,
+   "arrowDecidedBuildShare": 0.45,
+   "councilColoursChecked": 1.8
+  }
+ },
+ "2p master": {
+  "perMincmistr": {
+   "cardPlays": 33,
+   "bonusSteps": 8.4,
+   "taxDecisions": 4.8,
+   "minePlacements": 5.9,
+   "rowsComparedPerPlacement": 2.17,
+   "plots": 6.9,
+   "plotSpacesPerPlot": 6.8,
+   "plotRightPairsPerPlot": 7.1,
+   "builds": 6,
+   "buildOptionsPerBuild": 1.7,
+   "arrowDecidedBuildShare": 0.48,
+   "councilColoursChecked": 2.6
+  }
+ },
+ "3p journeyman": {
+  "perMincmistr": {
+   "cardPlays": 30,
+   "bonusSteps": 9,
+   "taxDecisions": 4.5,
+   "minePlacements": 6.4,
+   "rowsComparedPerPlacement": 2.74,
+   "plots": 6.1,
+   "plotSpacesPerPlot": 10.3,
+   "plotRightPairsPerPlot": 10.7,
+   "builds": 5.6,
+   "buildOptionsPerBuild": 1.8,
+   "arrowDecidedBuildShare": 0.54,
+   "councilColoursChecked": 2.8
+  }
+ },
+ "3p master": {
+  "perMincmistr": {
+   "cardPlays": 33,
+   "bonusSteps": 10.4,
+   "taxDecisions": 4.5,
+   "minePlacements": 6.8,
+   "rowsComparedPerPlacement": 2.79,
+   "plots": 6.5,
+   "plotSpacesPerPlot": 10.3,
+   "plotRightPairsPerPlot": 11.2,
+   "builds": 6.1,
+   "buildOptionsPerBuild": 1.8,
+   "arrowDecidedBuildShare": 0.52,
+   "councilColoursChecked": 4
+  }
+ },
+ "4p journeyman": {
+  "perMincmistr": {
+   "cardPlays": 25,
+   "bonusSteps": 7,
+   "taxDecisions": 4.1,
+   "minePlacements": 4.8,
+   "rowsComparedPerPlacement": 2.42,
+   "plots": 4.9,
+   "plotSpacesPerPlot": 9.5,
+   "plotRightPairsPerPlot": 10.6,
+   "builds": 4.3,
+   "buildOptionsPerBuild": 1.9,
+   "arrowDecidedBuildShare": 0.49,
+   "councilColoursChecked": 3.6
+  }
+ },
+ "4p master": {
+  "perMincmistr": {
+   "cardPlays": 28,
+   "bonusSteps": 7.7,
+   "taxDecisions": 4.3,
+   "minePlacements": 5.2,
+   "rowsComparedPerPlacement": 2.53,
+   "plots": 5.2,
+   "plotSpacesPerPlot": 9.5,
+   "plotRightPairsPerPlot": 10.4,
+   "builds": 4.7,
+   "buildOptionsPerBuild": 1.6,
+   "arrowDecidedBuildShare": 0.41,
+   "councilColoursChecked": 4.1
+  }
+ }
+}

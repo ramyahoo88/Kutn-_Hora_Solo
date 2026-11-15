@@ -1,0 +1,65 @@
+{
+ "results": [
+  {
+   "name": "full game via controls (2p mincmistr master)",
+   "ok": true,
+   "detail": "49 human clicks, 1 undo/replay checks, totals 10/49"
+  },
+  {
+   "name": "full game via controls (4p standard)",
+   "ok": true,
+   "detail": "40 human clicks, 1 undo/replay checks, totals 8/34/60/43"
+  },
+  {
+   "name": "full game via controls (3p mincmistr grandmaster)",
+   "ok": true,
+   "detail": "47 human clicks, 1 undo/replay checks, totals 18/61/51"
+  },
+  {
+   "name": "Undo depth after reload",
+   "ok": true,
+   "detail": "5 steps"
+  },
+  {
+   "name": "Undo after New game",
+   "ok": true,
+   "detail": "undo enabled=true; restored seed=probe-old-game (old=probe-old-game)"
+  },
+  {
+   "name": "15 Plan faces rendered in Draw only",
+   "ok": true,
+   "detail": "screenshots saved for comparison"
+  },
+  {
+   "name": "Draw only undo depth after reload",
+   "ok": true,
+   "detail": "5 undos, now \"Plan 14 · 13 cards left\""
+  },
+  {
+   "name": "Draw only New deck cancel/confirm",
+   "ok": true,
+   "detail": "cancel kept \"Plan 14 · 13 cards left\", reset leaves Undo disabled"
+  },
+  {
+   "name": "390 px digital 4-player layout",
+   "ok": true,
+   "detail": "scrollWidth 390 vs 390; overflowing: none; <24px targets: 1"
+  },
+  {
+   "name": "Print mine aid to PDF",
+   "ok": true,
+   "detail": "Letter and A4 PDFs written"
+  },
+  {
+   "name": "64-character seed gives three different individual decks",
+   "ok": true,
+   "detail": "13-2-12-8-9 | 11-6-5-12-4 | 1-3-0-13-4"
+  },
+  {
+   "name": "No page errors",
+   "ok": true,
+   "detail": ""
+  }
+ ],
+ "errors": []
+}

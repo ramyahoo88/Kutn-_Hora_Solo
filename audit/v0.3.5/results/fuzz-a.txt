@@ -1,0 +1,1 @@
+{"games":120,"steps":14811,"checks":1291,"councilChecks":1080,"councilBad":0,"finalBad":0,"mutations":0,"endings":{},"phases":{}}
