@@ -1,4 +1,4 @@
-export const VERSION = '0.2.0';
+export const VERSION = '0.2.1';
 export const SAVE_SCHEMA = 2;
 export const SETUP_VERSION = 2;
 export const GUILDS = {
@@ -42,7 +42,7 @@ export const ROCK_LAYOUTS = [
 export const HOUSE_EFFECTS = [
   [{public:true},{public:true,vp:1},{public:true,vp:3},{vp:8}],
   [{pelicans:1},{pelicans:1,vp:1},{pelicans:1,vp:3},{vp:8}],
-  [{rep:1},{rep:2},{rep:3},{rep:4,vp:8}],
+  [{rep:1},{rep:3},{rep:4},{vp:8}],
 ];
 export const REP_SCORE = {'-5':-4,'-4':-2,'-3':-1,3:1,4:2,5:4,6:6,7:8,8:10,9:13};
 export const REP_LOSS = [0,1,1,1,2,2,3];

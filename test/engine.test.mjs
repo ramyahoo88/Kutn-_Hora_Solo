@@ -250,3 +250,18 @@ test('save validation rejects impossible turns and preserves last-card pending c
   const stuck={...pending,pending:[]};
   assert.throws(()=>readSave(writeSave(stuck)),/turn and action-card count/);
 });
+
+test('third house row pays the printed 1, 3 and 4 reputation, then 8 points',()=>{
+  const observed=[];
+  for (let removed=0; removed<4; removed++) {
+    const game=createGame({seed:'house-row-3'});
+    const p=game.players[0];
+    p.houses[2]=removed;
+    p.coins=200;
+    p.held=['tavern'];
+    game.city[14]={plot:0};
+    const next=play(game,{kind:'build',id:'tavern',space:14,card:2});
+    observed.push([next.players[0].rep-p.rep,next.players[0].vp-p.vp]);
+  }
+  assert.deepEqual(observed,[[1,0],[3,0],[4,0],[0,8]]);
+});
