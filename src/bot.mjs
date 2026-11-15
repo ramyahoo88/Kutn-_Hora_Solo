@@ -1,6 +1,6 @@
-import {BUILDINGS,CARDS,CITY_WIDTH,COMMODITY,MINE_GROUPS,MINES,PATRICIANS,REP_SCORE} from './data.mjs';
+import {BUILDINGS,CARDS,CITY_WIDTH,COMMODITY,EVENTS,MINE_GROUPS,MINES,PATRICIANS,REP_SCORE} from './data.mjs';
 import {
-  actionKey,applyKnownAction,canBuildGuild,cardsThisTurn,coordinate,copyState,income,legalActions,marketOffer,mineRow,mineRows,
+  actionKey,applyKnownAction,canBuildGuild,cardsThisTurn,coordinate,copyState,finishCard,income,legalActions,marketOffer,mineRow,mineRows,
   patricianBase,plotCount,price,reputationChange,rulesFor,scoreBreakdown,seatAtTurn,seedNumber,taxCost,turnsPerRound,
 } from './engine.mjs';
 import {randomIndex,shuffle} from './random.mjs';
@@ -15,6 +15,13 @@ const POLICIES = {
   miner:{width:5,extend:1,opponent:0.65,city:0.78,mine:1.5,council:0.9},
   council:{width:5,extend:1,opponent:0.73,city:1,mine:0.85,council:1.45},
   denial:{width:6,extend:1,opponent:1.23,city:1,mine:1.25,council:1.12},
+};
+const EXPERIMENTS={
+  reply:{},
+  sampling:{samples:5},
+  closing:{closing:true},
+  construction:{construction:true},
+  planner:{samples:5,closing:true,construction:true},
 };
 
 export function publicPlanningState(state, sample=0) {
@@ -249,6 +256,12 @@ export function forecastNextCard(state) {
   if (state.phase!=='action'||state.pending.length||turn>=turnsPerRound(state)) return null;
   const seat=seatAtTurn(state,turn);
   const next={...state,actor:seat,turn,left:cardsThisTurn(state,turn)};
+  const action=forecastCard(next,legalActions(next));
+  return action?{seat,turn,action}:null;
+}
+
+function forecastCard(state, options) {
+  const seat=state.actor;
   const player=state.players[seat];
   const gross=income(state,seat);
   const wood=price(state,'wood');
@@ -279,7 +292,7 @@ export function forecastNextCard(state) {
   };
   let best=null;
   let bestScore=-Infinity;
-  for (const action of legalActions(next)) {
+  for (const action of options) {
     const score=priorities[action.kind](action)-(action.cost??0)*0.055-
       Number(!!action.as&&player.rep<6)*0.75;
     if (score>bestScore) {
@@ -287,7 +300,7 @@ export function forecastNextCard(state) {
       bestScore=score;
     }
   }
-  return best?{seat,turn,action:best}:null;
+  return best;
 }
 
 function replyAdjustment(position, seat, settings) {
@@ -300,8 +313,10 @@ function replyAdjustment(position, seat, settings) {
   applyKnownAction(projected,reply.action,true);
   const swing=evaluate(projected,seat,settings,false)-evaluate(position,seat,settings,false)-
     settings.opponent*pendingEstimate(projected)*0.35;
-  return Math.max(-2.7,Math.min(2.7,swing))*0.42;
+  return replyWeight(swing);
 }
+
+const replyWeight=swing=>Math.max(-2.7,Math.min(2.7,swing))*0.42;
 
 function variation(state, action, amplitude) {
   if (!amplitude||state.round===rulesFor(state).rounds) return 0;
@@ -328,14 +343,11 @@ function trim(items,width) {
   return kept;
 }
 
-function search(state, settings, sample) {
-  const root=publicPlanningState(state,sample);
+function rankPlans(root, settings, target, firstAction) {
   const seat=root.actor;
-  const throughTurn=state.left;
-  const target=Math.min(cardsLeft(state.players[seat]),throughTurn+settings.extend);
-  const start=evaluate(root,seat,settings);
+  const throughTurn=root.left;
   const finished=[];
-  let beam=[{state:root,first:null,value:start,order:0,spent:0,afterCurrent:null,turnEnd:null}];
+  let beam=[{state:root,first:null,value:evaluate(root,seat,settings),order:0,spent:0,afterCurrent:null,turnEnd:null}];
   let order=0;
   for (let depth=0;beam.length&&depth<18;depth++) {
     const next=[];
@@ -345,7 +357,7 @@ function search(state, settings, sample) {
         finished.push(node);
         continue;
       }
-      const actions=legalActions(node.state);
+      const actions=!node.first&&firstAction?[firstAction]:legalActions(node.state);
       for (const action of actions) {
         const child=copyState(node.state,false);
         applyKnownAction(child,action,true);
@@ -368,28 +380,207 @@ function search(state, settings, sample) {
     }
     beam=trim(next,settings.width);
   }
-  const ranked=(finished.length?finished:beam).sort(compare);
-  if (!settings.replyChoices) return ranked[0]?.first;
-  const shortList=[];
+  return (finished.length?finished:beam).sort(compare);
+}
+
+function turnPlans(root, settings, firstAction) {
+  const cards=Math.min(cardsLeft(root.players[root.actor]),root.left+settings.extend);
+  return rankPlans(root,settings,cards,firstAction);
+}
+
+function distinctPlans(ranked, limit) {
+  const result=[];
   const seen=new Set();
   for (const node of ranked) {
+    if (!node.first) continue;
     const key=actionKey(node.first);
     if (seen.has(key)) continue;
     seen.add(key);
-    const reply=node.turnEnd?replyAdjustment(node.turnEnd,seat,settings):0;
-    shortList.push({...node,value:node.value+reply+variation(state,node.first,settings.variety)});
-    if (shortList.length===settings.replyChoices) break;
+    result.push(node);
+    if (result.length===limit) break;
   }
+  return result;
+}
+
+function search(state, settings, sample) {
+  const root=publicPlanningState(state,sample);
+  const ranked=turnPlans(root,settings);
+  if (!settings.replyChoices) return ranked[0]?.first;
+  const shortList=distinctPlans(ranked,settings.replyChoices).map(node=>{
+    const reply=node.turnEnd?replyAdjustment(node.turnEnd,root.actor,settings):0;
+    return {...node,value:node.value+reply+variation(state,node.first,settings.variety)};
+  });
   return shortList.sort(compare)[0]?.first;
+}
+
+function forecastMove(state, settings) {
+  const options=legalActions(state);
+  if (options.length===1) return options[0];
+  if (state.phase==='tax') return taxDecision(state,options,settings);
+  if (!state.pending.length) return forecastCard(state,options);
+
+  let best=options[0];
+  let bestScore=-Infinity;
+  for (const action of options) {
+    const next=copyState(state,false);
+    applyKnownAction(next,action,true);
+    const score=evaluate(next,state.actor,settings);
+    if (score>bestScore) {
+      bestScore=score;
+      best=action;
+    }
+  }
+  return best;
+}
+
+// The caller supplies a sampled board at the end of a completed turn.
+export function nextOwnTurn(position, seat=position.actor, settings=POLICIES.standard, lastRound=position.round) {
+  const next=copyState(position,false);
+  finishCard(next);
+  let steps=0;
+  while (next.phase!=='end' && next.round<=lastRound) {
+    if (next.phase==='action' && next.actor===seat) return next;
+    if (++steps>90) throw Error('The forecast did not reach the next turn.');
+    applyKnownAction(next,forecastMove(next,settings));
+  }
+  return next.phase==='end'?next:null;
+}
+
+function remainingBuildValue(state, asset, settings) {
+  const seat=state.actor;
+  const matching=choice=>choice.kind==='build' &&
+    (asset.kind==='rights'?choice.id===asset.id:choice.space===asset.space);
+  let best=-Infinity;
+  const base=evaluate(state,seat,settings,false);
+  function tryBuild(position, options, prepCost) {
+    for (const action of options.filter(matching)) {
+      const next=copyState(position,false);
+      applyKnownAction(next,action,true);
+      const shortage=Math.max(0,taxCost(next,seat)-next.players[seat].coins);
+      const value=evaluate(next,seat,settings)-prepCost-Math.min(0.9,shortage*0.10);
+      best=Math.max(best,value-base);
+    }
+  }
+  const options=legalActions(state);
+  tryBuild(state,options,0);
+  if (state.left>1) {
+    const missing=asset.kind==='rights'?'plot':'rights';
+    for (const action of options) {
+      if (action.kind!==missing && !(action.kind==='income'&&action.gross>0&&!action.color)) continue;
+      const next=copyState(state,false);
+      applyKnownAction(next,action,true);
+      tryBuild(next,legalActions(next),0.85);
+    }
+  }
+  return Number.isFinite(best)?best:null;
+}
+
+function replannedValue(node, seat, settings, experiment) {
+  if (!node.turnEnd) return node.value;
+  const end=node.turnEnd;
+  const rounds=rulesFor(end).rounds;
+  let next;
+  let followGain=0;
+  let score;
+  if (end.turn+end.players.length>=turnsPerRound(end)) {
+    score=node.value+replyAdjustment(end,seat,settings);
+  } else {
+    next=nextOwnTurn(end,seat,settings,end.round);
+    const afterReply=evaluate(next,seat,settings,false);
+    const follow=rankPlans(next,{...settings,width:4},1)[0];
+    followGain=follow?follow.value-afterReply:0;
+    score=node.afterCurrent+replyWeight(afterReply-node.afterCurrent)+followGain*0.68;
+  }
+  if (!experiment.construction || end.round===rounds) return score;
+  const asset=node.first;
+  const stillHeld=asset.kind==='rights'&&end.players[seat].held.includes(asset.id);
+  const stillReserved=asset.kind==='plot'&&end.city[asset.space]?.plot===seat;
+  if (!stillHeld&&!stillReserved) return score;
+  next ??= nextOwnTurn(end,seat,settings,end.round+1);
+  if (!next || next.phase==='end') return score;
+  const gain=remainingBuildValue(next,asset,settings);
+  if (gain===null) return score-0.40;
+  return score+Math.min(1.25,Math.max(0,gain-followGain)*0.42);
+}
+
+function settledMargin(state, seat) {
+  const own=state.result.scores[seat];
+  const other=state.result.scores.filter((_,i)=>i!==seat).reduce((a,b)=>
+    b.total>a.total || (b.total===a.total&&b.coins>a.coins)?b:a);
+  // The cash bonus is always smaller than one VP.
+  return own.total-other.total+Math.atan((own.coins-other.coins)/10)*0.01;
+}
+
+function closingValue(end, seat, settings) {
+  const next=nextOwnTurn(end,seat,settings,end.round);
+  if (next.phase==='end') return settledMargin(next,seat);
+  const finishes=distinctPlans(rankPlans(next,{...settings,width:7},next.left),3);
+  let best=-Infinity;
+  for (const finish of finishes) {
+    if (!finish.turnEnd) continue;
+    const result=nextOwnTurn(finish.turnEnd,seat,settings,end.round);
+    if (result.phase==='end') best=Math.max(best,settledMargin(result,seat));
+  }
+  return Number.isFinite(best)?best:null;
+}
+
+function imaginedBoard(state, sample, experiment) {
+  const root=publicPlanningState(state,sample);
+  const {rounds,redRound}=rulesFor(state);
+  if (experiment.construction&&state.events.length>0&&state.round+1<rounds) {
+    const group=state.round+1<=redRound?'A':'B';
+    const unknown=Object.keys(EVENTS).filter(id=>EVENTS[id].set===group&&!root.events.includes(id));
+    const rng={rng:seedNumber(`forecast-event/${root.rng}`)};
+    root.events.push(unknown[randomIndex(rng,unknown.length)]);
+  }
+  return root;
+}
+
+function changesHiddenTiles(root, node) {
+  if (root.mineDeck.some((id,i)=>node.state.mineDeck[i]!==id) || root.mineDeck.length!==node.state.mineDeck.length) return true;
+  const before=marketOffer(root).map(offer=>offer.id).sort().join('/');
+  const after=marketOffer(node.state).map(offer=>offer.id).sort().join('/');
+  return before!==after;
+}
+
+function replan(state, settings, experiment) {
+  const root=imaginedBoard(state,0,experiment);
+  const seat=root.actor;
+  const closing=experiment.closing&&root.round===rulesFor(root).rounds&&cardsLeft(root.players[seat])<=3;
+  const value=node=>{
+    if (closing&&node.turnEnd) {
+      const final=closingValue(node.turnEnd,seat,settings);
+      if (final!==null) return final;
+    }
+    return replannedValue(node,seat,settings,experiment);
+  };
+  const finalists=distinctPlans(turnPlans(root,settings),settings.replyChoices).map(node=>({
+    ...node,value:value(node)+variation(state,node.first,settings.variety),
+  })).sort(compare);
+  const close=finalists.filter(node=>finalists[0].value-node.value<=3.0).slice(0,4);
+  if (!experiment.samples||close.length<2||!close.some(node=>changesHiddenTiles(root,node))) return finalists[0]?.first;
+
+  const boards=Array.from({length:experiment.samples},(_,sample)=>imaginedBoard(state,sample,experiment));
+  const shallow={...settings,width:4};
+  const revised=close.map(node=>{
+    const total=boards.reduce((sum,board)=>{
+      // Keep the current action fixed across worlds. Later choices can respond to a revealed draw.
+      const continuation=turnPlans(board,shallow,node.first)[0];
+      return sum+(continuation?value(continuation):node.value);
+    },0);
+    return {...node,value:total/boards.length+variation(state,node.first,settings.variety)};
+  });
+  return revised.sort(compare)[0]?.first;
 }
 
 export function botAction(state, strategy=state.difficulty) {
   const options=legalActions(state);
   if (!options.length) return null;
-  const settings=POLICIES[strategy]??POLICIES.standard;
+  const settings=Object.hasOwn(POLICIES,strategy)?POLICIES[strategy]:POLICIES.standard;
   if (state.phase==='tax') return taxDecision(state,options,settings);
   if (options.length===1) return options[0];
-  const selected=search(state,settings,0);
+  const experiment=Object.hasOwn(EXPERIMENTS,strategy)?EXPERIMENTS[strategy]:null;
+  const selected=experiment?replan(state,settings,experiment):search(state,settings,0);
   return options.find(action=>actionKey(action)===actionKey(selected??{}))??options[0];
 }
 

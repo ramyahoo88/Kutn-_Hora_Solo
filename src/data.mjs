@@ -1,6 +1,7 @@
-export const VERSION = '0.3.0';
+export const VERSION = '0.3.1';
 export const SAVE_SCHEMA = 3;
 export const SETUP_VERSION = 2;
+export const RIVAL_SETTINGS = ['standard','quick','planner'];
 export const GUILDS = {
   wood: 'Builders', food: 'Grocers', beer: 'Innkeepers',
   ore: 'Miners', silver: 'Metallurgists', permit: 'Scribes',

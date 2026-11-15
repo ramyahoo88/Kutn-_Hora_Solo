@@ -1,10 +1,12 @@
-# Kutná Hora Solo v0.3.0 playtest
+# Kutná Hora Solo v0.3.1 playtest
 
 An unofficial browser playtest for Kutná Hora: The City of Silver. Play one seat against one, two or three rivals. The app handles the town, mines, market, council and game draws. The same HTML works offline. Players can mirror its placements on the table. Export and import a JSON save to move a game between copies.
 
 To play offline, open [Kutna_Hora_Solo.html](Kutna_Hora_Solo.html) on GitHub, choose **Download raw file**, and open the downloaded file in your browser.
 
 Choose a rival count in **New game**. Pick your guild set from that player count's setup card and arrange your house rows. The seed assigns each remaining set once and determines the rivals’ house rows. At larger tables, **Play rivals** runs through the consecutive rival turns and tax decisions until you have a choice or the game ends. Earlier two-player saves import as two-player games.
+
+Choose **Planner (playtest)** under **Rival difficulty** to try the new rival at any table size. It forecasts intervening turns before choosing its follow-up, compares five possible tile orders when leading plans are close, checks whether it can use the exact plot or right it is about to buy, and scores likely finishes once it has three cards left in the final round. Standard is the default. Open Planner saves with v0.3.1 or later.
 
 | Rivals | Total players | Rounds | Board | Red buildings enter after | Events |
 | ---: | ---: | ---: | --- | ---: | --- |
@@ -35,7 +37,7 @@ node test/rival-study.mjs 12 v030-check
 
 Standard values progress toward the reputation discount, and favors rights and plots it can use together. It searches the current turn and up to one extra card, then adjusts its best plans for a likely legal card from the next player. Quick checks fewer continuations. The public game seed can vary close choices. Resuming a save reproduces the same decision. The rival estimates unseen tiles from the public position.
 
-The study uses 24 starts in two seed groups. Each starts a game with both seats on the v0.2.3 policy, and two head-to-head games with the revised Standard in each seat in turn. The v0.2.3 policy reproduced 794 decisions and final scores against the original code across nine complete games. The revised policy won 15/24 in the first group and 14/24 in the second, for 29/48 and a +2.98 VP mean margin. The scripted comparison measures outcomes against the earlier policy. Human difficulty is open for playtesting.
+The v0.3.0 study uses 24 starts in two seed groups. Each starts a game with both seats on the v0.2.3 policy, and two head-to-head games with the revised Standard in each seat in turn. The v0.2.3 policy reproduced 794 decisions and final scores against the original code across nine complete games. The revised policy won 15/24 in the first group and 14/24 in the second, for 29/48 and a +2.98 VP mean margin. The scripted comparison measures outcomes against the earlier policy. Human difficulty is open for playtesting.
 
 | Measure | v0.2.3 policy | Revised Standard |
 | --- | ---: | ---: |
@@ -50,11 +52,49 @@ The study uses 24 starts in two seed groups. Each starts a game with both seats 
 
 The same study ran 12 three-player and 12 four-player games with Standard, Quick and specialist policies. Half of the games at each count enabled events. All 24 reached final scoring, with 3,246 state checks after transitions. Standard averaged about 9 ms per decision at three players and 10 ms at four on the test machine.
 
+## v0.3.1 planner study
+
+Each seed runs an all-Standard game and gives each challenger one game from every seat on the same starting board against Standard opponents. Margin is the challenger's score minus the highest opposing score. Paired changes compare that margin with the same seat in the all-Standard game. The script reports outright wins, shared wins, an interval resampled by seed and mean CPU time per decision on Node 24. These are bot matches with an approximate reply model. Human difficulty and device response times need playtesting.
+
+```sh
+node test/planner-study.mjs reply 8 reply-v031-pilot reply.json
+node test/planner-study.mjs reply,sampling,closing,construction,planner 6 planner-v031-pilot variants.json
+node test/planner-study.mjs sampling,construction,planner 12 planner-v031-fresh fresh.json
+```
+
+The first trial isolated reply replanning. Its paired margin changes at two, three and four players were +1.31, +0.87 and −1.13 VP. All three intervals included zero. The second pilot added each feature to reply replanning in turn and tested all four together.
+
+| Pilot policy | 2-player paired VP | 3-player paired VP | 4-player paired VP |
+| --- | ---: | ---: | ---: |
+| Reply only | +1.00 | −1.22 | −2.13 |
+| Reply and five tile orders | +5.25 | +1.06 | +0.79 |
+| Reply and final-round scoring | +1.00 | −1.28 | −2.54 |
+| Reply and build planning | +0.83 | +1.89 | +0.42 |
+| Planner with all four | +1.08 | +0.06 | +0.50 |
+
+The fresh-seed run used 12 new starting boards per table size for each policy. Rotating every seat gave 24, 36 and 48 games per policy at two, three and four players, respectively.
+
+| Fresh-seed policy | Outright wins | 2-player paired VP | 3-player paired VP | 4-player paired VP | Mean CPU ms at 2 / 3 / 4 players |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Standard, all seats | 36 / 108 | 0 | 0 | 0 | 6.9 / 10.4 / 13.9 |
+| Reply and five tile orders | 29 / 108 | −0.96 | −3.31 | −0.15 | 26.3 / 46.9 / 58.7 |
+| Reply and build planning | 41 / 108 | +0.92 | +0.28 | +1.10 | 8.1 / 13.3 / 16.0 |
+| Planner with all four | 44 / 108 | +1.42 | −0.08 | +1.40 | 29.9 / 50.8 / 62.6 |
+
+Planner won 14/24, 12/36 and 18/48, respectively. Each of its three paired margin intervals included zero. The build-planning variant averaged 0.15–0.36 more completed buildings than Standard and had a smaller CPU cost. The four-feature Planner remains an opt-in playtest.
+
+The skip study uses the 52 four-player positions from the [v0.3.0 audit](https://github.com/ramyahoo88/Kutn-_Hora_Solo/tree/3895edf54ded43857156d0fc148c5c43b6c1c9e6/audit/v0.3.0/skip-traces). It replays the exact recorded card spent for no effect, then plays out the challenger’s first move with the same Standard continuation. Planner changed 23 decisions, with a mean gain of 0.60 VP and 0.02 VP of margin. Its margin averaged 1.69 VP below the average active alternative in the 51 positions with one.
+
+```sh
+node test/skip-planner-study.mjs /path/to/skip-traces reply,sampling,closing,construction,planner
+node test/skip-planner-study.mjs /path/to/skip-traces standard,planner --case=4 --rescore
+```
+
 ## Playtest checks
 
 - **One rival.** Start as the Metallurgists, Miners, and Innkeepers on Card 1 with seed `silver-1308`. The rival’s rows should be Builders, Grocers, and Scribes.
 - **Two rivals.** Use Card 6 and seed `app-table-3`. Check the larger boards, six rounds, each rival's cards and the council starting in round 4.
-- **Three rivals.** Use Card 6, Rival 1 starts and seed `app-table-4`. Use **Play rivals** and check that each rival acts before play returns to you. Export and reimport a save. Check red buildings after round 2 and scoring after round 5.
+- **Three rivals.** Use Card 6, Rival 1 starts, seed `app-table-4` and **Planner (playtest)**. Use **Play rivals** and check that each rival acts before play returns to you. Undo the batch, then replay it. Export and reimport a save and check that Planner is selected when opening New game. Check red buildings after round 2 and scoring after round 5.
 - **Safari.** Start a game, open the rival’s player board, and reload. Import the [Ius Regale short-stack save](test/fixtures/Ius_Regale_Short_Stack.json). Use **Play a card with no effect** and confirm the last card of Round 1. The event raises ore by 2 and discards all three remaining mine tiles. The journal reports the discard count. Your next Mine draw refills the stack from the discards.
 
 ## Sources and current rulings

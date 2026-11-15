@@ -1,7 +1,7 @@
 import {
   BARBARA_TAX, BUILDINGS, BUILDING_GROUPS, CARDS, CARDS_PER_TURN, CITY_WIDTH, COMMODITY,
   EVENTS, GAME_RULES, GOODS, GUILDS, GUILD_SETUPS_BY_COUNT, HOUSE_EFFECTS, LABEL,
-  MINES, MINE_GROUPS, MINE_ROWS, PATRICIANS, REP_SCORE, ROCK_STARS, SAVE_SCHEMA, SETUP_VERSION,
+  MINES, MINE_GROUPS, MINE_ROWS, PATRICIANS, REP_SCORE, RIVAL_SETTINGS, ROCK_STARS, SAVE_SCHEMA, SETUP_VERSION,
   TECHNOLOGY,
 } from './data.mjs';
 import {BUILD_DEMAND, CITY_BUILDS, PRICES} from './prices.mjs';
@@ -53,7 +53,7 @@ export function createGame(options = {}) {
   const state = {
     schema:SAVE_SCHEMA, setupVersion:SETUP_VERSION, seed, rng,
     setup, side, starter, round:1, turn:0, left:CARDS_PER_TURN[0],
-    actor:starter, phase:'action', pending:[], difficulty:options.difficulty==='quick'?'quick':'standard',
+    actor:starter, phase:'action', pending:[], difficulty:RIVAL_SETTINGS.includes(options.difficulty)?options.difficulty:'standard',
     players:guildSets.map((printed,i) => {
       const order = options.orders?.[i];
       const coins = 40+(i-starter+count)%count;
@@ -689,7 +689,7 @@ function finishRound(state) {
   state.starter=(state.starter+1)%state.players.length;
   beginRound(state);
 }
-function finishCard(state) {
+export function finishCard(state) {
   if (state.pending.length || state.left>0) return;
   state.turn++;
   if (state.turn===turnsPerRound(state)) {

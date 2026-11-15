@@ -1,6 +1,6 @@
 import {
   BUILDINGS,CARDS,EVENTS,GOODS,GUILD_SETUPS_BY_COUNT,MINE_GROUPS,MINE_ROWS,MINES,PATRICIANS,
-  SAVE_SCHEMA,SETUP_VERSION,TECHNOLOGY,
+  RIVAL_SETTINGS,SAVE_SCHEMA,SETUP_VERSION,TECHNOLOGY,
 } from './data.mjs';
 import {cardsThisTurn,finalResult,legalActions,plotCount,rulesFor,seatAtTurn,turnsPerRound} from './engine.mjs';
 
@@ -41,7 +41,7 @@ export function checkGame(s) {
   const guildSets=GUILD_SETUPS_BY_COUNT[count][s.setup];
   ok(Object.hasOwn(GUILD_SETUPS_BY_COUNT[count],s.setup)&&integer(s.side,0,count-1)&&
     integer(s.mineLayout,0,board.rockLayouts.length-1),'setup');
-  ok(['standard','quick'].includes(s.difficulty),'rival setting');
+  ok(RIVAL_SETTINGS.includes(s.difficulty),'rival setting');
   ok(integer(s.round,1,rounds)&&integer(s.starter,0,count-1)&&integer(s.actor,0,count-1)&&
     integer(s.turn,0,turnsPerRound(s))&&integer(s.left,0,2),'turn');
   ok(['action','tax','end'].includes(s.phase)&&Array.isArray(s.pending)&&s.pending.length<=4,'phase');
