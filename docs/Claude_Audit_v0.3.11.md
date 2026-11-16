@@ -151,7 +151,7 @@ The routine is unchanged from v0.3.5: one flip per card and no tracking beyond a
 **Digital app**
 
 - **Q1. Tidy the free-right explanation.** It reads "Best Printed VP + 2 × pelicans granted + 2 × reputation granted (8 vs 6). Printed VP + … 8." A short label such as "reward value" would say the same in a third of the space (`src/mincmistr.mjs:298`).
-- **Q2. State the cash check when it fires.** When rule 4.1 or 4.2 succeeds, "Why this move?" starts at the Income or card line. A first line such as "Has 2 g, fewer than 20" would match what it shows when the check fails.
+- **Q2. State the cash check when it fires.** When rule 4.1 succeeds, "Why this move?" starts at the Income line. A first line such as "Has 2 g, fewer than 20" would match what it shows when the check fails. The successful pelican check (4.2) already has its line.
 - **Q3. Auto-pay a zero tax bill** (carried). When your own bill is 0 g but another player's is not, you still choose between "Pay 0 g" and losing reputation.
 - **Q4. Mention in the Guide that Undo after New game restores the previous game** (carried).
 - **Q5.** Fix F1.
@@ -170,7 +170,7 @@ The routine is unchanged from v0.3.5: one flip per card and no tracking beyond a
 
 - **Q10. Make the PDF reproducible from source alone.** The v1.2.5 PDF is built by patching the previous release's PDF, so verifying it needs that older file and PyMuPDF. A pinned `requirements.txt`, or card sheets kept as their own source file, would let anyone rebuild and compare it. `scripts/pdf-content-check.py` is a stopgap that needs only Poppler.
 - **Q11. Add a `package.json`** with pinned jsdom and Playwright and `test`, `smoke`, `build` and `verify` scripts, plus CI (carried).
-- **Q12. Refresh stale version notes.** `Mincmistr_Sim_Report.md` and its print copy are headed "rules version 1.2.2". `src/data.mjs:13` and `mincmistr/mincmistr.mjs:1` say v1.2.2. `mincmistr/README.md` still says it was developed against v0.3.0. `src/mincmistr.mjs:283` cites a rule 6.7 that does not exist. The root README links only the v0.3.4 audit.
+- **Q12. Refresh stale version notes.** `Mincmistr_Sim_Report.md` and its print copy are headed "rules version 1.2.2"; keep that as the version tested and add a note linking to the current rules. `src/data.mjs:13` and `mincmistr/mincmistr.mjs:1` say v1.2.2. `mincmistr/README.md` still says it was developed against v0.3.0. `src/mincmistr.mjs:283` cites a rule 6.7 that does not exist. The root README links only the v0.3.4 audit.
 
 ## 9. Coverage gaps
 
