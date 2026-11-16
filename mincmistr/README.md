@@ -54,9 +54,10 @@ Run every command from the repository root. The scripts import the engine from `
 
 ## Build the print packet
 
-Use Node.js 24, Python 3.12 and DejaVu 2.37 fonts (the `fonts-dejavu` package on Ubuntu). Set `DEJAVU_FONTS` to the folder with the `.ttf` files if it differs from `/usr/share/fonts/truetype/dejavu`. Run these commands from the repository root. The PDF uses the rules, deck data, vector card artwork and both aids in `mincmistr/print/`.
+The release builds on Ubuntu 24.04 (x86-64) with Node.js 24 and Python 3.12. Install its exact font packages for a byte-for-byte rebuild. On other systems, extract the same font packages and point `DEJAVU_FONTS` to their `.ttf` directory. The PDF uses the rules, deck data, vector card artwork and both aids in `mincmistr/print/`.
 
 ```sh
+sudo apt-get install fonts-dejavu-core=2.37-8 fonts-dejavu-extra=2.37-8
 python3 -m venv .venv
 source .venv/bin/activate
 python3 -m pip install -r mincmistr/print/requirements.txt

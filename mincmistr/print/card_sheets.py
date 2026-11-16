@@ -112,7 +112,8 @@ def draw_frame(canvas, card=None, back=False):
 
 def sheet_art(groups):
     stream = BytesIO()
-    canvas = Canvas(stream, pagesize=letter, bottomup=0, invariant=1)
+    # Compress the finished packet with the pinned PyMuPDF build.
+    canvas = Canvas(stream, pagesize=letter, bottomup=0, invariant=1, pageCompression=0)
     for cards, back in groups:
         for i, card in enumerate(cards):
             box = card_box(i)
