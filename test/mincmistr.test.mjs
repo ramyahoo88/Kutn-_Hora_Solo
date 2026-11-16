@@ -70,7 +70,9 @@ test('the journal records the check that selected a Plan action',()=>{
   };
   const cash=opening(0);
   cash.players[1].coins=19;
-  assert.equal(rule(cash),'Rule 4.1 · Short of cash → Income');
+  const cashEntry=readSave(writeSave(playMincmistr(cash))).log.findLast(fromPlan);
+  assert.equal(cashEntry.rule,'Rule 4.1 · Short of cash → Income');
+  assert.deepEqual(cashEntry.explanation[0],{rule:'4.1',text:'Has 19 g, fewer than 20 g.'});
 
   const pelicans=opening(0);
   pelicans.players[1].pelicans=2;

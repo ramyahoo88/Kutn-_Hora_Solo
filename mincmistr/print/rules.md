@@ -1,6 +1,6 @@
 # The Mincmistr
 
-**A card-driven solo opponent for Kutná Hora** · Version 1.2.5 · 15 Nov 2026
+**A card-driven solo opponent for Kutná Hora** · Version 1.2.6 · 15 Nov 2026
 
 Play against one, two or three Mincmistrs, using the normal board and round count for that table size. A Mincmistr starts like a player, pays every cost and either pays its taxes or loses reputation. It obeys the piece limits and scores the same way at the end. It gets no starting points and no hidden information. It makes its choices with a short checklist, a deck of 15 Plan cards and a fixed row of six action cards.
 
@@ -8,7 +8,7 @@ There are no dice. Flip one Plan per action card. Most card plays take one or tw
 
 ## Components
 
-Print pages 5 to 8 of this file at actual size (100%), on Letter or A4, and cut out the cards. Pages 6 and 8 are optional card backs; print each one on the back of the page before it.
+Print pages 5 to 8 of the print-and-play PDF at actual size (100%) on Letter or A4 and cut out the cards. Pages 6 and 8 are optional card backs. Print each one on the back of the page before it. The table reference and mine choice aid are on pages 9 and 10.
 
 - 15 Plan cards.
 - 3 reference cards: Card play, Goals and Choices.
@@ -21,6 +21,7 @@ Print pages 5 to 8 of this file at actual size (100%), on Letter or A4, and cut 
 3. Shuffle the 15 Plan cards. Put them face down beside its board.
 4. Lay its six action cards face up in a row, in the order shown in rule 2.
 5. Choose a difficulty (rule 9). Journeyman is the standard game.
+6. Keep its held rights in the order it took them. Add each new right at the end. Lay out drawn mine tiles in draw order until it chooses one.
 
 ## 2. The row
 
@@ -119,7 +120,7 @@ Free tiles from technology use the same placement rule.
 
 Keep the current Plan and its arrow for bonus choices. Bonus actions and placements use no additional action card or Plan and do not repeat rule 4. Follow the bonus effect's costs and normal component limits.
 
-- **Free building right** (house reward or St. Barbara tile 2): rank eligible public tiles by their printed rewards: **VP + 2 × pelicans granted + 2 × reputation granted**. Take the highest value. If no public tile is eligible, tile 2 takes an eligible right from its own guilds with the highest income value. A house reward takes only public rights. Break either tie by market reading order (higher row, then further left). If no right qualifies, take nothing. The three-right limit still applies.
+- **Free building right** (house reward or St. Barbara tile 2): it can take a right on offer if it holds fewer than three. The house and demand checks for buying rights do not apply. Rank public tiles by their printed rewards: **VP + 2 × pelicans granted + 2 × reputation granted**. Take the highest value. If no public tile is on offer, tile 2 takes a right from its own guilds with the highest income value. A house reward takes only public rights. Break either tie by market reading order (higher row, then further left). If no right qualifies, take nothing.
 - **Remove a house**: when an effect lets it choose a row, choose the guild row with the most houses already removed that still has a house. Ties go to the topmost eligible row. A normal guild Build removes a house from that building's guild row. It always takes optional house removals.
 - **Seat a patrician from the bank**: the colour with the biggest edge (rule 6.6), even if that edge is 0 or less. Ties go green, silver, yellow, red.
 - **Score a building** (St. Barbara): its building with the most town points. Ties go by the arrow.

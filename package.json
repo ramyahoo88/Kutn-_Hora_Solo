@@ -1,0 +1,17 @@
+{
+  "name": "kutna-hora-solo",
+  "version": "0.3.12",
+  "private": true,
+  "scripts": {
+    "build": "node build.mjs",
+    "test": "node --test test/*.test.mjs && node mincmistr/flowcheck.mjs",
+    "smoke": "npm run smoke:dom && npm run smoke:browser",
+    "smoke:dom": "node test/dom-smoke.mjs",
+    "smoke:browser": "node test/browser-smoke.mjs",
+    "verify": "node test/verify-build.mjs"
+  },
+  "devDependencies": {
+    "jsdom": "26.1.0",
+    "playwright": "1.62.1"
+  }
+}

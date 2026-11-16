@@ -248,9 +248,10 @@ function cardPlay(state, m) {
   const p=me(state,m);
   const {cash,pelicans,prizeTiles}=PLAN_PRIORITIES;
   if (p.coins<cash) {
+    explain(m,'4.1',`Has ${p.coins} g, fewer than ${cash} g.`);
     const a=income(state,m);
     if (a) { tally(m,'cash'); return a; }
-    if (m.explanation) explain(m,'4.1',`Has ${p.coins} g. ${unavailable(state,m,'income')}`);
+    if (m.explanation) explain(m,'4.1',unavailable(state,m,'income'));
   } else explain(m,'4.1',`Has ${p.coins} g. The cash check needs fewer than ${cash} g.`);
   const tile=currentBarbara(state);
   const goodTile=prizeTiles.includes(tile);
@@ -280,7 +281,7 @@ function cardPlay(state, m) {
   return legalActions(state).find(a=>a.kind==='skip'&&a.card===card);
 }
 
-// ---------- rule 6.5, 6.7: bonus steps from tiles and St. Barbara ----------
+// ---------- rule 6.5: bonus steps from tiles and St. Barbara ----------
 function bonus(state, m) {
   const options=legalActions(state), item=state.pending[0], p=me(state,m);
   const skip=options.find(a=>a.kind==='skip');
@@ -295,7 +296,7 @@ function bonus(state, m) {
         return skip;
       }
       const pubs=xs.filter(a=>BUILDINGS[a.id].public);
-      if (pubs.length) return rankedChoice(m,'6.5',pubs,[high('Printed VP + 2 × pelicans granted + 2 × reputation granted',a=>publicValue(a.id))],
+      if (pubs.length) return rankedChoice(m,'6.5',pubs,[high('printed reward value',a=>publicValue(a.id))],
         a=>`Free public right to ${building(a)}`);
       return rankedChoice(m,'6.5',xs,[high('income value (g)',a=>incomeValue(state,a.id))],
         a=>`No public right on offer. Take the free guild right to ${building(a)}`);

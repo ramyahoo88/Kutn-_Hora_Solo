@@ -1,6 +1,6 @@
 # Mincmistr table reference
 
-**Kutná Hora: The City of Silver · Mincmistr v1.2.5**
+**Kutná Hora: The City of Silver · Mincmistr v1.2.6**
 
 ## Play one action card
 
@@ -20,15 +20,15 @@
 
 **Buying Rights.** Only affordable own-guild tiles with a house left and enough demand qualify. Maximize production × price, then cheapest, higher market row, leftmost. Skip if none qualify.
 
-**Plot.** Most matching dots for any held right (0 with no rights), then lowest cost, then arrow. A free Plot costs 0 g. **Build.** Highest production (public = 0), matching dots, arrow, earliest acquired right. Count matching dots for public tiles and on the board edge.
+**Plot.** Most matching dots for any held right (0 with no rights), then lowest cost, then arrow. A free Plot costs 0 g. **Build.** Highest production (public = 0), matching dots, arrow, earliest acquired right. Keep rights in acquisition order. Count dots for public tiles and on the board edge.
 
 ## Free rights
 
-**House reward.** Take an eligible public right. With no eligible public right, take nothing.
+**Free rights must be on offer and fit within the three-right limit.** Skip the house and demand checks for buying rights.
 
-**St. Barbara tile 2.** Prefer an eligible public right. Otherwise, take an eligible own-guild right with the highest production × price. With no eligible right, take nothing.
+**House reward.** Take a public right only. **St. Barbara tile 2.** Prefer a public right. If none is on offer, take an own-guild right with the highest production × price.
 
-Rank public rights by their printed rewards: VP + 2 × pelicans granted + 2 × reputation granted. Break ties by higher market row, then further left. The three-right limit applies to both rewards.
+Rank public rights by their printed rewards: VP + 2 × pelicans granted + 2 × reputation granted. Break ties by higher market row, then further left.
 
 ## Mine, Income and ties
 

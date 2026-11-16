@@ -1,18 +1,18 @@
-# Kutná Hora Solo v0.3.11 playtest
+# Kutná Hora Solo v0.3.12 playtest
 
 An unofficial browser playtest for Kutná Hora: The City of Silver. Play one seat against one, two or three rivals. The app handles the town, mines, market, council and game draws. The same HTML works offline. Players can mirror its placements on the table. Export and import a JSON save to move a game between copies.
 
 To play offline, open [Kutna_Hora_Solo.html](Kutna_Hora_Solo.html) on GitHub, choose **Download raw file**, and open the downloaded file in your browser.
 
-For the physical game, choose **Draw only** in the toolbar. Tap **Draw Plan** once per Mincmistr action card and resolve the printed Plan at the table. One shared 15-card deck supports one to three Mincmistrs. **Rules and reference** opens the reference cards, full v1.2.5 rules and two printable aids. **Export deck** and **Import deck** move the deck, recent draws and five Undo steps between devices. Bookmark the page with `#draw-only` to open the deck directly.
+For the physical game, choose **Draw only** in the toolbar. Tap **Draw Plan** once per Mincmistr action card and resolve the printed Plan at the table. One shared 15-card deck supports one to three Mincmistrs. **Rules and reference** opens the reference cards, full v1.2.6 rules and two printable aids. **Export deck** and **Import deck** move the deck, recent draws and five Undo steps between devices. Bookmark the page with `#draw-only` to open the deck directly.
 
 Choose a rival count in **New game**. Pick your guild set from that player count's setup card and arrange your house rows. The seed assigns each remaining set once and determines the rivals’ house rows. At larger tables, **Play rivals** runs through the consecutive rival turns and tax decisions until you have a choice or the game ends. Earlier two-player saves import as two-player games.
 
-Choose **Mincmistr** under **Rival difficulty** to play the v1.2.5 tabletop variant directly in the app. Choose Apprentice, Journeyman, Master or Grandmaster for one to three Mincmistrs. With several Mincmistrs, choose a shared deck or one per rival. At a three-player table, Master offers the tougher rounds 3–6 option from rule 10. **Play one Plan** marks the town and mine spaces it changed and shows changes to miners, production, houses, patricians and other resources. If the Plan triggers a market removal, the review names the tile. Any automatic round-end effects appear below the Plan changes. Tap a coordinate in the review to jump to that space. **Why this move?** shows the checks and tie-breaks, including for Plans played as a batch. The journal preserves these details. Rule numbers open the relevant text offline. [Tabletop rules and printables](mincmistr/README.md)
+Choose **Mincmistr** under **Rival difficulty** to play the v1.2.6 tabletop variant directly in the app. Choose Apprentice, Journeyman, Master or Grandmaster for one to three Mincmistrs. With several Mincmistrs, choose a shared deck or one per rival. At a three-player table, Master offers the tougher rounds 3–6 option from rule 10. **Play one Plan** marks the town and mine spaces it changed and shows changes to miners, production, houses, patricians and other resources. If the Plan triggers a market removal, the review names the tile. Any automatic round-end effects appear below the Plan changes. Tap a coordinate in the review to jump to that space. **Why this move?** shows the checks and tie-breaks, including for Plans played as a batch. The journal preserves these details. Rule numbers open the relevant text offline. [Tabletop rules and printables](mincmistr/README.md)
 
 Write observations in **Playtest note** in the journal. The note is saved with the game and travels with **Export playtest report**. When the save warning appears, **Export game and note** keeps the position and latest note from this tab. Use **Import save** to open either copy. The journal shows the original report versions and the version that re-exported it when they differ. If the report includes a previous position, choose **Load position before this step** in the journal to replay the move. **Undo** immediately afterward returns to the imported position.
 
-The digital game keeps up to five Undo steps after reload. Each mode uses its own autosave. If another tab advances a save, load the latest position when prompted. Draw only preserves unreadable saved decks until an explicit reset. Individual Mincmistr decks use different seat inputs even with a 64-character seed. [v0.3.4 audit](https://github.com/ramyahoo88/Kutn-_Hora_Solo/blob/c6149d3350981c5507b3ca7279c579d9e767d5f6/docs/Astra_Audit_v0.3.4.md)
+The app automatically clears zero tax bills. Choose **Undo** immediately after starting a new game to restore the previous game. The digital game keeps up to five Undo steps after reload. Each mode uses its own autosave. If another tab advances a save, load the latest position when prompted. Draw only preserves unreadable saved decks until an explicit reset. Individual Mincmistr decks use different seat inputs even with a 64-character seed. [v0.3.4 audit](https://github.com/ramyahoo88/Kutn-_Hora_Solo/blob/c6149d3350981c5507b3ca7279c579d9e767d5f6/docs/Astra_Audit_v0.3.4.md)
 
 Choose **Planner (playtest)** under **Rival difficulty** at any table size. It forecasts intervening turns before choosing its follow-up, compares five possible tile orders when leading plans are close, checks whether it can use the exact plot or right it is about to buy, and scores likely finishes once it has three cards left in the final round. Standard is the default. Open Planner saves with v0.3.1 or later.
 
@@ -34,17 +34,14 @@ Version 0.2.1 corrected the third row of guild houses. Builds using its four hou
 
 Version 0.2.0 added the rival’s visible hand and both player boards, previews of market effects before placement, and recovery downloads when an autosave cannot be opened. Version 0.1.0 saves retain their deck order and migrate III–3 to its printed two stars. Starting a new game with a v0.1.0 seed uses the updated shuffle.
 
-## Reproduce
+## Build and check
 
 ```sh
-node build.mjs
-cmp dist/index.html Kutna_Hora_Solo.html
-node --test test/*.test.mjs
-node mincmistr/flowcheck.mjs
-node test/rival-study.mjs 12 v030-check
+npm run build
+npm test
 ```
 
-Run the browser and DOM smoke checks with the [test instructions](test/README.md).
+The build writes `dist/index.html`. Use the [test instructions](test/README.md) to install the smoke test dependencies and verify the shipped app and print packet. [Claude’s v0.3.11 audit](https://github.com/ramyahoo88/Kutn-_Hora_Solo/blob/86e9a5844f4985fbac1668188ded5eaedb8952f7/docs/Claude_Audit_v0.3.11.md) covers the release that prompted these changes.
 
 Standard values progress toward the reputation discount, and favors rights and plots it can use together. It searches the current turn and up to one extra card, then adjusts its best plans for a likely legal card from the next player. Quick checks fewer continuations. The public game seed can vary close choices. Resuming a save reproduces the same decision. The rival estimates unseen tiles from the public position.
 

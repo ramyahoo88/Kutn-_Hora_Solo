@@ -1,20 +1,22 @@
 #!/usr/bin/env python3
 """Crop the printed Plan fronts into a three-column sprite for the offline app.
 
-Requires Poppler's pdftoppm and Pillow with WebP support.
+Requires PyMuPDF and Pillow with WebP support.
 """
 
+import argparse
 from pathlib import Path
-import subprocess
-from tempfile import TemporaryDirectory
 
+import fitz
 from PIL import Image
 
 
 def main():
     project = Path(__file__).resolve().parents[2]
-    pdf = project / "mincmistr" / "Mincmistr_Print_and_Play.pdf"
-    output = project / "src" / "assets" / "mincmistr-plans.webp"
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('pdf', nargs='?', type=Path, default=project / 'mincmistr' / 'Mincmistr_Print_and_Play.pdf')
+    parser.add_argument('output', nargs='?', type=Path, default=project / 'src' / 'assets' / 'mincmistr-plans.webp')
+    args = parser.parse_args()
     dpi = 176
     # The Letter sheets center three 2.5 × 3.5 inch cards in each direction.
     grid_left, grid_top = dpi // 2, dpi // 4
@@ -24,25 +26,21 @@ def main():
     face_width, face_height = width - 2 * inset_x, height - 2 * inset_y
     sprite = Image.new("RGB", (3 * face_width, 5 * face_height))
 
-    with TemporaryDirectory() as folder:
+    with fitz.open(args.pdf) as doc:
         for page, first, count in ((5, 0, 9), (7, 9, 6)):
-            prefix = Path(folder) / f"page-{page}"
-            subprocess.run([
-                "pdftoppm", "-f", str(page), "-l", str(page), "-r", str(dpi),
-                "-singlefile", "-png", str(pdf), str(prefix),
-            ], check=True)
-            with Image.open(prefix.with_suffix(".png")) as sheet:
-                if sheet.size != (dpi * 17 // 2, dpi * 11):
-                    raise ValueError(f"Expected a Letter card sheet on page {page}")
-                for index in range(count):
-                    row, column = divmod(index, 3)
-                    left, top = grid_left + column * width, grid_top + row * height
-                    face = sheet.crop((
-                        left + inset_x, top + inset_y, left + width - inset_x, top + height - inset_y,
-                    ))
-                    sprite.paste(face, (column * face_width, ((first + index) // 3) * face_height))
+            if doc[page - 1].rect != fitz.paper_rect('letter'):
+                raise ValueError(f'Expected a Letter card sheet on page {page}')
+            rendered = doc[page - 1].get_pixmap(dpi=dpi, colorspace=fitz.csRGB, alpha=False)
+            sheet = Image.frombytes('RGB', (rendered.width, rendered.height), rendered.samples)
+            for index in range(count):
+                row, column = divmod(index, 3)
+                left, top = grid_left + column * width, grid_top + row * height
+                face = sheet.crop((
+                    left + inset_x, top + inset_y, left + width - inset_x, top + height - inset_y,
+                ))
+                sprite.paste(face, (column * face_width, ((first + index) // 3) * face_height))
 
-    sprite.save(output, lossless=True, method=6)
+    sprite.save(args.output, lossless=True, method=6)
 
 
 if __name__ == "__main__":

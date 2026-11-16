@@ -5,7 +5,8 @@ import {readFile} from 'node:fs/promises';
 import {createServer} from 'node:http';
 import {fileURLToPath,pathToFileURL} from 'node:url';
 import {MINCMISTR_RULES_VERSION,VERSION} from '../src/data.mjs';
-import {createGame,createPlanDeck,drawPlan} from '../src/engine.mjs';
+import {botAction} from '../src/bot.mjs';
+import {createGame,createPlanDeck,drawPlan,legalActions,taxCost,transition} from '../src/engine.mjs';
 import {playMincmistr} from '../src/mincmistr.mjs';
 import {readPosition,writeSave} from '../src/save.mjs';
 
@@ -209,11 +210,66 @@ try {
   }
   console.log('PASS Plan and round-end effects display their own market removals and resource changes');
 
+  let lastPlan=createGame({seed:'zero-tax-with-surcharges',playerCount:4,starter:0,difficulty:'mincmistr',events:false});
+  while (lastPlan.turn<11) {
+    const actions=legalActions(lastPlan);
+    const plot=lastPlan.turn===1 && actions.find(action=>action.kind==='plot' && !action.as);
+    lastPlan=transition(lastPlan,plot || actions.find(action=>action.kind==='skip'));
+  }
+  lastPlan.players[3].coins=19;
+  const beforeZero=playMincmistr(lastPlan);
+  assert.equal(beforeZero.phase,'tax');
+  assert.equal(beforeZero.actor,0);
+  assert.deepEqual(beforeZero.players.map((_,i)=>taxCost(beforeZero,i)),[0,3,0,0]);
+  const beforeSurcharge=transition(beforeZero,{kind:'tax',cost:0});
+  await importGame(a,writeSave(lastPlan));
+  await click(a,'[data-do="rival-step"]');
+  await a.getByRole('heading',{name:'Rival 1 taxes',exact:true}).waitFor();
+  assert.deepEqual(await game(a),beforeSurcharge);
+  assert.match(await a.locator('.round-end-review').textContent(),/You · Paid 0 g in taxes/);
+  await a.reload();
+  await click(a,'#undo');
+  await a.getByRole('heading',{name:'Rival 3 turn',exact:true}).waitFor();
+  assert.deepEqual(await game(a),lastPlan);
+  await importGame(a,writeSave(beforeZero)); // A save from before zero bills were automatic.
+  assert.deepEqual(await game(a),beforeSurcharge);
+  await click(a,'[data-do="rival-step"]');
+  await a.getByRole('heading',{name:'Rival 1 turn',exact:true}).waitFor();
+  const taxPaid=await game(a);
+  assert.equal(taxPaid.round,2);
+  assert.equal(taxPaid.players[1].coins,lastPlan.players[1].coins-3);
+  assert.equal(taxPaid.log.filter(entry=>entry.text==='Paid 0 g in taxes.').length,3);
+  console.log('PASS zero bills clear in order around a nonzero surcharge, with reload, Undo and older saves');
+
   const digitalPosition=await raw(a,GAME);
   const mobile=await browser.newContext({viewport:{width:360,height:800},hasTouch:true,acceptDownloads:true,
     isMobile:browserName!=='firefox'});
   const phone=observe(await mobile.newPage());
   await phone.goto(origin);
+  for (const count of [2,4]) {
+    let board=createGame({seed:'wrap-'+count,playerCount:count,difficulty:'standard'});
+    while (board.round<(count===4?5:6) || board.actor!==0 || board.phase!=='action') {
+      assert.notEqual(board.phase,'end');
+      board=transition(board,botAction(board,'quick'));
+    }
+    await importGame(phone,writeSave(board));
+    for (const width of [360,390,430]) {
+      await phone.setViewportSize({width,height:800});
+      await phone.evaluate(()=>document.fonts.ready);
+      assert.ok(await phone.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth));
+      const technology=phone.getByRole('button',{name:/^Inspect Mine .+ · Technology/}).first();
+      await technology.locator('.cell-label-short').waitFor();
+      assert.match(await technology.locator('.cell-label-short').textContent(),/^Tech [1-4]$/);
+      if (count===4) {
+        const plot=phone.locator('.cell[title*="Reserved plot"] .cell-label-short').first();
+        assert.equal(await plot.textContent(),'Plot');
+        assert.ok(await plot.isVisible());
+      }
+    }
+  }
+  await phone.setViewportSize({width:360,height:800});
+  console.log('PASS readable plot and technology labels with full names available at 360–430 px');
+
   const doubleMine=createGame({seed:'browser-playtest-report',difficulty:'mincmistr',starter:1,playerCount:4,
     mincmistr:{level:'grandmaster',shared:false}});
   doubleMine.barbara=9;

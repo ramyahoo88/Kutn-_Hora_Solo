@@ -2,6 +2,8 @@
 
 15 Nov 2026 · rules version 1.2.2 · engine: Kutná Hora Solo v0.3.0 (`0b28294`, `src/` unchanged)
 
+This report records the rules and engine used for the original study. [Current Mincmistr rules](../Mincmistr_Rules.md)
+
 ## Summary
 
 The Mincmistr is a deck-driven opponent for two-player Kutná Hora. It plays every rule a player plays: same setup, costs, taxes, limits and scoring, with no starting points and no hidden information. Each card play takes a flip and usually one to two checks. The measured average is 1.14 goal checks per card play at Journeyman.

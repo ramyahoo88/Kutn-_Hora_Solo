@@ -5,7 +5,7 @@ import {
 import {
   applyKnownAction, canBuildGuild, cityPointsAt, copyState, coordinate, createGame, currentBarbara,
   eventNow, income, legalActions, marketOffer, mineRows, patricianBase, plotCount, price,
-  reputationChange, rulesFor, scoreBreakdown, seatName, transition, unavailableActionReason,
+  reputationChange, rulesFor, scoreBreakdown, seatName, taxCost, transition, unavailableActionReason,
 } from './engine.mjs';
 import {actionRationale,botAction} from './bot.mjs';
 import {describePlan,PLAN_DECK,playMincmistr,ROW} from './mincmistr.mjs';
@@ -60,6 +60,13 @@ function reportVersions() {
   return {appVersion,mincmistrRulesVersion,source};
 }
 
+function payZeroTaxes(position) {
+  while (position.phase==='tax' && taxCost(position,position.actor)===0) {
+    position=transition(position,{kind:'tax',cost:0});
+  }
+  return position;
+}
+
 function restoreAutosave() {
   try {
     const saved=savedGame.read();
@@ -69,7 +76,8 @@ function restoreAutosave() {
     if (saved===null) return;
     try {
       const loaded=readAutosave(saved);
-      ({state,rivalReport,review,importedReport}=loaded.current);
+      ({rivalReport,review,importedReport}=loaded.current);
+      state=payZeroTaxes(loaded.current.state);
       restorePlaytestNote(loaded.current.playtestNote);
       undo=loaded.undo;
       boardSeat=0;
@@ -100,7 +108,7 @@ async function storePosition(next, {replace=false, undoing=false}={}) {
   const history=undoing?undo.slice(0,-1):[...undo,previous].slice(-20);
   const restoreDraft=replace || (undoing&&next.replaced);
   const position={
-    state:next.state,rivalReport:next.rivalReport,review:next.review,
+    state:payZeroTaxes(next.state),rivalReport:next.rivalReport,review:next.review,
     playtestNote:restoreDraft?next.playtestNote:previous.playtestNote,
     importedReport:replace||undoing?next.importedReport:reportVersions(),
   };
@@ -646,13 +654,17 @@ function mapCell(value, i, columns, area, board) {
   const classes=[`cell ${tokenClass}`,matching>=0?'target':'',active?'selected':'',value?.rock?'rock':'',
     entrance?'entrance':'',changed?'plan-changed':''].join(' ');
   const name=value?.rock?'Rock':tile?.name??(value?'Reserved plot':entrance?'Entrance':'Open space');
+  const shortName=area==='town'&&value?.plot!==undefined?'Plot':
+    name.startsWith('Technology ')?name.replace('Technology ','Tech '):null;
+  const label=shortName?`<b><span class="cell-label-full">${safe(name)}</span><span class="cell-label-short" aria-hidden="true">${safe(shortName)}</span></b>`:
+    `<b>${safe(name)}</b>`;
   const positionOwner=owner!==undefined?playerName(owner):tile?.public?'Public':'';
   const title=`${area==='town'?'Town':'Mine'} ${id} · ${name}${positionOwner?` · ${positionOwner}`:''}${value?.rock?` · ${value.stars} ★`:''}${changed?' · Changed by last Plan':''}`;
   const edge=area==='town'&&board.edge[i];
   const edgeMark=edge?`<span class="cell-edge" title="Board edge · ${dotLabels[edge]}"><span class="sr-only">Board edge</span>${dots({dots:edge})}</span>`:'';
   const details=area==='town'?dots(tile)+edgeMark:
     value?`<small>${value.stars} ★${tile?` · ${tile.extend}w`:''}</small>`:'';
-  const content=`<span class="cell-id">${id}${changed?'<span class="plan-change-mark" aria-hidden="true"> ◆</span><span class="sr-only"> Changed by last Plan</span>':''}</span>${value||entrance?`<b>${safe(name)}</b>`:''}${details}`;
+  const content=`<span class="cell-id">${id}${changed?'<span class="plan-change-mark" aria-hidden="true"> ◆</span><span class="sr-only"> Changed by last Plan</span>':''}</span>${value||entrance?label:''}${details}`;
   const attributes=`class="${classes}" title="${safe(title)}"${changed?` id="plan-change-${area}-${i}"`:''}`;
   const reference=`${area}/${i}`;
   const inspectable=tile||value?.rock;
@@ -874,6 +886,9 @@ function runRival(onePlan=false) {
           if (!multiple&&['rights','build','place-mine','technology','income'].includes(action.kind)) why=actionRationale(next,action);
           next=transition(next,action);
         }
+        const afterTaxes=payZeroTaxes(next);
+        if (afterTaxes!==next && onePlan) afterAction??=next;
+        next=afterTaxes;
         const entries=next.log.slice(previousEntries,afterAction?.log.length);
         for (const {actor,text} of entries) {
           if (actor!==turn.actor && !(onePlan && actor===null)) continue;

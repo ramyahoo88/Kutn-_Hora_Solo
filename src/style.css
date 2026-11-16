@@ -189,7 +189,8 @@ select, input[type=text] { min-height: 40px; padding: 7px 9px; border-radius: 6p
 .cell, .void { position: relative; min-height: 45px; min-width: 0; }
 .cell { display: flex; flex-direction: column; justify-content: flex-start; gap: 2px; align-items: flex-start; border: 1px solid #44454a; border-radius: 6px; background: #2f3034; color: var(--ink); padding: 4px 5px; text-align: left; font-variant-numeric: tabular-nums; }
 .cell-id { font-size: .69rem; color: var(--quiet); line-height: 1.05; }
-.cell b { font-size: .72rem; line-height: 1.1; overflow-wrap: anywhere; }
+.cell b { max-width: 100%; font-size: .72rem; line-height: 1.1; hyphens: auto; overflow: hidden; text-overflow: ellipsis; }
+.cell-label-short { display: none; }
 .cell .dots { margin-top: auto; }
 .cell-edge { position: absolute; right: 4px; top: 3px; display: inline-flex; padding: 2px; border: 1px solid #79746a; border-radius: 3px; background: #242427; }
 .cell small { font-size: .66rem; line-height: 1.1; }
@@ -391,6 +392,12 @@ dialog::backdrop { background: #100f11b9; }
 }
 @media (max-width: 380px) {
   .topbar { flex-wrap: wrap; gap: 4px; padding-block: 5px; }
+}
+@media (max-width: 460px) {
+  .town-grid, .mine-grid { gap: 3px; padding-inline: 6px; }
+  .cell { padding-inline: 3px; }
+  .cell-label-full { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+  .cell-label-short { display: inline; }
 }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; } }
 @media print {

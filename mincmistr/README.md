@@ -2,7 +2,7 @@
 
 The Mincmistr is a card-driven automa for the physical game. It uses a 15-card Plan deck, a fixed row for its six action cards and a four-step checklist. There are no dice and no starting points. It uses normal costs, component limits and scoring, with the action priorities and difficulty changes described in these rules. It never uses the Joker.
 
-Developed and tested against this repository's engine at `v0.3.0-playtest` (`0b28294`). The rules engine in `v0.3.1-playtest` is the same, apart from the new Planner rival setting.
+The original simulations used engine v0.3.0 (`0b28294`). The latest independent audit compares v1.2.5 with app v0.3.11. [Claude’s audit and evidence](https://github.com/ramyahoo88/Kutn-_Hora_Solo/blob/86e9a5844f4985fbac1668188ded5eaedb8952f7/docs/Claude_Audit_v0.3.11.md)
 
 To play without printing, open [Kutná Hora Solo](../Kutna_Hora_Solo.html) and choose **New game → Rival difficulty → Mincmistr**. **Play one Plan** shows changes to the board and resources. Open **Why this move?** to review the checks and tie-breaks. Tap a rule number to open it offline. **View Plan card** shows the printed face and its text.
 
@@ -10,16 +10,12 @@ When playing at the table, choose **Draw only** to use the printed Plan faces as
 
 ## Read or print
 
-- `Mincmistr_Print_and_Play.pdf`: rules on pages 1–4, card sheets on pages 5–8. Print at 100% on Letter or A4.
-- `Mincmistr_Rules.md`: the v1.2.5 rulebook text, with clarified printed public rewards, mine awards, patricians, house-row choices and permit recruitment.
-- [One-page table reference](print/reference-sheet.md). Print it from the app, or build a Letter or A4 PDF using the command below.
-- `Mincmistr_Sim_Report.md`: design history, test method and results.
-- `Mincmistr_Sample_Game.md`: two rounds of a simulated game, annotated rule by rule.
-- `NOTES.md`: the overnight lab notebook.
+- [Print-and-play PDF](Mincmistr_Print_and_Play.pdf). Rules on pages 1–4, cards and optional backs on pages 5–8, table reference on page 9, and mine choice aid on page 10. Print cards at 100% on Letter or A4.
+- [Mincmistr v1.2.6 rules](Mincmistr_Rules.md). The setup explains how to keep rights and mine tiles in order. Rule 6.5 defines which free rights qualify.
+- [Table reference](print/reference-sheet.md) and [mine choice aid](print/mine-aid.md). You can also print both from the app.
+- [Simulation report](Mincmistr_Sim_Report.md), [sample game](Mincmistr_Sample_Game.md) and [design notebook](NOTES.md).
 
-Version 1.2.5 clarifies the existing rules without changing the Mincmistr’s decisions. The simulation-strength section has been removed from the rulebook, and Quick reference is now rule 12. The studies below remain available as design history.
-
-To update a printed v1.2.4 set, replace the rules on pages 1–4 and the Goals and Choices reference cards on page 7. The earlier Plan deck and Card play reference card still work.
+For a printed v1.2.5 set, replace pages 1–4 and the Choices card on page 7. You can keep your Plan deck and its backs. Print pages 9 and 10 if you want paper copies of the aids.
 
 ## Strength (holdout seeds, Mincmistr's win rate and margin)
 
@@ -54,26 +50,23 @@ Run every command from the repository root. The scripts import the engine from `
 - `policies.mjs`: rejects rival names the engine does not define, because `botAction` would otherwise play Standard.
 - `multisim.mjs` and `multisum.mjs`: three- and four-player tests, covering you against several Mincmistrs, or one Mincmistr at a table of rivals.
 - `multi.mjs`, `mirror.mjs`, `overhead.mjs`, `exploit.mjs`, `rollout*.mjs`, `samplegame.mjs`: supporting studies.
-- `print/build.py`: rebuilds the PDF from `print/rules.md` and the card data. Needs Python `markdown` and headless Chrome or Chromium:
-
-  ```
-  node mincmistr/print/export_cards.mjs
-  python3 mincmistr/print/build.py /tmp/mincmistr.html mincmistr/Mincmistr_Print_and_Play.pdf
-  ```
-
-  To regenerate only the rules pages and reuse the existing card sheets, install Python `markdown` and `PyMuPDF` with DejaVu fonts. Set `DEJAVU_FONTS` if the fonts live outside `/usr/share/fonts/truetype/dejavu`.
-
-  ```sh
-  python3 mincmistr/print/build.py --refresh-rules mincmistr/Mincmistr_Print_and_Play.pdf /tmp/Mincmistr_Print_and_Play.pdf
-  ```
-
-  To reproduce the v1.2.5 print release while retaining the card frames and backs, use the PDF from [v0.3.10-playtest](https://github.com/ramyahoo88/Kutn-_Hora_Solo/blob/v0.3.10-playtest/mincmistr/Mincmistr_Print_and_Play.pdf) as the input to `--refresh-copy`:
-
-  ```sh
-  python3 mincmistr/print/build.py --refresh-copy /tmp/Mincmistr_v1.2.4.pdf /tmp/Mincmistr_v1.2.5.pdf
-  ```
-
-- `print/export_app_plans.py` crops the Plan fronts from the PDF for the app. After updating the PDF's cards, run `python3 mincmistr/print/export_app_plans.py` with Poppler and Pillow installed, then rebuild the offline HTML.
-- `print/mine-aid.md` is the mine choice aid. To refresh the app's offline reference after editing the aid, rules, or reference cards, run `python3 mincmistr/print/build.py --app-reference mincmistr/print/app-reference.html`, then rebuild the offline HTML.
-- To render the one-page reference PDF, install Python `markdown`, `reportlab` and DejaVu fonts. Run `python3 mincmistr/print/build.py --table-reference letter /tmp/Mincmistr_Table_Reference.pdf`. Use `a4` for A4 paper.
 - `results/`: raw results. `results/v1.0/` holds the version 1.0 holdout runs.
+
+## Build the print packet
+
+Use Node.js 24, Python 3.12 and DejaVu 2.37 fonts (the `fonts-dejavu` package on Ubuntu). Set `DEJAVU_FONTS` to the folder with the `.ttf` files if it differs from `/usr/share/fonts/truetype/dejavu`. Run these commands from the repository root. The PDF uses the rules, deck data, vector card artwork and both aids in `mincmistr/print/`.
+
+```sh
+python3 -m venv .venv
+source .venv/bin/activate
+python3 -m pip install -r mincmistr/print/requirements.txt
+node mincmistr/print/export_cards.mjs
+cp mincmistr/print/rules.md mincmistr/Mincmistr_Rules.md
+python3 mincmistr/print/build.py --pdf mincmistr/Mincmistr_Print_and_Play.pdf
+python3 mincmistr/print/build.py --app-reference mincmistr/print/app-reference.html
+python3 mincmistr/print/export_app_plans.py
+node build.mjs Kutna_Hora_Solo.html
+npm run verify
+```
+
+The verification command rebuilds into a temporary directory and compares the files byte for byte. Reproduce release hashes with the Linux build environment and the dependencies above. For a standalone table reference, use `python3 mincmistr/print/build.py --table-reference letter /tmp/Mincmistr_Table_Reference.pdf`. Use `a4` for A4 paper.

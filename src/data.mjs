@@ -1,5 +1,5 @@
-export const VERSION = '0.3.11';
-export const MINCMISTR_RULES_VERSION = '1.2.5';
+export const VERSION = '0.3.12';
+export const MINCMISTR_RULES_VERSION = '1.2.6';
 export const PLAN_EXPLANATION_LIMIT = 32;
 export const SAVE_SCHEMA = 3;
 export const SETUP_VERSION = 2;
@@ -10,7 +10,7 @@ export const MINCMISTR_LEVELS = {
   master:      {townPoints:true,  rowPoints:true,  extraCard:[4,5,6]},
   grandmaster: {townPoints:true,  rowPoints:true,  extraCard:[1,2,3,4,5,6]},
 };
-// Mincmistr v1.2.2 Plan cards, in print order. C = Construct, M = Mine, S = St. Barbara.
+// Mincmistr Plan cards in print order. C = Construct, M = Mine, S = St. Barbara.
 export const MINCMISTR_PLANS = [
   ['CM','low'], ['CM','high'], ['CM','low'], ['MC','high'], ['CS','low'],
   ['MC','high'], ['CS','low'], ['MC','high'], ['CM','low'], ['CS','high'],

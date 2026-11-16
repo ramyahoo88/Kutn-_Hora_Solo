@@ -1,25 +1,28 @@
-# App smoke tests
+# App tests
 
-Run these commands from the repository root with Node.js 24. The engine suite runs with no installation.
-
-```sh
-node --test test/*.test.mjs
-node mincmistr/flowcheck.mjs
-node build.mjs dist/rebuilt.html
-cmp dist/rebuilt.html Kutna_Hora_Solo.html
-```
-
-The extra smoke tests exercise controls in the shipped HTML.
+Run from the repository root with Node.js 24. The engine suite and app build need no npm dependencies.
 
 ```sh
-npm install --no-save --no-package-lock jsdom@26.1.0 playwright@1.62.1
-node test/dom-smoke.mjs
-npx playwright install chromium firefox webkit
-node test/browser-smoke.mjs
-node test/browser-smoke.mjs firefox
-node test/browser-smoke.mjs webkit
+npm test
+npm run build
 ```
 
-The DOM test simulates blocked storage and shared tabs. The browser test opens the shipped HTML over loopback and from disk. It checks Plan explanations, resource changes and round-end events, playtest notes across tabs, report replay and Undo after reload, deck transfer across a reshuffle, and print views at 360 and 390 px. Use `HEADED=1` to see the browser. `BROWSER_EXECUTABLE` can point to an installed browser of the chosen engine.
+`npm test` runs the engine tests and the Mincmistr card-play checks. `npm run build` writes `dist/index.html`. For a release, install the [print build dependencies](../mincmistr/README.md#build-the-print-packet) and run `npm run verify`. It compares the shipped files with a rebuild from source.
 
-For a Safari or iPhone check, open the HTML and follow the README's playtest checks. WebKit exercises the engine in the automated suite. Safari's file-opening, storage and print behavior can differ by device.
+Install the locked smoke test dependencies and Chromium, then exercise the controls in the shipped HTML.
+
+```sh
+npm ci
+npx playwright install --only-shell chromium
+npm run smoke
+```
+
+The DOM checks simulate blocked storage and shared tabs. The browser checks cover saves and Undo, Plan explanations and round-end effects, report replay, deck transfer, phone layouts and print views. Run them independently with `npm run smoke:dom` and `npm run smoke:browser`. Use `HEADED=1` and install full Chromium to see the browser, or set `BROWSER_EXECUTABLE` to the path of an installed browser.
+
+```sh
+npx playwright install firefox webkit
+npm run smoke:browser -- firefox
+npm run smoke:browser -- webkit
+```
+
+For a Safari or iPhone check, open the HTML and follow the [playtest checks](../README.md#playtest-checks). The automated WebKit check covers the engine. File opening, storage and printing can differ on Safari.
