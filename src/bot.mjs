@@ -1,7 +1,8 @@
 import {BUILDINGS,CARDS,CITY_WIDTH,COMMODITY,EVENTS,MINE_GROUPS,MINES,PATRICIANS,REP_SCORE} from './data.mjs';
 import {
   actionKey,applyKnownAction,canBuildGuild,cardsThisTurn,coordinate,copyState,finishCard,income,legalActions,marketOffer,mineRow,mineRows,
-  patricianBase,plotCount,price,reputationChange,rulesFor,scoreBreakdown,seatAtTurn,seedNumber,taxCost,turnsPerRound,
+  mineDrawName,patricianBase,plotCount,price,reputationChange,rulesFor,scoreBreakdown,seatAtTurn,seedNumber,taxCost,turnsPerRound,
+  undrawnMines,usesEvents,
 } from './engine.mjs';
 import {randomIndex,shuffle} from './random.mjs';
 
@@ -27,6 +28,8 @@ export const BOT_POLICIES=[...Object.keys(POLICIES),...Object.keys(EXPERIMENTS)]
 
 export function publicPlanningState(state, sample=0) {
   const copy=copyState(state,false);
+  // Forecasts can sample possible outcomes. The real move waits for physical input.
+  delete copy.tabletop;
   const visible=[state.setup,state.round,state.turn,state.left,state.actor,state.pop,state.ore,state.technology,sample];
   copy.rng=seedNumber(visible.join('/'));
   // Every seed with the same visible position and tile backs has the same planning distribution.
@@ -36,13 +39,14 @@ export function publicPlanningState(state, sample=0) {
   const options=MINE_GROUPS.map(group=>group.filter(tile=>!visibleMines.has(tile.id)).map(tile=>tile.id));
   if (state.mineMixed) {
     const sampleDeck=shuffle(copy,options.flat());
-    copy.mineDeck=sampleDeck.slice(0,state.mineDeck.length);
-    copy.mineDiscard=sampleDeck.slice(state.mineDeck.length);
+    const backs=undrawnMines(state);
+    copy.mineDeck=sampleDeck.slice(0,backs);
+    copy.mineDiscard=sampleDeck.slice(backs);
   } else {
     copy.mineDeck=[];
     copy.mineDiscard=[];
     for (const [i,group] of options.entries()) {
-      const backs=state.mineDeck.filter(id=>MINES[id].tier===i+1).length;
+      const backs=state.mineDeck.filter(id=>MINES[id].tier===i+1).length-(state.tabletop?.unseenDiscards[i]??0);
       const sampleDeck=shuffle(copy,group);
       copy.mineDeck.push(...sampleDeck.slice(0,backs));
       copy.mineDiscard.push(...sampleDeck.slice(backs));
@@ -528,7 +532,7 @@ function closingValue(end, seat, settings) {
 function imaginedBoard(state, sample, experiment) {
   const root=publicPlanningState(state,sample);
   const {rounds,redRound}=rulesFor(state);
-  if (experiment.construction&&state.events.length>0&&state.round+1<rounds) {
+  if (experiment.construction&&usesEvents(state)&&state.round+1<rounds) {
     const group=state.round+1<=redRound?'A':'B';
     const unknown=Object.keys(EVENTS).filter(id=>EVENTS[id].set===group&&!root.events.includes(id));
     const rng={rng:seedNumber(`forecast-event/${root.rng}`)};
@@ -600,7 +604,7 @@ export function actionRationale(state, action) {
     case 'mine': return 'Opens a mine draw to develop the ore economy or contest mine rows.';
     case 'technology': case 'place-mine': {
       const mine=MINES[action.id];
-      return `Places ${mine.name} in row ${1+Math.floor(action.space/rulesFor(state).board.mineWidth)}${mine.stars?` with ${mine.stars} ${mine.stars===1?'star':'stars'}`:''}${mine.ore?` and ${mine.ore} ore production`:''}.`;
+      return `Places ${mineDrawName(state,action.id)} in row ${1+Math.floor(action.space/rulesFor(state).board.mineWidth)}${mine.stars?` with ${mine.stars} ${mine.stars===1?'star':'stars'}`:''}${mine.ore?` and ${mine.ore} ore production`:''}.`;
     }
     case 'barbara': return 'Spends a pelican to claim the current cathedral benefit.';
     case 'tax': return 'Pays the tax to preserve reputation.';

@@ -1,4 +1,4 @@
-export const VERSION = '1.0';
+export const VERSION = '1.1';
 export const MINCMISTR_RULES_VERSION = '1.2.6';
 export const PLAN_EXPLANATION_LIMIT = 32;
 export const SAVE_SCHEMA = 3;
@@ -186,6 +186,7 @@ export const MINE_GROUPS = mineData.map((group,tier) => group.map(([stars,ore,po
 })));
 export const TECHNOLOGY = [1,2,3,3].map((extend,i) => ({id:`t${i+1}`,name:`Technology ${i+1}`,stars:1,ore:0,pop:0,vp:0,extend}));
 export const MINES = Object.fromEntries([...MINE_GROUPS.flat(),...TECHNOLOGY].map(tile => [tile.id,tile]));
+export const MINE_FIELDS = ['stars','ore','pop','vp','extend'];
 export const EVENTS = {
   abbey:{name:'Sedlec Abbey',set:'A',tax:2, detail:'At round end, cycle the top tile of each guild stack to its bottom.'},
   fever:{name:'Silver Fever',set:'A',pop:2, detail:'At round end, population rises 2 and every miner pool refills for free.'},

@@ -1,6 +1,10 @@
-# Kutná Hora Solo v1.0
+# Kutná Hora Solo v1.1
 
-An unofficial browser app for Kutná Hora: The City of Silver. Play one seat against one, two or three rivals. The app handles the town, mines, market, council and game draws. The same HTML works offline. Players can mirror its placements on the table. Export and import a JSON save to move a game between copies.
+An unofficial tabletop companion for Kutná Hora: The City of Silver. Play one seat against one, two or three rivals with your physical mine tiles and event cards. The app runs the rivals and tracks the town, mines, market, council and scoring. The same HTML works offline. Export and import a JSON save to move a game between copies.
+
+Shuffle your mine tiles within their printed tiers and stack I above II and III. When the app asks for a draw, enter the tiles' printed values in draw order. The app selects a placement for a rival and tells you which pieces to discard. With events enabled, deal your physical A and B cards to the round track and enter each card by title when it is revealed. Use the base event deck.
+
+Tabletop games keep their own autosave. Open **New game → Export previous digital save** to download an earlier digital autosave, if one is present. To continue that game, import the export into your v1.0 copy.
 
 To play offline, open [Kutna_Hora_Solo.html](Kutna_Hora_Solo.html) on GitHub, choose **Download raw file**, and open the downloaded file in your browser.
 

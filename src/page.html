@@ -28,7 +28,7 @@
     <section class="hero" aria-label="Kutná Hora: The City of Silver">
       <div class="hero-art" aria-hidden="true"></div>
       <div class="hero-copy">
-        <span class="eyebrow">Unofficial solo edition · vAPP_VERSION</span>
+        <span class="eyebrow">APP_EDITION · vAPP_VERSION</span>
         <h1>Kutná Hora</h1>
         <p>The City of Silver</p>
       </div>
@@ -95,6 +95,8 @@
       <div class="panel-head"><h2 id="setup-title">New game</h2><button type="button" class="flat" data-do="close">Close</button></div>
       <div class="dialog-body">
         <p class="muted">Play against one to three rivals.</p>
+        <p id="physical-setup" class="fine" hidden>Prepare your physical mine stack with tier I on top, then II and III. Deal the event cards face down if your table uses them.</p>
+        <button id="export-digital-save" type="button" class="link" data-do="export-digital-save" hidden>Export previous digital save</button>
         <div class="field-grid">
           <label>Rivals<select name="playerCount" id="player-count"><option value="2">1 rival</option><option value="3">2 rivals</option><option value="4">3 rivals</option></select></label>
           <label>Starting player<select name="starter"><option value="0">You</option></select></label>
@@ -117,7 +119,7 @@
   <main class="frame paper-drawer" id="draw-only" aria-labelledby="paper-title" hidden>
     <header class="paper-heading">
       <h1 id="paper-title" tabindex="-1">Mincmistr <span>Draw only</span></h1>
-      <a class="link" href="#digital-game">Digital game</a>
+      <a class="link" href="#digital-game">APP_MODE</a>
     </header>
     <section class="panel" aria-label="Plan deck">
       <div class="panel-head">
@@ -190,13 +192,17 @@
         <h2 id="guide-title">Playing Kutná Hora Solo</h2>
         <p>Choose <strong>Undo</strong> immediately after starting a new game to restore your previous game.</p>
         <p>Choose one, two or three rivals in <strong>New game</strong>. With three rivals the game lasts five rounds. With one or two it lasts six. Two-player games use event cards. Events are optional on the larger boards.</p>
+        <div id="physical-guide" hidden>
+          <p><strong>Use your physical game.</strong> Shuffle the mine tiles within each tier and stack tier I above II and III. On a Mine action, draw the requested tiles and enter their printed values in order. Place the selected tile and put the rest in your discard pile. The app prompts you when it is time to reshuffle.</p>
+          <p><strong>Reveal one event at a time.</strong> Enter the printed title from the base game when the app prompts you. It applies any tax increase at the start of the round and the other effects at round end. If you Undo, restore the physical pieces to match the app. Reuse an already revealed tile or event if the app asks for it again.</p>
+        </div>
         <p><strong>Take your turn.</strong> Play two cards on each of your first two turns and one on your last. Pick the card half and target, then confirm. With multiple rivals, <strong>Play rivals</strong> continues until your next card, tax decision or final scoring.</p>
         <p><strong>Set up your guilds.</strong> Choose your set from the printed setup card and arrange your house rows. The seed assigns the remaining sets and the rivals’ row order.</p>
         <p><strong>Build your income.</strong> Take Rights to a building, claim a Plot, then use Building. A Mine can also start ore production. The Income action collects the current value of your production. The market prices affect all players.</p>
         <p><strong>Follow the grid.</strong> Town and mine coordinates are read left to right, top to bottom. Colored dots are printed scoring matches. A striped guild offer can sell Rights while new construction of that guild is unavailable.</p>
         <p><strong>Win on points.</strong> Patricians score in the last three rounds. The final count adds town matches, mine row awards, final income, reputation and unused items to earned points. Coins break a points tie. Any players still tied for first share the win.</p>
         <p><strong>Check public information.</strong> Open a tile to inspect its costs and effects. Use <strong>Details</strong> when the tile is an action target. Each player board shows the full house rewards, production and supplies. Each rival's remaining cards are below the turn controls.</p>
-        <p><strong>Resume or share a position.</strong> This browser keeps your game and up to five recent Undo steps when local storage is available. If another tab advances the save, choose <strong>Load saved game</strong> to continue from that position. Export a JSON save to move between browsers or share a position. Version 0.1.0 saves keep their existing deck order.</p>
+        <p><strong>Resume or share a position.</strong> This browser keeps your game and up to five recent Undo steps when local storage is available. If another tab advances the save, choose <strong>Load saved game</strong> to continue from that position. Export a JSON save to move between browsers or share a position. APP_SAVE_NOTE</p>
         <p><strong>Rival settings.</strong> Standard and Quick consider the next player's likely card. Planner tries the replies on a copy of the board, explores several possible draws when choices are close, and looks further ahead for builds and final scoring.</p>
         <p><strong>Mincmistr.</strong> Choose <strong>Play one Plan</strong> to see the moves, resources and board spaces changed. The review also shows any automatic round-end effects. Expand <strong>Why this move?</strong> for the checks and tie-breaks, or tap a rule number to read it offline.</p>
         <p><strong>Share a game report.</strong> The journal saves your <strong>Game note</strong> with the game. Use <strong>Export game report</strong> to share the game and note. If autosave is paused, <strong>Export game and note</strong> in the save warning makes the same kind of copy. Open a report with <strong>Import save</strong>, then use <strong>Load position before this step</strong> in the journal if an earlier position is included. Undo returns to the imported position.</p>

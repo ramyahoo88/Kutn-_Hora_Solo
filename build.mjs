@@ -7,10 +7,12 @@ const project=dirname(fileURLToPath(import.meta.url));
 const read=(path)=>readFile(resolve(project,'src',path),'utf8');
 const data=async (path,mime)=>`data:${mime};base64,${(await readFile(resolve(project,'src','assets',path))).toString('base64')}`;
 const output=resolve(process.argv[2]??resolve(project,'dist','index.html'));
+const tabletop=process.argv[3]!=='--digital';
 const order=['data','prices','random','engine','bot','mincmistr','save','storage','paper','app'];
 const modules=[];
 for (const entry of order) {
   let source=await read(`${entry}.mjs`);
+  if (entry==='app' && tabletop) source=source.replace('const TABLETOP_BUILD=false;','const TABLETOP_BUILD=true;');
   const exports=[];
   source=source.replace(/^import\s+\{([\s\S]*?)\}\s+from\s+'\.\/([a-z]+)\.mjs';$/gm,(_match,names,module)=>{
     if (!order.slice(0,order.indexOf(entry)).includes(module)) throw Error(`Unresolved module ${module} in ${entry}.`);
@@ -38,6 +40,9 @@ const js=`'use strict';\nconst modules={};\n${modules.join('\n')}`.replace(/<\/s
 const licenses=await Promise.all(['DM-Sans-OFL.txt','Instrument-Serif-OFL.txt'].map(file=>read(`assets/${file}`)));
 const reference=await readFile(resolve(project,'mincmistr','print','app-reference.html'),'utf8');
 const html=(await read('page.html')).replace('APP_VERSION',VERSION).replace('/* BUNDLE_CSS */',()=>css)
+  .replace('APP_EDITION',tabletop?'Unofficial tabletop companion':'Unofficial solo edition')
+  .replace('APP_MODE',tabletop?'Tabletop game':'Digital game')
+  .replace('APP_SAVE_NOTE',tabletop?'Use tabletop saves with this edition. Export an earlier digital save from New game.':'Version 0.1.0 saves keep their existing deck order.')
   .replace('MINCMISTR_RULES_VERSION',MINCMISTR_RULES_VERSION).replace('/* BUNDLE_JS */',()=>js)
   .replace('/* PAPER_REFERENCE */',()=>reference);
 await mkdir(dirname(output),{recursive:true});

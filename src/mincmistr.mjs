@@ -4,7 +4,7 @@
 import {BUILDINGS,CARDS,CITY_WIDTH,GUILDS,LABEL,MINCMISTR_LEVELS,MINCMISTR_PLANS,MINES,PATRICIANS,PLAN_EXPLANATION_LIMIT} from './data.mjs';
 import {
   canBuildGuild,cityPointsAt,coordinate,createPlanDeck,currentBarbara,drawPlan,legalActions,marketOffer,
-  mineRows,patricianBase,plotCount,price,rulesFor,transition,unavailableActionReason,
+  mineDrawName,mineRows,patricianBase,physicalPrompt,plotCount,price,rulesFor,transition,unavailableActionReason,
 } from './engine.mjs';
 
 // Plan deck: 15 cards. Goals in priority order. C = Construct, M = Mine, S = St. Barbara.
@@ -169,7 +169,7 @@ function choosePlacement(state, m, options) {
   }
   const sum=id=>MINES[id].stars+MINES[id].ore+MINES[id].vp;
   const keep=rankedChoice(m,'6.4',ids,[high('stars + ore + VP',sum),high('stars',id=>MINES[id].stars)],
-    id=>`Keep ${MINES[id].name}`,'the first tile drawn');
+    id=>`Keep ${mineDrawName(state,id)}`,'the first tile drawn');
   const width=rulesFor(state).board.mineWidth, rows=mineRows(state), n=state.players.length;
   const row=a=>rows[Math.floor(a.space/width)];
   const mines=a=>row(a).count[m.seat];
@@ -366,7 +366,7 @@ function describePlanRule(m,action) {
 // Play one decision from a saved digital game. Bonus decisions use the last flipped card.
 export function playMincmistr(state, beforeRoundEnd) {
   const {mincmistr,actor:seat}=state;
-  if (!mincmistr || seat===0 || state.phase==='end') throw Error('Choose a Mincmistr turn.');
+  if (!mincmistr || seat===0 || state.phase==='end' || physicalPrompt(state)) throw Error('Choose a Mincmistr turn.');
   const slot=mincmistr.shared?0:seat-1;
   const deck=mincmistr.decks[slot];
   const m={

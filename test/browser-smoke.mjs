@@ -1,20 +1,19 @@
-// Run against the shipped HTML. Pass firefox or webkit for another engine.
+// Exercise the digital build. Pass firefox or webkit for another engine.
 import assert from 'node:assert/strict';
 import {once} from 'node:events';
 import {readFile} from 'node:fs/promises';
 import {createServer} from 'node:http';
-import {fileURLToPath,pathToFileURL} from 'node:url';
 import {MINCMISTR_RULES_VERSION,VERSION} from '../src/data.mjs';
 import {botAction} from '../src/bot.mjs';
 import {createGame,createPlanDeck,drawPlan,legalActions,taxCost,transition} from '../src/engine.mjs';
 import {playMincmistr} from '../src/mincmistr.mjs';
 import {readPosition,writeSave} from '../src/save.mjs';
+import {digitalSmokeHtml} from './digital-smoke-html.mjs';
 
 const playwright=await import(process.env.PLAYWRIGHT_MODULE??'playwright');
 const browserName=process.argv[2]??'chromium';
 assert.ok(['chromium','firefox','webkit'].includes(browserName),'Choose chromium, firefox or webkit.');
-const htmlPath=fileURLToPath(new URL('../Kutna_Hora_Solo.html',import.meta.url));
-const html=await readFile(htmlPath);
+const html=digitalSmokeHtml();
 const GAME='kutna-hora-solo-v1';
 const PAPER='kutna-hora-mincmistr-deck-v1';
 const PLAYTEST_REPORT='.journal [data-do="report"]';
@@ -539,7 +538,7 @@ try {
   console.log('PASS temporary storage failure preserves all eight existing draws');
 
   const offlineFile=observe(await context.newPage());
-  await offlineFile.goto(pathToFileURL(htmlPath).href+'#draw-only');
+  await offlineFile.goto(new URL('../Kutna_Hora_Solo.html#draw-only',import.meta.url).href);
   await click(offlineFile,'#paper-open-reference');
   await offlineFile.locator('#paper-ref-cards').waitFor();
   await click(offlineFile,'#paper-reference-close');

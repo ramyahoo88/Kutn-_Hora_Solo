@@ -1,11 +1,11 @@
 import {
-  BARBARA, BUILDINGS, CARDS, CITY_WIDTH, COMMODITY, GAME_RULES, GOODS, GUILDS,
-  GUILD_SETUPS_BY_COUNT, HOUSE_EFFECTS, LABEL, MINES, PATRICIANS, REP_SCORE, VERSION,
+  BARBARA, BUILDINGS, CARDS, CITY_WIDTH, COMMODITY, EVENTS, GAME_RULES, GOODS, GUILDS,
+  GUILD_SETUPS_BY_COUNT, HOUSE_EFFECTS, LABEL, MINES, MINE_FIELDS, PATRICIANS, REP_SCORE, VERSION,
 } from './data.mjs';
 import {
   applyKnownAction, canBuildGuild, cityPointsAt, copyState, coordinate, createGame, currentBarbara,
-  eventNow, income, legalActions, marketOffer, mineRows, patricianBase, plotCount, price,
-  reputationChange, rulesFor, scoreBreakdown, seatName, taxCost, transition, unavailableActionReason,
+  eventNow, income, legalActions, marketOffer, mineDrawName, mineRows, patricianBase, physicalPrompt, plotCount, price,
+  recordPhysicalDraw, reputationChange, rulesFor, scoreBreakdown, seatName, taxCost, transition, unavailableActionReason, usesEvents,
 } from './engine.mjs';
 import {actionRationale,botAction} from './bot.mjs';
 import {describePlan,PLAN_DECK,playMincmistr,ROW} from './mincmistr.mjs';
@@ -13,7 +13,9 @@ import {connectReference,openReference,setPlanFace,showPlan,startPaperDrawer} fr
 import {readAutosave,readPosition,writeAutosave,writePlaytestReport,writeSave} from './save.mjs';
 import {downloadJson,storageSlot} from './storage.mjs';
 
-const STORAGE='kutna-hora-solo-v1';
+const TABLETOP_BUILD=false;
+const DIGITAL_STORAGE='kutna-hora-solo-v1';
+const STORAGE=TABLETOP_BUILD?'kutna-hora-tabletop-v1':DIGITAL_STORAGE;
 const savedGame=storageSlot(STORAGE);
 const FIRST_SEED='silver-1308';
 const byId=id=>document.getElementById(id);
@@ -67,6 +69,14 @@ function payZeroTaxes(position) {
   return position;
 }
 
+function checkEdition(position) {
+  if (Boolean(position.state.tabletop)!==TABLETOP_BUILD) {
+    throw Error(TABLETOP_BUILD
+      ? 'This edition uses physical draws. Open a digital save in the earlier digital app.'
+      : 'Open this save in the tabletop edition.');
+  }
+}
+
 function restoreAutosave() {
   try {
     const saved=savedGame.read();
@@ -76,10 +86,11 @@ function restoreAutosave() {
     if (saved===null) return;
     try {
       const loaded=readAutosave(saved);
+      checkEdition(loaded.current);
       ({rivalReport,review,importedReport}=loaded.current);
       state=payZeroTaxes(loaded.current.state);
       restorePlaytestNote(loaded.current.playtestNote);
-      undo=loaded.undo;
+      undo=loaded.undo.filter(position=>Boolean(position.state.tabletop)===TABLETOP_BUILD);
       boardSeat=0;
       resetSelection();
       return true;
@@ -94,7 +105,11 @@ function restoreAutosave() {
 function startDigitalGame() {
   if (state) return;
   restoreAutosave();
-  state ??= createGame({seed:FIRST_SEED});
+  state ??= createGame({seed:FIRST_SEED,tabletop:TABLETOP_BUILD});
+  if (TABLETOP_BUILD) {
+    try { byId('export-digital-save').hidden=storageSlot(DIGITAL_STORAGE).read()===null; }
+    catch {}
+  }
   savedGame.watch(changed=>{
     saveConflict=changed;
     renderSaveStatus();
@@ -253,7 +268,7 @@ function actionLabel(a) {
     case 'build': return `${BUILDINGS[a.id].name} at ${coordinate(a.space,CITY_WIDTH)} · ${money(a.cost)}`;
     case 'income': return a.color ? `Collect ${money(a.gross)} and seat ${a.color} · 10 g` : `Collect ${money(a.gross)}`;
     case 'mine': return a.refill ? `Recruit ${a.refill} · ${money(a.cost)}, then draw` : 'Draw without buying a permit';
-    case 'place-mine': case 'technology': return `${MINES[a.id].name} at mine ${coordinate(a.space,rulesFor(state).board.mineWidth)} · ${money(a.cost)}`;
+    case 'place-mine': case 'technology': return `${mineDrawName(state,a.id)} at mine ${coordinate(a.space,rulesFor(state).board.mineWidth)} · ${money(a.cost)}`;
     case 'barbara': return `Spend one pelican · ${BARBARA[currentBarbara(state)][0]}`;
     case 'house': return `Remove a ${GUILDS[a.id]} house`;
     case 'patrician': return `Seat ${a.color} directly`;
@@ -425,7 +440,7 @@ function renderChoices(actions, title, intro='') {
   const current=grouped[choice];
   const first=actions.find(a=>a.kind!=='skip');
   const groupButtons=isGrouped?`<div class="tile-options" aria-label="Choose tile">${ids.map(id=>{
-    const name=(MINES[id]??BUILDINGS[id]).name;
+    const name=MINES[id]?mineDrawName(state,id):BUILDINGS[id].name;
     return `<button type="button" class="outline ${selectionGroup===id?'active':''}" data-do="tile" data-value="${id}" aria-pressed="${selectionGroup===id}">${name}</button>`;
   }).join('')}</div>`:'';
   const useSelect=grouped.length>6 || grouped.some(a=>a.space!==undefined);
@@ -527,19 +542,61 @@ function renderRoundEnd(roundEnd) {
   </div>`;
 }
 
+function renderPhysicalDraw(prompt) {
+  if (prompt.kind==='event') {
+    return `<form id="physical-draw" class="physical-draw">
+      <p>Reveal your round ${state.round} event from deck ${prompt.set}.</p>
+      <label>Printed event title<select name="event" required>
+        <option value="">Select the title</option>
+        ${prompt.choices.map(id=>`<option value="${id}">${safe(EVENTS[id].name)}</option>`).join('')}
+      </select></label>
+      <button type="submit" class="primary fill">Confirm event</button>
+    </form>`;
+  }
+  const count=prompt.count;
+  const tiles=`${count} mine ${count===1?'tile':'tiles'}`;
+  if (prompt.kind==='mine-discard') {
+    return `<form id="physical-draw" class="physical-draw">
+      <p>Move ${tiles} from the top of the physical draw stack to the discard pile.</p>
+      <button type="submit" class="primary fill">Confirm discard</button>
+    </form>`;
+  }
+  const shuffle=prompt.beforeShuffle<count;
+  const draw=shuffle?(prompt.beforeShuffle
+    ? `Draw ${prompt.beforeShuffle}, then shuffle the discard pile and draw the remaining ${count-prompt.beforeShuffle}.`
+    : `Shuffle the discard pile, then draw ${tiles}.`):`Draw ${tiles} from your stack.`;
+  const labels={stars:'Stars',ore:'Ore production',pop:'Population',vp:'Immediate VP',extend:'Wood beside or below'};
+  return `<form id="physical-draw" class="physical-draw">
+    <p>${draw} Match the printed values and leave absent symbols at zero.</p>
+    ${Array.from({length:count},(_,i)=>`<fieldset class="mine-entry"><legend>Drawn tile ${i+1}</legend>
+      ${MINE_FIELDS.map(field=>`<label>${labels[field]}
+        <input name="${field}-${i}" type="number" inputmode="numeric" required step="1" min="${field==='extend'?1:0}" value="${field==='extend'?'':'0'}">
+      </label>`).join('')}
+    </fieldset>`).join('')}
+    <p class="fine">Keep the tiles in draw order until you see which one to place.</p>
+    <button type="submit" class="primary fill">Confirm mine draw</button>
+  </form>`;
+}
+
 function renderDecisions() {
   selections=[];
   let title='Your turn';
   let tag=state.phase==='action'?`${state.left} ${state.left===1?'card':'cards'} left`:'';
   let content='';
-  if (state.phase==='end') {
+  const prompt=physicalPrompt(state);
+  if (prompt) {
+    title=prompt.kind==='event'?'Reveal an event':prompt.kind==='mine-discard'?'Discard mine tiles':
+      state.actor===0?'Draw your mine tiles':`${playerName(state.actor)} needs a mine draw`;
+    content=renderPhysicalDraw(prompt);
+    tag='';
+  } else if (state.phase==='end') {
     title='Final scoring';
     content=renderResult();
   } else if (state.actor!==0) {
     const multiple=state.players.length>2;
     title=`${playerName(state.actor)} ${state.phase==='tax'?'taxes':'turn'}`;
     const what=multiple?'Play rivals':state.phase==='tax'?'Resolve rival taxes':'Play rival turn';
-    const flow=multiple?'Resolves rival turns and taxes until your next decision.':'';
+    const flow=multiple?(TABLETOP_BUILD?'Runs rival turns and pauses for physical draws.':'Resolves rival turns and taxes until your next decision.'):'';
     const step=state.phase==='tax'?'Resolve these taxes':state.pending.length?'Finish this Plan':'Play one Plan';
     content=`${flow?`<p class="muted rival-flow">${flow}</p>`:''}<button type="button" class="primary fill" data-do="rival" ${busy?'aria-busy="true"':''}>${busy?'Rival planning…':what}</button>
       ${state.mincmistr&&(state.phase==='action'||multiple)?`<button type="button" class="outline fill rival-step" data-do="rival-step">${step}</button>`:''}`;
@@ -561,7 +618,8 @@ function renderDecisions() {
         <span class="printed-plan-face" id="review-plan-face" aria-hidden="true"></span>View Plan card</button>`:''}
       <div class="review-actions">
         ${planEntry?.rule?`<p class="review-rule">${renderRule(planEntry.rule)}</p>`:''}
-        ${rivalReport.length?`<ul>${rivalReport.map(row=>`<li>${safe(row)}</li>`).join('')}</ul>`:'<p class="muted">Finished resolving the Plan.</p>'}
+        ${rivalReport.length?`<ul>${rivalReport.map(row=>`<li>${safe(row)}</li>`).join('')}</ul>`:
+          prompt?.kind==='mine-draw'?'<p class="muted">Waiting for the physical draw.</p>':'<p class="muted">Finished resolving the Plan.</p>'}
       </div>
     </div>
     ${renderPlanChanges(review.changes,review.roundEnd!==undefined)}
@@ -844,9 +902,11 @@ function sharedChanges(before,after) {
 
 function planChanges(before,after) {
   const seat=before.actor;
+  const changes=(from,to,keys)=>from.flatMap((cell,i)=>
+    keys.some(key=>cell?.[key]!==to[i]?.[key])?[i]:[]);
   return {
-    town:before.city.flatMap((tile,i)=>tile===after.city[i]?[]:[i]),
-    mine:before.mine.flatMap((tile,i)=>tile===after.mine[i]?[]:[i]),
+    town:changes(before.city,after.city,['id','owner','plot']),
+    mine:changes(before.mine,after.mine,['id','owner','rock','stars']),
     summary:[...playerChanges(before.players[seat],after.players[seat]),...sharedChanges(before,after)],
   };
 }
@@ -859,55 +919,89 @@ function roundEndReview(before,after) {
   return {notes,summary:[...sharedChanges(before,after),...players]};
 }
 
+async function rivalMoves(start, {onePlan=false, finishCardOnly=false}={}) {
+  const multiple=start.players.length>2;
+  const continuingPlan=onePlan&&start.pending.length>0;
+  const notes=continuingPlan&&review?.seat===start.actor?[...rivalReport]:[];
+  let next=start;
+  let afterAction;
+  const beforeRoundEnd=onePlan?position=>{afterAction=copyState(position);}:undefined;
+  let planNumber=null;
+  let steps=0;
+  while (next.actor!==0&&next.phase!=='end'&&!physicalPrompt(next)) {
+    const turn=next;
+    do {
+      if (++steps>120) throw Error('The rivals’ turns did not finish.');
+      const previousEntries=next.log.length;
+      let why;
+      if (next.mincmistr) {
+        next=playMincmistr(next,beforeRoundEnd);
+        if (onePlan && start.phase==='action') planNumber=next.mincmistr.lastPlans[start.actor-1]+1;
+      } else {
+        const action=botAction(next);
+        if (!action) throw Error('No legal rival action.');
+        if (!multiple&&['rights','build','place-mine','technology','income'].includes(action.kind)) why=actionRationale(next,action);
+        next=transition(next,action);
+      }
+      const afterTaxes=payZeroTaxes(next);
+      if (afterTaxes!==next && onePlan) afterAction??=next;
+      next=afterTaxes;
+      const entries=next.log.slice(previousEntries,afterAction?.log.length);
+      for (const {actor,text} of entries) {
+        if (actor!==turn.actor && !(onePlan && actor===null)) continue;
+        if (onePlan && plansByNote.has(text)) continue;
+        notes.push(onePlan?text:noteFor(turn.actor,text));
+      }
+      if (why) notes.push(why);
+    } while (!physicalPrompt(next)&&(onePlan||finishCardOnly?next.pending.length>0:
+      next.actor===turn.actor&&next.phase===turn.phase&&next.round===turn.round&&next.turn===turn.turn));
+    if (onePlan || finishCardOnly || !multiple || saveConflict || physicalPrompt(next)) break;
+    // Let the browser update between rivals on larger tables.
+    if (next.actor!==0&&next.phase!=='end') await new Promise(resolve=>setTimeout(resolve,0));
+  }
+  const reviewed=onePlan?{seat:start.actor,plan:planNumber,roundEnd:roundEndReview(afterAction,next)}:null;
+  if (reviewed?.plan) {
+    const before=continuingPlan?undo.findLast(({state:previous})=>
+      previous.seed===start.seed&&previous.round===start.round&&previous.turn===start.turn&&
+      previous.actor===start.actor&&previous.left===start.left+1&&!previous.pending.length&&
+      plansByNote.get(start.log[previous.log.length]?.text)===planNumber)?.state:start;
+    if (before) reviewed.changes=planChanges(before,afterAction??next);
+  }
+  return {state:next,rivalReport:onePlan||multiple?notes:notes.slice(0,6),review:reviewed};
+}
+
 function runRival(onePlan=false) {
-  if (state.actor===0 || state.phase==='end' || (onePlan && !state.mincmistr)) return;
+  if (state.actor===0 || state.phase==='end' || physicalPrompt(state) || (onePlan && !state.mincmistr)) return;
   changeGame(async()=>{
-    const start=state;
-    const multiple=start.players.length>2;
     await new Promise(resolve=>setTimeout(resolve,24));
-    let next=start;
-    const notes=[];
-    let afterAction;
-    const beforeRoundEnd=onePlan?position=>{afterAction=copyState(position);}:undefined;
-    let planNumber=null;
-    let steps=0;
-    while (next.actor!==0&&next.phase!=='end') {
-      const turn=next;
-      do {
-        if (++steps>120) throw Error('The rivals’ turns did not finish.');
-        const previousEntries=next.log.length;
-        let why;
-        if (next.mincmistr) {
-          next=playMincmistr(next,beforeRoundEnd);
-          if (onePlan && start.phase==='action') planNumber=next.mincmistr.lastPlans[start.actor-1]+1;
-        } else {
-          const action=botAction(next);
-          if (!action) throw Error('No legal rival action.');
-          if (!multiple&&['rights','build','place-mine','technology','income'].includes(action.kind)) why=actionRationale(next,action);
-          next=transition(next,action);
-        }
-        const afterTaxes=payZeroTaxes(next);
-        if (afterTaxes!==next && onePlan) afterAction??=next;
-        next=afterTaxes;
-        const entries=next.log.slice(previousEntries,afterAction?.log.length);
-        for (const {actor,text} of entries) {
-          if (actor!==turn.actor && !(onePlan && actor===null)) continue;
-          if (onePlan && plansByNote.has(text)) continue;
-          notes.push(onePlan?text:noteFor(turn.actor,text));
-        }
-        if (why) notes.push(why);
-      } while(onePlan?next.pending.length>0:
-        next.actor===turn.actor&&next.phase===turn.phase&&next.round===turn.round&&next.turn===turn.turn);
-      if (onePlan || !multiple || saveConflict) break;
-      // Let the browser update between rivals on larger tables.
-      if (next.actor!==0&&next.phase!=='end') await new Promise(resolve=>setTimeout(resolve,0));
-    }
-    if (saveConflict) return;
-    const reviewed=onePlan?{seat:start.actor,plan:planNumber,roundEnd:roundEndReview(afterAction,next)}:null;
-    if (reviewed?.plan) reviewed.changes=planChanges(start,afterAction??next);
-    await storePosition({state:next,rivalReport:onePlan||multiple?notes:notes.slice(0,6),review:reviewed});
+    const next=await rivalMoves(state,{onePlan});
+    if (!saveConflict) await storePosition(next);
   },{focus:true,planning:true});
 }
+
+byId('decisions').addEventListener('submit',event=>{
+  if (event.target.id!=='physical-draw') return;
+  event.preventDefault();
+  const prompt=physicalPrompt(state);
+  if (busy||saveConflict||!prompt) return;
+  const form=new FormData(event.target);
+  let input;
+  if (prompt.kind==='event') input=form.get('event');
+  else if (prompt.kind==='mine-draw') {
+    input=Array.from({length:prompt.count},(_,i)=>
+      Object.fromEntries(MINE_FIELDS.map(field=>[field,Number(form.get(`${field}-${i}`))])));
+  }
+  let next;
+  try { next=recordPhysicalDraw(state,input); }
+  catch (error) { say(error.message,true); return; }
+  changeGame(async()=>{
+    if (prompt.kind==='mine-draw'&&next.actor>0) {
+      const onePlan=review?.seat===next.actor&&review.plan===next.mincmistr?.lastPlans[next.actor-1]+1;
+      const result=await rivalMoves(next,{onePlan,finishCardOnly:true});
+      if (!saveConflict) await storePosition(result);
+    } else await storePosition({state:next,rivalReport,review});
+  },{focus:true});
+});
 function changeAction(card,kind) {
   const wasOpen=byId('decisions').querySelector('details')?.open??false;
   resetSelection();
@@ -971,7 +1065,7 @@ function openDialog(kind) {
     form.elements.mincmistrLevel.value=state.mincmistr?.level??'journeyman';
     form.elements.mincmistrDecks.value=state.mincmistr?.shared===false?'individual':'shared';
     form.elements.mincmistrTougher.checked=state.mincmistr?.tougher??false;
-    form.elements.events.checked=state.players.length>2&&state.events.length>0;
+    form.elements.events.checked=state.players.length>2&&usesEvents(state);
     form.elements.starter.value='0';
     fillTableOptions();
     byId('guild-side').value=String(state.side);
@@ -992,7 +1086,7 @@ byId('setup-form').addEventListener('submit',event=>{
   const setup=Number(form.get('setup'));
   const side=Number(form.get('side'));
   const next=createGame({
-    playerCount,setup,side,events:form.has('events'),seed:form.get('seed'),
+    playerCount,setup,side,events:form.has('events'),seed:form.get('seed'),tabletop:TABLETOP_BUILD,
     starter:Number(form.get('starter')),difficulty:form.get('difficulty'),
     mincmistr:{level:form.get('mincmistrLevel'),shared:form.get('mincmistrDecks')!=='individual',tougher:form.has('mincmistrTougher')},
     orders:[guildOrders(GUILD_SETUPS_BY_COUNT[playerCount][setup][side])[Number(form.get('rows'))]],
@@ -1016,6 +1110,7 @@ byId('file').addEventListener('change',async event=>{
   try {
     if (file.size>4_000_000) throw Error('That save is larger than 4 MB.');
     const next=readPosition(await file.text());
+    checkEdition(next);
     if (busy || saveConflict || state!==previous) throw Error('The game changed while the file was opening. Try importing again.');
     await changeGame(async()=>{
       const applied=await storePosition(next,{replace:true});
@@ -1098,6 +1193,11 @@ byId('digital-game').addEventListener('click',event=>{
         break;
       }
       case 'export': downloadJson(writeSave(state),'Kutna_Hora_Solo_Save.json'); break;
+      case 'export-digital-save': {
+        const previous=storageSlot(DIGITAL_STORAGE).read();
+        if (previous!==null) downloadJson(previous,'Kutna_Hora_v1.0_Save.json');
+        break;
+      }
       case 'export-unreadable':
         if (unreadableSave!==null) downloadJson(unreadableSave,'Kutna_Hora_Unreadable_Save.json');
         break;
@@ -1130,5 +1230,7 @@ function showMode() {
   if (changed) byId(drawOnly?'paper-title':'digital-title').focus();
 }
 window.addEventListener('hashchange',showMode);
+byId('physical-guide').hidden=!TABLETOP_BUILD;
+byId('physical-setup').hidden=!TABLETOP_BUILD;
 connectReference();
 showMode();

@@ -1,7 +1,7 @@
 import {
   BARBARA_TAX, BUILDINGS, BUILDING_GROUPS, CARDS, CARDS_PER_TURN, CITY_WIDTH, COMMODITY,
   EVENTS, GAME_RULES, GOODS, GUILDS, GUILD_SETUPS_BY_COUNT, HOUSE_EFFECTS, LABEL,
-  MINCMISTR_LEVELS, MINCMISTR_PLANS, MINES, MINE_GROUPS, MINE_ROWS, PATRICIANS,
+  MINCMISTR_LEVELS, MINCMISTR_PLANS, MINES, MINE_FIELDS, MINE_GROUPS, MINE_ROWS, PATRICIANS,
   REP_SCORE, RIVAL_SETTINGS, ROCK_STARS, SAVE_SCHEMA, SETUP_VERSION,
   TECHNOLOGY,
 } from './data.mjs';
@@ -26,6 +26,7 @@ const FROM_ORE = ['silver','permit'];
 const EFFECT_ID = action => JSON.stringify([action.kind,action.id,action.space,action.refill,action.color,action.card,action.as]);
 export const coordinate = (space, columns) => `${'ABCDEFG'[space%columns]}${1+Math.floor(space/columns)}`;
 export const eventNow = state => EVENTS[state.events[state.round-1]];
+export const usesEvents = state => state.tabletop?.events ?? state.events.length>0;
 export const currentBarbara = state => Math.min(state.barbara,12);
 const commodityRecord = () => Object.fromEntries(GOODS.map(key => [key,0]));
 const tokenRecord = count => Object.fromEntries(PATRICIANS.map(key => [key,count]));
@@ -134,10 +135,15 @@ export function createGame(options = {}) {
   if (Number.isInteger(options.mineLayout) && layouts[options.mineLayout]) state.mineLayout=options.mineLayout;
   const rocks = shuffle(state,ROCK_STARS);
   for (const [i,space] of layouts[state.mineLayout].entries()) state.mine[space]={rock:true,stars:rocks[i]};
-  state.mineDeck = MINE_GROUPS.flatMap(group=>shuffle(state,group.map(tile=>tile.id)));
   const pool = key => Object.keys(EVENTS).filter(id=>EVENTS[id].set===key);
-  if (count===2 || options.events===true) {
-    state.events=[...shuffle(state,pool('A')).slice(0,rules.redRound),
+  const events=count===2||options.events===true;
+  if (options.tabletop) {
+    state.tabletop={events,unseenDiscards:MINE_GROUPS.map(()=>0)};
+    // Tile IDs are candidates for matching the physical faces, in no draw order.
+    state.mineDeck=MINE_GROUPS.flat().map(tile=>tile.id);
+  } else {
+    state.mineDeck=MINE_GROUPS.flatMap(group=>shuffle(state,group.map(tile=>tile.id)));
+    if (events) state.events=[...shuffle(state,pool('A')).slice(0,rules.redRound),
       ...shuffle(state,pool('B')).slice(0,rules.rounds-rules.redRound-1)];
   }
   beginRound(state);
@@ -147,12 +153,14 @@ export function createGame(options = {}) {
 export function copyState(state, keepLog = true) {
   return {
     ...state,
+    ...(state.tabletop?{tabletop:{...state.tabletop,unseenDiscards:[...state.tabletop.unseenDiscards]}}:{}),
     players:state.players.map(p=>({...p,production:{...p.production},houses:[...p.houses],held:[...p.held]})),
     city:[...state.city], mine:[...state.mine],
     pending:state.pending.map(item=>item.drawn?{...item,drawn:[...item.drawn]}:{...item}),
     market:state.market.map(row=>row.map(stack=>({group:stack.group,tiles:[...stack.tiles]}))),
     arms:{...state.arms}, bank:{...state.bank}, patrons:{...state.patrons}, council:{...state.council},
     mineDeck:[...state.mineDeck], mineDiscard:[...state.mineDiscard], marketDiscard:[...state.marketDiscard],
+    events:[...state.events],
     log:keepLog && state.log ? [...state.log] : null,
   };
 }
@@ -391,7 +399,7 @@ export function taxCost(state, seat) {
 }
 
 export function legalActions(state) {
-  if (state.phase==='end') return [];
+  if (state.phase==='end'||physicalPrompt(state)) return [];
   const p=state.players[state.actor];
   if (state.phase==='tax') {
     const cost=taxCost(state,state.actor);
@@ -434,6 +442,10 @@ function startMine(state, action, free) {
     fillPool(p,action.refill);
     log(state,state.actor,`Recruited ${action.refill} ${action.refill===1?'miner':'miners'} for ${action.cost} g.`);
   }
+  if (state.tabletop) {
+    state.pending.unshift({kind:'mine-draw',free});
+    return;
+  }
   const drawn=[];
   for (let i=0;i<state.technology+1;i++) {
     const id=popMine(state);
@@ -441,7 +453,7 @@ function startMine(state, action, free) {
   }
   if (drawn.length) state.pending.unshift({kind:'mine-place',free,drawn});
 }
-function placeMine(state, action, free) {
+function placeMine(state, action, free, label=MINES[action.id].name) {
   const seat=state.actor;
   const p=state.players[seat];
   const tile=MINES[action.id];
@@ -452,7 +464,7 @@ function placeMine(state, action, free) {
   produce(state,seat,'ore',tile.ore);
   advanceDemand(state,'pop',tile.pop);
   p.vp+=tile.vp;
-  log(state,seat,`Placed ${tile.name} at mine ${coordinate(action.space,rulesFor(state).board.mineWidth)} for ${action.cost} g.`);
+  log(state,seat,`Placed ${label} at mine ${coordinate(action.space,rulesFor(state).board.mineWidth)} for ${action.cost} g.`);
 }
 
 function claimRights(state, action) {
@@ -559,8 +571,14 @@ function resolvePending(state, action) {
   switch(item.kind) {
     case 'mine-place':
       for (const id of item.drawn) if (id!==action.id) state.mineDiscard.push(id);
-      if (action.kind==='place-mine') placeMine(state,action,item.free);
-      else log(state,seat,'Discarded the mine draw.');
+      if (action.kind==='place-mine') {
+        const label=state.tabletop?`drawn tile ${item.drawn.indexOf(action.id)+1}`:undefined;
+        placeMine(state,action,item.free,label);
+      } else log(state,seat,'Discarded the mine draw.');
+      if (state.tabletop) {
+        const count=item.drawn.length-Number(action.kind==='place-mine');
+        if (count) log(state,seat,`Put ${count} unused mine ${count===1?'tile':'tiles'} on the physical discard pile.`);
+      }
       break;
     case 'technology':
       if (action.kind==='technology') placeMine(state,action,true);
@@ -689,6 +707,14 @@ function resolveEvent(state) {
       break;
     case 'code': {
       // Discard from the current stack. A later Mine draw triggers recycling.
+      if (state.tabletop) {
+        if (undrawnMines(state)>0) {
+          state.phase='mine-discard';
+          return;
+        }
+        log(state,null,`${event.name} found no mine tiles left in the draw stack.`);
+        return;
+      }
       const discarded=state.mineDeck.splice(0,5);
       state.mineDiscard.push(...discarded);
       const count=discarded.length;
@@ -713,6 +739,13 @@ function beginRound(state) {
   state.left=CARDS_PER_TURN[0];
   state.phase='action';
   for (const p of state.players) p.hand=UNPLAYED;
+  if (state.tabletop?.events && state.round<rulesFor(state).rounds) {
+    state.phase='event';
+    return;
+  }
+  announceRound(state);
+}
+function announceRound(state) {
   const event=eventNow(state);
   if (event) addTax(state,event.tax);
   log(state,null,`Round ${state.round} begins${event?` · ${event.name}`:''}.`);
@@ -736,6 +769,13 @@ function finishRound(state) {
   state.starter=(state.starter+1)%state.players.length;
   beginRound(state);
 }
+function beginTaxes(state) {
+  if (state.players.every((_,seat)=>taxCost(state,seat)===0)) finishRound(state);
+  else {
+    state.phase='tax';
+    state.taxIndex=0;
+  }
+}
 export function finishCard(state, beforeRoundEnd) {
   if (state.pending.length || state.left>0) return;
   state.turn++;
@@ -743,15 +783,78 @@ export function finishCard(state, beforeRoundEnd) {
     beforeRoundEnd?.(state);
     state.actor=state.starter;
     resolveEvent(state);
-    if (state.events[state.round-1]==='rush' || state.players.every((_,seat)=>taxCost(state,seat)===0)) finishRound(state);
-    else {
-      state.phase='tax';
-      state.taxIndex=0;
-    }
+    if (state.phase!=='mine-discard') beginTaxes(state);
     return;
   }
   state.actor=seatAtTurn(state,state.turn);
   state.left=cardsThisTurn(state);
+}
+
+export function undrawnMines(state) {
+  return state.mineDeck.length-(state.tabletop?.unseenDiscards.reduce((sum,count)=>sum+count,0)??0);
+}
+
+function nextMineTier(state) {
+  const backs=MINE_GROUPS.map(()=>0);
+  for (const id of state.mineDeck) backs[MINES[id].tier-1]++;
+  return backs.findIndex((count,i)=>count>state.tabletop.unseenDiscards[i])+1;
+}
+
+export function physicalPrompt(state) {
+  if (!state.tabletop) return null;
+  if (state.phase==='event') {
+    const set=state.round<=rulesFor(state).redRound?'A':'B';
+    return {kind:'event',set,choices:Object.keys(EVENTS).filter(id=>EVENTS[id].set===set&&!state.events.includes(id))};
+  }
+  if (state.phase==='mine-discard') return {kind:'mine-discard',count:Math.min(5,undrawnMines(state))};
+  if (state.pending[0]?.kind!=='mine-draw') return null;
+  const count=Math.min(state.technology+1,state.mineDeck.length+state.mineDiscard.length);
+  return {kind:'mine-draw',count,beforeShuffle:Math.min(count,undrawnMines(state))};
+}
+
+export function mineDrawName(state,id) {
+  const draw=state.tabletop&&state.pending[0]?.drawn;
+  const index=draw?.indexOf(id)??-1;
+  return index<0?MINES[id].name:`Drawn tile ${index+1}`;
+}
+
+export function recordPhysicalDraw(state, input) {
+  const prompt=physicalPrompt(state);
+  if (!prompt) throw Error('There is no physical draw to confirm.');
+  const next=copyState(state);
+  if (prompt.kind==='event') {
+    if (!prompt.choices.includes(input)) throw Error('Choose the title on the event card you revealed.');
+    next.events.push(input);
+    next.phase='action';
+    announceRound(next);
+  } else if (prompt.kind==='mine-discard') {
+    for (let i=0;i<prompt.count;i++) {
+      const tier=next.mineMixed?1:nextMineTier(next);
+      next.tabletop.unseenDiscards[tier-1]++;
+    }
+    log(next,null,`${eventNow(next).name} set aside ${prompt.count} physical mine ${prompt.count===1?'tile':'tiles'}.`);
+    beginTaxes(next);
+  } else {
+    if (!Array.isArray(input)||input.length!==prompt.count) throw Error(`Enter ${prompt.count} mine ${prompt.count===1?'tile':'tiles'}.`);
+    const drawn=[];
+    for (const [index,face] of input.entries()) {
+      if (undrawnMines(next)===0) {
+        next.mineDeck.push(...next.mineDiscard);
+        next.mineDiscard=[];
+        next.tabletop.unseenDiscards.fill(0);
+        next.mineMixed=true;
+      }
+      const tier=next.mineMixed?null:nextMineTier(next);
+      const match=next.mineDeck.findIndex(id=> {
+        const tile=MINES[id];
+        return (!tier||tile.tier===tier)&&MINE_FIELDS.every(field=>tile[field]===face?.[field]);
+      });
+      if (match<0) throw Error(`Drawn tile ${index+1} does not match an available tile. Check its printed values and the draw order.`);
+      drawn.push(next.mineDeck.splice(match,1)[0]);
+    }
+    next.pending[0]={kind:'mine-place',free:next.pending[0].free,drawn};
+  }
+  return next;
 }
 function resolveTax(state, action, beforeRoundEnd) {
   const p=state.players[state.actor];

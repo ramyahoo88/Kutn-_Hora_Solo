@@ -2,7 +2,7 @@ import {
   BUILDINGS,CARDS,EVENTS,GOODS,GUILD_SETUPS_BY_COUNT,MINCMISTR_LEVELS,MINCMISTR_PLANS,MINCMISTR_RULES_VERSION,
   MINE_GROUPS,MINE_ROWS,MINES,PATRICIANS,PLAN_EXPLANATION_LIMIT,RIVAL_SETTINGS,SAVE_SCHEMA,SETUP_VERSION,TECHNOLOGY,VERSION,
 } from './data.mjs';
-import {cardsThisTurn,finalResult,legalActions,plotCount,rulesFor,seatAtTurn,turnsPerRound,validPlanDeck} from './engine.mjs';
+import {cardsThisTurn,finalResult,legalActions,physicalPrompt,plotCount,rulesFor,seatAtTurn,turnsPerRound,undrawnMines,usesEvents,validPlanDeck} from './engine.mjs';
 
 export const SAVE_KIND = 'kutna-hora-solo';
 export const AUTOSAVE_UNDO_LIMIT = 5;
@@ -36,7 +36,9 @@ function validTurn(s) {
   for (let turn=0; turn<s.turn; turn++) {
     played[seatAtTurn(s,turn)] += cardsThisTurn(s,turn);
   }
-  if (s.phase==='action') {
+  if (s.phase==='event') {
+    if (s.turn!==0 || s.actor!==s.starter || s.left!==cardsThisTurn(s) || s.pending.length) return false;
+  } else if (s.phase==='action') {
     if (s.turn===turnCount || s.actor!==seatAtTurn(s,s.turn)) return false;
     const used = cardsThisTurn(s)-s.left;
     const resolving = s.pending.length>0;
@@ -45,6 +47,7 @@ function validTurn(s) {
   } else {
     if (s.turn!==turnCount || s.left!==0 || s.pending.length) return false;
     if (s.phase==='tax' && s.actor!==seatAtTurn(s,s.taxIndex)) return false;
+    if (s.phase==='mine-discard' && s.actor!==s.starter) return false;
     if (s.phase==='end' && s.round!==rulesFor(s).rounds) return false;
   }
   return s.players.every((p,seat)=>CARDS.filter((_,card)=>!(p.hand&(1<<card))).length===played[seat]);
@@ -63,7 +66,11 @@ export function checkGame(s) {
   ok(RIVAL_SETTINGS.includes(s.difficulty),'rival setting');
   ok(integer(s.round,1,rounds)&&integer(s.starter,0,count-1)&&integer(s.actor,0,count-1)&&
     integer(s.turn,0,turnsPerRound(s))&&integer(s.left,0,2),'turn');
-  ok(['action','tax','end'].includes(s.phase)&&Array.isArray(s.pending)&&s.pending.length<=4,'phase');
+  const tabletop=s.tabletop;
+  ok(tabletop===undefined||tabletop&&typeof tabletop.events==='boolean'&&(count>2||tabletop.events)&&
+    array(tabletop.unseenDiscards,MINE_GROUPS.length)&&tabletop.unseenDiscards.every(n=>integer(n,0,27)),'physical draw settings');
+  const phases=['action','tax','end',...(tabletop?['event','mine-discard']:[])];
+  ok(phases.includes(s.phase)&&Array.isArray(s.pending)&&s.pending.length<=4,'phase');
   ok(s.phase!=='tax'||integer(s.taxIndex,0,count-1),'tax order');
   ok(validMincmistr(s,count),'Mincmistr settings or Plan deck');
   const assigned=new Set();
@@ -95,16 +102,29 @@ export function checkGame(s) {
   const buildings=[...s.market.flatMap(row=>row.flatMap(stack=>stack.tiles)),...s.marketDiscard,...s.players.flatMap(p=>p.held),
     ...s.city.flatMap(cell=>cell?.id?[cell.id]:[]),...(s.round<=redRound?s.red:[])];
   ok(buildings.length===Object.keys(BUILDINGS).length&&new Set(buildings).size===buildings.length,'building supply');
-  const eventsOff=count>2&&array(s.events,0);
-  ok(eventsOff||array(s.events,rounds-1)&&new Set(s.events).size===rounds-1&&
+  const reveals=Math.min(s.round-Number(s.phase==='event'),rounds-1);
+  const eventCount=tabletop?(tabletop.events?reveals:0):rounds-1;
+  const eventsOff=!tabletop&&count>2&&array(s.events,0);
+  ok(eventsOff||array(s.events,eventCount)&&new Set(s.events).size===eventCount&&
     s.events.every((id,i)=>known(EVENTS,id)&&EVENTS[id].set===(i<redRound?'A':'B')),'event order');
+  ok(s.phase!=='event'||tabletop.events&&s.round<rounds,'event reveal');
   ok(integer(s.pop,0,40)&&integer(s.ore,0,30)&&tally(s.arms,GOODS,4)&&integer(s.tax,0,25)&&integer(s.barbara,1,12),'shared tracks');
   ok(tally(s.bank,PATRICIANS,3)&&tally(s.patrons,PATRICIANS,3)&&tally(s.council,PATRICIANS,3)&&
     PATRICIANS.every(id=>s.bank[id]+s.patrons[id]+s.council[id]===3),'council supply');
   ok(integer(s.technology,0,TECHNOLOGY.length)&&typeof s.mineMixed==='boolean','technology');
   ok(Array.isArray(s.mineDeck)&&Array.isArray(s.mineDiscard)&&s.mineDeck.every(regularMine)&&s.mineDiscard.every(regularMine),'mine deck');
+  if (tabletop) {
+    ok(undrawnMines(s)>=0&&(s.mineMixed?tabletop.unseenDiscards.slice(1).every(n=>n===0):
+      tabletop.unseenDiscards.every((n,i)=>n<=s.mineDeck.filter(id=>MINES[id].tier===i+1).length)),'physical mine discards');
+    ok(s.phase!=='mine-discard'||s.events[s.round-1]==='code'&&undrawnMines(s)>0,'mine discard prompt');
+  }
   const pendingKinds=['mine-place','technology','right','house','patrician','score-building','plot','build','income','mine'];
-  ok(s.pending.every(item=>{
+  ok(s.pending.every((item,index)=>{
+    if (item?.kind==='mine-draw') {
+      const p=s.players[s.actor];
+      return tabletop&&index===0&&typeof item.free==='boolean'&&(item.free?p.reserve+p.pool:p.pool)>0&&
+        s.mineDeck.length+s.mineDiscard.length>0&&item.drawn===undefined;
+    }
     if (!pendingKinds.includes(item?.kind)) return false;
     if (item.kind==='mine-place') {
       const p=s.players[s.actor];
@@ -128,7 +148,7 @@ export function checkGame(s) {
   ok(s.phase==='end' ? array(s.result?.scores,count)&&(s.result.winner===null||integer(s.result.winner,0,count-1))&&s.result.scores.every(score=>
     score&&['earned','town','mines','income','reputation','extras','total','coins'].every(key=>integer(score[key],-99999,99999))
   ) : s.result===null,'final result');
-  ok(s.phase==='end'||legalActions(s).length>0,'legal continuation');
+  ok(s.phase==='end'||physicalPrompt(s)||legalActions(s).length>0,'legal continuation');
   return s;
 }
 
@@ -178,7 +198,9 @@ function startingSeat(state) {
 function isPriorPosition(before,state) {
   if (!before || before.seed!==state.seed || before.setup!==state.setup || before.side!==state.side ||
       before.difficulty!==state.difficulty || before.mineLayout!==state.mineLayout || before.players.length!==state.players.length ||
-      startingSeat(before)!==startingSeat(state) || before.events.join()!==state.events.join()) return false;
+      startingSeat(before)!==startingSeat(state) || Boolean(before.tabletop)!==Boolean(state.tabletop) ||
+      usesEvents(before)!==usesEvents(state)) return false;
+  if (state.tabletop ? !before.events.every((id,i)=>id===state.events[i]) : before.events.join()!==state.events.join()) return false;
   if (!before.players.every((player,i)=>player.guilds.join()===state.players[i].guilds.join())) return false;
   const old=before.mincmistr,next=state.mincmistr;
   if (old?.level!==next?.level || old?.shared!==next?.shared || old?.tougher!==next?.tougher) return false;
@@ -254,7 +276,7 @@ export function writePlaytestReport(current,previous,note=current.playtestNote??
         card:state.setup,side:state.side,players:state.players.length,guildRows:state.players.map(p=>p.guilds),
         mineLayout:state.mineLayout,startingSeat:startingSeat(state),
         difficulty:state.difficulty,level:state.mincmistr?.level??null,sharedDeck:state.mincmistr?.shared??null,
-        tougherMaster:state.mincmistr?.tougher??false,events:state.events.length>0,
+        tougherMaster:state.mincmistr?.tougher??false,events:usesEvents(state),
       },
       note:note.slice(0,1000),
       ...(source.appVersion||source.mincmistrRulesVersion?{source}:{}),

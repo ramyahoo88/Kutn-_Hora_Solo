@@ -1,13 +1,13 @@
 // Run the shipped controls in a DOM harness. Browser layout and native dialogs
 // are covered separately by browser-smoke.mjs.
 import assert from 'node:assert/strict';
-import {readFileSync} from 'node:fs';
 import {createGame,createPlanDeck,drawPlan,legalActions,transition} from '../src/engine.mjs';
 import {playMincmistr} from '../src/mincmistr.mjs';
 import {readPosition,readSave,writeSave} from '../src/save.mjs';
+import {digitalSmokeHtml} from './digital-smoke-html.mjs';
 
 const {JSDOM,VirtualConsole}=await import(process.env.JSDOM_MODULE??'jsdom');
-const html=readFileSync(new URL('../Kutna_Hora_Solo.html',import.meta.url),'utf8');
+const html=digitalSmokeHtml().toString('utf8');
 const GAME='kutna-hora-solo-v1';
 const PAPER='kutna-hora-mincmistr-deck-v1';
 const delay=ms=>new Promise(resolve=>setTimeout(resolve,ms));

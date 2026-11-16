@@ -328,6 +328,13 @@ dialog::backdrop { background: #100f11b9; }
 .field-grid .event-option { display: flex; align-items: center; gap: 7px; min-height: 36px; }
 .field-grid [hidden] { display: none; }
 .event-option input { accent-color: var(--brass); }
+.physical-draw { display: grid; gap: 12px; }
+.physical-draw p { margin: 0; }
+.physical-draw label { display: grid; gap: 4px; min-width: 0; color: var(--muted); }
+.physical-draw input { min-width: 0; width: 100%; min-height: 44px; padding: 7px 9px; border-radius: 6px; border: 1px solid #66625d; background: #222225; font: inherit; }
+.mine-entry { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; min-width: 0; margin: 0; padding: 8px; border: 1px solid #66625d; border-radius: 6px; }
+.mine-entry legend { padding: 0 4px; font-weight: 650; }
+.mine-entry label:last-child { grid-column: 1 / -1; }
 .input-pair { display: flex; gap: 5px; }
 @media (min-width: 1071px) {
   .summary.many-seats .economy { display: flex; gap: 12px; align-items: center; }
