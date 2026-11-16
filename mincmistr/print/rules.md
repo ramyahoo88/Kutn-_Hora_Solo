@@ -1,6 +1,6 @@
 # The Mincmistr
 
-**A card-driven solo opponent for Kutná Hora** · Version 1.2.4 · 15 Nov 2026
+**A card-driven solo opponent for Kutná Hora** · Version 1.2.5 · 15 Nov 2026
 
 Play against one, two or three Mincmistrs, using the normal board and round count for that table size. A Mincmistr starts like a player, pays every cost and either pays its taxes or loses reputation. It obeys the piece limits and scores the same way at the end. It gets no starting points and no hidden information. It makes its choices with a short checklist, a deck of 15 Plan cards and a fixed row of six action cards.
 
@@ -79,7 +79,7 @@ Each one still needs a card in the row and enough coins. Rule 6 gives its choice
 
 ### 5.2 Mine
 
-It takes a Mine action using a miner from its pool. If its pool is empty, it recruits as many miners as it can, up to 2, paying the permit price. Then it draws mine tiles as normal and places one (rule 6.4).
+It takes a Mine action using a miner from its pool. If its pool is empty, it pays for one permit and recruits as many available reserve miners as it can, up to 2. With an empty pool, Mine is not possible if it cannot pay or has no reserve miners. Otherwise, it draws mine tiles as normal and places one (rule 6.4).
 
 ### 5.3 St. Barbara
 
@@ -109,7 +109,7 @@ Among legal, affordable builds, choose the **most production** (public buildings
 
 Of the tiles drawn, it keeps the one with the most **stars + ore + VP**. Ties go to more stars, then the first tile drawn.
 
-It places that tile where it **gains the most mine-row points right now**: the award it would hold in that row after placing, minus the award it holds there now. Use the normal mine-row awards. With two players, a row with 0–3 stars in total pays 2 to the leader and 0 to the other player, 4–6 stars pays 4 and 1, and 7 or more pays 6 and 2. Tied players both take the higher award, and a player with no stars in a row scores nothing there. A tile with no stars gains nothing anywhere.
+It places that tile where it **gains the most mine-row points right now**: the award it would hold in that row after placing, minus the award it holds there now. Use the award table printed on the board for this player count. With two players, a row with 0–3 stars in total pays 2 to the leader and 0 to the other player, 4–6 stars pays 4 and 1, and 7 or more pays 6 and 2. Tied players each receive the full award for their place and occupy all tied positions. A player with no stars in a row scores nothing there. A tile with no stars gains nothing anywhere.
 
 Ties go to the cheapest space, then the row where it has the fewest mines, then the arrow. If it cannot pay for any space, it discards the draw.
 
@@ -119,8 +119,8 @@ Free tiles from technology use the same placement rule.
 
 Keep the current Plan and its arrow for bonus choices. Bonus actions and placements use no additional action card or Plan and do not repeat rule 4. Follow the bonus effect's costs and normal component limits.
 
-- **Free building right** (house reward or St. Barbara tile 2): take the eligible public tile with the highest **VP + 2 per pelican + 2 per reputation**. If no public tile is eligible, tile 2 takes an eligible right from its own guilds with the highest income value. A house reward takes only public rights. Break either tie by market reading order (higher row, then further left). If no right qualifies, take nothing. The three-right limit still applies.
-- **Remove a house**: among guild rows that still have a house, choose the row with the most houses already removed. Ties go to the topmost eligible row. It always takes optional house removals.
+- **Free building right** (house reward or St. Barbara tile 2): rank eligible public tiles by their printed rewards: **VP + 2 × pelicans granted + 2 × reputation granted**. Take the highest value. If no public tile is eligible, tile 2 takes an eligible right from its own guilds with the highest income value. A house reward takes only public rights. Break either tie by market reading order (higher row, then further left). If no right qualifies, take nothing. The three-right limit still applies.
+- **Remove a house**: when an effect lets it choose a row, choose the guild row with the most houses already removed that still has a house. Ties go to the topmost eligible row. A normal guild Build removes a house from that building's guild row. It always takes optional house removals.
 - **Seat a patrician from the bank**: the colour with the biggest edge (rule 6.6), even if that edge is 0 or less. Ties go green, silver, yellow, red.
 - **Score a building** (St. Barbara): its building with the most town points. Ties go by the arrow.
 - **Dig twice** (St. Barbara tile 9): it takes both free Mine actions, as the tile says, using miners from its reserve first. Placement is free; place each tile by rule 6.4.
@@ -135,8 +135,8 @@ Whenever it takes Income, it seats a patrician if three things are true: one is 
 | Colour | Points per patrician |
 |---|---|
 | Green | 1 for each public building next to each of its buildings |
-| Silver | 3 for every 2 pelicans it has used |
-| Yellow | 2 per mine in its weakest mine row, counting at most 2 |
+| Silver | 3 VP per complete pair of pelicans it has used |
+| Yellow | 2 VP if it has a mine in every row; 4 VP if it has at least 2 in every row |
 | Red | 3 for each complete column of removed houses |
 
 ## 7. The arrow
@@ -166,7 +166,7 @@ This applies to town plots, building placement and mine spaces.
 
 Master and Grandmaster give it extra actions only. They never add points, coins or discounts.
 
-**Fine-tuning.** Give the double last turn to the last N rounds. Choose N from 0 to the number of rounds in the game. Master is N = 3. Grandmaster uses every round (N = 6 with two or three players and N = 5 with four). Each extra round is worth about 1.5 to 2.5 points in the two-player simulations in rule 12.
+**Fine-tuning.** Give the double last turn to the last N rounds. Choose N from 0 to the number of rounds in the game. Master is N = 3. Grandmaster uses every round (N = 6 with two or three players and N = 5 with four).
 
 ## 10. Two or three Mincmistrs
 
@@ -176,7 +176,7 @@ To face more opponents, set up a three- or four-player game using rule 1. Give e
 - Each Mincmistr follows these rules on its own.
 - Wherever a rule compares it with "you", it compares with the best of its opponents, you and the other Mincmistrs alike.
 - All of them play at the same level.
-- With three players, Master is slightly easy: the Standard rival won about 39% against a fair share of 33%. For a tougher three-player game, double the last turn in rounds 3–6 (rule 9, N = 4).
+- For a tougher three-player game, double the last turn in rounds 3–6 (rule 9, N = 4).
 
 ## 11. Example
 
@@ -186,34 +186,7 @@ At 26 g it is not short of cash. It has only 1 pelican, and the current St. Barb
 
 It draws two tiles and keeps the one with 2 stars, because it has more stars + ore + VP. You lead the top row 2 stars to 0, with 2 stars in that row. In the second row, you have 3 stars and it has 1, out of 4 stars in total. The 2-star tile in the top row gives a total of 4 stars, tied at 2 each, so it moves from 0 to the leader's 4 points: a gain of 4. In the second row it would also tie at 3 stars, but the 6-star total keeps the award at 4 and 1, so its share rises from 1 to 4: a gain of 3. It places the tile in the top row, on the cheapest space there. If two spaces tie, it takes the latest in reading order.
 
-## 12. How strong is it?
-
-These results come from simulated two-player games in the Kutná Hora Solo engine (v0.3.0) against the app's two rivals. All seeds were held out from tuning, and every game set covers both seats and both starting players. The Standard column uses 768 games per level and the Quick column 384. The figures are the Mincmistr's win rate and its average margin in points.
-
-| Level | vs the app's Quick rival | vs the app's Standard rival |
-|---|---|---|
-| Apprentice | 52% · +0.0 | 20% · −9.1 |
-| Journeyman | 64% · +3.3 | 33% · −5.1 |
-| Master | 77% · +7.6 | 50% · −0.3 |
-| Grandmaster | 87% · +12.2 | 71% · +5.5 |
-
-If you usually beat the app's Standard rival, start at Master. Each level is worth about 5 points.
-
-Against two or three Mincmistrs, here is how often the app's Standard rival wins when it takes your seat (288–576 games each):
-
-| Opponents | Apprentice | Journeyman | Master | Grandmaster |
-|---|---|---|---|---|
-| 2 Mincmistrs (3 players, fair share 33%) | 70% | 57% | 39% | 18% |
-| 3 Mincmistrs (4 players, fair share 25%) | 64% | 48% | 25% | 19% |
-
-Fine-tuning in two-player games against the Standard rival, by the number of final rounds with a double last turn (768 games each):
-
-| N | 0 (Journeyman) | 1 | 2 | 3 (Master) | 4 | 5 | 6 (Grandmaster) |
-|---|---|---|---|---|---|---|---|
-| Win rate | 33% | 40% | 44% | 50% | 58% | 67% | 71% |
-| Margin | −5.1 | −3.7 | −2.1 | −0.3 | +2.2 | +4.0 | +5.5 |
-
-## 13. Quick reference
+## 12. Quick reference
 
 1. Flip a Plan card.
 2. Fewer than 20 g: **Income**.

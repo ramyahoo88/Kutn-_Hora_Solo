@@ -79,22 +79,22 @@ def ref_cards(headings=True):
       1. <b>Build</b> with a right and a plot.<br>
       2. <b>Plot</b> if rights &gt; plots and plots &lt; 3.<br>
       3. <b>Rights</b> with fewer than 2 rights.</p>
-      <p><b style="color:#3d4f63">Mine</b>: use a pool miner, or recruit up to 2 if empty.</p>
+      <p><b style="color:#3d4f63">Mine</b>: use a pool miner; if empty, pay one permit fee to recruit up to 2. Skip if unable.</p>
       <p><b style="color:#a0761c">St. Barbara</b>: spend a pelican.</p>
       <p><b style="color:#5a4a86">Income</b>: seat the available patrician with the biggest <b>edge ≥ 1</b> if it can pay 10 g. Ties: green, silver, yellow, red.</p>
       <p class="small"><b>Edge</b>: own VP per patrician minus the best opponent's.</p>
       <div class="edge">{dot('#3f8a4a')} 1 per public neighbour of each of its buildings<br>
-      {dot('#a9b0b8')} 3 per 2 pelicans used<br>
-      {dot('#d8b43a')} 2 per mine in its weakest row (max 2)<br>
+      {dot('#a9b0b8')} 3 VP per complete pair of used pelicans<br>
+      {dot('#d8b43a')} 2 VP with a mine in every row; 4 VP with 2+ in every row<br>
       {dot('#b8432f')} 3 per full column of removed houses</div>
       <p class="levels small"><b>Journeyman</b>: as written. <b>Master</b>: play both remaining cards on its last turn in the final 3 rounds. <b>Grandmaster</b>: every round.</p></div>'''
     c3 = f'''{start('Choices')}
-      <p><b>Buy Rights</b>: affordable own guild, house left, demand permits building. Most production × price, then cost, higher row, leftmost.</p>
+      <p><b>Buy Rights</b>: affordable own guild, house left, enough demand. Most production × price, then cost, higher row, leftmost.</p>
       <p><b>Plot</b>: best dot count of any held right (0 if none), then cost, then arrow.</p>
       <p><b>Build</b>: production (0 for public), dots, arrow, first acquired.</p>
       <p><b>Mine</b>: keep most ★ + ore + VP, then most ★, first drawn. Place by row VP gain, cost, fewest own mines in row, arrow.</p>
-      <p><b>Free right</b>: house rewards are public only. St. Barbara 2: eligible public, else eligible own guild. Rank by VP + 2/pelican + 2/rep (public) or production × price (guild). Ties: higher row, leftmost.</p>
-      <p><b>Remove house</b>: nonempty row with most removed. Topmost if tied.</p>
+      <p><b>Free right</b>: house rewards: eligible public only. St. Barbara 2: eligible public, else eligible own guild. Public: printed rewards, VP + 2 × pelicans + 2 × reputation. Guild: production × price. Ties: higher row, leftmost.</p>
+      <p><b>House row (if a choice)</b>: nonempty row with most removed; topmost if tied.</p>
       <p class="small"><b>Apprentice</b>: Plot by cost, arrow. Build skips dots. Keep the normal mine tile choice. Place by fewest own mines in row, cost, arrow.</p></div>'''
     return [c1, c2, c3]
 
@@ -254,7 +254,7 @@ def refresh_rules(source_pdf, out_pdf, card_text=False):
         .rules p { margin: 2pt 0 3pt; }
         .rules th, .rules td { padding: 1.6pt 5pt; }
     """
-    page_starts = ('**4.3 Plan.**', '### 6.5 Bonus steps', '## 10. Two or three Mincmistrs')
+    page_starts = ('**4.3 Plan.**', '### 6.5 Bonus steps', '## 9. Difficulty')
     breaks = [0, *(rules_md.index(heading) for heading in page_starts), len(rules_md)]
     stream = BytesIO()
     archive = fitz.Archive(str(fonts))

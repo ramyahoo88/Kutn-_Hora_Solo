@@ -11,13 +11,15 @@ When playing at the table, choose **Draw only** to use the printed Plan faces as
 ## Read or print
 
 - `Mincmistr_Print_and_Play.pdf`: rules on pages 1–4, card sheets on pages 5–8. Print at 100% on Letter or A4.
-- `Mincmistr_Rules.md`: the v1.2.4 rulebook text, with clarified bonus timing, placement priorities, Rights and four-player Grandmaster.
+- `Mincmistr_Rules.md`: the v1.2.5 rulebook text, with clarified printed public rewards, mine awards, patricians, house-row choices and permit recruitment.
 - [One-page table reference](print/reference-sheet.md). Print it from the app, or build a Letter or A4 PDF using the command below.
 - `Mincmistr_Sim_Report.md`: design history, test method and results.
 - `Mincmistr_Sample_Game.md`: two rounds of a simulated game, annotated rule by rule.
 - `NOTES.md`: the overnight lab notebook.
 
-To update a printed v1.2.3 set, replace the rules on pages 1–4 and the reference cards on page 7. The earlier Plan deck works with these rules. The new fronts say “2+ pelicans” to make the threshold explicit.
+Version 1.2.5 clarifies the existing rules without changing the Mincmistr’s decisions. The simulation-strength section has been removed from the rulebook, and Quick reference is now rule 12. The studies below remain available as design history.
+
+To update a printed v1.2.4 set, replace the rules on pages 1–4 and the Goals and Choices reference cards on page 7. The earlier Plan deck and Card play reference card still work.
 
 ## Strength (holdout seeds, Mincmistr's win rate and margin)
 
@@ -65,10 +67,10 @@ Run every command from the repository root. The scripts import the engine from `
   python3 mincmistr/print/build.py --refresh-rules mincmistr/Mincmistr_Print_and_Play.pdf /tmp/Mincmistr_Print_and_Play.pdf
   ```
 
-  To reproduce the v1.2.4 print release while retaining the card frames and backs, use the PDF from [v0.3.9-playtest](https://github.com/ramyahoo88/Kutn-_Hora_Solo/blob/v0.3.9-playtest/mincmistr/Mincmistr_Print_and_Play.pdf) as the input to `--refresh-copy`:
+  To reproduce the v1.2.5 print release while retaining the card frames and backs, use the PDF from [v0.3.10-playtest](https://github.com/ramyahoo88/Kutn-_Hora_Solo/blob/v0.3.10-playtest/mincmistr/Mincmistr_Print_and_Play.pdf) as the input to `--refresh-copy`:
 
   ```sh
-  python3 mincmistr/print/build.py --refresh-copy /tmp/Mincmistr_v1.2.3.pdf /tmp/Mincmistr_v1.2.4.pdf
+  python3 mincmistr/print/build.py --refresh-copy /tmp/Mincmistr_v1.2.4.pdf /tmp/Mincmistr_v1.2.5.pdf
   ```
 
 - `print/export_app_plans.py` crops the Plan fronts from the PDF for the app. After updating the PDF's cards, run `python3 mincmistr/print/export_app_plans.py` with Poppler and Pillow installed, then rebuild the offline HTML.

@@ -21,4 +21,4 @@
 
 Discard the draw if placement is impossible. Technology and both Mine actions from St. Barbara tile 9 use the same placement priorities at no wood cost. Use reserve miners first for those free mines.
 
-Mincmistr v1.2.4, rules 5.2, 6.4, 6.5, 7 and 9. Mine scoring follows the table printed on the Kutná Hora board.
+Mincmistr v1.2.5, rules 5.2, 6.4, 6.5, 7 and 9. Mine scoring follows the table printed on the Kutná Hora board.

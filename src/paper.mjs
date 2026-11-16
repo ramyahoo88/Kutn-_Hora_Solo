@@ -9,7 +9,7 @@ const RECENT_LIMIT = 5;
 const byId = id => document.getElementById(id);
 const goalText = {
   C: '<ol><li>Build if it holds a right and a plot.</li><li>Otherwise claim a plot if it holds more rights than plots and has fewer than three plots.</li><li>Otherwise buy an eligible guild right if it holds fewer than two rights.</li></ol>',
-  M: 'Use a miner from its pool. If the pool is empty, pay for a permit and recruit as many miners as possible, up to two. Draw the normal number of tiles for the current technology level. Keep the most stars + ore + VP, then the most stars, then the first drawn. Place it using the mine choice aid (rule 6.4).',
+  M: 'Use a miner from its pool. If the pool is empty, pay for one permit and recruit as many available reserve miners as possible, up to two. With an empty pool, Mine is unavailable if it cannot pay or has no reserve miners. Otherwise, draw the normal number of tiles for the current technology level. Keep the most stars + ore + VP, then the most stars, then the first drawn. Place it using the mine choice aid (rule 6.4).',
   S: 'Spend a pelican and resolve the current St. Barbara tile.',
 };
 

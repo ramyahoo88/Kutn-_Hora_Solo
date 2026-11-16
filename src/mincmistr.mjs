@@ -51,7 +51,7 @@ function unavailable(state,m,kind) {
 }
 // Rule 6.1: a tile's income value is its production times the current price of its commodity.
 const incomeValue = (state,id) => BUILDINGS[id].production*price(state,BUILDINGS[id].group);
-// Rule 6.5: a public tile's value is VP + 2 per pelican + 2 per reputation.
+// Rule 6.5: value the tile's printed VP, pelicans granted and reputation granted.
 const publicValue = id => { const t=BUILDINGS[id]; return t.vp+2*t.pelicans+2*t.rep; };
 // Rule 6.6: a patrician colour's edge is the Mincmistr's council score for it minus the best rival's.
 function edge(state, m, color) {
@@ -295,7 +295,7 @@ function bonus(state, m) {
         return skip;
       }
       const pubs=xs.filter(a=>BUILDINGS[a.id].public);
-      if (pubs.length) return rankedChoice(m,'6.5',pubs,[high('VP + 2 per pelican + 2 per reputation',a=>publicValue(a.id))],
+      if (pubs.length) return rankedChoice(m,'6.5',pubs,[high('Printed VP + 2 × pelicans granted + 2 × reputation granted',a=>publicValue(a.id))],
         a=>`Free public right to ${building(a)}`);
       return rankedChoice(m,'6.5',xs,[high('income value (g)',a=>incomeValue(state,a.id))],
         a=>`No public right on offer. Take the free guild right to ${building(a)}`);

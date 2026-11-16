@@ -1,6 +1,6 @@
 # Mincmistr table reference
 
-**Kutná Hora: The City of Silver · Mincmistr v1.2.4**
+**Kutná Hora: The City of Silver · Mincmistr v1.2.5**
 
 ## Play one action card
 
@@ -28,11 +28,11 @@
 
 **St. Barbara tile 2.** Prefer an eligible public right. Otherwise, take an eligible own-guild right with the highest production × price. With no eligible right, take nothing.
 
-Rank public rights by VP + 2 per pelican + 2 per reputation. Break ties by higher market row, then further left. The three-right limit applies to both rewards.
+Rank public rights by their printed rewards: VP + 2 × pelicans granted + 2 × reputation granted. Break ties by higher market row, then further left. The three-right limit applies to both rewards.
 
 ## Mine, Income and ties
 
-**Mine.** Use a pool miner or recruit up to two. Keep the most stars + ore + VP, then most stars, then first drawn. Place for most row VP gained, then cheapest, fewest own mines in row, arrow.
+**Mine.** Use a pool miner. If empty, pay one permit fee to recruit up to two reserves; skip if unable. Keep the most stars + ore + VP, then most stars, then first drawn. Place for most row VP gained, then cheapest, fewest own mines in row, arrow.
 
 **Income.** Collect income. If it can then pay 10 g, seat an available patrician with the biggest edge of at least 1 VP. Edge is its points per token minus the best opponent’s. Ties go green, silver, yellow, red. Pay taxes when able.
 
