@@ -5,7 +5,8 @@ import {
 import {
   applyKnownAction, canBuildGuild, cityPointsAt, copyState, coordinate, createGame, currentBarbara,
   eventNow, income, legalActions, marketOffer, mineDrawName, mineRows, patricianBase, physicalPrompt, plotCount, price,
-  recordPhysicalDraw, reputationChange, rulesFor, scoreBreakdown, seatName, taxCost, transition, unavailableActionReason, usesEvents,
+  recordPhysicalDraw, reputationChange, rulesFor, scoreBreakdown, seatName, taxCost, transition, unavailableActionReason,
+  undrawnMines, usesEvents,
 } from './engine.mjs';
 import {actionRationale,botAction} from './bot.mjs';
 import {describePlan,PLAN_DECK,playMincmistr,ROW} from './mincmistr.mjs';
@@ -16,6 +17,7 @@ import {downloadJson,storageSlot} from './storage.mjs';
 const TABLETOP_BUILD=false;
 const DIGITAL_STORAGE='kutna-hora-solo-v1';
 const STORAGE=TABLETOP_BUILD?'kutna-hora-tabletop-v1':DIGITAL_STORAGE;
+const MINE_DRAFT_STORAGE=`${STORAGE}-mine-draft`;
 const savedGame=storageSlot(STORAGE);
 const FIRST_SEED='silver-1308';
 const byId=id=>document.getElementById(id);
@@ -43,6 +45,7 @@ let rivalReport=[];
 let review=null;
 let importedReport;
 let savingDraft=null;
+let mineDraft=null;
 let flashTimer;
 let selectionGroup=null;
 let boardSeat=0;
@@ -54,6 +57,27 @@ function currentPosition() {
 function restorePlaytestNote(note='') {
   noteInput.value=note;
   noteInput.closest('details').open=Boolean(note);
+}
+
+function clearMineDraft() {
+  mineDraft=null;
+  if (!TABLETOP_BUILD) return;
+  try { sessionStorage.removeItem(MINE_DRAFT_STORAGE); }
+  catch {}
+}
+
+function mineEntryDraft() {
+  if (mineDraft) return mineDraft;
+  // Match the exact pending position. Drafts stay in this tab and out of saves.
+  const position=writeSave(state);
+  let values={};
+  try {
+    const saved=JSON.parse(sessionStorage.getItem(MINE_DRAFT_STORAGE));
+    if (saved?.position===position && saved.values && typeof saved.values==='object') values=saved.values;
+    else sessionStorage.removeItem(MINE_DRAFT_STORAGE);
+  } catch {}
+  mineDraft={position,values};
+  return mineDraft;
 }
 
 function reportVersions() {
@@ -107,6 +131,7 @@ function startDigitalGame() {
   restoreAutosave();
   state ??= createGame({seed:FIRST_SEED,tabletop:TABLETOP_BUILD});
   if (TABLETOP_BUILD) {
+    if (physicalPrompt(state)?.kind!=='mine-draw') clearMineDraft();
     try { byId('export-digital-save').hidden=storageSlot(DIGITAL_STORAGE).read()===null; }
     catch {}
   }
@@ -131,6 +156,7 @@ async function storePosition(next, {replace=false, undoing=false}={}) {
   const result=await savedGame.write(contents,{replace});
   saveConflict=result==='conflict';
   if (saveConflict) return false;
+  clearMineDraft();
   ({state,rivalReport,review,importedReport}=position);
   if (restoreDraft) {
     boardSeat=0;
@@ -177,7 +203,7 @@ function renderSaveStatus() {
   byId('undo').disabled=busy || saveConflict || undo.length===0;
   byId('report-before').disabled=busy || saveConflict;
   noteInput.readOnly=busy;
-  for (const button of byId('decisions').querySelectorAll('[data-do="commit"],[data-do="rival"],[data-do="rival-step"]')) {
+  for (const button of byId('decisions').querySelectorAll('[data-do="commit"],[data-do="rival"],[data-do="rival-step"],#physical-draw button[type="submit"]')) {
     button.disabled=busy || saveConflict;
   }
 }
@@ -565,15 +591,26 @@ function renderPhysicalDraw(prompt) {
   const draw=shuffle?(prompt.beforeShuffle
     ? `Draw ${prompt.beforeShuffle}, then shuffle the discard pile and draw the remaining ${count-prompt.beforeShuffle}.`
     : `Shuffle the discard pile, then draw ${tiles}.`):`Draw ${tiles} from your stack.`;
-  const labels={stars:'Stars',ore:'Ore production',pop:'Population',vp:'Immediate VP',extend:'Wood beside or below'};
-  return `<form id="physical-draw" class="physical-draw">
-    <p>${draw} Match the printed values and leave absent symbols at zero.</p>
+  const labels={
+    stars:['Stars'],ore:['Ore','Ore production'],pop:['Pop.','Population'],
+    vp:['VP','Immediate VP'],extend:['Wood','Wood beside or below'],
+  };
+  const {values}=mineEntryDraft();
+  return `<form id="physical-draw" class="physical-draw" autocomplete="off">
+    <p>${draw} Enter the tiles in draw order. Leave absent symbols at zero. Wood is the cost shown for spaces beside or below the tile.</p>
     ${Array.from({length:count},(_,i)=>`<fieldset class="mine-entry"><legend>Drawn tile ${i+1}</legend>
-      ${MINE_FIELDS.map(field=>`<label>${labels[field]}
-        <input name="${field}-${i}" type="number" inputmode="numeric" required step="1" min="${field==='extend'?1:0}" value="${field==='extend'?'':'0'}">
-      </label>`).join('')}
+      ${MINE_FIELDS.map((field,j)=>{
+        const [label,fullLabel=label]=labels[field];
+        const name=`${field}-${i}`;
+        const value=typeof values[name]==='string'?values[name]:field==='extend'?'':'0';
+        const last=i===count-1 && j===MINE_FIELDS.length-1;
+        return `<label><span aria-hidden="true" title="${fullLabel}">${label}</span>
+          <input name="${name}" aria-label="${fullLabel}" type="number" inputmode="numeric" enterkeyhint="${last?'done':'next'}"
+            required step="1" min="${field==='extend'?1:0}" value="${safe(value)}">
+        </label>`;
+      }).join('')}
+      <p id="mine-entry-error-${i}" class="mine-entry-error" hidden></p>
     </fieldset>`).join('')}
-    <p class="fine">Keep the tiles in draw order until you see which one to place.</p>
     <button type="submit" class="primary fill">Confirm mine draw</button>
   </form>`;
 }
@@ -742,7 +779,7 @@ function renderBoards() {
   const rowScores=state.players.map((_,seat)=>`<tr><th class="seat-${seat}" scope="row">${playerName(seat)}</th>${rows.map(row=>`<td>${row.vp[seat]}</td>`).join('')}</tr>`).join('');
   const legend=state.players.map((_,seat)=>`<span class="seat-${seat}">${playerName(seat)}</span>`).join('');
   byId('boards').innerHTML=`<section class="panel board" aria-label="Town board"><div class="panel-head"><h2>Town</h2><div class="legend">${legend}<span>Public</span></div></div><div class="town-grid">${town}</div></section>
-    <section class="panel board" aria-label="Mine board"><div class="panel-head"><h2>Mines</h2><span class="fine">Draw ${state.technology+1} · ${state.mineDeck.length} in stack</span></div>
+    <section class="panel board" aria-label="Mine board"><div class="panel-head"><h2>Mines</h2><span class="fine">Draw ${state.technology+1} · ${undrawnMines(state)} in stack</span></div>
     <div class="mine-grid" style="--mine-columns:${board.mineWidth}">${mine}</div>
     <div class="mine-scores"><table class="score-table" aria-label="Mine row scores"><thead><tr><th scope="col">Mine VP</th>${columns}</tr></thead><tbody>${rowScores}</tbody></table></div></section>`;
 }
@@ -979,21 +1016,67 @@ function runRival(onePlan=false) {
   },{focus:true,planning:true});
 }
 
+function clearMineEntryError(entry) {
+  if (!entry?.hasAttribute('aria-invalid')) return;
+  entry.removeAttribute('aria-invalid');
+  entry.removeAttribute('aria-describedby');
+  const feedback=entry.querySelector('.mine-entry-error');
+  feedback.hidden=true;
+  feedback.textContent='';
+}
+
+byId('decisions').addEventListener('input',event=>{
+  const field=event.target;
+  if (!field.matches('#physical-draw .mine-entry input')) return;
+  clearMineEntryError(field.closest('.mine-entry'));
+  const draft=mineEntryDraft();
+  draft.values[field.name]=field.value;
+  try { sessionStorage.setItem(MINE_DRAFT_STORAGE,JSON.stringify(draft)); }
+  catch {}
+});
+
+byId('decisions').addEventListener('focusin',event=>{
+  if (event.target.matches('#physical-draw .mine-entry input')) event.target.select();
+});
+
+byId('decisions').addEventListener('keydown',event=>{
+  const field=event.target;
+  if (event.key!=='Enter' || event.isComposing || !field.matches('#physical-draw .mine-entry input')) return;
+  const fields=[...field.form.querySelectorAll('.mine-entry input')];
+  const next=fields[fields.indexOf(field)+1];
+  if (!next) return;
+  event.preventDefault();
+  if (field.reportValidity()) next.focus();
+});
+
 byId('decisions').addEventListener('submit',event=>{
-  if (event.target.id!=='physical-draw') return;
+  const drawForm=event.target;
+  if (drawForm.id!=='physical-draw') return;
   event.preventDefault();
   const prompt=physicalPrompt(state);
   if (busy||saveConflict||!prompt) return;
-  const form=new FormData(event.target);
+  const form=new FormData(drawForm);
   let input;
   if (prompt.kind==='event') input=form.get('event');
   else if (prompt.kind==='mine-draw') {
     input=Array.from({length:prompt.count},(_,i)=>
       Object.fromEntries(MINE_FIELDS.map(field=>[field,Number(form.get(`${field}-${i}`))])));
   }
+  clearMineEntryError(drawForm.querySelector('.mine-entry[aria-invalid]'));
   let next;
   try { next=recordPhysicalDraw(state,input); }
-  catch (error) { say(error.message,true); return; }
+  catch (error) {
+    const entry=drawForm.querySelectorAll('.mine-entry')[error.tileIndex];
+    if (entry) {
+      const feedback=entry.querySelector('.mine-entry-error');
+      feedback.textContent=error.message;
+      feedback.hidden=false;
+      entry.setAttribute('aria-invalid','true');
+      entry.setAttribute('aria-describedby',feedback.id);
+      entry.querySelector('input').focus();
+    } else say(error.message,true);
+    return;
+  }
   changeGame(async()=>{
     if (prompt.kind==='mine-draw'&&next.actor>0) {
       const onePlan=review?.seat===next.actor&&review.plan===next.mincmistr?.lastPlans[next.actor-1]+1;
@@ -1167,6 +1250,7 @@ byId('digital-game').addEventListener('click',event=>{
       }
       case 'load-saved': {
         const loaded=restoreAutosave();
+        if (loaded) clearMineDraft();
         render();
         if (loaded) say('Saved game loaded.');
         else if (!saveFailed && unreadableSave===null) say('There is no saved game in this browser.');
@@ -1232,5 +1316,11 @@ function showMode() {
 window.addEventListener('hashchange',showMode);
 byId('physical-guide').hidden=!TABLETOP_BUILD;
 byId('physical-setup').hidden=!TABLETOP_BUILD;
+if (TABLETOP_BUILD) {
+  const checklist=byId('physical-setup-steps').content;
+  for (const target of document.querySelectorAll('[data-physical-steps]')) {
+    target.append(checklist.cloneNode(true));
+  }
+}
 connectReference();
 showMode();

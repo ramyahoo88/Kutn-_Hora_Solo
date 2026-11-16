@@ -6,7 +6,7 @@ The original simulations used engine v0.3.0 (`0b28294`). The latest independent 
 
 To play without printing, open [Kutná Hora Solo](../Kutna_Hora_Solo.html) and choose **New game → Rival difficulty → Mincmistr**. **Play one Plan** shows changes to the board and resources. Open **Why this move?** to review the checks and tie-breaks. Tap a rule number to open it offline. **View Plan card** shows the printed face and its text.
 
-When playing at the table, choose **Draw only** to use the printed Plan faces as a shared deck. Tap **Draw Plan** before each Mincmistr action card. Import or export a deck to move it between devices. Open **Rules and reference** to print the large-text **Table reference** or the **Mine choice aid**.
+Choose **Draw only** if you want to resolve the Mincmistr yourself at the table. Tap **Draw Plan** before each Mincmistr action card. Import or export a deck to move it between devices. Open **Rules and reference** to print the large-text **Table reference** or the **Mine choice aid**.
 
 ## Read or print
 

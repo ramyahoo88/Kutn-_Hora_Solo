@@ -328,13 +328,20 @@ dialog::backdrop { background: #100f11b9; }
 .field-grid .event-option { display: flex; align-items: center; gap: 7px; min-height: 36px; }
 .field-grid [hidden] { display: none; }
 .event-option input { accent-color: var(--brass); }
+.setup-checklist { margin: 8px 0; }
+.setup-checklist summary { color: var(--brass); cursor: pointer; padding: 6px 0; font-weight: 650; }
+.setup-checklist ol { padding-left: 22px; margin: 4px 0 12px; color: var(--muted); }
+[data-physical-steps] li + li { margin-top: 5px; }
 .physical-draw { display: grid; gap: 12px; }
 .physical-draw p { margin: 0; }
 .physical-draw label { display: grid; gap: 4px; min-width: 0; color: var(--muted); }
-.physical-draw input { min-width: 0; width: 100%; min-height: 44px; padding: 7px 9px; border-radius: 6px; border: 1px solid #66625d; background: #222225; font: inherit; }
-.mine-entry { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; min-width: 0; margin: 0; padding: 8px; border: 1px solid #66625d; border-radius: 6px; }
+.mine-entry { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 5px; min-width: 0; margin: 0; padding: 5px 6px 7px; border: 1px solid #66625d; border-radius: 6px; }
 .mine-entry legend { padding: 0 4px; font-weight: 650; }
-.mine-entry label:last-child { grid-column: 1 / -1; }
+.mine-entry label { text-align: center; font-size: .82rem; }
+.mine-entry input { min-width: 0; width: 100%; min-height: 44px; padding: 5px 3px; border-radius: 6px; border: 1px solid #66625d; background: #222225; font-size: 16px; text-align: center; appearance: textfield; }
+.mine-entry input::-webkit-inner-spin-button { appearance: none; }
+.mine-entry[aria-invalid="true"] { border-color: #f4a68f; }
+.mine-entry-error { grid-column: 1 / -1; color: #f4a68f; }
 .input-pair { display: flex; gap: 5px; }
 @media (min-width: 1071px) {
   .summary.many-seats .economy { display: flex; gap: 12px; align-items: center; }

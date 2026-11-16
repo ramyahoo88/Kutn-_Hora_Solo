@@ -17,7 +17,7 @@ npx playwright install --only-shell chromium
 npm run smoke
 ```
 
-The DOM checks simulate blocked storage and shared tabs. The browser checks cover saves and Undo, Plan explanations and round-end effects, report replay, deck transfer, phone layouts and print views. Run them independently with `npm run smoke:dom` and `npm run smoke:browser`. Use `HEADED=1` and install full Chromium to see the browser, or set `BROWSER_EXECUTABLE` to the path of an installed browser.
+The DOM checks simulate blocked storage and shared tabs. The browser checks cover saves and Undo, Plan explanations and round-end effects, report replay, deck transfer, phone layouts and print views in the digital build. The tabletop checks cover event entry, physical mine draws and draft recovery in the shipped app. Run the groups independently with `npm run smoke:dom`, `npm run smoke:browser` and `npm run smoke:tabletop`. Use `HEADED=1` and install full Chromium to see the browser, or set `BROWSER_EXECUTABLE` to the path of an installed browser.
 
 ```sh
 npx playwright install firefox webkit

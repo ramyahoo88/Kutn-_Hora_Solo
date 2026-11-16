@@ -95,7 +95,10 @@
       <div class="panel-head"><h2 id="setup-title">New game</h2><button type="button" class="flat" data-do="close">Close</button></div>
       <div class="dialog-body">
         <p class="muted">Play against one to three rivals.</p>
-        <p id="physical-setup" class="fine" hidden>Prepare your physical mine stack with tier I on top, then II and III. Deal the event cards face down if your table uses them.</p>
+        <details id="physical-setup" class="setup-checklist" hidden>
+          <summary>Physical setup checklist</summary>
+          <div data-physical-steps></div>
+        </details>
         <button id="export-digital-save" type="button" class="link" data-do="export-digital-save" hidden>Export previous digital save</button>
         <div class="field-grid">
           <label>Rivals<select name="playerCount" id="player-count"><option value="2">1 rival</option><option value="3">2 rivals</option><option value="4">3 rivals</option></select></label>
@@ -193,10 +196,12 @@
         <p>Choose <strong>Undo</strong> immediately after starting a new game to restore your previous game.</p>
         <p>Choose one, two or three rivals in <strong>New game</strong>. With three rivals the game lasts five rounds. With one or two it lasts six. Two-player games use event cards. Events are optional on the larger boards.</p>
         <div id="physical-guide" hidden>
-          <p><strong>Use your physical game.</strong> Shuffle the mine tiles within each tier and stack tier I above II and III. On a Mine action, draw the requested tiles and enter their printed values in order. Place the selected tile and put the rest in your discard pile. The app prompts you when it is time to reshuffle.</p>
-          <p><strong>Reveal one event at a time.</strong> Enter the printed title from the base game when the app prompts you. It applies any tax increase at the start of the round and the other effects at round end. If you Undo, restore the physical pieces to match the app. Reuse an already revealed tile or event if the app asks for it again.</p>
+          <h3>Physical setup checklist</h3>
+          <div data-physical-steps></div>
+          <p><strong>Draw mines when prompted.</strong> Keep the tiles in draw order until you see which one to place. Put the rest in your physical discard pile. The app tells you when to reshuffle. If you refresh this tab, you can resume an unfinished entry when browser storage is available.</p>
+          <p><strong>Mirror the moves.</strong> Copy the app’s placements, costs, income and track changes to your table. Apply event changes to the physical pieces once, following the app. If you Undo, restore the physical pieces and reuse an already revealed tile or event when prompted.</p>
         </div>
-        <p><strong>Take your turn.</strong> Play two cards on each of your first two turns and one on your last. Pick the card half and target, then confirm. With multiple rivals, <strong>Play rivals</strong> continues until your next card, tax decision or final scoring.</p>
+        <p><strong>Take your turn.</strong> Play two cards on each of your first two turns and one on your last. Pick the card half and target, then confirm. With multiple rivals, <strong>Play rivals</strong> runs the following rival turns. Confirm any physical draw when prompted.</p>
         <p><strong>Set up your guilds.</strong> Choose your set from the printed setup card and arrange your house rows. The seed assigns the remaining sets and the rivals’ row order.</p>
         <p><strong>Build your income.</strong> Take Rights to a building, claim a Plot, then use Building. A Mine can also start ore production. The Income action collects the current value of your production. The market prices affect all players.</p>
         <p><strong>Follow the grid.</strong> Town and mine coordinates are read left to right, top to bottom. Colored dots are printed scoring matches. A striped guild offer can sell Rights while new construction of that guild is unavailable.</p>
@@ -206,13 +211,22 @@
         <p><strong>Rival settings.</strong> Standard and Quick consider the next player's likely card. Planner tries the replies on a copy of the board, explores several possible draws when choices are close, and looks further ahead for builds and final scoring.</p>
         <p><strong>Mincmistr.</strong> Choose <strong>Play one Plan</strong> to see the moves, resources and board spaces changed. The review also shows any automatic round-end effects. Expand <strong>Why this move?</strong> for the checks and tie-breaks, or tap a rule number to read it offline.</p>
         <p><strong>Share a game report.</strong> The journal saves your <strong>Game note</strong> with the game. Use <strong>Export game report</strong> to share the game and note. If autosave is paused, <strong>Export game and note</strong> in the save warning makes the same kind of copy. Open a report with <strong>Import save</strong>, then use <strong>Load position before this step</strong> in the journal if an earlier position is included. Undo returns to the imported position.</p>
-        <p><strong>Playing on the table.</strong> Open <strong>Draw only</strong> for a shared Plan deck. Draw one Plan for each Mincmistr action card. <strong>Rules and reference</strong> has the full rules and two printable aids. Use <strong>Export deck</strong> and <strong>Import deck</strong> to move the current deck and five recent Undo steps between devices.</p>
+        <p><strong>Plan deck only.</strong> Open <strong>Draw only</strong> if you want to resolve the Mincmistr yourself at the table. Draw one Plan for each Mincmistr action card. <strong>Rules and reference</strong> has the full rules and two printable aids. Use <strong>Export deck</strong> and <strong>Import deck</strong> to move the current deck and five recent Undo steps between devices.</p>
         <p><strong>Mincmistr levels.</strong> Journeyman follows the printed priorities. Apprentice simplifies plot, build and mine choices. Master plays both cards on its last turn in the final three rounds, and Grandmaster does so each round. In three-player games, Master can also double its last turn in rounds 3–6. <button type="button" class="link guide-rule" data-do="rule" data-value="9" aria-controls="paper-ref-rules">Read rule 9</button></p>
         <p><a href="https://filemanager.czechgames.com/storage/files/kutna-hora-the-city-of-silver/rules/kutna-hora-rules-en.pdf" target="_blank" rel="noreferrer">CGE rulebook</a> · <a href="https://www.czechgames.com/news/available-now-the-kutna-hora-companion-app" target="_blank" rel="noreferrer">CGE market companion</a> · <a href="https://www.zatrolene-hry.cz/spolecenska-hra/kutna-hora-mesto-stribra-14736/k-stazeni/vlastni-solo-mod-capek-18184/" target="_blank" rel="noreferrer">Capek paper variant</a></p>
         <p class="fine">Banner cropped from <a href="https://commons.wikimedia.org/wiki/File:Kutn%C3%A1_Hora_-_St._Barbara%27s_Church_-_Panoramic_Photocompilation.jpg" target="_blank" rel="noreferrer">St. Barbara’s Church by Txllxt TxllxT</a> under <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noreferrer">CC BY-SA 4.0</a>.</p>
       </section>
     </div>
   </dialog>
+  <template id="physical-setup-steps">
+    <ol>
+      <li><strong>Seats and guilds.</strong> Start the game in the app. Set out your guilds and the rivals’ in the order shown on each player board. Match the starting player, coins and pieces to the app.</li>
+      <li><strong>Boards and rocks.</strong> Use the smaller town and mine sides with two total players and the larger sides with three or four. Match the spaces and star values of the four rocks shown in Mines.</li>
+      <li><strong>Building offers.</strong> Match the top tiles and stack positions shown in Town hall. Keep the remaining tiles grouped by stack and find the tile the app names when an offer changes. Set aside the red public tiles until the app adds them.</li>
+      <li><strong>Mine tiles.</strong> Shuffle each tier separately. Stack tier I above tier II, then tier III at the bottom.</li>
+      <li><strong>Events.</strong> Use the base decks when events are enabled. Deal A cards before the red buildings arrive and B cards afterward. Leave the final round empty. Reveal each event and enter its title when the app asks.</li>
+    </ol>
+  </template>
   <script>/* BUNDLE_JS */</script>
 </body>
 </html>

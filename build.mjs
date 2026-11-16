@@ -42,7 +42,7 @@ const reference=await readFile(resolve(project,'mincmistr','print','app-referenc
 const html=(await read('page.html')).replace('APP_VERSION',VERSION).replace('/* BUNDLE_CSS */',()=>css)
   .replace('APP_EDITION',tabletop?'Unofficial tabletop companion':'Unofficial solo edition')
   .replace('APP_MODE',tabletop?'Tabletop game':'Digital game')
-  .replace('APP_SAVE_NOTE',tabletop?'Use tabletop saves with this edition. Export an earlier digital save from New game.':'Version 0.1.0 saves keep their existing deck order.')
+  .replace('APP_SAVE_NOTE',tabletop?'Use tabletop saves with this edition. To export a previous digital autosave, use New game, then open that save in the v1.0 digital app.':'Version 0.1.0 saves keep their existing deck order.')
   .replace('MINCMISTR_RULES_VERSION',MINCMISTR_RULES_VERSION).replace('/* BUNDLE_JS */',()=>js)
   .replace('/* PAPER_REFERENCE */',()=>reference);
 await mkdir(dirname(output),{recursive:true});

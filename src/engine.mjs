@@ -849,7 +849,11 @@ export function recordPhysicalDraw(state, input) {
         const tile=MINES[id];
         return (!tier||tile.tier===tier)&&MINE_FIELDS.every(field=>tile[field]===face?.[field]);
       });
-      if (match<0) throw Error(`Drawn tile ${index+1} does not match an available tile. Check its printed values and the draw order.`);
+      if (match<0) {
+        const error=Error(`Drawn tile ${index+1} does not match an available tile. Check its printed values and the draw order.`);
+        error.tileIndex=index;
+        throw error;
+      }
       drawn.push(next.mineDeck.splice(match,1)[0]);
     }
     next.pending[0]={kind:'mine-place',free:next.pending[0].free,drawn};
