@@ -246,6 +246,24 @@ try {
     isMobile:browserName!=='firefox'});
   const phone=observe(await mobile.newPage());
   await phone.goto(origin);
+  await click(phone,'#guide-open-reference');
+  const reference=phone.locator('#paper-reference[open]');
+  await reference.getByRole('heading',{name:'The Mincmistr',exact:true}).waitFor();
+  assert.deepEqual(await reference.locator('[data-reference]').allTextContents(),[
+    'Reference cards','Table reference','Mine choice aid','Full rules','Guide',
+  ]);
+  await reference.getByRole('button',{name:'Guide',exact:true}).click();
+  await reference.getByRole('heading',{name:'Playing Kutná Hora Solo',exact:true}).waitFor();
+  assert.ok(!await reference.locator('#paper-ref-rules').isVisible());
+  assert.ok(await reference.locator('.reference-body').evaluate(el=>el.scrollWidth<=el.clientWidth));
+  await reference.getByRole('button',{name:'Read rule 9',exact:true}).click();
+  assert.equal(await phone.evaluate(()=>document.activeElement.id),'mincmistr-rule-9');
+  await click(phone,'#paper-reference-close');
+  await phone.getByRole('button',{name:'New game',exact:true}).click();
+  const planner=phone.locator('#rival-difficulty option[value="planner"]');
+  assert.equal(await planner.textContent(),'Planner');
+  await click(phone,'#setup-dialog [data-do="close"]');
+  console.log('PASS Guide opens the rules at 360 px, the fifth tab links back to rule 9, and Planner has its final label');
   for (const count of [2,4]) {
     let board=createGame({seed:'wrap-'+count,playerCount:count,difficulty:'standard'});
     while (board.round<(count===4?5:6) || board.actor!==0 || board.phase!=='action') {
@@ -434,7 +452,7 @@ try {
   assert.deepEqual(printPage,{scheme:'light',background:'rgb(255, 255, 255)'});
   await phone.emulateMedia({media:'screen'});
   await phone.evaluate(()=>window.dispatchEvent(new Event('afterprint')));
-  await click(phone,'[aria-controls="paper-ref-rules"]');
+  await click(phone,'[data-reference][aria-controls="paper-ref-rules"]');
   await phone.getByRole('heading',{name:'10. Two or three Mincmistrs',exact:true}).waitFor();
   assert.ok(await phone.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth));
   assert.ok(await phone.locator('.reference-body').evaluate(el=>el.scrollWidth<=el.clientWidth));

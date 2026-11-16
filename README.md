@@ -1,8 +1,10 @@
-# Kutná Hora Solo v0.3.12 playtest
+# Kutná Hora Solo v0.3.13 playtest
 
 An unofficial browser playtest for Kutná Hora: The City of Silver. Play one seat against one, two or three rivals. The app handles the town, mines, market, council and game draws. The same HTML works offline. Players can mirror its placements on the table. Export and import a JSON save to move a game between copies.
 
 To play offline, open [Kutna_Hora_Solo.html](Kutna_Hora_Solo.html) on GitHub, choose **Download raw file**, and open the downloaded file in your browser.
+
+Open **Guide** to read the full Mincmistr rules. Use the tabs to switch to the reference cards, table reference, mine choice aid or the app guide.
 
 For the physical game, choose **Draw only** in the toolbar. Tap **Draw Plan** once per Mincmistr action card and resolve the printed Plan at the table. One shared 15-card deck supports one to three Mincmistrs. **Rules and reference** opens the reference cards, full v1.2.6 rules and two printable aids. **Export deck** and **Import deck** move the deck, recent draws and five Undo steps between devices. Bookmark the page with `#draw-only` to open the deck directly.
 
@@ -14,7 +16,7 @@ Write observations in **Playtest note** in the journal. The note is saved with t
 
 The app automatically clears zero tax bills. Choose **Undo** immediately after starting a new game to restore the previous game. The digital game keeps up to five Undo steps after reload. Each mode uses its own autosave. If another tab advances a save, load the latest position when prompted. Draw only preserves unreadable saved decks until an explicit reset. Individual Mincmistr decks use different seat inputs even with a 64-character seed. [v0.3.4 audit](https://github.com/ramyahoo88/Kutn-_Hora_Solo/blob/c6149d3350981c5507b3ca7279c579d9e767d5f6/docs/Astra_Audit_v0.3.4.md)
 
-Choose **Planner (playtest)** under **Rival difficulty** at any table size. It forecasts intervening turns before choosing its follow-up, compares five possible tile orders when leading plans are close, checks whether it can use the exact plot or right it is about to buy, and scores likely finishes once it has three cards left in the final round. Standard is the default. Open Planner saves with v0.3.1 or later.
+Choose **Planner** under **Rival difficulty** at any table size. It forecasts intervening turns before choosing its follow-up, compares five possible tile orders when leading plans are close, checks whether it can use the exact plot or right it is about to buy, and scores likely finishes once it has three cards left in the final round. Standard is the default. Open Planner saves with v0.3.1 or later.
 
 | Rivals | Total players | Rounds | Board | Red buildings enter after | Events |
 | ---: | ---: | ---: | --- | ---: | --- |
@@ -106,7 +108,7 @@ node test/skip-planner-study.mjs /path/to/skip-traces standard,planner --case=4 
 
 - **One rival.** Start as the Metallurgists, Miners, and Innkeepers on Card 1 with seed `silver-1308`. The rival’s rows should be Builders, Grocers, and Scribes.
 - **Two rivals.** Use Card 6 and seed `app-table-3`. Check the larger boards, six rounds, each rival's cards and the council starting in round 4.
-- **Three rivals.** Use Card 6, Rival 1 starts, seed `app-table-4` and **Planner (playtest)**. Use **Play rivals** and check that each rival acts before play returns to you. Undo the batch, then replay it. Export and reimport a save and check that Planner is selected when opening New game. Check red buildings after round 2 and scoring after round 5.
+- **Three rivals.** Use Card 6, Rival 1 starts, seed `app-table-4` and **Planner**. Use **Play rivals** and check that each rival acts before play returns to you. Undo the batch, then replay it. Export and reimport a save and check that Planner is selected when opening New game. Check red buildings after round 2 and scoring after round 5.
 - **Safari.** Start a game, open the rival’s player board, and reload. Import the [Ius Regale short-stack save](test/fixtures/Ius_Regale_Short_Stack.json). Use **Play a card with no effect** and confirm the last card of Round 1. The event raises ore by 2 and discards all three remaining mine tiles. The journal reports the discard count. Your next Mine draw refills the stack from the discards.
 
 ## Sources and current rulings

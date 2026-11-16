@@ -18,7 +18,7 @@
       <div class="wordmark" id="digital-title" tabindex="-1"><span class="mark" aria-hidden="true">◆</span><span>Kutná Hora Solo</span></div>
       <nav aria-label="Game controls">
         <button type="button" class="flat" data-do="undo" id="undo">Undo</button>
-        <button type="button" class="flat" data-do="dialog" data-value="help">Guide</button>
+        <button type="button" class="flat" id="guide-open-reference" aria-haspopup="dialog" aria-controls="paper-reference">Guide</button>
         <a class="flat" href="#draw-only">Draw only</a>
         <button type="button" class="outline" data-do="dialog" data-value="setup">New game</button>
       </nav>
@@ -99,7 +99,7 @@
           <label>Rivals<select name="playerCount" id="player-count"><option value="2">1 rival</option><option value="3">2 rivals</option><option value="4">3 rivals</option></select></label>
           <label>Starting player<select name="starter"><option value="0">You</option></select></label>
           <label>Guild setup<select name="setup" id="guild-setup"></select></label>
-          <label>Rival difficulty<select name="difficulty" id="rival-difficulty"><option value="standard">Standard</option><option value="quick">Quick</option><option value="planner">Planner (playtest)</option><option value="mincmistr">Mincmistr</option></select></label>
+          <label>Rival difficulty<select name="difficulty" id="rival-difficulty"><option value="standard">Standard</option><option value="quick">Quick</option><option value="planner">Planner</option><option value="mincmistr">Mincmistr</option></select></label>
           <label id="mincmistr-level-option" hidden>Level<select name="mincmistrLevel" id="mincmistr-level" disabled><option value="apprentice">Apprentice</option><option value="journeyman" selected>Journeyman</option><option value="master">Master</option><option value="grandmaster">Grandmaster</option></select></label>
           <label id="mincmistr-deck-option" hidden>Plan decks<select name="mincmistrDecks" disabled><option value="shared">Shared deck</option><option value="individual">One deck per Mincmistr</option></select></label>
           <label class="wide event-option" id="mincmistr-tougher-option" hidden><input type="checkbox" name="mincmistrTougher" disabled> Tougher Master · Double the last turn in rounds 3–6</label>
@@ -112,27 +112,6 @@
         <button type="submit" class="primary">Start game</button>
       </div>
     </form>
-  </dialog>
-  <dialog id="help-dialog" aria-labelledby="help-title">
-    <div class="panel-head"><h2 id="help-title">Playing Kutná Hora Solo</h2><button type="button" class="flat" data-do="close">Close</button></div>
-    <div class="dialog-body guide">
-      <p>Choose <strong>Undo</strong> immediately after starting a new game to restore your previous game.</p>
-      <p>Choose one, two or three rivals in <strong>New game</strong>. With three rivals the game lasts five rounds. With one or two it lasts six. Two-player games use event cards. Events are optional on the larger boards.</p>
-      <p><strong>Take your turn.</strong> Play two cards on each of your first two turns and one on your last. Pick the card half and target, then confirm. With multiple rivals, <strong>Play rivals</strong> continues until your next card, tax decision or final scoring.</p>
-      <p><strong>Set up your guilds.</strong> Choose your set from the printed setup card and arrange your house rows. The seed assigns the remaining sets and the rivals’ row order.</p>
-      <p><strong>Build your income.</strong> Take Rights to a building, claim a Plot, then use Building. A Mine can also start ore production. The Income action collects the current value of your production. The market prices affect all players.</p>
-      <p><strong>Follow the grid.</strong> Town and mine coordinates are read left to right, top to bottom. Colored dots are printed scoring matches. A striped guild offer can sell Rights while new construction of that guild is unavailable.</p>
-      <p><strong>Win on points.</strong> Patricians score in the last three rounds. The final count adds town matches, mine row awards, final income, reputation and unused items to earned points. Coins break a points tie. Any players still tied for first share the win.</p>
-      <p><strong>Check public information.</strong> Open a tile to inspect its costs and effects. Use <strong>Details</strong> when the tile is an action target. Each player board shows the full house rewards, production and supplies. Each rival's remaining cards are below the turn controls.</p>
-      <p><strong>Resume or share a position.</strong> This browser keeps your game and up to five recent Undo steps when local storage is available. If another tab advances the save, choose <strong>Load saved game</strong> to continue from that position. Export a JSON save to move between browsers or share a position. Version 0.1.0 saves keep their existing deck order.</p>
-      <p><strong>Rival settings.</strong> Standard and Quick consider the next player's likely card. Planner tries the replies on a copy of the board, explores several possible draws when choices are close, and looks further ahead for builds and final scoring.</p>
-      <p><strong>Mincmistr.</strong> Choose <strong>Play one Plan</strong> to see the moves, resources and board spaces changed. The review also shows any automatic round-end effects. Expand <strong>Why this move?</strong> for the checks and tie-breaks, or tap a rule number to read it offline.</p>
-      <p><strong>Report a playtest.</strong> The journal saves your <strong>Playtest note</strong> with the game. Use <strong>Export playtest report</strong> to share the game and note. If autosave is paused, <strong>Export game and note</strong> in the save warning makes the same kind of copy. Open a report with <strong>Import save</strong>, then use <strong>Load position before this step</strong> in the journal if an earlier position is included. Undo returns to the imported position.</p>
-      <p><strong>Playing on the table.</strong> Open <strong>Draw only</strong> for a shared Plan deck. Draw one Plan for each Mincmistr action card. <strong>Rules and reference</strong> has the full rules and two printable aids. Use <strong>Export deck</strong> and <strong>Import deck</strong> to move the current deck and five recent Undo steps between devices.</p>
-      <p><strong>Mincmistr levels.</strong> Journeyman follows the printed priorities. Apprentice simplifies plot, build and mine choices. Master plays both cards on its last turn in the final three rounds, and Grandmaster does so each round. In three-player games, Master can also double its last turn in rounds 3–6. <button type="button" class="link guide-rule" data-do="rule" data-value="9" aria-haspopup="dialog">Read rule 9</button></p>
-      <p><a href="https://filemanager.czechgames.com/storage/files/kutna-hora-the-city-of-silver/rules/kutna-hora-rules-en.pdf" target="_blank" rel="noreferrer">CGE rulebook</a> · <a href="https://www.czechgames.com/news/available-now-the-kutna-hora-companion-app" target="_blank" rel="noreferrer">CGE market companion</a> · <a href="https://www.zatrolene-hry.cz/spolecenska-hra/kutna-hora-mesto-stribra-14736/k-stazeni/vlastni-solo-mod-capek-18184/" target="_blank" rel="noreferrer">Capek paper variant</a></p>
-      <p class="fine">Banner cropped from <a href="https://commons.wikimedia.org/wiki/File:Kutn%C3%A1_Hora_-_St._Barbara%27s_Church_-_Panoramic_Photocompilation.jpg" target="_blank" rel="noreferrer">St. Barbara’s Church by Txllxt TxllxT</a> under <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noreferrer">CC BY-SA 4.0</a>.</p>
-    </div>
   </dialog>
   </div>
   <main class="frame paper-drawer" id="draw-only" aria-labelledby="paper-title" hidden>
@@ -203,8 +182,30 @@
       <button type="button" class="outline" data-reference aria-controls="paper-ref-table" aria-pressed="false">Table reference</button>
       <button type="button" class="outline" data-reference aria-controls="paper-ref-mine" aria-pressed="false">Mine choice aid</button>
       <button type="button" class="outline" data-reference aria-controls="paper-ref-rules" aria-pressed="false">Full rules</button>
+      <button type="button" class="outline" data-reference aria-controls="paper-ref-guide" aria-pressed="false">Guide</button>
     </div>
-    <div class="dialog-body reference-body">/* PAPER_REFERENCE */</div>
+    <div class="dialog-body reference-body">
+      /* PAPER_REFERENCE */
+      <section id="paper-ref-guide" class="reference-prose" aria-labelledby="guide-title" hidden>
+        <h2 id="guide-title">Playing Kutná Hora Solo</h2>
+        <p>Choose <strong>Undo</strong> immediately after starting a new game to restore your previous game.</p>
+        <p>Choose one, two or three rivals in <strong>New game</strong>. With three rivals the game lasts five rounds. With one or two it lasts six. Two-player games use event cards. Events are optional on the larger boards.</p>
+        <p><strong>Take your turn.</strong> Play two cards on each of your first two turns and one on your last. Pick the card half and target, then confirm. With multiple rivals, <strong>Play rivals</strong> continues until your next card, tax decision or final scoring.</p>
+        <p><strong>Set up your guilds.</strong> Choose your set from the printed setup card and arrange your house rows. The seed assigns the remaining sets and the rivals’ row order.</p>
+        <p><strong>Build your income.</strong> Take Rights to a building, claim a Plot, then use Building. A Mine can also start ore production. The Income action collects the current value of your production. The market prices affect all players.</p>
+        <p><strong>Follow the grid.</strong> Town and mine coordinates are read left to right, top to bottom. Colored dots are printed scoring matches. A striped guild offer can sell Rights while new construction of that guild is unavailable.</p>
+        <p><strong>Win on points.</strong> Patricians score in the last three rounds. The final count adds town matches, mine row awards, final income, reputation and unused items to earned points. Coins break a points tie. Any players still tied for first share the win.</p>
+        <p><strong>Check public information.</strong> Open a tile to inspect its costs and effects. Use <strong>Details</strong> when the tile is an action target. Each player board shows the full house rewards, production and supplies. Each rival's remaining cards are below the turn controls.</p>
+        <p><strong>Resume or share a position.</strong> This browser keeps your game and up to five recent Undo steps when local storage is available. If another tab advances the save, choose <strong>Load saved game</strong> to continue from that position. Export a JSON save to move between browsers or share a position. Version 0.1.0 saves keep their existing deck order.</p>
+        <p><strong>Rival settings.</strong> Standard and Quick consider the next player's likely card. Planner tries the replies on a copy of the board, explores several possible draws when choices are close, and looks further ahead for builds and final scoring.</p>
+        <p><strong>Mincmistr.</strong> Choose <strong>Play one Plan</strong> to see the moves, resources and board spaces changed. The review also shows any automatic round-end effects. Expand <strong>Why this move?</strong> for the checks and tie-breaks, or tap a rule number to read it offline.</p>
+        <p><strong>Report a playtest.</strong> The journal saves your <strong>Playtest note</strong> with the game. Use <strong>Export playtest report</strong> to share the game and note. If autosave is paused, <strong>Export game and note</strong> in the save warning makes the same kind of copy. Open a report with <strong>Import save</strong>, then use <strong>Load position before this step</strong> in the journal if an earlier position is included. Undo returns to the imported position.</p>
+        <p><strong>Playing on the table.</strong> Open <strong>Draw only</strong> for a shared Plan deck. Draw one Plan for each Mincmistr action card. <strong>Rules and reference</strong> has the full rules and two printable aids. Use <strong>Export deck</strong> and <strong>Import deck</strong> to move the current deck and five recent Undo steps between devices.</p>
+        <p><strong>Mincmistr levels.</strong> Journeyman follows the printed priorities. Apprentice simplifies plot, build and mine choices. Master plays both cards on its last turn in the final three rounds, and Grandmaster does so each round. In three-player games, Master can also double its last turn in rounds 3–6. <button type="button" class="link guide-rule" data-do="rule" data-value="9" aria-controls="paper-ref-rules">Read rule 9</button></p>
+        <p><a href="https://filemanager.czechgames.com/storage/files/kutna-hora-the-city-of-silver/rules/kutna-hora-rules-en.pdf" target="_blank" rel="noreferrer">CGE rulebook</a> · <a href="https://www.czechgames.com/news/available-now-the-kutna-hora-companion-app" target="_blank" rel="noreferrer">CGE market companion</a> · <a href="https://www.zatrolene-hry.cz/spolecenska-hra/kutna-hora-mesto-stribra-14736/k-stazeni/vlastni-solo-mod-capek-18184/" target="_blank" rel="noreferrer">Capek paper variant</a></p>
+        <p class="fine">Banner cropped from <a href="https://commons.wikimedia.org/wiki/File:Kutn%C3%A1_Hora_-_St._Barbara%27s_Church_-_Panoramic_Photocompilation.jpg" target="_blank" rel="noreferrer">St. Barbara’s Church by Txllxt TxllxT</a> under <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noreferrer">CC BY-SA 4.0</a>.</p>
+      </section>
+    </div>
   </dialog>
   <script>/* BUNDLE_JS */</script>
 </body>

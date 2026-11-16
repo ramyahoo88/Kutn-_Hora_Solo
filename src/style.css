@@ -329,7 +329,6 @@ dialog::backdrop { background: #100f11b9; }
 .field-grid [hidden] { display: none; }
 .event-option input { accent-color: var(--brass); }
 .input-pair { display: flex; gap: 5px; }
-.guide { display: grid; gap: 10px; }
 @media (min-width: 1071px) {
   .summary.many-seats .economy { display: flex; gap: 12px; align-items: center; }
   .summary.many-seats .prices { flex: 1; margin: 0; }

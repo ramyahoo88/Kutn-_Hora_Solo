@@ -111,9 +111,16 @@ export function openReference(rule) {
 
 export function connectReference() {
   const dialog = byId('paper-reference');
+  byId('guide-open-reference').addEventListener('click',() => {
+    selectReference('paper-ref-rules');
+    openReference();
+  });
   byId('paper-open-reference').addEventListener('click',() => openReference());
   for (const button of dialog.querySelectorAll('[data-reference]')) {
     button.addEventListener('click',() => selectReference(button.getAttribute('aria-controls')));
+  }
+  for (const button of dialog.querySelectorAll('[data-do="rule"]')) {
+    button.addEventListener('click',() => openReference(button.dataset.value));
   }
   byId('paper-reference-close').addEventListener('click',() => dialog.close());
   const clearPrint=() => document.body.classList.remove('print-reference','print-mine-aid','print-table-reference');
