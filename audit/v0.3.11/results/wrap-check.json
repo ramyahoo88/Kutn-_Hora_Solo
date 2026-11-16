@@ -1,0 +1,56 @@
+[
+ {
+  "width": 360,
+  "players": 2,
+  "townWordsSplit": [
+   "Brewery"
+  ],
+  "mineWordsSplit": [
+   "Technology"
+  ]
+ },
+ {
+  "width": 360,
+  "players": 4,
+  "townWordsSplit": [
+   "Reserved",
+   "Smelter",
+   "Airshaft"
+  ],
+  "mineWordsSplit": [
+   "Technology"
+  ]
+ },
+ {
+  "width": 390,
+  "players": 2,
+  "townWordsSplit": [],
+  "mineWordsSplit": [
+   "Technology"
+  ]
+ },
+ {
+  "width": 390,
+  "players": 4,
+  "townWordsSplit": [
+   "Reserved"
+  ],
+  "mineWordsSplit": [
+   "Technology"
+  ]
+ },
+ {
+  "width": 430,
+  "players": 2,
+  "townWordsSplit": [],
+  "mineWordsSplit": []
+ },
+ {
+  "width": 430,
+  "players": 4,
+  "townWordsSplit": [],
+  "mineWordsSplit": [
+   "Technology"
+  ]
+ }
+]

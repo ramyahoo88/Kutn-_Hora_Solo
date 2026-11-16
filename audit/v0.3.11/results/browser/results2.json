@@ -1,0 +1,35 @@
+{
+ "results": [
+  {
+   "name": "Digital read failure at startup preserves the existing save",
+   "ok": true,
+   "detail": "startup warning \"Autosave is unavailable. Export your game and note to keep your progress.\"; after Load: seed probe-read-fail"
+  },
+  {
+   "name": "Digital corrupt save protected until New game",
+   "ok": true,
+   "detail": "warning \"Your previous autosave could not be opened. Autosave is paused. Start a new game or import a save to resume it.\"; download Kutna_Hora_Unreadable_Save.json"
+  },
+  {
+   "name": "Draw only corrupt deck protected until New deck",
+   "ok": true,
+   "detail": "warning \"The saved deck could not be opened. Import a deck or start a new one to resume autosave.\""
+  },
+  {
+   "name": "Stale tab New game does not overwrite the newer save",
+   "ok": true,
+   "detail": "B warning \"The saved game changed. Load it to continue. You can export this tab’s game and note first.\""
+  },
+  {
+   "name": "Draw only after another tab clears storage",
+   "ok": true,
+   "detail": "after Load: \"Plan 11 · 14 cards left\" → after draw: \"Plan 8 · 13 cards left\""
+  },
+  {
+   "name": "No page errors",
+   "ok": true,
+   "detail": ""
+  }
+ ],
+ "errors": []
+}

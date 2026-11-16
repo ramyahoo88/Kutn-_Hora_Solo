@@ -1,0 +1,77 @@
+[
+ {
+  "plan": 1,
+  "label": "Plan 1 · Construct → Mine · earliest space on ties",
+  "pos": "0% 0%"
+ },
+ {
+  "plan": 2,
+  "label": "Plan 2 · Construct → Mine · latest space on ties",
+  "pos": "50% 0%"
+ },
+ {
+  "plan": 3,
+  "label": "Plan 3 · Construct → Mine · earliest space on ties",
+  "pos": "100% 0%"
+ },
+ {
+  "plan": 4,
+  "label": "Plan 4 · Mine → Construct · latest space on ties",
+  "pos": "0% 25%"
+ },
+ {
+  "plan": 5,
+  "label": "Plan 5 · Construct → St. Barbara · earliest space on ties",
+  "pos": "50% 25%"
+ },
+ {
+  "plan": 6,
+  "label": "Plan 6 · Mine → Construct · latest space on ties",
+  "pos": "100% 25%"
+ },
+ {
+  "plan": 7,
+  "label": "Plan 7 · Construct → St. Barbara · earliest space on ties",
+  "pos": "0% 50%"
+ },
+ {
+  "plan": 8,
+  "label": "Plan 8 · Mine → Construct · latest space on ties",
+  "pos": "50% 50%"
+ },
+ {
+  "plan": 9,
+  "label": "Plan 9 · Construct → Mine · earliest space on ties",
+  "pos": "100% 50%"
+ },
+ {
+  "plan": 10,
+  "label": "Plan 10 · Construct → St. Barbara · latest space on ties",
+  "pos": "0% 75%"
+ },
+ {
+  "plan": 11,
+  "label": "Plan 11 · St. Barbara → Construct · earliest space on ties",
+  "pos": "50% 75%"
+ },
+ {
+  "plan": 12,
+  "label": "Plan 12 · Construct → Mine · latest space on ties",
+  "pos": "100% 75%"
+ },
+ {
+  "plan": 13,
+  "label": "Plan 13 · Mine → Construct · earliest space on ties",
+  "pos": "0% 100%"
+ },
+ {
+  "plan": 14,
+  "label": "Plan 14 · Construct → Mine · latest space on ties",
+  "pos": "50% 100%"
+ },
+ {
+  "plan": 15,
+  "label": "Plan 15 · Construct → Mine · earliest space on ties",
+  "pos": "100% 100%"
+ }
+]

@@ -1,0 +1,35 @@
+{
+  "repository": "ramyahoo88/Kutn-_Hora_Solo",
+  "branch": "v0.3.11-playtest",
+  "commit": "1cfde4513f5d214f284d90051e21e95336588590",
+  "tree": "8b96f1a1bfb31cb520c0bbd38089d64f2be152c7",
+  "app_version": "0.3.11",
+  "save_schema": 3,
+  "paper_rules": "Mincmistr v1.2.5 (15 Nov 2026)",
+  "node": "v22.23.4",
+  "chromium": "Playwright bundled Chromium (build 1243)",
+  "sha256": {
+    "Kutna_Hora_Solo.html (shipped and rebuilt)": "d95e1896b220072a967d66977b77323213ad634bd770031ed0139cb021f41eba",
+    "mincmistr/Mincmistr_Print_and_Play.pdf": "7b6aab2fb26e2ad958289bddf2d6e6cb11263638461193e1d3dd25bc95a0b509",
+    "src/assets/mincmistr-plans.webp (shipped and regenerated)": "d02c83957edde734eb3f18ba939a6f27c5cc36359556208ba3bb1cb6e6c1e752",
+    "mincmistr/Mincmistr_Rules.md (identical to print/rules.md)": "e5474b57b0138f2e349364da92e7c8ce43fca0476ff1a482bbf31913901cb749",
+    "mincmistr/print/app-reference.html (shipped and rebuilt)": "af5dcdb0be34c86e378684a31feed99fd9eebd9c7a48617653515dc988c24f61"
+  },
+  "checks": {
+    "node build.mjs <separate path> && cmp": "byte-identical (617,357 bytes)",
+    "build.py --app-reference && cmp": "byte-identical",
+    "export_plans_audit.py && cmp": "byte-identical sprite, cropped from the shipped PDF",
+    "build.py --refresh-copy (documented PDF rebuild)": "NOT RUN: needs PyMuPDF, which is not installed here and could not be installed",
+    "pdf-content-check.py": "pages 1-4 carry rules.md character for character (letters and digits; 13 list numbers added by layout); page 7 carries every reference-card sentence; Plan header on all 15 Plan cards",
+    "build.py --table-reference letter|a4": "one page each",
+    "export_cards.mjs": "cards.json unchanged",
+    "node --test test/*.test.mjs": "41/41 pass",
+    "node mincmistr/flowcheck.mjs": "1,200 card plays, 0 mismatches",
+    "node mincmistr/equiv.mjs": "2,109 decisions, 0 mismatches",
+    "node mincmistr/samplegame.mjs sample-12 2": "byte-identical to Mincmistr_Sample_Game.md",
+    "node test/browser-smoke.mjs (chromium)": "10/10 PASS",
+    "node test/dom-smoke.mjs": "NOT RUN: jsdom not installed here",
+    "firefox / webkit": "NOT RUN: engines not installed here",
+    "node test/rival-study.mjs 12 v030-check": "not rerun: src/bot.mjs, prices.mjs and random.mjs are unchanged since v0.3.5, where it reproduced every README figure"
+  }
+}

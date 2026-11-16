@@ -1,0 +1,24 @@
+{
+ "games": 352,
+ "decisions": 33318,
+ "cardPlays": 22864,
+ "mismatches": 0,
+ "cardCounts": {
+  "ok": 4224,
+  "bad": 0
+ },
+ "roundTrips": 774,
+ "rules": {
+  "4.3C": 11853,
+  "4.3M": 4161,
+  "4.1": 4971,
+  "4.2": 834,
+  "4.3S": 215,
+  "4.4M": 239,
+  "4.4X": 384,
+  "4.4I": 207
+ },
+ "labels": 22864,
+ "labelBad": 0,
+ "maxExplanation": 10
+}

@@ -1,0 +1,44 @@
+{
+ "oneRival": [
+  "Metallurgists, Miners, Innkeepers",
+  "Builders, Grocers, Scribes"
+ ],
+ "twoRivals": {
+  "rounds": 6,
+  "town": 30,
+  "mineWidth": 7,
+  "redRound": 3
+ },
+ "marketExpansion": [
+  "Plan 13 · Mine → Construct · earliest space on ties.",
+  "Recruited 2 miners for 6 g.",
+  "The town expands silver supply and removes Smelter from the offer.",
+  "Placed III–8 at mine B3 for 12 g."
+ ],
+ "roundEnd": {
+  "oreBefore": 9,
+  "oreAfterPlan": 12,
+  "oreAfterRoundEnd": 14,
+  "pelicans": [
+   "0→1",
+   "1→2"
+  ],
+  "lines": [
+   "The town expands silver supply and removes Hammer Works from the offer.",
+   "Cathedral Construction resolved."
+  ]
+ },
+ "iusRegale": {
+  "deck": 3,
+  "deckAfter": 0,
+  "ore": "0→2",
+  "line": "Ius Regale Montanorum discarded 3 mine tiles."
+ },
+ "grandmaster": [
+  6,
+  6,
+  6,
+  6,
+  6
+ ]
+}

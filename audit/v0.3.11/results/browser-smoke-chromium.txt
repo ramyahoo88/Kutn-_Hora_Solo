@@ -1,0 +1,10 @@
+PASS digital tabs, Undo after reload, file picker and save download
+PASS notes persist through reload, export from a stale tab and follow the loaded game or Undo
+PASS one Plan includes its mine bonus, review, replay and fast rival batch
+PASS Plan and round-end effects display their own market removals and resource changes
+PASS 360 px Plan review, offline rules, repeated report transfer, failed-write recovery and replay with Undo
+PASS 390 px touch layout, both printable aids, offline references, recent Plans and reshuffle Undo
+PASS Draw only portability, identical reshuffle replay and wrong-file rejection
+PASS Draw only tabs protect their own save slot
+PASS temporary storage failure preserves all eight existing draws
+PASS standalone file and bundled artwork in chromium

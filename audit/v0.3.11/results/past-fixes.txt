@@ -1,0 +1,9 @@
+PASS · Third house row: 1, 3, 4 reputation then 8 VP; top row grants a public right instead
+PASS · Long seeds: 52, 53 and 64 characters keep three distinct individual decks; shared deck stays single
+PASS · St. Barbara 9: free mines use reserve first; with an empty reserve they use the pool
+PASS · Tax penalty at the reputation floor converts the overflow to VP; one step above does not
+PASS · Ius Regale discards 5 from a long stack and the rest from a short one
+PASS · Tile 7 overflow above reputation 9 becomes VP
+PASS · Mincmistr edge compares with the best opponent, not the human only (4 players)
+PASS · v0.1.0 saves migrate III-3 to two stars (fixture regenerated)
+PASS · Master: 6 card plays in rounds 4-6 at 2 players, rounds 3-5 at 4; tougher 3-player adds round 3

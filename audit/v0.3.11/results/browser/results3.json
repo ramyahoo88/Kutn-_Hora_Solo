@@ -1,0 +1,35 @@
+{
+ "results": [
+  {
+   "name": "Playtest report: note, versions, earlier position, identical replay, Undo back to the import",
+   "ok": true,
+   "detail": "Kutna_Hora_Playtest_v0.3.11_probe3-report_2026-11-16T00-48-42-358Z.json; \"Imported playtest report · App v0.3.11 · Mincmistr v1.2.5\"; replay identical=true; two Undos return to imported position=true"
+  },
+  {
+   "name": "Why this move?: review matches the journal record, rule links open the cited rule, changed spaces are marked",
+   "ok": true,
+   "detail": "Rule 4.3 · Goal 1 Construct → Plot; 5 checks; rules 4.1✓ 4.2✓ 5.1✓ 6.2✓ 2✓; 1 marked space(s); focus plan-change-town-13"
+  },
+  {
+   "name": "Deck export/import: same deck and next draw on a second device; wrong files rejected",
+   "ok": true,
+   "detail": "Mincmistr_Plan_Deck.json; next draw \"Plan 15 · Construct → Mine · earliest space on ties\" on both; game-as-deck → \"Choose a Mincmistr deck JSON export from Draw only.\"; deck-as-game → \"Choose a Kutná Hora Solo JSON save.\""
+  },
+  {
+   "name": "360 px: review with explanation, open journal and reference tabs fit the width",
+   "ok": true,
+   "detail": "scrollWidth 360/360; overflowing none; single words split across lines: none; reference overflow cards:0/0 table:0/0 mine:0/0 rules:0/0"
+  },
+  {
+   "name": "Print views written",
+   "ok": true,
+   "detail": "table-reference-letter.pdf, table-reference-a4.pdf, mine-aid-letter.pdf, mine-aid-a4.pdf"
+  },
+  {
+   "name": "No page errors",
+   "ok": true,
+   "detail": ""
+  }
+ ],
+ "errors": []
+}

@@ -1,0 +1,6 @@
+offer: Airshaft, Sawmill, Tavern · guilds: food, wood, ore · held: Hospital
+house reward, no public → Hospital | [ 'Skip the free right. No public right is on offer.' ]
+tile 2, no public → Hospital, Sawmill | [
+  'No public right on offer. Take the free guild right to Sawmill. Best income value (g) (9 vs 4). income value (g) 9.'
+]
+tile 2, three rights → [ 'Skip the free right. All three rights slots are full.' ]

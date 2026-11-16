@@ -1,0 +1,25 @@
+{
+ "results": [
+  {
+   "game": "2p master",
+   "plans": 33,
+   "bonusSteps": 0,
+   "compared": 30,
+   "withRoundEnd": 3,
+   "bad": [],
+   "shownMismatch": 0,
+   "ok": true
+  },
+  {
+   "game": "4p grandmaster",
+   "plans": 90,
+   "bonusSteps": 15,
+   "compared": 86,
+   "withRoundEnd": 4,
+   "bad": [],
+   "shownMismatch": 0,
+   "ok": true
+  }
+ ],
+ "errors": []
+}

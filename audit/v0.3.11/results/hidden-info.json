@@ -1,0 +1,103 @@
+{
+ "2p standard": {
+  "positions": 33,
+  "same": 33,
+  "diff": 0,
+  "examples": []
+ },
+ "2p quick": {
+  "positions": 40,
+  "same": 40,
+  "diff": 0,
+  "examples": []
+ },
+ "2p planner": {
+  "positions": 18,
+  "same": 18,
+  "diff": 0,
+  "examples": []
+ },
+ "3p standard": {
+  "positions": 85,
+  "same": 85,
+  "diff": 0,
+  "examples": []
+ },
+ "3p quick": {
+  "positions": 86,
+  "same": 86,
+  "diff": 0,
+  "examples": []
+ },
+ "3p planner": {
+  "positions": 38,
+  "same": 38,
+  "diff": 0,
+  "examples": []
+ },
+ "4p standard": {
+  "positions": 97,
+  "same": 97,
+  "diff": 0,
+  "examples": []
+ },
+ "4p quick": {
+  "positions": 101,
+  "same": 101,
+  "diff": 0,
+  "examples": []
+ },
+ "4p planner": {
+  "positions": 50,
+  "same": 50,
+  "diff": 0,
+  "examples": []
+ },
+ "mincmistrDifferences": [
+  {
+   "ownLinesIdentical": true,
+   "townLines": [
+    "Round 5 begins · Michal of Vrchoviště."
+   ],
+   "townLinesPerturbed": [
+    "Round 5 begins · Abbot Heidenreich."
+   ]
+  },
+  {
+   "ownLinesIdentical": true,
+   "townLines": [
+    "Cathedral Construction resolved.",
+    "Round 2 begins · Sedlec Abbey."
+   ],
+   "townLinesPerturbed": [
+    "Cathedral Construction resolved.",
+    "Round 2 begins · Land Rush."
+   ]
+  },
+  {
+   "ownLinesIdentical": true,
+   "townLines": [
+    "Round 5 begins · Abbot Heidenreich."
+   ],
+   "townLinesPerturbed": [
+    "Round 5 begins · 180,000 Groschen."
+   ]
+  },
+  {
+   "ownLinesIdentical": true,
+   "townLines": [
+    "Land Rush resolved.",
+    "Round 3 begins · A Visit from the King."
+   ],
+   "townLinesPerturbed": [
+    "Land Rush resolved.",
+    "Round 3 begins · Abbot Heidenreich."
+   ]
+  }
+ ],
+ "Mincmistr master (all table sizes)": {
+  "positions": 526,
+  "same": 522,
+  "diff": 4
+ }
+}

@@ -1,0 +1,3 @@
+{'rules_characters_source': 9635, 'rules_characters_pdf': 9648, 'list_numbers_added_by_layout': 13, 'other_differences': []}
+{'reference_card_fragments_missing_from_page_7': []}
+{'plan_header_count_page_5': 9, 'plan_header_count_page_7': 6}
