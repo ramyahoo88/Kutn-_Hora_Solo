@@ -754,7 +754,7 @@ function renderJournal() {
     const original=formatReportVersions(importedReport.source??importedReport);
     const exporter=formatReportVersions(importedReport);
     const showExporter=Boolean(importedReport.source && exporter && original!==exporter);
-    const title=showExporter?'Original report':'Imported playtest report';
+    const title=showExporter?'Original report':'Imported game report';
     byId('report-source-title').textContent=original?`${title} · ${original}`:title;
     byId('report-exported-with').hidden=!showExporter;
     byId('report-exported-with').textContent=showExporter?`Re-exported with ${exporter}`:'';
@@ -1094,7 +1094,7 @@ byId('digital-game').addEventListener('click',event=>{
         const seed=state.seed.replace(/[^a-z0-9._-]+/gi,'-');
         const stamp=time.toISOString().replace(/[:.]/g,'-');
         const contents=writePlaytestReport(currentPosition(),undo.at(-1),noteInput.value,time);
-        downloadJson(contents,`Kutna_Hora_Playtest_v${VERSION}_${seed}_${stamp}.json`);
+        downloadJson(contents,`Kutna_Hora_Game_Report_v${VERSION}_${seed}_${stamp}.json`);
         break;
       }
       case 'export': downloadJson(writeSave(state),'Kutna_Hora_Solo_Save.json'); break;

@@ -25,4 +25,4 @@ npm run smoke:browser -- firefox
 npm run smoke:browser -- webkit
 ```
 
-For a Safari or iPhone check, open the HTML and follow the [playtest checks](../README.md#playtest-checks). The automated WebKit check covers the engine. File opening, storage and printing can differ on Safari.
+For a Safari or iPhone check, open the HTML and follow the [manual checks](../README.md#manual-checks). The automated WebKit check covers the engine. File opening, storage and printing can differ on Safari.

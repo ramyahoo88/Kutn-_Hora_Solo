@@ -1,6 +1,6 @@
-# Kutná Hora Solo v0.3.13 playtest
+# Kutná Hora Solo v1.0
 
-An unofficial browser playtest for Kutná Hora: The City of Silver. Play one seat against one, two or three rivals. The app handles the town, mines, market, council and game draws. The same HTML works offline. Players can mirror its placements on the table. Export and import a JSON save to move a game between copies.
+An unofficial browser app for Kutná Hora: The City of Silver. Play one seat against one, two or three rivals. The app handles the town, mines, market, council and game draws. The same HTML works offline. Players can mirror its placements on the table. Export and import a JSON save to move a game between copies.
 
 To play offline, open [Kutna_Hora_Solo.html](Kutna_Hora_Solo.html) on GitHub, choose **Download raw file**, and open the downloaded file in your browser.
 
@@ -12,7 +12,7 @@ Choose a rival count in **New game**. Pick your guild set from that player count
 
 Choose **Mincmistr** under **Rival difficulty** to play the v1.2.6 tabletop variant directly in the app. Choose Apprentice, Journeyman, Master or Grandmaster for one to three Mincmistrs. With several Mincmistrs, choose a shared deck or one per rival. At a three-player table, Master offers the tougher rounds 3–6 option from rule 10. **Play one Plan** marks the town and mine spaces it changed and shows changes to miners, production, houses, patricians and other resources. If the Plan triggers a market removal, the review names the tile. Any automatic round-end effects appear below the Plan changes. Tap a coordinate in the review to jump to that space. **Why this move?** shows the checks and tie-breaks, including for Plans played as a batch. The journal preserves these details. Rule numbers open the relevant text offline. [Tabletop rules and printables](mincmistr/README.md)
 
-Write observations in **Playtest note** in the journal. The note is saved with the game and travels with **Export playtest report**. When the save warning appears, **Export game and note** keeps the position and latest note from this tab. Use **Import save** to open either copy. The journal shows the original report versions and the version that re-exported it when they differ. If the report includes a previous position, choose **Load position before this step** in the journal to replay the move. **Undo** immediately afterward returns to the imported position.
+Write observations in **Game note** in the journal. The note is saved with the game and travels with **Export game report**. When the save warning appears, **Export game and note** keeps the position and latest note from this tab. Use **Import save** to open either copy. The journal shows the original report versions and the version that re-exported it when they differ. If the report includes a previous position, choose **Load position before this step** in the journal to replay the move. **Undo** immediately afterward returns to the imported position.
 
 The app automatically clears zero tax bills. Choose **Undo** immediately after starting a new game to restore the previous game. The digital game keeps up to five Undo steps after reload. Each mode uses its own autosave. If another tab advances a save, load the latest position when prompted. Draw only preserves unreadable saved decks until an explicit reset. Individual Mincmistr decks use different seat inputs even with a 64-character seed. [v0.3.4 audit](https://github.com/ramyahoo88/Kutn-_Hora_Solo/blob/c6149d3350981c5507b3ca7279c579d9e767d5f6/docs/Astra_Audit_v0.3.4.md)
 
@@ -91,7 +91,7 @@ The fresh-seed run used 12 new starting boards per table size for each policy. R
 | Reply and build planning | 41 / 108 | +0.92 | +0.28 | +1.10 | 8.1 / 13.3 / 16.0 |
 | Planner with all four | 44 / 108 | +1.42 | −0.08 | +1.40 | 29.9 / 50.8 / 62.6 |
 
-Planner won 14/24, 12/36 and 18/48, respectively. Each of its three paired margin intervals included zero. The build-planning variant averaged 0.15–0.36 more completed buildings than Standard and had a smaller CPU cost. The four-feature Planner remains an opt-in playtest.
+Planner won 14/24, 12/36 and 18/48, respectively. Each of its three paired margin intervals included zero. The build-planning variant averaged 0.15–0.36 more completed buildings than Standard and had a smaller CPU cost. Planner is an optional difficulty.
 
 The skip study uses the 52 four-player positions from the [v0.3.0 audit](https://github.com/ramyahoo88/Kutn-_Hora_Solo/tree/3895edf54ded43857156d0fc148c5c43b6c1c9e6/audit/v0.3.0/skip-traces). It replays the exact recorded card spent for no effect, then plays out the challenger’s first move with the same Standard continuation. Planner changed 23 decisions, with a mean gain of 0.60 VP and 0.02 VP of margin. Its margin averaged 1.69 VP below the average active alternative in the 51 positions with one.
 
@@ -100,7 +100,7 @@ node test/skip-planner-study.mjs /path/to/skip-traces reply,sampling,closing,con
 node test/skip-planner-study.mjs /path/to/skip-traces standard,planner --case=4 --rescore
 ```
 
-## Playtest checks
+## Manual checks
 
 - **Plan review.** Import the [market expansion save](test/fixtures/Market_Expansion_Plan.json) and choose **Play one Plan**. The review names Smelter as the tile removed by the Plan. In the [round-end Plan save](test/fixtures/Round_End_Plan.json), the Mine action adds 3 ore. Cathedral Construction then adds 2 ore and gives each player a pelican under **Automatic round-end effects**.
 - **Draw only.** Draw 16 Plans and export the deck. Import it in another browser or device. Undo twice to reach draw 14 of 15, then draw twice and confirm the same two Plans appear across the reshuffle. Open **Rules and reference** to print the table reference or mine choice aid.

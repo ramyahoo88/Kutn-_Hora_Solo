@@ -72,6 +72,7 @@ try {
   const b=observe(await context.newPage());
   await a.goto(origin);
   await b.goto(origin);
+  assert.doesNotMatch(await a.locator('#digital-game').innerText(),/playtest/i);
   assert.match(await a.locator('.eyebrow').textContent(),new RegExp(`v${VERSION.replaceAll('.','\\.')}$`));
 
   const initial=writeSave(createGame({seed:'browser-digital-conflict'}));
@@ -325,7 +326,7 @@ try {
   await phone.reload();
   assert.equal(await phone.locator('#playtest-note').inputValue(),'Both free mines resolved.');
   const report=await downloadFile(phone,PLAYTEST_REPORT);
-  assert.ok(report.name.startsWith(`Kutna_Hora_Playtest_v${VERSION}_browser-playtest-report_`));
+  assert.ok(report.name.startsWith(`Kutna_Hora_Game_Report_v${VERSION}_browser-playtest-report_`));
   const decodedReport=JSON.parse(report.text);
   assert.equal(decodedReport.playtest.note,'Both free mines resolved.');
   assert.equal(decodedReport.playtest.appVersion,VERSION);

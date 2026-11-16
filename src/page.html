@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="color-scheme" content="dark">
   <meta name="theme-color" content="#18191c">
-  <meta name="description" content="An unofficial solo playtest for Kutná Hora: The City of Silver. Play the two-, three-, or four-player game against up to three rivals.">
+  <meta name="description" content="An unofficial solo app for Kutná Hora: The City of Silver. Play the two-, three-, or four-player game against up to three rivals.">
   <title>Kutná Hora Solo · The City of Silver</title>
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%231d2220'/%3E%3Cpath d='M16 4l12 12-12 12L4 16z' fill='%23d5b988'/%3E%3Cpath d='M16 10l6 6-6 6-6-6z' fill='%231d2220'/%3E%3C/svg%3E">
   <style>/* BUNDLE_CSS */</style>
@@ -28,7 +28,7 @@
     <section class="hero" aria-label="Kutná Hora: The City of Silver">
       <div class="hero-art" aria-hidden="true"></div>
       <div class="hero-copy">
-        <span class="eyebrow">Unofficial solo playtest · vAPP_VERSION</span>
+        <span class="eyebrow">Unofficial solo edition · vAPP_VERSION</span>
         <h1>Kutná Hora</h1>
         <p>The City of Silver</p>
       </div>
@@ -53,7 +53,7 @@
       <div class="panel-head journal-head">
         <h2 id="journal-title">Game journal</h2>
         <div class="panel-controls">
-          <button type="button" class="flat" data-do="report">Export playtest report</button>
+          <button type="button" class="flat" data-do="report">Export game report</button>
           <button type="button" class="flat" data-do="journal" id="journal-toggle" aria-controls="journal-body" aria-expanded="false">Show all</button>
         </div>
       </div>
@@ -64,8 +64,8 @@
         <button type="button" class="outline" id="report-before" data-do="report-before" hidden>Load position before this step</button>
       </section>
       <details class="report-note">
-        <summary>Playtest note</summary>
-        <label class="sr-only" for="playtest-note">Note to include in the playtest report</label>
+        <summary>Game note</summary>
+        <label class="sr-only" for="playtest-note">Note to include in the game report</label>
         <textarea id="playtest-note" rows="3" maxlength="1000" placeholder="What happened or what did you expect?"></textarea>
       </details>
     </section>
@@ -199,7 +199,7 @@
         <p><strong>Resume or share a position.</strong> This browser keeps your game and up to five recent Undo steps when local storage is available. If another tab advances the save, choose <strong>Load saved game</strong> to continue from that position. Export a JSON save to move between browsers or share a position. Version 0.1.0 saves keep their existing deck order.</p>
         <p><strong>Rival settings.</strong> Standard and Quick consider the next player's likely card. Planner tries the replies on a copy of the board, explores several possible draws when choices are close, and looks further ahead for builds and final scoring.</p>
         <p><strong>Mincmistr.</strong> Choose <strong>Play one Plan</strong> to see the moves, resources and board spaces changed. The review also shows any automatic round-end effects. Expand <strong>Why this move?</strong> for the checks and tie-breaks, or tap a rule number to read it offline.</p>
-        <p><strong>Report a playtest.</strong> The journal saves your <strong>Playtest note</strong> with the game. Use <strong>Export playtest report</strong> to share the game and note. If autosave is paused, <strong>Export game and note</strong> in the save warning makes the same kind of copy. Open a report with <strong>Import save</strong>, then use <strong>Load position before this step</strong> in the journal if an earlier position is included. Undo returns to the imported position.</p>
+        <p><strong>Share a game report.</strong> The journal saves your <strong>Game note</strong> with the game. Use <strong>Export game report</strong> to share the game and note. If autosave is paused, <strong>Export game and note</strong> in the save warning makes the same kind of copy. Open a report with <strong>Import save</strong>, then use <strong>Load position before this step</strong> in the journal if an earlier position is included. Undo returns to the imported position.</p>
         <p><strong>Playing on the table.</strong> Open <strong>Draw only</strong> for a shared Plan deck. Draw one Plan for each Mincmistr action card. <strong>Rules and reference</strong> has the full rules and two printable aids. Use <strong>Export deck</strong> and <strong>Import deck</strong> to move the current deck and five recent Undo steps between devices.</p>
         <p><strong>Mincmistr levels.</strong> Journeyman follows the printed priorities. Apprentice simplifies plot, build and mine choices. Master plays both cards on its last turn in the final three rounds, and Grandmaster does so each round. In three-player games, Master can also double its last turn in rounds 3–6. <button type="button" class="link guide-rule" data-do="rule" data-value="9" aria-controls="paper-ref-rules">Read rule 9</button></p>
         <p><a href="https://filemanager.czechgames.com/storage/files/kutna-hora-the-city-of-silver/rules/kutna-hora-rules-en.pdf" target="_blank" rel="noreferrer">CGE rulebook</a> · <a href="https://www.czechgames.com/news/available-now-the-kutna-hora-companion-app" target="_blank" rel="noreferrer">CGE market companion</a> · <a href="https://www.zatrolene-hry.cz/spolecenska-hra/kutna-hora-mesto-stribra-14736/k-stazeni/vlastni-solo-mod-capek-18184/" target="_blank" rel="noreferrer">Capek paper variant</a></p>

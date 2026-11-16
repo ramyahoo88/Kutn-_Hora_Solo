@@ -1,4 +1,4 @@
-export const VERSION = '0.3.13';
+export const VERSION = '1.0';
 export const MINCMISTR_RULES_VERSION = '1.2.6';
 export const PLAN_EXPLANATION_LIMIT = 32;
 export const SAVE_SCHEMA = 3;
