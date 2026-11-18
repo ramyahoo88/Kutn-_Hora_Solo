@@ -1,6 +1,6 @@
 # The Mincmistr
 
-**A card-driven solo opponent for Kutná Hora** · Version 1.2.6 · 15 Nov 2026
+**A card-driven solo opponent for Kutná Hora** · Version 1.2.7 · 17 Nov 2026
 
 Play against one, two or three Mincmistrs, using the normal board and round count for that table size. A Mincmistr starts like a player, pays every cost and either pays its taxes or loses reputation. It obeys the piece limits and scores the same way at the end. It gets no starting points and no hidden information. It makes its choices with a short checklist, a deck of 15 Plan cards and a fixed row of six action cards.
 
@@ -168,6 +168,8 @@ This applies to town plots, building placement and mine spaces.
 Master and Grandmaster give it extra actions only. They never add points, coins or discounts.
 
 **Fine-tuning.** Give the double last turn to the last N rounds. Choose N from 0 to the number of rounds in the game. Master is N = 3. Grandmaster uses every round (N = 6 with two or three players and N = 5 with four).
+
+**Low-effort option.** For fewer placement calculations, use the Apprentice choices and give each Mincmistr the double last turn in the final two rounds, the final three rounds, or every round. Flip a Plan for each card played. The final three rounds plays about like Journeyman, a little tougher with three or four players. Every round plays about like Master. The final two rounds is a gentler step.
 
 ## 10. Two or three Mincmistrs
 

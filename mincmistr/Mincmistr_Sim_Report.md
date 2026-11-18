@@ -166,3 +166,75 @@ None of these denial strategies is a usable exploit. Untested: longer-range mani
 - `mincmistr-source.zip`: `mincmistr.mjs` (rules as code), `simfinal.mjs`, `summarize.mjs`, `equiv.mjs`, `automa.mjs` and `base.json` (tuning lab), `print/` build scripts, and result files.
 
 Reproduce a holdout cell with `node simfinal.mjs journeyman standard 24 h1,h2,h3,h4,h5,h6,h7,h8 out.jsonl && node summarize.mjs out.jsonl`. Run this from a folder that contains `engine/src`, copied from commit `0b28294`.
+
+## Addendum: current engine, 16–17 Nov 2026
+
+These runs use Kutná Hora Solo v1.1.1 (`0700c8d`) and rules 1.2.6–1.2.7. The scripts are in `exp/` and the raw results in `results/2026-11-17/`. Every comparison uses the same boards on both sides.
+
+### Two-player results still hold
+
+Against Standard on fresh seeds (`jg1–jg16`, 768 games), Journeyman scored 32.8% and −5.3, and Master 51.4% and −0.5. The original study measured 32.7% and −5.1, and 50.4% and −0.3. The newer engine (physical draws, mine entry, setup) did not change the Mincmistr's strength.
+
+### Against the Planner rival (two players, `p1–p8`, 384 games each)
+
+| Level | vs Planner | vs Standard (original study) |
+|---|---|---|
+| Apprentice | 14.3%, −11.2 ± 0.6 | 19.7%, −9.1 |
+| Journeyman | 26.8%, −6.5 ± 0.6 | 32.7%, −5.1 |
+| Master | 45.8%, −1.5 ± 0.6 | 50.4%, −0.3 |
+| Grandmaster | 60.4%, +3.2 ± 0.6 | 71.0%, +5.5 |
+
+Planner is about 1.5–2.5 points stronger than Standard at every level.
+
+### Shared or separate Plan decks (Master, Standard in your seat, 576 games each)
+
+| Players | Your wins, separate decks | Your wins, one shared deck | Change in your margin |
+|---|---|---|---|
+| 3 | 38.5% | 37.0% | +0.06 ± 0.58 |
+| 4 | 26.2% | 25.7% | −0.28 ± 0.49 |
+
+Sharing one deck makes no measurable difference, so rule 10's shared deck is fine.
+
+### Proposals tested and rejected
+
+In these tables, a positive change means your margin rose, so the Mincmistr got weaker.
+
+| Proposal | Test | Fired | Change in your margin |
+|---|---|---|---|
+| Joker finish: final round, Joker as Plot and then Build | 2p Journeyman vs Standard, 768 games | 0.28/game | +0.27 ± 0.07 |
+| | 2p Master vs Standard, 768 games | 0.31/game | +0.16 ± 0.09 |
+| | 3p, rounds 3–6 doubled, vs Planner, 288 games | 0.77/game | +0.06 ± 0.18 |
+| Yellow-set mine priority | 3p, rounds 3–6 doubled, vs Planner, 288 games | 0.06/game | −0.08 ± 0.06 |
+
+The Joker finish costs reputation, last-round coins and a card play. A held right already scores 1 point at the end without being built.
+
+### Low-effort option: Apprentice choices with the double last turn (rule 9, v1.2.7)
+
+**Two players, 384 games each.** The table gives the Mincmistr's wins and margin.
+
+| Setup | vs Standard (`jg1–jg8`) | vs Planner (`p1–p8`) |
+|---|---|---|
+| Journeyman | 29.7%, −5.8 | 26.8%, −6.5 |
+| Apprentice, final two rounds | 29.7%, −6.6 | 24.5%, −7.5 |
+| Apprentice, final three rounds | 31.8%, −5.1 | 32.6%, −5.7 |
+| Master | 48.2%, −1.3 | 45.8%, −1.5 |
+| Apprentice, final five rounds | 46.9%, −0.8 | not run |
+| Apprentice, every round | 51.0%, +0.2 | 47.4%, −1.2 |
+
+**Three and four players.** Standard took your seat for 576 games per setup (`mq1–mq8`, `mq1–mq6`), each Mincmistr with its own deck. The table gives the change in your margin over the strongest Mincmistr, on the same boards.
+
+| Players | Final two vs Journeyman | Final three vs Journeyman | Every round vs Master |
+|---|---|---|---|
+| 3 | +1.35 ± 0.53 | −0.17 ± 0.54 | −0.53 ± 0.58 |
+| 4 | +0.68 ± 0.41 | −0.84 ± 0.41 | +1.08 ± 0.46 |
+
+GPT ran an independent study of 1,440 games: 72 games per cell, 36 boards, a shared deck, with both Standard and Planner in your seat. It found the final three rounds 3.1–3.6 points tougher than Journeyman at three and four players. It found the final two rounds within about 2 points of Journeyman, and every round within 1.5 points of Master. Both studies agree that every round plays like Master. On the final three rounds, the larger runs here show a smaller effect: about Journeyman at three players and 0.8 points tougher at four. Rule 9 therefore offers all three schedules. It describes the final three rounds as about Journeyman, a little tougher with three or four players, and the final two rounds as a gentler step.
+
+### Checks
+
+After rule 1.2.7:
+- The tuning lab and the shipped code made the same decision at all four levels, with 0 mismatches in 445–521 decisions per level.
+- The independent card-play flow check found 0 mismatches in 1,200 card plays.
+- `npm test` passes all 46 tests.
+
+The print-and-play PDF was **not** regenerated, because this environment has no PyMuPDF. Its rules pages still show v1.2.6 without the low-effort paragraph, and `npm run verify` will flag it until `mincmistr/print/build.py --pdf` is run.

@@ -1,5 +1,5 @@
 export const VERSION = '1.1.1';
-export const MINCMISTR_RULES_VERSION = '1.2.6';
+export const MINCMISTR_RULES_VERSION = '1.2.7';
 export const PLAN_EXPLANATION_LIMIT = 32;
 export const SAVE_SCHEMA = 3;
 export const SETUP_VERSION = 2;

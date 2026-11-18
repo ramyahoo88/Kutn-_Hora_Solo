@@ -11,7 +11,7 @@ Choose **Draw only** if you want to resolve the Mincmistr yourself at the table.
 ## Read or print
 
 - [Print-and-play PDF](Mincmistr_Print_and_Play.pdf). Rules on pages 1–4, cards and optional backs on pages 5–8, table reference on page 9, and mine choice aid on page 10. Print cards at 100% on Letter or A4.
-- [Mincmistr v1.2.6 rules](Mincmistr_Rules.md). The setup explains how to keep rights and mine tiles in order. Rule 6.5 defines which free rights qualify.
+- [Mincmistr v1.2.7 rules](Mincmistr_Rules.md). The setup explains how to keep rights and mine tiles in order. Rule 6.5 defines which free rights qualify.
 - [Table reference](print/reference-sheet.md) and [mine choice aid](print/mine-aid.md). You can also print both from the app.
 - [Simulation report](Mincmistr_Sim_Report.md), [sample game](Mincmistr_Sample_Game.md) and [design notebook](NOTES.md).
 
@@ -52,6 +52,7 @@ Run every command from the repository root. The scripts import the engine from `
 - `multi.mjs`, `mirror.mjs`, `overhead.mjs`, `exploit.mjs`, `rollout*.mjs`, `samplegame.mjs`: supporting studies.
 - `results/`: raw results. `results/v1.0/` holds the version 1.0 holdout runs.
 
+- `exp/` and `results/2026-11-17/`: the 16–17 Nov studies on v1.1.1 (Planner ladder, shared decks, Joker-finish and yellow-set trials, the low-effort option). See the report addendum.
 ## Build the print packet
 
 The release builds on Ubuntu 24.04 (x86-64) with Node.js 24 and Python 3.12. Install its exact font packages for a byte-for-byte rebuild. On other systems, extract the same font packages and point `DEJAVU_FONTS` to their `.ttf` directory. The PDF uses the rules, deck data, vector card artwork and both aids in `mincmistr/print/`.
