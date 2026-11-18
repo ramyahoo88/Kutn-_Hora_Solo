@@ -11,7 +11,7 @@ Choose **Draw only** if you want to resolve the Mincmistr yourself at the table.
 ## Read or print
 
 - [Print-and-play PDF](Mincmistr_Print_and_Play.pdf). Rules on pages 1–4, cards and optional backs on pages 5–8, table reference on page 9, and mine choice aid on page 10. Print cards at 100% on Letter or A4.
-- [Mincmistr v1.2.7 rules](Mincmistr_Rules.md). The setup explains how to keep rights and mine tiles in order. Rule 6.5 defines which free rights qualify.
+- [Mincmistr v1.2.8 rules](Mincmistr_Rules.md). The setup explains how to keep rights and mine tiles in order. Rule 6.5 defines which free rights qualify.
 - [Table reference](print/reference-sheet.md) and [mine choice aid](print/mine-aid.md). You can also print both from the app.
 - [Simulation report](Mincmistr_Sim_Report.md), [sample game](Mincmistr_Sample_Game.md) and [design notebook](NOTES.md).
 

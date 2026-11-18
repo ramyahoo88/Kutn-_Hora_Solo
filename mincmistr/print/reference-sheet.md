@@ -1,6 +1,6 @@
 # Mincmistr table reference
 
-**Kutná Hora: The City of Silver · Mincmistr v1.2.7**
+**Kutná Hora: The City of Silver · Mincmistr v1.2.8**
 
 ## Play one action card
 
